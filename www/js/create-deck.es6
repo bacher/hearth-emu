@@ -3,6 +3,10 @@ hbe.createDeckScreen = () => {
 
     jade.render($('#app')[0], 'create-deck', {});
 
+    $('#app')
+        .removeClass('w b')
+        .addClass('c');
+
     $.ajax({
         url: '/cards.json'
     }).then(data => {

@@ -1,0 +1,129 @@
+
+.b {
+  @w: 900px;
+  @h: 700px;
+
+  .battle {
+    height: 100%;
+    opacity: 0.5;
+    background: url("../temp/hearthstone-battle.png");
+    background-size: cover;
+  }
+
+  .board {
+    position: relative;
+    width: @w;
+    height: @h;
+    margin: 0 auto;
+    outline: 1px solid red;
+    transform: perspective(300px) rotateX(1deg);
+  }
+
+  .history {
+    position: absolute;
+    width: 40px;
+    height: 290px;
+    top: @h/2-145px;
+    left: 3px;
+    outline: 1px solid black;
+  }
+
+  .hand {
+    position: absolute;
+    width: 300px;
+    height: 100px;
+    left: @w/2-150px;
+    outline: 1px solid red;
+
+    &.op {
+      top: 0;
+    }
+
+    &.my {
+      bottom: 0;
+    }
+  }
+
+  .stats {
+    position: absolute;
+    width: 200px;
+    height: 30px;
+    left: @w/2+150px;
+    outline: 1px solid red;
+
+    &.op {
+      top: 30px;
+    }
+
+    &.my {
+      bottom: 30px;
+    }
+  }
+
+  .battleground {
+    position: absolute;
+    width: 600px;
+    height: 260px;
+    top: @h/2-130px;
+    left: @w/2-300px;
+    outline: 1px solid black;
+  }
+
+  .minions {
+    position: absolute;
+    width: 600px;
+    height: 120px;
+    outline: 1px solid red;
+
+    &.op {
+      top: 5px;
+    }
+
+    &.my {
+      bottom: 5px;
+    }
+  }
+
+  .hero {
+    position: absolute;
+    width: 340px;
+    height: 100px;
+    left: @w/2-170px;
+    outline: 1px solid red;
+
+    &.op {
+      top: 100px;
+    }
+
+    &.my {
+      bottom: 100px;
+    }
+  }
+
+  .decks {
+    position: absolute;
+    width: 40px;
+    height: 400px;
+    top: @h/2-200px;
+    right: 0;
+    outline: 1px solid red;
+  }
+
+  .deck {
+    &.op {
+      top: 0;
+    }
+
+    &.my {
+      bottom: 0;
+    }
+  }
+
+  .turn-off {
+    position: absolute;
+    right: 0;
+    height: 20px;
+    top: 190px;
+  }
+
+}

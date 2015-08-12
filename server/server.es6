@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const PlayerWaiter = require('./player-waiter');
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -28,4 +30,7 @@ const server = app.listen(8080, function () {
     var port = server.address().port;
 
     console.log('Example app listening at http://%s:%s', host, port);
+
+    new PlayerWaiter().listenWs();
+
 });

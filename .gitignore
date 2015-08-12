@@ -1,10 +1,10 @@
 /.idea/
 
 /server/node_modules/
-/server/*.js
-/server/*.js.map
+/server/**/*.js
+/server/**/*.js.map
 
 /www/bower_components/
-/www/js/*.js
-/www/js/*.js.map
+/www/js/**/*.js
+/www/js/**/*.js.map
 /www/styles/*.css

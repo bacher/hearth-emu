@@ -1,6 +1,4 @@
 
-const hbe = {};
-
 jade.render($('#app')[0], 'main-menu', {});
 
 $('BODY')
@@ -8,5 +6,9 @@ $('BODY')
         hbe.createDeckScreen();
     })
     .on('click', '.btn-play-battle', e => {
-        hbe.battleScreen();
+        hbe.createWaitBattleScreen();
     });
+
+if (/^#battle/.test(window.location.hash)) {
+    hbe.createBattleScreen();
+}
