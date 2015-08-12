@@ -5,7 +5,7 @@ module.exports = class Card {
         this.type = info.type;
         this.cost = info.cost;
         this.rarity = info.rarity || 0;
-        this.activation = info.activation;
+        this.act = info.act;
         this.param = info.param;
     }
 };

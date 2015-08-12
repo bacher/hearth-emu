@@ -2,9 +2,9 @@
 const BaseMinions = require('../base-minions');
 
 module.exports = {
-    summon: (battle, player) => {
+    summon: (card, battle, player) => {
 
-        const newMinion = BaseMinions[this.param].spawn();
+        const newMinion = BaseMinions[card.param].spawn();
 
         player.minions.addMinion(newMinion);
     },

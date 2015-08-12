@@ -24,9 +24,8 @@ module.exports = class Player extends EventEmitter {
             .on('message', json => {
                 this.onMessage(JSON.parse(json));
             })
-            .once('close', () => {
+            .on('close', () => {
                 this.status = 'off';
-                console.log('соединение закрыто')
             });
     }
 
@@ -86,6 +85,8 @@ module.exports = class Player extends EventEmitter {
     playCard(params) {
 
         const card = this.hand.getCard(params.cid);
+
+        console.log(card);
 
         this.emit('message', {
             msg: 'playCard',

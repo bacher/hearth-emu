@@ -63,11 +63,11 @@ module.exports = class Battle {
         const p2 = this.players[1];
 
         p1.on('message', msg => {
-            this.handlePlayerMessage(p1, msg.message, msg.data);
+            this.handlePlayerMessage(p1, msg.msg, msg.data);
         });
 
         p2.on('message', msg => {
-            this.handlePlayerMessage(p2, msg.message, msg.data);
+            this.handlePlayerMessage(p2, msg.msg, msg.data);
         });
     }
 
@@ -75,7 +75,8 @@ module.exports = class Battle {
         switch (message) {
             case 'playCard':
                 console.log('handler: playCard');
-                data.act(this, player);
+                console.log(data);
+                data.info.act(data.info, this, player);
                 break;
             case 'updateClients':
                 this.sendGameData();

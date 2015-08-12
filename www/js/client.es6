@@ -12,3 +12,6 @@ $('BODY')
 if (/^#battle/.test(window.location.hash)) {
     hbe.createBattleScreen();
 }
+
+//debug
+hbe.createWaitBattleScreen();
