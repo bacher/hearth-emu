@@ -52,13 +52,15 @@
     margin-right: -40px;
     margin-top: 0;
     transition: margin 0.3s;
+  }
 
+  .hand.my .card {
     &.selected {
       box-shadow: 0 0 8px #f00
     }
 
     &:hover {
-      margin-top: -15px;
+      margin-top: -10px;
       margin-right: -21px;
     }
   }
@@ -114,7 +116,6 @@
     width: 340px;
     height: 100px;
     left: @w/2-170px;
-    outline: 1px solid red;
 
     &.op {
       top: 100px;
@@ -123,6 +124,32 @@
     &.my {
       bottom: 100px;
     }
+  }
+
+  .avatar {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 120px;
+    outline: 1px solid red;
+  }
+
+  .weapon {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    left: 30px;
+    top: 20px;
+    outline: 1px solid red;
+  }
+
+  .hero-skill {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    right: 30px;
+    top: 20px;
+    outline: 1px solid red;
   }
 
   .decks {

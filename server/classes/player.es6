@@ -103,7 +103,7 @@ module.exports = class Player extends EventEmitter {
 
     endTurn() {
         this.emit('message', {
-            msg: 'end-turn'
+            msg: 'endTurn'
         });
     }
 

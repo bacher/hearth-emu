@@ -39,8 +39,9 @@ hbe.createWaitBattleScreen = () => {
                 break;
 
             case 'game-data':
-                hbe.battleData = data.data;
                 hbe.createBattleScreen();
+                hbe.battleData = data.data;
+                updateInGameData();
                 break;
         }
     };
@@ -54,8 +55,45 @@ hbe.createBattleScreen = () => {
         .removeClass('w c')
         .addClass('b');
 
+    $('#app')
+        .on('click', '.hand.my .card', e => {
+            if (hbe.battleData.my.active) {
+                var $card = $(e.currentTarget);
 
-    hbe.battleData.my.hand.cards.forEach(card => {
+                $card.siblings().removeClass('selected');
+                $card.addClass('selected');
+            }
+        })
+        .on('click', '.battleground', e => {
+            if (hbe.battleData.my.active) {
+                var $card = $('.card.selected');
+
+                if ($card.length) {
+                    socket.send(JSON.stringify({
+                        msg: 'play-card',
+                        data: {
+                            cid: $card.data('cid')
+                        }
+                    }));
+                }
+            }
+        })
+        .on('click', '.end-turn', () => {
+            if (hbe.battleData.my.active) {
+                socket.send(JSON.stringify({
+                    msg: 'end-turn'
+                }));
+            }
+        });
+};
+
+function updateInGameData() {
+    const game = hbe.battleData;
+
+    const $hand = $('.hand.my').empty();
+    const $handOp = $('.hand.op').empty();
+
+    game.my.hand.cards.forEach(card => {
         var $container = $('<div>');
 
         jade.render($container[0], 'card', {
@@ -63,27 +101,31 @@ hbe.createBattleScreen = () => {
             cid: card.cid
         });
 
-        $('.hand.my').append($container.children());
+        $hand.append($container.children());
     });
 
-    $('#app')
-        .on('click', '.hand.my .card', e => {
-            var $card = $(e.currentTarget);
+    var $container = $('<div>');
+    jade.render($container[0], 'card', {
+        img: 'cards/card_back.png',
+        cid: 0
+    });
 
-            $card.siblings().removeClass('selected');
-            $card.addClass('selected');
-        })
-        .on('click', '.battleground', e => {
-            var $card = $('.card.selected');
+    for (var i = 0; i < game.op.hand.cards.length; ++i) {
+        $handOp.append($container.children().clone());
+    }
 
-            if ($card.length) {
-                socket.send(JSON.stringify({
-                    msg: 'play-card',
-                    data: {
-                        cid: $card.data('cid')
-                    }
-                }));
-            }
-        });
+    ['my', 'op'].forEach(side => {
+        const hero = game[side].hero;
 
-};
+        $('.hero.' + side + ' .avatar').text(hero.hp);
+
+        $('.stats.' + side).text(hero.mana + '/' + hero.crystals);
+    });
+
+    if (game.my.active) {
+        $('.history').css('background', 'green');
+    } else {
+        $('.history').css('background', 'red');
+    }
+
+}

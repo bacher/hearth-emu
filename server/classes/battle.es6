@@ -21,6 +21,7 @@ module.exports = class Battle {
             this.status = 'game';
 
             this.players[0].hero.addCrystal();
+            this.players[0].hero.restoreMana();
             this.players[0].activate();
             this.players[0].drawCard();
             this.players[0].drawCard();
@@ -74,9 +75,11 @@ module.exports = class Battle {
     handlePlayerMessage(player, message, data) {
         switch (message) {
             case 'playCard':
-                console.log('handler: playCard');
-                console.log(data);
                 data.info.act(data.info, this, player);
+                break;
+            case 'endTurn':
+                this.switchTurn();
+                this.sendGameData();
                 break;
             case 'updateClients':
                 this.sendGameData();
