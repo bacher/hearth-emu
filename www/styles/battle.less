@@ -44,6 +44,29 @@
     }
   }
 
+  .card {
+    display: inline-block;
+    width: 77px;
+    vertical-align: top;
+    margin-right: -40px;
+    margin-top: 0;
+    transition: margin 0.3s;
+
+    &.selected {
+      box-shadow: 0 0 3px #f00
+    }
+
+    &:hover {
+      margin-top: -15px;
+      margin-right: -20px;
+    }
+  }
+
+  .card-img {
+    width: 90px;
+    margin-left: -6px;
+  }
+
   .stats {
     position: absolute;
     width: 200px;

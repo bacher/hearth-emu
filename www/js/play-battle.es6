@@ -1,4 +1,6 @@
 
+var socket = null;
+
 hbe.createWaitBattleScreen = () => {
 
     jade.render($('#app')[0], 'wait-for-battle', {});
@@ -7,7 +9,7 @@ hbe.createWaitBattleScreen = () => {
         .removeClass('b c')
         .addClass('w');
 
-    const socket = new WebSocket('ws://localhost:8081/');
+    socket = new WebSocket('ws://localhost:8081/');
 
     socket.onopen = () => {
         console.log('Соединение установлено');
@@ -33,6 +35,10 @@ hbe.createWaitBattleScreen = () => {
 
         switch (data.msg) {
             case 'battle-started':
+                break;
+
+            case 'game-data':
+                hbe.battleData = data.data;
                 hbe.createBattleScreen();
                 break;
         }
@@ -46,4 +52,37 @@ hbe.createBattleScreen = () => {
     $('#app')
         .removeClass('w c')
         .addClass('b');
+
+
+    hbe.battleData.my.hand.cards.forEach(card => {
+        var $container = $('<div>');
+
+        jade.render($container[0], 'card', {
+            img: 'cards/' + card.info.id + '.png',
+            cid: card.cid
+        });
+
+        $('.hand.my').append($container.children());
+    });
+
+    $('#app')
+        .on('click', '.hand.my .card', e => {
+            var $card = $(e.currentTarget);
+
+            $card.siblings().removeClass('selected');
+            $card.addClass('selected');
+        })
+        .on('click', '.battleground', e => {
+            var $card = $('.card.selected');
+
+            if ($card.length) {
+                socket.send(JSON.stringify({
+                    msg: 'play-card',
+                    data: {
+                        cid: $card.data('cid')
+                    }
+                }));
+            }
+        });
+
 };

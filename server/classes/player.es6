@@ -4,6 +4,7 @@ const Deck = require('./deck');
 const Hero = require('./hero');
 const Hand = require('./hand');
 const Minions = require('./minions');
+const CARDS = require('../cards');
 
 module.exports = class Player extends EventEmitter {
     constructor(ws) {
@@ -30,10 +31,11 @@ module.exports = class Player extends EventEmitter {
     }
 
     onMessage(json) {
-        console.log(json.action);
+        console.log(json.msg);
 
-        switch (json.action) {
-            case 'activate-card':
+        switch (json.msg) {
+            case 'play-card':
+                this.playCard(json.data);
                 break;
             case 'end-turn':
                 this.endTurn();
@@ -74,13 +76,29 @@ module.exports = class Player extends EventEmitter {
         }
     }
 
-    addManaCard() {
-        this.hand.addCard();
+    addCoinCard() {
+        this.hand.addCard(CARDS['the_coin']);
+    }
+
+    playCard(params) {
+        const card = this.hand.getCard(params.cid);
+
+        this.emit('message', {
+            msg: 'playCard',
+            data: card
+        });
+
+        this.hand.removeCard(params.cid);
+        this.hero.removeMana(card.cost);
+
+        this.emit('message', {
+            msg: 'updateClients'
+        });
     }
 
     endTurn() {
         this.emit('message', {
-            event: 'end-turn'
+            msg: 'end-turn'
         });
     }
 

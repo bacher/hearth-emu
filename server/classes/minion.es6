@@ -1,0 +1,10 @@
+
+module.exports = class Minion {
+    constructor(info) {
+        this.base = info.base;
+        this.attack = info.base.attack;
+        this.maxHp = info.base.maxHp;
+
+        //
+    }
+};

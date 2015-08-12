@@ -30,7 +30,7 @@ module.exports = class Battle {
             this.players[1].drawCard();
             this.players[1].drawCard();
             this.players[1].drawCard();
-            this.players[1].addManaCard();
+            this.players[1].addCoinCard();
 
             this.sendGameData();
 
@@ -59,13 +59,27 @@ module.exports = class Battle {
     }
 
     bindListeners() {
-        this.players[0].on('message', data => {
+        const p1 = this.players[0];
+        const p2 = this.players[1];
 
+        p1.on('message', msg => {
+            this.handlePlayerMessage(p1, msg.message, msg.data);
         });
 
-        this.players[1].on('message', data => {
-
+        p2.on('message', msg => {
+            this.handlePlayerMessage(p2, msg.message, msg.data);
         });
+    }
+
+    handlePlayerMessage(player, message, data) {
+        switch (message) {
+            case 'playCard':
+                data.act(this, player);
+                break;
+            case 'updateClients':
+                this.sendGameData();
+                break;
+        }
     }
 
     getPlayers() {

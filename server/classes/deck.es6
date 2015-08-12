@@ -1,15 +1,17 @@
 
 const _ = require('lodash');
-const Card = require('./card');
+const CARDS = require('../cards');
 
 module.exports = class Deck {
     constructor() {
-        this.cards = [
-            new Card({}),
-            new Card({}),
-            new Card({}),
-            new Card({})
-        ];
+        this.cards = [];
+
+        for (var i = 0; i < 10; ++i) {
+            this.cards.push({
+                info: CARDS['chillwind_yeti'],
+                cid: _.uniqueId('c')
+            });
+        }
     }
 
     shuffle() {

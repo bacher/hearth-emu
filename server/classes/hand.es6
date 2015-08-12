@@ -19,4 +19,31 @@ module.exports = class Hand {
             cards: this.cards
         };
     }
+
+    findCard(cid) {
+        for (var i = 0; i < this.cards.length; ++i) {
+            if (this.cards[i].cid === cid) {
+                return {
+                    index: i,
+                    card: this.cards[i]
+                };
+            }
+        }
+
+        return null;
+    }
+
+    getCard(cid) {
+        var info = findCard(cid);
+
+        return info && info.card;
+    }
+
+    removeCard(cid) {
+        var info = findCard(cid);
+
+        if (info) {
+            this.cards.splice(info.index, 1);
+        }
+    }
 };

@@ -1,5 +1,6 @@
 
 module.exports.CLASSES = {
+    neutral: 0,
     warrior: 1,
     shaman: 2,
     rogue: 3,
