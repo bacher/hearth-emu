@@ -34,13 +34,13 @@ module.exports = class Hand {
     }
 
     getCard(cid) {
-        var info = findCard(cid);
+        var info = this.findCard(cid);
 
         return info && info.card;
     }
 
     removeCard(cid) {
-        var info = findCard(cid);
+        var info = this.findCard(cid);
 
         if (info) {
             this.cards.splice(info.index, 1);

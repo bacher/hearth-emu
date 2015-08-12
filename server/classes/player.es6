@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const EventEmitter = require('events').EventEmitter;
 
 const Deck = require('./deck');
@@ -21,8 +22,7 @@ module.exports = class Player extends EventEmitter {
 
         ws
             .on('message', json => {
-                console.log(json);
-                this.onMessage(json);
+                this.onMessage(JSON.parse(json));
             })
             .once('close', () => {
                 this.status = 'off';
@@ -31,7 +31,7 @@ module.exports = class Player extends EventEmitter {
     }
 
     onMessage(json) {
-        console.log(json.msg);
+        console.log('Client Message:', json.msg);
 
         switch (json.msg) {
             case 'play-card':
@@ -77,10 +77,14 @@ module.exports = class Player extends EventEmitter {
     }
 
     addCoinCard() {
-        this.hand.addCard(CARDS['the_coin']);
+        this.hand.addCard({
+            cid: _.uniqueId('c'),
+            info: CARDS['the_coin']
+        });
     }
 
     playCard(params) {
+
         const card = this.hand.getCard(params.cid);
 
         this.emit('message', {

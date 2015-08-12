@@ -74,6 +74,7 @@ module.exports = class Battle {
     handlePlayerMessage(player, message, data) {
         switch (message) {
             case 'playCard':
+                console.log('handler: playCard');
                 data.act(this, player);
                 break;
             case 'updateClients':

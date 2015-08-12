@@ -29,9 +29,10 @@ hbe.createWaitBattleScreen = () => {
     };
 
     socket.onmessage = event => {
-        console.log('Получены данные', event.data);
 
         const data = JSON.parse(event.data);
+
+        console.log('Server Message:', data);
 
         switch (data.msg) {
             case 'battle-started':
