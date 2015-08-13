@@ -117,15 +117,25 @@ function updateInGameData() {
     ['my', 'op'].forEach(side => {
         const hero = game[side].hero;
 
-        $('.hero.' + side + ' .avatar').text(hero.hp);
+        const $minions = $('.minions.' + side);
 
-        $('.stats.' + side).text(hero.mana + '/' + hero.crystals);
+        game[side].minions.minions.forEach(minion => {
+            var $container = $('<div>');
+
+            jade.render($container[0], 'card', {
+                img: 'cards/' + minion.base.id + '.png',
+                cid: minion.mid
+            });
+
+            $minions.append($container.children());
+        });
+
+        $('.avatar.' + side + ' .health .value').text(hero.hp);
+
+        $('.stats.' + side + ' .mana .active').text(hero.mana);
+        $('.stats.' + side + ' .mana .all').text(hero.crystals);
     });
 
-    if (game.my.active) {
-        $('.history').css('background', 'green');
-    } else {
-        $('.history').css('background', 'red');
-    }
+    $('.end-turn').toggleClass('active', game.my.active);
 
 }

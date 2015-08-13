@@ -1,13 +1,15 @@
 
 .b {
+  background: #3C3C3C;
+
   @w: 900px;
-  @h: 700px;
+  @h: 654px;
 
   .battle {
-    height: 100%;
-    //opacity: 0.5;
-    //background: url("../temp/hearthstone-battle.png");
-    //background-size: cover;
+    height: 677px;
+    overflow: hidden;
+    padding-top: 23px;
+    background: url("../textures/board_1280.jpg");
   }
 
   .board {
@@ -15,17 +17,16 @@
     width: @w;
     height: @h;
     margin: 0 auto;
-    outline: 1px solid red;
     transform: perspective(300px) rotateX(1deg);
   }
 
   .history {
+    display: none;
     position: absolute;
     width: 40px;
     height: 290px;
     top: @h/2-145px;
     left: 3px;
-    outline: 1px solid black;
   }
 
   .hand {
@@ -33,14 +34,14 @@
     width: 300px;
     height: 100px;
     left: @w/2-150px;
-    outline: 1px solid red;
+    transform: scale(1.1);
 
     &.op {
-      top: 0;
+      top: -92px;
     }
 
     &.my {
-      bottom: 0;
+      bottom: -49px;
     }
   }
 
@@ -51,17 +52,18 @@
     vertical-align: top;
     margin-right: -40px;
     margin-top: 0;
-    transition: margin 0.3s;
   }
 
   .hand.my .card {
+    transition: margin 0.3s;
+
     &.selected {
       box-shadow: 0 0 8px #f00
     }
 
     &:hover {
-      margin-top: -10px;
-      margin-right: -21px;
+      margin-top: -27px;
+      margin-right: 0;
     }
   }
 
@@ -74,64 +76,119 @@
   .stats {
     position: absolute;
     width: 200px;
-    height: 30px;
-    left: @w/2+150px;
-    outline: 1px solid red;
+    height: 32px;
 
     &.op {
-      top: 30px;
+      top: 0;
+      left: @w/2+145px;
     }
 
     &.my {
-      bottom: 30px;
+      bottom: 2px;
+      left: @w/2+167px;
+    }
+  }
+
+  .mana {
+    display: inline-block;
+    width: 66px;
+    height: 100%;
+    padding-top: 2px;
+    color: #FFF;
+    text-align: center;
+    text-shadow: 0 0 2px #000;
+
+    > SPAN {
+      vertical-align: middle;
+    }
+
+    .active, .all {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .slash {
+      font-size: 27px;
+      margin: 0 1px;
     }
   }
 
   .battleground {
     position: absolute;
-    width: 600px;
-    height: 260px;
-    top: @h/2-130px;
-    left: @w/2-300px;
-    outline: 1px solid black;
+    width: 100%;
+    height: 400px;
+    top: @h/2-200px;
+    padding-left: 156px;
   }
 
   .minions {
     position: absolute;
     width: 600px;
-    height: 120px;
-    outline: 1px solid red;
+    height: 110px;
 
     &.op {
-      top: 5px;
+      top: 60px;
     }
 
     &.my {
-      bottom: 5px;
+      bottom: 85px;
     }
   }
 
   .hero {
     position: absolute;
     width: 340px;
-    height: 100px;
+    height: 124px;
     left: @w/2-170px;
 
     &.op {
-      top: 100px;
+      top: 41px;
     }
 
     &.my {
-      bottom: 100px;
+      bottom: 70px;
     }
   }
 
   .avatar {
     position: absolute;
-    width: 100px;
-    height: 100px;
-    left: 120px;
-    outline: 1px solid red;
+    width: 108px;
+    height: 124px;
+    background: url("../textures/hero_shaman.png");
+
+    &.op {
+      left: 116px;
+    }
+
+    &.my {
+      left: 118px;
+    }
+  }
+
+  .health {
+    position: absolute;
+    width: 27px;
+    height: 41px;
+    right: -5px;
+    text-align: center;
+    background: url("../textures/health.png");
+
+    &.op {
+      bottom: -6px;
+    }
+
+    &.my {
+      bottom: -5px;
+    }
+
+    .value {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #FFF;
+      text-shadow: -1px -1px 1px #000, 1px 1px 1px #000;
+    }
   }
 
   .weapon {
@@ -145,11 +202,19 @@
 
   .hero-skill {
     position: absolute;
-    width: 60px;
-    height: 60px;
-    right: 30px;
-    top: 20px;
-    outline: 1px solid red;
+    width: 61px;
+    height: 59px;
+    background: url("../textures/spell_shaman.png");
+
+    &.op {
+      right: 24px;
+      top: 62px;
+    }
+
+    &.my {
+      right: 22px;
+      top: 37px;
+    }
   }
 
   .decks {
@@ -158,7 +223,6 @@
     height: 400px;
     top: @h/2-200px;
     right: 0;
-    outline: 1px solid red;
   }
 
   .deck {
@@ -171,11 +235,28 @@
     }
   }
 
-  .turn-off {
+  .end-turn {
     position: absolute;
-    right: 0;
-    height: 20px;
-    top: 190px;
+    top: 149px;
+    right: 3px;
+    width: 103px;
+    height: 55px;
+    background: url("../textures/enemy-turn.png");
+
+    &.active {
+      background: url("../textures/end-turn.png");
+
+      &:hover:after {
+        position: absolute;
+        display: block;
+        content: '';
+        width: 117px;
+        height: 70px;
+        top: -10px;
+        right: -11px;
+        background: url("../textures/end-turn_active.png");
+      }
+    }
   }
 
 }

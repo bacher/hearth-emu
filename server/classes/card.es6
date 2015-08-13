@@ -1,6 +1,7 @@
 
 module.exports = class Card {
     constructor(info) {
+        this.id = info.id;
         this.name = info.name;
         this.type = info.type;
         this.cost = info.cost;

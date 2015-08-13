@@ -3,8 +3,9 @@ const H = require('./common');
 const Card = require('./classes/card');
 const ACTIVATIONS = require('./classes/activations');
 
-const cards = {
-    'the_coin': new Card({
+const cards = [
+    new Card({
+        id: 'the_coin',
         name: 'The Coin',
         type: H.CARD_TYPES.spell,
         cost: 0,
@@ -13,7 +14,8 @@ const cards = {
         param: 1
     }),
 
-    'chillwind_yeti': new Card({
+    new Card({
+        id: 'chillwind_yeti',
         name: 'Chillwind Yeti',
         cost: 4,
         act: ACTIVATIONS.summon,
@@ -21,10 +23,13 @@ const cards = {
         type: H.CARD_TYPES.minion,
         clas: H.CLASSES.neutral
     })
-};
+];
 
-for (var id in cards) {
-    cards[id].id = id;
+const cardsHash = {};
+
+for (var i = 0; i < cards.length; ++i) {
+    var card = cards[i];
+    cardsHash[card.id] = card;
 }
 
-module.exports = cards;
+module.exports = cardsHash;

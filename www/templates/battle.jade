@@ -5,24 +5,38 @@
 
       .hand.op
       .stats.op
+         .mana.op
+            SPAN.active
+            SPAN.slash /
+            SPAN.all
       .hero.op
-         .weapon
-         .avatar
-         .hero-skill
+         .weapon.op
+         .avatar.op
+            .health.op
+               SPAN.value
+         .hero-skill.op
 
       .battleground
          .minions.op
          .minions.my
 
       .hero.my
-         .weapon
-         .avatar
-         .hero-skill
+         .weapon.my
+         .avatar.my
+            .health.my
+               SPAN.value
+         .hero-skill.my
       .stats.my
+         .mana.my
+            SPAN.active
+            SPAN.slash /
+            SPAN.all
+         .crystals
+
       .hand.my
 
       .decks
          .deck.op
          .deck.my
 
-         BUTTON.end-turn END
+         .end-turn
