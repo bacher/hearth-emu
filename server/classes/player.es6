@@ -13,6 +13,11 @@ module.exports = class Player extends EventEmitter {
 
         this.ws = ws;
         this.status = 'waiting';
+        this.userName = '';
+
+        this.flags = {
+            joined: false
+        };
 
         this.active = false;
         this.deck = new Deck();
@@ -30,21 +35,38 @@ module.exports = class Player extends EventEmitter {
     }
 
     onMessage(json) {
-        console.log('Client Message:', json.msg);
 
-        switch (json.msg) {
-            case 'play-card':
-                this.playCard(json.data);
-                break;
-            case 'end-turn':
-                this.endTurn();
-                break;
+        if (this.flags.joined) {
 
+            if (this.active) {
+                this.log('Client Message:', json.msg);
+
+                switch (json.msg) {
+                    case 'play-card':
+                        this.playCard(json.data);
+                        break;
+                    case 'end-turn':
+                        this.endTurn();
+                        break;
+                    default:
+                        this.warn('Unregistered Client Message:', json.msg);
+
+                }
+            } else {
+                this.warn('Inactive Client Message:', json.msg)
+            }
+        } else {
+            this.userName = json.data.name;
+            this.flags.joined = true;
+
+            var brackedName = '[' + this.userName + ']';
+            this.log = console.log.bind(console, brackedName);
+            this.warn = console.warn.bind(console, brackedName);
         }
     }
 
     sendMessage(msg, json) {
-        console.log('Sending', msg);
+        this.log('Sending:', msg);
 
         this.ws.send(JSON.stringify({
             msg: msg,
@@ -86,15 +108,13 @@ module.exports = class Player extends EventEmitter {
 
         const card = this.hand.getCard(params.cid);
 
-        console.log(card);
-
         this.emit('message', {
             msg: 'playCard',
             data: card
         });
 
         this.hand.removeCard(params.cid);
-        this.hero.removeMana(card.cost);
+        this.hero.removeMana(card.info.cost);
 
         this.emit('message', {
             msg: 'updateClients'

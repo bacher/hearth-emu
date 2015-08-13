@@ -13,6 +13,13 @@ hbe.createWaitBattleScreen = () => {
 
     socket.onopen = () => {
         console.log('Соединение установлено');
+
+        socket.send(JSON.stringify({
+            msg: 'join',
+            data: {
+                name: window.location.search.match(/[?&]name=([^&]*)/)[1]
+            }
+        }));
     };
 
     socket.onclose = event => {
@@ -79,6 +86,7 @@ hbe.createBattleScreen = () => {
             }
         })
         .on('click', '.end-turn', () => {
+            console.log('END-TURN');
             if (hbe.battleData.my.active) {
                 socket.send(JSON.stringify({
                     msg: 'end-turn'
