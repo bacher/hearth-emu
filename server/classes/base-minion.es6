@@ -8,7 +8,7 @@ module.exports = class BaseMinion {
         this.attack = info.attack;
         this.maxHp = info.maxHp;
 
-        this.abilities = info.abilities || null;
+        this.abilities = info.abilities || {};
     }
 
     spawn() {

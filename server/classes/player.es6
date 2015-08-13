@@ -130,6 +130,7 @@ module.exports = class Player extends EventEmitter {
     getGameData() {
         return {
             active: this.active,
+            name: this.userName,
             hero: this.hero.getGameData(),
             hand: this.hand.getGameData(),
             deck: this.deck.getGameData(),

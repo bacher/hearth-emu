@@ -21,4 +21,10 @@ module.exports = class Minions {
             minions: this.minions
         };
     }
+
+    wakeUpAll() {
+        this.minions.forEach(minion => {
+            delete minion.flags.sleep;
+        });
+    }
 };

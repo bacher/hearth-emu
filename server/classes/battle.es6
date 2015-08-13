@@ -3,39 +3,38 @@ const _ = require('lodash');
 
 module.exports = class Battle {
     constructor(player1, player2) {
-        this.status = 'waiting';
-
         this.players = _.shuffle([player1, player2]);
 
         this.bindListeners();
     }
 
     start() {
-        console.log('Battle starting');
+        setTimeout(() => {
+            if (this.players[0].flags.joined && this.players[1].flags.joined) {
+                this.start2();
+            } else {
+                this.start();
+            }
+        }, 50);
+    }
 
-        this.status = 'starting';
-
+    start2() {
         this.sendMessage('battle-started');
 
-        setTimeout(() => {
-            this.status = 'game';
+        this.players[0].hero.addCrystal();
+        this.players[0].hero.restoreMana();
+        this.players[0].activate();
+        this.players[0].drawCard();
+        this.players[0].drawCard();
+        this.players[0].drawCard();
 
-            this.players[0].hero.addCrystal();
-            this.players[0].hero.restoreMana();
-            this.players[0].activate();
-            this.players[0].drawCard();
-            this.players[0].drawCard();
-            this.players[0].drawCard();
+        this.players[1].drawCard();
+        this.players[1].drawCard();
+        this.players[1].drawCard();
+        this.players[1].drawCard();
+        this.players[1].addCoinCard();
 
-            this.players[1].drawCard();
-            this.players[1].drawCard();
-            this.players[1].drawCard();
-            this.players[1].drawCard();
-            this.players[1].addCoinCard();
-
-            this.sendGameData();
-
-        }, 500);
+        this.sendGameData();
     }
 
     sendMessage(msg, json) {
@@ -101,6 +100,7 @@ module.exports = class Battle {
         players[0].deactivate();
 
         players[1].activate();
+        players[1].minions.wakeUpAll();
         players[1].hero.addCrystal();
         players[1].hero.restoreMana();
         players[1].drawCard();

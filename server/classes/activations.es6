@@ -6,6 +6,10 @@ module.exports = {
 
         const newMinion = BaseMinions[card.param].spawn();
 
+        if (!newMinion.base.abilities.charge) {
+            newMinion.flags.sleep = true;
+        }
+
         player.minions.addMinion(newMinion);
     },
 

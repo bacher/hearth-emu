@@ -6,6 +6,7 @@ module.exports = class Minion {
         this.base = info.base;
         this.attack = info.base.attack;
         this.maxHp = info.base.maxHp;
+        this.flags = {};
 
         this.mid = _.uniqueId('m')
     }

@@ -98,6 +98,9 @@ hbe.createBattleScreen = () => {
 function updateInGameData() {
     const game = hbe.battleData;
 
+    $('.name.op').text(game.op.name);
+    $('.name.my').text(game.my.name);
+
     const $hand = $('.hand.my').empty();
     const $handOp = $('.hand.op').empty();
 
@@ -130,10 +133,7 @@ function updateInGameData() {
         game[side].minions.minions.forEach(minion => {
             var $container = $('<div>');
 
-            jade.render($container[0], 'card', {
-                img: 'cards/' + minion.base.id + '.png',
-                cid: minion.mid
-            });
+            jade.render($container[0], 'minion', minion);
 
             $minions.append($container.children());
         });

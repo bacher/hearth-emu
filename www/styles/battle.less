@@ -12,6 +12,26 @@
     background: url("../textures/board_1280.jpg");
   }
 
+  .name {
+    position: absolute;
+    left: 2px;
+    line-height: 32px;
+    padding: 3px 31px 3px 16px;
+    color: #FFF;
+    font-size: 19px;
+    font-weight: bold;
+    text-shadow: -1px -1px 1px #000, 1px 1px 1px #000;
+    background: rgba(0,0,0, 0.31);
+
+    &.op {
+      top: 27px;
+    }
+
+    &.my {
+      top: 605px;
+    }
+  }
+
   .board {
     position: relative;
     width: @w;
@@ -46,12 +66,30 @@
   }
 
   .card {
+    position: relative;
     display: inline-block;
     width: 77px;
     height: 107px;
     vertical-align: top;
     margin-right: -40px;
     margin-top: 0;
+
+    &.sleep:after {
+      position: absolute;
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      top: -18px;
+      right: -19px;
+      content: '';
+      background: url("../textures/zzz.png");
+    }
+
+    .img {
+      width: 90px;
+      margin-left: -6px;
+      margin-top: -20px;
+    }
   }
 
   .hand.my .card {
@@ -65,12 +103,6 @@
       margin-top: -27px;
       margin-right: 0;
     }
-  }
-
-  .card-img {
-    width: 90px;
-    margin-left: -6px;
-    margin-top: -20px;
   }
 
   .stats {
@@ -93,22 +125,22 @@
     display: inline-block;
     width: 66px;
     height: 100%;
-    padding-top: 2px;
+    padding-top: 4px;
     color: #FFF;
     text-align: center;
-    text-shadow: 0 0 2px #000;
+    text-shadow: -1px -1px 2px #000, 1px 1px 2px #000;
 
     > SPAN {
       vertical-align: middle;
     }
 
     .active, .all {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
     }
 
     .slash {
-      font-size: 27px;
+      font-size: 22px;
       margin: 0 1px;
     }
   }
@@ -118,13 +150,14 @@
     width: 100%;
     height: 400px;
     top: @h/2-200px;
-    padding-left: 156px;
+    padding-left: 132px;
   }
 
   .minions {
     position: absolute;
     width: 600px;
     height: 110px;
+    text-align: center;
 
     &.op {
       top: 60px;
