@@ -28,6 +28,14 @@ hbe.createCollectionScreen = () => {
         })
         .on('click', '.btn-back', () => {
             switchMode(null);
+        })
+        .on('click', '.deck', e => {
+            const $deck = $(e.currentTarget);
+            const id = $deck.data('id');
+
+            const deck = _.find(decks, deck => deck.id === id);
+
+            switchMode(deck);
         });
 
     $app
@@ -43,12 +51,15 @@ hbe.createCollectionScreen = () => {
             $('.create-deck-screen').removeClass('show');
 
             decks.push({
-                title: 'CustomShaman',
+                label: 'Custom Shaman',
                 clas: 'shaman',
-                cards: []
+                cards: [],
+                id: Math.floor(Math.random() * 10000)
             });
 
-            switchMode(decks[0]);
+            saveDecks();
+
+            switchMode(decks[decks.length - 1]);
         });
 
     $.ajax({
@@ -91,6 +102,10 @@ hbe.createCollectionScreen = () => {
         } else {
             $('.tab').show();
         }
+    }
+
+    function saveDecks() {
+        localStorage.setItem('decks', JSON.stringify(decks));
     }
 
 };

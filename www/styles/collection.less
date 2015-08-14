@@ -111,6 +111,8 @@
     width: 39px;
     height: 32px;
     margin-right: 5px;
+    cursor: pointer;
+    transform-origin: bottom;
     transition: transform 0.1s;
 
     &.neutral { background: url("../textures/class-icons-neutral.png"); }
@@ -124,9 +126,12 @@
     &.warlock { background: url("../textures/class-icons-warlock.png"); }
     &.warrior { background: url("../textures/class-icons-warrior.png"); }
 
+    &:hover {
+      transform: scale(1.05);
+    }
+
     &.selected {
       transform: scale(1.3);
-      transform-origin: bottom;
     }
   }
 
@@ -177,6 +182,7 @@
     width: 143px;
     height: 57px;
     margin-bottom: 7px;
+    cursor: pointer;
 
     .frame {
       width: 143px;
@@ -188,9 +194,12 @@
       position: absolute;
       width: 70px;
       height: 30px;
-      font-size: 32px;
-
-      background: linear-gradient(left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+      margin-top: 32px;
+      margin-left: 17px;
+      color: #FFF;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
     }
 
     .background {
