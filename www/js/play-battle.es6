@@ -70,15 +70,32 @@ hbe.createBattleScreen = () => {
     $app
         .on('click', '.hand.my .card', e => {
             if (hbe.battleData.my.active) {
-                var $card = $(e.currentTarget);
+                const $card = $(e.currentTarget);
 
-                $card.siblings().removeClass('selected');
+                $('.selected').removeClass('selected');
                 $card.addClass('selected');
             }
         })
+        .on('click', '.creatures.op .creature', e => {
+
+            if (hbe.battleData.my.active) {
+                const $myCreature = $('.creatures.my .creature.selected');
+
+                if ($myCreature.length) {
+                    const $enemyCreature = $(e.currentTarget);
+
+                    send('hit-creature', {
+                        my: $myCreature.data('crid'),
+                        op: $enemyCreature.data('crid')
+                    });
+                }
+
+            }
+
+        })
         .on('click', '.battleground', e => {
             if (hbe.battleData.my.active) {
-                var $card = $('.card.selected');
+                const $card = $('.card.selected');
 
                 if ($card.length) {
                     send('play-card', {
@@ -96,10 +113,23 @@ hbe.createBattleScreen = () => {
             if (hbe.battleData.my.active) {
                 var $creature = $(e.currentTarget);
 
-                $creature.siblings().removeClass('selected');
+                $('.selected').removeClass('selected');
                 $creature.addClass('selected');
             }
         })
+        .on('click', '.avatar.op', () => {
+            if (hbe.battleData.my.active) {
+
+                const $myCreature = $('.creatures.my .creature.selected');
+
+                if ($myCreature.length) {
+                    send('hit-hero', {
+                        my: $myCreature.data('crid')
+                    });
+                }
+            }
+        });
+
 };
 
 function updateInGameData() {
@@ -143,7 +173,7 @@ function updateInGameData() {
 
         const $creatures = $('.creatures.' + side);
 
-        game[side].creatures.minions.forEach(minion => {
+        game[side].creatures.forEach(minion => {
             var $container = $('<div>');
 
             jade.render($container[0], 'creature', minion);

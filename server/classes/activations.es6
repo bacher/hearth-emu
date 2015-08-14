@@ -10,7 +10,7 @@ module.exports = {
             newMinion.flags.sleep = true;
         }
 
-        player.creatures.addMinion(newMinion);
+        player.creatures.addCreature(newMinion);
     },
 
     addMana: param => {

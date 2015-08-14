@@ -48,6 +48,10 @@ module.exports = class Player extends EventEmitter {
                     case 'end-turn':
                         this.endTurn();
                         break;
+                    case 'hit-creature':
+                    case 'hit-hero':
+                        this.emit('message', json);
+                        break;
                     default:
                         this.warn('Unregistered Client Message:', json.msg);
 
@@ -59,7 +63,7 @@ module.exports = class Player extends EventEmitter {
             this.userName = json.data.name;
             this.flags.joined = true;
 
-            var brackedName = '[' + this.userName + ']';
+            const brackedName = '[' + this.userName + ']';
             this.log = console.log.bind(console, brackedName);
             this.warn = console.warn.bind(console, brackedName);
         }
@@ -109,7 +113,7 @@ module.exports = class Player extends EventEmitter {
         const card = this.hand.getCard(params.cid);
 
         this.emit('message', {
-            msg: 'playCard',
+            msg: 'play-card',
             data: card
         });
 
@@ -117,13 +121,13 @@ module.exports = class Player extends EventEmitter {
         this.hero.removeMana(card.info.cost);
 
         this.emit('message', {
-            msg: 'updateClients'
+            msg: 'update-clients'
         });
     }
 
     endTurn() {
         this.emit('message', {
-            msg: 'endTurn'
+            msg: 'end-turn'
         });
     }
 

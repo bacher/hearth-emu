@@ -71,18 +71,56 @@ module.exports = class Battle {
         });
     }
 
-    handlePlayerMessage(player, message, data) {
-        switch (message) {
-            case 'playCard':
+    handlePlayerMessage(player, msg, data) {
+        switch (msg) {
+            case 'play-card':
                 data.info.act(data.info, this, player);
                 break;
-            case 'endTurn':
+            case 'end-turn':
                 this.switchTurn();
                 this.sendGameData();
                 break;
-            case 'updateClients':
+            case 'update-clients':
                 this.sendGameData();
                 break;
+            case 'hit-creature':
+                const my = player.creatures.getCreatureByCrid(data.my);
+                const op = this.getOp(player).creatures.getCreatureByCrid(data.op);
+
+                op.flags.dead = true;
+                my.flags.sleep = true;
+
+                this.sendGameData();
+
+                break;
+
+            case 'hit-hero': {
+                const my = player.creatures.getCreatureByCrid(data.my);
+
+                const opHero = this.getOp(player).hero;
+
+                if (opHero.hp <= my.attack) {
+
+                } else {
+                    opHero.hp -= my.attack;
+                }
+
+                my.flags.sleep = true;
+
+                this.sendGameData();
+
+                break;
+            }
+            default:
+                console.warn('Unhandled Player Message:', msg);
+        }
+    }
+
+    getOp(player) {
+        if (this.players[0] === player) {
+            return this.players[1];
+        } else {
+            return this.players[0];
         }
     }
 

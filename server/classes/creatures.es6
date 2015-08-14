@@ -1,30 +1,41 @@
 
+const _ = require('lodash');
+
 const MAX_MINIONS_COUNT = 7;
 
 module.exports = class Creatures {
     constructor() {
-        this.minions = [];
+        this.creatures = [];
     }
 
-    canAddMinions() {
-        return this.minions.length !== MAX_MINIONS_COUNT;
+    canAddCreature() {
+        return this.creatures.length !== MAX_MINIONS_COUNT;
     }
 
-    addMinion(minion) {
-        if (this.canAddMinions()) {
-            this.minions.push(minion);
+    addCreature(minion) {
+        if (this.canAddCreature()) {
+            this.creatures.push(minion);
         }
     }
 
     getGameData() {
-        return {
-            minions: this.minions
-        };
+        return this.creatures.filter(cr => !cr.flags.dead);
     }
 
     wakeUpAll() {
-        this.minions.forEach(minion => {
-            delete minion.flags.sleep;
+        this.creatures.forEach(creature => {
+            delete creature.flags.sleep;
         });
+    }
+
+    getCreatureIndex(creature) {
+        return this.creatures.indexOf(creature);
+    }
+
+    getCreatureByCrid(crid) {
+
+        const index = _.findIndex(this.creatures, { crid: crid });
+
+        return this.creatures[index];
     }
 };

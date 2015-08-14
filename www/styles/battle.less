@@ -65,7 +65,11 @@
     }
   }
 
-  .card {
+  .creatures.my .creature.selected {
+    box-shadow: 0 0 8px #f00;
+  }
+
+  .card, .creature {
     position: relative;
     display: inline-block;
     width: 77px;
@@ -147,7 +151,7 @@
 
   .battleground {
     position: absolute;
-    width: 100%;
+    width: 650px;
     height: 400px;
     top: @h/2-200px;
     padding-left: 132px;

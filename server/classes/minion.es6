@@ -8,6 +8,6 @@ module.exports = class Minion {
         this.maxHp = info.base.maxHp;
         this.flags = {};
 
-        this.mid = _.uniqueId('m')
+        this.crid = _.uniqueId('cr')
     }
 };
