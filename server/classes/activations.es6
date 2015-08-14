@@ -15,5 +15,11 @@ module.exports = {
 
     addMana: param => {
 
-    }
+    },
+
+    dealDamage: (card, battle, player) => {},
+
+    overload: (card, battle, player) => {},
+
+    silence: (card, battle, player) => {}
 };

@@ -1,17 +1,20 @@
 
-jade.render($('#app')[0], 'main-menu', {});
+window.$app = $('#app');
 
-$('BODY')
-    .on('click', '.btn-create-deck', e => {
-        hbe.createDeckScreen();
-    })
-    .on('click', '.btn-play-battle', e => {
+jade.render($app[0], 'main-menu', {});
+
+$app.addClass('m');
+
+$app
+    .on('click', '.play', e => {
         hbe.createWaitBattleScreen();
+    })
+    .on('click', '.my-collection', e => {
+        hbe.createCollectionScreen();
     });
 
-if (/^#battle/.test(window.location.hash)) {
-    hbe.createBattleScreen();
+if (/[?&]gobattle[&$]/.test(window.location.search)) {
+    hbe.createWaitBattleScreen();
+} else if (window.location.hash === '#collection') {
+    hbe.createCollectionScreen();
 }
-
-//debug
-hbe.createWaitBattleScreen();

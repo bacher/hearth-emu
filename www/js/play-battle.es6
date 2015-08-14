@@ -1,8 +1,6 @@
 
 var socket = null;
 
-const $app = $('#app');
-
 function send(msg, data) {
     const packet = { msg, data: data || null };
 
@@ -16,7 +14,7 @@ hbe.createWaitBattleScreen = () => {
     jade.render($app[0], 'wait-for-battle', {});
 
     $app
-        .removeClass('b c')
+        .removeClass('m b c')
         .addClass('w');
 
     socket = new WebSocket('ws://localhost:8081/');

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 require('colors');
 
 const PlayerWaiter = require('./player-waiter');
+const cards = require('./cards');
 
 const app = express();
 
@@ -13,16 +14,7 @@ app.use(express.static('../www'));
 app.get('/cards.json', (req, res) => {
     res.json({
         ok: true,
-        cards: [
-            {
-                name: 'Chillwind Yeti',
-                cost: 4,
-                type: 'minion',
-                rarity: 0,
-                category: 'neutral',
-                img: 'cards/chillwind_yeti.png'
-            }
-        ]
+        cards: cards
     });
 });
 
