@@ -3,9 +3,12 @@ hbe.createCollectionScreen = () => {
 
     window.location.hash = '#collection';
 
-    const decks = [];
+    const decks = JSON.parse(localStorage.getItem('decks')) || [];
+
 
     jade.render($app[0], 'collection', {});
+
+    drawDecks();
 
     $app
         .removeClass('m w b')
@@ -73,6 +76,10 @@ hbe.createCollectionScreen = () => {
         jade.render(cards, 'collection-cards', {
             cards: drawCards
         });
+    }
+
+    function drawDecks() {
+        jade.render($('.decks-wrapper')[0], 'decks', { decks: decks });
     }
 
     function switchMode(deck) {

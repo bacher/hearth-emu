@@ -94,9 +94,6 @@
     background: url("../textures/new-deck.png");
   }
 
-
-
-
   .cards {
     display: inline-block;
     vertical-align: top;
@@ -171,13 +168,65 @@
     }
   }
 
-  //.deck {
-  //  display: inline-block;
-  //  vertical-align: top;
-  //  width: 300px;
-  //  height: 500px;
-  //  overflow: scroll;
-  //  border: 1px solid black;
-  //}
+  .decks-wrapper {
+    margin-top: 2px;
+    margin-left: 5px;
+  }
+
+  .deck {
+    width: 143px;
+    height: 57px;
+    margin-bottom: 7px;
+
+    .frame {
+      width: 143px;
+      height: 57px;
+      background: url("../textures/deck-avatar.png");
+    }
+
+    .label {
+      position: absolute;
+      width: 70px;
+      height: 30px;
+      font-size: 32px;
+
+      background: linear-gradient(left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    .background {
+      position: absolute;
+      width: 125px;
+      height: 37px;
+      margin: 10px 0 0 11px;
+
+      &.druid {
+        background: url("../textures/deck-hero-druid.jpg");
+      }
+      &.hunter {
+        background: url("../textures/deck-hero-hunter.jpg");
+      }
+      &.mage {
+        background: url("../textures/deck-hero-mage.jpg");
+      }
+      &.paladin {
+        background: url("../textures/deck-hero-paladin.jpg");
+      }
+      &.priest {
+        background: url("../textures/deck-hero-priest.jpg");
+      }
+      &.rogue {
+        background: url("../textures/deck-hero-rogue.jpg");
+      }
+      &.shaman {
+        background: url("../textures/deck-hero-shaman.jpg");
+      }
+      &.warlock {
+        background: url("../textures/deck-hero-warlock.jpg");
+      }
+      &.warrior {
+        background: url("../textures/deck-hero-warrior.jpg");
+      }
+    }
+  }
 
 }
