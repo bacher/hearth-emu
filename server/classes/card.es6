@@ -8,5 +8,6 @@ module.exports = class Card {
         this.rarity = info.rarity || 0;
         this.act = info.act;
         this.param = info.param;
+        this.addToDeck = info.addToDeck || true;
     }
 };

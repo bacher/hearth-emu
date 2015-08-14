@@ -100,7 +100,7 @@ module.exports = class Battle {
         players[0].deactivate();
 
         players[1].activate();
-        players[1].minions.wakeUpAll();
+        players[1].creatures.wakeUpAll();
         players[1].hero.addCrystal();
         players[1].hero.restoreMana();
         players[1].drawCard();

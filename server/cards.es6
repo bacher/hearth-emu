@@ -10,6 +10,7 @@ const cards = [
         type: H.CARD_TYPES.spell,
         cost: 0,
         clas: H.CLASSES.neutral,
+        addToDeck: false,
         act: ACTIVATIONS.addMana,
         param: 1
     }),

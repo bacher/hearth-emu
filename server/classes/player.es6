@@ -4,7 +4,7 @@ const EventEmitter = require('events').EventEmitter;
 const Deck = require('./deck');
 const Hero = require('./hero');
 const Hand = require('./hand');
-const Minions = require('./minions');
+const Creatures = require('./creatures');
 const CARDS = require('../cards');
 
 module.exports = class Player extends EventEmitter {
@@ -23,7 +23,7 @@ module.exports = class Player extends EventEmitter {
         this.deck = new Deck();
         this.hero = new Hero();
         this.hand = new Hand();
-        this.minions = new Minions();
+        this.creatures = new Creatures();
 
         ws
             .on('message', json => {
@@ -134,7 +134,7 @@ module.exports = class Player extends EventEmitter {
             hero: this.hero.getGameData(),
             hand: this.hand.getGameData(),
             deck: this.deck.getGameData(),
-            minions: this.minions.getGameData()
+            creatures: this.creatures.getGameData()
         };
     }
 };

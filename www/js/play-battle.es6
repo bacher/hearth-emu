@@ -1,25 +1,30 @@
 
 var socket = null;
 
+const $app = $('#app');
+
+function send(msg, data) {
+    const packet = { msg, data: data || null };
+
+    console.log('Client Message:', packet);
+
+    socket.send(JSON.stringify(packet));
+}
+
 hbe.createWaitBattleScreen = () => {
 
-    jade.render($('#app')[0], 'wait-for-battle', {});
+    jade.render($app[0], 'wait-for-battle', {});
 
-    $('#app')
+    $app
         .removeClass('b c')
         .addClass('w');
 
     socket = new WebSocket('ws://localhost:8081/');
 
     socket.onopen = () => {
-        console.log('Соединение установлено');
-
-        socket.send(JSON.stringify({
-            msg: 'join',
-            data: {
-                name: window.location.search.match(/[?&]name=([^&]*)/)[1]
-            }
-        }));
+        send('join', {
+            name: window.location.search.match(/[?&]name=([^&]*)/)[1]
+        });
     };
 
     socket.onclose = event => {
@@ -28,11 +33,11 @@ hbe.createWaitBattleScreen = () => {
         } else {
             console.log('Обрыв соединения'); // например, "убит" процесс сервера
         }
-        console.log('Код: ' + event.code + ' причина: ' + event.reason);
+        console.warn('Code: ' + event.code + ' Cause: ' + event.reason);
     };
 
     socket.onerror = error => {
-        console.log('Ошибка', error.message);
+        console.warn('Socket Error', error.message);
     };
 
     socket.onmessage = event => {
@@ -43,10 +48,10 @@ hbe.createWaitBattleScreen = () => {
 
         switch (data.msg) {
             case 'battle-started':
+                hbe.createBattleScreen();
                 break;
 
             case 'game-data':
-                hbe.createBattleScreen();
                 hbe.battleData = data.data;
                 updateInGameData();
                 break;
@@ -56,13 +61,13 @@ hbe.createWaitBattleScreen = () => {
 
 hbe.createBattleScreen = () => {
 
-    jade.render($('#app')[0], 'battle', {});
+    jade.render($app[0], 'battle', {});
 
-    $('#app')
+    $app
         .removeClass('w c')
         .addClass('b');
 
-    $('#app')
+    $app
         .on('click', '.hand.my .card', e => {
             if (hbe.battleData.my.active) {
                 var $card = $(e.currentTarget);
@@ -76,23 +81,25 @@ hbe.createBattleScreen = () => {
                 var $card = $('.card.selected');
 
                 if ($card.length) {
-                    socket.send(JSON.stringify({
-                        msg: 'play-card',
-                        data: {
-                            cid: $card.data('cid')
-                        }
-                    }));
+                    send('play-card', {
+                        cid: $card.data('cid')
+                    });
                 }
             }
         })
         .on('click', '.end-turn', () => {
-            console.log('END-TURN');
             if (hbe.battleData.my.active) {
-                socket.send(JSON.stringify({
-                    msg: 'end-turn'
-                }));
+                send('end-turn');
             }
-        });
+        })
+        .on('click', '.creatures.my .creature', e => {
+            if (hbe.battleData.my.active) {
+                var $creature = $(e.currentTarget);
+
+                $creature.siblings().removeClass('selected');
+                $creature.addClass('selected');
+            }
+        })
 };
 
 function updateInGameData() {
@@ -101,8 +108,14 @@ function updateInGameData() {
     $('.name.op').text(game.op.name);
     $('.name.my').text(game.my.name);
 
+    if (!game.my.active) {
+        $('.selected').removeClass('selected');
+    }
+
     const $hand = $('.hand.my').empty();
     const $handOp = $('.hand.op').empty();
+
+    $('.creatures').empty();
 
     game.my.hand.cards.forEach(card => {
         var $container = $('<div>');
@@ -128,14 +141,14 @@ function updateInGameData() {
     ['my', 'op'].forEach(side => {
         const hero = game[side].hero;
 
-        const $minions = $('.minions.' + side);
+        const $creatures = $('.creatures.' + side);
 
-        game[side].minions.minions.forEach(minion => {
+        game[side].creatures.minions.forEach(minion => {
             var $container = $('<div>');
 
-            jade.render($container[0], 'minion', minion);
+            jade.render($container[0], 'creature', minion);
 
-            $minions.append($container.children());
+            $creatures.append($container.children());
         });
 
         $('.avatar.' + side + ' .health .value').text(hero.hp);

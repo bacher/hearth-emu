@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+require('colors');
 
 const PlayerWaiter = require('./player-waiter');
 
@@ -29,8 +30,7 @@ const server = app.listen(8080, function () {
     var host = server.address().address;
     var port = server.address().port;
 
-    console.log('Example app listening at http://%s:%s', host, port);
+    console.log('Hearthstone server listening %s:%s'.green, host, port);
 
     new PlayerWaiter().listenWs();
-
 });

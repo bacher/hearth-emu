@@ -1,7 +1,7 @@
 
 const MAX_MINIONS_COUNT = 7;
 
-module.exports = class Minions {
+module.exports = class Creatures {
     constructor() {
         this.minions = [];
     }
