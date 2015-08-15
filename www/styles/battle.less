@@ -8,6 +8,7 @@
     overflow: hidden;
     padding-top: 23px;
     background: url("../textures/board_1280.jpg");
+    background-repeat: no-repeat;
   }
 
   .name {
@@ -100,7 +101,17 @@
     transition: margin 0.3s;
 
     &.selected {
-      box-shadow: 0 0 8px #f00
+      box-shadow: 0 0 12px 10px #F00;
+    }
+
+    &.available:after {
+      position: absolute;
+      content: '';
+      top: -16px;
+      left: -10px;
+      width: 98px;
+      height: 105px;
+      background: url("../textures/card-glow.png");
     }
 
     &:hover {

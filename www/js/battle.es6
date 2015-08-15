@@ -8,7 +8,7 @@ new Screen({
         render($app, 'battle');
 
         $app
-            .on('click', '.hand.my .card', e => {
+            .on('click', '.hand.my .card.available', e => {
                 if (hbe.battleData.my.active) {
                     const $card = $(e.currentTarget);
 
@@ -89,6 +89,12 @@ function updateInGameData() {
     game.my.hand.forEach(card => {
         var $container = $('<div>');
         render($container, 'card', card);
+
+        if (game.my.active) {
+            if (card.base.cost <= game.my.hero.mana) {
+                $container.children().addClass('available');
+            }
+        }
 
         $hand.append($container.children());
     });

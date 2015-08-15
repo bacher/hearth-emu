@@ -18,7 +18,7 @@ app.get('/cards.json', (req, res) => {
     });
 });
 
-const server = app.listen(8080, function () {
+const server = app.listen(8080, '192.168.1.66', function () {
     var host = server.address().address;
     var port = server.address().port;
 

@@ -21,7 +21,7 @@ class Screen {
     }
 
     destroy() {
-        $app.off(this.gClass);
+        $app.off();
         $app.removeClass(this.gClass);
 
         if (this._destroy) {

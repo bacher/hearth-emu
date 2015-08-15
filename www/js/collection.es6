@@ -5,10 +5,11 @@ new Screen({
     hash: 'collection',
     draw: function() {
 
-        const decks = JSON.parse(localStorage.getItem('decks')) || [];
+        var decks = JSON.parse(localStorage.getItem('decks')) || [];
         var page = 0;
         var heroMode = false;
         var activeDeck = null;
+        var $cardToRemove = null;
 
         jade.render($app[0], 'collection', {});
 
@@ -71,6 +72,19 @@ new Screen({
                 checkLimits();
                 updateDeckCards();
             })
+            .on('click', '.deck .remove', e => {
+                $cardToRemove = $(e.currentTarget).parent();
+                $('.confirm').show();
+
+                e.stopPropagation();
+            })
+            .on('click', '.confirm .ok', () => {
+                removeDeck($cardToRemove.data('id'));
+                $('.confirm').hide();
+            })
+            .on('click', '.confirm .cancel', () => {
+                $('.confirm').hide();
+            })
             .on('click', '.hero', e => {
                 const $hero = $(e.currentTarget);
 
@@ -82,9 +96,11 @@ new Screen({
             .on('click', '.choose', () => {
                 $('.create-deck-screen').removeClass('show');
 
+                const clas = $('.hero.selected').data('clas');
+
                 decks.push({
-                    label: 'Custom Shaman',
-                    clas: 'shaman',
+                    label: 'Custom ' + clas[0].toUpperCase() + clas.substr(1),
+                    clas: clas,
                     cards: [],
                     id: Math.floor(Math.random() * 10000)
                 });
@@ -143,7 +159,7 @@ new Screen({
         }
 
         function checkLimits() {
-            if (heroMode) {
+            if (heroMode && activeDeck) {
                 $('.card').each(function() {
                     const id = $(this).data('id');
 
@@ -174,9 +190,13 @@ new Screen({
                 $('.tab').show();
             }
 
-            activeDeck = deck;
+            activeDeck = deck || null;
 
-            updateDeckCards();
+            if (heroMode) {
+                updateDeckCards();
+            } else {
+                drawDecks();
+            }
         }
 
         function selectTab($tab) {
@@ -196,6 +216,11 @@ new Screen({
 
         function saveDecks() {
             localStorage.setItem('decks', JSON.stringify(decks));
+        }
+
+        function removeDeck(removeId) {
+            decks = decks.filter(deck => deck.id !== removeId);
+            drawDecks();
         }
 
     }
