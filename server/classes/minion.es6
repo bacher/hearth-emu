@@ -2,12 +2,13 @@
 const _ = require('lodash');
 
 module.exports = class Minion {
-    constructor(info) {
-        this.base = info.base;
-        this.attack = info.base.attack;
-        this.maxHp = info.base.maxHp;
-        this.flags = {};
+    constructor(card) {
+        this.id = _.uniqueId('minion');
 
-        this.crid = _.uniqueId('cr')
+        this.card = card;
+        this.base = card.minion;
+        this.attack = this.base.attack;
+        this.maxHp = this.base.maxHp;
+        this.flags = _.clone(this.base.flags);
     }
 };

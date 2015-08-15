@@ -1,4 +1,6 @@
 
+const A = require('./activations');
+
 module.exports = class Card {
     constructor(info) {
         this.id = info.id;
@@ -7,10 +9,12 @@ module.exports = class Card {
         this.cost = info.cost;
         this.clas = info.clas || 0;
         this.rarity = info.rarity || 0;
-        this.act = info.act || null;
-        this.param = info.param || null;
         this.pic = info.pic;
         this.flags = {};
+
+        this.act = A[info.act];
+        this.minion = info.minion || null;
+        this.param = info.param || null;
 
         if (info.flags.uncollectable) {
             this.flags.uncollectable = true;

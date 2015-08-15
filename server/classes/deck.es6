@@ -1,10 +1,10 @@
 
 const _ = require('lodash');
-const CARDS = require('../cards');
+const CARDS = require('../cards').hash;
 
 module.exports = class Deck {
-    constructor() {
-        this.cards = [];
+    constructor(cardIds) {
+        this.cards = cardIds.map(id => CARDS[id]);
     }
 
     shuffle() {

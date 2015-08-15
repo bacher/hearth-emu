@@ -12,7 +12,7 @@ function send(msg, data) {
 hbe.createWaitBattleScreen = function() {
     window.location.hash = '#';
 
-    jade.render($app[0], 'waiting-opponent', {});
+    render($app, 'waiting-opponent');
 
     $app
         .removeClass('m b c')
@@ -22,8 +22,11 @@ hbe.createWaitBattleScreen = function() {
     socket = new WebSocket('ws://localhost:8081/');
 
     socket.onopen = () => {
+
+        const deck = JSON.parse(window.localStorage.getItem('decks'))[0];
         send('join', {
-            name: window.location.search.match(/[?&]name=([^&]*)/)[1]
+            name: window.location.search.match(/[?&]name=([^&]*)/)[1],
+            deck: deck.cards
         });
     };
 
@@ -61,7 +64,7 @@ hbe.createWaitBattleScreen = function() {
 
 hbe.createBattleScreen = () => {
 
-    jade.render($app[0], 'battle', {});
+    render($app, 'battle');
 
     $app
         .removeClass('w c')
@@ -99,7 +102,7 @@ hbe.createBattleScreen = () => {
 
                 if ($card.length) {
                     send('play-card', {
-                        cid: $card.data('cid')
+                        id: $card.data('id')
                     });
                 }
             }
@@ -147,25 +150,17 @@ function updateInGameData() {
 
     $('.creatures').empty();
 
-    game.my.hand.cards.forEach(card => {
+    game.my.hand.forEach(card => {
         var $container = $('<div>');
-
-        debugger
-        jade.render($container[0], 'card', {
-            img: 'cards/' + card.info.id + '.png',
-            cid: card.cid
-        });
+        render($container, 'card', card);
 
         $hand.append($container.children());
     });
 
     var $container = $('<div>');
-    jade.render($container[0], 'card', {
-        img: 'cards/card_back.png',
-        cid: 0
-    });
+    render($container, 'card');
 
-    for (var i = 0; i < game.op.hand.cards.length; ++i) {
+    for (var i = 0; i < game.op.hand.length; ++i) {
         $handOp.append($container.children().clone());
     }
 
@@ -177,7 +172,7 @@ function updateInGameData() {
         game[side].creatures.forEach(minion => {
             var $container = $('<div>');
 
-            jade.render($container[0], 'creature', minion);
+            render($container, 'creature', minion);
 
             $creatures.append($container.children());
         });
@@ -190,4 +185,13 @@ function updateInGameData() {
 
     $('.end-turn').toggleClass('active', game.my.active);
 
+}
+
+function render($cont, tmplName, params) {
+    try {
+        jade.render($cont[0], tmplName, params || {});
+    } catch(e) {
+        debugger;
+        throw e;
+    }
 }

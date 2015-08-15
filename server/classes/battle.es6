@@ -32,7 +32,7 @@ module.exports = class Battle {
         this.players[1].drawCard();
         this.players[1].drawCard();
         this.players[1].drawCard();
-        this.players[1].addCoinCard();
+        this.players[1].hand.addCoinCard();
 
         this.sendGameData();
     }
@@ -74,7 +74,7 @@ module.exports = class Battle {
     handlePlayerMessage(player, msg, data) {
         switch (msg) {
             case 'play-card':
-                data.info.act(data.info, this, player);
+                data.base.act(data.base, this, player);
                 break;
             case 'end-turn':
                 this.switchTurn();

@@ -20,48 +20,51 @@ module.exports = class Player extends EventEmitter {
         };
 
         this.active = false;
-        this.deck = new Deck();
+        this.deck = null;
         this.hero = new Hero();
         this.hand = new Hand();
         this.creatures = new Creatures();
 
         ws
             .on('message', json => {
-                this.onMessage(JSON.parse(json));
+                const packet = JSON.parse(json);
+                this.onMessage(packet.msg, packet.data);
             })
             .on('close', () => {
                 this.status = 'off';
             });
     }
 
-    onMessage(json) {
+    onMessage(msg, data) {
 
         if (this.flags.joined) {
 
             if (this.active) {
-                this.log('Client Message:', json.msg);
+                this.log('Client Message:', msg);
 
-                switch (json.msg) {
+                switch (msg) {
                     case 'play-card':
-                        this.playCard(json.data);
+                        this.playCard(data);
                         break;
                     case 'end-turn':
                         this.endTurn();
                         break;
                     case 'hit-creature':
                     case 'hit-hero':
-                        this.emit('message', json);
+                        this.emit('message', { msg, data });
                         break;
                     default:
-                        this.warn('Unregistered Client Message:', json.msg);
+                        this.warn('Unregistered Client Message:', msg);
 
                 }
             } else {
-                this.warn('Inactive Client Message:', json.msg)
+                this.warn('Inactive Client Message:', msg)
             }
-        } else {
-            this.userName = json.data.name;
+        } else if (msg === 'join') {
+            this.userName = data.name;
             this.flags.joined = true;
+
+            this.deck = new Deck(data.deck);
 
             const brackedName = '[' + this.userName + ']';
             this.log = console.log.bind(console, brackedName);
@@ -101,24 +104,17 @@ module.exports = class Player extends EventEmitter {
         }
     }
 
-    addCoinCard() {
-        this.hand.addCard({
-            cid: _.uniqueId('c'),
-            info: CARDS['the_coin']
-        });
-    }
-
     playCard(params) {
 
-        const card = this.hand.getCard(params.cid);
+        const card = this.hand.getCard(params.id);
 
         this.emit('message', {
             msg: 'play-card',
             data: card
         });
 
-        this.hand.removeCard(params.cid);
-        this.hero.removeMana(card.info.cost);
+        this.hand.removeCard(params.id);
+        this.hero.removeMana(card.base.cost);
 
         this.emit('message', {
             msg: 'update-clients'

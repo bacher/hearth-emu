@@ -1,12 +1,11 @@
 
-const BaseMinions = require('../base-minions');
+const Minion = require('./minion');
 
 module.exports = {
     summon: (card, battle, player) => {
+        const newMinion = new Minion(card);
 
-        const newMinion = BaseMinions[card.param].spawn();
-
-        if (!newMinion.base.abilities.charge) {
+        if (!newMinion.flags.charge) {
             newMinion.flags.sleep = true;
         }
 

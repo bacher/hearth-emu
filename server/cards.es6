@@ -20,5 +20,12 @@ for (var i = 0; i < cards.length; ++i) {
 
 module.exports = {
     list: cards,
-    hash: cardsHash
+    hash: cardsHash,
+    findByName: name => {
+        for (var i = 0; i < cards.length; ++i) {
+            if (cards[i].name === name) {
+                return cards[i];
+            }
+        }
+    }
 };
