@@ -273,7 +273,7 @@
       margin-left: 53px;
       width: 55px;
       height: 30px;
-      background: url("../textures/collection-card-modificator_lock.png");
+      background: url("../textures/collection-card-modificator_x1.png");
     }
 
     &.lock:after {
@@ -330,8 +330,12 @@
       background: url("../textures/button-remove.png");
     }
 
-    &:hover .remove {
-      display: block;
+    &:hover {
+      box-shadow: 0 0 10px 4px rgba(255,255,255,0.6);
+
+      .remove {
+        display: block;
+      }
     }
 
     .background {

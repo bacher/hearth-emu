@@ -160,15 +160,18 @@ new Screen({
 
         function checkLimits() {
             if (heroMode && activeDeck) {
+                debugger
                 $('.card').each(function() {
-                    const id = $(this).data('id');
+                    const $card = $(this);
+                    const id = $card.data('id');
 
                     const alreadyInDeck = activeDeck.cards.filter(cardId => cardId === id).length;
 
+                    $card.removeClass('lock one');
                     if (alreadyInDeck >= 2) {
-                        $(this).addClass('lock');
+                        $card.addClass('lock');
                     } else if (alreadyInDeck === 1) {
-                        $(this).addClass('one');
+                        $card.addClass('one');
                     }
                 });
             }
@@ -177,6 +180,8 @@ new Screen({
         function switchMode(deck) {
             heroMode = !!deck;
             $('.collection').toggleClass('hero-mode', !!deck);
+
+            activeDeck = deck || null;
 
             if (deck) {
                 $('.tab:not(.neutral)').hide();
@@ -189,8 +194,6 @@ new Screen({
             } else {
                 $('.tab').show();
             }
-
-            activeDeck = deck || null;
 
             if (heroMode) {
                 updateDeckCards();
