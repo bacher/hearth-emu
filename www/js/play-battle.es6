@@ -9,13 +9,15 @@ function send(msg, data) {
     socket.send(JSON.stringify(packet));
 }
 
-hbe.createWaitBattleScreen = () => {
+hbe.createWaitBattleScreen = function() {
+    window.location.hash = '#';
 
-    jade.render($app[0], 'wait-for-battle', {});
+    jade.render($app[0], 'waiting-opponent', {});
 
     $app
         .removeClass('m b c')
-        .addClass('w');
+        .addClass('w')
+        .off();
 
     socket = new WebSocket('ws://localhost:8081/');
 
@@ -148,6 +150,7 @@ function updateInGameData() {
     game.my.hand.cards.forEach(card => {
         var $container = $('<div>');
 
+        debugger
         jade.render($container[0], 'card', {
             img: 'cards/' + card.info.id + '.png',
             cid: card.cid

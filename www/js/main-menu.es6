@@ -1,6 +1,4 @@
 
-window.$app = $('#app');
-
 hbe.createMainMenuScreen = function() {
     window.location.hash = '#';
 
@@ -18,11 +16,3 @@ hbe.createMainMenuScreen = function() {
             hbe.createCollectionScreen();
         });
 };
-
-if (/[?&]gobattle[&$]/.test(window.location.search)) {
-    hbe.createWaitBattleScreen();
-} else if (window.location.hash === '#collection') {
-    hbe.createCollectionScreen();
-} else {
-    hbe.createMainMenuScreen();
-}

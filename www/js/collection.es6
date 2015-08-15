@@ -1,10 +1,12 @@
 
-hbe.createCollectionScreen = () => {
+hbe.createCollectionScreen = function() {
 
     window.location.hash = '#collection';
 
     const decks = JSON.parse(localStorage.getItem('decks')) || [];
-
+    var page = 0;
+    var heroMode = false;
+    var activeDeck = null;
 
     jade.render($app[0], 'collection', {});
 
@@ -12,21 +14,17 @@ hbe.createCollectionScreen = () => {
 
     $app
         .removeClass('m w b')
-        .addClass('c');
-
-    $app
+        .addClass('c')
+        .off()
         .on('click', '.new-deck', () => {
             $('.create-deck-screen').addClass('show');
         })
         .on('click', '.tab', e => {
             const $tab = $(e.currentTarget);
 
-            $tab.siblings().removeClass('selected');
-            $tab.addClass('selected');
-
-            drawCards();
+            selectTab($tab);
         })
-        .on('click', '.btn-back', () => {
+        .on('click', '.btn-done', () => {
             switchMode(null);
         })
         .on('click', '.deck', e => {
@@ -36,9 +34,31 @@ hbe.createCollectionScreen = () => {
             const deck = _.find(decks, deck => deck.id === id);
 
             switchMode(deck);
-        });
+        })
+        .on('click', '.card:not(.lock)', e => {
+            if (activeDeck && activeDeck.cards.length < 30) {
+                activeDeck.cards.push($(e.currentTarget).data('id'));
 
-    $app
+                saveDecks();
+
+                checkLimits();
+
+                updateDeckCards();
+            }
+        })
+        .on('click', '.btn-back', () => {
+            hbe.createMainMenuScreen();
+        })
+        .on('click', '.arrow.left', () => {
+            page--;
+
+            drawCards();
+        })
+        .on('click', '.arrow.right', () => {
+            page++;
+
+            drawCards();
+        })
         .on('click', '.hero', e => {
             const $hero = $(e.currentTarget);
 
@@ -65,43 +85,101 @@ hbe.createCollectionScreen = () => {
     $.ajax({
         url: '/cards.json'
     }).then(data => {
-        hbe.cards = data.cards;
+        hbe.cards = {
+            all: data.cards,
+            [hbe.CLASSES.neutral]: [],
+            [hbe.CLASSES.warrior]: [],
+            [hbe.CLASSES.shaman]: [],
+            [hbe.CLASSES.rogue]: [],
+            [hbe.CLASSES.paladin]: [],
+            [hbe.CLASSES.hunter]: [],
+            [hbe.CLASSES.druid]: [],
+            [hbe.CLASSES.warlock]: [],
+            [hbe.CLASSES.mage]: [],
+            [hbe.CLASSES.priest]: []
+        };
+
+        hbe.cardsHash = {};
+
+        data.cards.forEach(card => {
+            hbe.cards[card.clas].push(card);
+            hbe.cardsHash[card.id] = card;
+        });
 
         drawCards();
     });
 
     function drawCards() {
-        const cards = $('.cards')[0];
-        const drawCards = [];
-
+        const $cards = $('.cards');
         const selectedClas = hbe.CLASSES[$('.tab.selected').data('clas')];
 
-        for (var i = 0; i < hbe.cards.length; ++i) {
-            var card = hbe.cards[i];
+        const cardsPool = hbe.cards[selectedClas];
+        const drawCards = cardsPool.slice(page * 8, page * 8 + 8);
 
-            if (card.clas === selectedClas) {
-                drawCards.push(card);
-            }
-        }
+        $('.arrow.left').toggle(page !== 0);
+        $('.arrow.right').toggle(page * 8 + 8 < cardsPool.length);
 
-        jade.render(cards, 'collection-cards', {
+        jade.render($cards[0], 'collection-cards', {
             cards: drawCards
         });
+
+        checkLimits();
     }
 
     function drawDecks() {
         jade.render($('.decks-wrapper')[0], 'decks', { decks: decks });
     }
 
+    function checkLimits() {
+        if (heroMode) {
+            $('.card').each(function() {
+                const id = $(this).data('id');
+
+                const alreadyInDeck = activeDeck.cards.filter(cardId => cardId === id).length;
+
+                if (alreadyInDeck >= 2) {
+                    $(this).addClass('lock');
+                } else if (alreadyInDeck === 1) {
+                    $(this).addClass('one');
+                }
+            });
+        }
+    }
+
     function switchMode(deck) {
+        heroMode = !!deck;
         $('.collection').toggleClass('hero-mode', !!deck);
 
         if (deck) {
             $('.tab:not(.neutral)').hide();
-            $('.tab.' + deck.clas).show();
+            const $classTab = $('.tab.' + deck.clas);
+            $classTab.show();
+
+            selectTab($classTab);
+
+            drawCards();
         } else {
             $('.tab').show();
         }
+
+        activeDeck = deck;
+
+        updateDeckCards();
+    }
+
+    function selectTab($tab) {
+        $tab.siblings().removeClass('selected');
+        $tab.addClass('selected');
+
+        page = 0;
+
+        drawCards();
+    }
+
+    function updateDeckCards() {
+        const $cards = $('.deck-cards');
+
+        jade.render($cards[0], 'card-lines', { cards: activeDeck.cards.map(cardId => hbe.cardsHash[cardId]) });
     }
 
     function saveDecks() {

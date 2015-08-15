@@ -34,12 +34,26 @@
     display: block;
   }
 
-  .btn-back {
+  .btn-done, .btn-back {
     position: absolute;
-    width: 100px;
-    height: 54px;
-    top: 700px;
-    left: 800px;
+    width: 62px;
+    height: 28px;
+
+    &:hover {
+      background: url("../textures/blink2.png");
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .btn-done {
+    top: 654px;
+    left: 141px;
+  }
+
+  .btn-back {
+    top: 597px;
+    left: 122px
   }
 
   .heroes {
@@ -94,10 +108,37 @@
     background: url("../textures/new-deck.png");
   }
 
-  .cards {
-    display: inline-block;
-    vertical-align: top;
-    width: 600px;
+  .deck-cards {
+    position: absolute;
+    top: 88px;
+    left: 19px;
+  }
+
+  .card-line {
+    width: 159px;
+    height: 27px;
+    background: url("../textures/card-line.png");
+
+    .cost, .name {
+      line-height: 28px;
+      color: #FFF;
+      font-weight: bold;
+      vertical-align: middle;
+    }
+
+    .cost {
+      margin: 0 7px;
+      font-size: 16px;
+      text-shadow: -1px -1px 1px #000, 1px 1px 1px #000;
+    }
+
+    .name {
+      margin-left: 3px;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 2px #000;
+
+    }
   }
 
   .tabs {
@@ -140,10 +181,34 @@
     top: 84px;
     left: 194px;
     width: 640px;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .pager {
+    position: absolute;
+    top: 574px;
+    left: 450px;
+    width: 100px;
+    height: 50px;
+  }
+
+  .arrow {
+    position: absolute;
+    top: 400px;
+
+    &.left {
+      left: 200px;
+    }
+
+    &.right {
+      left: 824px;
+    }
   }
 
   .card {
     display: inline-block;
+    margin-bottom: 25px;
 
     .img {
       width: 160px;
@@ -154,18 +219,29 @@
       display: block;
       position: absolute;
       content: '';
-      bottom: -20px;
+      margin-top: -9px;
       margin-left: 53px;
       width: 55px;
       height: 30px;
       background: url("../textures/collection-card-modificator_x2.png");
     }
 
+    &.one:after {
+      display: block;
+      position: absolute;
+      content: '';
+      margin-top: -9px;
+      margin-left: 53px;
+      width: 55px;
+      height: 30px;
+      background: url("../textures/collection-card-modificator_lock.png");
+    }
+
     &.lock:after {
       display: block;
       position: absolute;
       content: '';
-      bottom: -20px;
+      margin-top: -9px;
       margin-left: 53px;
       width: 55px;
       height: 30px;
@@ -192,7 +268,7 @@
 
     .label {
       position: absolute;
-      width: 70px;
+      width: 118px;
       height: 30px;
       margin-top: 32px;
       margin-left: 17px;
@@ -200,6 +276,9 @@
       font-size: 13px;
       font-weight: bold;
       letter-spacing: 0.5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .background {
