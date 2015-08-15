@@ -2,9 +2,9 @@
 window.$app = $('#app');
 
 if (/[?&]gobattle(?:$|&)/.test(window.location.search)) {
-    hbe.createWaitBattleScreen();
+    hbe.activateScreen('waiting-opponent');
 } else if (window.location.hash === '#collection') {
-    hbe.createCollectionScreen();
+    hbe.activateScreen('collection');
 } else {
-    hbe.createMainMenuScreen();
+    hbe.activateScreen('main-menu');
 }

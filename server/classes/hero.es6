@@ -14,8 +14,12 @@ module.exports = class Hero {
         };
     }
 
+    addMana(count) {
+        this.manaCount += count;
+    }
+
     addCrystal() {
-        this.crystalCount += 1;
+        this.crystalCount++;
     }
 
     restoreMana() {

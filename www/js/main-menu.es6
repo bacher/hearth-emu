@@ -1,18 +1,17 @@
 
-hbe.createMainMenuScreen = function() {
-    window.location.hash = '#';
+new Screen({
+    gClass: 'm',
+    name: 'main-menu',
 
-    jade.render($app[0], 'main-menu', {});
+    draw: function() {
+        jade.render($app[0], 'main-menu', {});
 
-    $app.removeClass('c b w');
-    $app.addClass('m');
-
-    $app
-        .off()
-        .on('click', '.play', e => {
-            hbe.createWaitBattleScreen();
-        })
-        .on('click', '.my-collection', e => {
-            hbe.createCollectionScreen();
-        });
-};
+        $app
+            .on('click', '.play', () => {
+                hbe.activateScreen('waiting-opponent');
+            })
+            .on('click', '.my-collection', () => {
+                hbe.activateScreen('collection');
+            });
+    }
+});

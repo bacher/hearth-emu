@@ -12,8 +12,8 @@ module.exports = {
         player.creatures.addCreature(newMinion);
     },
 
-    addMana: param => {
-
+    addMana: (card, battle, player) => {
+        player.hero.addMana(1);
     },
 
     dealDamage: (card, battle, player) => {},

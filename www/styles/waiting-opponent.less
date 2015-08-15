@@ -4,4 +4,42 @@
     height: 720px;
     background: url("../textures/waiting-opponent.jpg");
   }
+
+  .animation {
+    position: absolute;
+    top: 164px;
+    left: 318px;
+    width: 659px;
+    height: 412px;
+
+    &.s1 {
+      background: url("../textures/waiting-opponent-animation2.jpg");
+    }
+    &.s2 {
+      background: url("../textures/waiting-opponent-animation3.jpg");
+    }
+    &.s3 {
+      background: url("../textures/waiting-opponent-animation4.jpg");
+    }
+    &.s4 {
+      background: url("../textures/waiting-opponent-animation5.jpg");
+    }
+    &.s5 {
+      background: url("../textures/waiting-opponent-animation6.jpg");
+    }
+  }
+
+  .cancel {
+    position: absolute;
+    top: 587px;
+    left: 611px;
+    width: 88px;
+    height: 48px;
+
+    &:hover {
+      background: url("../textures/blink3.png");
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
 }
