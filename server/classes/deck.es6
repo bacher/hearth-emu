@@ -5,13 +5,6 @@ const CARDS = require('../cards');
 module.exports = class Deck {
     constructor() {
         this.cards = [];
-
-        for (var i = 0; i < 10; ++i) {
-            this.cards.push({
-                info: CARDS['chillwind_yeti'],
-                cid: _.uniqueId('c')
-            });
-        }
     }
 
     shuffle() {

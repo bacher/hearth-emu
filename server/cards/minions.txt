@@ -1,0 +1,12 @@
+
+Chillwind Yeti,147/652/31,4,n,(4/4)
+Boulderfist Ogre,147/673/60,6,n,(6/6)
+Brewmaster,149/700/397,4,n,(4/4)
+Gnomish Inventor,147/610/246,4,n,(4/4)
+Guardian of Icecrown,149/284/7813,4,n,(4/4)
+Kor'kron Elite,149/481/130,4,w,(4/4)
+Sen'jin Shieldmasta,147/646/326,4,n,(4/4)
+Oasis Snapjaw,147/577/15,4,n,(4/4)
+Bloodfen Raptor,147/640/576,2,n,(2/2)
+Bluegill Warrior,147/643/289,2,n,(2/2)
+Frostwolf Grunt,147/583/663,2,n,(2/2)

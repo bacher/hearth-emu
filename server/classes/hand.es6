@@ -15,9 +15,7 @@ module.exports = class Hand {
     }
 
     getGameData() {
-        return {
-            cards: this.cards
-        };
+        return this.cards;
     }
 
     findCard(cid) {

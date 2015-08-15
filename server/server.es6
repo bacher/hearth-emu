@@ -14,7 +14,7 @@ app.use(express.static('../www'));
 app.get('/cards.json', (req, res) => {
     res.json({
         ok: true,
-        cards: cards
+        cards: cards.list
     });
 });
 

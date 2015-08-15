@@ -27,6 +27,32 @@ module.exports = {
         'priest'
     ],
 
+    CLASSES_M: {
+        n: 0,
+        w: 1,
+        s: 2,
+        r: 3,
+        pl: 4,
+        h: 5,
+        d: 6,
+        wl: 7,
+        m: 8,
+        p: 9
+    },
+
+    CLASSES_ML: [
+        'n',
+        'w',
+        's',
+        'r',
+        'pl',
+        'h',
+        'd',
+        'wl',
+        'm',
+        'p'
+    ],
+
     CARD_TYPES: {
         minion: 1,
         spell: 2,

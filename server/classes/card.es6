@@ -5,11 +5,15 @@ module.exports = class Card {
         this.name = info.name;
         this.type = info.type;
         this.cost = info.cost;
-        this.rarity = info.rarity || 0;
-        this.act = info.act;
-        this.param = info.param;
         this.clas = info.clas || 0;
-        this.uncollectable = info.uncollectable || false;
+        this.rarity = info.rarity || 0;
+        this.act = info.act || null;
+        this.param = info.param || null;
         this.pic = info.pic;
+        this.flags = {};
+
+        if (info.flags.uncollectable) {
+            this.flags.uncollectable = true;
+        }
     }
 };
