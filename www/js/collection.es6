@@ -59,6 +59,19 @@ hbe.createCollectionScreen = function() {
 
             drawCards();
         })
+        .on('click', '.card-line', e => {
+            const $cardLine = $(e.currentTarget);
+
+            const id = $cardLine.data('id');
+
+            const index = activeDeck.cards.indexOf(id);
+            activeDeck.cards.splice(index, 1);
+
+            saveDecks();
+
+            checkLimits();
+            updateDeckCards();
+        })
         .on('click', '.hero', e => {
             const $hero = $(e.currentTarget);
 

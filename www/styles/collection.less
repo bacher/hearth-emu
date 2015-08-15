@@ -118,6 +118,7 @@
     width: 159px;
     height: 27px;
     background: url("../textures/card-line.png");
+    cursor: pointer;
 
     .cost, .name {
       line-height: 28px;
@@ -206,9 +207,14 @@
     }
   }
 
+  .hero-mode .card:not(.lock) {
+    cursor: pointer;
+  }
+
   .card {
     display: inline-block;
     margin-bottom: 25px;
+
 
     .img {
       width: 160px;
