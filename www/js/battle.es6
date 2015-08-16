@@ -103,7 +103,7 @@ function updateInGameData() {
     });
 
     $('.hero-skill.my')
-        .toggleClass('available', game.my.active && !game.my.hero.skillUsed && game.my.hero.mana >= 2)
+        .toggleClass('available', game.my.active && game.my.hero.canUseSkill)
         .toggleClass('used', game.my.hero.skillUsed);
 
     $('.hero-skill.op')

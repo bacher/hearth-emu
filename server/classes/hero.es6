@@ -1,6 +1,5 @@
 
 const H = require('../common');
-const Minion = require('./minion');
 
 module.exports = class Hero {
     constructor(player, clas) {
@@ -55,13 +54,16 @@ module.exports = class Hero {
     }
 
     getBaseData() {
+        const totemsLeft = this.totems.filter(totem => !this.player.creatures.isHasCardCreature(totem));
+
         return {
             hp: this.hp,
             armor: this.armor,
             spellDamage: this.spellDamage,
             mana: this.mana,
             crystals: this.crystals,
-            skillUsed: this.skillUsed
+            skillUsed: this.skillUsed,
+            canUseSkill: totemsLeft.length !== 0 && this.mana >= 2 && !this.skillUsed
         };
     }
 
@@ -84,7 +86,8 @@ module.exports = class Hero {
                 if (totemsLeft.length) {
                     const totem = totemsLeft[Math.floor(Math.random() * totemsLeft.length)];
 
-                    i.creatures.addCreature(new Minion(totem));
+                    const Minion = require('./minion');
+                    i.creatures.addCreature(new Minion(this.player, totem));
                 }
                 break;
             default:

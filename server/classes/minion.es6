@@ -1,15 +1,14 @@
 
-const EventEmitter = require('events').EventEmitter;
+//const EventEmitter = require('events').EventEmitter;
 const _ = require('lodash');
 
-const Aura = require('./aura');
-
-module.exports = class Minion extends EventEmitter {
-    constructor(battle, player, card) {
-        super();
-
+module.exports = class Minion {
+    constructor(player, card) {
         this.player = player;
-        this.battle = battle;
+        this.battle = player.battle;
+
+        Object.defineProperty(this, 'player', { enumerable: false });
+        Object.defineProperty(this, 'battle', { enumerable: false });
 
         this.id = _.uniqueId('minion');
 
@@ -24,16 +23,16 @@ module.exports = class Minion extends EventEmitter {
         }
 
         if (this.card.name === 'Wrath of Air Totem') {
-            this.aura = new Aura('spellDamage', {
-                own: player,
-                power: 1
-            });
-            battle.auras.push(this.aura);
+            const Aura = require('./aura');
+
+            this.aura = new Aura(player, 'spellDamage', 1);
+            Object.defineProperty(this, 'aura', { enumerable: false });
+            this.battle.auras.addAura(this.aura);
         }
     }
 
     onDeath() {
-        this.emit('death');
+        //this.emit('death');
 
         if (this.card.name === 'Wrath of Air Totem') {
             this.battle.auras.removeAura(this.aura);

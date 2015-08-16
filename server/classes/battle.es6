@@ -1,4 +1,5 @@
 
+const fs = require('fs');
 const _ = require('lodash');
 const Auras = require('./auras');
 
@@ -41,6 +42,9 @@ module.exports = class Battle {
 
     sendMessage(msg, json) {
         this.players.forEach(player => {
+
+            console.log(json);
+
             player.sendMessage(msg, json);
         });
     }

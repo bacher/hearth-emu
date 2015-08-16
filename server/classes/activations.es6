@@ -3,7 +3,7 @@ const Minion = require('./minion');
 
 module.exports = {
     summon: (card, battle, player) => {
-        const newMinion = new Minion(card);
+        const newMinion = new Minion(player, card);
 
         player.creatures.addCreature(newMinion);
     },

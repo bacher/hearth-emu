@@ -90,10 +90,17 @@ module.exports = class Player extends EventEmitter {
     sendMessage(msg, json) {
         this.log('Sending:', msg);
 
-        this.ws.send(JSON.stringify({
-            msg: msg,
-            data: json
-        }));
+        try {
+            this.ws.send(JSON.stringify({
+                msg: msg,
+                data: json
+            }));
+        } catch (e) {
+            console.log('ERROR');
+            console.log(json);
+            console.log(json.my.hand);
+            console.log(json.my.creatures);
+        }
     }
 
     activate() {

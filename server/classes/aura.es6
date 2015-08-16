@@ -9,7 +9,7 @@ const AURAS = {
     }
 };
 
-class Aura {
+module.exports = class Aura {
     constructor(player, auraName, params) {
         this.aura = AURAS[auraName];
         this.player = player;
@@ -32,4 +32,4 @@ class Aura {
             return true;
         }
     }
-}
+};
