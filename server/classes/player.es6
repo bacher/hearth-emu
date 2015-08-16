@@ -11,6 +11,7 @@ module.exports = class Player extends EventEmitter {
     constructor(ws) {
         super();
 
+        this.battle = null;
         this.ws = ws;
         this.status = 'waiting';
         this.userName = '';
@@ -31,8 +32,12 @@ module.exports = class Player extends EventEmitter {
                 this.onMessage(packet.msg, packet.data);
             })
             .on('close', () => {
-                this.status = 'off';
+                this.emit('disconnect')
             });
+    }
+
+    getEnemy() {
+        this.battle.getOpponent(this);
     }
 
     onMessage(msg, data) {
@@ -65,13 +70,21 @@ module.exports = class Player extends EventEmitter {
             this.userName = data.name;
             this.flags.joined = true;
 
-            this.deck = new Deck(data.deck.cards);
-            this.hero = new Hero(data.deck.clas);
+            this.joinParams = data;
 
             const brackedName = '[' + this.userName + ']';
             this.log = console.log.bind(console, brackedName);
             this.warn = console.warn.bind(console, brackedName);
+
+            this.emit('logged');
         }
+    }
+
+    enterBattle(battle) {
+        this.battle = battle;
+
+        this.deck = new Deck(this.joinParams.deck.cards);
+        this.hero = new Hero(this, this.joinParams.deck.clas);
     }
 
     sendMessage(msg, json) {
@@ -133,7 +146,7 @@ module.exports = class Player extends EventEmitter {
         return {
             active: this.active,
             name: this.userName,
-            hero: this.hero.getGameData(),
+            hero: this.hero.getClientData(),
             hand: this.hand.getGameData(),
             deck: this.deck.getGameData(),
             creatures: this.creatures.getGameData()

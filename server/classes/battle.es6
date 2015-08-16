@@ -1,9 +1,11 @@
 
 const _ = require('lodash');
+const Auras = require('./auras');
 
 module.exports = class Battle {
     constructor(player1, player2) {
         this.players = _.shuffle([player1, player2]);
+        this.auras = new Auras();
 
         this.bindListeners();
     }
@@ -112,7 +114,7 @@ module.exports = class Battle {
                 break;
             }
             case 'use-hero-skill': {
-                player.hero.useSkill(this, player, this.getOp(player), data);
+                player.hero.useSkill(this, player, this.getOpponent(player), data);
 
                 this.sendGameData();
                 break;
@@ -122,7 +124,7 @@ module.exports = class Battle {
         }
     }
 
-    getOp(player) {
+    getOpponent(player) {
         if (this.players[0] === player) {
             return this.players[1];
         } else {

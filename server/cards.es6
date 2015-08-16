@@ -1,7 +1,6 @@
 
 const H = require('./common');
 const Card = require('./classes/card');
-const ACTIVATIONS = require('./classes/activations');
 
 var cards = [];
 

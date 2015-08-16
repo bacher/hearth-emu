@@ -17,14 +17,20 @@ module.exports = class PlayerWaiter {
         this.wsServer.on('connection', ws => {
 
             const player = new Player(ws);
+            player.on('logged', () => {
+                if (this.waitingPlayer) {
+                    const battle = new Battle(this.waitingPlayer, player);
 
-            if (this.waitingPlayer && this.waitingPlayer.status !== 'off') {
-                new Battle(this.waitingPlayer, player).start();
-                this.waitingPlayer = null;
+                    this.waitingPlayer.enterBattle(battle);
+                    player.enterBattle(battle);
 
-            } else {
-                this.waitingPlayer = player;
-            }
+                    battle.start();
+                    this.waitingPlayer = null;
+
+                } else {
+                    this.waitingPlayer = player;
+                }
+            });
 
         });
     }

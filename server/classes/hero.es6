@@ -1,18 +1,23 @@
 
 const H = require('../common');
-const Cards = require('../cards');
 const Minion = require('./minion');
 
 module.exports = class Hero {
-    constructor(clas) {
+    constructor(player, clas) {
+        this.player = player;
+        this.battle = player.battle;
+
         this.clas = clas;
         this.hp = 30;
         this.armor = 0;
-        this.manaCount = 0;
-        this.crystalCount = 0;
+        this.spellDamage = 0;
+        this.mana = 0;
+        this.crystals = 0;
         this.skillUsed = false;
 
         if (clas === H.CLASSES.shaman) {
+            const Cards = require('../cards');
+
             this.totems = [
                 Cards.findByName('Searing Totem'),
                 Cards.findByName('Stoneclaw Totem'),
@@ -24,43 +29,52 @@ module.exports = class Hero {
 
     getManaStatus() {
         return {
-            mana: this.manaCount,
-            crystals: this.crystalCount
+            mana: this.mana,
+            crystals: this.crystals
         };
     }
 
     addMana(count) {
-        this.manaCount += count;
+        this.mana += count;
     }
 
     addCrystal() {
-        this.crystalCount++;
+        this.crystals++;
     }
 
     restoreMana() {
-        this.manaCount = this.crystalCount;
+        this.mana = this.crystals;
     }
 
     removeMana(count) {
-        if (count > this.manaCount) {
-            this.manaCount = 0;
+        if (count > this.mana) {
+            this.mana = 0;
         } else {
-            this.manaCount -= count;
+            this.mana -= count;
         }
     }
 
-    getGameData() {
+    getBaseData() {
         return {
             hp: this.hp,
             armor: this.armor,
-            mana: this.manaCount,
-            crystals: this.crystalCount,
+            spellDamage: this.spellDamage,
+            mana: this.mana,
+            crystals: this.crystals,
             skillUsed: this.skillUsed
         };
     }
 
+    getData() {
+        return this.battle.auras.applyEffect(this);
+    }
+
+    getClientData() {
+        return this.getData();
+    }
+
     useSkill(battle, i, op, data) {
-        this.manaCount -= 2;
+        this.mana -= 2;
         this.skillUsed = true;
 
         switch (this.clas) {
