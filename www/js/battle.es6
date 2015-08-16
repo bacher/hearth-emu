@@ -99,6 +99,13 @@ function updateInGameData() {
         $hand.append($container.children());
     });
 
+    $('.hero-skill.my')
+        .toggleClass('available', game.my.active && !game.my.hero.skillUsed && game.my.hero.mana >= 2)
+        .toggleClass('used', game.my.hero.skillUsed);
+
+    $('.hero-skill.op')
+        .toggleClass('used', game.op.hero.skillUsed);
+
     var $container = $('<div>');
     render($container, 'card');
 

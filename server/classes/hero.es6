@@ -5,6 +5,7 @@ module.exports = class Hero {
         this.armor = 0;
         this.manaCount = 0;
         this.crystalCount = 0;
+        this.skillUsed = false;
     }
 
     getManaStatus() {
@@ -39,7 +40,8 @@ module.exports = class Hero {
             hp: this.hp,
             armor: this.armor,
             mana: this.manaCount,
-            crystals: this.crystalCount
+            crystals: this.crystalCount,
+            skillUsed: this.skillUsed
         };
     }
 };

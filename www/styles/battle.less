@@ -250,18 +250,55 @@
 
   .hero-skill {
     position: absolute;
-    width: 61px;
-    height: 59px;
-    background: url("../textures/spell_shaman.png");
 
     &.op {
-      right: 24px;
+      left: 259px;
       top: 62px;
     }
 
     &.my {
-      right: 22px;
-      top: 37px;
+      left: 261px;
+      top: 31px;
+
+      &.available:after {
+        content: '';
+        display: block;
+        width: 115px;
+        height: 104px;
+        margin-top: -27px;
+        margin-left: -31px;
+        background: url("../textures/hero-skill-glow.png");
+      }
+    }
+
+    .background {
+      position: absolute;
+      width: 61px;
+      height: 59px;
+      margin-top: 4px;
+      margin-left: -4px;
+      background: url("../textures/spell_shaman.png");
+    }
+
+    .frame {
+      position: absolute;
+      width: 99px;
+      height: 105px;
+      margin-top: -23px;
+      margin-left: -23px;
+      background: url("../textures/hero-skill-frame.png");
+    }
+
+    &.used {
+      .background {
+        display: none;
+      }
+
+      .frame {
+        background: url("../textures/hero-skill-inactive.png");
+        background-repeat: repeat;
+        background-position: center;
+      }
     }
   }
 
