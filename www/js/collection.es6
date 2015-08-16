@@ -24,16 +24,13 @@ new Screen({
 
                 selectTab($tab);
             })
-            .on('click', '.btn-done', () => {
-                switchMode(null);
-            })
-            .on('click', '.deck', e => {
+            .on('click', '.my-decks .deck', e => {
                 const $deck = $(e.currentTarget);
                 const id = $deck.data('id');
 
                 const deck = _.find(decks, deck => deck.id === id);
 
-                switchMode(deck);
+                switchMode(deck, $deck);
             })
             .on('click', '.card:not(.lock)', e => {
                 if (activeDeck && activeDeck.cards.length < 30) {
@@ -47,7 +44,14 @@ new Screen({
                 }
             })
             .on('click', '.btn-back', () => {
-                hbe.activateScreen('main-menu');
+                if (heroMode) {
+                    activeDeck.label = $('.label-edit').val();
+                    saveDecks();
+
+                    switchMode(null);
+                } else {
+                    hbe.activateScreen('main-menu');
+                }
             })
             .on('click', '.arrow.left', () => {
                 page--;
@@ -108,6 +112,11 @@ new Screen({
                 saveDecks();
 
                 switchMode(decks[decks.length - 1]);
+            })
+            .on('click', '.create-deck-screen .back', () => {
+                $('.create-deck-screen').removeClass('show');
+                $('.hero.selected').removeClass('selected');
+                $('.choose').removeClass('show');
             });
 
         $.ajax({
@@ -160,7 +169,6 @@ new Screen({
 
         function checkLimits() {
             if (heroMode && activeDeck) {
-                debugger
                 $('.card').each(function() {
                     const $card = $(this);
                     const id = $card.data('id');
@@ -177,7 +185,7 @@ new Screen({
             }
         }
 
-        function switchMode(deck) {
+        function switchMode(deck, $deck) {
             heroMode = !!deck;
             $('.collection').toggleClass('hero-mode', !!deck);
 
@@ -187,6 +195,11 @@ new Screen({
                 $('.tab:not(.neutral)').hide();
                 const $classTab = $('.tab.' + deck.clas);
                 $classTab.show();
+
+                const $deckInfo = $deck.clone();
+                $deckInfo.append($('<INPUT>').addClass('label-edit').val($deck.find('.label').text()));
+
+                $('.hero-right-panel .deck-info').html($deckInfo);
 
                 selectTab($classTab);
 
