@@ -95,6 +95,8 @@ new Screen({
                 $hero.siblings().removeClass('selected');
                 $hero.addClass('selected');
 
+                $('.avatar').removeClass().addClass('avatar').addClass($hero.data('clas'));
+
                 $('.choose').addClass('show');
             })
             .on('click', '.choose', () => {
@@ -116,6 +118,7 @@ new Screen({
             .on('click', '.create-deck-screen .back', () => {
                 $('.create-deck-screen').removeClass('show');
                 $('.hero.selected').removeClass('selected');
+                $('.avatar').removeClass().addClass('avatar');
                 $('.choose').removeClass('show');
             });
 
