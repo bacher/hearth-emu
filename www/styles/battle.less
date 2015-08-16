@@ -76,7 +76,6 @@
     width: 77px;
     height: 107px;
     vertical-align: top;
-    margin-right: -40px;
     margin-top: 0;
 
     &.sleep:after {
@@ -95,6 +94,14 @@
       margin-left: -6px;
       margin-top: -20px;
     }
+  }
+
+  .card {
+    margin-right: -40px;
+  }
+
+  .creature {
+    margin-right: 10px;
   }
 
   .hand.my .card {
@@ -165,7 +172,7 @@
     width: 650px;
     height: 400px;
     top: @h/2-200px;
-    padding-left: 132px;
+    padding-left: 156px;
   }
 
   .creatures {
@@ -176,6 +183,7 @@
 
     &.op {
       top: 60px;
+      margin-top: 15px;
     }
 
     &.my {
@@ -296,7 +304,7 @@
 
       .frame {
         background: url("../textures/hero-skill-inactive.png");
-        background-repeat: repeat;
+        background-repeat: no-repeat;
         background-position: center;
       }
     }

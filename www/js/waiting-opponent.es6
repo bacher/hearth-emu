@@ -27,7 +27,10 @@ new Screen({
             const deck = JSON.parse(window.localStorage.getItem('decks'))[0];
             send('join', {
                 name: window.location.search.match(/[?&]name=([^&]*)/)[1],
-                deck: deck.cards
+                deck: {
+                    clas: hbe.CLASSES[deck.clas],
+                    cards: deck.cards
+                }
             });
         };
 

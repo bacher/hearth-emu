@@ -111,6 +111,12 @@ module.exports = class Battle {
 
                 break;
             }
+            case 'use-hero-skill': {
+                player.hero.useSkill(this, player, this.getOp(player), data);
+
+                this.sendGameData();
+                break;
+            }
             default:
                 console.warn('Unhandled Player Message:', msg);
         }
@@ -141,6 +147,7 @@ module.exports = class Battle {
         players[1].creatures.wakeUpAll();
         players[1].hero.addCrystal();
         players[1].hero.restoreMana();
+        players[1].hero.skillUsed = false;
         players[1].drawCard();
     }
 };

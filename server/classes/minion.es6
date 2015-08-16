@@ -10,5 +10,9 @@ module.exports = class Minion {
         this.attack = this.base.attack;
         this.maxHp = this.base.maxHp;
         this.flags = _.clone(this.base.flags);
+
+        if (!this.base.flags.charge) {
+            this.flags.sleep = true;
+        }
     }
 };

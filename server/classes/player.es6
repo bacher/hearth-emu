@@ -21,7 +21,7 @@ module.exports = class Player extends EventEmitter {
 
         this.active = false;
         this.deck = null;
-        this.hero = new Hero();
+        this.hero = null;
         this.hand = new Hand();
         this.creatures = new Creatures();
 
@@ -51,6 +51,7 @@ module.exports = class Player extends EventEmitter {
                         break;
                     case 'hit-creature':
                     case 'hit-hero':
+                    case 'use-hero-skill':
                         this.emit('message', { msg, data });
                         break;
                     default:
@@ -64,7 +65,8 @@ module.exports = class Player extends EventEmitter {
             this.userName = data.name;
             this.flags.joined = true;
 
-            this.deck = new Deck(data.deck);
+            this.deck = new Deck(data.deck.cards);
+            this.hero = new Hero(data.deck.clas);
 
             const brackedName = '[' + this.userName + ']';
             this.log = console.log.bind(console, brackedName);

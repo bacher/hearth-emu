@@ -38,4 +38,8 @@ module.exports = class Creatures {
 
         return this.creatures[index];
     }
+
+    isHasCardCreature(card) {
+        return this.creatures.some(creat => creat.card === card);
+    }
 };

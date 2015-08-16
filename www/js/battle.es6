@@ -67,6 +67,9 @@ new Screen({
                         });
                     }
                 }
+            })
+            .on('click', '.hero-skill.my.available', () => {
+                send('use-hero-skill', {});
             });
     }
 });
