@@ -220,6 +220,16 @@
     height: 124px;
     background: url("../textures/hero_shaman.png");
 
+    &:hover:after {
+      position: absolute;
+      content: "";
+      left: -23px;
+      top: -16px;
+      width: 147px;
+      height: 180px;
+      background: url("../textures/hero-hover.png");
+    }
+
     &.op {
       left: 116px;
     }
@@ -265,15 +275,17 @@
 
   .hero-skill {
     position: absolute;
+    width: 99px;
+    height: 105px;
 
     &.op {
-      left: 259px;
-      top: 62px;
+      left: 236px;
+      top: 29px;
     }
 
     &.my {
-      left: 261px;
-      top: 31px;
+      left: 238px;
+      top: 8px;
 
       &.available:after {
         content: '';
@@ -286,12 +298,22 @@
       }
     }
 
+    &:hover:before {
+      position: absolute;
+      top: -3px;
+      left: -10px;
+      width: 118px;
+      height: 118px;
+      content: "";
+      background: url("../textures/hero-skill-hover.png");
+    }
+
     .background {
       position: absolute;
       width: 61px;
       height: 59px;
-      margin-top: 4px;
-      margin-left: -4px;
+      margin-top: 27px;
+      margin-left: 19px;
       background: url("../textures/spell_shaman.png");
     }
 
@@ -299,8 +321,8 @@
       position: absolute;
       width: 99px;
       height: 105px;
-      margin-top: -23px;
-      margin-left: -23px;
+      //margin-top: -23px;
+      //margin-left: -23px;
       background: url("../textures/hero-skill-frame.png");
     }
 
@@ -327,17 +349,15 @@
 
   .deck {
     position: absolute;
-    width: 54px;
+    width: 61px;
 
     &.op {
       top: 14px;
-      left: 7px;
       height: 120px;
     }
 
     &.my {
       top: 222px;
-      left: 7px;
       height: 106px;
     }
 
@@ -353,6 +373,7 @@
     background: url("../textures/table.png");
     text-align: left;
     cursor: default;
+    pointer-events: none;
     display: none;
 
     .header {
@@ -434,6 +455,7 @@
     position: absolute;
     width: 173px;
     height: 259px;
+    pointer-events: none;
     background: url("../textures/skill-helper-s.png");
     margin: 0;
     animation: margin linear 10s infinite;
