@@ -11,7 +11,7 @@ new Screen({
         var activeDeck = null;
         var $cardToRemove = null;
 
-        jade.render($app[0], 'collection', {});
+        render($app, 'collection');
 
         drawDecks();
 
@@ -230,7 +230,7 @@ new Screen({
         function updateDeckCards() {
             const $cards = $('.deck-cards');
 
-            jade.render($cards[0], 'card-lines', { cards: activeDeck.cards.map(cardId => hbe.cardsHash[cardId]) });
+            render($cards, 'card-lines', { cards: activeDeck.cards.map(cardId => hbe.cardsHash[cardId]) });
         }
 
         function saveDecks() {

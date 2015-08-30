@@ -24,9 +24,18 @@ new Screen({
 
         socket.onopen = () => {
 
+            var name;
+            const nameMatch = window.location.search.match(/[?&]name=([^&]*)/);
+
+            if (nameMatch) {
+                name = nameMatch[1];
+            } else {
+                name = 'Random_' + Math.floor(Math.random() * 100 + 1);
+            }
+
             const deck = JSON.parse(window.localStorage.getItem('decks'))[0];
             send('join', {
-                name: window.location.search.match(/[?&]name=([^&]*)/)[1],
+                name: name,
                 deck: {
                     clas: hbe.CLASSES[deck.clas],
                     cards: deck.cards

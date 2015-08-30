@@ -4,9 +4,16 @@
    .name.my
 
    .board
+      .decor1
+      .decor2
+      .decor3
+
       .history
 
-      .hand.op
+      .battleground
+         .creatures.op
+         .creatures.my
+
       .stats.op
          .mana.op
             SPAN.active
@@ -20,10 +27,16 @@
          .hero-skill.op
             .background
             .frame
+               .skill-helper.op
 
-      .battleground
-         .creatures.op
-         .creatures.my
+      .hand.op
+         .cards
+         .hand-helper.table.op
+            .header Enemy Hand
+            .text
+               |Your enemy's hand contains
+               SPAN.value
+               |cards.
 
       .hero.my
          .weapon.my
@@ -33,6 +46,7 @@
          .hero-skill.my
             .background
             .frame
+               .skill-helper.my
 
       .stats.my
          .mana.my
@@ -42,9 +56,22 @@
          .crystals
 
       .hand.my
+         .cards
 
       .decks
          .deck.op
+            .deck-helper.table.op
+               .header Enemy Deck
+               .text
+                  |There are
+                  SPAN.value
+                  |cards in your opponent's deck.
          .deck.my
+            .deck-helper.table.my
+               .header Deck
+               .text
+                  |You have
+                  SPAN.value
+                  |cards in your deck.
 
          .end-turn

@@ -70,7 +70,26 @@ new Screen({
             })
             .on('click', '.hero-skill.my.available', () => {
                 send('use-hero-skill', {});
-            });
+            })
+            //.on('click', '.battleground', e => {
+            //    const $blow = $('<div>');
+            //
+            //    $blow.addClass('cursor-blow');
+            //    $blow.css({
+            //        top: e.pageY,
+            //        left: e.pageX
+            //    });
+            //
+            //    $app.append($blow);
+            //
+            //    setTimeout(() => {
+            //        $blow.addClass('step2');
+            //    }, 100);
+            //
+            //    setTimeout(() => {
+            //        $blow.remove();
+            //    }, 200);
+            //});
     }
 });
 
@@ -84,8 +103,8 @@ function updateInGameData() {
         $('.selected').removeClass('selected');
     }
 
-    const $hand = $('.hand.my').empty();
-    const $handOp = $('.hand.op').empty();
+    const $hand = $('.hand.my .cards').empty();
+    const $handOp = $('.hand.op .cards').empty();
 
     $('.creatures').empty();
 
@@ -117,11 +136,12 @@ function updateInGameData() {
     }
 
     ['my', 'op'].forEach(side => {
-        const hero = game[side].hero;
+        const player = game[side];
+        const hero = player.hero;
 
         const $creatures = $('.creatures.' + side);
 
-        game[side].creatures.forEach(minion => {
+        player.creatures.forEach(minion => {
             var $container = $('<div>');
 
             render($container, 'creature', minion);
@@ -133,7 +153,11 @@ function updateInGameData() {
 
         $('.stats.' + side + ' .mana .active').text(hero.mana);
         $('.stats.' + side + ' .mana .all').text(hero.crystals);
+
+        $('.deck-helper.' + side + ' .value').text(player.deck.count);
     });
+
+    $('.hand-helper.op .value').text(game.op.hand.length);
 
     $('.end-turn').toggleClass('active', game.my.active);
 

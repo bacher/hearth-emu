@@ -5,7 +5,10 @@ class Screen {
         this.name = info.name;
         this._draw = info.draw;
         this._destroy = info.destroy;
-        this.hashLocation = info.hash || '';
+
+        if (info.hash !== false) {
+            this.hashLocation = '#' + (info.hash || '');
+        }
 
         hbe.screens.push(this);
     }
@@ -30,6 +33,8 @@ class Screen {
     }
 
     setLocationHash() {
-        window.location.hash = '#' + this.hashLocation;
+        if (this.hashLocation) {
+            window.location.hash = this.hashLocation;
+        }
     }
 }

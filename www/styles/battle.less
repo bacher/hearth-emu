@@ -7,8 +7,7 @@
     height: 677px;
     overflow: hidden;
     padding-top: 23px;
-    background: url("../textures/board_1280.jpg");
-    background-repeat: no-repeat;
+    background: url("../textures/board_1280.jpg") no-repeat;
   }
 
   .name {
@@ -59,6 +58,15 @@
     &.op {
       transform: scale(0.94);
       top: -92px;
+
+      .hand-helper {
+        top: 97px;
+        left: 16px;
+      }
+
+      &:hover .hand-helper {
+        display: block;
+      }
     }
 
     &.my {
@@ -67,7 +75,7 @@
   }
 
   .creatures.my .creature.selected {
-    box-shadow: 0 0 8px #f00;
+    box-shadow: 0 0 8px #F00;
   }
 
   .card, .creature {
@@ -227,8 +235,7 @@
     height: 41px;
     right: -5px;
     text-align: center;
-    background: url("../textures/health.png");
-    background-repeat: no-repeat;
+    background: url("../textures/health.png") no-repeat;
 
     &.op {
       bottom: -6px;
@@ -319,12 +326,63 @@
   }
 
   .deck {
+    position: absolute;
+    width: 54px;
+
     &.op {
-      top: 0;
+      top: 14px;
+      left: 7px;
+      height: 120px;
     }
 
     &.my {
-      bottom: 0;
+      top: 222px;
+      left: 7px;
+      height: 106px;
+    }
+
+    &:hover .deck-helper {
+      display: block;
+    }
+  }
+
+  .table {
+    position: absolute;
+    width: 178px;
+    height: 108px;
+    background: url("../textures/table.png");
+    text-align: left;
+    cursor: default;
+    display: none;
+
+    .header {
+      margin: 18px 0 0 33px;
+      font-size: 16px;
+      letter-spacing: 1px;
+      color: #FFF;
+      text-shadow: 0 0 2px #000;
+    }
+
+    .text {
+      margin: 8px 17px 0 33px;
+      font-size: 12px;
+      color: #FDFDFD;
+    }
+
+    .value {
+      margin: 0 3px;
+    }
+  }
+
+  .deck-helper {
+    &.op {
+      top: 8px;
+      left: -144px;
+    }
+
+    &.my {
+      top: 4px;
+      left: -151px;
     }
   }
 
@@ -351,5 +409,137 @@
       }
     }
   }
+
+  .hero-skill .frame:hover .skill-helper {
+    display: block;
+  }
+
+  @keyframes margin {
+    0% {
+      margin: 0 0;
+    }
+    25% {
+      margin: -1px -2px;
+    }
+    50% {
+      margin: 0 2px;
+    }
+    75% {
+      margin: 2px 1px;
+    }
+  }
+
+  .skill-helper {
+    display: none;
+    position: absolute;
+    width: 173px;
+    height: 259px;
+    background: url("../textures/skill-helper-s.png");
+    margin: 0;
+    animation: margin linear 10s infinite;
+
+    &.op {
+      top: 96px;
+      left: 0;
+    }
+
+    &.my {
+      top: -248px;
+      left: -10px;
+    }
+  }
+
+  @keyframes background-offset {
+    from {
+      background-position: -87px 9px;
+    }
+    to {
+      background-position: -19px -21px;
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes blink2 {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .decor1 {
+    display: block;
+    position: absolute;
+    top: 466px;
+    left: 41px;
+    width: 150px;
+    height: 86px;
+    background: url("../textures/waterfall-fluids-2.png");
+    animation: background-offset linear 2s infinite;
+  }
+
+  .decor1:after {
+    position: absolute;
+    top: -34px;
+    left: 11px;
+    width: 167px;
+    height: 155px;
+    content: "";
+    background: url("../textures/waterfall-air-3.png");
+    opacity: 1;
+    animation: blink ease-in-out 5s infinite;
+  }
+
+  .decor2 {
+    position: absolute;
+    top: 46px;
+    left: 678px;
+    width: 139px;
+    height: 112px;
+    background: url("../textures/gate-glow-2.png");
+    opacity: 0.9;
+    animation: blink2 ease-in-out 9s infinite;
+  }
+
+  @keyframes eyes {
+    0% {
+      opacity: 0;
+    }
+    60% {
+      opacity: 0;
+    }
+    60.1% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .decor3 {
+    position: absolute;
+    top: 128px;
+    left: 158px;
+    width: 20px;
+    height: 8px;
+    background: url("../textures/eyes.png");
+    animation: eyes linear 10s infinite;
+  }
+
+  //.cursor-blow {
+  //  position: absolute;
+  //  margin-top: -36px;
+  //  margin-left: -35px;
+  //  width: 69px;
+  //  height: 73px;
+  //  background: url("../textures/cursor-blow.png");
+  //
+  //  &.step2 {
+  //    background: url("../textures/cursor-blow-3.png");
+  //  }
+  //}
 
 }
