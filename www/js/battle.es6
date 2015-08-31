@@ -37,7 +37,7 @@ new Screen({
                     if ($myCreature.length) {
                         const $enemyCreature = $(e.currentTarget);
 
-                        send('hit-creature', {
+                        send('hit', {
                             my: $myCreature.data('id'),
                             op: $enemyCreature.data('id')
                         });
@@ -68,8 +68,9 @@ new Screen({
                     const $myCreature = $('.creatures.my .creature.selected');
 
                     if ($myCreature.length) {
-                        send('hit-hero', {
-                            my: $myCreature.data('id')
+                        send('hit', {
+                            my: $myCreature.data('id'),
+                            op: 'hero'
                         });
                     }
                 }
@@ -77,7 +78,7 @@ new Screen({
             .on('click', '.hero-skill.my.available', () => {
                 send('use-hero-skill', {});
             })
-            .on('mouseenter', '.card-wrap', e => {
+            .on('mouseenter', '.hand.my .card-wrap', e => {
                 if (!dragging) {
                     const $cardWrap = $(e.currentTarget);
                     const $img = $cardWrap.find('IMG');
@@ -241,10 +242,20 @@ function updateInGameData() {
         player.creatures.forEach(minion => {
             var $container = $('<div>');
 
-            render($container, 'creature', minion);
+            var classes = '';
+            for (var prop in minion.flags) {
+                classes += ' ';
+                classes += prop;
+            }
+
+            render($container, 'creature', {
+                id: minion.id,
+                classes: classes,
+                pic: minion.card.pic
+            });
 
             const $minion = $container.children();
-            if (side === 'my' && !minion.flags['sleep']) {
+            if (side === 'my' && !minion.flags['sleep'] && !minion.flags['tired'] && minion.attack > 0) {
                 $minion.addClass('available');
             }
             $creatures.append($minion);

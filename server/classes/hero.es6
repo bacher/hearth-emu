@@ -17,10 +17,10 @@ H.Hero = class Hero {
         if (clas === H.CLASSES.shaman) {
 
             this.totems = [
-                H.CARDS.findByName('Searing Totem'),
-                H.CARDS.findByName('Stoneclaw Totem'),
-                H.CARDS.findByName('Wrath of Air Totem'),
-                H.CARDS.findByName('Healing Totem')
+                H.CARDS.getByName('Searing Totem'),
+                H.CARDS.getByName('Stoneclaw Totem'),
+                H.CARDS.getByName('Wrath of Air Totem'),
+                H.CARDS.getByName('Healing Totem')
             ];
         }
     }
@@ -85,8 +85,7 @@ H.Hero = class Hero {
                 if (totemsLeft.length) {
                     const totem = totemsLeft[Math.floor(Math.random() * totemsLeft.length)];
 
-                    const Minion = require('./minion');
-                    i.creatures.addCreature(new Minion(this.player, totem));
+                    i.creatures.addCreature(new H.Minion(this.player, totem));
                 }
                 break;
             default:

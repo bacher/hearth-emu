@@ -20,14 +20,12 @@ H.Minion = class Minion {
         this.maxHp = this.base.maxHp;
         this.flags = _.clone(this.base.flags);
 
-        if (!this.base.flags.charge) {
+        if (!this.base.flags['charge']) {
             this.flags.sleep = true;
         }
 
         if (this.card.name === 'Wrath of Air Totem') {
-            const Aura = require('./aura');
-
-            this.aura = new Aura(player, 'spellDamage', 1);
+            this.aura = new H.Aura(player, 'spellDamage', 1);
             Object.defineProperty(this, 'aura', { enumerable: false });
             this.battle.auras.addAura(this.aura);
         }

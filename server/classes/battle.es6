@@ -82,7 +82,7 @@ H.Battle = class Battle {
     handlePlayerMessage(player, msg, data) {
         switch (msg) {
             case 'play-card':
-                data.base.act(data.base, this, player);
+                data.base.act(data, this, player);
                 break;
 
             case 'end-turn':
@@ -94,13 +94,28 @@ H.Battle = class Battle {
                 this.sendGameData();
                 break;
 
-            case 'hit-creature':
+            case 'hit':
                 const enemy = player.getEnemy();
-                const my = player.creatures.getCreatureByCrid(data.my);
-                const op = enemy.creatures.getCreatureByCrid(data.op);
 
-                enemy.creatures.killCreature(op);
-                my.flags.sleep = true;
+                if (data.my !== 'hero') {
+                    const my = player.creatures.getCreatureByCrid(data.my);
+
+                    if (data.op === 'hero') {
+                        const opHero = player.enemy.hero;
+
+                        if (opHero.hp <= my.attack) {
+                        } else {
+                            opHero.hp -= my.attack;
+                        }
+
+                    } else {
+                        const op = enemy.creatures.getCreatureByCrid(data.op);
+
+                        enemy.creatures.killCreature(op);
+                    }
+
+                    my.flags.tired = true;
+                }
 
                 this.sendGameData();
 
@@ -136,25 +151,6 @@ H.Battle = class Battle {
                 }
                 break;
 
-            case 'hit-hero': {
-                console.log('AAAA', data);
-
-                const my = player.creatures.getCreatureByCrid(data.my);
-
-                const opHero = player.enemy.hero;
-
-                if (opHero.hp <= my.attack) {
-
-                } else {
-                    opHero.hp -= my.attack;
-                }
-
-                my.flags.sleep = true;
-
-                this.sendGameData();
-
-                break;
-            }
             case 'use-hero-skill': {
                 player.hero.useSkill(this, player, data);
 

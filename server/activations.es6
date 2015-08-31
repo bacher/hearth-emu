@@ -2,20 +2,35 @@
 const H = require('./namespace');
 
 H.ACTIVATIONS = {
-    summon: (card, battle, player) => {
-        const newMinion = new H.Minion(player, card);
+    summon: (handCard, battle, player) => {
+        const newMinion = new H.Minion(player, handCard.base);
 
         player.creatures.addCreature(newMinion);
     },
 
-    addMana: (card, battle, player) => {
+    addMana: (handCard, battle, player) => {
         player.hero.addMana(1);
     },
 
-    dealDamage: function(card, battle, player) {
+    dealDamage: function(handCard, battle, player) {
     },
 
-    overload: (card, battle, player) => {},
+    overload: (handCard, battle, player) => {},
 
-    silence: (card, battle, player) => {}
+    silence: (handCard, battle, player) => {},
+
+    spawnCreatures: (handCard, battle, player) => {
+        console.log(handCard);
+
+        const card = handCard.base;
+
+        const minionName = card.param[0];
+        const count = Number(card.param[1]) || 1;
+
+        for (var i = 0; i < count; ++i) {
+            var minion = new H.Minion(player, H.CARDS.getByName(minionName));
+
+            player.creatures.addCreature(minion);
+        }
+    }
 };

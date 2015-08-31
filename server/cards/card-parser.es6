@@ -1,6 +1,7 @@
 
 const fs = require('fs');
-const H = require('../common');
+const H = require('../namespace');
+require('../constants');
 
 // ############
 
@@ -86,6 +87,10 @@ spellsLines.forEach(line => {
         info.target = details[5];
 
         [info.act, info.param] = details[6].split(':');
+
+        if (info.param.indexOf('{') === 0) {
+            info.param = info.param.substr(1, info.param.length - 2).split(',');
+        }
 
         if (details[7]) {
             details[7].split(',').forEach(flag => {

@@ -22,7 +22,7 @@ H.Hand = class Hand {
     }
 
     addCoinCard() {
-        this.addCard(H.CARDS.findByName('The Coin'));
+        this.addCard(H.CARDS.getByName('The Coin'));
     }
 
     _findHandCard(id) {

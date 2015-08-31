@@ -44,12 +44,16 @@ new Screen({
         };
 
         socket.onclose = event => {
-            if (event.wasClean) {
-                console.log('Соединение закрыто чисто');
-            } else {
+            if (!event.wasClean) {
                 console.log('Обрыв соединения');
+                console.warn('Code:', event.code);
+
+                if (checkParam('autoreload')) {
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 500);
+                }
             }
-            console.warn('Code: ' + event.code + ' Cause: ' + event.reason);
         };
 
         socket.onerror = error => {

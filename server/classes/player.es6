@@ -51,8 +51,7 @@ H.Player = class Player extends EventEmitter {
                     case 'end-turn':
                         this.endTurn();
                         break;
-                    case 'hit-creature':
-                    case 'hit-hero':
+                    case 'hit':
                     case 'use-hero-skill':
                     case 'get-targets':
                         this.emit('message', { msg, data });
@@ -126,15 +125,15 @@ H.Player = class Player extends EventEmitter {
 
     playCard(params) {
 
-        const card = this.hand.getHandCard(params.id);
+        const handCard = this.hand.getHandCard(params.id);
 
         this.emit('message', {
             msg: 'play-card',
-            data: card
+            data: handCard
         });
 
         this.hand.removeHandCard(params.id);
-        this.hero.removeMana(card.base.cost);
+        this.hero.removeMana(handCard.base.cost);
 
         this.emit('message', {
             msg: 'update-clients'
