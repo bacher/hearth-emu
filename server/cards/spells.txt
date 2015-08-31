@@ -1,8 +1,8 @@
-#name,#class,#cost,#act,#actParam,#flags
-The Coin,148/735/141,0,n,[addMana:1],{uncollectable}
-Lightning Bolt,148/115/10,1,s,[dealDamage:3,overload:1]
-Earth Shock,148/127/77,1,s,[silence,dealDamage:1]
-Feral Spirit,148/136/214,3,s,[spawnCreatures:{feral_spirit,2}]
+#name,#class,#cost,#target,#act,#actParam,#flags
+The Coin,148/735/141,0,n,none,[addMana:1],{uncollectable}
+Lightning Bolt,148/115/10,1,s,all,[dealDamage:3,overload:1]
+Earth Shock,148/127/77,1,s,all,[silence,dealDamage:1]
+Feral Spirit,148/136/214,3,s,none,[spawnCreatures:{feral_spirit,2}]
 
 #Druid
-Innervate,148/97/548,0,d,[gainCrystalsThisTurn:2]
+Innervate,148/97/548,0,d,none,[gainCrystalsThisTurn:2]

@@ -37,7 +37,7 @@ new Screen({
         }, 500);
 
         setTimeout(() => {
-            if (/[?&]gobattle(?:$|&)/.test(window.location.search)) {
+            if (checkParam('gobattle')) {
                 hbe.activateScreen('waiting-opponent');
             } else if (window.location.hash === '#collection') {
                 hbe.activateScreen('collection');

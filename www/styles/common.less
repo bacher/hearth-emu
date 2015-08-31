@@ -14,3 +14,19 @@ BODY {
 #app {
   height: 100%;
 }
+
+@font-face {
+  font-family: 'Belwe Bold';
+  src: url("../fonts/belwe-bd-bt-bold.ttf")
+}
+
+.cursor {
+  position: absolute;
+  width: 43px;
+  height: 43px;
+  background: url("../textures/hand.png");
+
+  &.down {
+    background: url("../textures/hand-down.png");
+  }
+}

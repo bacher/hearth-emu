@@ -82,13 +82,16 @@ module.exports = class Battle {
             case 'play-card':
                 data.base.act(data.base, this, player);
                 break;
+
             case 'end-turn':
                 this.switchTurn();
                 this.sendGameData();
                 break;
+
             case 'update-clients':
                 this.sendGameData();
                 break;
+
             case 'hit-creature':
                 const my = player.creatures.getCreatureByCrid(data.my);
                 const op = this.getOp(player).creatures.getCreatureByCrid(data.op);
@@ -98,6 +101,21 @@ module.exports = class Battle {
 
                 this.sendGameData();
 
+                break;
+
+            case 'get-targets':
+                const cardId = data['card-id'];
+
+                if (cardId) {
+                    const card = player.hand.findCard(cardId);
+
+                    if (card.getTargets) {
+                        send('targets', {
+                            'card-id': cardId,
+                            'targets': card.getTargets(this, player)
+                        });
+                    }
+                }
                 break;
 
             case 'hit-hero': {

@@ -42,4 +42,8 @@ module.exports = class Creatures {
     isHasCardCreature(card) {
         return this.creatures.some(creat => creat.card === card);
     }
+
+    getAllIds() {
+        return this.creatures.map(creat => creature.id);
+    }
 };

@@ -57,6 +57,7 @@ module.exports = class Player extends EventEmitter {
                     case 'hit-creature':
                     case 'hit-hero':
                     case 'use-hero-skill':
+                    case 'get-targets':
                         this.emit('message', { msg, data });
                         break;
                     default:

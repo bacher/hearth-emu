@@ -14,6 +14,10 @@ new Screen({
 
                     $('.selected').removeClass('selected');
                     $card.addClass('selected');
+
+                    send('get-targets', {
+                        'card-id': $card.data('id')
+                    });
                 }
             })
             .on('click', '.creatures.op .creature', e => {

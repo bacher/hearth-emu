@@ -64,8 +64,8 @@ spellsLines.forEach(line => {
 
     if (line && !/^#/.test(line)) {
 
-        // Feral Spirit,148/136/214,3,s,[spawnCreatures:{feral_spirit,2}]
-        const rx = /^([^,]+),([^,]+),(\d),([a-z]{1,2}),\[([^\]]+)\](?:,\{([^}]+)\})?/;
+        // Feral Spirit,148/136/214,3,s,all[spawnCreatures:{feral_spirit,2}]
+        const rx = /^([^,]+),([^,]+),(\d),([a-z]{1,2}),([a-z]+),\[([^\]]+)\](?:,\{([^}]+)\})?/;
         const info = {};
 
         const details = line.match(rx);
@@ -83,10 +83,12 @@ spellsLines.forEach(line => {
         info.clas = H.CLASSES_M[details[4]];
         info.flags = {};
 
-        [info.act, info.param] = details[5].split(':');
+        info.target = details[5];
 
-        if (details[6]) {
-            details[6].split(',').forEach(flag => {
+        [info.act, info.param] = details[6].split(':');
+
+        if (details[7]) {
+            details[7].split(',').forEach(flag => {
                 info.flags[flag] = true;
             });
         }

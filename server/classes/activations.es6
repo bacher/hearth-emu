@@ -12,7 +12,8 @@ module.exports = {
         player.hero.addMana(1);
     },
 
-    dealDamage: (card, battle, player) => {},
+    dealDamage: function(card, battle, player) {
+    },
 
     overload: (card, battle, player) => {},
 

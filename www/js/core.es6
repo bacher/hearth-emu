@@ -66,6 +66,10 @@ hbe.activateScreen = function(name) {
     }
 };
 
+function checkParam(string) {
+    return new RegExp('[?&]' + string + '(?:&|$)').test(window.location.search);
+}
+
 function send(msg, data) {
     const packet = { msg, data: data || null };
 
@@ -81,4 +85,23 @@ function render($cont, tmplName, params) {
         debugger;
         throw e;
     }
+}
+
+if (checkParam('cursor')) {
+    const $cursor = $('<div>').addClass('cursor').appendTo('BODY');
+
+    $('BODY')
+        .css('cursor', 'none')
+        .on('mousemove', e => {
+            $cursor.css({
+                top: e.pageY - 4,
+                left: e.pageX - 15
+            })
+        })
+        .on('mousedown', () => {
+            $cursor.addClass('down');
+        })
+        .on('mouseup', () => {
+            $cursor.removeClass('down');
+        });
 }

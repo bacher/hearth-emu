@@ -1,4 +1,5 @@
 
+const T = require('./targets');
 const A = require('./activations');
 
 module.exports = class Card {
@@ -11,6 +12,10 @@ module.exports = class Card {
         this.rarity = info.rarity || 0;
         this.pic = info.pic;
         this.flags = {};
+
+        if (info.target && info.target !== 'none') {
+            this.getTargets = T[info.target];
+        }
 
         this.act = A[info.act];
         this.minion = info.minion || null;
