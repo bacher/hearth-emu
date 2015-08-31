@@ -8,6 +8,10 @@
     overflow: hidden;
     padding-top: 23px;
     background: url("../textures/board_1280.jpg") no-repeat;
+
+    &.dragging {
+      cursor: -webkit-grabbing !important;
+    }
   }
 
   .name {
@@ -75,12 +79,31 @@
   }
 
   .card, .creature {
-    //position: relative;
-    //display: inline-block;
-    //width: 77px;
-    //height: 107px;
-    //vertical-align: top;
-    //margin-top: 0;
+    IMG {
+      position: absolute;
+      pointer-events: none;
+      top: -13px;
+      left: -6px;
+      width: 90px;
+    }
+  }
+
+  .creature {
+    position: relative;
+    display: inline-block;
+    margin-right: 16px;
+    width: 76px;
+    height: 108px;
+
+    &.available:before {
+      position: absolute;
+      content: "";
+      top: -9px;
+      left: -12px;
+      width: 98px;
+      height: 105px;
+      background: url("../textures/card-glow.png");
+    }
 
     &.sleep:after {
       position: absolute;
@@ -91,23 +114,8 @@
       right: -19px;
       content: '';
       background: url("../textures/zzz.png");
+      // FIX
     }
-
-    IMG {
-      position: absolute;
-      top: -15px;
-      left: -7px;
-      width: 118px;
-      pointer-events: none;
-    }
-  }
-
-  //.card {
-  //  margin-right: -40px;
-  //}
-
-  .creature {
-    margin-right: 10px;
 
     &.purpose:after {
       position: absolute;
@@ -120,21 +128,21 @@
     }
   }
 
+  .card-wrap.available .card:before {
+    position: absolute;
+    content: "";
+    top: -9px;
+    left: -11px;
+    width: 98px;
+    height: 105px;
+    background: url("../textures/card-glow.png");
+  }
+
   .hand.my .card {
     //transition: margin 0.3s;
 
     &.selected {
       box-shadow: 0 0 12px 10px #F00;
-    }
-
-    &.available:after {
-      position: absolute;
-      content: '';
-      top: -16px;
-      left: -10px;
-      width: 98px;
-      height: 105px;
-      background: url("../textures/card-glow.png");
     }
 
     //&:hover {
@@ -205,7 +213,7 @@
     }
 
     &.my {
-      bottom: 85px;
+      bottom: 87px;
     }
   }
 
@@ -277,11 +285,13 @@
 
     .value {
       display: inline-block;
-      margin-top: 12px;
+      margin-top: 10px;
+      color: #FFF;
+
       font-size: 22px;
       font-weight: bold;
-      color: #FFF;
-      text-shadow: -1px -1px 1px #000, 1px 1px 1px #000;
+      font-family: "Belwe Bold", Times, serif;
+      text-shadow: 0 0 1px #000, 0 0 1px #000, 0 0 2px #000;
     }
   }
 
@@ -607,27 +617,23 @@
 
   .card {
     position: absolute;
-    width: 85px;
-    height: 122px;
+    width: 77px;
+    height: 109px;
     top: 0;
     transform: rotate(0);
-
-    IMG {
-      position: absolute;
-      pointer-events: none;
-      top: -13px;
-      left: -7px;
-      width: 100px;
-    }
   }
 
   .card-wrap {
     position: absolute;
     top: 0;
     left: 0;
-    width: 85px;
-    height: 122px;
+    width: 77px;
+    height: 109px;
     transition: top ease-out 0.2s;
+  }
+
+  .active .card-wrap {
+    cursor: -webkit-grab;
   }
 
   .hand.my .card-wrap {
@@ -640,12 +646,12 @@
 
   .hand1 .c1 { transform: rotate(0deg); }
 
-  .hand2 .c1 { transform: rotate(0deg) translate(-45px,0); }
-  .hand2 .c2 { transform: rotate(0deg) translate(45px,0); }
+  .hand2 .c1 { transform: rotate(0deg) translate(-41px,0); }
+  .hand2 .c2 { transform: rotate(0deg) translate(40px,0); }
 
-  .hand3 .c1 { transform: rotate(0deg) translate(-90px,0); }
+  .hand3 .c1 { transform: rotate(0deg) translate(-81px,0); }
   .hand3 .c2 { transform: rotate(0deg); }
-  .hand3 .c3 { transform: rotate(0deg) translate(90px,0); }
+  .hand3 .c3 { transform: rotate(0deg) translate(81px,0); }
 
   .hand4 .card { transform: rotate(-8deg); }
   .hand4 .c1 { transform: rotate(-15deg); }
@@ -677,8 +683,46 @@
   .hand7 .c6 { transform: rotate(12deg); }
   .hand7 .c7 { transform: rotate(18deg); }
 
+  .hand8 .card { transform: rotate(-8deg); }
+  .hand8 .c1 { transform: rotate(-21deg); }
+  .hand8 .c2 { transform: rotate(-15deg); }
+  .hand8 .c3 { transform: rotate(-9deg); }
+  .hand8 .c4 { transform: rotate(-3deg); }
+  .hand8 .c5 { transform: rotate(3deg); }
+  .hand8 .c6 { transform: rotate(9deg); }
+  .hand8 .c7 { transform: rotate(15deg); }
+  .hand8 .c8 { transform: rotate(21deg); }
+
+  .hand9 .card { transform: rotate(-8deg); }
+  .hand9 .c1 { transform: rotate(-20deg); }
+  .hand9 .c2 { transform: rotate(-15deg); }
+  .hand9 .c3 { transform: rotate(-10deg); }
+  .hand9 .c4 { transform: rotate(-5deg); }
+  .hand9 .c5 { transform: rotate(0deg); }
+  .hand9 .c6 { transform: rotate(5deg); }
+  .hand9 .c7 { transform: rotate(10deg); }
+  .hand9 .c8 { transform: rotate(15deg); }
+  .hand9 .c9 { transform: rotate(20deg); }
+
+  .hand10 .card { transform: rotate(-8deg); }
+  .hand10 .c1 { transform: rotate(-18deg); }
+  .hand10 .c2 { transform: rotate(-14deg); }
+  .hand10 .c3 { transform: rotate(-10deg); }
+  .hand10 .c4 { transform: rotate(-6deg); }
+  .hand10 .c5 { transform: rotate(-2deg); }
+  .hand10 .c6 { transform: rotate(2deg); }
+  .hand10 .c7 { transform: rotate(6deg); }
+  .hand10 .c8 { transform: rotate(10deg); }
+  .hand10 .c9 { transform: rotate(14deg); }
+  .hand10 .c10 { transform: rotate(18deg); }
+
   .hand.my .card-wrap:hover {
     top: -28px;
+  }
+
+  .card-drag {
+    transition: none;
+    pointer-events: none;
   }
 
 
@@ -694,6 +738,16 @@
     top: -310px;
     left: -90px;
     animation: up ease-out 2s;
+    
+    &.available:before {
+      position: absolute;
+      content: "";
+      top: 13px;
+      left: -12px;
+      width: 306px;
+      height: 326px;
+      background: url("../textures/card-glow-large.png");
+    }
   }
 
 }

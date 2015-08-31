@@ -7,8 +7,12 @@ new Screen({
     draw: function() {
         render($app, 'battle');
 
-        const $cardPreview = $('<IMG>')
+        var dragging = false;
+        var $dragCard;
+
+        const $cardPreview = $('<DIV>')
             .addClass('card-preview')
+            .append($('<IMG>'))
             .appendTo('.hand.my')
             .hide();
 
@@ -34,22 +38,11 @@ new Screen({
                         const $enemyCreature = $(e.currentTarget);
 
                         send('hit-creature', {
-                            my: $myCreature.data('crid'),
-                            op: $enemyCreature.data('crid')
+                            my: $myCreature.data('id'),
+                            op: $enemyCreature.data('id')
                         });
                     }
 
-                }
-            })
-            .on('click', '.battleground', e => {
-                if (hbe.battleData.my.active) {
-                    const $card = $('.card.selected');
-
-                    if ($card.length) {
-                        send('play-card', {
-                            id: $card.data('id')
-                        });
-                    }
                 }
             })
             .on('click', '.end-turn', () => {
@@ -85,15 +78,73 @@ new Screen({
                 send('use-hero-skill', {});
             })
             .on('mouseenter', '.card-wrap', e => {
-                const $img = $(e.currentTarget).find('IMG');
-                const picUrl = $img.attr('src');
+                if (!dragging) {
+                    const $cardWrap = $(e.currentTarget);
+                    const $img = $cardWrap.find('IMG');
+                    const picUrl = $img.attr('src');
 
-                $cardPreview
-                    .attr('src', picUrl)
-                    .show();
+                    $cardPreview.find('IMG').attr('src', picUrl);
+                    $cardPreview
+                        .toggleClass('available', $cardWrap.hasClass('available'))
+                        .show();
+                }
             })
             .on('mouseleave', '.card-wrap', () => {
                 $cardPreview.hide();
+            })
+            .on('mousedown', '.card-wrap', e => {
+                if (!hbe.battleData.my.active) {
+                    return;
+                }
+
+                const $card = $(e.currentTarget);
+
+                if (!$card.hasClass('available')) {
+                    return;
+                }
+
+                dragging = true;
+
+                $('.battle').addClass('dragging');
+
+                $dragCard = $card.clone();
+
+                $dragCard.data('linked-card', $card[0]);
+
+                $dragCard.addClass('card-drag');
+
+                $dragCard.appendTo('.battle');
+
+                $card.hide();
+            })
+            .on('mousemove', e => {
+                 if ($dragCard) {
+                     $dragCard.css({
+                         top: e.pageY - 70,
+                         left: e.pageX - 50
+                     });
+                 }
+            })
+            .on('mouseup', e => {
+                if ($dragCard) {
+
+                    console.log(e);
+
+                    if ($(e.target).closest('.battleground').length) {
+                        send('play-card', {
+                            id: $dragCard.data('id')
+                        });
+
+                    } else {
+                        $($dragCard.data('linked-card')).show();
+                    }
+
+                    dragging = false;
+                    $dragCard.remove();
+                    $dragCard = null;
+
+                    $('.battle').removeClass('dragging');
+                }
             });
             //.on('click', '.battleground', e => {
             //    const $blow = $('<div>');
@@ -121,6 +172,8 @@ function updateInGameData() {
     clearPurposes();
 
     const game = hbe.battleData;
+
+    $('.battle').toggleClass('active', game.my.active);
 
     $('.name.op').text(game.op.name);
     $('.name.my').text(game.my.name);
@@ -190,7 +243,11 @@ function updateInGameData() {
 
             render($container, 'creature', minion);
 
-            $creatures.append($container.children());
+            const $minion = $container.children();
+            if (side === 'my' && !minion.flags['sleep']) {
+                $minion.addClass('available');
+            }
+            $creatures.append($minion);
         });
 
         $('.avatar.' + side + ' .health .value').text(hero.hp);
