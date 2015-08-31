@@ -7,25 +7,38 @@ const H = require('../namespace');
 H.Battle = class Battle {
     constructor(player1, player2) {
         this.players = _.shuffle([player1, player2]);
+        this.p1 = this.players[0];
+        this.p2 = this.players[1];
 
         this.auras = new H.Auras();
 
-        this.bindListeners();
-    }
+        this._bindListeners();
 
-    start() {
+        player1.enterBattle(this);
+        player2.enterBattle(this);
+
         setTimeout(() => {
-            if (this.players[0].flags.joined && this.players[1].flags.joined) {
-                this.start2();
-            } else {
-                this.start();
-            }
-        }, 50);
+            this._start();
+        }, 1000);
     }
 
-    start2() {
+    _start() {
         this.sendMessage('battle-started');
 
+        this._sendCardsForRepick();
+    }
+
+    _sendCardsForRepick() {
+        var cards = this.p1.deck.showLastCards(3);
+        this.p1.startingCardCount = 3;
+        this.p1.sendMessage('cards-for-repick', cards);
+
+        cards = this.p2.deck.showLastCards(4);
+        this.p1.startingCardCount = 4;
+        this.p2.sendMessage('cards-for-repick', cards);
+    }
+
+    _start2() {
         this.players[0].hero.addCrystal();
         this.players[0].hero.restoreMana();
         this.players[0].activate();
@@ -44,9 +57,6 @@ H.Battle = class Battle {
 
     sendMessage(msg, json) {
         this.players.forEach(player => {
-
-            console.log(json);
-
             player.sendMessage(msg, json);
         });
     }
@@ -66,21 +76,27 @@ H.Battle = class Battle {
         });
     }
 
-    bindListeners() {
-        const p1 = this.players[0];
-        const p2 = this.players[1];
+    _bindListeners() {
+        const player1 = this.players[0];
+        const player2 = this.players[1];
 
-        p1.on('message', msg => {
-            this.handlePlayerMessage(p1, msg.msg, msg.data);
+        player1.on('message', msg => {
+            this._handlePlayerMessage(player1, msg.msg, msg.data);
         });
 
-        p2.on('message', msg => {
-            this.handlePlayerMessage(p2, msg.msg, msg.data);
+        player2.on('message', msg => {
+            this._handlePlayerMessage(player2, msg.msg, msg.data);
         });
     }
 
-    handlePlayerMessage(player, msg, data) {
+    _handlePlayerMessage(player, msg, data) {
         switch (msg) {
+            case 'cards-replaced':
+                if (this.p1.flags['deck'] && this.p2.flags['deck']) {
+                    this._start2();
+                }
+                break;
+
             case 'play-card':
                 data.base.act(data, this, player);
                 break;

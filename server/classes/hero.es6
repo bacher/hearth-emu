@@ -4,7 +4,6 @@ const H = require('../namespace');
 H.Hero = class Hero {
     constructor(player, clas) {
         this.player = player;
-        this.battle = player.battle;
 
         this.clas = clas;
         this.hp = 30;
@@ -67,7 +66,7 @@ H.Hero = class Hero {
     }
 
     getData() {
-        return this.battle.auras.applyEffect(this);
+        return this.player.battle.auras.applyEffect(this);
     }
 
     getClientData() {

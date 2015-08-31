@@ -4,6 +4,10 @@ const EventEmitter = require('events').EventEmitter;
 
 const H = require('../namespace');
 
+const INACTIVE_MESSAGES = [
+    'replace-cards'
+];
+
 H.Player = class Player extends EventEmitter {
     constructor(ws) {
         super();
@@ -13,9 +17,7 @@ H.Player = class Player extends EventEmitter {
         this.status = 'waiting';
         this.userName = '';
 
-        this.flags = {
-            joined: false
-        };
+        this.flags = {};
 
         this.active = false;
         this.deck = null;
@@ -29,6 +31,8 @@ H.Player = class Player extends EventEmitter {
                 this.onMessage(packet.msg, packet.data);
             })
             .on('close', () => {
+                this.flags['disconnected'] = true;
+
                 this.emit('disconnect')
             });
     }
@@ -39,12 +43,22 @@ H.Player = class Player extends EventEmitter {
 
     onMessage(msg, data) {
 
-        if (this.flags.joined) {
+        if (this.flags['logged']) {
 
-            if (this.active) {
+            if (_.contains(INACTIVE_MESSAGES, msg) || this.active) {
                 this.log('Client Message:', msg);
 
                 switch (msg) {
+                    case 'replace-cards':
+                        this.deck.replaceCards(data, this.startingCardCount);
+
+                        this.flags['deck'] = true;
+
+                        this.emit('message', {
+                            msg: 'cards-replaced'
+                        });
+
+                        break;
                     case 'play-card':
                         this.playCard(data);
                         break;
@@ -65,9 +79,12 @@ H.Player = class Player extends EventEmitter {
             }
         } else if (msg === 'join') {
             this.userName = data.name;
-            this.flags.joined = true;
+            this.flags['logged'] = true;
 
             this.joinParams = data;
+
+            this.deck = new H.Deck(this.joinParams.deck.cards);
+            this.hero = new H.Hero(this, this.joinParams.deck.clas);
 
             const brackedName = '[' + this.userName + ']';
             this.log = console.log.bind(console, brackedName);
@@ -81,9 +98,6 @@ H.Player = class Player extends EventEmitter {
         this.battle = battle;
 
         this.enemy = battle.getOpponent(this);
-
-        this.deck = new H.Deck(this.joinParams.deck.cards);
-        this.hero = new H.Hero(this, this.joinParams.deck.clas);
     }
 
     sendMessage(msg, json) {

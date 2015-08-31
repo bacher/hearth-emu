@@ -62,17 +62,20 @@ new Screen({
 
         socket.onmessage = event => {
 
-            const data = JSON.parse(event.data);
+            const message = JSON.parse(event.data);
 
-            console.log('Server Message:', data);
+            const msg = message.msg;
+            const data = message.data;
 
-            switch (data.msg) {
+            console.log('Server Message:', message);
+
+            switch (msg) {
                 case 'battle-started':
                     hbe.activateScreen('battle');
 
                     if (checkParam('endturn')) {
                         setInterval(() => {
-                            if (hbe.battleData.my.active) {
+                            if (hbe.battleData && hbe.battleData.my.active) {
                                 send('end-turn');
                             }
                         }, 500);
@@ -80,15 +83,23 @@ new Screen({
 
                     break;
 
+                case 'cards-for-repick':
+                    drawCardsForPick(data);
+
+                    if (checkParam('endturn')) {
+                        $('.repick-layer .confirm').click();
+                    }
+                    break;
+
                 case 'game-data':
-                    hbe.battleData = data.data;
+                    hbe.battleData = data;
                     updateInGameData();
                     break;
                 case 'targets':
-                    updateInGameTargets(data.data);
+                    updateInGameTargets(data);
                     break;
                 default:
-                    console.warn('Unhandled Message:', data.msg);
+                    console.warn('Unhandled Message:', msg);
             }
         };
 

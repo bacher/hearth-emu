@@ -51,13 +51,9 @@ module.exports = class Game {
             const player = new H.Player(ws);
 
             player.on('logged', () => {
-                if (this.waitingPlayer) {
-                    const battle = new H.Battle(this.waitingPlayer, player);
+                if (this.waitingPlayer && !this.waitingPlayer.flags['disconnected']) {
+                    new H.Battle(this.waitingPlayer, player);
 
-                    this.waitingPlayer.enterBattle(battle);
-                    player.enterBattle(battle);
-
-                    battle.start();
                     this.waitingPlayer = null;
 
                 } else {

@@ -146,6 +146,14 @@ new Screen({
 
                     $('.battle').removeClass('dragging');
                 }
+            })
+            .on('click', '.card-repick', e => {
+                $(e.currentTarget).toggleClass('replace');
+            })
+            .on('click', '.repick-layer .confirm', () => {
+                const replaceIds = $('.card-repick.replace').map((i, el) => $(el).data('id')).get();
+
+                send('replace-cards', replaceIds);
             });
             //.on('click', '.battleground', e => {
             //    const $blow = $('<div>');
@@ -170,6 +178,9 @@ new Screen({
 });
 
 function updateInGameData() {
+
+    $('.repick-layer').remove();
+
     clearPurposes();
 
     const game = hbe.battleData;
@@ -313,4 +324,15 @@ function updateInGameTargets(data) {
             }
         }
     }
+}
+
+function drawCardsForPick(deckCards) {
+    const $cards = $('.repick-layer .cards');
+
+    deckCards.forEach(deckCard => {
+        const $card = $('<div>').addClass('card-repick').data('id', deckCard.id);
+        $card.append($('<img>').attr('src', 'http://media-hearth.cursecdn.com/avatars/'+deckCard.card.pic+'.png'));
+
+        $cards.append($card);
+    });
 }
