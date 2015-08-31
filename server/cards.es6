@@ -1,13 +1,13 @@
 
-const H = require('./common');
-const Card = require('./classes/card');
+const H = require('./namespace');
+
 
 var cards = [];
 
 ['./cards/minions.json', './cards/weapons.json', './cards/spells.json'].forEach(packName => {
     const cardsRaw = require(packName);
 
-    cards = cards.concat(cardsRaw.map(card => new Card(card)));
+    cards = cards.concat(cardsRaw.map(card => new H.Card(card)));
 });
 
 const cardsHash = {};
@@ -17,7 +17,7 @@ for (var i = 0; i < cards.length; ++i) {
     cardsHash[card.id] = card;
 }
 
-module.exports = {
+H.CARDS = {
     list: cards,
     hash: cardsHash,
     findByName: name => {

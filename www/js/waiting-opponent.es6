@@ -65,12 +65,26 @@ new Screen({
             switch (data.msg) {
                 case 'battle-started':
                     hbe.activateScreen('battle');
+
+                    if (checkParam('endturn')) {
+                        setInterval(() => {
+                            if (hbe.battleData.my.active) {
+                                send('end-turn');
+                            }
+                        }, 500);
+                    }
+
                     break;
 
                 case 'game-data':
                     hbe.battleData = data.data;
                     updateInGameData();
                     break;
+                case 'targets':
+                    updateInGameTargets(data.data);
+                    break;
+                default:
+                    console.warn('Unhandled Message:', data.msg);
             }
         };
 

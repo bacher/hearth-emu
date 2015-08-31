@@ -1,13 +1,10 @@
+
 const _ = require('lodash');
 const EventEmitter = require('events').EventEmitter;
 
-const Deck = require('./deck');
-const Hero = require('./hero');
-const Hand = require('./hand');
-const Creatures = require('./creatures');
-const CARDS = require('../cards');
+const H = require('../namespace');
 
-module.exports = class Player extends EventEmitter {
+H.Player = class Player extends EventEmitter {
     constructor(ws) {
         super();
 
@@ -23,8 +20,8 @@ module.exports = class Player extends EventEmitter {
         this.active = false;
         this.deck = null;
         this.hero = null;
-        this.hand = new Hand();
-        this.creatures = new Creatures();
+        this.hand = new H.Hand();
+        this.creatures = new H.Creatures();
 
         ws
             .on('message', json => {
@@ -37,7 +34,7 @@ module.exports = class Player extends EventEmitter {
     }
 
     getEnemy() {
-        this.battle.getOpponent(this);
+        return this.battle.getOpponent(this);
     }
 
     onMessage(msg, data) {
@@ -84,8 +81,10 @@ module.exports = class Player extends EventEmitter {
     enterBattle(battle) {
         this.battle = battle;
 
-        this.deck = new Deck(this.joinParams.deck.cards);
-        this.hero = new Hero(this, this.joinParams.deck.clas);
+        this.enemy = battle.getOpponent(this);
+
+        this.deck = new H.Deck(this.joinParams.deck.cards);
+        this.hero = new H.Hero(this, this.joinParams.deck.clas);
     }
 
     sendMessage(msg, json) {
@@ -97,10 +96,8 @@ module.exports = class Player extends EventEmitter {
                 data: json
             }));
         } catch (e) {
-            console.log('ERROR');
+            console.log('ERROR', e);
             console.log(json);
-            console.log(json.my.hand);
-            console.log(json.my.creatures);
         }
     }
 
@@ -129,14 +126,14 @@ module.exports = class Player extends EventEmitter {
 
     playCard(params) {
 
-        const card = this.hand.getCard(params.id);
+        const card = this.hand.getHandCard(params.id);
 
         this.emit('message', {
             msg: 'play-card',
             data: card
         });
 
-        this.hand.removeCard(params.id);
+        this.hand.removeHandCard(params.id);
         this.hero.removeMana(card.base.cost);
 
         this.emit('message', {

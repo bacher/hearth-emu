@@ -1,8 +1,10 @@
 
 //const EventEmitter = require('events').EventEmitter;
 const _ = require('lodash');
+const H = require('../namespace');
 
-module.exports = class Minion {
+
+H.Minion = class Minion {
     constructor(player, card) {
         this.player = player;
         this.battle = player.battle;
@@ -40,5 +42,9 @@ module.exports = class Minion {
 
         this.battle = null;
         this.player = null;
+    }
+
+    is(prop) {
+        return !!this.flags[prop];
     }
 };

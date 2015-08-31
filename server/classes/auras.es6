@@ -1,5 +1,8 @@
 
-module.exports = class Auras {
+const H = require('../namespace');
+
+
+H.Auras = class Auras {
     constructor(battle) {
         this.list = [];
 

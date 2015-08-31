@@ -1,15 +1,15 @@
 
-const Hero = require('./hero');
+const H = require('../namespace');
 
 const AURAS = {
     'spellDamage': {
         effect: hero => hero.spellDamage++,
         side: 'own',
-        target: Hero
+        target: H.Hero
     }
 };
 
-module.exports = class Aura {
+H.Aura = class Aura {
     constructor(player, auraName, params) {
         this.aura = AURAS[auraName];
         this.player = player;

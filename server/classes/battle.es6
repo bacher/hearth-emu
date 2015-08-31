@@ -1,12 +1,14 @@
 
 const fs = require('fs');
 const _ = require('lodash');
-const Auras = require('./auras');
 
-module.exports = class Battle {
+const H = require('../namespace');
+
+H.Battle = class Battle {
     constructor(player1, player2) {
         this.players = _.shuffle([player1, player2]);
-        this.auras = new Auras();
+
+        this.auras = new H.Auras();
 
         this.bindListeners();
     }
@@ -93,10 +95,11 @@ module.exports = class Battle {
                 break;
 
             case 'hit-creature':
+                const enemy = player.getEnemy();
                 const my = player.creatures.getCreatureByCrid(data.my);
-                const op = this.getOp(player).creatures.getCreatureByCrid(data.op);
+                const op = enemy.creatures.getCreatureByCrid(data.op);
 
-                op.flags.dead = true;
+                enemy.creatures.killCreature(op);
                 my.flags.sleep = true;
 
                 this.sendGameData();
@@ -105,23 +108,40 @@ module.exports = class Battle {
 
             case 'get-targets':
                 const cardId = data['card-id'];
+                const creatureId = data['creature-id'];
 
                 if (cardId) {
-                    const card = player.hand.findCard(cardId);
+                    const handCard = player.hand.getHandCard(cardId);
 
-                    if (card.getTargets) {
-                        send('targets', {
-                            'card-id': cardId,
-                            'targets': card.getTargets(this, player)
-                        });
+                    let targets;
+
+                    if (handCard.base.getTargets) {
+                        targets = handCard.base.getTargets(this, player);
+                    } else {
+                        targets = 'not-need';
                     }
+
+                    player.sendMessage('targets', {
+                        'card-id': cardId,
+                        'targets': targets
+                    });
+                } else if (creatureId) {
+                    const creature = player.creatures.getCreatureByCrid(creatureId);
+                    let targets = H.TARGETS['physic'](this, player, creature);
+
+                    player.sendMessage('targets', {
+                        'creature-id': creatureId,
+                        'targets': targets
+                    });
                 }
                 break;
 
             case 'hit-hero': {
+                console.log('AAAA', data);
+
                 const my = player.creatures.getCreatureByCrid(data.my);
 
-                const opHero = this.getOp(player).hero;
+                const opHero = player.enemy.hero;
 
                 if (opHero.hp <= my.attack) {
 
@@ -136,7 +156,7 @@ module.exports = class Battle {
                 break;
             }
             case 'use-hero-skill': {
-                player.hero.useSkill(this, player, this.getOpponent(player), data);
+                player.hero.useSkill(this, player, data);
 
                 this.sendGameData();
                 break;

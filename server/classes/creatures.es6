@@ -1,11 +1,15 @@
 
 const _ = require('lodash');
 
+const H = require('../namespace');
+
 const MAX_MINIONS_COUNT = 7;
 
-module.exports = class Creatures {
+
+H.Creatures = class Creatures {
     constructor() {
         this.creatures = [];
+        this.graveyard = [];
     }
 
     canAddCreature() {
@@ -19,7 +23,7 @@ module.exports = class Creatures {
     }
 
     getGameData() {
-        return this.creatures.filter(cr => !cr.flags.dead);
+        return this.creatures;
     }
 
     wakeUpAll() {
@@ -33,10 +37,15 @@ module.exports = class Creatures {
     }
 
     getCreatureByCrid(crid) {
-
-        const index = _.findIndex(this.creatures, { crid: crid });
+        const index = _.findIndex(this.creatures, { id: crid });
 
         return this.creatures[index];
+    }
+
+    killCreature(creat) {
+        const index = this.getCreatureIndex(creat);
+        this.creatures.splice(index, 1);
+        this.graveyard.push(creat);
     }
 
     isHasCardCreature(card) {
@@ -44,6 +53,10 @@ module.exports = class Creatures {
     }
 
     getAllIds() {
-        return this.creatures.map(creat => creature.id);
+        return this.creatures.map(minion => minion.id);
+    }
+
+    getTauntMinions() {
+        return this.creatures.filter(creature => creature.is('taunt'));
     }
 };

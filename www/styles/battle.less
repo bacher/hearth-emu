@@ -15,11 +15,13 @@
     left: 2px;
     line-height: 32px;
     padding: 3px 31px 3px 16px;
+    background: rgba(0,0,0, 0.31);
+
     color: #FFF;
-    font-family: "Belwe Bold", Times, sans-serif;
+    font-family: "Belwe Bold", Times, serif;
+    font-weight: bold;
     text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 2px #000;
     font-size: 17px;
-    background: rgba(0,0,0, 0.31);
 
     &.op {
       top: 27px;
@@ -110,6 +112,16 @@
 
   .creature {
     margin-right: 10px;
+
+    &.purpose:after {
+      position: absolute;
+      content: "";
+      top: -16px;
+      left: -10px;
+      width: 269px;
+      height: 287px;
+      background: url("../textures/card-fire-glow-square.png");
+    }
   }
 
   .hand.my .card {
@@ -230,6 +242,16 @@
       background: url("../textures/hero-hover.png");
     }
 
+    &.purpose:after {
+      position: absolute;
+      content: "";
+      top: -5px;
+      left: -7px;
+      width: 123px;
+      height: 131px;
+      background: url("../textures/hero-fire-glow.png");
+    }
+
     &.op {
       left: 116px;
     }
@@ -292,8 +314,8 @@
         display: block;
         width: 115px;
         height: 104px;
-        margin-top: -27px;
-        margin-left: -31px;
+        margin-top: -2px;
+        margin-left: -9px;
         background: url("../textures/hero-skill-glow.png");
       }
     }
@@ -321,8 +343,6 @@
       position: absolute;
       width: 99px;
       height: 105px;
-      //margin-top: -23px;
-      //margin-left: -23px;
       background: url("../textures/hero-skill-frame.png");
     }
 
@@ -379,7 +399,8 @@
     .header {
       margin: 18px 0 0 33px;
       font-size: 16px;
-      font-family: "Belwe Bold", Times, sans-serif;
+      font-family: "Belwe Bold", Times, serif;
+      font-weight: bold;
       color: #FFF;
       text-shadow: 0 0 1px #000, 0 0 1px #000, 0 0 2px #000;
     }

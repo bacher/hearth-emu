@@ -209,6 +209,8 @@ new Screen({
                 drawCards();
             } else {
                 $('.tab').show();
+
+                $('.card').removeClass('lock one');
             }
 
             if (heroMode) {

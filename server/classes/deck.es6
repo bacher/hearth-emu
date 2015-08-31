@@ -1,10 +1,10 @@
 
 const _ = require('lodash');
-const CARDS = require('../cards').hash;
+const H = require('../namespace');
 
-module.exports = class Deck {
+H.Deck = class Deck {
     constructor(cardIds) {
-        this.cards = cardIds.map(id => CARDS[id]);
+        this.cards = cardIds.map(id => H.CARDS.hash[id]);
     }
 
     shuffle() {

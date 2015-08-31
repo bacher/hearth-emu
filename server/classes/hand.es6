@@ -1,19 +1,16 @@
 
-const _ = require('lodash');
-const CARDS = require('../cards');
+const H = require('../namespace');
 
 const MAX_HAND_CARD_COUNT = 10;
 
-module.exports = class Hand {
+
+H.Hand = class Hand {
     constructor() {
         this.cards = [];
     }
 
     addCard(card) {
-        this.cards.push({
-            base: card,
-            id: _.uniqueId('hand_')
-        });
+        this.cards.push(new H.HandCard(card));
     }
 
     canAddCard() {
@@ -25,10 +22,10 @@ module.exports = class Hand {
     }
 
     addCoinCard() {
-        this.addCard(CARDS.findByName('The Coin'));
+        this.addCard(H.CARDS.findByName('The Coin'));
     }
 
-    findCard(id) {
+    _findHandCard(id) {
         for (var i = 0; i < this.cards.length; ++i) {
             if (this.cards[i].id === id) {
                 return {
@@ -41,14 +38,14 @@ module.exports = class Hand {
         return null;
     }
 
-    getCard(id) {
-        const info = this.findCard(id);
+    getHandCard(id) {
+        const info = this._findHandCard(id);
 
         return info && info.card;
     }
 
-    removeCard(id) {
-        const info = this.findCard(id);
+    removeHandCard(id) {
+        const info = this._findHandCard(id);
 
         if (info) {
             this.cards.splice(info.index, 1);

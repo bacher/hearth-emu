@@ -1,9 +1,9 @@
 
-const Minion = require('./minion');
+const H = require('./namespace');
 
-module.exports = {
+H.ACTIVATIONS = {
     summon: (card, battle, player) => {
-        const newMinion = new Minion(player, card);
+        const newMinion = new H.Minion(player, card);
 
         player.creatures.addCreature(newMinion);
     },

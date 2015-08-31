@@ -1,7 +1,7 @@
 
-const H = require('../common');
+const H = require('../namespace');
 
-module.exports = class Hero {
+H.Hero = class Hero {
     constructor(player, clas) {
         this.player = player;
         this.battle = player.battle;
@@ -15,13 +15,12 @@ module.exports = class Hero {
         this.skillUsed = false;
 
         if (clas === H.CLASSES.shaman) {
-            const Cards = require('../cards');
 
             this.totems = [
-                Cards.findByName('Searing Totem'),
-                Cards.findByName('Stoneclaw Totem'),
-                Cards.findByName('Wrath of Air Totem'),
-                Cards.findByName('Healing Totem')
+                H.CARDS.findByName('Searing Totem'),
+                H.CARDS.findByName('Stoneclaw Totem'),
+                H.CARDS.findByName('Wrath of Air Totem'),
+                H.CARDS.findByName('Healing Totem')
             ];
         }
     }
@@ -75,7 +74,7 @@ module.exports = class Hero {
         return this.getData();
     }
 
-    useSkill(battle, i, op, data) {
+    useSkill(battle, i, data) {
         this.mana -= 2;
         this.skillUsed = true;
 

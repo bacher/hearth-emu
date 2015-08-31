@@ -1,8 +1,7 @@
 
-const T = require('./targets');
-const A = require('./activations');
+const H = require('../namespace');
 
-module.exports = class Card {
+H.Card = class Card {
     constructor(info) {
         this.id = info.id;
         this.name = info.name;
@@ -14,10 +13,10 @@ module.exports = class Card {
         this.flags = {};
 
         if (info.target && info.target !== 'none') {
-            this.getTargets = T[info.target];
+            this.getTargets = H.TARGETS[info.target];
         }
 
-        this.act = A[info.act];
+        this.act = H.ACTIVATIONS[info.act];
         this.minion = info.minion || null;
         this.param = info.param || null;
 

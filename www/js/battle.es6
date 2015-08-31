@@ -20,7 +20,7 @@ new Screen({
                     });
                 }
             })
-            .on('click', '.creatures.op .creature', e => {
+            .on('click', '.creatures.op .creature.purpose', e => {
 
                 if (hbe.battleData.my.active) {
                     const $myCreature = $('.creatures.my .creature.selected');
@@ -58,6 +58,10 @@ new Screen({
 
                     $('.selected').removeClass('selected');
                     $creature.addClass('selected');
+
+                    send('get-targets', {
+                        'creature-id': $creature.data('id')
+                    });
                 }
             })
             .on('click', '.avatar.op', () => {
@@ -67,14 +71,14 @@ new Screen({
 
                     if ($myCreature.length) {
                         send('hit-hero', {
-                            my: $myCreature.data('crid')
+                            my: $myCreature.data('id')
                         });
                     }
                 }
             })
             .on('click', '.hero-skill.my.available', () => {
                 send('use-hero-skill', {});
-            })
+            });
             //.on('click', '.battleground', e => {
             //    const $blow = $('<div>');
             //
@@ -98,6 +102,8 @@ new Screen({
 });
 
 function updateInGameData() {
+    clearPurposes();
+
     const game = hbe.battleData;
 
     $('.name.op').text(game.op.name);
@@ -167,3 +173,42 @@ function updateInGameData() {
 
 }
 
+function clearPurposes() {
+    $('.avatar .creature')
+        .removeClass('purpose');
+}
+
+function updateInGameTargets(data) {
+    const targets = data.targets;
+
+    clearPurposes();
+
+    if (targets !== 'not-need') {
+
+        if (targets.my) {
+
+            if (targets.my.hero) {
+                $('.avatar.my').addClass('purpose')
+            }
+
+            if (targets.my.minions) {
+                targets.my.minions.forEach(minionId => {
+                    $('.creatures.my .creature[data-id="' + minionId + '"]').addClass('purpose');
+                });
+            }
+        }
+
+        if (targets.op) {
+
+            if (targets.op.hero) {
+                $('.avatar.op').addClass('purpose')
+            }
+
+            if (targets.op.minions) {
+                targets.op.minions.forEach(minionId => {
+                    $('.creatures.op .creature[data-id="' + minionId + '"]').addClass('purpose');
+                });
+            }
+        }
+    }
+}

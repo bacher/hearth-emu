@@ -17,7 +17,13 @@ BODY {
 
 @font-face {
   font-family: 'Belwe Bold';
-  src: url("../fonts/belwe-bd-bt-bold.ttf")
+  src: url("../fonts/belwe-bold.ttf");
+}
+
+@font-face {
+  font-family: 'Belwe Bold';
+  src: url("../fonts/belwe-bd-bt-bold.ttf");
+  font-weight: bold;
 }
 
 .cursor {
@@ -25,6 +31,7 @@ BODY {
   width: 43px;
   height: 43px;
   background: url("../textures/hand.png");
+  pointer-events: none;
 
   &.down {
     background: url("../textures/hand-down.png");
