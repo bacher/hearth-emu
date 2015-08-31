@@ -1,7 +1,8 @@
 
 if locals.id
-   .card(data-id=id)
-      IMG.img(src='http://media-hearth.cursecdn.com/avatars/'+base.pic+'.png')
+   .card-wrap(data-id=id)
+      .card
+         IMG(src="http://media-hearth.cursecdn.com/avatars/"+base.pic+".png")
 else
-   .card
-      IMG.img(src='cards/card_back.png')
+   .card-wrap
+      IMG(src="cards/card_back.png")

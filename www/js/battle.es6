@@ -118,18 +118,26 @@ function updateInGameData() {
 
     $('.creatures').empty();
 
-    game.my.hand.forEach(card => {
+    game.my.hand.forEach((card, i) => {
         var $container = $('<div>');
         render($container, 'card', card);
 
+        const $cardWrapper = $container.children();
+
+        $cardWrapper.addClass('c' + (i + 1));
+
         if (game.my.active) {
             if (card.base.cost <= game.my.hero.mana) {
-                $container.children().addClass('available');
+                $cardWrapper.addClass('available');
             }
         }
 
-        $hand.append($container.children());
+        $hand.append($cardWrapper);
     });
+
+    $hand
+        .removeClass('hand1 hand2 hand3 hand4 hand5 hand6 hand7 hand8 hand9 hand10')
+        .addClass('hand' + game.my.hand.length);
 
     $('.hero-skill.my')
         .toggleClass('available', game.my.active && game.my.hero.canUseSkill)

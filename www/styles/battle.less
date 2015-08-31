@@ -4,7 +4,7 @@
   @h: 654px;
 
   .battle {
-    height: 677px;
+    height: 697px;
     overflow: hidden;
     padding-top: 23px;
     background: url("../textures/board_1280.jpg") no-repeat;
@@ -51,15 +51,15 @@
 
   .hand {
     position: absolute;
-    width: 300px;
-    height: 100px;
-    left: @w/2-166px;
-    text-align: center;
-    transform: scale(1.1);
+    //width: 300px;
+    //height: 100px;
+    //left: @w/2-166px;
+    //text-align: center;
+    //transform: scale(1.1);
 
     &.op {
-      transform: scale(0.94);
-      top: -92px;
+      //transform: scale(0.94);
+      //top: -92px;
 
       .hand-helper {
         top: 97px;
@@ -81,12 +81,12 @@
   }
 
   .card, .creature {
-    position: relative;
-    display: inline-block;
-    width: 77px;
-    height: 107px;
-    vertical-align: top;
-    margin-top: 0;
+    //position: relative;
+    //display: inline-block;
+    //width: 77px;
+    //height: 107px;
+    //vertical-align: top;
+    //margin-top: 0;
 
     &.sleep:after {
       position: absolute;
@@ -99,16 +99,16 @@
       background: url("../textures/zzz.png");
     }
 
-    .img {
-      width: 90px;
-      margin-left: -6px;
-      margin-top: -20px;
-    }
+    //.img {
+    //  width: 90px;
+    //  margin-left: -6px;
+    //  margin-top: -20px;
+    //}
   }
 
-  .card {
-    margin-right: -40px;
-  }
+  //.card {
+  //  margin-right: -40px;
+  //}
 
   .creature {
     margin-right: 10px;
@@ -125,7 +125,7 @@
   }
 
   .hand.my .card {
-    transition: margin 0.3s;
+    //transition: margin 0.3s;
 
     &.selected {
       box-shadow: 0 0 12px 10px #F00;
@@ -141,10 +141,10 @@
       background: url("../textures/card-glow.png");
     }
 
-    &:hover {
-      margin-top: -44px;
-      margin-right: 0;
-    }
+    //&:hover {
+    //  margin-top: -44px;
+    //  margin-right: 0;
+    //}
   }
 
   .stats {
@@ -584,5 +584,91 @@
   //    background: url("../textures/cursor-blow-3.png");
   //  }
   //}
+
+
+  .hand {
+    transform: scale(0.32);
+    transform-origin: 0 0;
+
+    &.my {
+      top: 589px;
+      left: 395px;
+    }
+  }
+
+  .card {
+    position: absolute;
+    width: 250px;
+    height: 364px;
+    top: 0;
+    transform: rotate(0);
+
+    &:after {
+      position: absolute;
+      pointer-events: none;
+      top: -22px;
+      left: -18px;
+      content: "";
+      width: 286px;
+      height: 395px;
+      background: url("http://media-hearth.cursecdn.com/avatars/147/610/246.png");
+    }
+  }
+
+  .card-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 364px;
+    transform-origin: 60% 1700px;
+    transition: top ease-out 0.2s;
+  }
+
+  .hand1 .c1 { transform: rotate(0deg); }
+
+  .hand2 .c1 { transform: rotate(0deg) translate(-130px,0); }
+  .hand2 .c2 { transform: rotate(0deg) translate(130px,0); }
+
+  .hand3 .c1 { transform: rotate(0deg) translate(-260px,0); }
+  .hand3 .c2 { transform: rotate(0deg); }
+  .hand3 .c3 { transform: rotate(0deg) translate(260px,0); }
+
+  .hand4 .card { transform: rotate(-8deg); }
+  .hand4 .c1 { transform: rotate(-15deg); }
+  .hand4 .c2 { transform: rotate(-5deg); }
+  .hand4 .c3 { transform: rotate(5deg); }
+  .hand4 .c4 { transform: rotate(15deg); }
+
+  .hand5 .card { transform: rotate(-8deg); }
+  .hand5 .c1 { transform: rotate(-16deg); }
+  .hand5 .c2 { transform: rotate(-8deg); }
+  .hand5 .c3 { transform: rotate(0deg); }
+  .hand5 .c4 { transform: rotate(8deg); }
+  .hand5 .c5 { transform: rotate(16deg); }
+
+  .hand6 .card { transform: rotate(-8deg); }
+  .hand6 .c1 { transform: rotate(-18deg); }
+  .hand6 .c2 { transform: rotate(-11deg); }
+  .hand6 .c3 { transform: rotate(-4deg); }
+  .hand6 .c4 { transform: rotate(3deg); }
+  .hand6 .c5 { transform: rotate(10deg); }
+  .hand6 .c6 { transform: rotate(17deg); }
+
+  .hand7 .card { transform: rotate(-8deg); }
+  .hand7 .c1 { transform: rotate(-18deg); }
+  .hand7 .c2 { transform: rotate(-12deg); }
+  .hand7 .c3 { transform: rotate(-6deg); }
+  .hand7 .c4 { transform: rotate(0deg); }
+  .hand7 .c5 { transform: rotate(6deg); }
+  .hand7 .c6 { transform: rotate(12deg); }
+  .hand7 .c7 { transform: rotate(18deg); }
+
+  .hand.my .card-wrap:hover {
+    top: -70px;
+  }
+
+
+
 
 }
