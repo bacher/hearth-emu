@@ -50,12 +50,6 @@
   }
 
   .hand {
-    position: absolute;
-    //width: 300px;
-    //height: 100px;
-    //left: @w/2-166px;
-    //text-align: center;
-    //transform: scale(1.1);
 
     &.op {
       //transform: scale(0.94);
@@ -99,11 +93,13 @@
       background: url("../textures/zzz.png");
     }
 
-    //.img {
-    //  width: 90px;
-    //  margin-left: -6px;
-    //  margin-top: -20px;
-    //}
+    IMG {
+      position: absolute;
+      top: -15px;
+      left: -7px;
+      width: 118px;
+      pointer-events: none;
+    }
   }
 
   //.card {
@@ -167,10 +163,12 @@
     display: inline-block;
     width: 66px;
     height: 100%;
-    padding-top: 4px;
+    padding-top: 2px;
+    font-family: "Belwe Bold", Times, serif;
+    font-weight: bold;
     color: #FFF;
     text-align: center;
-    text-shadow: -1px -1px 2px #000, 1px 1px 2px #000;
+    text-shadow: 0 0 1px #000,0 0 1px #000,0 0 1px #000;
 
     > SPAN {
       vertical-align: middle;
@@ -587,31 +585,39 @@
 
 
   .hand {
-    transform: scale(0.32);
-    transform-origin: 0 0;
+    position: absolute;
 
     &.my {
-      top: 589px;
+      top: 597px;
       left: 395px;
+    }
+
+    &.op {
+      transform: scale(0.8);
+      top: -79px;
+      left: 403px;
+
+      .hand-helper {
+        transform: scale(1.25);
+        top: 117px;
+        left: -110px;
+      }
     }
   }
 
   .card {
     position: absolute;
-    width: 250px;
-    height: 364px;
+    width: 85px;
+    height: 122px;
     top: 0;
     transform: rotate(0);
 
-    &:after {
+    IMG {
       position: absolute;
       pointer-events: none;
-      top: -22px;
-      left: -18px;
-      content: "";
-      width: 286px;
-      height: 395px;
-      background: url("http://media-hearth.cursecdn.com/avatars/147/610/246.png");
+      top: -13px;
+      left: -7px;
+      width: 100px;
     }
   }
 
@@ -619,20 +625,27 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 250px;
-    height: 364px;
-    transform-origin: 60% 1700px;
+    width: 85px;
+    height: 122px;
     transition: top ease-out 0.2s;
+  }
+
+  .hand.my .card-wrap {
+    transform-origin: 60% 554px;
+  }
+
+  .hand.op .card-wrap {
+    transform-origin: 60% -554px;
   }
 
   .hand1 .c1 { transform: rotate(0deg); }
 
-  .hand2 .c1 { transform: rotate(0deg) translate(-130px,0); }
-  .hand2 .c2 { transform: rotate(0deg) translate(130px,0); }
+  .hand2 .c1 { transform: rotate(0deg) translate(-45px,0); }
+  .hand2 .c2 { transform: rotate(0deg) translate(45px,0); }
 
-  .hand3 .c1 { transform: rotate(0deg) translate(-260px,0); }
+  .hand3 .c1 { transform: rotate(0deg) translate(-90px,0); }
   .hand3 .c2 { transform: rotate(0deg); }
-  .hand3 .c3 { transform: rotate(0deg) translate(260px,0); }
+  .hand3 .c3 { transform: rotate(0deg) translate(90px,0); }
 
   .hand4 .card { transform: rotate(-8deg); }
   .hand4 .c1 { transform: rotate(-15deg); }
@@ -665,10 +678,22 @@
   .hand7 .c7 { transform: rotate(18deg); }
 
   .hand.my .card-wrap:hover {
-    top: -70px;
+    top: -28px;
   }
 
 
+  @keyframes up {
+    100% {
+      top: -320px;
+    }
+  }
 
+  .card-preview {
+    position: absolute;
+    pointer-events: none;
+    top: -310px;
+    left: -90px;
+    animation: up ease-out 2s;
+  }
 
 }

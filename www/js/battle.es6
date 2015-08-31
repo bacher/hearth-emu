@@ -7,6 +7,11 @@ new Screen({
     draw: function() {
         render($app, 'battle');
 
+        const $cardPreview = $('<IMG>')
+            .addClass('card-preview')
+            .appendTo('.hand.my')
+            .hide();
+
         $app
             .on('click', '.hand.my .card.available', e => {
                 if (hbe.battleData.my.active) {
@@ -78,6 +83,17 @@ new Screen({
             })
             .on('click', '.hero-skill.my.available', () => {
                 send('use-hero-skill', {});
+            })
+            .on('mouseenter', '.card-wrap', e => {
+                const $img = $(e.currentTarget).find('IMG');
+                const picUrl = $img.attr('src');
+
+                $cardPreview
+                    .attr('src', picUrl)
+                    .show();
+            })
+            .on('mouseleave', '.card-wrap', () => {
+                $cardPreview.hide();
             });
             //.on('click', '.battleground', e => {
             //    const $blow = $('<div>');
@@ -135,9 +151,7 @@ function updateInGameData() {
         $hand.append($cardWrapper);
     });
 
-    $hand
-        .removeClass('hand1 hand2 hand3 hand4 hand5 hand6 hand7 hand8 hand9 hand10')
-        .addClass('hand' + game.my.hand.length);
+
 
     $('.hero-skill.my')
         .toggleClass('available', game.my.active && game.my.hero.canUseSkill)
@@ -149,9 +163,21 @@ function updateInGameData() {
     var $container = $('<div>');
     render($container, 'card');
 
-    for (var i = 0; i < game.op.hand.length; ++i) {
-        $handOp.append($container.children().clone());
+    const $cardPattern = $container.children();
+
+    for (var i = game.op.hand.length - 1; i >= 0; --i) {
+        const $card = $cardPattern.clone();
+
+        $card.addClass('c' + (i + 1));
+
+        $handOp.append($card);
     }
+
+    $hand.add($handOp)
+        .removeClass('hand1 hand2 hand3 hand4 hand5 hand6 hand7 hand8 hand9 hand10');
+
+    $hand.addClass('hand' + game.my.hand.length);
+    $handOp.addClass('hand' + game.op.hand.length);
 
     ['my', 'op'].forEach(side => {
         const player = game[side];
