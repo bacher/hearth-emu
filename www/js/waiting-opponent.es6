@@ -53,6 +53,8 @@ new Screen({
                         window.location.reload();
                     }, 500);
                 }
+
+                hbe.activateScreen('connection-lost');
             }
         };
 
