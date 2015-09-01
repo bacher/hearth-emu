@@ -11,6 +11,7 @@ new H.Screen({
         var activeDeck = null;
         var $cardToRemove = null;
 
+        var showCardsBase;
         var showCards;
 
         render($app, 'collection');
@@ -161,27 +162,38 @@ new H.Screen({
             drawCards();
         });
 
+        function makeBaseFiltering() {
+            showCardsBase = [];
+
+            for (var i = 0; i < 10; ++i) {
+                showCardsBase[i] = H.cards[i].filter(card => !card.flags['uncollectable']);
+            }
+        }
+
         function filterCards() {
             const searchQuery = $('.search').val().toLowerCase();
 
-            showCards = {};
-
-            for (var i = 0; i < 10; ++i) {
+            showCards = showCardsBase.map((cardPack, i) => {
                 if (i === 0 || !heroMode || i === H.CLASSES[activeDeck.clas]) {
-                    showCards[i] = H.cards[i];
-
                     if (searchQuery) {
-                        showCards[i] = showCards[i].filter(card => _.contains(card.name.toLowerCase(), searchQuery));
+                        return cardPack.filter(card => _.contains(card.name.toLowerCase(), searchQuery));
+                    } else {
+                        return cardPack;
                     }
                 } else {
-                    showCards[i] = [];
+                    return [];
                 }
-            }
+            });
 
             toggleTabs();
         }
 
         function drawCards() {
+
+            if (!showCardsBase) {
+                makeBaseFiltering();
+            }
+
             const selectedClas = H.CLASSES[$('.tab.selected').data('clas')];
 
             const cardsPool = (showCards || H.cards)[selectedClas];

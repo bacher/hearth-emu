@@ -17,8 +17,6 @@ H.Card = class Card {
             this.target = 'not-need';
         }
 
-        this.flags = {};
-
         if (info.target && info.target !== 'none') {
             this.getTargets = H.TARGETS[info.target];
         }
@@ -32,10 +30,24 @@ H.Card = class Card {
             });
         }
 
+        this.flags = {};
+
+        if (info.flags) {
+            info.flags.forEach(flag => {
+                this.flags[flag] = true;
+            });
+        }
+
         this.minion = info.minion || null;
 
-        if (info.flags.uncollectable) {
-            this.flags.uncollectable = true;
+        if (this.minion && this.minion.flags) {
+            const flagsArray = this.minion.flags;
+
+            this.minion.flags = {};
+
+            flagsArray.forEach(flag => {
+                this.minion.flags[flag] = true;
+            });
         }
     }
 };

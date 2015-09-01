@@ -10,8 +10,8 @@ Oasis Snapjaw,147/577/15,4,n,(4/4)
 Bloodfen Raptor,147/640/576,2,n,(2/2)
 Bluegill Warrior,147/643/289,2,n,(2/2)
 Frostwolf Grunt,147/583/663,2,n,(2/2)
-Searing Totem,147/462/98,1,s,(1/1)
-Stoneclaw Totem,147/465/298,1,s,(0/2,[taunt])
-Wrath of Air Totem,147/468/365,1,s,(0/2,[spell-damage])
-Healing Totem,149/475/275,1,s,(0/2,[end-turn:healOwnMinions])
-Feral Spirit,148/136/214,0,s,(2/3,[taunt])
+Searing Totem,147/462/98,1,s,(1/1),{uncollectable}
+Stoneclaw Totem,147/465/298,1,s,(0/2,{taunt}),{uncollectable}
+Wrath of Air Totem,147/468/365,1,s,(0/2,{spell-damage}),{uncollectable}
+Healing Totem,149/475/275,1,s,(0/2,{end-turn:healOwnMinions}),{uncollectable}
+Feral Spirit,148/136/214,0,s,(2/3,{taunt}),{uncollectable}

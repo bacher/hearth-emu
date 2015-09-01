@@ -17,19 +17,28 @@ minionsLines.forEach(line => {
 
     if (line && !/^#/.test(line)) {
 
-        //Chillwind Yeti,minion,147/652/31,4,n,(4/4)
+        //Chillwind Yeti,minion,147/652/31,4,n,(4/4,{taunt}),{uncollectable}
         const info = {};
+        const rx = /^([^(]+),\(([^)]+)\)(?:,\{([^}]+)\})?$/;
+        const curves = /^\{(.*)\}$/;
 
-        const bracket = line.indexOf('(');
+        const match = line.match(rx);
 
-        var headerPart = line.substr(0, bracket - 1);
-        var minionPart = line.substr(bracket + 1);
-        minionPart = minionPart.substr(0, minionPart.length - 1);
+        const headerPart = match[1];
+        const minionPart = match[2];
+        const flagsPart = match[3];
 
         const header = headerPart.split(',');
         const minion = minionPart.split(',');
+        var minionFlags;
 
-        console.log(header, minion);
+        if (minion[1]) {
+            minionFlags = minion[1].match(curves)[1].split(',');
+            minion.length = 1;
+        }
+        const flags = flagsPart && flagsPart.split(',');
+
+        console.log(header, flags, minion, minionFlags);
 
         id++;
         info.id = 'm' + id;
@@ -39,12 +48,14 @@ minionsLines.forEach(line => {
         info.cost = Number(header[2]);
         info.clas = H.CLASSES_M[header[3]];
         info.act = 'summon';
-        info.flags = {};
+        info.flags = flags;
+
+        const attackHp = minion[0].split('/');
 
         info.minion = {
-            attack: Number(minion[0].split('/')[0]),
-            maxHp: Number(minion[0].split('/')[1]),
-            flags: {}
+            attack: Number(attackHp[0]),
+            maxHp: Number(attackHp[1]),
+            flags: minionFlags || null
         };
 
         minions.push(info);
@@ -84,7 +95,6 @@ spellsLines.forEach(line => {
         info.pic = details[2];
         info.cost = Number(details[3]);
         info.clas = H.CLASSES_M[details[4]];
-        info.flags = {};
 
         info.target = details[5];
 
@@ -103,9 +113,7 @@ spellsLines.forEach(line => {
         });
 
         if (details[7]) {
-            details[7].split(',').forEach(flag => {
-                info.flags[flag] = true;
-            });
+            info.flags = details[7].split(',');
         }
 
         spells.push(info);
