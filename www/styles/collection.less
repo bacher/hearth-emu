@@ -3,7 +3,7 @@
   .collection {
     width: 1280px;
     height: 720px;
-    background: url("../textures/collection_1280.jpg");
+    background: url("../textures/collection.jpg");
     background-repeat: no-repeat;
   }
 
@@ -439,6 +439,42 @@
       text-shadow: 0 0 1px #000, 0 0 3px #000;
       letter-spacing: 0.3px;
     }
+  }
+
+  .search {
+    position: absolute;
+    top: 648px;
+    left: 607px;
+    width: 126px;
+    height: 22px;
+
+    outline: none;
+    border: none;
+    background: none;
+
+    color: #FFF;
+    font-family: "Belwe Bold", Times, serif;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 1.1px;
+    text-shadow: 0 0 1px #000, 0 0 3px #000;
+
+    &::-webkit-input-placeholder {
+      color: #C08F8F;
+    }
+  }
+
+  .cards-empty {
+    display: none;
+    position: absolute;
+    top: 308px;
+    left: 333px;
+    color: #635645;
+    font-family: "Belwe Bold", Times, serif;
+    font-weight: bold;
+    font-size: 38px;
+    letter-spacing: 1.6px;
   }
 
 }

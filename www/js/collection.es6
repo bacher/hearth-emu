@@ -11,6 +11,8 @@ new H.Screen({
         var activeDeck = null;
         var $cardToRemove = null;
 
+        var showCards;
+
         render($app, 'collection');
 
         drawDecks();
@@ -120,6 +122,16 @@ new H.Screen({
                 $('.hero.selected').removeClass('selected');
                 $('.avatar').removeClass().addClass('avatar');
                 $('.choose').removeClass('show');
+            })
+            .on('focusout', '.search', () => {
+                filterCards();
+
+                drawCards();
+            })
+            .on('keydown', '.search', e => {
+                if (e.which === 13) {
+                    $(e.currentTarget).blur();
+                }
             });
 
         $.ajax({
@@ -149,21 +161,60 @@ new H.Screen({
             drawCards();
         });
 
+        function filterCards() {
+            const searchQuery = $('.search').val().toLowerCase();
+
+            showCards = {};
+
+            for (var i = 0; i < 10; ++i) {
+                if (i === 0 || !heroMode || i === H.CLASSES[activeDeck.clas]) {
+                    showCards[i] = H.cards[i];
+
+                    if (searchQuery) {
+                        showCards[i] = showCards[i].filter(card => _.contains(card.name.toLowerCase(), searchQuery));
+                    }
+                } else {
+                    showCards[i] = [];
+                }
+            }
+
+            toggleTabs();
+        }
+
         function drawCards() {
-            const $cards = $('.cards');
             const selectedClas = H.CLASSES[$('.tab.selected').data('clas')];
 
-            const cardsPool = H.cards[selectedClas];
+            const cardsPool = (showCards || H.cards)[selectedClas];
+
+            const $cards = $('.cards');
             const cards = cardsPool.slice(page * 8, page * 8 + 8);
 
             $('.arrow.left').toggle(page !== 0);
             $('.arrow.right').toggle(page * 8 + 8 < cardsPool.length);
 
-            jade.render($cards[0], 'collection-cards', {
-                cards: cards
-            });
+            $('.cards-empty').toggle(cards.length === 0);
 
-            checkLimits();
+            if (cards.length === 0) {
+                $cards.empty();
+            } else {
+                jade.render($cards[0], 'collection-cards', {
+                    cards: cards
+                });
+
+                checkLimits();
+            }
+        }
+
+        function toggleTabs() {
+            for (var i = 0; i < 10; ++i) {
+                $('.tab.' + H.CLASSES_L[i]).toggle(showCards[i].length > 0);
+            }
+
+            if ($('.tab.selected:visible').length === 0) {
+                selectTab($('.tab:visible:eq(0)'));
+            } else {
+                $('.tab.selected').removeClass('.selected');
+            }
         }
 
         function drawDecks() {
@@ -195,16 +246,12 @@ new H.Screen({
             activeDeck = deck || null;
 
             if (deck) {
-                $('.tab:not(.neutral)').hide();
-                const $classTab = $('.tab.' + deck.clas);
-                $classTab.show();
+                filterCards();
 
                 const $deckInfo = $deck.clone();
                 $deckInfo.append($('<INPUT>').addClass('label-edit').val($deck.find('.label').text()));
 
                 $('.hero-right-panel .deck-info').html($deckInfo);
-
-                selectTab($classTab);
 
                 drawCards();
             } else {

@@ -349,7 +349,7 @@ H.updateInGameData = function() {
 
     $('.end-turn').toggleClass('active', game.my.active);
 
-}
+};
 
 function clearPurposes() {
     $('.avatar .creature')
