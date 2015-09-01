@@ -255,13 +255,33 @@
     }
   }
 
+  .class-bg {
+    position: absolute;
+    top: 45px;
+    left: 357px;
+    width: 305px;
+    height: 77px;
+
+    &.hunter  { background: url("../textures/collection-class-bg2_hunter.jpg"); }
+    &.warrior { background: url("../textures/collection-class-bg2_warrior.jpg"); }
+    &.rogue   { background: url("../textures/collection-class-bg2_rogue.jpg"); }
+    &.priest  { background: url("../textures/collection-class-bg2_priest.jpg"); }
+    &.shaman  { background: url("../textures/collection-class-bg2_shaman.jpg"); }
+    &.warlock { background: url("../textures/collection-class-bg2_warlock.jpg"); }
+    &.mage    { background: url("../textures/collection-class-bg2_mage.jpg"); }
+    &.paladin { background: url("../textures/collection-class-bg2_paladin.jpg"); }
+    &.druid   { background: url("../textures/collection-class-bg2_druid.jpg"); }
+    &.neutral { background: url("../textures/collection-class-bg2_neutral.jpg"); }
+  }
+
   .cards {
     position: absolute;
-    top: 84px;
-    left: 194px;
-    width: 640px;
+    top: 96px;
+    left: 200px;
+    width: 650px;
     display: inline-block;
     vertical-align: top;
+    pointer-events: none;
   }
 
   .pager {
@@ -272,16 +292,39 @@
     height: 50px;
   }
 
-  .arrow {
+  .scroll-zone {
     position: absolute;
-    top: 400px;
+    top: 47px;
+    width: 109px;
+    height: 580px;
+    display: none;
+
+    &.left:hover:after {
+      position: absolute;
+      content: "";
+      top: 275px;
+      left: -15px;
+      width: 63px;
+      height: 53px;
+      background: url("../textures/arrow_left.png");
+    }
+
+    &.right:hover:after {
+      position: absolute;
+      content: "";
+      top: 275px;
+      right: 14px;
+      width: 63px;
+      height: 53px;
+      background: url("../textures/arrow_right.png");
+    }
 
     &.left {
-      left: 200px;
+      left: 163px;
     }
 
     &.right {
-      left: 824px;
+      left: 777px;
     }
   }
 
@@ -292,17 +335,23 @@
   .card {
     position: relative;
     display: inline-block;
-    margin-bottom: 25px;
+    width: 136px;
+    height: 194px;
+    margin: 31px 25px 25px 0;
+    pointer-events: initial;
 
     .img {
       width: 160px;
       height: 221px;
+      margin-top: -22px;
+      margin-left: -11px;
+      pointer-events: none;
     }
 
     &:hover .glow {
       position: absolute;
-      top: 12px;
-      left: 5px;
+      top: -11px;
+      left: -7px;
       width: 151px;
       height: 203px;
       background: url("../textures/card-white-glow.png");
@@ -313,7 +362,7 @@
       content: "";
       width: 55px;
       height: 30px;
-      margin: 212px 0 -242px 51px;
+      margin: 192px 0 -222px 43px;
       background: url("../textures/collection-card-modificator_x2.png");
     }
 
@@ -322,7 +371,7 @@
       content: "";
       width: 55px;
       height: 30px;
-      margin: 212px 0 -242px 51px;
+      margin: 192px 0 -222px 43px;
       background: url("../textures/collection-card-modificator_x1.png");
     }
 
@@ -331,7 +380,7 @@
       content: "";
       width: 55px;
       height: 30px;
-      margin: 215px 0 -245px 51px;
+      margin: 195px 0 -225px 43px;
       background: url("../textures/collection-card-modificator_lock.png");
     }
   }

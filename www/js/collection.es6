@@ -16,6 +16,8 @@ new H.Screen({
 
         render($app, 'collection');
 
+        selectTab($('.tab.druid'));
+
         drawDecks();
 
         $app
@@ -56,12 +58,12 @@ new H.Screen({
                     H.activateScreen('main-menu');
                 }
             })
-            .on('click', '.arrow.left', () => {
+            .on('click', '.scroll-zone.left', () => {
                 page--;
 
                 drawCards();
             })
-            .on('click', '.arrow.right', () => {
+            .on('click', '.scroll-zone.right', () => {
                 page++;
 
                 drawCards();
@@ -159,6 +161,8 @@ new H.Screen({
                 H.cardsHash[card.id] = card;
             });
 
+            makeBaseFiltering();
+
             drawCards();
         });
 
@@ -190,19 +194,17 @@ new H.Screen({
 
         function drawCards() {
 
-            if (!showCardsBase) {
-                makeBaseFiltering();
-            }
+            if (!showCardsBase) return;
 
             const selectedClas = H.CLASSES[$('.tab.selected').data('clas')];
 
-            const cardsPool = (showCards || H.cards)[selectedClas];
+            const cardsPool = (showCards || showCardsBase)[selectedClas];
 
             const $cards = $('.cards');
             const cards = cardsPool.slice(page * 8, page * 8 + 8);
 
-            $('.arrow.left').toggle(page !== 0);
-            $('.arrow.right').toggle(page * 8 + 8 < cardsPool.length);
+            $('.scroll-zone.left').toggle(page !== 0);
+            $('.scroll-zone.right').toggle(page * 8 + 8 < cardsPool.length);
 
             $('.cards-empty').toggle(cards.length === 0);
 
@@ -282,6 +284,10 @@ new H.Screen({
         function selectTab($tab) {
             $tab.siblings().removeClass('selected');
             $tab.addClass('selected');
+
+            $('.class-bg')
+                .removeClass('warrior warlock paladin mage priest rogue shaman hunter druid neutral')
+                .addClass($tab.data('clas'));
 
             page = 0;
 
