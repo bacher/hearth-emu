@@ -54,7 +54,7 @@ H.Battle = class Battle {
         this.p1.sendMessage('cards-for-repick', cards);
 
         cards = this.p2.deck.showLastCards(4);
-        this.p1.startingCardCount = 4;
+        this.p2.startingCardCount = 4;
         this.p2.sendMessage('cards-for-repick', cards);
     }
 
