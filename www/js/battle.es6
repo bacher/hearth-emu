@@ -214,10 +214,12 @@ new Screen({
             .on('click', '.card-repick', e => {
                 $(e.currentTarget).toggleClass('replace');
             })
-            .on('click', '.repick-layer .confirm', () => {
+            .on('click', '.repick-layer .confirm', e => {
                 const replaceIds = $('.card-repick.replace').map((i, el) => $(el).data('id')).get();
 
                 send('replace-cards', replaceIds);
+
+                $(e.currentTarget).remove();
             });
             //.on('click', '.battleground', e => {
             //    const $blow = $('<div>');
