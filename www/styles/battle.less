@@ -256,6 +256,18 @@
       background: url("../textures/hero-fire-glow.png");
     }
 
+    &.casting:after {
+      position: absolute;
+      content: "";
+      top: -18px;
+      left: -27px;
+      width: 165px;
+      height: 165px;
+      background: url("../textures/rune-1.png");
+
+      animation: rotate linear 16s infinite;
+    }
+
     &.op {
       left: 116px;
     }
@@ -465,6 +477,15 @@
 
   .hero-skill:hover .skill-helper {
     display: block;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   @keyframes margin {

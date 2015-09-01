@@ -111,6 +111,8 @@ new Screen({
                         'card-id': $card.data('id')
                     });
 
+                    $('.hero.my .avatar').addClass('casting');
+
                     heroTargeting = true;
 
                     $dragAim.data('linked-card', $card[0]);
@@ -187,6 +189,7 @@ new Screen({
                             $($dragAim.data('linked-card')).show();
                         }
 
+                        $('.hero.my .avatar').removeClass('casting');
                         $dragAim.hide();
                         heroTargeting = false;
 
