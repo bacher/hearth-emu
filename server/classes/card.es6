@@ -28,6 +28,22 @@ H.Card = class Card {
                     param: act.param || null
                 };
             });
+        } else if (info.type === H.CARD_TYPES.minion) {
+            this.acts = [{ act: H.ACTIVATIONS['summon']}];
+
+            this.minion = info.minion;
+
+            if (this.minion.flags) {
+                const flagsArray = this.minion.flags;
+
+                this.minion.flags = {};
+
+                flagsArray.forEach(flag => {
+                    this.minion.flags[flag] = true;
+                });
+            } else {
+                this.minion.flags = {};
+            }
         }
 
         this.flags = {};
@@ -35,18 +51,6 @@ H.Card = class Card {
         if (info.flags) {
             info.flags.forEach(flag => {
                 this.flags[flag] = true;
-            });
-        }
-
-        this.minion = info.minion || null;
-
-        if (this.minion && this.minion.flags) {
-            const flagsArray = this.minion.flags;
-
-            this.minion.flags = {};
-
-            flagsArray.forEach(flag => {
-                this.minion.flags[flag] = true;
             });
         }
     }

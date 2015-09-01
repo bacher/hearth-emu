@@ -47,7 +47,6 @@ minionsLines.forEach(line => {
         info.pic = header[1];
         info.cost = Number(header[2]);
         info.clas = H.CLASSES_M[header[3]];
-        info.act = 'summon';
         info.flags = flags;
 
         const attackHp = minion[0].split('/');

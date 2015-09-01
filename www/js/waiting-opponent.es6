@@ -38,7 +38,7 @@ new H.Screen({
                 name: name,
                 deck: {
                     clas: H.CLASSES[deck.clas],
-                    cards: deck.cards
+                    cards: deck.cardIds
                 }
             });
         };

@@ -5,5 +5,9 @@ new H.Screen({
     hash: '',
     draw: function() {
         $app.empty();
+
+        $app.on('click', () => {
+            window.location.reload();
+        });
     }
 });
