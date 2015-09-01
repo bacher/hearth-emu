@@ -141,9 +141,17 @@ H.Player = class Player extends EventEmitter {
 
         const handCard = this.hand.getHandCard(params.id);
 
+        const targetPlayer = (params.targetSide === 'op' ? this.enemy : this);
+
+        const target = targetPlayer.creatures.getCreatureByCrid(params.target);
+
         this.emit('message', {
             msg: 'play-card',
-            data: handCard
+            data: {
+                handCard,
+                targetPlayer,
+                target
+            }
         });
 
         this.hand.removeHandCard(params.id);

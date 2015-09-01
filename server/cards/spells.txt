@@ -1,10 +1,10 @@
 #name,#class,#cost,#target,#act,#actParam,#flags
-The Coin,148/735/141,0,n,none,[addMana:1],{uncollectable}
+The Coin,148/735/141,0,n,not-need,[addMana:1],{uncollectable}
 
 #Shaman
 Lightning Bolt,148/115/10,1,s,all,[dealDamage:3,overload:1]
 Earth Shock,148/127/77,1,s,all,[silence,dealDamage:1]
-Feral Spirit,148/136/214,3,s,none,[spawnCreatures:{Feral Spirit,2}]
+Feral Spirit,148/136/214,3,s,not-need,[spawnCreatures:{Feral Spirit,2}]
 
 #Druid
-Innervate,148/97/548,0,d,none,[gainCrystalsThisTurn:2]
+Innervate,148/97/548,0,d,not-need,[gainCrystalsThisTurn:2]

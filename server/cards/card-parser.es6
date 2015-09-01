@@ -1,3 +1,4 @@
+#!/usr/local/bin/node
 
 const fs = require('fs');
 const H = require('../namespace');
@@ -66,7 +67,8 @@ spellsLines.forEach(line => {
     if (line && !/^#/.test(line)) {
 
         // Feral Spirit,148/136/214,3,s,all[spawnCreatures:{feral_spirit,2}]
-        const rx = /^([^,]+),([^,]+),(\d),([a-z]{1,2}),([a-z]+),\[([^\]]+)\](?:,\{([^}]+)\})?/;
+        // Lightning Bolt,148/115/10,1,s,all,[dealDamage:3,overload:1]
+        const rx = /^([^,]+),([^,]+),(\d),([a-z]{1,2}),([a-z-]+),\[([^\]]+)\](?:,\{([^}]+)\})?/;
         const info = {};
 
         const details = line.match(rx);
@@ -86,11 +88,19 @@ spellsLines.forEach(line => {
 
         info.target = details[5];
 
-        [info.act, info.param] = details[6].split(':');
+        info.acts = details[6].split(',').map(act => {
+            var actName, param = '';
+            [actName, param] = act.split(':');
 
-        if (info.param.indexOf('{') === 0) {
-            info.param = info.param.substr(1, info.param.length - 2).split(',');
-        }
+            if (param && param.indexOf('{') === 0) {
+                param = param.substr(1, param.length - 2).split(',');
+            }
+
+            return {
+                actName,
+                param
+            };
+        });
 
         if (details[7]) {
             details[7].split(',').forEach(flag => {

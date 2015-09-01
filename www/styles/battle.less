@@ -671,42 +671,42 @@
   .hand5 .c5 { transform: rotate(16deg); }
 
   .hand6 .card { transform: rotate(-8deg); }
-  .hand6 .c1 { transform: rotate(-18deg); }
-  .hand6 .c2 { transform: rotate(-11deg); }
-  .hand6 .c3 { transform: rotate(-4deg); }
+  .hand6 .c1 { transform: rotate(-15deg); }
+  .hand6 .c2 { transform: rotate(-9deg); }
+  .hand6 .c3 { transform: rotate(-3deg); }
   .hand6 .c4 { transform: rotate(3deg); }
-  .hand6 .c5 { transform: rotate(10deg); }
-  .hand6 .c6 { transform: rotate(17deg); }
+  .hand6 .c5 { transform: rotate(9deg); }
+  .hand6 .c6 { transform: rotate(15deg); }
 
   .hand7 .card { transform: rotate(-8deg); }
-  .hand7 .c1 { transform: rotate(-18deg); }
-  .hand7 .c2 { transform: rotate(-12deg); }
-  .hand7 .c3 { transform: rotate(-6deg); }
+  .hand7 .c1 { transform: rotate(-15deg); }
+  .hand7 .c2 { transform: rotate(-10deg); }
+  .hand7 .c3 { transform: rotate(-5deg); }
   .hand7 .c4 { transform: rotate(0deg); }
-  .hand7 .c5 { transform: rotate(6deg); }
-  .hand7 .c6 { transform: rotate(12deg); }
-  .hand7 .c7 { transform: rotate(18deg); }
+  .hand7 .c5 { transform: rotate(5deg); }
+  .hand7 .c6 { transform: rotate(10deg); }
+  .hand7 .c7 { transform: rotate(15deg); }
 
   .hand8 .card { transform: rotate(-8deg); }
-  .hand8 .c1 { transform: rotate(-21deg); }
-  .hand8 .c2 { transform: rotate(-15deg); }
-  .hand8 .c3 { transform: rotate(-9deg); }
-  .hand8 .c4 { transform: rotate(-3deg); }
-  .hand8 .c5 { transform: rotate(3deg); }
-  .hand8 .c6 { transform: rotate(9deg); }
-  .hand8 .c7 { transform: rotate(15deg); }
-  .hand8 .c8 { transform: rotate(21deg); }
+  .hand8 .c1 { transform: rotate(-14deg); }
+  .hand8 .c2 { transform: rotate(-10deg); }
+  .hand8 .c3 { transform: rotate(-6deg); }
+  .hand8 .c4 { transform: rotate(-2deg); }
+  .hand8 .c5 { transform: rotate(2deg); }
+  .hand8 .c6 { transform: rotate(6deg); }
+  .hand8 .c7 { transform: rotate(10deg); }
+  .hand8 .c8 { transform: rotate(14deg); }
 
   .hand9 .card { transform: rotate(-8deg); }
-  .hand9 .c1 { transform: rotate(-20deg); }
-  .hand9 .c2 { transform: rotate(-15deg); }
-  .hand9 .c3 { transform: rotate(-10deg); }
-  .hand9 .c4 { transform: rotate(-5deg); }
+  .hand9 .c1 { transform: rotate(-16deg); }
+  .hand9 .c2 { transform: rotate(-12deg); }
+  .hand9 .c3 { transform: rotate(-8deg); }
+  .hand9 .c4 { transform: rotate(-4deg); }
   .hand9 .c5 { transform: rotate(0deg); }
-  .hand9 .c6 { transform: rotate(5deg); }
-  .hand9 .c7 { transform: rotate(10deg); }
-  .hand9 .c8 { transform: rotate(15deg); }
-  .hand9 .c9 { transform: rotate(20deg); }
+  .hand9 .c6 { transform: rotate(4deg); }
+  .hand9 .c7 { transform: rotate(8deg); }
+  .hand9 .c8 { transform: rotate(12deg); }
+  .hand9 .c9 { transform: rotate(16deg); }
 
   .hand10 .card { transform: rotate(-8deg); }
   .hand10 .c1 { transform: rotate(-18deg); }
@@ -895,6 +895,35 @@
         background: url("../textures/starting-hand-confirm.png");
         pointer-events: none;
       }
+    }
+  }
+
+  @keyframes bg-offset {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 -107px; }
+  }
+
+  .targeting {
+    position: absolute;
+    display: none;
+    bottom: 190px;
+    left: 618px;
+    width: 47px;
+    height: 400px;
+    background: url("../textures/targeting.png");
+    animation: bg-offset linear 4s infinite;
+
+    transform: rotate(0deg);
+    transform-origin: 50% 100%;
+
+    &:after {
+      position: absolute;
+      content: "";
+      top: -49px;
+      left: -16px;
+      width: 78px;
+      height: 32px;
+      background: url("../textures/targeting-arrow.png");
     }
   }
 

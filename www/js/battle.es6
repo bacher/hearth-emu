@@ -8,6 +8,7 @@ new Screen({
         render($app, 'battle');
 
         var dragging = false;
+        var heroTargeting = false;
         var $dragCard;
 
         const $cardPreview = $('<DIV>')
@@ -15,6 +16,8 @@ new Screen({
             .append($('<IMG>'))
             .appendTo('.hand.my')
             .hide();
+
+        const $dragAim = $('<div>').addClass('targeting').appendTo($app);
 
         $app
             .on('click', '.hand.my .card.available', e => {
@@ -27,22 +30,6 @@ new Screen({
                     send('get-targets', {
                         'card-id': $card.data('id')
                     });
-                }
-            })
-            .on('click', '.creatures.op .creature.purpose', e => {
-
-                if (hbe.battleData.my.active) {
-                    const $myCreature = $('.creatures.my .creature.selected');
-
-                    if ($myCreature.length) {
-                        const $enemyCreature = $(e.currentTarget);
-
-                        send('hit', {
-                            my: $myCreature.data('id'),
-                            op: $enemyCreature.data('id')
-                        });
-                    }
-
                 }
             })
             .on('click', '.end-turn', () => {
@@ -104,45 +91,122 @@ new Screen({
                     return;
                 }
 
+                const targetType = $card.data('target');
+
                 dragging = true;
 
-                $('.battle').addClass('dragging');
+                if (targetType === 'not-need') {
+                    $('.battle').addClass('dragging');
 
-                $dragCard = $card.clone();
+                    $dragCard = $card.clone();
 
-                $dragCard.data('linked-card', $card[0]);
+                    $dragCard.data('linked-card', $card[0]);
 
-                $dragCard.addClass('card-drag');
+                    $dragCard.addClass('card-drag');
 
-                $dragCard.appendTo('.battle');
+                    $dragCard.appendTo('.battle');
+
+                } else {
+                    send('get-targets', {
+                        'card-id': $card.data('id')
+                    });
+
+                    heroTargeting = true;
+
+                    $dragAim.data('linked-card', $card[0]);
+
+                    $dragAim.show();
+                }
 
                 $card.hide();
+
             })
             .on('mousemove', e => {
-                 if ($dragCard) {
-                     $dragCard.css({
-                         top: e.pageY - 70,
-                         left: e.pageX - 50
-                     });
-                 }
-            })
-            .on('mouseup', e => {
-                if ($dragCard) {
 
-                    console.log(e);
+                if (dragging) {
 
-                    if ($(e.target).closest('.battleground').length) {
-                        send('play-card', {
-                            id: $dragCard.data('id')
-                        });
+                    if (heroTargeting) {
+
+                        const heroPos = {
+                            x: 643,
+                            y: 528
+                        };
+
+                        const dX = heroPos.x - e.pageX;
+                        const dY = heroPos.y - e.pageY;
+                        const distance = Math.sqrt(dX * dX + dY * dY);
+
+                        let angle = Math.atan(dX / dY);
+
+                        if (dY < 0) {
+                            angle = angle + Math.PI;
+                        }
+
+                        $dragAim
+                            .height(distance - 60)
+                            .css('transform', 'rotate(' + -angle + 'rad)');
 
                     } else {
-                        $($dragCard.data('linked-card')).show();
+                        $dragCard.css({
+                            top: e.pageY - 70,
+                            left: e.pageX - 50
+                        });
+                    }
+                }
+            })
+            .on('mouseup', e => {
+                if (dragging) {
+
+                    const $target = $(e.target);
+
+                    if (heroTargeting) {
+                        const $targetMinion = $target.closest('.creature.purpose');
+
+                        if ($targetMinion.length) {
+
+                            const $myCard = $($dragAim.data('linked-card'));
+
+                            send('play-card', {
+                                id: $myCard.data('id'),
+                                targetSide: 'op', //FIXME
+                                target: $targetMinion.data('id')
+                            });
+
+                            //const $myCreature = $('.creatures.my .creature.selected');
+                            //
+                            //if ($myCreature.length) {
+                            //    const $enemyCreature = $(e.currentTarget);
+                            //
+                            //    send('hit', {
+                            //        my: $myCreature.data('id'),
+                            //        op: $enemyCreature.data('id')
+                            //    });
+                            //}
+
+                        } else {
+                            $($dragAim.data('linked-card')).show();
+                        }
+
+                        $dragAim.hide();
+                        heroTargeting = false;
+
+                    } else {
+                        if ($target.closest('.battleground').length) {
+                            send('play-card', {
+                                id: $dragCard.data('id')
+                            });
+
+                        } else {
+                            $($dragCard.data('linked-card')).show();
+                        }
+
+                        $dragCard.remove();
+                        $dragCard = null;
                     }
 
                     dragging = false;
-                    $dragCard.remove();
-                    $dragCard = null;
+
+                    $('.purpose').removeClass('purpose');
 
                     $('.battle').removeClass('dragging');
                 }
