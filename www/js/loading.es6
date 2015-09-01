@@ -12,21 +12,55 @@ new H.Screen({
         $.ajax({
             url: 'textures/textures.json'
         }).then(data => {
+
+            var loaded = 0;
+            var bad = 0;
+            var all = data.length - 1;
+
             data.forEach(imageName => {
                 if (imageName) {
+
                     const img = new Image();
 
                     img.onload = () => {
-
+                        loaded++;
+                        check();
                     };
 
                     img.onerror = () => {
-
+                        bad++;
+                        check();
                     };
 
                     img.src = 'textures/' + imageName;
                 }
             });
+
+            setTimeout(() => {
+                onLoaded();
+            }, 2000);
+
+            function check() {
+                if (all === loaded + bad) {
+                    onLoaded();
+                }
+            }
+
+            var alreadyCalled = false;
+
+            function onLoaded() {
+                if (alreadyCalled) return;
+
+                alreadyCalled = true;
+
+                if (H.checkParam('gobattle')) {
+                    H.activateScreen('waiting-opponent');
+                } else if (window.location.hash === '#collection') {
+                    H.activateScreen('collection');
+                } else {
+                    H.activateScreen('main-menu');
+                }
+            }
         });
 
         setTimeout(() => {
@@ -35,16 +69,6 @@ new H.Screen({
             $app.find('.label').addClass('loaded');
 
         }, 500);
-
-        setTimeout(() => {
-            if (H.checkParam('gobattle')) {
-                H.activateScreen('waiting-opponent');
-            } else if (window.location.hash === '#collection') {
-                H.activateScreen('collection');
-            } else {
-                H.activateScreen('main-menu');
-            }
-        }, 1000);
 
     }
 });

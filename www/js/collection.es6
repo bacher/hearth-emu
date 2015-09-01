@@ -35,7 +35,7 @@ new H.Screen({
 
                 const deck = _.find(decks, deck => deck.id === id);
 
-                switchMode(deck, $deck);
+                switchMode(deck);
             })
             .on('click', '.card:not(.lock)', e => {
                 if (activeDeck && activeDeck.cards.length < 30) {
@@ -117,6 +117,8 @@ new H.Screen({
                 });
 
                 saveDecks();
+
+                drawDecks();
 
                 switchMode(decks[decks.length - 1]);
             })
@@ -253,7 +255,7 @@ new H.Screen({
             }
         }
 
-        function switchMode(deck, $deck) {
+        function switchMode(deck) {
             heroMode = !!deck;
             $('.collection').toggleClass('hero-mode', !!deck);
 
@@ -262,6 +264,7 @@ new H.Screen({
             if (deck) {
                 filterCards();
 
+                const $deck = $('.deck[data-id="' + deck.id + '"]');
                 const $deckInfo = $deck.clone();
                 $deckInfo.append($('<INPUT>').addClass('label-edit').val($deck.find('.label').text()));
 
