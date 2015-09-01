@@ -290,45 +290,48 @@
   }
 
   .card {
+    position: relative;
     display: inline-block;
     margin-bottom: 25px;
-
 
     .img {
       width: 160px;
       height: 221px;
     }
 
-    &:after {
-      display: block;
+    &:hover .glow {
       position: absolute;
-      content: '';
-      margin-top: -9px;
-      margin-left: 53px;
+      top: 12px;
+      left: 5px;
+      width: 151px;
+      height: 203px;
+      background: url("../textures/card-white-glow.png");
+    }
+
+    &:before {
+      display: block;
+      content: "";
       width: 55px;
       height: 30px;
+      margin: 212px 0 -242px 51px;
       background: url("../textures/collection-card-modificator_x2.png");
     }
 
-    &.one:after {
+    &.one:before {
       display: block;
-      position: absolute;
-      content: '';
-      margin-top: -9px;
-      margin-left: 53px;
+      content: "";
       width: 55px;
       height: 30px;
+      margin: 212px 0 -242px 51px;
       background: url("../textures/collection-card-modificator_x1.png");
     }
 
-    &.lock:after {
+    &.lock:before {
       display: block;
-      position: absolute;
-      content: '';
-      margin-top: -9px;
-      margin-left: 53px;
+      content: "";
       width: 55px;
       height: 30px;
+      margin: 215px 0 -245px 51px;
       background: url("../textures/collection-card-modificator_lock.png");
     }
   }
