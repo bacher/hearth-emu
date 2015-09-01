@@ -53,25 +53,23 @@
     left: 3px;
   }
 
-  .hand {
 
-    &.op {
-      //transform: scale(0.94);
-      //top: -92px;
 
-      .hand-helper {
-        top: 97px;
-        left: 16px;
-      }
+  .hand-helper-zone {
+    position: absolute;
+    top: -30px;
+    left: 322px;
+    width: 246px;
+    height: 49px;
 
-      &:hover .hand-helper {
-        display: block;
-      }
+    &:hover .hand-helper {
+      display: block;
     }
+  }
 
-    &.my {
-      bottom: -49px;
-    }
+  .hand-helper {
+    top: 33px;
+    left: -26px;
   }
 
   .creatures.my .creature.selected {
