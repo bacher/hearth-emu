@@ -179,7 +179,7 @@ new Screen({
 
 function updateInGameData() {
 
-    $('.repick-layer').remove();
+    $('.shadow').remove();
 
     clearPurposes();
 
@@ -325,8 +325,14 @@ function updateInGameTargets(data) {
 function drawWelcome(data) {
     const $welcome = $('.welcome');
 
-    $welcome.find('.hero.my').addClass(hbe.CLASSES_L[data.my.clas]);
-    $welcome.find('.hero.op').addClass(hbe.CLASSES_L[data.op.clas]);
+    const myClass = hbe.CLASSES_L[data.my.clas];
+    const opClass = hbe.CLASSES_L[data.op.clas];
+
+    $welcome.find('.hero.my').addClass(myClass);
+    $welcome.find('.hero.op').addClass(opClass);
+
+    $('.hero-skill.my .pic').addClass(myClass);
+    $('.hero-skill.op .pic').addClass(opClass);
 
     $('.name.my').text(data.my.name);
     $('.name.op').text(data.op.name);

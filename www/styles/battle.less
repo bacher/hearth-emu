@@ -305,8 +305,8 @@
 
   .hero-skill {
     position: absolute;
-    width: 99px;
-    height: 105px;
+    width: 97px;
+    height: 104px;
 
     &.op {
       left: 236px;
@@ -338,32 +338,26 @@
       background: url("../textures/hero-skill-hover.png");
     }
 
-    .background {
+    .pic {
       position: absolute;
-      width: 61px;
-      height: 59px;
-      margin-top: 27px;
-      margin-left: 19px;
-      background: url("../textures/spell_shaman.png");
+      width: 97px;
+      height: 104px;
+
+      &.druid { background: url("../textures/hero-skills_druid.png"); }
+      &.shaman { background: url("../textures/hero-skills_shaman.png"); }
+      &.warrior { background: url("../textures/hero-skills_warrior.png"); }
+      &.warlock { background: url("../textures/hero-skills_warlock.png"); }
+      &.priest { background: url("../textures/hero-skills_priest.png"); }
+      &.rogue { background: url("../textures/hero-skills_rogue.png"); }
+      &.paladin { background: url("../textures/hero-skills_paladin.png"); }
+      &.mage { background: url("../textures/hero-skills_mage.png"); }
+      &.hunter { background: url("../textures/hero-skills_hunter.png"); }
     }
 
-    .frame {
-      position: absolute;
-      width: 99px;
-      height: 105px;
-      background: url("../textures/hero-skill-frame.png");
-    }
-
-    &.used {
-      .background {
-        display: none;
-      }
-
-      .frame {
-        background: url("../textures/hero-skill-inactive.png");
-        background-repeat: no-repeat;
-        background-position: center;
-      }
+    &.used .pic {
+      background: url("../textures/hero-skill-inactive.png");
+      background-repeat: no-repeat;
+      background-position: center;
     }
   }
 
@@ -460,7 +454,7 @@
     }
   }
 
-  .hero-skill .frame:hover .skill-helper {
+  .hero-skill:hover .skill-helper {
     display: block;
   }
 
