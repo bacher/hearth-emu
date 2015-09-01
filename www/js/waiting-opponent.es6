@@ -1,5 +1,5 @@
 
-new Screen({
+new H.Screen({
     gClass: 'w',
     name: 'waiting-opponent',
     hash: '',
@@ -20,9 +20,9 @@ new Screen({
             $anim.addClass('s' + step);
         }, 100);
 
-        window.socket = new WebSocket('ws://localhost:8081/');
+        H.socket = new WebSocket('ws://localhost:8081/');
 
-        socket.onopen = () => {
+        H.socket.onopen = () => {
 
             var name;
             const nameMatch = window.location.search.match(/[?&]name=([^&]*)/);
@@ -37,32 +37,32 @@ new Screen({
             send('join', {
                 name: name,
                 deck: {
-                    clas: hbe.CLASSES[deck.clas],
+                    clas: H.CLASSES[deck.clas],
                     cards: deck.cards
                 }
             });
         };
 
-        socket.onclose = event => {
+        H.socket.onclose = event => {
             if (!event.wasClean) {
                 console.log('Обрыв соединения');
                 console.warn('Code:', event.code);
 
-                if (checkParam('autoreload')) {
+                if (H.checkParam('autoreload')) {
                     setTimeout(() => {
                         window.location.reload();
                     }, 500);
                 }
 
-                hbe.activateScreen('connection-lost');
+                H.activateScreen('connection-lost');
             }
         };
 
-        socket.onerror = error => {
+        H.socket.onerror = error => {
             console.warn('Socket Error', error.message);
         };
 
-        socket.onmessage = event => {
+        H.socket.onmessage = event => {
 
             const message = JSON.parse(event.data);
 
@@ -73,34 +73,34 @@ new Screen({
 
             switch (msg) {
                 case 'battle-started':
-                    hbe.activateScreen('battle');
+                    H.activateScreen('battle');
 
-                    if (checkParam('endturn')) {
+                    if (H.checkParam('endturn')) {
                         setInterval(() => {
-                            if (hbe.battleData && hbe.battleData.my.active) {
+                            if (H.battleData && H.battleData.my.active) {
                                 send('end-turn');
                             }
                         }, 500);
                     }
 
-                    drawWelcome(data);
+                    H.drawWelcome(data);
 
                     break;
 
                 case 'cards-for-repick':
-                    drawCardsForPick(data);
+                    H.drawCardsForPick(data);
 
-                    if (checkParam('endturn')) {
+                    if (H.checkParam('endturn')) {
                         $('.repick-layer .confirm').click();
                     }
                     break;
 
                 case 'game-data':
-                    hbe.battleData = data;
-                    updateInGameData();
+                    H.battleData = data;
+                    H.updateInGameData();
                     break;
                 case 'targets':
-                    updateInGameTargets(data);
+                    H.updateInGameTargets(data);
                     break;
                 default:
                     console.warn('Unhandled Message:', msg);
@@ -108,8 +108,8 @@ new Screen({
         };
 
         $app.on('click', '.cancel', () => {
-            socket.close();
-            hbe.activateScreen('main-menu');
+            H.socket.close();
+            H.activateScreen('main-menu');
         });
     },
 

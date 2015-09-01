@@ -1,1 +1,1 @@
-# Hearthstone battle emulator
+# Hearthstone emulator

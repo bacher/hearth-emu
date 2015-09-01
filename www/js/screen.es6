@@ -1,5 +1,5 @@
 
-class Screen {
+H.Screen = class Screen {
     constructor(info) {
         this.gClass = info.gClass;
         this.name = info.name;
@@ -10,7 +10,7 @@ class Screen {
             this.hashLocation = '#' + (info.hash || '');
         }
 
-        hbe.screens.push(this);
+        H.screens.push(this);
     }
 
     draw() {
@@ -37,4 +37,4 @@ class Screen {
             window.location.hash = this.hashLocation;
         }
     }
-}
+};

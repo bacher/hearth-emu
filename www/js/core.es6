@@ -1,5 +1,5 @@
 
-const hbe = {
+const H = {
 
     CLASSES: {
         neutral: 0,
@@ -43,10 +43,10 @@ const hbe = {
     ]
 };
 
-hbe.screens = [];
-hbe.activeScreen = null;
+H.screens = [];
+H.activeScreen = null;
 
-hbe.activateScreen = function(name) {
+H.activateScreen = function(name) {
     var setScreen = null;
     this.screens.some(screen => {
         if (screen.name === name) {
@@ -66,28 +66,29 @@ hbe.activateScreen = function(name) {
     }
 };
 
-function checkParam(string) {
+H.checkParam = function(string) {
     return new RegExp('[?&]' + string + '(?:&|$)').test(window.location.search);
-}
+};
 
 function send(msg, data) {
     const packet = { msg, data: data || null };
 
     console.log('Client Message:', packet);
 
-    socket.send(JSON.stringify(packet));
+    H.socket.send(JSON.stringify(packet));
 }
 
 function render($cont, tmplName, params) {
     try {
         jade.render($cont[0], tmplName, params || {});
     } catch(e) {
+        /* jshint debug:true */
         debugger;
         throw e;
     }
 }
 
-if (checkParam('cursor')) {
+if (H.checkParam('cursor')) {
     const $cursor = $('<div>').addClass('cursor').appendTo('BODY');
 
     $('BODY')
@@ -96,7 +97,7 @@ if (checkParam('cursor')) {
             $cursor.css({
                 top: e.pageY - 4,
                 left: e.pageX - 15
-            })
+            });
         })
         .on('mousedown', () => {
             $cursor.addClass('down');

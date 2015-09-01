@@ -14,11 +14,7 @@ module.exports = {
 
     everyEndRound: param => {
 
-    },
-
-    everyStartRound: param => {
-
-    },
+    }
 
     //whenever
 

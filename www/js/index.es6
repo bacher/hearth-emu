@@ -1,4 +1,4 @@
 
 window.$app = $('#app');
 
-hbe.activateScreen('loading');
+H.activateScreen('loading');

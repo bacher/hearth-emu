@@ -1,7 +1,7 @@
 
 var socket = null;
 
-new Screen({
+new H.Screen({
     gClass: 'b',
     name: 'battle',
     draw: function() {
@@ -21,7 +21,7 @@ new Screen({
 
         $app
             .on('click', '.hand.my .card.available', e => {
-                if (hbe.battleData.my.active) {
+                if (H.battleData.my.active) {
                     const $card = $(e.currentTarget);
 
                     $('.selected').removeClass('selected');
@@ -33,12 +33,12 @@ new Screen({
                 }
             })
             .on('click', '.end-turn', () => {
-                if (hbe.battleData.my.active) {
+                if (H.battleData.my.active) {
                     send('end-turn');
                 }
             })
             .on('click', '.creatures.my .creature', e => {
-                if (hbe.battleData.my.active) {
+                if (H.battleData.my.active) {
                     var $creature = $(e.currentTarget);
 
                     $('.selected').removeClass('selected');
@@ -50,7 +50,7 @@ new Screen({
                 }
             })
             .on('click', '.avatar.op', () => {
-                if (hbe.battleData.my.active) {
+                if (H.battleData.my.active) {
 
                     const $myCreature = $('.creatures.my .creature.selected');
 
@@ -81,7 +81,7 @@ new Screen({
                 $cardPreview.hide();
             })
             .on('mousedown', '.card-wrap', e => {
-                if (!hbe.battleData.my.active) {
+                if (!H.battleData.my.active) {
                     return;
                 }
 
@@ -246,13 +246,13 @@ new Screen({
     }
 });
 
-function updateInGameData() {
+H.updateInGameData = function() {
 
     $('.shadow').remove();
 
     clearPurposes();
 
-    const game = hbe.battleData;
+    const game = H.battleData;
 
     $('.battle').toggleClass('active', game.my.active);
 
@@ -356,7 +356,7 @@ function clearPurposes() {
         .removeClass('purpose');
 }
 
-function updateInGameTargets(data) {
+H.updateInGameTargets = function(data) {
     const targets = data.targets;
 
     clearPurposes();
@@ -366,7 +366,7 @@ function updateInGameTargets(data) {
         if (targets.my) {
 
             if (targets.my.hero) {
-                $('.avatar.my').addClass('purpose')
+                $('.avatar.my').addClass('purpose');
             }
 
             if (targets.my.minions) {
@@ -379,7 +379,7 @@ function updateInGameTargets(data) {
         if (targets.op) {
 
             if (targets.op.hero) {
-                $('.avatar.op').addClass('purpose')
+                $('.avatar.op').addClass('purpose');
             }
 
             if (targets.op.minions) {
@@ -389,13 +389,13 @@ function updateInGameTargets(data) {
             }
         }
     }
-}
+};
 
-function drawWelcome(data) {
+H.drawWelcome = function(data) {
     const $welcome = $('.welcome');
 
-    const myClass = hbe.CLASSES_L[data.my.clas];
-    const opClass = hbe.CLASSES_L[data.op.clas];
+    const myClass = H.CLASSES_L[data.my.clas];
+    const opClass = H.CLASSES_L[data.op.clas];
 
     $welcome.find('.hero.my').addClass(myClass);
     $welcome.find('.hero.op').addClass(opClass);
@@ -405,9 +405,9 @@ function drawWelcome(data) {
 
     $('.name.my').text(data.my.name);
     $('.name.op').text(data.op.name);
-}
+};
 
-function drawCardsForPick(deckCards) {
+H.drawCardsForPick = function(deckCards) {
     $('.welcome').hide();
     $('.repick-layer').show();
     const $cards = $('.repick-layer .cards');
@@ -418,4 +418,4 @@ function drawCardsForPick(deckCards) {
 
         $cards.append($card);
     });
-}
+};

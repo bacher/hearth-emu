@@ -1,0 +1,30 @@
+{
+  "nonew": false,
+  "curly": true,
+  "latedef": "nofunc",
+  "noarg": true,
+  "trailing": true,
+  "noempty": true,
+  "eqeqeq": true,
+  "strict": false,
+  "undef": true,
+  "sub": true,
+  "bitwise": true,
+  "newcap": true,
+  "camelcase": true,
+  "esnext": true,
+
+  "browser": true,
+  "node": true,
+
+  "globals": {
+    "$": true,
+    "_": true,
+    "$app": true,
+    "H": true,
+    "jade": true,
+
+    "render": true,
+    "send": true
+  }
+}

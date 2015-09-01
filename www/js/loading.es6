@@ -1,5 +1,5 @@
 
-new Screen({
+new H.Screen({
     gClass: 'l',
     name: 'loading',
     hash: false,
@@ -37,12 +37,12 @@ new Screen({
         }, 500);
 
         setTimeout(() => {
-            if (checkParam('gobattle')) {
-                hbe.activateScreen('waiting-opponent');
+            if (H.checkParam('gobattle')) {
+                H.activateScreen('waiting-opponent');
             } else if (window.location.hash === '#collection') {
-                hbe.activateScreen('collection');
+                H.activateScreen('collection');
             } else {
-                hbe.activateScreen('main-menu');
+                H.activateScreen('main-menu');
             }
         }, 1000);
 

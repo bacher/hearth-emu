@@ -8,6 +8,3 @@ H.HandCard = class HandCard {
         this.base = info;
     }
 };
-
-
-

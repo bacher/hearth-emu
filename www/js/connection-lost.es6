@@ -1,5 +1,5 @@
 
-new Screen({
+new H.Screen({
     gClass: 'cl',
     name: 'connection-lost',
     hash: '',

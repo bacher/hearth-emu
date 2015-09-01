@@ -142,6 +142,7 @@ H.Battle = class Battle {
                         const opHero = player.enemy.hero;
 
                         if (opHero.hp <= my.attack) {
+                            console.log('DEATH');
                         } else {
                             opHero.hp -= my.attack;
                         }

@@ -21,9 +21,10 @@ H.Auras = class Auras {
         const base = object.getBaseData();
 
         this.list.forEach(aura => {
-            if (aura.affectSide && aura.affectSide !== object.player) {
-            } else if (aura.target && !(object instanceof aura.target)) {
-            } else {
+            if (
+                !(aura.affectSide && aura.affectSide !== object.player) &&
+                !(aura.target && !(object instanceof aura.target))
+            ) {
                 aura.effect(base);
             }
         });

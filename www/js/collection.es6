@@ -1,5 +1,5 @@
 
-new Screen({
+new H.Screen({
     gClass: 'c',
     name: 'collection',
     hash: 'collection',
@@ -50,7 +50,7 @@ new Screen({
 
                     switchMode(null);
                 } else {
-                    hbe.activateScreen('main-menu');
+                    H.activateScreen('main-menu');
                 }
             })
             .on('click', '.arrow.left', () => {
@@ -125,25 +125,25 @@ new Screen({
         $.ajax({
             url: '/cards.json'
         }).then(data => {
-            hbe.cards = {
+            H.cards = {
                 all: data.cards,
-                [hbe.CLASSES.neutral]: [],
-                [hbe.CLASSES.warrior]: [],
-                [hbe.CLASSES.shaman]: [],
-                [hbe.CLASSES.rogue]: [],
-                [hbe.CLASSES.paladin]: [],
-                [hbe.CLASSES.hunter]: [],
-                [hbe.CLASSES.druid]: [],
-                [hbe.CLASSES.warlock]: [],
-                [hbe.CLASSES.mage]: [],
-                [hbe.CLASSES.priest]: []
+                [H.CLASSES.neutral]: [],
+                [H.CLASSES.warrior]: [],
+                [H.CLASSES.shaman]: [],
+                [H.CLASSES.rogue]: [],
+                [H.CLASSES.paladin]: [],
+                [H.CLASSES.hunter]: [],
+                [H.CLASSES.druid]: [],
+                [H.CLASSES.warlock]: [],
+                [H.CLASSES.mage]: [],
+                [H.CLASSES.priest]: []
             };
 
-            hbe.cardsHash = {};
+            H.cardsHash = {};
 
             data.cards.forEach(card => {
-                hbe.cards[card.clas].push(card);
-                hbe.cardsHash[card.id] = card;
+                H.cards[card.clas].push(card);
+                H.cardsHash[card.id] = card;
             });
 
             drawCards();
@@ -151,16 +151,16 @@ new Screen({
 
         function drawCards() {
             const $cards = $('.cards');
-            const selectedClas = hbe.CLASSES[$('.tab.selected').data('clas')];
+            const selectedClas = H.CLASSES[$('.tab.selected').data('clas')];
 
-            const cardsPool = hbe.cards[selectedClas];
-            const drawCards = cardsPool.slice(page * 8, page * 8 + 8);
+            const cardsPool = H.cards[selectedClas];
+            const cards = cardsPool.slice(page * 8, page * 8 + 8);
 
             $('.arrow.left').toggle(page !== 0);
             $('.arrow.right').toggle(page * 8 + 8 < cardsPool.length);
 
             jade.render($cards[0], 'collection-cards', {
-                cards: drawCards
+                cards: cards
             });
 
             checkLimits();
@@ -232,7 +232,7 @@ new Screen({
         function updateDeckCards() {
             const $cards = $('.deck-cards');
 
-            render($cards, 'card-lines', { cards: activeDeck.cards.map(cardId => hbe.cardsHash[cardId]) });
+            render($cards, 'card-lines', { cards: activeDeck.cards.map(cardId => H.cardsHash[cardId]) });
         }
 
         function saveDecks() {

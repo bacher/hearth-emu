@@ -1,5 +1,5 @@
 
-new Screen({
+new H.Screen({
     gClass: 'm',
     name: 'main-menu',
 
@@ -8,10 +8,10 @@ new Screen({
 
         $app
             .on('click', '.play', () => {
-                hbe.activateScreen('waiting-opponent');
+                H.activateScreen('waiting-opponent');
             })
             .on('click', '.my-collection', () => {
-                hbe.activateScreen('collection');
+                H.activateScreen('collection');
             });
     }
 });

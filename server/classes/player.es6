@@ -33,7 +33,7 @@ H.Player = class Player extends EventEmitter {
             .on('close', () => {
                 this.flags['disconnected'] = true;
 
-                this.emit('disconnect')
+                this.emit('disconnect');
             });
     }
 
@@ -75,7 +75,7 @@ H.Player = class Player extends EventEmitter {
 
                 }
             } else {
-                this.warn('Inactive Client Message:', msg)
+                this.warn('Inactive Client Message:', msg);
             }
         } else if (msg === 'join') {
             this.userName = data.name;
@@ -130,10 +130,12 @@ H.Player = class Player extends EventEmitter {
                 this.hand.addCard(card);
             } else {
                 // Burn card
+                console.log('IMPL!');
             }
 
         } else {
             // Make damage
+            console.log('IMPL!');
         }
     }
 
