@@ -331,8 +331,8 @@ function drawWelcome(data) {
     $welcome.find('.hero.my').addClass(myClass);
     $welcome.find('.hero.op').addClass(opClass);
 
-    $('.hero-skill.my .pic').addClass(myClass);
-    $('.hero-skill.op .pic').addClass(opClass);
+    $('.hero-skill.my').addClass(myClass);
+    $('.hero-skill.op').addClass(opClass);
 
     $('.name.my').text(data.my.name);
     $('.name.op').text(data.op.name);
