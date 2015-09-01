@@ -187,9 +187,6 @@ function updateInGameData() {
 
     $('.battle').toggleClass('active', game.my.active);
 
-    $('.name.op').text(game.op.name);
-    $('.name.my').text(game.my.name);
-
     if (!game.my.active) {
         $('.selected').removeClass('selected');
     }
@@ -215,7 +212,6 @@ function updateInGameData() {
 
         $hand.append($cardWrapper);
     });
-
 
 
     $('.hero-skill.my')
@@ -326,7 +322,19 @@ function updateInGameTargets(data) {
     }
 }
 
+function drawWelcome(data) {
+    const $welcome = $('.welcome');
+
+    $welcome.find('.hero.my').addClass(hbe.CLASSES_L[data.my.clas]);
+    $welcome.find('.hero.op').addClass(hbe.CLASSES_L[data.op.clas]);
+
+    $('.name.my').text(data.my.name);
+    $('.name.op').text(data.op.name);
+}
+
 function drawCardsForPick(deckCards) {
+    $('.welcome').hide();
+    $('.repick-layer').show();
     const $cards = $('.repick-layer .cards');
 
     deckCards.forEach(deckCard => {

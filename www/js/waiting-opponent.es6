@@ -81,6 +81,8 @@ new Screen({
                         }, 500);
                     }
 
+                    drawWelcome(data);
+
                     break;
 
                 case 'cards-for-repick':

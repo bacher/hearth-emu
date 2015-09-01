@@ -23,9 +23,29 @@ H.Battle = class Battle {
     }
 
     _start() {
-        this.sendMessage('battle-started');
+        const p1Info = {
+            name: this.p1.joinParams.name,
+            clas: this.p1.hero.clas
+        };
 
-        this._sendCardsForRepick();
+        const p2Info = {
+            name: this.p2.joinParams.name,
+            clas: this.p2.hero.clas
+        };
+
+        this.p1.sendMessage('battle-started', {
+            my: p1Info,
+            op: p2Info
+        });
+
+        this.p2.sendMessage('battle-started', {
+            my: p2Info,
+            op: p1Info
+        });
+
+        setTimeout(() => {
+            this._sendCardsForRepick();
+        }, 1000);
     }
 
     _sendCardsForRepick() {
@@ -39,18 +59,18 @@ H.Battle = class Battle {
     }
 
     _start2() {
-        this.players[0].hero.addCrystal();
-        this.players[0].hero.restoreMana();
-        this.players[0].activate();
-        this.players[0].drawCard();
-        this.players[0].drawCard();
-        this.players[0].drawCard();
+        this.p1.hero.addCrystal();
+        this.p1.hero.restoreMana();
+        this.p1.activate();
+        this.p1.drawCard();
+        this.p1.drawCard();
+        this.p1.drawCard();
 
-        this.players[1].drawCard();
-        this.players[1].drawCard();
-        this.players[1].drawCard();
-        this.players[1].drawCard();
-        this.players[1].hand.addCoinCard();
+        this.p2.drawCard();
+        this.p2.drawCard();
+        this.p2.drawCard();
+        this.p2.drawCard();
+        this.p2.hand.addCoinCard();
 
         this.sendGameData();
     }
