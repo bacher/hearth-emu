@@ -1,5 +1,5 @@
 
-each card in cards
-   .card-line(data-id=card.id)
-      SPAN.cost= card.cost
-      SPAN.name= card.name
+each cardInfo in cards
+   .card-line(data-id=cardInfo.card.id,class=cardInfo.x2?'x2':'')
+      SPAN.cost= cardInfo.card.cost
+      SPAN.name= cardInfo.card.name

@@ -10,7 +10,7 @@ new H.Screen({
         const $stone = $app.find('.stone');
 
         $.ajax({
-            url: 'textures/textures.json'
+            url: 'textures.json'
         }).then(data => {
 
             var loaded = 0;
@@ -18,22 +18,19 @@ new H.Screen({
             var all = data.length - 1;
 
             data.forEach(imageName => {
-                if (imageName) {
+                const img = new Image();
 
-                    const img = new Image();
+                img.onload = () => {
+                    loaded++;
+                    check();
+                };
 
-                    img.onload = () => {
-                        loaded++;
-                        check();
-                    };
+                img.onerror = () => {
+                    bad++;
+                    check();
+                };
 
-                    img.onerror = () => {
-                        bad++;
-                        check();
-                    };
-
-                    img.src = 'textures/' + imageName;
-                }
+                img.src = 'textures/' + imageName;
             });
 
             setTimeout(() => {

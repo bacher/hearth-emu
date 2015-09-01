@@ -93,6 +93,16 @@
     width: 232px;
     height: 647px;
     background: url("../textures/deck-right-panel.jpg");
+
+    &.full:before {
+      position: absolute;
+      content: "";
+      top: 62px;
+      left: 12px;
+      width: 176px;
+      height: 587px;
+      background: url("../textures/deck-cards-glow.jpg");
+    }
   }
 
   .deck-info .deck {
@@ -103,6 +113,28 @@
 
   .hero-mode .hero-right-panel {
     display: block;
+  }
+
+  .card-count {
+    position: absolute;
+    top: 651px;
+    left: 41px;
+    color: #FFF;
+    font-family: "Belwe Bold", Times, serif;
+    letter-spacing: 0.3px;
+    text-align: center;
+
+    .number {
+      font-weight: bold;
+      font-size: 18px;
+      text-shadow: 0 0 1px #000, 0 0 3px #000;
+    }
+
+    .label {
+      margin-top: -3px;
+      font-size: 11px;
+      text-shadow: 0 0 1px #000, 0 0 1px #000;
+    }
   }
 
   .btn-back {
@@ -188,15 +220,28 @@
 
   .deck-cards {
     position: absolute;
-    top: 88px;
+    top: 73px;
     left: 19px;
+    height: 566px;
+    overflow: scroll;
   }
 
   .card-line {
+    position: relative;
     width: 159px;
     height: 27px;
     background: url("../textures/card-line.png");
     cursor: pointer;
+
+    &.x2:after {
+      position: absolute;
+      content: "";
+      top: 4px;
+      right: 4px;
+      width: 17px;
+      height: 17px;
+      background: url("../textures/card-line-x2.png");
+    }
 
     .cost, .name {
       line-height: 28px;

@@ -38,8 +38,10 @@ new H.Screen({
                 switchMode(deck);
             })
             .on('click', '.card:not(.lock)', e => {
-                if (activeDeck && activeDeck.cards.length < 30) {
-                    activeDeck.cards.push($(e.currentTarget).data('id'));
+                if (activeDeck && activeDeck.cardIds.length < 30) {
+                    activeDeck.cardIds.push($(e.currentTarget).data('id'));
+
+                    sortCards(activeDeck);
 
                     saveDecks();
 
@@ -73,8 +75,8 @@ new H.Screen({
 
                 const id = $cardLine.data('id');
 
-                const index = activeDeck.cards.indexOf(id);
-                activeDeck.cards.splice(index, 1);
+                const index = activeDeck.cardIds.indexOf(id);
+                activeDeck.cardIds.splice(index, 1);
 
                 saveDecks();
 
@@ -112,7 +114,7 @@ new H.Screen({
                 decks.push({
                     label: 'Custom ' + clas[0].toUpperCase() + clas.substr(1),
                     clas: clas,
-                    cards: [],
+                    cardIds: [],
                     id: Math.floor(Math.random() * 10000)
                 });
 
@@ -243,7 +245,7 @@ new H.Screen({
                     const $card = $(this);
                     const id = $card.data('id');
 
-                    const alreadyInDeck = activeDeck.cards.filter(cardId => cardId === id).length;
+                    const alreadyInDeck = activeDeck.cardIds.filter(cardId => cardId === id).length;
 
                     $card.removeClass('lock one');
                     if (alreadyInDeck >= 2) {
@@ -300,7 +302,33 @@ new H.Screen({
         function updateDeckCards() {
             const $cards = $('.deck-cards');
 
-            render($cards, 'card-lines', { cards: activeDeck.cards.map(cardId => H.cardsHash[cardId]) });
+            const cards = [];
+
+            const ids = activeDeck.cardIds;
+
+            for (var i = 0; i < ids.length; ++i) {
+                const id = ids[i];
+
+                const card = H.cardsHash[id];
+                var multiplyer = 1;
+
+                if (id === ids[i + 1]) {
+                    multiplyer = 2;
+                    i++;
+                }
+
+                cards.push({
+                    card,
+                    x2: multiplyer === 2
+                });
+
+            }
+
+            render($cards, 'card-lines', { cards: cards });
+
+            $('.card-count .number').text(activeDeck.cardIds.length + '/30');
+
+            $('.hero-right-panel').toggleClass('full', activeDeck.cardIds.length === 30);
         }
 
         function saveDecks() {
@@ -309,7 +337,25 @@ new H.Screen({
 
         function removeDeck(removeId) {
             decks = decks.filter(deck => deck.id !== removeId);
+            saveDecks();
             drawDecks();
+        }
+
+        function sortCards(deck) {
+            deck.cardIds = deck.cardIds.sort((cardId1, cardId2) => {
+                if (cardId1 === cardId2) {
+                    return 0;
+                }
+
+                const card1 = H.cardsHash[cardId1];
+                const card2 = H.cardsHash[cardId2];
+
+                if (card1.cost !== card2.cost) {
+                    return card1.cost - card2.cost;
+                } else {
+                    return card1.name.localeCompare(card2.name);
+                }
+            });
         }
 
     }

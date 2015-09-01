@@ -10,6 +10,7 @@
 "card-glow-large.png",
 "card-glow-medium.png",
 "card-glow.png",
+"card-line-x2.png",
 "card-line.png",
 "card-white-glow.png",
 "choose.png",
@@ -123,6 +124,7 @@
 "create-deck-herow.jpg",
 "create-deck-herowl.jpg",
 "create-deck_1280.jpg",
+"deck-cards-glow.jpg",
 "deck-hero-druid.jpg",
 "deck-hero-hunter.jpg",
 "deck-hero-mage.jpg",
@@ -141,6 +143,5 @@
 "waiting-opponent-animation4.jpg",
 "waiting-opponent-animation5.jpg",
 "waiting-opponent-animation6.jpg",
-"waiting-opponent.jpg",
-""
+"waiting-opponent.jpg"
 ]
