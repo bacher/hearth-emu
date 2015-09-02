@@ -11,14 +11,14 @@
 
     </div>
 
-    <form class="card-details">
+    <div class="card-details">
         <div class="card-info">
             <img class="card-pic">
             <label>ID: <span class="id">NEW_CARD</span></label>
-            <label>Picture:<input class="pic" required></label>
-            <label>Name:<input class="name" required></label>
+            <label>Picture:<input class="pic"></label>
+            <label>Name:<input class="name"></label>
             <label>Class:
-                <select class="clas" required>
+                <select class="clas">
                     <option value="0">Neutral</option>
                     <option value="1">Warrior</option>
                     <option value="2">Shaman</option>
@@ -31,13 +31,13 @@
                     <option value="9">Priest</option>
                 </select>
             </label>
-            <label>Cost:<input class="cost" required></label>
+            <label>Cost:<input class="cost"></label>
             <label>Flags:<input class="card-flags"></label>
             <a class="flag-suggest" data-for="card-flags" href="#">uncollectable</a>
             <label>Card Type:
-                <select class="type" required>
+                <select class="type">
                     <option value="1">Minion</option>
-                    <option value="2">Speel</option>
+                    <option value="2">Spell</option>
                     <option value="3">Weapon</option>
                     <option value="4">Trap</option>
                 </select>
@@ -48,13 +48,13 @@
 
         <div class="minion-info">
             <div>Minion:</div>
-            <label>Attack/MaxHP:<input class="attack-maxhp" required></label>
+            <label>Attack/MaxHP:<input class="attack-maxhp"></label>
             <label>Flags:<input class="minion-flags"></label>
             <a href="#" class="flag-suggest" data-for="minion-flags">taunt</a>
             <a href="#" class="flag-suggest" data-for="minion-flags">charge</a>
             <a href="#" class="flag-suggest" data-for="minion-flags">cant-attack</a>
             <label>Race:
-                <select class="race" required>
+                <select class="race">
                     <option value="0">General</option>
                     <option value="1">Beast</option>
                     <option value="2">Demon</option>
@@ -75,9 +75,20 @@
             </div>
         </div>
 
+        <div class="spell-info">
+            <div>Spell:</div>
+            <label>Target:<input class="target"></label>
+            <div class="acts">Acts:
+                <label>1:<input class="act" require></label>
+                <label>2:<input class="act"></label>
+                <label>3:<input class="act"></label>
+                <label>4:<input class="act"></label>
+            </div>
+        </div>
+
         <button class="new-btn">New</button>
         <button class="save-btn">Save</button>
-    </form>
+    </div>
 
     <div style="display: none;">
         <div id="tpl" class="card">

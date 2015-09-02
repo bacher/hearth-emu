@@ -60,7 +60,7 @@ const server = app.listen(8088, function () {
             }
         });
 
-        fs.writeFile('../server/cards/minions.json', JSON.stringify(cards, null, ' '));
+        fs.writeFile('../server/cards/minions.json', JSON.stringify(cards, null, '  '));
         console.log('Card id:%s %s.', updatedCard.id, status);
     });
 });

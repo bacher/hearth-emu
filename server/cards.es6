@@ -2,13 +2,9 @@
 const H = require('./namespace');
 
 
-var cards = [];
+const cardsRaw = require('./cards/minions.json');
 
-['./cards/minions.json', './cards/weapons.json', './cards/spells.json'].forEach(packName => {
-    const cardsRaw = require(packName);
-
-    cards = cards.concat(cardsRaw.map(card => new H.Card(card)));
-});
+const cards = cardsRaw.map(card => new H.Card(card));
 
 const cardsHash = {};
 

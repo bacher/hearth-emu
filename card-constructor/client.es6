@@ -12,6 +12,7 @@ const $cards = $('.cards');
 const $details = $('.card-details');
 
 const $minion = $details.find('.minion-info');
+const $spell = $details.find('.spell-info');
 
 var maxCardId;
 var cards = null;
@@ -50,6 +51,9 @@ $.ajax('/cards.json').then(data => {
         $details.find('.type').val(card.type);
         $details.find('.card-flags').val(card.flags && card.flags.join(','));
 
+        $minion.hide();
+        $spell.hide();
+
         if (card.type === CARD_TYPES.minion) {
             $minion.show();
 
@@ -63,15 +67,26 @@ $.ajax('/cards.json').then(data => {
             for (var prop in card.minion.events) {
                 $minion.find('.event[data-type=' + prop + ']').val(card.minion.events[prop]);
             }
-        } else {
-            $minion.hide();
+        } else if (card.type === CARD_TYPES.spell) {
+            $spell.show();
+
+            $spell.find('.target').val(card.target);
+
+            $spell.find('.act').val('');
+
+            card.acts.forEach((act, i) => {
+                $spell.find('.act').eq(i).val(act);
+            });
         }
 
     });
 
     $details
         .on('change', '.type', () => {
-            $minion.toggle($details.find('.type').val() === CARD_TYPES.minion);
+            const type = Number($details.find('.type').val());
+
+            $minion.toggle(type === CARD_TYPES.minion);
+            $spell.toggle(type === CARD_TYPES.spell);
         })
         .on('change', '.pic', () => {
             $details.find('.card-pic').attr('src', $details.find('.pic').val().trim());
@@ -90,10 +105,11 @@ $.ajax('/cards.json').then(data => {
             $details.find('.type').val(1);
 
             $details.find('.card-pic').attr('src', '');
+
+            $minion.show();
+            $spell.hide();
         })
-        .on('submit', e => {
-            e.preventDefault();
-            e.stopPropagation();
+        .on('click', '.save-btn', () => {
 
             var isNew = false;
 
@@ -132,6 +148,7 @@ $.ajax('/cards.json').then(data => {
                 $details.find('.id').text(card.id);
             }
 
+
             if (card.type === CARD_TYPES.minion) {
                 const attackMaxhpPart = $minion.find('.attack-maxhp').val().split(/[, \/]/);
 
@@ -161,6 +178,18 @@ $.ajax('/cards.json').then(data => {
                 if (de) card.minion.events['death'] = de;
                 if (au) card.minion.events['aura'] = au;
                 if (cu) card.minion.events['custom'] = cu;
+
+            } else if (card.type === CARD_TYPES.spell) {
+
+                card.target = $spell.find('.target').val() || 'not-need';
+
+                card.acts = $spell.find('.act').map((i, act) => {
+                    const text = $(act).val();
+
+                    if (text) {
+                        return text.trim();
+                    }
+                }).get();
             }
 
             $.ajax({
@@ -188,5 +217,7 @@ $.ajax('/cards.json').then(data => {
                 drawCards();
             });
         });
+
+    $details.find('.new-btn').click();
 
 });
