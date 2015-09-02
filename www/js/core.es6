@@ -102,7 +102,7 @@ H.loadDecks = function() {
 
 H.saveDecks = function() {
     window.localStorage.setItem('decks', JSON.stringify(H.decks));
-    window.localStorage.setItem('activeDeckId', H.activeDeck.id);
+    window.localStorage.setItem('activeDeckId', H.activeDeck && H.activeDeck.id || null);
 };
 
 H.getDeckById = function(id) {

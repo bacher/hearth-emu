@@ -1,5 +1,11 @@
 /.idea/
 
+/card-constructor/node_modules/
+/card-constructor/bower_components/
+/card-constructor/**/*.js
+/card-constructor/**/*.js.map
+/card-constructor/**/*.css
+
 /server/node_modules/
 /server/**/*.js
 /server/**/*.js.map

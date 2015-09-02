@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hearthstone Card Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="cards">
+
+    </div>
+
+    <form class="card-details">
+        <div class="card-info">
+            <img class="card-pic">
+            <label>ID: <span class="id">NEW_CARD</span></label>
+            <label>Picture:<input class="pic" required></label>
+            <label>Name:<input class="name" required></label>
+            <label>Class:
+                <select class="clas" required>
+                    <option value="0">Neutral</option>
+                    <option value="1">Warrior</option>
+                    <option value="2">Shaman</option>
+                    <option value="3">Rogue</option>
+                    <option value="4">Paladin</option>
+                    <option value="5">Hunter</option>
+                    <option value="6">Druid</option>
+                    <option value="7">Warlock</option>
+                    <option value="8">Mage</option>
+                    <option value="9">Priest</option>
+                </select>
+            </label>
+            <label>Cost:<input class="cost" required></label>
+            <label>Flags:<input class="card-flags"></label>
+            <a class="flag-suggest" data-for="card-flags" href="#">uncollectable</a>
+            <label>Card Type:
+                <select class="type" required>
+                    <option value="1">Minion</option>
+                    <option value="2">Speel</option>
+                    <option value="3">Weapon</option>
+                    <option value="4">Trap</option>
+                </select>
+            </label>
+        </div>
+
+        <br>
+
+        <div class="minion-info">
+            <div>Minion:</div>
+            <label>Attack/MaxHP:<input class="attack-maxhp" required></label>
+            <label>Flags:<input class="minion-flags"></label>
+            <a href="#" class="flag-suggest" data-for="minion-flags">taunt</a>
+            <a href="#" class="flag-suggest" data-for="minion-flags">charge</a>
+            <a href="#" class="flag-suggest" data-for="minion-flags">cant-attack</a>
+            <label>Race:
+                <select class="race" required>
+                    <option value="0">General</option>
+                    <option value="1">Beast</option>
+                    <option value="2">Demon</option>
+                    <option value="3">Dragon</option>
+                    <option value="4">Mechanical</option>
+                    <option value="5">Murloc</option>
+                    <option value="6">Pirate</option>
+                    <option value="7">Totem</option>
+                </select>
+            </label>
+            <div class="events">Events
+                <label>Every turn:<input class="event" data-type="every-turn"></label>
+                <label>Battlecry:<input class="event" data-type="cry"></label>
+                <label>Deathrattle:<input class="event" data-type="death"></label>
+                <label>Aura:<input class="event" data-type="aura"></label>
+                <label>Custom:<input class="event" data-type="custom"></label>
+            </div>
+        </div>
+
+        <button class="new-btn">New</button>
+        <button class="save-btn">Save</button>
+    </form>
+
+    <div style="display: none;">
+        <div id="tpl" class="card">
+            <img class="card-pic">
+        </div>
+    </div>
+
+    <script src="bower_components/lodash/lodash.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>

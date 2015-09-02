@@ -118,10 +118,11 @@ new H.Screen({
                 $('.create-deck-screen').removeClass('show');
 
                 const clas = $('.hero.selected').data('clas');
+                const className = H.CLASSES_L[clas];
 
                 H.decks.push({
-                    label: 'Custom ' + clas[0].toUpperCase() + clas.substr(1),
-                    clas: H.CLASSES[clas],
+                    label: 'Custom ' + className[0].toUpperCase() + className.substr(1),
+                    clas: clas,
                     cardIds: [],
                     id: Math.floor(Math.random() * 10000)
                 });
