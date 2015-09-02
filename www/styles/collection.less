@@ -226,12 +226,21 @@
     overflow: scroll;
   }
 
+  .card-preview {
+    position: absolute;
+    left: 623px;
+  }
+
   .card-line {
     position: relative;
     width: 159px;
     height: 27px;
     background: url("../textures/card-line.png");
     cursor: pointer;
+
+    &:hover .card-preview {
+      display: block;
+    }
 
     &.x2:after {
       position: absolute;
@@ -425,7 +434,7 @@
       content: "";
       width: 55px;
       height: 30px;
-      margin: 195px 0 -225px 43px;
+      margin: 192px 0 -222px 43px;
       background: url("../textures/collection-card-modificator_lock.png");
     }
   }

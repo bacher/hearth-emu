@@ -70,6 +70,10 @@ H.checkParam = function(string) {
     return new RegExp('[?&]' + string + '(?:&|$)').test(window.location.search);
 };
 
+H.generatePicUrl = function(part) {
+    return 'http://media-hearth.cursecdn.com/avatars/' + part + '.png';
+};
+
 function send(msg, data) {
     const packet = { msg, data: data || null };
 

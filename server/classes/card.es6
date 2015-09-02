@@ -10,18 +10,22 @@ H.Card = class Card {
         this.clas = info.clas || 0;
         this.rarity = info.rarity || 0;
         this.pic = info.pic;
+        this.target = 'not-need';
+        this.flags = {};
 
-        if (this.type === H.CARD_TYPES.spell) {
-            this.target = info.target;
-        } else {
-            this.target = 'not-need';
-        }
-
-        if (info.target && info.target !== 'none') {
-            this.getTargets = H.TARGETS[info.target];
+        if (info.flags) {
+            info.flags.forEach(flag => {
+                this.flags[flag] = true;
+            });
         }
 
         if (info.type === H.CARD_TYPES.spell) {
+            this.target = info.target;
+
+            if (this.target !== 'not-need') {
+                this.getTargets = H.TARGETS[info.target];
+            }
+
             this.acts = info.acts.map(act => {
                 return {
                     act: H.ACTIVATIONS[act.actName],
@@ -46,12 +50,5 @@ H.Card = class Card {
             }
         }
 
-        this.flags = {};
-
-        if (info.flags) {
-            info.flags.forEach(flag => {
-                this.flags[flag] = true;
-            });
-        }
     }
 };

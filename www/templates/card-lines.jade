@@ -1,5 +1,5 @@
 
 each cardInfo in cards
-   .card-line(data-id=cardInfo.card.id,class=cardInfo.x2?'x2':'')
+   .card-line(class=cardInfo.x2?'x2':'',data-id=cardInfo.card.id,data-pic="http://media-hearth.cursecdn.com/avatars/"+cardInfo.card.pic+".png")
       SPAN.cost= cardInfo.card.cost
       SPAN.name= cardInfo.card.name

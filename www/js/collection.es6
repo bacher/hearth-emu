@@ -10,6 +10,7 @@ new H.Screen({
         var heroMode = false;
         var activeDeck = null;
         var $cardToRemove = null;
+        var $previewImage = null;
 
         var showCardsBase;
         var showCards;
@@ -138,6 +139,29 @@ new H.Screen({
             .on('keydown', '.search', e => {
                 if (e.which === 13) {
                     $(e.currentTarget).blur();
+                }
+            })
+            .on('mouseenter', '.card-line', e => {
+                const $cardLine = $(e.currentTarget);
+                const cardPosition = $cardLine.position();
+
+                if ($previewImage) {
+                    $previewImage.remove();
+                    $previewImage = null;
+                }
+
+                $previewImage = $('<img>')
+                    .addClass('card-preview')
+                    .attr('src', $cardLine.data('pic'))
+                    .css({
+                        top: Math.min(268, Math.max(20, cardPosition.top + - 123))
+                    })
+                    .appendTo($app);
+            })
+            .on('mouseleave', '.card-line', () => {
+                if ($previewImage) {
+                    $previewImage.remove();
+                    $previewImage = null;
                 }
             });
 
@@ -321,8 +345,11 @@ new H.Screen({
                     card,
                     x2: multiplyer === 2
                 });
-
             }
+
+            cards.forEach(card => {
+                new Image().src = H.generatePicUrl(card.card.pic);
+            });
 
             render($cards, 'card-lines', { cards: cards });
 
