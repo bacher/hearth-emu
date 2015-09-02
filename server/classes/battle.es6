@@ -182,16 +182,18 @@ H.Battle = class Battle {
                     }
 
                     player.sendMessage('targets', {
-                        'card-id': cardId,
-                        'targets': targets
+                        cardId: cardId,
+                        targets: targets
                     });
                 } else if (creatureId) {
                     const creature = player.creatures.getCreatureByCrid(creatureId);
                     let targets = H.TARGETS['physic'](this, player, creature);
 
+                    targets.op.minions = targets.op.minions.map(minion => minion.id);
+
                     player.sendMessage('targets', {
-                        'creature-id': creatureId,
-                        'targets': targets
+                        creatureId: creatureId,
+                        targets: targets
                     });
                 }
                 break;
