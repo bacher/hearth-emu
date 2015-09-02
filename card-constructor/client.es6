@@ -56,7 +56,7 @@ $.ajax('/cards.json').then(data => {
             const minion = card.minion;
             $minion.find('.attack-maxhp').val(minion.attack + '/' + minion.maxHp);
             $minion.find('.minion-flags').val(minion.flags && minion.flags.join(','));
-            $minion.find('.race').val(minion.race);
+            $minion.find('.race').val(minion.race || 0);
 
             $minion.find('.events').val('');
 
@@ -148,13 +148,15 @@ $.ajax('/cards.json').then(data => {
                     card.minion.flags = flagsString.split(',');
                 }
 
-                const et = $minion.find('.event[data-type=every-turn]').val().trim();
+                const st = $minion.find('.event[data-type=start-turn]').val().trim();
+                const et = $minion.find('.event[data-type=end-turn]').val().trim();
                 const cr = $minion.find('.event[data-type=cry]').val().trim();
                 const de = $minion.find('.event[data-type=death]').val().trim();
                 const au = $minion.find('.event[data-type=aura]').val().trim();
                 const cu = $minion.find('.event[data-type=custom]').val().trim();
 
-                if (et) card.minion.events['every-turn'] = et;
+                if (st) card.minion.events['start-turn'] = st;
+                if (et) card.minion.events['end-turn'] = et;
                 if (cr) card.minion.events['cry'] = cr;
                 if (de) card.minion.events['death'] = de;
                 if (au) card.minion.events['aura'] = au;
