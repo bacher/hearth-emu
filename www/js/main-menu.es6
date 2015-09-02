@@ -4,11 +4,11 @@ new H.Screen({
     name: 'main-menu',
 
     draw: function() {
-        jade.render($app[0], 'main-menu', {});
+        render($app, 'main-menu');
 
         $app
             .on('click', '.play', () => {
-                H.activateScreen('waiting-opponent');
+                H.activateScreen('start-game-menu');
             })
             .on('click', '.my-collection', () => {
                 H.activateScreen('collection');
