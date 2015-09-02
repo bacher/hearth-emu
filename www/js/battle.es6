@@ -23,46 +23,9 @@ new H.Screen({
         const $dragAim = $('<div>').addClass('targeting').appendTo($app);
 
         $app
-            .on('click', '.hand.my .card.available', e => {
-                if (H.battleData.my.active) {
-                    const $card = $(e.currentTarget);
-
-                    $('.selected').removeClass('selected');
-                    $card.addClass('selected');
-
-                    send('get-targets', {
-                        'card-id': $card.data('id')
-                    });
-                }
-            })
             .on('click', '.end-turn', () => {
                 if (H.battleData.my.active) {
                     send('end-turn');
-                }
-            })
-            .on('click', '.creatures.my .creature', e => {
-                if (H.battleData.my.active) {
-                    var $creature = $(e.currentTarget);
-
-                    $('.selected').removeClass('selected');
-                    $creature.addClass('selected');
-
-                    send('get-targets', {
-                        'creature-id': $creature.data('id')
-                    });
-                }
-            })
-            .on('click', '.avatar.op', () => {
-                if (H.battleData.my.active) {
-
-                    const $myCreature = $('.creatures.my .creature.selected');
-
-                    if ($myCreature.length) {
-                        send('hit', {
-                            my: $myCreature.data('id'),
-                            op: 'hero'
-                        });
-                    }
                 }
             })
             .on('click', '.hero-skill.my.available', () => {
@@ -204,37 +167,25 @@ new H.Screen({
                     const $target = $(e.target);
 
                     if (aimTargeting) {
-                        const $targetMinion = $target.closest('.creature.purpose');
+                        const $purpose = $target.closest('.purpose');
+                        const purposeId = $purpose.hasClass('creature') ? $purpose.data('id') : 'hero';
 
-                        if ($targetMinion.length) {
-
+                        if ($purpose.length) {
                             const $myCard = $($dragAim.data('linked-card'));
 
                             if (heroTargeting) {
                                 send('play-card', {
                                     id: $myCard.data('id'),
                                     targetSide: 'op', //FIXME
-                                    target: $targetMinion.data('id')
+                                    target: purposeId
                                 });
                             } else {
-                                debugger
                                 send('hit', {
                                     by: $myCard.data('id'),
                                     targetSide: 'op',
-                                    target: $targetMinion.data('id')
+                                    target: purposeId
                                 });
                             }
-
-                            //const $myCreature = $('.creatures.my .creature.selected');
-                            //
-                            //if ($myCreature.length) {
-                            //    const $enemyCreature = $(e.currentTarget);
-                            //
-                            //    send('hit', {
-                            //        my: $myCreature.data('id'),
-                            //        op: $enemyCreature.data('id')
-                            //    });
-                            //}
 
                         } else {
                             const $source = $($dragAim.data('linked-card'));
@@ -313,10 +264,6 @@ H.updateInGameData = function() {
     const game = H.battleData;
 
     $('.battle').toggleClass('active', game.my.active);
-
-    if (!game.my.active) {
-        $('.selected').removeClass('selected');
-    }
 
     const $hand = $('.hand.my .cards').empty();
     const $handOp = $('.hand.op .cards').empty();
