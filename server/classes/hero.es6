@@ -36,7 +36,9 @@ H.Hero = class Hero {
     }
 
     addCrystal() {
-        this.crystals++;
+        if (this.crystals < 10) {
+            this.crystals++;
+        }
     }
 
     restoreMana() {

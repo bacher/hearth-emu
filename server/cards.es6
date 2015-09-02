@@ -16,10 +16,18 @@ for (var i = 0; i < cards.length; ++i) {
 H.CARDS = {
     list: cards,
     hash: cardsHash,
-    getByName: name => {
+    getByName: function(name, type) {
+        const lowerCaseName = name.toLowerCase();
+
         for (var i = 0; i < cards.length; ++i) {
-            if (cards[i].name === name) {
-                return cards[i];
+            const card = cards[i];
+
+            if (type && card.type !== type) {
+                continue;
+            }
+
+            if (card.name.toLowerCase() === lowerCaseName) {
+                return card;
             }
         }
     }

@@ -28,7 +28,11 @@ H.Card = class Card {
 
             this.acts = info.acts.map(act => {
                 const match = act.match(/^([^:]+)(?::(.+))?$/);
-                const params = match[1].split(',');
+                var params = null;
+
+                if (match[2]) {
+                    params = match[2].split(',');
+                }
 
                 const actFunc = H.ACTIVATIONS[match[1]];
 

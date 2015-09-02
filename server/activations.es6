@@ -2,36 +2,31 @@
 const H = require('./namespace');
 
 H.ACTIVATIONS = {
-    'card-summon': (data, actParams, battle, player) => {
-        const newMinion = new H.Minion(player, data.handCard.base);
+    'card-summon': function(o) {
+        const newMinion = new H.Minion(o.player, o.params.handCard.base);
 
-        player.creatures.addCreature(newMinion);
+        o.player.creatures.addCreature(newMinion);
     },
 
-    'add-mana': (data, actParams, battle, player) => {
-        player.hero.addMana(1);
+    'add-mana': function(o) {
+        o.player.hero.addMana(1);
     },
 
-    'deal-damage': function(data, actParams, battle, player) {
-        data.targetPlayer.creatures.killCreature(data.target);
+    'deal-damage': function(o) {
+        o.params.targetPlayer.creatures.killCreature(o.params.target);
     },
 
-    'overload': (data, actParams, battle, player) => {},
+    'overload': function(o) {},
 
-    'silence': (data, actParams, battle, player) => {},
+    'silence': function(o) {},
 
-    'gain-crystal-this-turn': () => {},
+    'gain-crystal-this-turn': function(o) {},
 
-    'summon': (data, actParams, battle, player) => {
-        const card = data.handCard.base;
+    'summon': function(o) {
+        const minionCardName = o.actParams[0];
 
-        const minionName = card.param[0];
-        const count = Number(card.param[1]) || 1;
+        const minion = new H.Minion(o.player, H.CARDS.getByName(minionCardName, H.CARD_TYPES.minion));
 
-        for (var i = 0; i < count; ++i) {
-            var minion = new H.Minion(player, H.CARDS.getByName(minionName));
-
-            player.creatures.addCreature(minion);
-        }
+        o.player.creatures.addCreature(minion);
     }
 };
