@@ -40,6 +40,19 @@ const H = {
         'spell',
         'weapon',
         'trap'
+    ],
+
+    HERO_NAMES: [
+        '',
+        'Garrosh Hellscream',
+        'Thrall',
+        'Valeera Sanguinar',
+        'Uther Lightbringer',
+        'Rexxar',
+        'Malfurion Stormrage',
+        'Gul\'dan',
+        'Jaina Proudmoore',
+        'Anduin Wrynn'
     ]
 };
 
@@ -72,6 +85,19 @@ H.checkParam = function(string) {
 
 H.generatePicUrl = function(part) {
     return 'http://media-hearth.cursecdn.com/avatars/' + part + '.png';
+};
+
+H.loadDecks = function() {
+    if (!H.decks) {
+        H.decks = JSON.parse(localStorage.getItem('decks')) || [];
+
+        H.activeDeckId = Number(localStorage.getItem('activeDeckId')) || null;
+    }
+};
+
+H.saveDecks = function() {
+    window.localStorage.setItem('decks', JSON.stringify(H.decks));
+    window.localStorage.setItem('activeDeckId', H.activeDeckId);
 };
 
 function send(msg, data) {

@@ -4,8 +4,6 @@ new H.Screen({
     name: 'collection',
     hash: 'collection',
     draw: function() {
-
-        var decks = JSON.parse(localStorage.getItem('decks')) || [];
         var page = 0;
         var heroMode = false;
         var activeDeck = null;
@@ -36,7 +34,7 @@ new H.Screen({
                 const $deck = $(e.currentTarget);
                 const id = $deck.data('id');
 
-                const deck = _.find(decks, deck => deck.id === id);
+                const deck = _.find(H.decks, deck => deck.id === id);
 
                 switchMode(deck);
             })
@@ -46,7 +44,7 @@ new H.Screen({
 
                     sortCards(activeDeck);
 
-                    saveDecks();
+                    H.saveDecks();
 
                     checkLimits();
 
@@ -56,7 +54,7 @@ new H.Screen({
             .on('click', '.btn-back', () => {
                 if (heroMode) {
                     activeDeck.label = $('.label-edit').val();
-                    saveDecks();
+                    H.saveDecks();
 
                     switchMode(null);
                 } else {
@@ -81,7 +79,7 @@ new H.Screen({
                 const index = activeDeck.cardIds.indexOf(id);
                 activeDeck.cardIds.splice(index, 1);
 
-                saveDecks();
+                H.saveDecks();
 
                 checkLimits();
                 updateDeckCards();
@@ -105,7 +103,14 @@ new H.Screen({
                 $hero.siblings().removeClass('selected');
                 $hero.addClass('selected');
 
-                $('.avatar').removeClass().addClass('avatar').addClass($hero.data('clas'));
+                const clas = $hero.data('clas');
+
+                $('.avatar')
+                    .removeClass()
+                    .addClass('avatar')
+                    .addClass(H.CLASSES_L[clas]);
+
+                $('.hero-details .label').text(H.HERO_NAMES[clas]);
 
                 $('.choose').addClass('show');
             })
@@ -114,18 +119,18 @@ new H.Screen({
 
                 const clas = $('.hero.selected').data('clas');
 
-                decks.push({
+                H.decks.push({
                     label: 'Custom ' + clas[0].toUpperCase() + clas.substr(1),
-                    clas: clas,
+                    clas: H.CLASSES[clas],
                     cardIds: [],
                     id: Math.floor(Math.random() * 10000)
                 });
 
-                saveDecks();
+                H.saveDecks();
 
                 drawDecks();
 
-                switchMode(decks[decks.length - 1]);
+                switchMode(H.decks[H.decks.length - 1]);
             })
             .on('click', '.create-deck-screen .back', () => {
                 $('.create-deck-screen').removeClass('show');
@@ -230,7 +235,7 @@ new H.Screen({
             showCards = showCardsBase.map((cardPack, i) => {
                 var filteredPack = cardPack;
 
-                if (i === 0 || !heroMode || i === H.CLASSES[activeDeck.clas]) {
+                if (i === 0 || !heroMode || i === activeDeck.clas) {
                     if (searchQuery) {
                         filteredPack = filteredPack.filter(card => _.contains(card.name.toLowerCase(), searchQuery));
                     }
@@ -291,7 +296,7 @@ new H.Screen({
         }
 
         function drawDecks() {
-            jade.render($('.decks-wrapper')[0], 'decks', { decks: decks });
+            render($('.decks-wrapper'), 'decks', { decks: H.decks });
         }
 
         function checkLimits() {
@@ -388,13 +393,11 @@ new H.Screen({
             $('.hero-right-panel').toggleClass('full', activeDeck.cardIds.length === 30);
         }
 
-        function saveDecks() {
-            localStorage.setItem('decks', JSON.stringify(decks));
-        }
+
 
         function removeDeck(removeId) {
-            decks = decks.filter(deck => deck.id !== removeId);
-            saveDecks();
+            H.decks = H.decks.filter(deck => deck.id !== removeId);
+            H.saveDecks();
             drawDecks();
         }
 

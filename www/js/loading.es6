@@ -9,6 +9,8 @@ new H.Screen({
 
         const $stone = $app.find('.stone');
 
+        H.loadDecks();
+
         $.ajax({
             url: 'textures.json'
         }).then(data => {
@@ -54,6 +56,8 @@ new H.Screen({
                     H.activateScreen('waiting-opponent');
                 } else if (window.location.hash === '#collection') {
                     H.activateScreen('collection');
+                } else if (window.location.hash === '#start-game') {
+                    H.activateScreen('start-game-menu');
                 } else {
                     H.activateScreen('main-menu');
                 }
