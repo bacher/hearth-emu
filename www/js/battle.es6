@@ -9,8 +9,10 @@ new H.Screen({
         render($app, 'battle');
 
         var dragging = false;
+        var aimTargeting = false;
         var heroTargeting = false;
         var $dragCard;
+        var $aimingMinion = null;
 
         const $cardPreview = $('<DIV>')
             .addClass('card-preview')
@@ -81,16 +83,10 @@ new H.Screen({
             .on('mouseleave', '.card-wrap', () => {
                 $cardPreview.hide();
             })
-            .on('mousedown', '.card-wrap', e => {
-                if (!H.battleData.my.active) {
-                    return;
-                }
+            .on('mousedown', '.card-wrap.available', e => {
+                if (!H.battleData.my.active) return;
 
                 const $card = $(e.currentTarget);
-
-                if (!$card.hasClass('available')) {
-                    return;
-                }
 
                 const targetType = $card.data('target');
 
@@ -109,12 +105,18 @@ new H.Screen({
 
                 } else {
                     send('get-targets', {
-                        'card-id': $card.data('id')
+                        cardId: $card.data('id')
                     });
 
                     $('.hero.my .avatar').addClass('casting');
 
+                    aimTargeting = true;
                     heroTargeting = true;
+
+                    $dragAim.css({
+                        bottom: 170,
+                        left: 618
+                    });
 
                     $dragAim.data('linked-card', $card[0]);
 
@@ -124,19 +126,58 @@ new H.Screen({
                 $card.hide();
 
             })
+            .on('mousedown', '.creature.available', e => {
+                if (!H.battleData.my.active) return;
+
+                $aimingMinion = $(e.currentTarget);
+
+                dragging = true;
+
+                send('get-targets', {
+                    creatureId: $aimingMinion.data('id')
+                });
+
+                aimTargeting = true;
+                heroTargeting = false;
+
+                const minionPosition = $aimingMinion.offset();
+
+                $dragAim.css({
+                    bottom: 720 - (minionPosition.top + $aimingMinion.height() / 2),
+                    left: minionPosition.left + $aimingMinion.width() / 2 - 24
+                });
+
+                $dragAim.data('linked-card', $aimingMinion[0]);
+
+                $dragAim.show();
+
+                $aimingMinion.addClass('aiming');
+
+            })
             .on('mousemove', e => {
 
                 if (dragging) {
 
-                    if (heroTargeting) {
+                    if (aimTargeting) {
 
-                        const heroPos = {
-                            x: 643,
-                            y: 528
-                        };
+                        var sourcePos;
 
-                        const dX = heroPos.x - e.pageX;
-                        const dY = heroPos.y - e.pageY;
+                        if (heroTargeting) {
+                            sourcePos = {
+                                x: 643,
+                                y: 548
+                            };
+                        } else {
+                            const minionPosition = $aimingMinion.offset();
+                            sourcePos = {
+                                x: minionPosition.left + $aimingMinion.width() / 2,
+                                y: minionPosition.top + $aimingMinion.height() / 2
+                            };
+                        }
+
+
+                        const dX = sourcePos.x - e.pageX;
+                        const dY = sourcePos.y - e.pageY;
                         const distance = Math.sqrt(dX * dX + dY * dY);
 
                         let angle = Math.atan(dX / dY);
@@ -162,18 +203,27 @@ new H.Screen({
 
                     const $target = $(e.target);
 
-                    if (heroTargeting) {
+                    if (aimTargeting) {
                         const $targetMinion = $target.closest('.creature.purpose');
 
                         if ($targetMinion.length) {
 
                             const $myCard = $($dragAim.data('linked-card'));
 
-                            send('play-card', {
-                                id: $myCard.data('id'),
-                                targetSide: 'op', //FIXME
-                                target: $targetMinion.data('id')
-                            });
+                            if (heroTargeting) {
+                                send('play-card', {
+                                    id: $myCard.data('id'),
+                                    targetSide: 'op', //FIXME
+                                    target: $targetMinion.data('id')
+                                });
+                            } else {
+                                debugger
+                                send('hit', {
+                                    by: $myCard.data('id'),
+                                    targetSide: 'op',
+                                    target: $targetMinion.data('id')
+                                });
+                            }
 
                             //const $myCreature = $('.creatures.my .creature.selected');
                             //
@@ -187,12 +237,19 @@ new H.Screen({
                             //}
 
                         } else {
-                            $($dragAim.data('linked-card')).show();
+                            const $source = $($dragAim.data('linked-card'));
+                            if (heroTargeting) {
+                                $source.show();
+                            } else {
+                                $source.removeClass('aiming');
+                            }
                         }
 
                         $('.hero.my .avatar').removeClass('casting');
                         $dragAim.hide();
+
                         heroTargeting = false;
+                        aimTargeting = false;
 
                     } else {
                         if ($target.closest('.battleground').length) {

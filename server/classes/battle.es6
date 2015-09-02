@@ -65,6 +65,7 @@ H.Battle = class Battle {
         this.p1.drawCard();
         this.p1.drawCard();
         this.p1.drawCard();
+        this.p1.drawCard();
 
         this.p2.drawCard();
         this.p2.drawCard();
@@ -139,10 +140,10 @@ H.Battle = class Battle {
             case 'hit':
                 const enemy = player.getEnemy();
 
-                if (data.my !== 'hero') {
-                    const my = player.creatures.getCreatureByCrid(data.my);
+                if (data.by !== 'hero') {
+                    const my = player.creatures.getCreatureByCrid(data.by);
 
-                    if (data.op === 'hero') {
+                    if (data.target === 'hero') {
                         const opHero = player.enemy.hero;
 
                         if (opHero.hp <= my.attack) {
@@ -152,7 +153,8 @@ H.Battle = class Battle {
                         }
 
                     } else {
-                        const op = enemy.creatures.getCreatureByCrid(data.op);
+                        //FIXME: add targetSide condition
+                        const op = enemy.creatures.getCreatureByCrid(data.target);
 
                         enemy.creatures.killCreature(op);
                     }
@@ -165,8 +167,8 @@ H.Battle = class Battle {
                 break;
 
             case 'get-targets':
-                const cardId = data['card-id'];
-                const creatureId = data['creature-id'];
+                const cardId = data.cardId;
+                const creatureId = data.creatureId;
 
                 if (cardId) {
                     const handCard = player.hand.getHandCard(cardId);

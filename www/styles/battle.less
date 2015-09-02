@@ -93,11 +93,16 @@
     width: 76px;
     height: 108px;
 
+    &.aiming {
+      transform: scale(1.1);
+      transform-origin: 50% 50%;
+    }
+
     &.available:before {
       position: absolute;
       content: "";
       top: -9px;
-      left: -12px;
+      left: -11px;
       width: 98px;
       height: 105px;
       background: url("../textures/card-glow.png");
@@ -119,7 +124,7 @@
       position: absolute;
       content: "";
       top: -9px;
-      left: -12px;
+      left: -11px;
       width: 98px;
       height: 105px;
       background: url("../textures/card-fire-glow-square.png");
@@ -925,8 +930,6 @@
   .targeting {
     position: absolute;
     display: none;
-    bottom: 190px;
-    left: 618px;
     width: 47px;
     height: 400px;
     background: url("../textures/targeting.png");
@@ -938,22 +941,13 @@
     &:before {
       position: absolute;
       content: "";
-      top: -49px;
+      top: -56px;
       left: -16px;
       width: 78px;
       height: 32px;
       background: url("../textures/targeting-arrow.png");
     }
 
-    &:after {
-      position: absolute;
-      content: "";
-      top: -49px;
-      left: -16px;
-      width: 78px;
-      height: 32px;
-      background: url("../textures/targeting-arrow.png");
-    }
   }
 
 }
