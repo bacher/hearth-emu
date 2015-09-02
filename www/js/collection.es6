@@ -15,6 +15,8 @@ new H.Screen({
         var showCardsBase;
         var showCards;
 
+        var costFilter = null;
+
         render($app, 'collection');
 
         selectTab($('.tab.druid'));
@@ -163,6 +165,24 @@ new H.Screen({
                     $previewImage.remove();
                     $previewImage = null;
                 }
+            })
+            .on('click', '.mana', e => {
+                const $mana = $(e.currentTarget);
+
+                if ($mana.hasClass('selected')) {
+                    $mana.removeClass('selected');
+
+                    costFilter = null;
+
+                } else {
+                    $('.mana.selected').removeClass('selected');
+                    $mana.addClass('selected');
+
+                    costFilter = $mana.data('cost');
+                }
+
+                filterCards();
+                drawCards();
             });
 
         $.ajax({
@@ -191,6 +211,8 @@ new H.Screen({
 
             makeBaseFiltering();
 
+            filterCards();
+
             drawCards();
         });
 
@@ -206,22 +228,31 @@ new H.Screen({
             const searchQuery = $('.search').val().toLowerCase();
 
             showCards = showCardsBase.map((cardPack, i) => {
+                var filteredPack = cardPack;
+
                 if (i === 0 || !heroMode || i === H.CLASSES[activeDeck.clas]) {
                     if (searchQuery) {
-                        return cardPack.filter(card => _.contains(card.name.toLowerCase(), searchQuery));
-                    } else {
-                        return cardPack;
+                        filteredPack = filteredPack.filter(card => _.contains(card.name.toLowerCase(), searchQuery));
+                    }
+
+                    if (costFilter !== null) {
+                        if (costFilter < 7) {
+                            filteredPack = filteredPack.filter(card => card.cost === costFilter);
+                        } else {
+                            filteredPack = filteredPack.filter(card => card.cost >= 7);
+                        }
                     }
                 } else {
-                    return [];
+                    filteredPack = [];
                 }
+
+                return filteredPack
             });
 
             toggleTabs();
         }
 
         function drawCards() {
-
             if (!showCardsBase) return;
 
             const selectedClas = H.CLASSES[$('.tab.selected').data('clas')];
@@ -296,18 +327,17 @@ new H.Screen({
 
                 $('.hero-right-panel .deck-info').html($deckInfo);
 
-                drawCards();
+                updateDeckCards();
+
             } else {
-                $('.tab').show();
+                filterCards();
+                toggleTabs();
 
                 $('.card').removeClass('lock one');
+
             }
 
-            if (heroMode) {
-                updateDeckCards();
-            } else {
-                drawDecks();
-            }
+            drawDecks();
         }
 
         function selectTab($tab) {
