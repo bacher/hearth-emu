@@ -2,25 +2,27 @@
 const H = require('./namespace');
 
 H.ACTIVATIONS = {
-    summon: (data, actParams, battle, player) => {
+    'card-summon': (data, actParams, battle, player) => {
         const newMinion = new H.Minion(player, data.handCard.base);
 
         player.creatures.addCreature(newMinion);
     },
 
-    addMana: (data, actParams, battle, player) => {
+    'add-mana': (data, actParams, battle, player) => {
         player.hero.addMana(1);
     },
 
-    dealDamage: function(data, actParams, battle, player) {
+    'deal-damage': function(data, actParams, battle, player) {
         data.targetPlayer.creatures.killCreature(data.target);
     },
 
-    overload: (data, actParams, battle, player) => {},
+    'overload': (data, actParams, battle, player) => {},
 
-    silence: (data, actParams, battle, player) => {},
+    'silence': (data, actParams, battle, player) => {},
 
-    spawnCreatures: (data, actParams, battle, player) => {
+    'gain-crystal-this-turn': () => {},
+
+    'summon': (data, actParams, battle, player) => {
         const card = data.handCard.base;
 
         const minionName = card.param[0];
