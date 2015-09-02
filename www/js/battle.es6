@@ -84,7 +84,7 @@ new H.Screen({
                 $cardPreview.hide();
             })
             .on('mousedown', '.card-wrap.available', e => {
-                if (!H.battleData.my.active) return;
+                if (!H.battleData.my.active) { return; }
 
                 const $card = $(e.currentTarget);
 
@@ -127,7 +127,7 @@ new H.Screen({
 
             })
             .on('mousedown', '.creature.available', e => {
-                if (!H.battleData.my.active) return;
+                if (!H.battleData.my.active) { return; }
 
                 $aimingMinion = $(e.currentTarget);
 

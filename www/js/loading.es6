@@ -48,7 +48,7 @@ new H.Screen({
             var alreadyCalled = false;
 
             function onLoaded() {
-                if (alreadyCalled) return;
+                if (alreadyCalled) { return; }
 
                 alreadyCalled = true;
 

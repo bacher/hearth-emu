@@ -13,7 +13,7 @@ new H.Screen({
         if (H.activeDeck) {
             setTimeout(() => {
                 $('.deck[data-id="' + H.activeDeck.id + '"]').click();
-            }, 4)
+            }, 4);
         }
 
         $app

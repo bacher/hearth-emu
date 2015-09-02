@@ -252,14 +252,14 @@ new H.Screen({
                     filteredPack = [];
                 }
 
-                return filteredPack
+                return filteredPack;
             });
 
             toggleTabs();
         }
 
         function drawCards() {
-            if (!showCardsBase) return;
+            if (!showCardsBase) { return; }
 
             const selectedClas = H.CLASSES[$('.tab.selected').data('clas')];
 

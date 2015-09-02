@@ -41,7 +41,7 @@ new H.Screen({
                     deck: H.activeDeck
                 });
             } else {
-                alert('Deck is not selected');
+                window.alert('Deck is not selected');
             }
 
         };
