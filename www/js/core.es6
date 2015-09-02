@@ -91,13 +91,22 @@ H.loadDecks = function() {
     if (!H.decks) {
         H.decks = JSON.parse(localStorage.getItem('decks')) || [];
 
-        H.activeDeckId = Number(localStorage.getItem('activeDeckId')) || null;
+        const deckId = Number(localStorage.getItem('activeDeckId'));
+        const deck = H.getDeckById(deckId);
+
+        if (deck) {
+            H.activeDeck = deck;
+        }
     }
 };
 
 H.saveDecks = function() {
     window.localStorage.setItem('decks', JSON.stringify(H.decks));
-    window.localStorage.setItem('activeDeckId', H.activeDeckId);
+    window.localStorage.setItem('activeDeckId', H.activeDeck.id);
+};
+
+H.getDeckById = function(id) {
+    return _.find(H.decks, deck => deck.id === id);
 };
 
 function send(msg, data) {

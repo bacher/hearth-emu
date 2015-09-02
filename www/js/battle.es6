@@ -4,6 +4,7 @@ var socket = null;
 new H.Screen({
     gClass: 'b',
     name: 'battle',
+    hash: 'battle',
     draw: function() {
         render($app, 'battle');
 

@@ -33,14 +33,17 @@ new H.Screen({
                 name = 'Random_' + Math.floor(Math.random() * 100 + 1);
             }
 
-            const deck = JSON.parse(window.localStorage.getItem('decks'))[0];
-            send('join', {
-                name: name,
-                deck: {
-                    clas: H.CLASSES[deck.clas],
-                    cards: deck.cardIds
-                }
-            });
+            H.loadDecks();
+
+            if (H.activeDeck) {
+                send('join', {
+                    name: name,
+                    deck: H.activeDeck
+                });
+            } else {
+                alert('Deck is not selected');
+            }
+
         };
 
         H.socket.onclose = event => {

@@ -52,11 +52,13 @@ new H.Screen({
 
                 alreadyCalled = true;
 
+                const hash = window.location.hash;
+
                 if (H.checkParam('gobattle')) {
                     H.activateScreen('waiting-opponent');
-                } else if (window.location.hash === '#collection') {
+                } else if (hash === '#collection') {
                     H.activateScreen('collection');
-                } else if (window.location.hash === '#start-game') {
+                } else if (hash === '#start-game' || hash === '#battle') {
                     H.activateScreen('start-game-menu');
                 } else {
                     H.activateScreen('main-menu');

@@ -8,24 +8,40 @@ new H.Screen({
             decks: H.decks
         });
 
-        if (H.activeDeckId !== null) {
-            $('.deck[data-id="' + H.activeDeckId + '"]').click();
+        H.loadDecks();
+
+        if (H.activeDeck) {
+            setTimeout(() => {
+                $('.deck[data-id="' + H.activeDeck.id + '"]').click();
+            }, 4)
         }
 
         $app
-            .on('click', '.deck', e => {
+            .on('click', '.deck:not(.selected)', e => {
                 const $deck = $(e.currentTarget);
 
+                $('.deck.selected').removeClass('selected');
                 $deck.addClass('selected');
 
                 const deckId = $deck.data('id');
 
-                const deck = _.find(H.decks, deck => deck.id === deckId);
+                H.activeDeck = H.getDeckById(deckId);
 
-                $('.hero .avatar').addClass(H.CLASSES_L[deck.clas]);
-                $('.hero .label').text(deck.label);
+                $('.hero .avatar')
+                    .removeClass()
+                    .addClass('avatar')
+                    .addClass(H.CLASSES_L[H.activeDeck.clas]);
+                $('.hero .label').text(H.activeDeck.label);
+
+                $('.play-btn').show();
 
                 H.saveDecks();
+            })
+            .on('click', '.play-btn', () => {
+                H.activateScreen('waiting-opponent');
+            })
+            .on('click', '.back', () => {
+                H.activateScreen('main-menu');
             });
     }
 });
