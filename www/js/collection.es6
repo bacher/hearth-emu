@@ -167,10 +167,7 @@ new H.Screen({
                     .appendTo($app);
             })
             .on('mouseleave', '.card-line', () => {
-                if ($previewImage) {
-                    $previewImage.remove();
-                    $previewImage = null;
-                }
+                removeCardPreview();
             })
             .on('click', '.mana', e => {
                 const $mana = $(e.currentTarget);
@@ -221,6 +218,13 @@ new H.Screen({
 
             drawCards();
         });
+
+        function removeCardPreview() {
+            if ($previewImage) {
+                $previewImage.remove();
+                $previewImage = null;
+            }
+        }
 
         function makeBaseFiltering() {
             showCardsBase = [];
@@ -386,6 +390,8 @@ new H.Screen({
             cards.forEach(card => {
                 new Image().src = H.generatePicUrl(card.card.pic);
             });
+
+            removeCardPreview();
 
             render($cards, 'card-lines', { cards: cards });
 

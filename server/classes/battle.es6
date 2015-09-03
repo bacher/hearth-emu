@@ -184,31 +184,19 @@ H.Battle = class Battle {
                         targets = 'not-need';
                     }
 
-                    if (targets.my.minions) {
-                        targets.my.minions = targets.my.minions.map(minion => minion.id);
-                    }
-
-                    if (targets.op.minions) {
-                        targets.op.minions = targets.op.minions.map(minion => minion.id);
-                    }
-
                     player.sendMessage('targets', {
                         cardId: cardId,
-                        targets: targets
+                        targets: targets.getGameData()
                     });
                 } else if (creatureId) {
-                    //const creature = player.creatures.getCreatureByCrid(creatureId);
-
                     let targets = H.TARGETS['physic']({
                         battle: this,
                         player
                     });
 
-                    targets.op.minions = targets.op.minions.map(minion => minion.id);
-
                     player.sendMessage('targets', {
                         creatureId: creatureId,
-                        targets: targets
+                        targets: targets.getGameData()
                     });
                 }
                 break;

@@ -33,6 +33,12 @@ H.Minion = class Minion {
     }
 
     dealDamage(dmg) {
+        if (/\d+-\d+/.test(dmg)) {
+            const dmgRandom = dmg.split('-').map(Number);
+
+            dmg = dmgRandom[0] + Math.floor(Math.random() * (dmgRandom[1] - dmgRandom[0]));
+        }
+
         this.hp -= dmg;
 
         if (this.hp <= 0) {

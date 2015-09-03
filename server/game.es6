@@ -8,6 +8,7 @@ require('./constants');
 require('./classes/aura');
 require('./classes/auras');
 require('./classes/battle');
+require('./classes/targets');
 require('./classes/card');
 require('./classes/creatures');
 require('./classes/deck');

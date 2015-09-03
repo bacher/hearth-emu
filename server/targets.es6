@@ -6,49 +6,46 @@ const H = require('./namespace');
 const T = H.TARGETS = {
 
     'enemies': function(o) {
-        const ret = T['enemy-minions'](o);
-        ret.op.hero = true;
+        const targets = T['enemy-minions'](o);
+        targets.addEnemyHero();
 
-        return ret;
+        return targets;
     },
 
     'minions': function(o) {
-        return _.extend(T['friendly-minions'](o), T['enemy-minions'](o));
+        return T['friendly-minions'](o).merge(T['enemy-minions'](o));
     },
     'friendly-minions': function(o) {
-        return {
-            my: {
-                minions: o.player.creatures.getAll()
-            }
-        };
+        const targets = new H.Targets(o.player);
+        targets.addMinions(o.player.creatures.getAll());
+
+        return targets;
     },
     'enemy-minions': function(o) {
-        return {
-            op: {
-                minions: o.player.enemy.creatures.getAll()
-            }
-        };
+        const targets = new H.Targets(o.player);
+        targets.addMinions(o.player.enemy.creatures.getAll());
+
+        return targets;
     },
+    //FIXME: BAD NAME FOR TARGETS
     'all': function(o) {
-        return {
-            my: {
-                minions: o.player.creatures.getAll()
-            },
-            op :{
-                minions: o.player.enemy.creatures.getAll(),
-                hero: true
-            }
-        };
+        const targets = new H.Targets(o.player);
+
+        targets.addMinions(o.player.creatures.getAll());
+        targets.addMinions(o.player.enemy.creatures.getAll());
+        targets.addEnemyHero();
+
+        return targets;
     },
     'physic': function(o) {
         const taunts = o.player.enemy.creatures.getTauntMinions();
 
         if (taunts.length) {
-            return {
-                op: {
-                    minions: taunts
-                }
-            };
+            const targets = new H.Targets(o.player);
+
+            targets.addMinions(taunts);
+
+            return targets;
         } else {
             return T['enemies'](o);
         }
