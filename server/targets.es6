@@ -1,22 +1,40 @@
 
+const _ = require('lodash');
 const H = require('./namespace');
 
 
-H.TARGETS = {
-    'all': function(battle, player) {
+const T = H.TARGETS = {
+
+    'minions': function(o) {
+        return _.extend(T['friendly-minions'](o), T['enemy-minions'](o));
+    },
+    'friendly-minions': function(o) {
         return {
             my: {
-                minions: player.creatures.getAllIds(),
-                hero: false
+                minions: o.player.creatures.getAllIds()
+            }
+        };
+    },
+    'enemy-minions': function(o) {
+        return {
+            op: {
+                minions: o.player.enemy.creatures.getAllIds()
+            }
+        };
+    },
+    'all': function(o) {
+        return {
+            my: {
+                minions: o.player.creatures.getAllIds()
             },
             op :{
-                minions: player.getEnemy().creatures.getAllIds(),
+                minions: o.player.enemy.creatures.getAllIds(),
                 hero: true
             }
         };
     },
-    'physic': function(battle, player, minion) {
-        const taunts = player.enemy.creatures.getTauntMinions();
+    'physic': function(o) {
+        const taunts = o.player.enemy.creatures.getTauntMinions();
 
         if (taunts.length) {
             return {
@@ -27,7 +45,7 @@ H.TARGETS = {
         } else {
             return {
                 op: {
-                    minions: player.enemy.creatures.getGameData(),
+                    minions: o.player.enemy.creatures.getGameData(),
                     hero: true
                 }
             };

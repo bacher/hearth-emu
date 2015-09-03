@@ -176,7 +176,11 @@ H.Battle = class Battle {
                     let targets;
 
                     if (handCard.base.getTargets) {
-                        targets = handCard.base.getTargets(this, player);
+                        targets = handCard.base.getTargets({
+                            battle: this,
+                            player,
+                            handCard
+                        });
                     } else {
                         targets = 'not-need';
                     }

@@ -110,7 +110,7 @@
     "clas": 2,
     "type": 2,
     "flags": [],
-    "target": "all",
+    "target": "minions",
     "acts": [
       "silence",
       "deal-damage:1"

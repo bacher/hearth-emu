@@ -77,8 +77,8 @@ new H.Screen({
                     heroTargeting = true;
 
                     $dragAim.css({
-                        bottom: 170,
-                        left: 618
+                        bottom: 167,
+                        left: 643
                     });
 
                     $dragAim.data('linked-card', $card[0]);
@@ -155,7 +155,6 @@ new H.Screen({
 
 
                         const $purpose = $(e.target).closest('.purpose');
-                        console.log($purpose);
                         $('.targeting').toggleClass('aim', $purpose.length > 0)
 
                     } else {
