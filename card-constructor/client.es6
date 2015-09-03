@@ -45,7 +45,7 @@ $.ajax('/cards.json').then(data => {
         $details.find('.card-pic').attr('src', 'http://media-hearth.cursecdn.com/avatars/' + card.pic + '.png');
         $details.find('.id').text(card.id);
         $details.find('.name').val(card.name);
-        $details.find('.clas').val(card.clas);
+        $details.find('.class-pic').removeClass('active').eq(card.clas).addClass('active');
         $details.find('.cost').val(card.cost);
         $details.find('.pic').val(card.pic);
         $details.find('.type').val(card.type);
@@ -83,10 +83,7 @@ $.ajax('/cards.json').then(data => {
 
     $details
         .on('change', '.type', () => {
-            const type = Number($details.find('.type').val());
-
-            $minion.toggle(type === CARD_TYPES.minion);
-            $spell.toggle(type === CARD_TYPES.spell);
+            checkType();
         })
         .on('change', '.pic', () => {
             $details.find('.card-pic').attr('src', $details.find('.pic').val().trim());
@@ -98,16 +95,24 @@ $.ajax('/cards.json').then(data => {
             const currentVal = $flags.val();
             $flags.val((currentVal ? currentVal + ',' : '') + $suggest.text());
         })
+        .on('click', '.spell-btn', () => {
+            $details.find('.type').val(2);
+            checkType();
+        })
         .on('click', '.new-btn', () => {
             $details.find('.id').text('NEW_CARD');
             $details.find('INPUT').val('');
             $details.find('SELECT').val(0);
             $details.find('.type').val(1);
+            $details.find('.class-pic').removeClass('active').eq(0).addClass('active');
 
             $details.find('.card-pic').attr('src', '');
 
             $minion.show();
             $spell.hide();
+        })
+        .on('click', '.class-pic', e => {
+            $(e.currentTarget).siblings().removeClass('active').end().addClass('active');
         })
         .on('click', '.save-btn', () => {
 
@@ -118,7 +123,7 @@ $.ajax('/cards.json').then(data => {
                 name: $details.find('.name').val().trim(),
                 cost: Number($details.find('.cost').val().trim()),
                 pic: $details.find('.pic').val().trim(),
-                clas: Number($details.find('.clas').val()),
+                clas: $details.find('.class-pic.active').data('class'),
                 type: Number($details.find('.type').val()),
                 flags: []
             };
@@ -219,5 +224,12 @@ $.ajax('/cards.json').then(data => {
         });
 
     $details.find('.new-btn').click();
+
+    function checkType() {
+        const type = Number($details.find('.type').val());
+
+        $minion.toggle(type === CARD_TYPES.minion);
+        $spell.toggle(type === CARD_TYPES.spell);
+    }
 
 });

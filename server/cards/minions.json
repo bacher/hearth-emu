@@ -1,5 +1,19 @@
 [
   {
+    "id": 109,
+    "name": "Ancestral Healing",
+    "cost": 0,
+    "pic": "147/450/216",
+    "clas": 2,
+    "type": 2,
+    "flags": [],
+    "target": "minions",
+    "acts": [
+      "restore-full-hp",
+      "give-flag:taunt"
+    ]
+  },
+  {
     "id": 50,
     "name": "Frog",
     "cost": 0,
@@ -103,6 +117,19 @@
     ]
   },
   {
+    "id": 110,
+    "name": "Totemic Might",
+    "cost": 0,
+    "pic": "148/124/367",
+    "clas": 2,
+    "type": 2,
+    "flags": [],
+    "target": "not-need",
+    "acts": [
+      "give-attack-race:2,totem"
+    ]
+  },
+  {
     "id": 102,
     "name": "Earth Shock",
     "cost": 1,
@@ -133,6 +160,34 @@
       },
       "race": 0
     }
+  },
+  {
+    "id": 107,
+    "name": "Forked Lightning",
+    "cost": 1,
+    "pic": "148/145/530",
+    "clas": 2,
+    "type": 2,
+    "flags": [],
+    "target": "not-need",
+    "acts": [
+      "deal-damage-random-enemy-minions:2",
+      "overload:2"
+    ]
+  },
+  {
+    "id": 108,
+    "name": "Frost Shock",
+    "cost": 1,
+    "pic": "147/441/233",
+    "clas": 2,
+    "type": 2,
+    "flags": [],
+    "target": "enemies",
+    "acts": [
+      "deal-damage:1",
+      "freeze"
+    ]
   },
   {
     "id": 54,
@@ -183,10 +238,10 @@
     "minion": {
       "attack": 0,
       "maxHp": 2,
-      "flags": [
-        "et:heal-own-minions"
-      ],
-      "events": {},
+      "flags": [],
+      "events": {
+        "end-turn": "heal-own-minions:1"
+      },
       "race": 7
     }
   },
@@ -385,6 +440,19 @@
     }
   },
   {
+    "id": 105,
+    "name": "Ancestral Spirit",
+    "cost": 2,
+    "pic": "147/444/526",
+    "clas": 2,
+    "type": 2,
+    "flags": [],
+    "target": "minions",
+    "acts": [
+      "give-deathrattle:resummon"
+    ]
+  },
+  {
     "id": 9,
     "name": "Bloodfen Raptor",
     "cost": 2,
@@ -469,21 +537,6 @@
     }
   },
   {
-    "id": 103,
-    "name": "Feral Spirit",
-    "cost": 3,
-    "pic": "148/136/214",
-    "clas": 2,
-    "type": 2,
-    "flags": [],
-    "target": "not-need",
-    "acts": [
-      "summon:Feral Spirit",
-      "summon:Feral Spirit",
-      "overload:2"
-    ]
-  },
-  {
     "id": 16,
     "name": "Feral Spirit",
     "cost": 3,
@@ -504,6 +557,21 @@
     }
   },
   {
+    "id": 103,
+    "name": "Feral Spirit",
+    "cost": 3,
+    "pic": "148/136/214",
+    "clas": 2,
+    "type": 2,
+    "flags": [],
+    "target": "not-need",
+    "acts": [
+      "summon:Feral Spirit",
+      "summon:Feral Spirit",
+      "overload:2"
+    ]
+  },
+  {
     "id": 28,
     "name": "Ironforge Riffleman",
     "cost": 3,
@@ -520,6 +588,20 @@
       },
       "race": 0
     }
+  },
+  {
+    "id": 106,
+    "name": "Lightning Storm",
+    "cost": 3,
+    "pic": "148/151/676",
+    "clas": 2,
+    "type": 2,
+    "flags": [],
+    "target": "not-need",
+    "acts": [
+      "deal-damage-enemy-minions:2-3",
+      "overload:2"
+    ]
   },
   {
     "id": 19,
