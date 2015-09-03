@@ -18,24 +18,24 @@ const T = H.TARGETS = {
     'friendly-minions': function(o) {
         return {
             my: {
-                minions: o.player.creatures.getAllIds()
+                minions: o.player.creatures.getAll()
             }
         };
     },
     'enemy-minions': function(o) {
         return {
             op: {
-                minions: o.player.enemy.creatures.getAllIds()
+                minions: o.player.enemy.creatures.getAll()
             }
         };
     },
     'all': function(o) {
         return {
             my: {
-                minions: o.player.creatures.getAllIds()
+                minions: o.player.creatures.getAll()
             },
             op :{
-                minions: o.player.enemy.creatures.getAllIds(),
+                minions: o.player.enemy.creatures.getAll(),
                 hero: true
             }
         };

@@ -184,6 +184,14 @@ H.Battle = class Battle {
                         targets = 'not-need';
                     }
 
+                    if (targets.my.minions) {
+                        targets.my.minions = targets.my.minions.map(minion => minion.id);
+                    }
+
+                    if (targets.op.minions) {
+                        targets.op.minions = targets.op.minions.map(minion => minion.id);
+                    }
+
                     player.sendMessage('targets', {
                         cardId: cardId,
                         targets: targets

@@ -47,6 +47,10 @@ H.Creatures = class Creatures {
         return this.creatures.some(creat => creat.card === card);
     }
 
+    getAll() {
+        return this.creatures;
+    }
+
     getAllIds() {
         return this.creatures.map(minion => minion.id);
     }

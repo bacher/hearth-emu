@@ -37,7 +37,10 @@ H.Card = class Card {
                 return act;
             });
         } else if (info.type === H.CARD_TYPES.minion) {
-            this.acts = [{ act: H.ACTIVATIONS['card-summon']}];
+            this.acts = [{
+                actFunc: H.ACTIVATIONS['card-summon'],
+                params: [this.id]
+            }];
 
             this.minion = info.minion;
 

@@ -16,6 +16,9 @@ for (var i = 0; i < cards.length; ++i) {
 H.CARDS = {
     list: cards,
     hash: cardsHash,
+    getById: function(id) {
+        return this.hash[id];
+    },
     getByName: function(name, type) {
         const lowerCaseName = name.toLowerCase();
 

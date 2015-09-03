@@ -3,7 +3,8 @@ const H = require('./namespace');
 
 H.ACTIVATIONS = {
     'card-summon': function(o) {
-        const newMinion = new H.Minion(o.player, o.params.handCard.base);
+        const card = H.CARDS.getById(this.params[0]);
+        const newMinion = new H.Minion(o.player, card);
 
         o.player.creatures.addCreature(newMinion);
     },
@@ -13,7 +14,19 @@ H.ACTIVATIONS = {
     },
 
     'deal-damage': function(o) {
-        o.params.target.dealDamage(this.params[0]);
+        const damage = this.params[0];
+
+        if (this.targets) {
+            const targets = H.TARGETS[this.targets]({
+                player: o.player
+            });
+
+            targets.forEach(target => {
+                target.dealDamage(damage);
+            });
+        } else {
+            o.params.target.dealDamage(damage);
+        }
     },
 
     'overload': function(o) {},

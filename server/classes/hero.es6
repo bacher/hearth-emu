@@ -12,6 +12,7 @@ H.Hero = class Hero {
         this.mana = 0;
         this.crystals = 0;
         this.skillUsed = false;
+        this.id = 'hero';
 
         if (clas === H.CLASSES.shaman) {
 
