@@ -749,6 +749,9 @@
   }
 
   .card-drag {
+    position: absolute;
+    margin-top: -52px;
+    margin-left: -40px;
     transition: none;
     pointer-events: none;
   }
@@ -929,16 +932,28 @@
 
   .targeting {
     position: absolute;
-    display: block;
+    display: none;
     width: 47px;
     height: 400px;
     background: url("../textures/targeting.png");
     animation: bg-offset linear 4s infinite;
+    margin-left: -24px;
 
     transform: rotate(0deg);
     transform-origin: 50% 100%;
 
-    &:before {
+    &.aim:before {
+      position: absolute;
+      content: "";
+      top: -103px;
+      left: -17px;
+      width: 82px;
+      height: 82px;
+      background: url("../textures/target.png");
+      pointer-events: none;
+    }
+
+    &:after {
       position: absolute;
       content: "";
       top: -56px;

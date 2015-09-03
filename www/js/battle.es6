@@ -106,8 +106,8 @@ new H.Screen({
                 const minionPosition = $aimingMinion.offset();
 
                 $dragAim.css({
-                    bottom: 720 - (minionPosition.top + $aimingMinion.height() / 2),
-                    left: minionPosition.left + $aimingMinion.width() / 2 - 24
+                    bottom: 720 - (minionPosition.top + $aimingMinion.outerHeight() / 2),
+                    left: minionPosition.left + $aimingMinion.outerWidth() / 2
                 });
 
                 $dragAim.data('linked-card', $aimingMinion[0]);
@@ -133,17 +133,17 @@ new H.Screen({
                         } else {
                             const minionPosition = $aimingMinion.offset();
                             sourcePos = {
-                                x: minionPosition.left + $aimingMinion.width() / 2,
-                                y: minionPosition.top + $aimingMinion.height() / 2
+                                // TODO: Why +4/+20 ?
+                                x: minionPosition.left + $aimingMinion.outerWidth() / 2 + 4,
+                                y: minionPosition.top + $aimingMinion.outerWidth() / 2 + 20
                             };
                         }
-
 
                         const dX = sourcePos.x - e.pageX;
                         const dY = sourcePos.y - e.pageY;
                         const distance = Math.sqrt(dX * dX + dY * dY);
 
-                        let angle = Math.atan(dX / dY);
+                        var angle = Math.atan(dX / dY);
 
                         if (dY < 0) {
                             angle = angle + Math.PI;
@@ -153,10 +153,15 @@ new H.Screen({
                             .height(distance - 60)
                             .css('transform', 'rotate(' + -angle + 'rad)');
 
+
+                        const $purpose = $(e.target).closest('.purpose');
+                        console.log($purpose);
+                        $('.targeting').toggleClass('aim', $purpose.length > 0)
+
                     } else {
                         $dragCard.css({
-                            top: e.pageY - 70,
-                            left: e.pageX - 50
+                            top: e.pageY,
+                            left: e.pageX
                         });
                     }
                 }
@@ -167,6 +172,7 @@ new H.Screen({
                     const $target = $(e.target);
 
                     if (aimTargeting) {
+
                         const $purpose = $target.closest('.purpose');
                         const purposeId = $purpose.hasClass('creature') ? $purpose.data('id') : 'hero';
 
