@@ -142,7 +142,6 @@ H.Player = class Player extends EventEmitter {
     }
 
     playCard(params) {
-
         const handCard = this.hand.getHandCard(params.id);
 
         const targetPlayer = (params.targetSide === 'op' ? this.enemy : this);

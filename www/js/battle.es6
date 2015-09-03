@@ -173,7 +173,16 @@ new H.Screen({
                     if (aimTargeting) {
 
                         const $purpose = $target.closest('.purpose');
-                        const purposeId = $purpose.hasClass('creature') ? $purpose.data('id') : 'hero';
+                        var purposeId;
+
+                        if ($purpose.hasClass('creature')) {
+                            purposeId = $purpose.data('id');
+                        } else {
+                            purposeId = 'hero'
+                        }
+
+                        const $collection = $purpose.closest('.my, .op');
+                        const targetSide = $collection.hasClass('my') ? 'my' : 'op';
 
                         if ($purpose.length) {
                             const $myCard = $($dragAim.data('linked-card'));
@@ -181,13 +190,13 @@ new H.Screen({
                             if (heroTargeting) {
                                 send('play-card', {
                                     id: $myCard.data('id'),
-                                    targetSide: 'op', //FIXME
+                                    targetSide: targetSide,
                                     target: purposeId
                                 });
                             } else {
                                 send('hit', {
                                     by: $myCard.data('id'),
-                                    targetSide: 'op',
+                                    targetSide: targetSide,
                                     target: purposeId
                                 });
                             }
