@@ -346,7 +346,8 @@ H.updateInGameData = function() {
             render($container, 'creature', {
                 id: minion.id,
                 classes: classes,
-                pic: minion.card.pic
+                minion: minion,
+                card: minion.card
             });
 
             const $minion = $container.children();

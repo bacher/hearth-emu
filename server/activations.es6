@@ -13,7 +13,7 @@ H.ACTIVATIONS = {
     },
 
     'deal-damage': function(o) {
-        o.params.targetPlayer.creatures.killCreature(o.params.target);
+        o.params.target.dealDamage(o.actParams[0]);
     },
 
     'overload': function(o) {},

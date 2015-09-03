@@ -5,6 +5,13 @@ const H = require('./namespace');
 
 const T = H.TARGETS = {
 
+    'enemies': function(o) {
+        const ret = T['enemy-minions'](o);
+        ret.op.hero = true;
+
+        return ret;
+    },
+
     'minions': function(o) {
         return _.extend(T['friendly-minions'](o), T['enemy-minions'](o));
     },
@@ -43,12 +50,7 @@ const T = H.TARGETS = {
                 }
             };
         } else {
-            return {
-                op: {
-                    minions: o.player.enemy.creatures.getGameData(),
-                    hero: true
-                }
-            };
+            return T['enemies'](o);
         }
     }
 };

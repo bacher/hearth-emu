@@ -43,12 +43,6 @@ H.Creatures = class Creatures {
         return this.creatures[index];
     }
 
-    killCreature(creat) {
-        const index = this.getCreatureIndex(creat);
-        this.creatures.splice(index, 1);
-        this.graveyard.push(creat);
-    }
-
     isHasCardCreature(card) {
         return this.creatures.some(creat => creat.card === card);
     }
@@ -59,5 +53,11 @@ H.Creatures = class Creatures {
 
     getTauntMinions() {
         return this.creatures.filter(creature => creature.is('taunt'));
+    }
+
+    onCreatureDeath(creat) {
+        const index = this.getCreatureIndex(creat);
+        this.creatures.splice(index, 1);
+        this.graveyard.push(creat);
     }
 };

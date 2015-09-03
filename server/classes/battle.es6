@@ -190,8 +190,12 @@ H.Battle = class Battle {
                         targets: targets
                     });
                 } else if (creatureId) {
-                    const creature = player.creatures.getCreatureByCrid(creatureId);
-                    let targets = H.TARGETS['physic'](this, player, creature);
+                    //const creature = player.creatures.getCreatureByCrid(creatureId);
+
+                    let targets = H.TARGETS['physic']({
+                        battle: this,
+                        player
+                    });
 
                     targets.op.minions = targets.op.minions.map(minion => minion.id);
 

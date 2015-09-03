@@ -17,6 +17,7 @@ H.Minion = class Minion {
         this.card = card;
         this.base = card.minion;
         this.attack = this.base.attack;
+        this.hp = this.base.maxHp;
         this.maxHp = this.base.maxHp;
         this.flags = _.clone(this.base.flags);
 
@@ -31,15 +32,22 @@ H.Minion = class Minion {
         }
     }
 
-    onDeath() {
-        //this.emit('death');
+    dealDamage(dmg) {
+        this.hp -= dmg;
 
+        if (this.hp <= 0) {
+            this.hp = 0;
+
+            this.kill();
+        }
+    }
+
+    kill() {
         if (this.card.name === 'Wrath of Air Totem') {
             this.battle.auras.removeAura(this.aura);
         }
 
-        this.battle = null;
-        this.player = null;
+        this.player.creatures.onCreatureDeath(this);
     }
 
     is(prop) {

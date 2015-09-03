@@ -92,13 +92,14 @@
     margin-right: 16px;
     width: 76px;
     height: 108px;
+    transform-origin: 50% 50%;
+    transition: transform ease-out 0.2s;
 
     &.aiming {
-      transform: scale(1.1);
-      transform-origin: 50% 50%;
+      transform: scale(1.12);
     }
 
-    &.available:before {
+    &.available:not(.aiming):before {
       position: absolute;
       content: "";
       top: -9px;
@@ -128,6 +129,32 @@
       width: 98px;
       height: 105px;
       background: url("../textures/card-fire-glow-square.png");
+    }
+
+    .attack, .hp {
+      position: absolute;
+      top: 84px;
+      width: 24px;
+      height: 28px;
+      padding-top: 5px;
+      padding-left: 4px;
+      box-sizing: border-box;
+      background: url("../textures/attack.png");
+
+      color: #FFF;
+      font-family: "Belwe Bold", Times, serif;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      text-shadow: 0 0 1px #000,0 0 2px #000;
+    }
+
+    .attack {
+      left: -6px;
+    }
+
+    .hp {
+      left: 59px;
     }
   }
 
