@@ -49,6 +49,19 @@ H.Targets = class Targets {
         return this;
     }
 
+    forEach(func) {
+        this.my.minions.forEach(func);
+        this.op.minions.forEach(func);
+
+        if (this.my.hero) {
+            func(this.player.hero);
+        }
+
+        if (this.op.hero) {
+            func(this.player.enemy.hero);
+        }
+    }
+
     getGameData() {
         return {
             my: {

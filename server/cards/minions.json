@@ -693,7 +693,7 @@
       {
         "name": "deal-damage",
         "params": "2-3",
-        "targets": "enemy-minions"
+        "targetsType": "enemy-minions"
       },
       {
         "name": "overload",

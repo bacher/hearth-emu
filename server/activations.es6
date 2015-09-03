@@ -16,12 +16,10 @@ H.ACTIVATIONS = {
     'deal-damage': function(o) {
         const damage = this.params[0];
 
-        if (this.targets) {
-            const targets = H.TARGETS[this.targets]({
+        if (this.targetsType) {
+            H.TARGETS[this.targetsType]({
                 player: o.player
-            });
-
-            targets.forEach(target => {
+            }).forEach(target => {
                 target.dealDamage(damage);
             });
         } else {

@@ -78,7 +78,7 @@ $.ajax('/cards.json').then(data => {
             card.acts.forEach((act, i) => {
                 const $act = $spell.find('.act').eq(i);
                 $act.find('.act-command').val(act.name + ':' + act.params.join(','));
-                $act.find('.act-targets').val(act.targets);
+                $act.find('.act-targets').val(act.targetsType);
             });
         }
 
@@ -195,7 +195,7 @@ $.ajax('/cards.json').then(data => {
                     const $act = $(actNode);
 
                     const command = $act.find('.act-command').val();
-                    const targets = $act.find('.act-targets').val().trim();
+                    const targetsType = $act.find('.act-targets').val().trim();
                     const [name, params] = command.split(':');
 
                     if (name) {
@@ -205,7 +205,7 @@ $.ajax('/cards.json').then(data => {
                         };
 
                         if (targets) {
-                            act.targets = targets;
+                            act.targetsType = targetsType;
                         }
 
                         return act;
