@@ -27,24 +27,14 @@ H.Card = class Card {
             }
 
             this.acts = info.acts.map(act => {
-                const match = act.match(/^([^:]+)(?::(.+))?$/);
-                var params = null;
+                act.actFunc = H.ACTIVATIONS[act.name];
 
-                if (match[2]) {
-                    params = match[2].split(',');
-                }
-
-                const actFunc = H.ACTIVATIONS[match[1]];
-
-                if (!actFunc) {
-                    console.warn('Activation not founded', match[1]);
+                if (!act.actFunc) {
+                    console.warn('Activation not founded "%s".', act.name);
                     throw 0;
                 }
 
-                return {
-                    act: actFunc,
-                    params
-                };
+                return act;
             });
         } else if (info.type === H.CARD_TYPES.minion) {
             this.acts = [{ act: H.ACTIVATIONS['card-summon']}];

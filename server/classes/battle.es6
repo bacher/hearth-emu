@@ -119,10 +119,9 @@ H.Battle = class Battle {
                 break;
 
             case 'play-card':
-                data.handCard.base.acts.forEach(actInfo => {
-                    actInfo.act({
+                data.handCard.base.acts.forEach(act => {
+                    act.actFunc({
                         params: data,
-                        actParams: actInfo.params,
                         player
                     });
                 });

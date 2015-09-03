@@ -9,8 +9,18 @@
     "flags": [],
     "target": "minions",
     "acts": [
-      "restore-full-hp",
-      "give-flag:taunt"
+      {
+        "name": "restore-full-hp",
+        "params": [
+          ""
+        ]
+      },
+      {
+        "name": "give-flag",
+        "params": [
+          "taunt"
+        ]
+      }
     ]
   },
   {
@@ -43,8 +53,18 @@
     "flags": [],
     "target": "not-need",
     "acts": [
-      "gain-crystal-this-turn",
-      "gain-crystal-this-turn"
+      {
+        "name": "gain-crystal-this-turn",
+        "params": [
+          ""
+        ]
+      },
+      {
+        "name": "gain-crystal-this-turn",
+        "params": [
+          ""
+        ]
+      }
     ]
   },
   {
@@ -113,7 +133,12 @@
     ],
     "target": "not-need",
     "acts": [
-      "add-mana:1"
+      {
+        "name": "add-mana",
+        "params": [
+          "1"
+        ]
+      }
     ]
   },
   {
@@ -126,7 +151,13 @@
     "flags": [],
     "target": "not-need",
     "acts": [
-      "give-attack-race:2,totem"
+      {
+        "name": "give-attack-race",
+        "params": [
+          "2",
+          "totem"
+        ]
+      }
     ]
   },
   {
@@ -139,8 +170,18 @@
     "flags": [],
     "target": "minions",
     "acts": [
-      "silence",
-      "deal-damage:1"
+      {
+        "name": "silence",
+        "params": [
+          ""
+        ]
+      },
+      {
+        "name": "deal-damage",
+        "params": [
+          "1"
+        ]
+      }
     ]
   },
   {
@@ -171,8 +212,18 @@
     "flags": [],
     "target": "not-need",
     "acts": [
-      "deal-damage-random-enemy-minions:2",
-      "overload:2"
+      {
+        "name": "deal-damage-random-enemy-minions",
+        "params": [
+          "2"
+        ]
+      },
+      {
+        "name": "overload",
+        "params": [
+          "2"
+        ]
+      }
     ]
   },
   {
@@ -185,8 +236,18 @@
     "flags": [],
     "target": "enemies",
     "acts": [
-      "deal-damage:1",
-      "freeze"
+      {
+        "name": "deal-damage",
+        "params": [
+          "1"
+        ]
+      },
+      {
+        "name": "freeze",
+        "params": [
+          ""
+        ]
+      }
     ]
   },
   {
@@ -255,8 +316,18 @@
     "flags": [],
     "target": "all",
     "acts": [
-      "deal-damage:3",
-      "overload:1"
+      {
+        "name": "deal-damage",
+        "params": [
+          "3"
+        ]
+      },
+      {
+        "name": "overload",
+        "params": [
+          "1"
+        ]
+      }
     ]
   },
   {
@@ -449,7 +520,12 @@
     "flags": [],
     "target": "minions",
     "acts": [
-      "give-deathrattle:resummon"
+      {
+        "name": "give-deathrattle",
+        "params": [
+          "resummon"
+        ]
+      }
     ]
   },
   {
@@ -566,9 +642,24 @@
     "flags": [],
     "target": "not-need",
     "acts": [
-      "summon:Feral Spirit",
-      "summon:Feral Spirit",
-      "overload:2"
+      {
+        "name": "summon",
+        "params": [
+          "Feral Spirit"
+        ]
+      },
+      {
+        "name": "summon",
+        "params": [
+          "Feral Spirit"
+        ]
+      },
+      {
+        "name": "overload",
+        "params": [
+          "2"
+        ]
+      }
     ]
   },
   {
@@ -599,8 +690,15 @@
     "flags": [],
     "target": "not-need",
     "acts": [
-      "deal-damage-enemy-minions:2-3",
-      "overload:2"
+      {
+        "name": "deal-damage",
+        "params": "2-3",
+        "targets": "enemy-minions"
+      },
+      {
+        "name": "overload",
+        "params": "2"
+      }
     ]
   },
   {

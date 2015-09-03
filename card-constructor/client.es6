@@ -72,10 +72,13 @@ $.ajax('/cards.json').then(data => {
 
             $spell.find('.target').val(card.target);
 
-            $spell.find('.act').val('');
+            $spell.find('.act-command').val('');
+            $spell.find('.act-targets').val('');
 
             card.acts.forEach((act, i) => {
-                $spell.find('.act').eq(i).val(act);
+                const $act = $spell.find('.act').eq(i);
+                $act.find('.act-command').val(act.name + ':' + act.params.join(','));
+                $act.find('.act-targets').val(act.targets);
             });
         }
 
@@ -188,11 +191,24 @@ $.ajax('/cards.json').then(data => {
 
                 card.target = $spell.find('.target').val() || 'not-need';
 
-                card.acts = $spell.find('.act').map((i, act) => {
-                    const text = $(act).val();
+                card.acts = $spell.find('.act').map((i, actNode) => {
+                    const $act = $(actNode);
 
-                    if (text) {
-                        return text.trim();
+                    const command = $act.find('.act-command').val();
+                    const targets = $act.find('.act-targets').val().trim();
+                    const [name, params] = command.split(':');
+
+                    if (name) {
+                        const act = {
+                            name: name.trim(),
+                            params: params.trim()
+                        };
+
+                        if (targets) {
+                            act.targets = targets;
+                        }
+
+                        return act;
                     }
                 }).get();
             }
