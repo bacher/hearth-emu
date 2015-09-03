@@ -356,6 +356,14 @@ H.updateInGameData = function() {
         $('.deck-helper.' + side + ' .value').text(player.deck.count);
     });
 
+    const hero = game.my.hero;
+
+    $('.stats .crystals')
+        .removeClass()
+        .addClass('crystals')
+        .addClass('cn' + hero.mana)
+        .addClass('co' + (hero.crystals - hero.mana));
+
     $('.hand-helper.op .value').text(game.op.hand.length);
 
     $('.end-turn').toggleClass('active', game.my.active);

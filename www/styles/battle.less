@@ -417,15 +417,39 @@
   .table {
     position: absolute;
     width: 178px;
-    height: 108px;
-    background: url("../textures/table.png");
+    height: 0;
+    background: url("../textures/table_body.png");
     text-align: left;
     cursor: default;
     pointer-events: none;
     display: none;
 
+    &:before {
+      position: absolute;
+      bottom: 100%;
+      width: 185px;
+      height: 56px;
+      content: "";
+      background: url("../textures/table_top-bottom.png") 0 100%;
+    }
+
+    &:after {
+      position: absolute;
+      top: 100%;
+      width: 185px;
+      height: 56px;
+      content: "";
+      background: url("../textures/table_top-bottom.png");
+    }
+
+    .header, .text {
+      position: absolute;
+      z-index: 1;
+    }
+
     .header {
-      margin: 18px 0 0 33px;
+      top: -36px;
+      left: 36px;
       font-size: 16px;
       font-family: "Belwe Bold", Times, serif;
       font-weight: bold;
@@ -434,25 +458,28 @@
     }
 
     .text {
-      margin: 7px 17px 0 33px;
+      top: -10px;
+      left: 36px;
+      width: 128px;
       font-size: 12px;
       color: #FDFDFD;
+
+      .value {
+        margin: 0 3px;
+      }
     }
 
-    .value {
-      margin: 0 3px;
-    }
   }
 
   .deck-helper {
     &.op {
-      top: 8px;
-      left: -144px;
+      top: 63px;
+      left: -140px;
     }
 
     &.my {
-      top: 4px;
-      left: -151px;
+      top: 57px;
+      left: -150px;
     }
   }
 
@@ -961,6 +988,65 @@
       width: 78px;
       height: 32px;
       background: url("../textures/targeting-arrow.png");
+    }
+
+  }
+
+  .crystals {
+    position: absolute;
+    top: 6px;
+    left: 67px;
+
+    &:hover .table {
+      display: block;
+      top: -58px;
+      left: -121px;
+      height: 12px;
+    }
+
+    &.cn1 .normal, &.co1 .off {
+      width: 21px;
+    }
+    &.cn2 .normal, &.co2 .off  {
+      width: 42px;
+    }
+    &.cn3 .normal, &.co3 .off  {
+      width: 63px;
+    }
+    &.cn4 {
+      width: 84px;
+    }
+    &.cn5 {
+      width: 105px;
+    }
+    &.cn6 {
+      width: 126px;
+    }
+    &.cn7 {
+      width: 147px;
+    }
+    &.cn8 {
+      width: 168px;
+    }
+    &.cn9 {
+      width: 189px;
+    }
+    &.cn10 {
+      width: 210px;
+    }
+
+    .normal {
+      display: inline-block;
+      width: 0;
+      height: 22px;
+      background: url("../textures/mana-gem.png");
+    }
+
+    .off {
+      display: inline-block;
+      width: 0;
+      height: 22px;
+      background: url("../textures/mana-gem_off.png");
     }
 
   }
