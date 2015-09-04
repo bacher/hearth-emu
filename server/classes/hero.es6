@@ -119,4 +119,12 @@ H.Hero = class Hero {
 
         this._useSkill();
     }
+
+    dealDamage(amount) {
+        this.hp -= amount;
+
+        if (this.hp <= 0) {
+            // TODO: Death
+        }
+    }
 };

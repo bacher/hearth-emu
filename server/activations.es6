@@ -100,7 +100,7 @@ H.ACTIVATIONS = {
     },
     'heal': function(o) {
         o.targets.forEach(target => {
-            target.hp += o.params[0];
+            target.hp += this.params[0];
             if (target.hp > target.maxHp) {
                 target.hp = target.maxHp;
             }

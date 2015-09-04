@@ -223,7 +223,7 @@ H.Battle = class Battle extends EventEmitter {
                 targets
             });
         } else if (creatureId) {
-            targets = H.TARGETS.getTargets('physic', player).getGameData();
+            targets = H.TARGETS.getTargets(player, 'physic').getGameData();
 
             player.sendMessage('targets', {
                 creatureId,

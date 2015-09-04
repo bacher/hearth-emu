@@ -183,7 +183,7 @@
         ],
         "targetsType": {
           "names": [
-            "friendly",
+            "friends",
             "totems"
           ],
           "mergeType": "intersect"
@@ -689,6 +689,41 @@
     }
   },
   {
+    "id": 112,
+    "name": "Holy Nova",
+    "cost": 2,
+    "pic": "147/366/671",
+    "clas": 9,
+    "type": 2,
+    "flags": [],
+    "acts": [
+      {
+        "name": "deal-damage",
+        "params": [
+          2
+        ],
+        "targetsType": {
+          "names": [
+            "enemies"
+          ],
+          "mergeType": "intersect"
+        }
+      },
+      {
+        "name": "heal",
+        "params": [
+          2
+        ],
+        "targetsType": {
+          "names": [
+            "friends"
+          ],
+          "mergeType": "intersect"
+        }
+      }
+    ]
+  },
+  {
     "id": 22,
     "name": "Succubus",
     "cost": 2,
@@ -719,26 +754,6 @@
       "events": {
         "aura": "spell-damage:1"
       },
-      "race": 0
-    }
-  },
-  {
-    "id": 16,
-    "name": "Feral Spirit",
-    "cost": 3,
-    "pic": "148/136/214",
-    "clas": 2,
-    "type": 1,
-    "flags": [
-      "uncollectable"
-    ],
-    "minion": {
-      "attack": 2,
-      "maxHp": 3,
-      "flags": [
-        "taunt"
-      ],
-      "events": {},
       "race": 0
     }
   },
@@ -793,6 +808,26 @@
       "names": [
         "not-need"
       ]
+    }
+  },
+  {
+    "id": 16,
+    "name": "Feral Spirit",
+    "cost": 3,
+    "pic": "148/136/214",
+    "clas": 2,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [
+        "taunt"
+      ],
+      "events": {},
+      "race": 0
     }
   },
   {

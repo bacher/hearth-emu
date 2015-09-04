@@ -20,7 +20,7 @@ const T = {
 
         return targets;
     },
-    'friendly': function(player) {
+    'friends': function(player) {
         const targets = new H.Targets(player);
         targets.addMinions(player.creatures.getAll());
         targets.addMyHero();
@@ -39,13 +39,14 @@ const T = {
 
         return targets;
     },
-    //FIXME: BAD NAME FOR TARGETS
     'all': function(player) {
         const targets = new H.Targets(player);
 
+        targets.addMyHero();
         targets.addMinions(player.creatures.getAll());
-        targets.addMinions(player.enemy.creatures.getAll());
+
         targets.addEnemyHero();
+        targets.addMinions(player.enemy.creatures.getAll());
 
         return targets;
     },
@@ -65,6 +66,15 @@ const T = {
 };
 
 H.TARGETS = {
+    getTargets(player, name) {
+        if (!T[name]) {
+            console.warn('Not founded:', name);
+            throw 1;
+        }
+
+        return T[name](player);
+    },
+
     getByTargetsType(player, targetsType) {
         const allTargets = targetsType.names.map(name => T[name](player));
 
