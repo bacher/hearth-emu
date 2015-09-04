@@ -84,6 +84,7 @@ H.ACTIVATIONS = {
             target.detach();
 
             target.player.enemy.creatures.addCreature(target);
+            target.addFlag('sleep');
         });
     },
     'call-totem': function(o) {

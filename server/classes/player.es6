@@ -164,7 +164,7 @@ H.Player = class Player extends EventEmitter {
     _onTurnStart(player) {
         if (this === player) {
             this.activate();
-            this.creatures.wakeUpAll();
+
             this.drawCard();
         }
     }
@@ -174,6 +174,8 @@ H.Player = class Player extends EventEmitter {
             this.deactivate();
 
             this.creatures.resetFlag('freeze');
+
+            this.creatures.wakeUpAll();
         }
     }
 

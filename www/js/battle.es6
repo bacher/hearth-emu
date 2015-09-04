@@ -280,8 +280,6 @@ H.updateInGameData = function() {
 
     $('.battle').toggleClass('active', game.my.active);
 
-    $('.available').removeClass('available');
-
     const $hand = $('.hand.my .cards').empty();
     const $handOp = $('.hand.op .cards').empty();
 
@@ -357,8 +355,11 @@ H.updateInGameData = function() {
             });
 
             const $minion = $container.children();
-            if (side === 'my' && !minion.flags['sleep'] && !minion.flags['tired'] && minion.attack > 0) {
-                $minion.addClass('available');
+
+            if (game.my.active) {
+                if (side === 'my' && !minion.flags['sleep'] && !minion.flags['tired'] && minion.attack > 0) {
+                    $minion.addClass('available');
+                }
             }
             $creatures.append($minion);
         });
