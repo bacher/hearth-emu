@@ -43,13 +43,14 @@ H.ACTIVATIONS = {
     'give-attack-race': function(o) {
     },
     'deal-damage-random-enemy-minions': function(o) {},
-    'freeze': function(o) {},
     'give-deathrattle': function(o) {},
     '': function(o) {},
     'restore-full-hp': function(o) {
         o.params.target.hp = o.params.target.maxHp;
     },
-    'give-flag': function(o) {
-        o.params.target.flags[this.params[0]] = true;
+    'add-flag': function(o) {
+        this.params.forEach(flag => {
+            o.params.target.flags[flag] = true;
+        });
     }
 };

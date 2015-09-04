@@ -137,7 +137,18 @@
       left: -6px;
       width: 91px;
       height: 122px;
+      pointer-events: none;
       background: url("../textures/shield.png");
+    }
+
+    &.freeze .overlay:after {
+      position: absolute;
+      top: -20px;
+      left: -27px;
+      width: 137px;
+      height: 145px;
+      content: "";
+      background: url("../textures/freeze.png");
     }
 
     .attack, .hp {

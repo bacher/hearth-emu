@@ -118,6 +118,9 @@ H.Player = class Player extends EventEmitter {
 
     activate() {
         this.active = true;
+
+        // BAD SOLUTION
+        this.creatures.resetOnEndTurnEffects();
     }
 
     deactivate() {

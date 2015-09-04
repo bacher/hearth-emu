@@ -11,12 +11,10 @@
     "acts": [
       {
         "name": "restore-full-hp",
-        "params": [
-          ""
-        ]
+        "params": []
       },
       {
-        "name": "give-flag",
+        "name": "add-flag",
         "params": [
           "taunt"
         ]
@@ -55,15 +53,11 @@
     "acts": [
       {
         "name": "gain-crystal-this-turn",
-        "params": [
-          ""
-        ]
+        "params": []
       },
       {
         "name": "gain-crystal-this-turn",
-        "params": [
-          ""
-        ]
+        "params": []
       }
     ]
   },
@@ -172,9 +166,7 @@
     "acts": [
       {
         "name": "silence",
-        "params": [
-          ""
-        ]
+        "params": []
       },
       {
         "name": "deal-damage",
@@ -243,9 +235,10 @@
         ]
       },
       {
-        "name": "freeze",
+        "name": "add-flag",
         "params": [
-          ""
+          "freeze",
+          "tired"
         ]
       }
     ]
@@ -692,12 +685,16 @@
     "acts": [
       {
         "name": "deal-damage",
-        "params": "2-3",
+        "params": [
+          "2-3"
+        ],
         "targetsType": "enemy-minions"
       },
       {
         "name": "overload",
-        "params": "2"
+        "params": [
+          "2"
+        ]
       }
     ]
   },

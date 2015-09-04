@@ -22,7 +22,8 @@ H.Minion = class Minion {
         this.flags = _.clone(this.base.flags);
 
         if (!this.base.flags['charge']) {
-            this.flags.sleep = true;
+            this.flags['sleep'] = true;
+            this.flags['tired'] = true;
         }
 
         if (this.card.name === 'Wrath of Air Totem') {
