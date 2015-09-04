@@ -1,6 +1,8 @@
 
 const H = require('./namespace');
 
+const SILENCE_IGNORE_FLAGS = ['tired', 'freeze', 'sleep'];
+
 H.ACTIVATIONS = {
     'card-summon': function(o) {
         const card = H.CARDS.getById(this.params[0]);
@@ -37,7 +39,24 @@ H.ACTIVATIONS = {
 
     'overload': function(o) {},
 
-    'silence': function(o) {},
+    'silence': function(o) {
+        o.targets.forEach(target => {
+            var base = target.base;
+
+            for (var flag of target.flags) {
+                if (!base.flags[flag] && !_.contains(SILENCE_IGNORE_FLAGS, flag)) {
+                    delete target.flags[flag];
+                }
+            }
+
+            target.maxHp = base.maxHp;
+            if (target.hp > target.maxHp) {
+                target.hp = target.maxHp;
+            }
+
+            target.addFlag('silence');
+        });
+    },
 
     'gain-crystal-this-turn': function(o) {
         o.player.hero.mana += 1;

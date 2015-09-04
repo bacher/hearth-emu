@@ -131,17 +131,15 @@
       background: url("../textures/card-fire-glow-square.png");
     }
 
-    &.taunt .overlay {
-      position: absolute;
+    &.taunt .o1 {
       top: -10px;
       left: -6px;
       width: 91px;
       height: 122px;
-      pointer-events: none;
       background: url("../textures/shield.png");
     }
 
-    &.freeze .overlay:after {
+    &.freeze .o1:after {
       position: absolute;
       top: -20px;
       left: -27px;
@@ -149,6 +147,19 @@
       height: 145px;
       content: "";
       background: url("../textures/freeze.png");
+    }
+
+    &.silence .o2 {
+      top: -10px;
+      left: -6px;
+      width: 96px;
+      height: 107px;
+      background: url("../textures/silence.png");
+    }
+
+    .overlay {
+      position: absolute;
+      pointer-events: none;
     }
 
     .attack, .hp {
