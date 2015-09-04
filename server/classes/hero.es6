@@ -18,6 +18,8 @@ H.Hero = class Hero {
         this.crystals = 0;
         this.skillUsed = false;
         this.id = 'hero';
+
+        this.flags = {};
     }
 
     static create(player, clas) {
@@ -62,7 +64,8 @@ H.Hero = class Hero {
             mana: this.mana,
             crystals: this.crystals,
             skillUsed: this.skillUsed,
-            canUseSkill: this.canUseSkill()
+            canUseSkill: this.canUseSkill(),
+            flags: this.flags
         };
     }
 

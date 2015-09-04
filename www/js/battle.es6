@@ -10,9 +10,9 @@ new H.Screen({
 
         var dragging = false;
         var aimTargeting = false;
-        var heroTargeting = false;
+        var spellTargeting = false;
         var $dragCard;
-        var $aimingMinion = null;
+        var $aimingObject = null;
 
         const $cardPreview = $('<DIV>')
             .addClass('card-preview')
@@ -74,7 +74,7 @@ new H.Screen({
                     $('.hero.my .avatar').addClass('casting');
 
                     aimTargeting = true;
-                    heroTargeting = true;
+                    spellTargeting = true;
 
                     $dragAim.css({
                         bottom: 167,
@@ -89,32 +89,32 @@ new H.Screen({
                 $card.hide();
 
             })
-            .on('mousedown', '.creature.available', e => {
+            .on('mousedown', '.avatar.my.available, .creature.my.available', e => {
                 if (!H.battleData.my.active) { return; }
 
-                $aimingMinion = $(e.currentTarget);
+                $aimingObject = $(e.currentTarget);
 
                 dragging = true;
 
                 send('get-targets', {
-                    creatureId: $aimingMinion.data('id')
+                    creatureId: $aimingObject.data('id')
                 });
 
                 aimTargeting = true;
-                heroTargeting = false;
+                spellTargeting = false;
 
-                const minionPosition = $aimingMinion.offset();
+                const minionPosition = $aimingObject.offset();
 
                 $dragAim.css({
-                    bottom: 720 - (minionPosition.top + $aimingMinion.outerHeight() / 2),
-                    left: minionPosition.left + $aimingMinion.outerWidth() / 2
+                    bottom: 720 - (minionPosition.top + $aimingObject.outerHeight() / 2),
+                    left: minionPosition.left + $aimingObject.outerWidth() / 2
                 });
 
-                $dragAim.data('linked-card', $aimingMinion[0]);
+                $dragAim.data('linked-card', $aimingObject[0]);
 
                 $dragAim.show();
 
-                $aimingMinion.addClass('aiming');
+                $aimingObject.addClass('aiming');
 
             })
             .on('mousemove', e => {
@@ -125,17 +125,17 @@ new H.Screen({
 
                         var sourcePos;
 
-                        if (heroTargeting) {
+                        if (spellTargeting) {
                             sourcePos = {
                                 x: 643,
                                 y: 548
                             };
                         } else {
-                            const minionPosition = $aimingMinion.offset();
+                            const minionPosition = $aimingObject.offset();
                             sourcePos = {
                                 // TODO: Why +4/+20 ?
-                                x: minionPosition.left + $aimingMinion.outerWidth() / 2 + 4,
-                                y: minionPosition.top + $aimingMinion.outerWidth() / 2 + 20
+                                x: minionPosition.left + $aimingObject.outerWidth() / 2 + 4,
+                                y: minionPosition.top + $aimingObject.outerWidth() / 2 + 20
                             };
                         }
 
@@ -171,15 +171,10 @@ new H.Screen({
                     const $target = $(e.target);
 
                     if (aimTargeting) {
-
                         const $purpose = $target.closest('.purpose');
                         var purposeId;
 
-                        if ($purpose.hasClass('creature')) {
-                            purposeId = $purpose.data('id');
-                        } else {
-                            purposeId = 'hero'
-                        }
+                        purposeId = $purpose.data('id');
 
                         const $collection = $purpose.closest('.my, .op');
                         const targetSide = $collection.hasClass('my') ? 'my' : 'op';
@@ -187,7 +182,7 @@ new H.Screen({
                         if ($purpose.length) {
                             const $myCard = $($dragAim.data('linked-card'));
 
-                            if (heroTargeting) {
+                            if (spellTargeting) {
                                 send('play-card', {
                                     id: $myCard.data('id'),
                                     targetSide: targetSide,
@@ -203,7 +198,7 @@ new H.Screen({
 
                         } else {
                             const $source = $($dragAim.data('linked-card'));
-                            if (heroTargeting) {
+                            if (spellTargeting) {
                                 $source.show();
                             } else {
                                 $source.removeClass('aiming');
@@ -213,7 +208,7 @@ new H.Screen({
                         $('.hero.my .avatar').removeClass('casting');
                         $dragAim.hide();
 
-                        heroTargeting = false;
+                        spellTargeting = false;
                         aimTargeting = false;
 
                     } else {
@@ -301,6 +296,8 @@ H.updateInGameData = function() {
         $hand.append($cardWrapper);
     });
 
+
+    $('.avatar.my').toggleClass('available', game.my.active && game.my.hero.attack > 0 && !game.my.hero.flags['tired']);
 
     $('.hero-skill.my')
         .toggleClass('available', game.my.active && game.my.hero.canUseSkill)

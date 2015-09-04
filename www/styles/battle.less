@@ -86,18 +86,18 @@
     }
   }
 
+  .creature.aiming, .avatar.aiming {
+    transform-origin: 50% 50%;
+    transform: scale(1.12);
+  }
+
   .creature {
     position: relative;
     display: inline-block;
     margin-right: 16px;
     width: 76px;
     height: 108px;
-    transform-origin: 50% 50%;
     transition: transform ease-out 0.2s;
-
-    &.aiming {
-      transform: scale(1.12);
-    }
 
     &.available:not(.aiming):not(.purpose):before {
       position: absolute;
@@ -287,6 +287,16 @@
     width: 108px;
     height: 124px;
     background: url("../textures/hero_shaman.png");
+
+    &.available:before {
+      position: absolute;
+      content: "";
+      left: -8px;
+      top: -9px;
+      width: 124px;
+      height: 107px;
+      background: url("../textures/hero-glow.png");
+    }
 
     &:hover:after {
       position: absolute;
@@ -1059,6 +1069,7 @@
 
     transform: rotate(0deg);
     transform-origin: 50% 100%;
+    pointer-events: none;
 
     &.aim:before {
       position: absolute;
@@ -1068,7 +1079,6 @@
       width: 82px;
       height: 82px;
       background: url("../textures/target.png");
-      pointer-events: none;
     }
 
     &:after {
