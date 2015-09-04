@@ -758,7 +758,7 @@
         ],
         "targetsType": {
           "names": [
-            "enemy",
+            "enemies",
             "minions"
           ],
           "mergeType": "intersect"

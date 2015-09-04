@@ -103,6 +103,8 @@ H.Player = class Player extends EventEmitter {
 
         this.battle.on('turn-end', this._onTurnEnd.bind(this));
         this.battle.on('turn-start', this._onTurnStart.bind(this));
+
+        this.emit('battle-enter', battle);
     }
 
     sendMessage(msg, json) {
@@ -184,9 +186,6 @@ H.Player = class Player extends EventEmitter {
         if (this === player) {
             this.activate();
             this.creatures.wakeUpAll();
-            this.hero.addCrystal();
-            this.hero.restoreMana();
-            this.hero.skillUsed = false;
             this.drawCard();
         }
     }

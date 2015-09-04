@@ -376,7 +376,9 @@ H.updateInGameData = function() {
         .removeClass()
         .addClass('crystals')
         .addClass('cn' + hero.mana)
-        .addClass('co' + (hero.crystals - hero.mana));
+        .addClass('co' + (hero.crystals - hero.mana - hero.overload))
+        .addClass('cl' + hero.overload)
+        .addClass('no' + hero.nextOverload);
 
     $('.hand-helper.op .value').text(game.op.hand.length);
 

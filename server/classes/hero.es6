@@ -14,12 +14,26 @@ H.Hero = class Hero {
         this.hp = 30;
         this.armor = 0;
         this.spellDamage = 0;
+
         this.mana = 0;
         this.crystals = 0;
+        this.overload = 0;
+        this.nextOverload = 0;
+
         this.skillUsed = false;
         this.id = 'hero';
 
         this.flags = {};
+
+        this.player.on('battle-enter', battle => {
+            this.battle = battle;
+
+            battle.on('turn-start', player => {
+                if (player === this.player) {
+                    this._onTurnStart();
+                }
+            });
+        });
     }
 
     static create(player, clas) {
@@ -44,7 +58,7 @@ H.Hero = class Hero {
     }
 
     restoreMana() {
-        this.mana = this.crystals;
+        this.mana = this.crystals - this.overload;
     }
 
     removeMana(count) {
@@ -62,6 +76,8 @@ H.Hero = class Hero {
             armor: this.armor,
             spellDamage: this.spellDamage,
             mana: this.mana,
+            overload: this.overload,
+            nextOverload: this.nextOverload,
             crystals: this.crystals,
             skillUsed: this.skillUsed,
             canUseSkill: this.canUseSkill(),
@@ -79,6 +95,20 @@ H.Hero = class Hero {
 
     canUseSkill() {
         return !this.skillUsed && this.mana >= 2;
+    }
+
+    addOverload(count) {
+        this.nextOverload += count;
+    }
+
+    _onTurnStart() {
+        this.overload = this.nextOverload;
+        this.nextOverload = 0;
+
+        this.addCrystal();
+        this.restoreMana();
+
+        this.skillUsed = false;
     }
 
     useSkill() {

@@ -37,7 +37,9 @@ H.ACTIVATIONS = {
         });
     },
 
-    'overload': function(o) {},
+    'overload': function(o) {
+        o.player.hero.addOverload(this.params[0]);
+    },
 
     'silence': function(o) {
         o.targets.forEach(target => {

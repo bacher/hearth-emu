@@ -168,7 +168,7 @@ H.Battle = class Battle extends EventEmitter {
                     act.actFunc({
                         params: data,
                         player,
-                        battle,
+                        battle: this,
                         targets: targets
                     });
                 });

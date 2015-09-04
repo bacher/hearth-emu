@@ -1116,34 +1116,34 @@
       height: 12px;
     }
 
-    &.cn1 .normal, &.co1 .off {
+    &.cn1 .normal, &.co1 .off, &.cl1 .lock, &.no1 .next-overload {
       width: 21px;
     }
-    &.cn2 .normal, &.co2 .off {
+    &.cn2 .normal, &.co2 .off, &.cl2 .lock, &.no2 .next-overload {
       width: 42px;
     }
-    &.cn3 .normal, &.co3 .off {
+    &.cn3 .normal, &.co3 .off, &.cl3 .lock, &.no3 .next-overload {
       width: 63px;
     }
-    &.cn4 .normal, &.co4 .off {
+    &.cn4 .normal, &.co4 .off, &.cl4 .lock, &.no4 .next-overload {
       width: 84px;
     }
-    &.cn5 .normal, &.co5 .off {
+    &.cn5 .normal, &.co5 .off, &.cl5 .lock, &.no5 .next-overload {
       width: 105px;
     }
-    &.cn6 .normal, &.co6 .off {
+    &.cn6 .normal, &.co6 .off, &.cl6 .lock, &.no6 .next-overload {
       width: 126px;
     }
-    &.cn7 .normal, &.co7 .off {
+    &.cn7 .normal, &.co7 .off, &.cl7 .lock, &.no7 .next-overload {
       width: 147px;
     }
-    &.cn8 .normal, &.co8 .off {
+    &.cn8 .normal, &.co8 .off, &.cl8 .lock, &.no8 .next-overload {
       width: 168px;
     }
-    &.cn9 .normal, &.co9 .off {
+    &.cn9 .normal, &.co9 .off, &.cl9 .lock, &.no9 .next-overload {
       width: 189px;
     }
-    &.cn10 .normal, &.co10 .off {
+    &.cn10 .normal, &.co10 .off, &.cl10 .lock, &.no10 .next-overload {
       width: 210px;
     }
 
@@ -1159,6 +1159,21 @@
       width: 0;
       height: 22px;
       background: url("../textures/mana-gem_off.png");
+    }
+
+    .lock {
+      display: inline-block;
+      width: 0;
+      height: 22px;
+      background: url("../textures/gem-lock.png") repeat-x 0 2px;
+    }
+
+    .next-overload {
+      position: absolute;
+      right: 0;
+      width: 0;
+      height: 19px;
+      background: url("../textures/gem-lock.png");
     }
 
   }
