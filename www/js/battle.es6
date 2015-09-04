@@ -89,7 +89,7 @@ new H.Screen({
                 $card.hide();
 
             })
-            .on('mousedown', '.avatar.my.available, .creature.my.available', e => {
+            .on('mousedown', '.avatar.my.available, .creatures.my .creature.available', e => {
                 if (!H.battleData.my.active) { return; }
 
                 $aimingObject = $(e.currentTarget);

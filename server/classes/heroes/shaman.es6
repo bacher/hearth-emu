@@ -18,7 +18,7 @@ H.Shaman = class Shaman extends H.Hero {
     canUseSkill() {
         const totemsLeft = this.totems.filter(totem => !this.player.creatures.hasCardCreature(totem));
 
-        return !this.skillUsed && totemsLeft.length !== 0;
+        return !this.skillUsed && this.mana >= 2 && totemsLeft.length !== 0;
     }
 
     _useSkill() {
@@ -29,7 +29,7 @@ H.Shaman = class Shaman extends H.Hero {
         if (totemsLeft.length) {
             const totem = totemsLeft[Math.floor(Math.random() * totemsLeft.length)];
 
-            creatures.addCreature(new H.Minion(this.player, totem));
+            creatures.addCreature(new H.Minion(totem));
         }
     }
 };

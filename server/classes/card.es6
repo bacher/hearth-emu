@@ -22,10 +22,6 @@ H.Card = class Card {
         if (info.type === H.CARD_TYPES.spell) {
             this.target = info.target;
 
-            if (this.target !== 'not-need') {
-                this.getTargets = H.TARGETS[info.target];
-            }
-
             this.acts = info.acts.map(act => {
                 act.actFunc = H.ACTIVATIONS[act.name];
 

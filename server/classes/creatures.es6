@@ -7,9 +7,12 @@ const MAX_MINIONS_COUNT = 7;
 
 
 H.Creatures = class Creatures {
-    constructor() {
+    constructor(player) {
+        this.player = player;
         this.creatures = [];
-        this.graveyard = [];
+
+        this._onCreatureDeath = this._onCreatureDeath.bind(this);
+        this._onCreatureDetach = this._onCreatureDetach.bind(this);
     }
 
     canAddCreature() {
@@ -19,6 +22,11 @@ H.Creatures = class Creatures {
     addCreature(minion) {
         if (this.canAddCreature()) {
             this.creatures.push(minion);
+
+            minion.enterInGame(this.player);
+
+            minion.on('death', this._onCreatureDeath);
+            minion.on('detach', this._onCreatureDetach);
         }
     }
 
@@ -72,9 +80,19 @@ H.Creatures = class Creatures {
         return this.creatures.filter(creature => creature.is('taunt'));
     }
 
-    onCreatureDeath(creat) {
+    _removeCreature(creat) {
         const index = this.getCreatureIndex(creat);
         this.creatures.splice(index, 1);
-        this.graveyard.push(creat);
+
+        creat.removeListener('death', this._onCreatureDeath);
+        creat.removeListener('detach', this._onCreatureDetach);
+    }
+
+    _onCreatureDetach(creat) {
+        this._removeCreature(creat);
+    }
+
+    _onCreatureDeath(creat) {
+        this._removeCreature(creat);
     }
 };

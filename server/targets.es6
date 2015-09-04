@@ -3,65 +3,88 @@ const _ = require('lodash');
 const H = require('./namespace');
 
 
-const T = H.TARGETS = {
+H.TARGETS = {
+    getTargets(name, params) {
+        return T[name](params);
+    },
 
-    'enemies': function(o) {
-        const targets = T['enemy-minions'](o);
-        targets.addMinions(o.player.enemy.creatures.getAll());
+    mix(player, targetsType) {
+        const allTargets = targetsType.names.map(name => H.TARGETS.get(name, {
+            player
+        }));
+
+        const targets = allTargets.reduce((base, nextTarget) => {
+            return base[targetsType.mergeType](nextTarget);
+        });
+
+        if (targetsType.modificators) {
+            targetsType.modificators.forEach(mod => {
+                targets[mod.name](...mod.params);
+            });
+        }
+
+        return targets;
+    }
+};
+
+const T = {
+    'enemies': function(player) {
+        const targets = T['enemy-minions'](player);
+        targets.addMinions(player.enemy.creatures.getAll());
         targets.addEnemyHero();
 
         return targets;
     },
-    'minions': function(o) {
-        return T['friendly-minions'](o).merge(T['enemy-minions'](o));
+    'minions': function(player) {
+        return T['friendly-minions'](player).merge(T['enemy-minions'](player));
     },
-    'totems': function(o) {
-        const targets = new H.Targets(o.player);
+    'totems': function(player) {
+        const targets = new H.Targets(player);
 
-        targets.addMinions(o.player.creatures.getAllByRace(H.RACES['totem']));
+        targets.addMinions(player.creatures.getAllByRace(H.RACES['totem']));
 
         return targets;
     },
-    'friendly': function(o) {
-        const targets = new H.Targets(o.player);
-        targets.addMinions(o.player.creatures.getAll());
+    'friendly': function(player) {
+        const targets = new H.Targets(player);
+        targets.addMinions(player.creatures.getAll());
         targets.addMyHero();
 
         return targets;
     },
-    'friendly-minions': function(o) {
-        const targets = new H.Targets(o.player);
-        targets.addMinions(o.player.creatures.getAll());
+    'friendly-minions': function(player) {
+        const targets = new H.Targets(player);
+        targets.addMinions(player.creatures.getAll());
 
         return targets;
     },
-    'enemy-minions': function(o) {
-        const targets = new H.Targets(o.player);
-        targets.addMinions(o.player.enemy.creatures.getAll());
+    'enemy-minions': function(player) {
+        const targets = new H.Targets(player);
+        targets.addMinions(player.enemy.creatures.getAll());
 
         return targets;
     },
     //FIXME: BAD NAME FOR TARGETS
-    'all': function(o) {
-        const targets = new H.Targets(o.player);
+    'all': function(player) {
+        const targets = new H.Targets(player);
 
-        targets.addMinions(o.player.creatures.getAll());
-        targets.addMinions(o.player.enemy.creatures.getAll());
+        targets.addMinions(player.creatures.getAll());
+        targets.addMinions(player.enemy.creatures.getAll());
         targets.addEnemyHero();
 
         return targets;
     },
-    'physic': function(o) {
-        const taunts = o.player.enemy.creatures.getTauntMinions();
+    'physic': function(player) {
+        const taunts = player.enemy.creatures.getTauntMinions();
 
         if (taunts.length) {
-            const targets = new H.Targets(o.player);
+            const targets = new H.Targets(player);
 
             targets.addMinions(taunts);
 
             return targets;
         } else {
-            return T['enemies'](o);
+            return T['enemies'](player);
         }
     }
 };

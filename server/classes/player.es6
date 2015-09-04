@@ -23,7 +23,7 @@ H.Player = class Player extends EventEmitter {
         this.deck = null;
         this.hero = null;
         this.hand = new H.Hand();
-        this.creatures = new H.Creatures();
+        this.creatures = new H.Creatures(this);
 
         ws
             .on('message', json => {

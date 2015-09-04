@@ -1,16 +1,12 @@
 
-//const EventEmitter = require('events').EventEmitter;
+const EventEmitter = require('events').EventEmitter;
 const _ = require('lodash');
 const H = require('../namespace');
 
 
-H.Minion = class Minion {
-    constructor(player, card) {
-        this.player = player;
-        this.battle = player.battle;
-
-        Object.defineProperty(this, 'player', { enumerable: false });
-        Object.defineProperty(this, 'battle', { enumerable: false });
+H.Minion = class Minion extends EventEmitter {
+    constructor(card) {
+        super();
 
         this.id = _.uniqueId('minion');
 
@@ -22,15 +18,28 @@ H.Minion = class Minion {
         this.flags = _.clone(this.base.flags);
         this.race = this.base.race;
 
+        this._auras = [];
+        Object.defineProperty(this, '_auras', { enumerable: false });
+
         if (!this.base.flags['charge']) {
             this.flags['sleep'] = true;
             this.flags['tired'] = true;
         }
+    }
+
+    static createByName(name) {
+        return new H.Minion(H.CARDS.getByName(name, H.CARD_TYPES.minion));
+
+    }
+
+    enterInGame(player) {
+        this.player = player;
+        Object.defineProperty(this, 'player', { enumerable: false });
 
         if (this.card.name === 'Wrath of Air Totem') {
-            this.aura = new H.Aura(player, 'spellDamage', 1);
-            Object.defineProperty(this, 'aura', { enumerable: false });
-            this.battle.auras.addAura(this.aura);
+            const aura = new H.Aura(player, 'spellDamage', 1);
+            this._auras.push(aura);
+            this.player.battle.auras.addAura(aura);
         }
     }
 
@@ -50,12 +59,22 @@ H.Minion = class Minion {
         }
     }
 
-    kill() {
-        if (this.card.name === 'Wrath of Air Totem') {
-            this.battle.auras.removeAura(this.aura);
-        }
+    removeAuras() {
+        this._auras.forEach(aura => {
+            this.player.battle.auras.removeAura(aura);
+        });
+    }
 
-        this.player.creatures.onCreatureDeath(this);
+    detach() {
+        removeAuras();
+
+        this.emit('detach');
+    }
+
+    kill() {
+        removeAuras();
+
+        this.emit('death');
     }
 
     is(prop) {

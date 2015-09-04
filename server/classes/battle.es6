@@ -148,20 +148,7 @@ H.Battle = class Battle extends EventEmitter {
                         const targetsType = act.targetsType;
 
                         if (targetsType.names.length > 1 || targetsType.names[0] !== 'not-need') {
-
-                            const allTargets = targetsType.names.map(name => H.TARGETS[name]({
-                                player
-                            }));
-
-                            targets = allTargets.reduce((base, nextTarget) => {
-                                return base[targetsType.mergeType](nextTarget);
-                            });
-                        }
-
-                        if (targetsType.modificators) {
-                            targetsType.modificators.forEach(mod => {
-                                targets[mod.name](...mod.params);
-                            });
+                            targets = H.TARGETS.mix(player, targetsType);
                         }
                     }
 
@@ -220,29 +207,22 @@ H.Battle = class Battle extends EventEmitter {
 
                     let targets;
 
-                    if (handCard.base.getTargets) {
-                        targets = handCard.base.getTargets({
-                            battle: this,
-                            player,
-                            handCard
-                        });
+                    if (handCard.base.target) {
+                        targets = H.TARGETS.getTargets(handCard.base.target, player).getGameData();
                     } else {
                         targets = 'not-need';
                     }
 
                     player.sendMessage('targets', {
-                        cardId: cardId,
-                        targets: targets.getGameData()
+                        cardId,
+                        targets
                     });
                 } else if (creatureId) {
-                    let targets = H.TARGETS['physic']({
-                        battle: this,
-                        player
-                    });
+                    let targets = H.TARGETS.getTargets('physic', player).getGameData();
 
                     player.sendMessage('targets', {
-                        creatureId: creatureId,
-                        targets: targets.getGameData()
+                        creatureId,
+                        targets
                     });
                 }
                 break;

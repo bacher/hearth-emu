@@ -6,9 +6,8 @@ const SILENCE_IGNORE_FLAGS = ['tired', 'freeze', 'sleep'];
 H.ACTIVATIONS = {
     'card-summon': function(o) {
         const card = H.CARDS.getById(this.params[0]);
-        const newMinion = new H.Minion(o.player, card);
 
-        o.player.creatures.addCreature(newMinion);
+        o.player.creatures.addCreature(new H.Minion(card));
     },
 
     'add-mana': function(o) {
@@ -67,7 +66,7 @@ H.ACTIVATIONS = {
     'summon': function(o) {
         const minionCardName = this.params[0];
 
-        const minion = new H.Minion(o.player, H.CARDS.getByName(minionCardName, H.CARD_TYPES.minion));
+        const minion = H.Minion.createByName(minionCardName);
 
         o.player.creatures.addCreature(minion);
     },
@@ -80,6 +79,13 @@ H.ACTIVATIONS = {
     'add-flag': function(o) {
         this.params.forEach(flag => {
             o.params.target.flags[flag] = true;
+        });
+    },
+    'switch-owner': function(o) {
+        o.targets.forEach(target => {
+            target.detach();
+
+            target.player.enemy.creatures.addCreature(target);
         });
     }
 };
