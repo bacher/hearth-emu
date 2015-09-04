@@ -372,7 +372,31 @@
     }
   }
 
-  .health .value, .armor .value {
+  .attack {
+    position: absolute;
+    display: none;
+    width: 41px;
+    height: 41px;
+    text-align: center;
+    background: url("../textures/hero-attack.png");
+
+    &.op {
+      left: -16px;
+      bottom: -6px;
+    }
+
+    &.my {
+      left: -16px;
+      bottom: -6px;
+    }
+
+    .value {
+      margin-top: 11px;
+      margin-left: 8px;
+    }
+  }
+
+  .health .value, .armor .value, .attack .value {
     display: inline-block;
     color: #FFF;
 
@@ -651,8 +675,9 @@
   .decor1 {
     display: block;
     position: absolute;
-    top: 466px;
-    left: 41px;
+    top: 464px;
+    left: 43px;
+
     width: 150px;
     height: 86px;
     background: url("../textures/waterfall-fluids-2.png");
@@ -661,8 +686,8 @@
 
   .decor1:after {
     position: absolute;
-    top: -34px;
-    left: 11px;
+    top: -32px;
+    left: 9px;
     width: 167px;
     height: 155px;
     content: "";

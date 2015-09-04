@@ -357,9 +357,15 @@ H.updateInGameData = function() {
             $creatures.append($minion);
         });
 
-        $('.avatar.' + side + ' .health .value').text(hero.hp);
-        $('.avatar.' + side + ' .armor').toggle(hero.armor > 0);
-        $('.avatar.' + side + ' .armor .value').text(hero.armor);
+        const $avatar = $('.avatar.' + side);
+
+        $avatar.find('.health .value').text(hero.hp);
+
+        $avatar.find('.armor').toggle(hero.armor > 0)
+            .find('.value').text(hero.armor);
+
+        $avatar.find('.attack').toggle(hero.attack > 0)
+            .find('.value').text(hero.attack);
 
         $('.stats.' + side + ' .mana .active').text(hero.mana);
         $('.stats.' + side + ' .mana .all').text(hero.crystals);
