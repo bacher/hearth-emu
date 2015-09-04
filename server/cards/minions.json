@@ -7,7 +7,6 @@
     "clas": 2,
     "type": 2,
     "flags": [],
-    "target": "minions",
     "acts": [
       {
         "name": "restore-full-hp",
@@ -19,7 +18,13 @@
           "taunt"
         ]
       }
-    ]
+    ],
+    "targetsType": {
+      "mergeType": "intersect",
+      "names": [
+        "minions"
+      ]
+    }
   },
   {
     "id": 50,
@@ -49,7 +54,6 @@
     "clas": 6,
     "type": 2,
     "flags": [],
-    "target": "not-need",
     "acts": [
       {
         "name": "gain-crystal-this-turn",
@@ -71,7 +75,13 @@
           "mergeType": "intersect"
         }
       }
-    ]
+    ],
+    "targetsType": {
+      "mergeType": "intersect",
+      "names": [
+        "not-need"
+      ]
+    }
   },
   {
     "id": 51,
@@ -137,7 +147,6 @@
     "flags": [
       "uncollectable"
     ],
-    "target": "not-need",
     "acts": [
       {
         "name": "add-mana",
@@ -150,7 +159,13 @@
           ]
         }
       }
-    ]
+    ],
+    "targetsType": {
+      "mergeType": "intersect",
+      "names": [
+        "not-need"
+      ]
+    }
   },
   {
     "id": 110,
@@ -160,7 +175,6 @@
     "clas": 2,
     "type": 2,
     "flags": [],
-    "target": "not-need",
     "acts": [
       {
         "name": "give-hp",
@@ -175,7 +189,13 @@
           "mergeType": "intersect"
         }
       }
-    ]
+    ],
+    "targetsType": {
+      "mergeType": "intersect",
+      "names": [
+        "not-need"
+      ]
+    }
   },
   {
     "id": 102,
@@ -185,7 +205,6 @@
     "clas": 2,
     "type": 2,
     "flags": [],
-    "target": "minions",
     "acts": [
       {
         "name": "silence",
@@ -197,7 +216,13 @@
           "1"
         ]
       }
-    ]
+    ],
+    "targetsType": {
+      "mergeType": "intersect",
+      "names": [
+        "minions"
+      ]
+    }
   },
   {
     "id": 53,
@@ -225,7 +250,6 @@
     "clas": 2,
     "type": 2,
     "flags": [],
-    "target": "not-need",
     "acts": [
       {
         "name": "deal-damage",
@@ -260,7 +284,13 @@
           "mergeType": "intersect"
         }
       }
-    ]
+    ],
+    "targetsType": {
+      "mergeType": "intersect",
+      "names": [
+        "not-need"
+      ]
+    }
   },
   {
     "id": 108,
@@ -270,7 +300,6 @@
     "clas": 2,
     "type": 2,
     "flags": [],
-    "target": "enemies",
     "acts": [
       {
         "name": "deal-damage",
@@ -285,7 +314,13 @@
           "tired"
         ]
       }
-    ]
+    ],
+    "targetsType": {
+      "mergeType": "intersect",
+      "names": [
+        "enemies"
+      ]
+    }
   },
   {
     "id": 54,
@@ -351,7 +386,6 @@
     "clas": 2,
     "type": 2,
     "flags": [],
-    "target": "all",
     "acts": [
       {
         "name": "deal-damage",
@@ -371,7 +405,13 @@
           "mergeType": "intersect"
         }
       }
-    ]
+    ],
+    "targetsType": {
+      "mergeType": "intersect",
+      "names": [
+        "all"
+      ]
+    }
   },
   {
     "id": 56,
@@ -397,7 +437,13 @@
     "clas": 9,
     "type": 2,
     "flags": [],
-    "target": "enemies&minions",
+    "targetsType": {
+      "names": [
+        "enemies",
+        "minions"
+      ],
+      "mergeType": "intersect"
+    },
     "acts": [
       {
         "name": "switch-owner",
@@ -577,7 +623,6 @@
     "clas": 2,
     "type": 2,
     "flags": [],
-    "target": "minions",
     "acts": [
       {
         "name": "give-deathrattle",
@@ -585,7 +630,13 @@
           "resummon"
         ]
       }
-    ]
+    ],
+    "targetsType": {
+      "mergeType": "intersect",
+      "names": [
+        "minions"
+      ]
+    }
   },
   {
     "id": 9,
@@ -699,7 +750,6 @@
     "clas": 2,
     "type": 2,
     "flags": [],
-    "target": "not-need",
     "acts": [
       {
         "name": "summon",
@@ -737,7 +787,13 @@
           "mergeType": "intersect"
         }
       }
-    ]
+    ],
+    "targetsType": {
+      "mergeType": "intersect",
+      "names": [
+        "not-need"
+      ]
+    }
   },
   {
     "id": 28,
@@ -765,7 +821,6 @@
     "clas": 2,
     "type": 2,
     "flags": [],
-    "target": "not-need",
     "acts": [
       {
         "name": "deal-damage",
@@ -792,7 +847,13 @@
           "mergeType": "intersect"
         }
       }
-    ]
+    ],
+    "targetsType": {
+      "mergeType": "intersect",
+      "names": [
+        "not-need"
+      ]
+    }
   },
   {
     "id": 19,

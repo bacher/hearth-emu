@@ -101,7 +101,7 @@ $.ajax('/cards.json').then(data => {
         } else if (card.type === CARD_TYPES.spell) {
             $spell.show();
 
-            $spell.find('.target').val(card.target);
+            $spell.find('.target').val(card.targetsType.names.reduce((name1, name2) => name1 + '&' + name2));
 
             $spell.find('.act-command').val('');
             $spell.find('.act-targets').val('');
@@ -233,7 +233,12 @@ $.ajax('/cards.json').then(data => {
 
             } else if (card.type === CARD_TYPES.spell) {
 
-                card.target = $spell.find('.target').val() || 'not-need';
+                const targets = $spell.find('.target').val() || 'not-need';
+
+                card.targetsType = {
+                    names: targets.split('&'),
+                    mergeType: 'intersect'
+                };
 
                 card.acts = $spell.find('.act').map((i, actNode) => {
                     const $act = $(actNode);

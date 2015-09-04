@@ -3,7 +3,8 @@ const H = require('../namespace');
 
 const Constructors = {
     [H.CLASSES.shaman]: 'Shaman',
-    [H.CLASSES.druid]: 'Druid'
+    [H.CLASSES.druid]: 'Druid',
+    [H.CLASSES.priest]: 'Priest'
 };
 
 H.Hero = class Hero {

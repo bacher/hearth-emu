@@ -70,15 +70,15 @@ H.Minion = class Minion extends EventEmitter {
     }
 
     detach() {
-        removeAuras();
+        this.removeAuras();
 
-        this.emit('detach');
+        this.emit('detach', this);
     }
 
     kill() {
-        removeAuras();
+        this.removeAuras();
 
-        this.emit('death');
+        this.emit('death', this);
     }
 
     is(prop) {

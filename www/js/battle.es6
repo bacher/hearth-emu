@@ -51,11 +51,11 @@ new H.Screen({
 
                 const $card = $(e.currentTarget);
 
-                const targetType = $card.data('target');
+                const isNeedTarget = $card.data('need-target');
 
                 dragging = true;
 
-                if (targetType === 'not-need') {
+                if (!isNeedTarget) {
                     $('.battle').addClass('dragging');
 
                     $dragCard = $card.clone();
@@ -155,7 +155,7 @@ new H.Screen({
 
 
                         const $purpose = $(e.target).closest('.purpose');
-                        $('.targeting').toggleClass('aim', $purpose.length > 0)
+                        $('.targeting').toggleClass('aim', $purpose.length > 0);
 
                     } else {
                         $dragCard.css({
@@ -279,6 +279,8 @@ H.updateInGameData = function() {
     const game = H.battleData;
 
     $('.battle').toggleClass('active', game.my.active);
+
+    $('.available').removeClass('available');
 
     const $hand = $('.hand.my .cards').empty();
     const $handOp = $('.hand.op .cards').empty();

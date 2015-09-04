@@ -201,8 +201,10 @@ H.Battle = class Battle extends EventEmitter {
         if (cardId) {
             const handCard = player.hand.getCardById(cardId);
 
-            if (handCard.base.target) {
-                targets = H.TARGETS.getTargets(handCard.base.target, player).getGameData();
+            if (handCard.base.targetsType) {
+                targets = H.TARGETS
+                    .getByTargetsType(player, handCard.base.targetsType)
+                    .getGameData();
             } else {
                 targets = 'not-need';
             }
@@ -212,7 +214,9 @@ H.Battle = class Battle extends EventEmitter {
                 targets
             });
         } else if (creatureId === 'hero-skill') {
-            targets = H.TARGETS.getByTargetsType(player, player.hero.heroSkill.targetsType);
+            targets = H.TARGETS
+                .getByTargetsType(player, player.hero.heroSkill.targetsType)
+                .getGameData();
 
             player.sendMessage('targets', {
                 creatureId,
@@ -237,7 +241,7 @@ H.Battle = class Battle extends EventEmitter {
 
         var cardTargets = null;
 
-        if (card.target !== 'not-need') {
+        if (card.targetsType) {
             cardTargets = H.Targets.parseUserData(player, data);
         }
 

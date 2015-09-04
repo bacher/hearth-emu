@@ -2,31 +2,6 @@
 const _ = require('lodash');
 const H = require('./namespace');
 
-
-H.TARGETS = {
-    getTargets(name, params) {
-        return T[name](params);
-    },
-
-    getByTargetsType(player, targetsType) {
-        const allTargets = targetsType.names.map(name => H.TARGETS.get(name, {
-            player
-        }));
-
-        const targets = allTargets.reduce((base, nextTarget) => {
-            return base[targetsType.mergeType](nextTarget);
-        });
-
-        if (targetsType.modificators) {
-            targetsType.modificators.forEach(mod => {
-                targets[mod.name](...mod.params);
-            });
-        }
-
-        return targets;
-    }
-};
-
 const T = {
     'enemies': function(player) {
         const targets = T['enemy-minions'](player);
@@ -86,5 +61,23 @@ const T = {
         } else {
             return T['enemies'](player);
         }
+    }
+};
+
+H.TARGETS = {
+    getByTargetsType(player, targetsType) {
+        const allTargets = targetsType.names.map(name => T[name](player));
+
+        const targets = allTargets.reduce((base, nextTarget) => {
+            return base[targetsType.mergeType](nextTarget);
+        });
+
+        if (targetsType.modificators) {
+            targetsType.modificators.forEach(mod => {
+                targets[mod.name](...mod.params);
+            });
+        }
+
+        return targets;
     }
 };

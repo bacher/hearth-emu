@@ -13,6 +13,6 @@ H.Priest = class Priest extends H.Hero {
             targetsType: {
                 names: ['all']
             }
-        }
+        };
     }
 };

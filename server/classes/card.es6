@@ -10,7 +10,6 @@ H.Card = class Card {
         this.clas = info.clas || 0;
         this.rarity = info.rarity || 0;
         this.pic = info.pic;
-        this.target = 'not-need';
         this.flags = {};
 
         if (info.flags) {
@@ -20,7 +19,7 @@ H.Card = class Card {
         }
 
         if (info.type === H.CARD_TYPES.spell) {
-            this.target = info.target;
+            this.targetsType = info.targetsType;
 
             this.acts = info.acts.map(act => {
                 act.actFunc = H.ACTIVATIONS[act.name];
@@ -32,6 +31,7 @@ H.Card = class Card {
 
                 return act;
             });
+
         } else if (info.type === H.CARD_TYPES.minion) {
             this.acts = [{
                 actFunc: H.ACTIVATIONS['card-summon'],

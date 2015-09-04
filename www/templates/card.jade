@@ -1,6 +1,6 @@
 
 if locals.id
-   .card-wrap(data-id=id,data-target=base.target)
+   .card-wrap(data-id=id,data-need-target=base.targetsType?'need':null)
       .card
          IMG(src="http://media-hearth.cursecdn.com/avatars/"+base.pic+".png")
 else
