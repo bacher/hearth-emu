@@ -68,3 +68,25 @@ H.CARD_TYPES_L = [
     'weapon',
     'trap'
 ];
+
+H.RACES = {
+    general: 0,
+    beast: 1,
+    demon: 2,
+    dragon: 3,
+    mechanical: 4,
+    murloc: 5,
+    pirate: 6,
+    totem: 7
+};
+
+H.RACES_L = [
+    'General',
+    'Beast',
+    'Demon',
+    'Dragon',
+    'Mechanical',
+    'Murloc',
+    'Pirate',
+    'Totem'
+];

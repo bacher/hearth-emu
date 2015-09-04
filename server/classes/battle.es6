@@ -1,11 +1,14 @@
 
 const fs = require('fs');
 const _ = require('lodash');
+const EventEmitter = require('events').EventEmitter;
 
 const H = require('../namespace');
 
-H.Battle = class Battle {
+H.Battle = class Battle extends EventEmitter {
     constructor(player1, player2) {
+        super();
+
         this.players = _.shuffle([player1, player2]);
         this.p1 = this.players[0];
         this.p2 = this.players[1];
@@ -119,10 +122,47 @@ H.Battle = class Battle {
                 break;
 
             case 'play-card':
-                data.handCard.base.acts.forEach(act => {
+                const card = data.handCard.base;
+                var cardTargets = null;
+
+                if (card.target !== 'not-need') {
+                    cardTargets = new H.Targets({ player });
+
+                    const targetPlayer = (params.targetSide === 'op' ? player.enemy : player);
+
+                    if (params.target === 'hero') {
+                        cardTargets.addHero(targetPlayer.hero);
+                    } else {
+                        const target = targetPlayer.creatures.getCreatureByCrid(params.target);
+
+                        cardTargets.addMinion(target);
+                    }
+                }
+
+                card.acts.forEach(act => {
+                    var targets = null;
+
+                    if (cardTargets) {
+                        targets = cardTargets;
+                    } else {
+                        const targetsType = act.targetsType;
+
+                        if (targetsType.names.length > 1 || targetsType.names[0] !== 'not-need') {
+
+                            const allTargets = targetsType.names.map(name => H.TARGETS[name]({
+                                player
+                            }));
+
+                            targets = allTargets.reduce((base, nextTarget) => {
+                                return base[targetsType.mergeType](nextTarget);
+                            });
+                        }
+                    }
+
                     act.actFunc({
                         params: data,
-                        player
+                        player,
+                        targets: targets
                     });
                 });
                 break;
@@ -231,13 +271,8 @@ H.Battle = class Battle {
     switchTurn() {
         const players = this.getPlayers();
 
-        players[0].deactivate();
+        this.emit('turn-end', players[0]);
 
-        players[1].activate();
-        players[1].creatures.wakeUpAll();
-        players[1].hero.addCrystal();
-        players[1].hero.restoreMana();
-        players[1].hero.skillUsed = false;
-        players[1].drawCard();
+        this.emit('turn-start', players[1]);
     }
 };

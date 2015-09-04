@@ -32,6 +32,10 @@ function drawCards() {
 
 $.ajax('/cards.json').then(data => {
 
+    if (window.location.search.toLowerCase() === '?byid') {
+        data.cards = data.cards.sort((card1, card2) => card1.id - card2.id);
+    }
+
     maxCardId = data.maxCardId;
     cards = data.cards;
 
@@ -83,7 +87,12 @@ $.ajax('/cards.json').then(data => {
                     commandParamPart = ':' + act.params.join(',');
                 }
                 $act.find('.act-command').val(act.name + commandParamPart);
-                $act.find('.act-targets').val(act.targetsType);
+
+                const targets = act.targetsType.names.reduce((base, name) => {
+                    return base + '&' + name;
+                });
+
+                $act.find('.act-targets').val(targets);
             });
         }
 
@@ -204,13 +213,27 @@ $.ajax('/cards.json').then(data => {
                     const [name, params] = command.split(':').map(part => part.trim());
 
                     if (name) {
+                        const actParams = params && params.split(/\s*,\s*/).map(value => {
+                            const number = Number(value);
+                            if (!isNaN(number)) {
+                                return number;
+                            } else {
+                                value;
+                            }
+                        });
+
                         const act = {
                             name: name,
-                            params: params && params.split(/\s*,\s*/) || []
+                            params: actParams || []
                         };
 
                         if (targetsType) {
-                            act.targetsType = targetsType;
+                            const targetsDetails = targetsType.split('&');
+
+                            act.targetsType = {
+                                names: targetsDetails,
+                                mergeType: 'intersect'
+                            };
                         }
 
                         return act;

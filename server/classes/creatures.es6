@@ -36,9 +36,9 @@ H.Creatures = class Creatures {
         });
     }
 
-    resetOnEndTurnEffects() {
+    resetFlag(flag) {
         this.creatures.forEach(creature => {
-            creature['freeze'] = false;
+            delete creature[flag];
         });
     }
 
@@ -62,6 +62,10 @@ H.Creatures = class Creatures {
 
     getAllIds() {
         return this.creatures.map(minion => minion.id);
+    }
+
+    getAllByRace(race) {
+        return this.creatures.filter(creature => creature.race === race);
     }
 
     getTauntMinions() {

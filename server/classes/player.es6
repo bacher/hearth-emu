@@ -100,6 +100,9 @@ H.Player = class Player extends EventEmitter {
         this.battle = battle;
 
         this.enemy = battle.getOpponent(this);
+
+        this.battle.on('turn-end', this._onTurnEnd.bind(this));
+        this.battle.on('turn-start', this._onTurnStart.bind(this));
     }
 
     sendMessage(msg, json) {
@@ -118,9 +121,6 @@ H.Player = class Player extends EventEmitter {
 
     activate() {
         this.active = true;
-
-        // BAD SOLUTION
-        this.creatures.resetOnEndTurnEffects();
     }
 
     deactivate() {
@@ -147,16 +147,11 @@ H.Player = class Player extends EventEmitter {
     playCard(params) {
         const handCard = this.hand.getHandCard(params.id);
 
-        const targetPlayer = (params.targetSide === 'op' ? this.enemy : this);
-
-        const target = targetPlayer.creatures.getCreatureByCrid(params.target);
-
         this.emit('message', {
             msg: 'play-card',
             data: {
                 handCard,
-                targetPlayer,
-                target
+                params
             }
         });
 
@@ -184,4 +179,24 @@ H.Player = class Player extends EventEmitter {
             creatures: this.creatures.getGameData()
         };
     }
+
+    _onTurnStart(player) {
+        if (this === player) {
+            this.activate();
+            this.creatures.wakeUpAll();
+            this.hero.addCrystal();
+            this.hero.restoreMana();
+            this.hero.skillUsed = false;
+            this.drawCard();
+        }
+    }
+
+    _onTurnEnd(player) {
+        if (this === player) {
+            this.deactivate();
+
+            this.creatures.resetFlag('freeze');
+        }
+    }
+
 };

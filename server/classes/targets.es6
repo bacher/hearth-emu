@@ -1,4 +1,5 @@
 
+const _ = require('lodash');
 const H = require('../namespace');
 
 H.Targets = class Targets {
@@ -15,20 +16,34 @@ H.Targets = class Targets {
         };
     }
 
+    addMinion(minion) {
+        var destination;
+
+        if (minion.player === this.player) {
+            destination = this.my.minions;
+        } else {
+            destination = this.op.minions;
+        }
+
+        if (destination.indexOf(minion) === -1) {
+            destination.push(minion);
+        }
+    }
+
     addMinions(minions) {
-        minions.forEach(minion => {
-            var destination;
+        minions.forEach(minion => this.addMinion(minion));
+    }
 
-            if (minion.player === this.player) {
-                destination = this.my.minions;
-            } else {
-                destination = this.op.minions;
-            }
+    addHero(hero) {
+        if (hero.player === this.player) {
+            this.addMyHero();
+        } else {
+            this.addEnemyHero();
+        }
+    }
 
-            if (destination.indexOf(minion) === -1) {
-                destination.push(minion);
-            }
-        });
+    addMyHero() {
+        this.my.hero = true;
     }
 
     addEnemyHero() {
@@ -60,6 +75,16 @@ H.Targets = class Targets {
         if (this.op.hero) {
             func(this.player.enemy.hero);
         }
+    }
+
+    intersect(that) {
+        this.my.hero = this.my.hero && that.my.hero;
+        this.op.hero = this.op.hero && that.op.hero;
+
+        this.my.minions = _.intersection(this.my.minions, that.my.minions);
+        this.op.minions = _.intersection(this.op.minions, that.op.minions);
+
+        return this;
     }
 
     getGameData() {

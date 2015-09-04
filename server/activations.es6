@@ -13,6 +13,22 @@ H.ACTIVATIONS = {
         o.player.hero.addMana(1);
     },
 
+    'give-attack': function(o) {
+        const amount = this.params[0];
+        o.targets.forEach(target => {
+            target.attack += amount;
+        });
+    },
+
+    'give-hp': function(o) {
+        const amount = this.params[0];
+
+        o.targets.forEach(target => {
+            target.maxHp += amount;
+            target.hp += amount;
+        });
+    },
+
     'deal-damage': function(o) {
         const damage = this.params[0];
 
@@ -39,8 +55,6 @@ H.ACTIVATIONS = {
         const minion = new H.Minion(o.player, H.CARDS.getByName(minionCardName, H.CARD_TYPES.minion));
 
         o.player.creatures.addCreature(minion);
-    },
-    'give-attack-race': function(o) {
     },
     'deal-damage-random-enemy-minions': function(o) {},
     'give-deathrattle': function(o) {},

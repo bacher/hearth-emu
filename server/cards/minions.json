@@ -131,7 +131,12 @@
         "name": "add-mana",
         "params": [
           "1"
-        ]
+        ],
+        "targetsType": {
+          "names": [
+            "not-need"
+          ]
+        }
       }
     ]
   },
@@ -146,11 +151,17 @@
     "target": "not-need",
     "acts": [
       {
-        "name": "give-attack-race",
+        "name": "give-hp",
         "params": [
-          "2",
-          "totem"
-        ]
+          2
+        ],
+        "targetsType": {
+          "names": [
+            "friendly",
+            "totems"
+          ],
+          "mergeType": "intersect"
+        }
       }
     ]
   },
@@ -688,7 +699,13 @@
         "params": [
           "2-3"
         ],
-        "targetsType": "enemy-minions"
+        "targetsType": {
+          "names": [
+            "enemy",
+            "minions"
+          ],
+          "mergeType": "intersection"
+        }
       },
       {
         "name": "overload",

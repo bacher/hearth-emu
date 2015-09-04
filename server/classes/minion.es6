@@ -20,6 +20,7 @@ H.Minion = class Minion {
         this.hp = this.base.maxHp;
         this.maxHp = this.base.maxHp;
         this.flags = _.clone(this.base.flags);
+        this.race = this.base.race;
 
         if (!this.base.flags['charge']) {
             this.flags['sleep'] = true;
