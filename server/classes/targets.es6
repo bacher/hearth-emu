@@ -52,7 +52,7 @@ H.Targets = class Targets {
 
     merge(that) {
         ['my', 'op'].forEach(side => {
-            this[side].hero = this[side].hero || thia[side].hero;
+            this[side].hero = this[side].hero || that[side].hero;
 
             that[side].minions.forEach(minion => {
                 if (this[side].minions.indexOf(minion) === -1) {
@@ -85,6 +85,42 @@ H.Targets = class Targets {
         this.op.minions = _.intersection(this.op.minions, that.op.minions);
 
         return this;
+    }
+
+    random(count) {
+        const objects = this.my.minions.concat(this.op.minions);
+
+        if (this.my.hero) {
+            objects.push('my-hero');
+        }
+
+        if (this.op.hero) {
+            objects.push('op-hero');
+        }
+
+        this.my = {
+            minions: [],
+            hero: false
+        };
+
+        this.op = {
+            minions: [],
+            hero: false
+        };
+
+        for (var i = 0; i < count && objects.length; ++i) {
+            const index = Math.floor(Math.random() * objects.length);
+            const obj = objects[index];
+            objects.splice(index, 1);
+
+            const side = this[obj.player === this.player ? 'my' : 'op'];
+
+            if (obj === 'my-hero' || obj === 'op-hero') {
+                side.hero = true;
+            } else {
+                side.minions.push(obj);
+            }
+        }
     }
 
     getGameData() {

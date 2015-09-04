@@ -53,11 +53,23 @@
     "acts": [
       {
         "name": "gain-crystal-this-turn",
-        "params": []
+        "params": [],
+        "targetsType": {
+          "names": [
+            "not-need"
+          ],
+          "mergeType": "intersect"
+        }
       },
       {
         "name": "gain-crystal-this-turn",
-        "params": []
+        "params": [],
+        "targetsType": {
+          "names": [
+            "not-need"
+          ],
+          "mergeType": "intersect"
+        }
       }
     ]
   },
@@ -216,16 +228,37 @@
     "target": "not-need",
     "acts": [
       {
-        "name": "deal-damage-random-enemy-minions",
+        "name": "deal-damage",
         "params": [
-          "2"
-        ]
+          2
+        ],
+        "targetsType": {
+          "names": [
+            "enemies",
+            "minions"
+          ],
+          "mergeType": "intersect",
+          "modificators": [
+            {
+              "name": "random",
+              "params": [
+                2
+              ]
+            }
+          ]
+        }
       },
       {
         "name": "overload",
         "params": [
-          "2"
-        ]
+          2
+        ],
+        "targetsType": {
+          "names": [
+            "not-need"
+          ],
+          "mergeType": "intersect"
+        }
       }
     ]
   },
@@ -323,14 +356,20 @@
       {
         "name": "deal-damage",
         "params": [
-          "3"
+          3
         ]
       },
       {
         "name": "overload",
         "params": [
-          "1"
-        ]
+          1
+        ],
+        "targetsType": {
+          "names": [
+            "not-need"
+          ],
+          "mergeType": "intersect"
+        }
       }
     ]
   },
@@ -650,19 +689,37 @@
         "name": "summon",
         "params": [
           "Feral Spirit"
-        ]
+        ],
+        "targetsType": {
+          "names": [
+            "not-need"
+          ],
+          "mergeType": "intersect"
+        }
       },
       {
         "name": "summon",
         "params": [
           "Feral Spirit"
-        ]
+        ],
+        "targetsType": {
+          "names": [
+            "not-need"
+          ],
+          "mergeType": "intersect"
+        }
       },
       {
         "name": "overload",
         "params": [
-          "2"
-        ]
+          2
+        ],
+        "targetsType": {
+          "names": [
+            "not-need"
+          ],
+          "mergeType": "intersect"
+        }
       }
     ]
   },
@@ -704,14 +761,20 @@
             "enemy",
             "minions"
           ],
-          "mergeType": "intersection"
+          "mergeType": "intersect"
         }
       },
       {
         "name": "overload",
         "params": [
-          "2"
-        ]
+          2
+        ],
+        "targetsType": {
+          "names": [
+            "not-need"
+          ],
+          "mergeType": "intersect"
+        }
       }
     ]
   },

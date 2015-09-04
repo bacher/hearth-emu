@@ -30,17 +30,9 @@ H.ACTIVATIONS = {
     },
 
     'deal-damage': function(o) {
-        const damage = this.params[0];
-
-        if (this.targetsType) {
-            H.TARGETS[this.targetsType]({
-                player: o.player
-            }).forEach(target => {
-                target.dealDamage(damage);
-            });
-        } else {
-            o.params.target.dealDamage(damage);
-        }
+        o.targets.forEach(target => {
+            target.dealDamage(this.params[0]);
+        });
     },
 
     'overload': function(o) {},

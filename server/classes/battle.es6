@@ -157,6 +157,12 @@ H.Battle = class Battle extends EventEmitter {
                                 return base[targetsType.mergeType](nextTarget);
                             });
                         }
+
+                        if (targetsType.modificators) {
+                            targetsType.modificators.forEach(mod => {
+                                targets[mod.name](...mod.params);
+                            });
+                        }
                     }
 
                     act.actFunc({

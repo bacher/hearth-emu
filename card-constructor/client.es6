@@ -216,15 +216,7 @@ $.ajax('/cards.json').then(data => {
                     const [name, params] = command.split(':').map(part => part.trim());
 
                     if (name) {
-                        const actParams = params && params.split(/\s*,\s*/).map(value => {
-                            const number = Number(value);
-
-                            if (!isNaN(number)) {
-                                return number;
-                            } else {
-                                return value;
-                            }
-                        });
+                        const actParams = params && params.split(/\s*,\s*/).map(tryParseNumber);
 
                         const act = {
                             name: name,
@@ -232,12 +224,26 @@ $.ajax('/cards.json').then(data => {
                         };
 
                         if (targetsType) {
-                            const targetsDetails = targetsType.split('&');
+
+                            const match = targetsType.match(/^([^\.]+)(?:\.(.+))?$/);
+                            const targetsDetails = match[1].split('&');
 
                             act.targetsType = {
                                 names: targetsDetails,
                                 mergeType: 'intersect'
                             };
+
+                            if (match[2]) {
+                                const mods = match[2].split(',');
+                                act.targetsType.modificators = mods.map(mod => {
+                                    const modMatch = mod.match(/^([^(]+)\(([^)])\)/);
+
+                                    return {
+                                        name: modMatch[1],
+                                        params: modMatch[2] && modMatch[2].split(',').map(tryParseNumber)
+                                    };
+                                });
+                            }
                         }
 
                         return act;
@@ -278,6 +284,16 @@ $.ajax('/cards.json').then(data => {
 
         $minion.toggle(type === CARD_TYPES.minion);
         $spell.toggle(type === CARD_TYPES.spell);
+    }
+
+    function tryParseNumber(value) {
+        const number = Number(value);
+
+        if (!isNaN(number)) {
+            return number;
+        } else {
+            return value;
+        }
     }
 
 });
