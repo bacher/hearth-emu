@@ -2,13 +2,15 @@
 const H = require('../namespace');
 
 const Constructors = {
-    [H.CLASSES.shaman]: 'Shaman'
+    [H.CLASSES.shaman]: 'Shaman',
+    [H.CLASSES.druid]: 'Druid'
 };
 
 H.Hero = class Hero {
     constructor(player) {
         this.player = player;
 
+        this.attack = 0;
         this.hp = 30;
         this.armor = 0;
         this.spellDamage = 0;
@@ -52,16 +54,15 @@ H.Hero = class Hero {
     }
 
     getBaseData() {
-        const totemsLeft = this.totems.filter(totem => !this.player.creatures.hasCardCreature(totem));
-
         return {
+            attack: this.attack,
             hp: this.hp,
             armor: this.armor,
             spellDamage: this.spellDamage,
             mana: this.mana,
             crystals: this.crystals,
             skillUsed: this.skillUsed,
-            canUseSkill: totemsLeft.length !== 0 && this.mana >= 2 && !this.skillUsed
+            canUseSkill: this.canUseSkill()
         };
     }
 
@@ -71,6 +72,10 @@ H.Hero = class Hero {
 
     getClientData() {
         return this.getData();
+    }
+
+    canUseSkill() {
+        return !this.skillUsed && this.mana >= 2;
     }
 
     useSkill() {

@@ -358,6 +358,8 @@ H.updateInGameData = function() {
         });
 
         $('.avatar.' + side + ' .health .value').text(hero.hp);
+        $('.avatar.' + side + ' .armor').toggle(hero.armor > 0);
+        $('.avatar.' + side + ' .armor .value').text(hero.armor);
 
         $('.stats.' + side + ' .mana .active').text(hero.mana);
         $('.stats.' + side + ' .mana .all').text(hero.crystals);

@@ -346,15 +346,40 @@
     }
 
     .value {
-      display: inline-block;
       margin-top: 10px;
-      color: #FFF;
-
-      font-size: 22px;
-      font-weight: bold;
-      font-family: "Belwe Bold", Times, serif;
-      text-shadow: 0 0 1px #000, 0 0 1px #000, 0 0 2px #000;
     }
+  }
+
+  .armor {
+    position: absolute;
+    display: none;
+    width: 37px;
+    height: 43px;
+    right: -7px;
+    text-align: center;
+    background: url("../textures/hero-shield.png");
+
+    &.op {
+      bottom: 20px;
+    }
+
+    &.my {
+      bottom: 23px;
+    }
+
+    .value {
+      margin-top: 6px;
+    }
+  }
+
+  .health .value, .armor .value {
+    display: inline-block;
+    color: #FFF;
+
+    font-size: 22px;
+    font-weight: bold;
+    font-family: "Belwe Bold", Times, serif;
+    text-shadow: 0 0 1px #000, 0 0 1px #000, 0 0 2px #000;
   }
 
   .weapon {
