@@ -16,6 +16,22 @@ H.Targets = class Targets {
         };
     }
 
+    static parseUserData(player, params) {
+        const targets = new H.Targets(player);
+
+        const targetPlayer = (params.targetSide === 'op' ? player.enemy : player);
+
+        if (params.target === 'hero') {
+            targets.addHero(targetPlayer.hero);
+        } else {
+            const target = targetPlayer.creatures.getCreatureByCrid(params.target);
+
+            targets.addMinion(target);
+        }
+
+        return targets;
+    }
+
     addMinion(minion) {
         var destination;
 

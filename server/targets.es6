@@ -8,7 +8,7 @@ H.TARGETS = {
         return T[name](params);
     },
 
-    mix(player, targetsType) {
+    getByTargetsType(player, targetsType) {
         const allTargets = targetsType.names.map(name => H.TARGETS.get(name, {
             player
         }));

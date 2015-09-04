@@ -44,7 +44,7 @@ H.ACTIVATIONS = {
         o.targets.forEach(target => {
             var base = target.base;
 
-            for (var flag of target.flags) {
+            for (var flag in target.flags) {
                 if (!base.flags[flag] && !_.contains(SILENCE_IGNORE_FLAGS, flag)) {
                     delete target.flags[flag];
                 }
@@ -70,9 +70,7 @@ H.ACTIVATIONS = {
 
         o.player.creatures.addCreature(minion);
     },
-    'deal-damage-random-enemy-minions': function(o) {},
     'give-deathrattle': function(o) {},
-    '': function(o) {},
     'restore-full-hp': function(o) {
         o.params.target.hp = o.params.target.maxHp;
     },
@@ -86,6 +84,25 @@ H.ACTIVATIONS = {
             target.detach();
 
             target.player.enemy.creatures.addCreature(target);
+        });
+    },
+    'call-totem': function(o) {
+        const creatures = o.player.creatures;
+
+        const totemsLeft = o.player.hero.totems.filter(totem => !creatures.hasCardCreature(totem));
+
+        if (totemsLeft.length) {
+            const totem = totemsLeft[Math.floor(Math.random() * totemsLeft.length)];
+
+            creatures.addCreature(new H.Minion(totem));
+        }
+    },
+    'heal': function(o) {
+        o.targets.forEach(target => {
+            target.hp += o.params[0];
+            if (target.hp > target.maxHp) {
+                target.hp = target.maxHp;
+            }
         });
     }
 };

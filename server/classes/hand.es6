@@ -1,4 +1,5 @@
 
+const _ = require('lodash');
 const H = require('../namespace');
 
 const MAX_HAND_CARD_COUNT = 10;
@@ -25,30 +26,11 @@ H.Hand = class Hand {
         this.addCard(H.CARDS.getByName('The Coin'));
     }
 
-    _findHandCard(id) {
-        for (var i = 0; i < this.cards.length; ++i) {
-            if (this.cards[i].id === id) {
-                return {
-                    index: i,
-                    card: this.cards[i]
-                };
-            }
-        }
-
-        return null;
+    getCardById(id) {
+        return _.find(this.cards, { id });
     }
 
-    getHandCard(id) {
-        const info = this._findHandCard(id);
-
-        return info && info.card;
-    }
-
-    removeHandCard(id) {
-        const info = this._findHandCard(id);
-
-        if (info) {
-            this.cards.splice(info.index, 1);
-        }
+    removeHandCard(card) {
+        this.cards.splice(this.cards.indexOf(card), 1);
     }
 };

@@ -122,43 +122,7 @@ H.Battle = class Battle extends EventEmitter {
                 break;
 
             case 'play-card':
-                const card = data.handCard.base;
-                var cardTargets = null;
-
-                if (card.target !== 'not-need') {
-                    cardTargets = new H.Targets({ player });
-
-                    const targetPlayer = (params.targetSide === 'op' ? player.enemy : player);
-
-                    if (params.target === 'hero') {
-                        cardTargets.addHero(targetPlayer.hero);
-                    } else {
-                        const target = targetPlayer.creatures.getCreatureByCrid(params.target);
-
-                        cardTargets.addMinion(target);
-                    }
-                }
-
-                card.acts.forEach(act => {
-                    var targets = null;
-
-                    if (cardTargets) {
-                        targets = cardTargets;
-                    } else {
-                        const targetsType = act.targetsType;
-
-                        if (targetsType.names.length > 1 || targetsType.names[0] !== 'not-need') {
-                            targets = H.TARGETS.mix(player, targetsType);
-                        }
-                    }
-
-                    act.actFunc({
-                        params: data,
-                        player,
-                        battle: this,
-                        targets: targets
-                    });
-                });
+                this._playCard(player, data);
                 break;
 
             case 'end-turn':
@@ -171,64 +135,30 @@ H.Battle = class Battle extends EventEmitter {
                 break;
 
             case 'hit':
-                const enemy = player.getEnemy();
-
-                const by = data.by === 'hero' ?
-                    player.hero :
-                    player.creatures.getCreatureByCrid(data.by);
-
-                //FIXME: add targetSide condition
-                if (data.target === 'hero') {
-                    const opHero = enemy.hero;
-
-                    if (opHero.hp <= by.attack) {
-                        console.log('DEATH');
-                    } else {
-                        opHero.hp -= by.attack;
-                    }
-                } else {
-                    const op = enemy.creatures.getCreatureByCrid(data.target);
-
-                    op.dealDamage(by.attack);
-                }
-
-                by.flags['tired'] = true;
-
-                this.sendGameData();
-
+                this._hit(player, data);
                 break;
 
             case 'get-targets':
-                const cardId = data.cardId;
-                const creatureId = data.creatureId;
-
-                if (cardId) {
-                    const handCard = player.hand.getHandCard(cardId);
-
-                    let targets;
-
-                    if (handCard.base.target) {
-                        targets = H.TARGETS.getTargets(handCard.base.target, player).getGameData();
-                    } else {
-                        targets = 'not-need';
-                    }
-
-                    player.sendMessage('targets', {
-                        cardId,
-                        targets
-                    });
-                } else if (creatureId) {
-                    let targets = H.TARGETS.getTargets('physic', player).getGameData();
-
-                    player.sendMessage('targets', {
-                        creatureId,
-                        targets
-                    });
-                }
+                this._getTargets(player, data);
                 break;
 
             case 'use-hero-skill': {
-                player.hero.useSkill(this, player, data);
+                const heroSkill = player.hero.heroSkill;
+
+                player.hero.mana -= 2;
+
+                var targets = null;
+
+                if (player.hero.heroSkill.targetsType) {
+                    targets = H.Targets.parseUserData(player, data);
+                }
+
+                heroSkill.actFunc({
+                    //params: data,
+                    player,
+                    battle: this,
+                    targets
+                });
 
                 this.sendGameData();
                 break;
@@ -260,5 +190,105 @@ H.Battle = class Battle extends EventEmitter {
         this.emit('turn-end', players[0]);
 
         this.emit('turn-start', players[1]);
+    }
+
+    _getTargets(player, data) {
+        const cardId = data.cardId;
+        const creatureId = data.creatureId;
+
+        var targets;
+
+        if (cardId) {
+            const handCard = player.hand.getCardById(cardId);
+
+            if (handCard.base.target) {
+                targets = H.TARGETS.getTargets(handCard.base.target, player).getGameData();
+            } else {
+                targets = 'not-need';
+            }
+
+            player.sendMessage('targets', {
+                cardId,
+                targets
+            });
+        } else if (creatureId === 'hero-skill') {
+            targets = H.TARGETS.getByTargetsType(player, player.hero.heroSkill.targetsType);
+
+            player.sendMessage('targets', {
+                creatureId,
+                targets
+            });
+        } else if (creatureId) {
+            targets = H.TARGETS.getTargets('physic', player).getGameData();
+
+            player.sendMessage('targets', {
+                creatureId,
+                targets
+            });
+        }
+    }
+
+    _playCard(player, data) {
+        const handCard = player.hand.getCardById(data.id);
+        const card = handCard.base;
+
+        player.hand.removeHandCard(handCard);
+        player.hero.removeMana(card.cost);
+
+        var cardTargets = null;
+
+        if (card.target !== 'not-need') {
+            cardTargets = H.Targets.parseUserData(player, data);
+        }
+
+        card.acts.forEach(act => {
+            var targets = null;
+
+            if (cardTargets) {
+                targets = cardTargets;
+            } else {
+                const targetsType = act.targetsType;
+
+                if (targetsType.names.length > 1 || targetsType.names[0] !== 'not-need') {
+                    targets = H.TARGETS.getByTargetsType(player, targetsType);
+                }
+            }
+
+            act.actFunc({
+                params: data,
+                player,
+                battle: this,
+                targets: targets
+            });
+        });
+
+        this.sendGameData();
+    }
+
+    _hit(player, data) {
+        const enemy = player.getEnemy();
+
+        const by = data.by === 'hero' ?
+            player.hero :
+            player.creatures.getCreatureByCrid(data.by);
+
+        //FIXME: add targetSide condition
+        if (data.target === 'hero') {
+            const opHero = enemy.hero;
+
+            if (opHero.hp <= by.attack) {
+                console.log('DEATH');
+            } else {
+                opHero.hp -= by.attack;
+            }
+        } else {
+            const op = enemy.creatures.getCreatureByCrid(data.target);
+
+            op.dealDamage(by.attack);
+        }
+
+        by.flags['tired'] = true;
+
+        this.sendGameData();
     }
 };

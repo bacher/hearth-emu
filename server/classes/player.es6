@@ -59,15 +59,13 @@ H.Player = class Player extends EventEmitter {
                         });
 
                         break;
-                    case 'play-card':
-                        this.playCard(data);
-                        break;
                     case 'end-turn':
                         this.endTurn();
                         break;
+                    case 'get-targets':
+                    case 'play-card':
                     case 'hit':
                     case 'use-hero-skill':
-                    case 'get-targets':
                         this.emit('message', { msg, data });
                         break;
                     default:
@@ -144,25 +142,6 @@ H.Player = class Player extends EventEmitter {
             // Make damage
             console.log('IMPL!');
         }
-    }
-
-    playCard(params) {
-        const handCard = this.hand.getHandCard(params.id);
-
-        this.emit('message', {
-            msg: 'play-card',
-            data: {
-                handCard,
-                params
-            }
-        });
-
-        this.hand.removeHandCard(params.id);
-        this.hero.removeMana(handCard.base.cost);
-
-        this.emit('message', {
-            msg: 'update-clients'
-        });
     }
 
     endTurn() {

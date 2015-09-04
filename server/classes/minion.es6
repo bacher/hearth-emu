@@ -59,6 +59,10 @@ H.Minion = class Minion extends EventEmitter {
         }
     }
 
+    addFlag(flag) {
+        this.flags[flag] = true;
+    }
+
     removeAuras() {
         this._auras.forEach(aura => {
             this.player.battle.auras.removeAura(aura);

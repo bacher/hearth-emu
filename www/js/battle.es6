@@ -89,7 +89,7 @@ new H.Screen({
                 $card.hide();
 
             })
-            .on('mousedown', '.avatar.my.available, .creatures.my .creature.available', e => {
+            .on('mousedown', '.avatar.my.available, .creatures.my .creature.available, .hero-skill.my.available.need-target', e => {
                 if (!H.battleData.my.active) { return; }
 
                 $aimingObject = $(e.currentTarget);
@@ -181,16 +181,22 @@ new H.Screen({
 
                         if ($purpose.length) {
                             const $myCard = $($dragAim.data('linked-card'));
+                            const id = $myCard.data('id');
 
                             if (spellTargeting) {
                                 send('play-card', {
-                                    id: $myCard.data('id'),
+                                    id: id,
+                                    targetSide: targetSide,
+                                    target: purposeId
+                                });
+                            } else if (id === 'hero-skill') {
+                                send('use-hero-skill', {
                                     targetSide: targetSide,
                                     target: purposeId
                                 });
                             } else {
                                 send('hit', {
-                                    by: $myCard.data('id'),
+                                    by: id,
                                     targetSide: targetSide,
                                     target: purposeId
                                 });
@@ -301,7 +307,8 @@ H.updateInGameData = function() {
 
     $('.hero-skill.my')
         .toggleClass('available', game.my.active && game.my.hero.canUseSkill)
-        .toggleClass('used', game.my.hero.skillUsed);
+        .toggleClass('used', game.my.hero.skillUsed)
+        .toggleClass('need-target', game.my.hero.isHeroSkillTargeting);
 
     $('.hero-skill.op')
         .toggleClass('used', game.op.hero.skillUsed);

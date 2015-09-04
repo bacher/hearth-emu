@@ -81,6 +81,7 @@ H.Hero = class Hero {
             crystals: this.crystals,
             skillUsed: this.skillUsed,
             canUseSkill: this.canUseSkill(),
+            isHeroSkillTargeting: !!this.heroSkill.targetsType,
             flags: this.flags
         };
     }

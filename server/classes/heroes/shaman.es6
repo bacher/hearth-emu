@@ -7,6 +7,11 @@ H.Shaman = class Shaman extends H.Hero {
 
         this.clas = H.CLASSES['shaman'];
 
+        this.heroSkill = {
+            actFunc: H.ACTIVATIONS['call-totem'],
+            params: []
+        };
+
         this.totems = [
             H.CARDS.getByName('Searing Totem'),
             H.CARDS.getByName('Stoneclaw Totem'),
@@ -19,17 +24,5 @@ H.Shaman = class Shaman extends H.Hero {
         const totemsLeft = this.totems.filter(totem => !this.player.creatures.hasCardCreature(totem));
 
         return !this.skillUsed && this.mana >= 2 && totemsLeft.length !== 0;
-    }
-
-    _useSkill() {
-        const creatures = this.player.creatures;
-
-        const totemsLeft = this.totems.filter(totem => !creatures.hasCardCreature(totem));
-
-        if (totemsLeft.length) {
-            const totem = totemsLeft[Math.floor(Math.random() * totemsLeft.length)];
-
-            creatures.addCreature(new H.Minion(totem));
-        }
     }
 };
