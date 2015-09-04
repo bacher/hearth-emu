@@ -86,7 +86,7 @@ H.Player = class Player extends EventEmitter {
             const deck = this.joinParams.deck;
 
             this.deck = new H.Deck(deck.cardIds);
-            this.hero = new H.Hero(this, deck.clas);
+            this.hero = H.Hero.create(this, deck.clas);
 
             const brackedName = '[' + this.userName + ']';
             this.log = console.log.bind(console, brackedName);

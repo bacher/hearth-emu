@@ -52,7 +52,7 @@ H.Creatures = class Creatures {
         return this.creatures[index];
     }
 
-    isHasCardCreature(card) {
+    hasCardCreature(card) {
         return this.creatures.some(creat => creat.card === card);
     }
 

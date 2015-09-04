@@ -39,7 +39,9 @@ H.ACTIVATIONS = {
 
     'silence': function(o) {},
 
-    'gain-crystal-this-turn': function(o) {},
+    'gain-crystal-this-turn': function(o) {
+        o.player.hero.mana += 1;
+    },
 
     'summon': function(o) {
         const minionCardName = this.params[0];

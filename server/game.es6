@@ -15,6 +15,7 @@ require('./classes/deck');
 require('./classes/hand');
 require('./classes/hand-card');
 require('./classes/hero');
+require('./classes/heroes/shaman');
 require('./classes/minion');
 require('./classes/player');
 

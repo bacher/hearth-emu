@@ -1,11 +1,14 @@
 
 const H = require('../namespace');
 
+const Constructors = {
+    [H.CLASSES.shaman]: 'Shaman'
+};
+
 H.Hero = class Hero {
-    constructor(player, clas) {
+    constructor(player) {
         this.player = player;
 
-        this.clas = clas;
         this.hp = 30;
         this.armor = 0;
         this.spellDamage = 0;
@@ -13,16 +16,10 @@ H.Hero = class Hero {
         this.crystals = 0;
         this.skillUsed = false;
         this.id = 'hero';
+    }
 
-        if (clas === H.CLASSES.shaman) {
-
-            this.totems = [
-                H.CARDS.getByName('Searing Totem'),
-                H.CARDS.getByName('Stoneclaw Totem'),
-                H.CARDS.getByName('Wrath of Air Totem'),
-                H.CARDS.getByName('Healing Totem')
-            ];
-        }
+    static create(player, clas) {
+        return new H[Constructors[clas]](player);
     }
 
     getManaStatus() {
@@ -55,7 +52,7 @@ H.Hero = class Hero {
     }
 
     getBaseData() {
-        const totemsLeft = this.totems.filter(totem => !this.player.creatures.isHasCardCreature(totem));
+        const totemsLeft = this.totems.filter(totem => !this.player.creatures.hasCardCreature(totem));
 
         return {
             hp: this.hp,
@@ -76,22 +73,10 @@ H.Hero = class Hero {
         return this.getData();
     }
 
-    useSkill(battle, i, data) {
+    useSkill() {
         this.mana -= 2;
         this.skillUsed = true;
 
-        switch (this.clas) {
-            case H.CLASSES.shaman:
-                const totemsLeft = this.totems.filter(totem => !i.creatures.isHasCardCreature(totem));
-
-                if (totemsLeft.length) {
-                    const totem = totemsLeft[Math.floor(Math.random() * totemsLeft.length)];
-
-                    i.creatures.addCreature(new H.Minion(this.player, totem));
-                }
-                break;
-            default:
-                console.log('NOT IMPLEMENTED');
-        }
+        this._useSkill();
     }
 };
