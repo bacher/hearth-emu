@@ -17,10 +17,23 @@ const $spell = $details.find('.spell-info');
 var maxCardId;
 var cards = null;
 
+var filterCardType = 0;
+var filterClass = 0;
+
 function drawCards() {
     $cards.empty();
 
-    cards.forEach(card => {
+    var c = cards;
+
+    if (filterCardType) {
+        c = c.filter(card => card.type === filterCardType);
+    }
+
+    if (filterClass) {
+        c = c.filter(card => card.clas === filterClass);
+    }
+
+    c.forEach(card => {
         const $card = $tpl.clone();
 
         $card.data('card', card);
@@ -39,7 +52,21 @@ $.ajax('/cards.json').then(data => {
     maxCardId = data.maxCardId;
     cards = data.cards;
 
-    drawCards();
+    //drawCards();
+
+    $('.cards-params')
+        .on('change', '[name="card-type"]', e => {
+            const $input = $(e.currentTarget);
+
+            filterCardType = Number($input.val());
+
+            drawCards();
+        })
+        .on('click', '.class-pic', e => {
+            filterClass = $(e.currentTarget).data('class');
+
+            drawCards();
+        });
 
     $cards.on('click', '.card', e => {
         const $card = $(e.currentTarget);
