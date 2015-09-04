@@ -88,11 +88,14 @@ $.ajax('/cards.json').then(data => {
                 }
                 $act.find('.act-command').val(act.name + commandParamPart);
 
-                const targets = act.targetsType.names.reduce((base, name) => {
-                    return base + '&' + name;
-                });
+                if (act.targetsType) {
+                    const targets = act.targetsType.names.reduce((base, name) => {
+                        return base + '&' + name;
+                    });
 
-                $act.find('.act-targets').val(targets);
+                    $act.find('.act-targets').val(targets);
+                }
+
             });
         }
 
@@ -215,10 +218,11 @@ $.ajax('/cards.json').then(data => {
                     if (name) {
                         const actParams = params && params.split(/\s*,\s*/).map(value => {
                             const number = Number(value);
+
                             if (!isNaN(number)) {
                                 return number;
                             } else {
-                                value;
+                                return value;
                             }
                         });
 

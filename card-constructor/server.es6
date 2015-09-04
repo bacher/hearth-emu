@@ -13,13 +13,11 @@ app.use(express.static('.'));
 var cards = JSON.parse(fs.readFileSync('../server/cards/minions.json').toString());
 
 cards.forEach(card => {
-    if (card.acts) {
-        card.acts.forEach(act => {
-            if (typeof act.params === 'string') {
-                act.params = act.params.split(',');
-            }
-        });
-    }
+    //if (card.acts) {
+    //    card.acts.forEach(act => {
+    //        act.targetsType
+    //    });
+    //}
 });
 
 var maxCardId = -1;
