@@ -10,14 +10,20 @@ app.use(bodyParser.json());
 
 app.use(express.static('.'));
 
-var cards = JSON.parse(fs.readFileSync('../server/cards/minions.json').toString());
+const CARDS_FILENAME = '../server/data/cards.json';
 
-cards.forEach(card => {
-    if (card.targetsType === 'not-need') {
-        delete card.targetsType;
-    }
-});
-fs.writeFile('../server/cards/minions.json', JSON.stringify(cards, null, '  '));
+var cards = JSON.parse(fs.readFileSync(CARDS_FILENAME).toString());
+
+//cards.forEach(card => {
+//    if (card.targetsType === 'not-need') {
+//        delete card.targetsType;
+//    }
+//});
+//writeCards();
+
+function writeCards() {
+    fs.writeFile(CARDS_FILENAME, JSON.stringify(cards, null, '  '));
+}
 
 var maxCardId = -1;
 
@@ -68,7 +74,7 @@ const server = app.listen(8088, function () {
             }
         });
 
-        fs.writeFile('../server/cards/minions.json', JSON.stringify(cards, null, '  '));
+        writeCards();
         console.log('Card id:%s %s.', updatedCard.id, status);
     });
 });
