@@ -425,7 +425,7 @@
     }
   }
 
-  .attack {
+  .avatar .attack {
     position: absolute;
     display: none;
     width: 41px;
@@ -449,7 +449,7 @@
     }
   }
 
-  .health .value, .armor .value, .attack .value {
+  .health .value, .armor .value, .attack .value, .weapon .value {
     display: inline-block;
     color: #FFF;
 
@@ -461,10 +461,57 @@
 
   .weapon {
     position: absolute;
-    width: 60px;
-    height: 60px;
-    left: 30px;
-    top: 20px;
+    display: none;
+
+    &.my {
+      top: 17px;
+      left: -12px;
+    }
+
+    &.op {
+      top: 42px;
+      left: -5px;
+    }
+
+    &.off:before {
+      position: absolute;
+      width: 111px;
+      height: 98px;
+      content: "";
+      background: url("../textures/weapon-frame_lock.png");
+    }
+
+    .frame {
+      position: absolute;
+      width: 111px;
+      height: 98px;
+      background: url("../textures/weapon-frame.png");
+    }
+
+    .attack, .durability {
+      text-align: center;
+      font-size: 24px;
+    }
+
+    .attack {
+      position: absolute;
+      top: 69px;
+      left: 12px;
+      width: 26px;
+      height: 26px;
+      line-height: 22px;
+      background: url("../textures/weapon-attack.png");
+    }
+
+    .durability {
+      position: absolute;
+      top: 66px;
+      left: 79px;
+      width: 22px;
+      height: 26px;
+      line-height: 26px;
+      background: url("../textures/weapon-durability.png");
+    }
   }
 
   &.normal .hero-skill.my.available:after {

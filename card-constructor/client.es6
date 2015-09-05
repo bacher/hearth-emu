@@ -170,6 +170,7 @@ $.ajax('/cards.json').then(data => {
 
             $minion.show();
             $spell.hide();
+            $weapon.hide();
         })
         .on('click', '.class-pic', e => {
             $(e.currentTarget).siblings().removeClass('active').end().addClass('active');

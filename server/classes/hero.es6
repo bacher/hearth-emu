@@ -95,7 +95,7 @@ H.Hero = class Hero {
 
     getBaseData() {
         return {
-            attack: this.attack,
+            attack: (this.weapon ? this.weapon.attack : 0) + this.attack,
             hp: this.hp,
             armor: this.armor,
             spellDamage: this.spellDamage,
@@ -106,6 +106,7 @@ H.Hero = class Hero {
             skillUsed: this.skillUsed,
             canUseSkill: this.canUseSkill(),
             isHeroSkillTargeting: !!this.heroSkill.skillTargetsType,
+            weapon: this.weapon,
             flags: this.flags
         };
     }

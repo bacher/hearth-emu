@@ -77,6 +77,11 @@ const server = app.listen(8088, function () {
         });
 
         writeCards();
+
+        if (updatedCard.id > maxCardId) {
+            maxCardId = updatedCard.id;
+        }
+
         console.log('Card id:%s %s.', updatedCard.id, status);
     });
 });

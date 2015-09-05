@@ -10,7 +10,6 @@ new H.Screen({
 
         $app.addClass('normal');
 
-        //const $board = $app.find('.board');
         var dragging = false;
         var aimTargeting = false;
         var spellTargeting = false;
@@ -391,6 +390,17 @@ H.updateInGameData = function() {
 
         $avatar.find('.attack').toggle(hero.attack > 0)
             .find('.value').text(hero.attack);
+
+
+        const $weapon = $('.weapon.' + side);
+        if (player.hero.weapon) {
+            $weapon.show();
+            $weapon.toggleClass('off', !player.active);
+            $weapon.find('.attack').text(player.hero.weapon.attack);
+            $weapon.find('.durability').text(player.hero.weapon.durability);
+        } else {
+            $weapon.hide();
+        }
 
         $('.stats.' + side + ' .mana .active').text(hero.mana);
         $('.stats.' + side + ' .mana .all').text(hero.crystals);
