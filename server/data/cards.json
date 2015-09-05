@@ -1035,6 +1035,27 @@
     ]
   },
   {
+    "id": 121,
+    "name": "Shield Block",
+    "cost": 3,
+    "pic": "148/544/493",
+    "clas": 1,
+    "type": 2,
+    "flags": [],
+    "acts": [
+      {
+        "name": "add-armor",
+        "params": [
+          5
+        ]
+      },
+      {
+        "name": "draw-card",
+        "params": []
+      }
+    ]
+  },
+  {
     "id": 21,
     "type": 1,
     "name": "Wolfrider",
