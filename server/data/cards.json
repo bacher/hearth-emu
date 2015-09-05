@@ -882,6 +882,27 @@
     ]
   },
   {
+    "id": 129,
+    "name": "Sap",
+    "cost": 2,
+    "pic": "148/494/385",
+    "clas": 3,
+    "type": 2,
+    "flags": [],
+    "targetsType": {
+      "names": [
+        "enemies",
+        "minions"
+      ]
+    },
+    "acts": [
+      {
+        "name": "return-to-hand",
+        "params": []
+      }
+    ]
+  },
+  {
     "id": 114,
     "name": "Shadow Word: Pain",
     "cost": 2,
