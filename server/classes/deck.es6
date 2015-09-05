@@ -17,7 +17,9 @@ H.Deck = class Deck {
     }
 
     getNextCard() {
-        return this.deckCards.pop().card;
+        if (this.deckCards.length) {
+            return this.deckCards.pop().card;
+        }
     }
 
     getCount() {

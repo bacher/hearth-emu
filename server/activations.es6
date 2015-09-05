@@ -117,5 +117,14 @@ H.ACTIVATIONS = {
     },
     'add-hero-attack': function(o) {
         o.player.hero.attack = this.params[0];
+    },
+    'return-to-hand': function(o) {
+        o.targets.forEach(minion => {
+            const player = minion.player;
+
+            minion.detach();
+
+            player.hand.addCard(minion.card);
+        });
     }
 };

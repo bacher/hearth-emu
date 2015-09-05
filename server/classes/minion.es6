@@ -80,6 +80,8 @@ H.Minion = class Minion extends EventEmitter {
         this.removeAuras();
 
         this.emit('detach', this);
+
+        this.player = null;
     }
 
     kill() {

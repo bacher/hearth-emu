@@ -11,7 +11,9 @@ H.Hand = class Hand {
     }
 
     addCard(card) {
-        this.cards.push(new H.HandCard(card));
+        if (this.cards.length <= 10) {
+            this.cards.push(new H.HandCard(card));
+        }
     }
 
     canAddCard() {
