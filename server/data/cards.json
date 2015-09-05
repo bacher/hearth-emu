@@ -931,6 +931,33 @@
     ]
   },
   {
+    "id": 130,
+    "name": "Shiv",
+    "cost": 2,
+    "pic": "148/163/164",
+    "clas": 3,
+    "type": 2,
+    "flags": [],
+    "targetsType": {
+      "names": [
+        "all-but-my-hero"
+      ]
+    },
+    "acts": [
+      {
+        "name": "deal-damage",
+        "params": [
+          1
+        ]
+      },
+      {
+        "name": "draw-card",
+        "params": [],
+        "targetsType": "not-need"
+      }
+    ]
+  },
+  {
     "id": 22,
     "name": "Succubus",
     "cost": 2,
