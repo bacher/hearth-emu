@@ -639,6 +639,26 @@
     }
   },
   {
+    "id": 120,
+    "name": "Whirlwind",
+    "cost": 1,
+    "pic": "148/337/161",
+    "clas": 1,
+    "type": 2,
+    "flags": [],
+    "acts": [
+      {
+        "name": "deal-damage",
+        "params": [],
+        "targetsType": {
+          "names": [
+            "minions"
+          ]
+        }
+      }
+    ]
+  },
+  {
     "id": 14,
     "name": "Wrath of Air Totem",
     "cost": 1,
@@ -902,35 +922,6 @@
       "events": {},
       "race": 2
     }
-  },
-  {
-    "id": 120,
-    "name": "Charge",
-    "cost": 3,
-    "pic": "147/549/646",
-    "clas": 1,
-    "type": 2,
-    "flags": [],
-    "targetsType": {
-      "names": [
-        "minions",
-        "friends"
-      ]
-    },
-    "acts": [
-      {
-        "name": "add-attack",
-        "params": [
-          2
-        ]
-      },
-      {
-        "name": "add-flags",
-        "params": [
-          "charge"
-        ]
-      }
-    ]
   },
   {
     "id": 29,
