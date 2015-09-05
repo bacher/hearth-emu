@@ -114,5 +114,8 @@ H.ACTIVATIONS = {
     },
     'add-armor': function(o) {
         o.player.hero.armor += this.params[0];
+    },
+    'add-hero-attack': function(o) {
+        o.player.hero.attack = this.params[0];
     }
 };

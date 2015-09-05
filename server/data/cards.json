@@ -758,6 +758,23 @@
     }
   },
   {
+    "id": 123,
+    "name": "Heroic Strike",
+    "cost": 2,
+    "pic": "147/555/1",
+    "clas": 1,
+    "type": 2,
+    "flags": [],
+    "acts": [
+      {
+        "name": "add-hero-attack",
+        "params": [
+          4
+        ]
+      }
+    ]
+  },
+  {
     "id": 112,
     "name": "Holy Nova",
     "cost": 2,

@@ -121,6 +121,8 @@ H.Hero = class Hero {
         this.overload = this.nextOverload;
         this.nextOverload = 0;
 
+        this.attack = 0;
+
         this.addCrystal();
         this.restoreMana();
 
