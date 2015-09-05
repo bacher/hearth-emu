@@ -225,12 +225,19 @@
         "params": [
           2
         ],
-        "targetsType": {
+        "targetType": {
           "names": [
             "enemies",
             "minions"
           ],
-          "mergeType": "intersect"
+          "modificators": [
+            {
+              "name": "random",
+              "params": [
+                2
+              ]
+            }
+          ]
         }
       },
       {
@@ -832,6 +839,34 @@
       },
       "race": 0
     }
+  },
+  {
+    "id": 113,
+    "name": "Shadow Word: Death",
+    "cost": 3,
+    "pic": "148/590/547",
+    "clas": 9,
+    "type": 2,
+    "flags": [],
+    "targetsType": {
+      "names": [
+        "minions"
+      ],
+      "modificators": [
+        {
+          "name": "attack-more",
+          "params": [
+            4
+          ]
+        }
+      ]
+    },
+    "acts": [
+      {
+        "name": "kill",
+        "params": []
+      }
+    ]
   },
   {
     "id": 21,

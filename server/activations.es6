@@ -59,6 +59,11 @@ H.ACTIVATIONS = {
 
         o.player.creatures.addCreature(minion);
     },
+    'kill': function(o) {
+        o.targets.forEach(obj => {
+            obj.kill();
+        });
+    },
     'give-deathrattle': function(o) {},
     'restore-full-hp': function(o) {
         o.params.target.hp = o.params.target.maxHp;

@@ -103,7 +103,7 @@ H.Targets = class Targets {
         return this;
     }
 
-    random(count) {
+    'random'(count) {
         const objects = this.my.minions.concat(this.op.minions);
 
         if (this.my.hero) {
@@ -137,6 +137,27 @@ H.Targets = class Targets {
                 side.minions.push(obj);
             }
         }
+    }
+
+    'attack-more'(than) {
+        this._filterAll(obj => obj.attack > than);
+    }
+
+    _filterAll(filterFunc) {
+        this._filterMinions(filterFunc);
+
+        if (this.my.hero) {
+            this.my.hero = filterFunc(this.player.hero);
+        }
+
+        if (this.op.hero) {
+            this.op.hero = filterFunc(this.player.enemy.hero);
+        }
+    }
+
+    _filterMinions(filterFunc) {
+        this.my.minions = this.my.minions.filter(filterFunc);
+        this.op.minions = this.op.minions.filter(filterFunc);
     }
 
     getGameData() {

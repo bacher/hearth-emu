@@ -51,7 +51,7 @@ new H.Screen({
 
                 const $card = $(e.currentTarget);
 
-                const isNeedTarget = $card.data('need-target');
+                const isNeedTarget = $card.hasClass('need-target');
 
                 dragging = true;
 

@@ -102,7 +102,7 @@ $.ajax('/cards.json').then(data => {
             $spell.show();
 
             if (card.targetsType) {
-                $spell.find('.target').val(card.targetsType.names.reduce((name1, name2) => name1 + '&' + name2));
+                $spell.find('.target').val(getRawTargetsType(card.targetsType));
             } else {
                 $spell.find('.target').val('');
             }
@@ -124,11 +124,7 @@ $.ajax('/cards.json').then(data => {
                     $actTargets.val('not-need');
 
                 } else if (act.targetsType) {
-                    const targets = act.targetsType.names.reduce((base, name) => {
-                        return base + '&' + name;
-                    });
-
-                    $actTargets.val(targets);
+                    $actTargets.val(getRawTargetsType(act.targetsType));
                 }
 
             });
@@ -244,9 +240,7 @@ $.ajax('/cards.json').then(data => {
                 const targets = $spell.find('.target').val().trim();
 
                 if (targets) {
-                    card.targetsType = {
-                        names: targets.split('&')
-                    };
+                    card.targetsType = parseTargetsType(targets);
                 }
 
                 card.acts = $spell.find('.act').map((i, actNode) => {
@@ -264,30 +258,11 @@ $.ajax('/cards.json').then(data => {
                             params: actParams || []
                         };
 
-                        if (targetsType) {
+                        if (targetsType === 'not-need') {
                             act.targetsType = 'not-need';
 
                         } else if (targetsType) {
-
-                            const match = targetsType.match(/^([^\.]+)(?:\.(.+))?$/);
-                            const targetsDetails = match[1].split('&');
-
-                            act.targetsType = {
-                                names: targetsDetails,
-                                mergeType: 'intersect'
-                            };
-
-                            if (match[2]) {
-                                const mods = match[2].split(',');
-                                act.targetsType.modificators = mods.map(mod => {
-                                    const modMatch = mod.match(/^([^(]+)\(([^)])\)/);
-
-                                    return {
-                                        name: modMatch[1],
-                                        params: modMatch[2] && modMatch[2].split(',').map(tryParseNumber)
-                                    };
-                                });
-                            }
+                            act.targetType = parseTargetsType(targetsType);
                         }
 
                         return act;
@@ -338,6 +313,42 @@ $.ajax('/cards.json').then(data => {
         } else {
             return value;
         }
+    }
+
+    function parseTargetsType(targetsTypeRaw) {
+        const match = targetsTypeRaw.match(/^([^\.]+)(?:\.(.+))?$/);
+        const targetsDetails = match[1].split('&');
+
+        const targetsType = {
+            names: targetsDetails
+        };
+
+        if (match[2]) {
+            const mods = match[2].split(',');
+            targetsType.modificators = mods.map(mod => {
+                const modMatch = mod.match(/^([^(]+)\(([^)])\)/);
+
+                return {
+                    name: modMatch[1],
+                    params: modMatch[2] && modMatch[2].split(',').map(tryParseNumber)
+                };
+            });
+        }
+
+        return targetsType;
+    }
+
+    function getRawTargetsType(targetsType) {
+        var raw = targetsType.names.join('&');
+
+        if (targetsType.modificators) {
+            raw += '.' + targetsType.modificators.join('&');
+        }
+
+        console.log(targetsType);
+        console.log(raw);
+
+        return raw;
     }
 
 });
