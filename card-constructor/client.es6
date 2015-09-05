@@ -13,6 +13,7 @@ const $details = $('.card-details');
 
 const $minion = $details.find('.minion-info');
 const $spell = $details.find('.spell-info');
+const $weapon = $details.find('.weapon-info');
 
 var maxCardId;
 var cards = null;
@@ -84,6 +85,7 @@ $.ajax('/cards.json').then(data => {
 
         $minion.hide();
         $spell.hide();
+        $weapon.hide();
 
         if (card.type === CARD_TYPES.minion) {
             $minion.show();
@@ -98,6 +100,13 @@ $.ajax('/cards.json').then(data => {
             for (var prop in card.minion.events) {
                 $minion.find('.event[data-type=' + prop + ']').val(card.minion.events[prop]);
             }
+
+        } else if (card.type === CARD_TYPES.weapon) {
+            $weapon.show();
+
+            $minion.find('.attack-durability').val(card.attack + '/' + card.durability);
+            $minion.find('.events').val('');
+
         } else if (card.type === CARD_TYPES.spell) {
             $spell.show();
 
@@ -212,7 +221,6 @@ $.ajax('/cards.json').then(data => {
                     attack: Number(attackMaxhpPart[0]),
                     maxHp: Number(attackMaxhpPart[1]),
                     flags: [],
-                    events: {},
                     race: Number($minion.find('.race').val())
                 };
 
@@ -221,20 +229,16 @@ $.ajax('/cards.json').then(data => {
                     card.minion.flags = flagsString.split(',');
                 }
 
-                const st = $minion.find('.event[data-type=start-turn]').val().trim();
-                const et = $minion.find('.event[data-type=end-turn]').val().trim();
-                const cr = $minion.find('.event[data-type=cry]').val().trim();
-                const de = $minion.find('.event[data-type=death]').val().trim();
-                const au = $minion.find('.event[data-type=aura]').val().trim();
-                const cu = $minion.find('.event[data-type=custom]').val().trim();
+                card.minion.events = parseEvents($minion);
 
-                if (st) card.minion.events['start-turn'] = st;
-                if (et) card.minion.events['end-turn'] = et;
-                if (cr) card.minion.events['cry'] = cr;
-                if (de) card.minion.events['death'] = de;
-                if (au) card.minion.events['aura'] = au;
-                if (cu) card.minion.events['custom'] = cu;
+            } else if (card.type === CARD_TYPES.weapon) {
 
+                const attackDurParts = $weapon.find('.attack-durability').val().split(/[, \/]/).map(Number);
+
+                card.attack = attackDurParts[0];
+                card.durability = attackDurParts[1];
+
+                card.events = parseEvents($weapon);
             } else if (card.type === CARD_TYPES.spell) {
 
                 const targets = $spell.find('.target').val().trim();
@@ -353,6 +357,26 @@ $.ajax('/cards.json').then(data => {
         }
 
         return raw;
+    }
+
+    function parseEvents($obj) {
+        const st = $obj.find('.event[data-type=start-turn]').val().trim();
+        const et = $obj.find('.event[data-type=end-turn]').val().trim();
+        const cr = $obj.find('.event[data-type=cry]').val().trim();
+        const de = $obj.find('.event[data-type=death]').val().trim();
+        const au = $obj.find('.event[data-type=aura]').val().trim();
+        const cu = $obj.find('.event[data-type=custom]').val().trim();
+
+        const events = {};
+
+        if (st) events['start-turn'] = st;
+        if (et) events['end-turn'] = et;
+        if (cr) events['cry'] = cr;
+        if (de) events['death'] = de;
+        if (au) events['aura'] = au;
+        if (cu) events['custom'] = cu;
+
+        return events;
     }
 
 });

@@ -126,5 +126,18 @@ H.ACTIVATIONS = {
 
             player.hand.addCard(minion.card);
         });
+    },
+    'equip-weapon': function(o) {
+        const weapon = {
+            card: H.CARDS.getByName(this.params[0], H.CARD_TYPES['weapon'])
+        };
+
+        weapon.attack = weapon.card.attack;
+        weapon.durability = weapon.card.durability;
+
+        o.player.hero.weapon = weapon;
+    },
+    'add-weapon-attack': function(o) {
+        o.player.hero.weapon.attack += this.params[0];
     }
 };

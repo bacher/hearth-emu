@@ -783,6 +783,18 @@
     ]
   },
   {
+    "id": 128,
+    "name": "Dagger",
+    "cost": 2,
+    "pic": "126/749/201",
+    "clas": 3,
+    "type": 3,
+    "flags": [],
+    "attack": 1,
+    "durability": 2,
+    "events": {}
+  },
+  {
     "id": 118,
     "name": "Divine Spirit",
     "cost": 2,

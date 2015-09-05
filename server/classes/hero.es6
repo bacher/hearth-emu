@@ -24,6 +24,8 @@ H.Hero = class Hero {
         this.overload = 0;
         this.nextOverload = 0;
 
+        this.weapon = null;
+
         this.skillUsed = false;
         this.id = 'hero';
 
