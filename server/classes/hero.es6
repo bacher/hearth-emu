@@ -46,6 +46,10 @@ H.Hero = class Hero {
         H.Minion.prototype.dealDamage.call(this, count);
     }
 
+    kill() {
+        this.player.emit('message', { msg: 'death' });
+    }
+
     getManaStatus() {
         return {
             mana: this.mana,

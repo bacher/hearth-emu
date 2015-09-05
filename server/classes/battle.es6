@@ -104,27 +104,19 @@ H.Battle = class Battle extends EventEmitter {
         const player1 = this.players[0];
         const player2 = this.players[1];
 
-        player1.on('message', msg => {
-            this._handlePlayerMessage(player1, msg.msg, msg.data);
-        });
+        this.players.forEach(player => {
+            player.on('client-message', msg => {
+                this._handleClientMessage(player, msg.msg, msg.data);
+            });
 
-        player2.on('message', msg => {
-            this._handlePlayerMessage(player2, msg.msg, msg.data);
+            player.on('message', msg => {
+                this._handlePlayerMessage(player, msg.msg, msg.data);
+            });
         });
     }
 
     _handlePlayerMessage(player, msg, data) {
         switch (msg) {
-            case 'cards-replaced':
-                if (this.p1.flags['deck'] && this.p2.flags['deck']) {
-                    this._start2();
-                }
-                break;
-
-            case 'play-card':
-                this._playCard(player, data);
-                break;
-
             case 'end-turn':
                 this.switchTurn();
                 this.sendGameData();
@@ -132,6 +124,24 @@ H.Battle = class Battle extends EventEmitter {
 
             case 'update-clients':
                 this.sendGameData();
+                break;
+
+            case 'cards-replaced':
+                if (this.p1.flags['deck'] && this.p2.flags['deck']) {
+                    this._start2();
+                }
+                break;
+            case 'death':
+                //
+                console.log('BATTLE END');
+                break;
+        }
+    }
+
+    _handleClientMessage(player, msg, data) {
+        switch (msg) {
+            case 'play-card':
+                this._playCard(player, data);
                 break;
 
             case 'hit':

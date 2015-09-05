@@ -54,9 +54,7 @@ H.Player = class Player extends EventEmitter {
 
                         this.flags['deck'] = true;
 
-                        this.emit('message', {
-                            msg: 'cards-replaced'
-                        });
+                        this.emit('message', { msg: 'cards-replaced' });
 
                         break;
                     case 'end-turn':
@@ -66,7 +64,7 @@ H.Player = class Player extends EventEmitter {
                     case 'play-card':
                     case 'hit':
                     case 'use-hero-skill':
-                        this.emit('message', { msg, data });
+                        this.emit('client-message', { msg, data });
                         break;
                     default:
                         this.warn('Unregistered Client Message:', msg);
