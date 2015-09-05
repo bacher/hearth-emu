@@ -100,6 +100,9 @@ new H.Screen({
             .on('mousedown', '.avatar.my.available, .creatures.my .creature.available, .hero-skill.my.available.need-target', e => {
                 if (!H.battleData.my.active) { return; }
 
+                $app.addClass('targeting');
+                $app.removeClass('normal');
+
                 $aimingObject = $(e.currentTarget);
 
                 dragging = true;

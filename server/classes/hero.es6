@@ -36,6 +36,12 @@ H.Hero = class Hero {
                     this._onTurnStart();
                 }
             });
+
+            battle.on('turn-end', player => {
+                if (player === this.player) {
+                    this._onTurnEnd();
+                }
+            });
         });
     }
 
@@ -121,11 +127,13 @@ H.Hero = class Hero {
         this.overload = this.nextOverload;
         this.nextOverload = 0;
 
-        this.attack = 0;
-
         this.addCrystal();
         this.restoreMana();
 
         this.skillUsed = false;
+    }
+
+    _onTurnEnd() {
+        this.attack = 0;
     }
 };
