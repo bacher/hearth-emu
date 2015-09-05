@@ -143,14 +143,16 @@ H.Battle = class Battle extends EventEmitter {
                 break;
 
             case 'use-hero-skill': {
-                const heroSkill = player.hero.heroSkill;
+                var heroSkill = player.hero.heroSkill;
 
                 player.hero.mana -= 2;
 
                 var targets = null;
 
-                if (player.hero.heroSkill.targetsType) {
+                if (heroSkill.skillTargetsType) {
                     targets = H.Targets.parseUserData(player, data);
+                } else if (heroSkill.targetsType) {
+                    targets = H.TARGETS.getByTargetsType(player, heroSkill.targetsType);
                 }
 
                 heroSkill.actFunc({
@@ -215,7 +217,7 @@ H.Battle = class Battle extends EventEmitter {
             });
         } else if (creatureId === 'hero-skill') {
             targets = H.TARGETS
-                .getByTargetsType(player, player.hero.heroSkill.targetsType)
+                .getByTargetsType(player, player.hero.heroSkill.skillTargetsType)
                 .getGameData();
 
             player.sendMessage('targets', {

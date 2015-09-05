@@ -4,7 +4,8 @@ const H = require('../namespace');
 const Constructors = {
     [H.CLASSES.shaman]: 'Shaman',
     [H.CLASSES.druid]: 'Druid',
-    [H.CLASSES.priest]: 'Priest'
+    [H.CLASSES.priest]: 'Priest',
+    [H.CLASSES.hunter]: 'Hunter'
 };
 
 H.Hero = class Hero {
@@ -82,7 +83,7 @@ H.Hero = class Hero {
             crystals: this.crystals,
             skillUsed: this.skillUsed,
             canUseSkill: this.canUseSkill(),
-            isHeroSkillTargeting: !!this.heroSkill.targetsType,
+            isHeroSkillTargeting: !!this.heroSkill.skillTargetsType,
             flags: this.flags
         };
     }

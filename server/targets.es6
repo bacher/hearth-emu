@@ -3,6 +3,14 @@ const _ = require('lodash');
 const H = require('./namespace');
 
 const T = {
+    'heroes': function(player) {
+        const targets = new H.Targets(player);
+
+        targets.addMyHero();
+        targets.addEnemyHero();
+
+        return targets;
+    },
     'enemies': function(player) {
         const targets = T['enemy-minions'](player);
         targets.addMinions(player.enemy.creatures.getAll());
@@ -79,7 +87,7 @@ H.TARGETS = {
         const allTargets = targetsType.names.map(name => T[name](player));
 
         const targets = allTargets.reduce((base, nextTarget) => {
-            return base[targetsType.mergeType](nextTarget);
+            return base[targetsType.mergeType || 'intersect'](nextTarget);
         });
 
         if (targetsType.modificators) {
