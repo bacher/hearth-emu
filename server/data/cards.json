@@ -56,12 +56,16 @@
     "flags": [],
     "acts": [
       {
-        "name": "gain-crystal-this-turn",
-        "params": []
+        "name": "add-mana",
+        "params": [
+          1
+        ]
       },
       {
-        "name": "gain-crystal-this-turn",
-        "params": []
+        "name": "add-mana",
+        "params": [
+          1
+        ]
       }
     ]
   },

@@ -9,18 +9,15 @@ H.ACTIVATIONS = {
 
         o.player.creatures.addCreature(new H.Minion(card));
     },
-
     'add-mana': function(o) {
         o.player.hero.addMana(1);
     },
-
     'give-attack': function(o) {
         const amount = this.params[0];
         o.targets.forEach(target => {
             target.attack += amount;
         });
     },
-
     'give-hp': function(o) {
         const amount = this.params[0];
 
@@ -29,17 +26,14 @@ H.ACTIVATIONS = {
             target.hp += amount;
         });
     },
-
     'deal-damage': function(o) {
         o.targets.forEach(target => {
             target.dealDamage(this.params[0]);
         });
     },
-
     'overload': function(o) {
         o.player.hero.addOverload(this.params[0]);
     },
-
     'silence': function(o) {
         o.targets.forEach(target => {
             var base = target.base;
@@ -58,11 +52,6 @@ H.ACTIVATIONS = {
             target.addFlag('silence');
         });
     },
-
-    'gain-crystal-this-turn': function(o) {
-        o.player.hero.mana += 1;
-    },
-
     'summon': function(o) {
         const minionCardName = this.params[0];
 
