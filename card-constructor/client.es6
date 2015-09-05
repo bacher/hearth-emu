@@ -262,7 +262,7 @@ $.ajax('/cards.json').then(data => {
                             act.targetsType = 'not-need';
 
                         } else if (targetsType) {
-                            act.targetType = parseTargetsType(targetsType);
+                            act.targetsType = parseTargetsType(targetsType);
                         }
 
                         return act;

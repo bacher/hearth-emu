@@ -152,7 +152,7 @@
     "flags": [],
     "acts": [
       {
-        "name": "give-hp",
+        "name": "add-hp",
         "params": [
           "2"
         ],
@@ -225,7 +225,7 @@
         "params": [
           2
         ],
-        "targetType": {
+        "targetsType": {
           "names": [
             "enemies",
             "minions"
@@ -440,6 +440,33 @@
       "events": {},
       "race": 5
     }
+  },
+  {
+    "id": 117,
+    "name": "Power Word: Shield",
+    "cost": 1,
+    "pic": "147/381/431",
+    "clas": 9,
+    "type": 2,
+    "flags": [],
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "acts": [
+      {
+        "name": "add-hp",
+        "params": [
+          2
+        ]
+      },
+      {
+        "name": "draw-card",
+        "params": [],
+        "targetsType": "not-need"
+      }
+    ]
   },
   {
     "id": 12,
@@ -711,7 +738,7 @@
         "params": [
           5
         ],
-        "targetType": {
+        "targetsType": {
           "names": [
             "enemies",
             "heroes"
@@ -867,8 +894,7 @@
           "names": [
             "enemies",
             "minions"
-          ],
-          "mergeType": "intersect"
+          ]
         }
       },
       {

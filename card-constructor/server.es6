@@ -69,8 +69,10 @@ const server = app.listen(8088, function () {
         cards = cards.sort((card1, card2) => {
             if (card1.cost !== card2.cost) {
                 return card1.cost - card2.cost;
-            } else {
+            } else if (card1.name !== card2.name) {
                 return card1.name.localeCompare(card2.name);
+            } else {
+                return card2.type - card1.type;
             }
         });
 
