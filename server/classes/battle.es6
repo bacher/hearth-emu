@@ -146,6 +146,7 @@ H.Battle = class Battle extends EventEmitter {
                 var heroSkill = player.hero.heroSkill;
 
                 player.hero.mana -= 2;
+                player.hero.skillUsed = true;
 
                 var targets = null;
 

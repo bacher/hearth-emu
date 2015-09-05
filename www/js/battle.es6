@@ -307,7 +307,7 @@ H.updateInGameData = function() {
 
     $('.hero-skill.my')
         .toggleClass('available', game.my.active && game.my.hero.canUseSkill)
-        .toggleClass('used', game.my.hero.skillUsed)
+        .toggleClass('off', game.my.hero.skillUsed)
         .toggleClass('need-target', game.my.hero.isHeroSkillTargeting);
 
     $('.hero-skill.op')

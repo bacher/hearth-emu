@@ -14,12 +14,12 @@ require('./classes/creatures');
 require('./classes/deck');
 require('./classes/hand');
 require('./classes/hand-card');
+require('./classes/minion');
 require('./classes/hero');
 require('./classes/heroes/shaman');
 require('./classes/heroes/druid');
 require('./classes/heroes/priest');
 require('./classes/heroes/hunter');
-require('./classes/minion');
 require('./classes/player');
 
 require('./activations');

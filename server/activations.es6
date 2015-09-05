@@ -32,6 +32,7 @@ H.ACTIVATIONS = {
 
     'deal-damage': function(o) {
         o.targets.forEach(target => {
+            console.log(target);
             target.dealDamage(this.params[0]);
         });
     },

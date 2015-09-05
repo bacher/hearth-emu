@@ -42,6 +42,10 @@ H.Hero = class Hero {
         return new H[Constructors[clas]](player);
     }
 
+    dealDamage(count) {
+        H.Minion.prototype.dealDamage.call(this, count);
+    }
+
     getManaStatus() {
         return {
             mana: this.mana,
@@ -112,20 +116,5 @@ H.Hero = class Hero {
         this.restoreMana();
 
         this.skillUsed = false;
-    }
-
-    useSkill() {
-        this.mana -= 2;
-        this.skillUsed = true;
-
-        this._useSkill();
-    }
-
-    dealDamage(amount) {
-        this.hp -= amount;
-
-        if (this.hp <= 0) {
-            // TODO: Death
-        }
     }
 };
