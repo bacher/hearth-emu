@@ -68,9 +68,11 @@ H.ACTIVATIONS = {
     'restore-full-hp': function(o) {
         o.params.target.hp = o.params.target.maxHp;
     },
-    'add-flag': function(o) {
+    'add-flags': function(o) {
         this.params.forEach(flag => {
-            o.params.target.flags[flag] = true;
+            o.targets.forEach(target => {
+                target.addFlags(flag);
+            });
         });
     },
     'switch-owner': function(o) {
@@ -98,6 +100,13 @@ H.ACTIVATIONS = {
             if (target.hp > target.maxHp) {
                 target.hp = target.maxHp;
             }
+        });
+    },
+    'x2': function(o) {
+        this.params.forEach(field => {
+            o.targets.forEach(target => {
+                target[field] *= 2;
+            });
         });
     }
 };

@@ -13,7 +13,7 @@
         "params": []
       },
       {
-        "name": "add-flag",
+        "name": "add-flags",
         "params": [
           "taunt"
         ]
@@ -265,7 +265,7 @@
         ]
       },
       {
-        "name": "add-flag",
+        "name": "add-flags",
         "params": [
           "freeze",
           "tired"
@@ -621,6 +621,29 @@
       "events": {},
       "race": 5
     }
+  },
+  {
+    "id": 114,
+    "name": "Divine Spirit",
+    "cost": 2,
+    "pic": "147/713/554",
+    "clas": 9,
+    "type": 2,
+    "flags": [],
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "acts": [
+      {
+        "name": "x2",
+        "params": [
+          "hp",
+          "maxHp"
+        ]
+      }
+    ]
   },
   {
     "id": 11,

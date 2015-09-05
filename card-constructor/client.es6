@@ -342,11 +342,14 @@ $.ajax('/cards.json').then(data => {
         var raw = targetsType.names.join('&');
 
         if (targetsType.modificators) {
-            raw += '.' + targetsType.modificators.join('&');
-        }
+            targetsType.modificators.forEach(mod => {
+                raw += '.' + mod.name;
 
-        console.log(targetsType);
-        console.log(raw);
+                if (mod.params) {
+                    raw += '(' + mod.params.join(',') + ')';
+                }
+            });
+        }
 
         return raw;
     }

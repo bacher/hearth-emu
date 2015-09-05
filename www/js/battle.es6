@@ -169,6 +169,7 @@ new H.Screen({
             })
             .on('mouseup', e => {
                 if (dragging) {
+                    $app.removeClass('hide-cursor');
 
                     const $target = $(e.target);
 
