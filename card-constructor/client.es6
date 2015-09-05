@@ -324,13 +324,14 @@ $.ajax('/cards.json').then(data => {
         };
 
         if (match[2]) {
-            const mods = match[2].split(',');
+            const mods = match[2].split('.');
+
             targetsType.modificators = mods.map(mod => {
-                const modMatch = mod.match(/^([^(]+)\(([^)])\)/);
+                const modMatch = mod.match(/^([^(]+)(?:\(([^)])\))?/);
 
                 return {
                     name: modMatch[1],
-                    params: modMatch[2] && modMatch[2].split(',').map(tryParseNumber)
+                    params: modMatch[2] && modMatch[2].split(',').map(tryParseNumber) || []
                 };
             });
         }

@@ -151,6 +151,10 @@ H.Targets = class Targets {
         this._filterAll(obj => obj.attack < than);
     }
 
+    'damaged'() {
+        this._filterAll(obj => obj.hp < obj.maxHp);
+    }
+
     _filterAll(filterFunc) {
         this._filterMinions(filterFunc);
 

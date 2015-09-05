@@ -212,6 +212,33 @@
     }
   },
   {
+    "id": 124,
+    "name": "Execute",
+    "cost": 1,
+    "pic": "147/561/227",
+    "clas": 1,
+    "type": 2,
+    "flags": [],
+    "targetsType": {
+      "names": [
+        "minions",
+        "enemies"
+      ],
+      "modificators": [
+        {
+          "name": "damaged",
+          "params": []
+        }
+      ]
+    },
+    "acts": [
+      {
+        "name": "kill",
+        "params": []
+      }
+    ]
+  },
+  {
     "id": 107,
     "name": "Forked Lightning",
     "cost": 1,
