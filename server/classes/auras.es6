@@ -9,8 +9,13 @@ H.Auras = class Auras {
         this.battle = battle;
     }
 
-    addAura(aura) {
+    addAura(minion, aura) {
         this.list.push(aura);
+
+        //FIXME: How unbind?
+        minion.on('detach', () => {
+            this.removeAura(aura);
+        });
     }
 
     removeAura(aura) {

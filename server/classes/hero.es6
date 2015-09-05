@@ -111,12 +111,8 @@ H.Hero = class Hero {
         };
     }
 
-    getData() {
-        return this.player.battle.auras.applyEffect(this);
-    }
-
     getClientData() {
-        return this.getData();
+        return this.player.battle.auras.applyEffect(this.player, 'hero', this.getBaseData());
     }
 
     canUseSkill() {

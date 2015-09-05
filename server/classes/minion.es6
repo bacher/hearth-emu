@@ -36,10 +36,14 @@ H.Minion = class Minion extends EventEmitter {
         this.player = player;
         Object.defineProperty(this, 'player', { enumerable: false });
 
-        if (this.card.name === 'Wrath of Air Totem') {
-            const aura = new H.Aura(player, 'spellDamage', 1);
-            this._auras.push(aura);
-            this.player.battle.auras.addAura(aura);
+        for (var eventName in this.base.events) {
+            const eventInfo = this.base.events[eventName];
+
+            if (eventName === 'aura') {
+                const aura = new H.Aura(player, eventInfo);
+
+                this.player.battle.auras.addAura(this, aura);
+            }
         }
     }
 
@@ -70,23 +74,13 @@ H.Minion = class Minion extends EventEmitter {
         this.flags[flag] = true;
     }
 
-    removeAuras() {
-        this._auras.forEach(aura => {
-            this.player.battle.auras.removeAura(aura);
-        });
-    }
-
     detach() {
-        this.removeAuras();
-
         this.emit('detach', this);
 
         this.player = null;
     }
 
     kill() {
-        this.removeAuras();
-
         this.emit('death', this);
     }
 

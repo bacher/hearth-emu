@@ -19,8 +19,11 @@ const AURAS = {
 };
 
 H.Aura = class Aura {
-    constructor(player, auraName, params) {
-        this.aura = AURAS[auraName];
+    constructor(player, auraInfo) {
+        this.aura = AURAS[auraInfo.name];
+        this.params = auraInfo.params;
+
+        this.effect = this.aura.effect;
 
         this.player = player;
 

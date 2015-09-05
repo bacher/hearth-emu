@@ -718,7 +718,7 @@
       "race": 7,
       "events": {
         "aura": {
-          "name": "spell-damage",
+          "name": "add-spell-damage",
           "params": [
             1
           ]
