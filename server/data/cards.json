@@ -649,7 +649,9 @@
     "acts": [
       {
         "name": "deal-damage",
-        "params": [],
+        "params": [
+          1
+        ],
         "targetsType": {
           "names": [
             "minions"

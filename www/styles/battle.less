@@ -95,6 +95,16 @@
     transform: scale(1.12);
   }
 
+  &.normal .creature.available:before {
+    position: absolute;
+    content: "";
+    top: -9px;
+    left: -11px;
+    width: 98px;
+    height: 105px;
+    background: url("../textures/card-glow.png");
+  }
+
   .creature {
     position: relative;
     display: inline-block;
@@ -102,16 +112,6 @@
     width: 76px;
     height: 108px;
     transition: transform ease-out 0.2s;
-
-    &.available:not(.aiming):not(.purpose):before {
-      position: absolute;
-      content: "";
-      top: -9px;
-      left: -11px;
-      width: 98px;
-      height: 105px;
-      background: url("../textures/card-glow.png");
-    }
 
     &.sleep:after {
       position: absolute;
@@ -193,7 +193,7 @@
     }
   }
 
-  .card-wrap.available .card:before {
+  &.normal .card-wrap.available .card:before {
     position: absolute;
     content: "";
     top: -9px;
@@ -297,20 +297,20 @@
     }
   }
 
+  &.normal .avatar.available:before {
+    position: absolute;
+    content: "";
+    left: -8px;
+    top: -9px;
+    width: 124px;
+    height: 107px;
+    background: url("../textures/hero-glow.png");
+  }
+
   .avatar {
     position: absolute;
     width: 108px;
     height: 124px;
-
-    &.available:before {
-      position: absolute;
-      content: "";
-      left: -8px;
-      top: -9px;
-      width: 124px;
-      height: 107px;
-      background: url("../textures/hero-glow.png");
-    }
 
     &:hover:after {
       position: absolute;
@@ -467,6 +467,16 @@
     top: 20px;
   }
 
+  &.normal .hero-skill.my.available:after {
+    content: '';
+    display: block;
+    width: 115px;
+    height: 104px;
+    margin-top: -2px;
+    margin-left: -9px;
+    background: url("../textures/hero-skill-glow.png");
+  }
+
   .hero-skill {
     position: absolute;
     width: 97px;
@@ -480,16 +490,6 @@
     &.my {
       left: 238px;
       top: 8px;
-
-      &.available:after {
-        content: '';
-        display: block;
-        width: 115px;
-        height: 104px;
-        margin-top: -2px;
-        margin-left: -9px;
-        background: url("../textures/hero-skill-glow.png");
-      }
     }
 
     &:hover:before {

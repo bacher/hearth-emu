@@ -8,6 +8,9 @@ new H.Screen({
     draw: function() {
         render($app, 'battle');
 
+        $app.addClass('normal');
+
+        //const $board = $app.find('.board');
         var dragging = false;
         var aimTargeting = false;
         var spellTargeting = false;
@@ -70,6 +73,9 @@ new H.Screen({
                     send('get-targets', {
                         cardId: $card.data('id')
                     });
+
+                    $app.addClass('targeting');
+                    $app.removeClass('normal');
 
                     $('.hero.my .avatar').addClass('casting');
 
@@ -170,6 +176,9 @@ new H.Screen({
             .on('mouseup', e => {
                 if (dragging) {
                     $app.removeClass('hide-cursor');
+
+                    $app.addClass('normal');
+                    $app.removeClass('targeting');
 
                     const $target = $(e.target);
 
