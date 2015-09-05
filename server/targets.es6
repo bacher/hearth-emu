@@ -58,6 +58,13 @@ const T = {
 
         return targets;
     },
+    'all-but-my-hero': function(player) {
+        const targets = T['all'](player);
+
+        T.removeMyHero();
+
+        return targets;
+    },
     'physic': function(player) {
         const taunts = player.enemy.creatures.getTauntMinions();
 

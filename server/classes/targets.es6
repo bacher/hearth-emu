@@ -62,6 +62,10 @@ H.Targets = class Targets {
         this.my.hero = true;
     }
 
+    removeMyHero() {
+        this.my.hero = false;
+    }
+
     addEnemyHero() {
         this.op.hero = true;
     }
@@ -141,6 +145,10 @@ H.Targets = class Targets {
 
     'attack-more'(than) {
         this._filterAll(obj => obj.attack > than);
+    }
+
+    'attack-less'(than) {
+        this._filterAll(obj => obj.attack < than);
     }
 
     _filterAll(filterFunc) {

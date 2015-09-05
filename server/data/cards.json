@@ -336,6 +336,28 @@
     }
   },
   {
+    "id": 116,
+    "name": "Holy Smite",
+    "cost": 1,
+    "pic": "147/375/409",
+    "clas": 9,
+    "type": 2,
+    "flags": [],
+    "targetsType": {
+      "names": [
+        "all-but-my-hero"
+      ]
+    },
+    "acts": [
+      {
+        "name": "deal-damage",
+        "params": [
+          2
+        ]
+      }
+    ]
+  },
+  {
     "id": 101,
     "name": "Lightning Bolt",
     "cost": 1,
@@ -623,29 +645,6 @@
     }
   },
   {
-    "id": 114,
-    "name": "Divine Spirit",
-    "cost": 2,
-    "pic": "147/713/554",
-    "clas": 9,
-    "type": 2,
-    "flags": [],
-    "targetsType": {
-      "names": [
-        "minions"
-      ]
-    },
-    "acts": [
-      {
-        "name": "x2",
-        "params": [
-          "hp",
-          "maxHp"
-        ]
-      }
-    ]
-  },
-  {
     "id": 11,
     "name": "Frostwolf Grunt",
     "cost": 2,
@@ -722,6 +721,34 @@
     ]
   },
   {
+    "id": 114,
+    "name": "Shadow Word: Pain",
+    "cost": 2,
+    "pic": "147/706/315",
+    "clas": 9,
+    "type": 2,
+    "flags": [],
+    "targetsType": {
+      "names": [
+        "minions"
+      ],
+      "modificators": [
+        {
+          "name": "attack-less",
+          "params": [
+            4
+          ]
+        }
+      ]
+    },
+    "acts": [
+      {
+        "name": "kill",
+        "params": []
+      }
+    ]
+  },
+  {
     "id": 22,
     "name": "Succubus",
     "cost": 2,
@@ -756,26 +783,6 @@
     }
   },
   {
-    "id": 16,
-    "name": "Feral Spirit",
-    "cost": 3,
-    "pic": "148/136/214",
-    "clas": 2,
-    "type": 1,
-    "flags": [
-      "uncollectable"
-    ],
-    "minion": {
-      "attack": 2,
-      "maxHp": 3,
-      "flags": [
-        "taunt"
-      ],
-      "events": {},
-      "race": 0
-    }
-  },
-  {
     "id": 103,
     "name": "Feral Spirit",
     "cost": 3,
@@ -803,6 +810,26 @@
         ]
       }
     ]
+  },
+  {
+    "id": 16,
+    "name": "Feral Spirit",
+    "cost": 3,
+    "pic": "148/136/214",
+    "clas": 2,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [
+        "taunt"
+      ],
+      "events": {},
+      "race": 0
+    }
   },
   {
     "id": 28,
