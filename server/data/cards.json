@@ -687,6 +687,36 @@
     }
   },
   {
+    "id": 122,
+    "name": "Cleave",
+    "cost": 2,
+    "pic": "147/567/81",
+    "clas": 1,
+    "type": 2,
+    "flags": [],
+    "acts": [
+      {
+        "name": "deal-damage",
+        "params": [
+          2
+        ],
+        "targetsType": {
+          "names": [
+            "minions"
+          ],
+          "modificators": [
+            {
+              "name": "random",
+              "params": [
+                2
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
     "id": 118,
     "name": "Divine Spirit",
     "cost": 2,
