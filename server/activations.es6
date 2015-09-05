@@ -108,5 +108,8 @@ H.ACTIVATIONS = {
                 target[field] *= 2;
             });
         });
+    },
+    'copy-random-enemy-card': function(o) {
+        o.player.hand.addCard(o.player.enemy.hand.getRandomHandCard().base);
     }
 };

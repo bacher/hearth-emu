@@ -426,6 +426,21 @@
     ]
   },
   {
+    "id": 119,
+    "name": "Mind Vision",
+    "cost": 1,
+    "pic": "147/378/438",
+    "clas": 9,
+    "type": 2,
+    "flags": [],
+    "acts": [
+      {
+        "name": "copy-random-enemy-card",
+        "params": []
+      }
+    ]
+  },
+  {
     "id": 57,
     "name": "Murloc Raider",
     "cost": 1,

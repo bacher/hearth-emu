@@ -30,6 +30,10 @@ H.Hand = class Hand {
         return _.find(this.cards, { id });
     }
 
+    getRandomHandCard() {
+        return this.cards[Math.floor(Math.random() * this.cards.length)];
+    }
+
     removeHandCard(card) {
         this.cards.splice(this.cards.indexOf(card), 1);
     }
