@@ -57,31 +57,13 @@
     "acts": [
       {
         "name": "gain-crystal-this-turn",
-        "params": [],
-        "targetsType": {
-          "names": [
-            "not-need"
-          ],
-          "mergeType": "intersect"
-        }
+        "params": []
       },
       {
         "name": "gain-crystal-this-turn",
-        "params": [],
-        "targetsType": {
-          "names": [
-            "not-need"
-          ],
-          "mergeType": "intersect"
-        }
+        "params": []
       }
-    ],
-    "targetsType": {
-      "mergeType": "intersect",
-      "names": [
-        "not-need"
-      ]
-    }
+    ]
   },
   {
     "id": 51,
@@ -151,21 +133,10 @@
       {
         "name": "add-mana",
         "params": [
-          "1"
-        ],
-        "targetsType": {
-          "names": [
-            "not-need"
-          ]
-        }
+          1
+        ]
       }
-    ],
-    "targetsType": {
-      "mergeType": "intersect",
-      "names": [
-        "not-need"
-      ]
-    }
+    ]
   },
   {
     "id": 110,
@@ -189,13 +160,7 @@
           "mergeType": "intersect"
         }
       }
-    ],
-    "targetsType": {
-      "mergeType": "intersect",
-      "names": [
-        "not-need"
-      ]
-    }
+    ]
   },
   {
     "id": 102,
@@ -261,15 +226,7 @@
             "enemies",
             "minions"
           ],
-          "mergeType": "intersect",
-          "modificators": [
-            {
-              "name": "random",
-              "params": [
-                2
-              ]
-            }
-          ]
+          "mergeType": "intersect"
         }
       },
       {
@@ -277,20 +234,9 @@
         "params": [
           2
         ],
-        "targetsType": {
-          "names": [
-            "not-need"
-          ],
-          "mergeType": "intersect"
-        }
+        "targetsType": "not-need"
       }
-    ],
-    "targetsType": {
-      "mergeType": "intersect",
-      "names": [
-        "not-need"
-      ]
-    }
+    ]
   },
   {
     "id": 108,
@@ -386,6 +332,12 @@
     "clas": 2,
     "type": 2,
     "flags": [],
+    "targetsType": {
+      "names": [
+        "all"
+      ],
+      "mergeType": "intersect"
+    },
     "acts": [
       {
         "name": "deal-damage",
@@ -398,20 +350,9 @@
         "params": [
           1
         ],
-        "targetsType": {
-          "names": [
-            "not-need"
-          ],
-          "mergeType": "intersect"
-        }
+        "targetsType": "not-need"
       }
-    ],
-    "targetsType": {
-      "mergeType": "intersect",
-      "names": [
-        "all"
-      ]
-    }
+    ]
   },
   {
     "id": 56,
@@ -770,45 +711,21 @@
         "name": "summon",
         "params": [
           "Feral Spirit"
-        ],
-        "targetsType": {
-          "names": [
-            "not-need"
-          ],
-          "mergeType": "intersect"
-        }
+        ]
       },
       {
         "name": "summon",
         "params": [
           "Feral Spirit"
-        ],
-        "targetsType": {
-          "names": [
-            "not-need"
-          ],
-          "mergeType": "intersect"
-        }
+        ]
       },
       {
         "name": "overload",
         "params": [
           2
-        ],
-        "targetsType": {
-          "names": [
-            "not-need"
-          ],
-          "mergeType": "intersect"
-        }
+        ]
       }
-    ],
-    "targetsType": {
-      "mergeType": "intersect",
-      "names": [
-        "not-need"
-      ]
-    }
+    ]
   },
   {
     "id": 16,
@@ -875,20 +792,9 @@
         "params": [
           2
         ],
-        "targetsType": {
-          "names": [
-            "not-need"
-          ],
-          "mergeType": "intersect"
-        }
+        "targetsType": "not-need"
       }
-    ],
-    "targetsType": {
-      "mergeType": "intersect",
-      "names": [
-        "not-need"
-      ]
-    }
+    ]
   },
   {
     "id": 19,

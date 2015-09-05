@@ -84,6 +84,8 @@ new H.Screen({
                     $dragAim.data('linked-card', $card[0]);
 
                     $dragAim.show();
+
+                    $app.addClass('hide-cursor');
                 }
 
                 $card.hide();
@@ -285,16 +287,22 @@ H.updateInGameData = function() {
 
     $('.creatures').empty();
 
-    game.my.hand.forEach((card, i) => {
+    game.my.hand.forEach((handCard, i) => {
+        const base = handCard.base;
         var $container = $('<div>');
-        render($container, 'card', card);
+
+        render($container, 'card', handCard);
 
         const $cardWrapper = $container.children();
+
+        if (base.targetsType) {
+            $cardWrapper.addClass('need-target');
+        }
 
         $cardWrapper.addClass('c' + (i + 1));
 
         if (game.my.active) {
-            if (card.base.cost <= game.my.hero.mana) {
+            if (base.cost <= game.my.hero.mana) {
                 $cardWrapper.addClass('available');
             }
         }
@@ -326,15 +334,11 @@ H.updateInGameData = function() {
         $handOp.append($card);
     }
 
-    $hand.add($handOp)
-        .removeClass('hand1 hand2 hand3 hand4 hand5 hand6 hand7 hand8 hand9 hand10');
-
-    $hand.addClass('hand' + game.my.hand.length);
-    $handOp.addClass('hand' + game.op.hand.length);
-
     ['my', 'op'].forEach(side => {
         const player = game[side];
         const hero = player.hero;
+
+        $('.hand.' + side).removeClass().addClass('hand ' + side).addClass('hand' + player.hand.length);
 
         const $creatures = $('.creatures.' + side);
 

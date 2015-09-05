@@ -259,16 +259,19 @@ H.Battle = class Battle extends EventEmitter {
         }
 
         card.acts.forEach(act => {
-            var targets = null;
+            var targets;
 
-            if (cardTargets) {
-                targets = cardTargets;
-            } else {
+            if (act.targetsType === 'not-need') {
+                targets = null;
+            } else if (act.targetsType) {
                 const targetsType = act.targetsType;
 
                 if (targetsType.names.length > 1 || targetsType.names[0] !== 'not-need') {
                     targets = H.TARGETS.getByTargetsType(player, targetsType);
                 }
+
+            } else {
+                targets = cardTargets;
             }
 
             act.actFunc({

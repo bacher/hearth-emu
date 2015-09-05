@@ -118,13 +118,17 @@ $.ajax('/cards.json').then(data => {
                     commandParamPart = ':' + act.params.join(',');
                 }
                 $act.find('.act-command').val(act.name + commandParamPart);
+                const $actTargets = $act.find('.act-targets');
 
-                if (act.targetsType) {
+                if (act.targetsType === 'not-need') {
+                    $actTargets.val('not-need');
+
+                } else if (act.targetsType) {
                     const targets = act.targetsType.names.reduce((base, name) => {
                         return base + '&' + name;
                     });
 
-                    $act.find('.act-targets').val(targets);
+                    $actTargets.val(targets);
                 }
 
             });
@@ -241,8 +245,7 @@ $.ajax('/cards.json').then(data => {
 
                 if (targets) {
                     card.targetsType = {
-                        names: targets.split('&'),
-                        mergeType: 'intersect'
+                        names: targets.split('&')
                     };
                 }
 
@@ -262,6 +265,9 @@ $.ajax('/cards.json').then(data => {
                         };
 
                         if (targetsType) {
+                            act.targetsType = 'not-need';
+
+                        } else if (targetsType) {
 
                             const match = targetsType.match(/^([^\.]+)(?:\.(.+))?$/);
                             const targetsDetails = match[1].split('&');

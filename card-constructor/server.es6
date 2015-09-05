@@ -13,13 +13,8 @@ app.use(express.static('.'));
 var cards = JSON.parse(fs.readFileSync('../server/cards/minions.json').toString());
 
 cards.forEach(card => {
-    if (card.target) {
-        card.targetsType = {
-            names: [card.target],
-            mergeType: 'intersect'
-        };
-
-        delete card.target;
+    if (card.targetsType === 'not-need') {
+        delete card.targetsType;
     }
 });
 fs.writeFile('../server/cards/minions.json', JSON.stringify(cards, null, '  '));

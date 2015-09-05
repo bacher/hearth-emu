@@ -35,7 +35,7 @@ H.Card = class Card {
         } else if (info.type === H.CARD_TYPES.minion) {
             this.acts = [{
                 actFunc: H.ACTIVATIONS['card-summon'],
-                targetsType: { names: ['not-need'] },
+                targetsType: 'not-need',
                 params: [this.id]
             }];
 
