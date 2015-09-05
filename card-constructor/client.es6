@@ -70,6 +70,9 @@ $.ajax('/cards.json').then(data => {
         });
 
     $cards.on('click', '.card', e => {
+
+        $details.find('.new-btn').click();
+
         const $card = $(e.currentTarget);
 
         const card = $card.data('card');
@@ -97,15 +100,15 @@ $.ajax('/cards.json').then(data => {
 
             $minion.find('.events').val('');
 
-            for (var prop in card.minion.events) {
-                $minion.find('.event[data-type=' + prop + ']').val(card.minion.events[prop]);
-            }
+            drawEvents($minion, card.minion.events);
 
         } else if (card.type === CARD_TYPES.weapon) {
             $weapon.show();
 
-            $minion.find('.attack-durability').val(card.attack + '/' + card.durability);
-            $minion.find('.events').val('');
+            $weapon.find('.attack-durability').val(card.attack + '/' + card.durability);
+            $weapon.find('.events').val('');
+
+            drawEvents($weapon, card.events);
 
         } else if (card.type === CARD_TYPES.spell) {
             $spell.show();
@@ -360,22 +363,35 @@ $.ajax('/cards.json').then(data => {
         return raw;
     }
 
-    function parseEvents($obj) {
-        const st = $obj.find('.event[data-type=start-turn]').val().trim();
-        const et = $obj.find('.event[data-type=end-turn]').val().trim();
-        const cr = $obj.find('.event[data-type=cry]').val().trim();
-        const de = $obj.find('.event[data-type=death]').val().trim();
-        const au = $obj.find('.event[data-type=aura]').val().trim();
-        const cu = $obj.find('.event[data-type=custom]').val().trim();
+    function drawEvents($root, events) {
+        for (var prop in events) {
 
+            var eventRaw = events[prop].name;
+            const params = events[prop].params.join(',');
+
+            if (params) {
+                eventRaw += ':' + params;
+            }
+
+            $root.find('.event[data-type="' + prop + '"]').val(eventRaw);
+        }
+    }
+
+    function parseEvents($obj) {
         const events = {};
 
-        if (st) events['start-turn'] = st;
-        if (et) events['end-turn'] = et;
-        if (cr) events['cry'] = cr;
-        if (de) events['death'] = de;
-        if (au) events['aura'] = au;
-        if (cu) events['custom'] = cu;
+        ['start-turn', 'end-turn', 'battlecry', 'deathrattle', 'aura', 'custom'].forEach(type => {
+            const event = $obj.find('.event[data-type="' + type + '"]').val().trim();
+
+            if (event) {
+                const eventParts = event.split(':');
+
+                events[type] = {
+                    name: eventParts[0],
+                    params: eventParts.slice(1).map(tryParseNumber)
+                };
+            }
+        });
 
         return events;
     }

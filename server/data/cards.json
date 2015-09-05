@@ -223,7 +223,12 @@
       "maxHp": 1,
       "flags": [],
       "events": {
-        "cry": "deal-damage:1"
+        "battlecry": {
+          "name": "deal-damage",
+          "params": [
+            1
+          ]
+        }
       },
       "race": 0
     }
@@ -354,7 +359,13 @@
       "maxHp": 1,
       "flags": [],
       "events": {
-        "aura": "race-gain-attack:murloc,1"
+        "aura": {
+          "name": "race-gain-attack",
+          "params": [
+            "murlock",
+            1
+          ]
+        }
       },
       "race": 5
     }
@@ -373,10 +384,15 @@
       "attack": 0,
       "maxHp": 2,
       "flags": [],
+      "race": 7,
       "events": {
-        "end-turn": "heal-own-minions:1"
-      },
-      "race": 7
+        "end-turn": {
+          "name": "heal-own-minions",
+          "params": [
+            1
+          ]
+        }
+      }
     }
   },
   {
@@ -598,7 +614,10 @@
         "charge"
       ],
       "events": {
-        "custom": "freeze"
+        "custom": {
+          "name": "freeze",
+          "params": []
+        }
       },
       "race": 1
     }
@@ -650,7 +669,12 @@
       "maxHp": 1,
       "flags": [],
       "events": {
-        "cry": "restore-health:2"
+        "battlecry": {
+          "name": "restore-health",
+          "params": [
+            2
+          ]
+        }
       },
       "race": 0
     }
@@ -690,11 +714,16 @@
     "minion": {
       "attack": 0,
       "maxHp": 2,
-      "flags": [
-        "aura:spell-damage"
-      ],
-      "events": {},
-      "race": 7
+      "flags": [],
+      "race": 7,
+      "events": {
+        "aura": {
+          "name": "spell-damage",
+          "params": [
+            1
+          ]
+        }
+      }
     }
   },
   {
@@ -911,6 +940,27 @@
     ]
   },
   {
+    "id": 132,
+    "name": "Prophet Velen",
+    "cost": 2,
+    "pic": "148/271/228",
+    "clas": 9,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 7,
+      "maxHp": 7,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "aura": {
+          "name": "prophet-velen",
+          "params": []
+        }
+      }
+    }
+  },
+  {
     "id": 129,
     "name": "Sap",
     "cost": 2,
@@ -1015,7 +1065,12 @@
       "maxHp": 4,
       "flags": [],
       "events": {
-        "aura": "spell-damage:1"
+        "aura": {
+          "name": "spell-damage",
+          "params": [
+            1
+          ]
+        }
       },
       "race": 0
     }
@@ -1109,7 +1164,12 @@
       "maxHp": 2,
       "flags": [],
       "events": {
-        "cry": "deal-damage:1"
+        "battlecry": {
+          "name": "deal-damage",
+          "params": [
+            1
+          ]
+        }
       },
       "race": 0
     }
@@ -1170,9 +1230,20 @@
       "maxHp": 2,
       "flags": [],
       "events": {
-        "cry": "deal-damage:2",
-        "aura": "gain-attack-to-other-friendly-minions",
-        "custom": "freeze"
+        "aura": {
+          "name": "gain-attack-to-other-friendly-minions",
+          "params": []
+        },
+        "custom": {
+          "name": "freeze",
+          "params": []
+        },
+        "battlecry": {
+          "name": "deal-damage",
+          "params": [
+            2
+          ]
+        }
       },
       "race": 0
     }
@@ -1280,7 +1351,12 @@
       "maxHp": 4,
       "flags": [],
       "events": {
-        "cry": "summon:Mechanical Drogonling"
+        "battlecry": {
+          "name": "summon",
+          "params": [
+            "Mechanical Drogonling"
+          ]
+        }
       },
       "race": 0
     }
@@ -1324,7 +1400,12 @@
       "maxHp": 3,
       "flags": [],
       "events": {
-        "cry": "beasts-gain-attack-maxhp-taunt:2,2"
+        "battlecry": {
+          "name": "beasts-gain-attack-maxhp-taunt",
+          "params": [
+            "2,2"
+          ]
+        }
       },
       "race": 0
     }
@@ -1376,7 +1457,12 @@
       "maxHp": 4,
       "flags": [],
       "events": {
-        "aura": "spell-damage:1"
+        "aura": {
+          "name": "spell-damage",
+          "params": [
+            1
+          ]
+        }
       },
       "race": 0
     }
@@ -1430,7 +1516,10 @@
       "maxHp": 6,
       "flags": [],
       "events": {
-        "custom": "freeze"
+        "custom": {
+          "name": "freeze",
+          "params": []
+        }
       },
       "race": 0
     }
@@ -1448,7 +1537,12 @@
       "maxHp": 3,
       "flags": [],
       "events": {
-        "cry": "give-flag:windfury"
+        "battlecry": {
+          "name": "give-flag",
+          "params": [
+            "windfury"
+          ]
+        }
       },
       "race": 0
     }
@@ -1505,7 +1599,12 @@
       "maxHp": 5,
       "flags": [],
       "events": {
-        "cry": "restore-to-all-friends:2"
+        "battlecry": {
+          "name": "restore-to-all-friends",
+          "params": [
+            2
+          ]
+        }
       },
       "race": 0
     }
@@ -1523,7 +1622,13 @@
       "maxHp": 4,
       "flags": [],
       "events": {
-        "cry": "gain-attack-maxhp-for-minions-count:1,1"
+        "battlecry": {
+          "name": "gain-attack-maxhp-for-minions-count",
+          "params": [
+            1,
+            1
+          ]
+        }
       },
       "race": 0
     }
@@ -1541,7 +1646,12 @@
       "maxHp": 7,
       "flags": [],
       "events": {
-        "custom": "take-damage-gain-attack:3"
+        "custom": {
+          "name": "take-damage-gain-attack",
+          "params": [
+            3
+          ]
+        }
       },
       "race": 0
     }
@@ -1574,7 +1684,10 @@
       "maxHp": 2,
       "flags": [],
       "events": {
-        "custom": "summon-beast-draw-card"
+        "custom": {
+          "name": "summon-beast-draw-card",
+          "params": []
+        }
       },
       "race": 1
     }
@@ -1592,7 +1705,12 @@
       "maxHp": 2,
       "flags": [],
       "events": {
-        "cry": "deal-damage:2"
+        "battlecry": {
+          "name": "deal-damage",
+          "params": [
+            2
+          ]
+        }
       },
       "race": 0
     }
@@ -1610,7 +1728,10 @@
       "maxHp": 5,
       "flags": [],
       "events": {
-        "aura": "beasts-gain-charge"
+        "aura": {
+          "name": "beasts-gain-charge",
+          "params": []
+        }
       },
       "race": 1
     }
@@ -1628,7 +1749,12 @@
       "maxHp": 7,
       "flags": [],
       "events": {
-        "aura": "spell-damage:1"
+        "aura": {
+          "name": "spell-damage",
+          "params": [
+            1
+          ]
+        }
       },
       "race": 0
     }
@@ -1659,7 +1785,12 @@
       "maxHp": 6,
       "flags": [],
       "events": {
-        "cry": "deal-damage-to-all-other:1"
+        "battlecry": {
+          "name": "deal-damage-to-all-other",
+          "params": [
+            1
+          ]
+        }
       },
       "race": 2
     }
@@ -1677,7 +1808,12 @@
       "maxHp": 5,
       "flags": [],
       "events": {
-        "cry": "deal-damage:3"
+        "battlecry": {
+          "name": "deal-damage",
+          "params": [
+            3
+          ]
+        }
       },
       "race": 0
     }

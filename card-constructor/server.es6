@@ -15,9 +15,6 @@ const CARDS_FILENAME = '../server/data/cards.json';
 var cards = JSON.parse(fs.readFileSync(CARDS_FILENAME).toString());
 
 //cards.forEach(card => {
-//    if (card.targetsType === 'not-need') {
-//        delete card.targetsType;
-//    }
 //});
 //writeCards();
 
@@ -85,3 +82,13 @@ const server = app.listen(8088, function () {
         console.log('Card id:%s %s.', updatedCard.id, status);
     });
 });
+
+function tryParseNumber(value) {
+    const number = Number(value);
+
+    if (!isNaN(number)) {
+        return number;
+    } else {
+        return value;
+    }
+}

@@ -2,10 +2,17 @@
 const H = require('../namespace');
 
 const AURAS = {
-    'spellDamage': {
+    'spell-damage': {
         effect: hero => hero.spellDamage++,
         side: 'own',
         target: H.Hero
+    },
+    'prophet-velen': {
+        effect: spell => {
+
+        },
+        side: 'both',
+        target: ''
     }
 };
 
