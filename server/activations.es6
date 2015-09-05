@@ -18,7 +18,7 @@ H.ACTIVATIONS = {
             target.attack += amount;
         });
     },
-    'give-hp': function(o) {
+    'add-hp': function(o) {
         const amount = this.params[0];
 
         o.targets.forEach(target => {
@@ -109,7 +109,13 @@ H.ACTIVATIONS = {
             });
         });
     },
+    'draw-card': function(o) {
+        o.player.drawCard();
+    },
     'copy-random-enemy-card': function(o) {
         o.player.hand.addCard(o.player.enemy.hand.getRandomHandCard().base);
+    },
+    'add-armor': function(o) {
+        o.player.hero.armor += this.params[0];
     }
 };
