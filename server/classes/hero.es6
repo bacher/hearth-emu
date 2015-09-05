@@ -43,8 +43,12 @@ H.Hero = class Hero {
         return new H[Constructors[clas]](player);
     }
 
-    dealDamage(count) {
-        H.Minion.prototype.dealDamage.call(this, count);
+    dealDamage() {
+        H.Minion.prototype.dealDamage.apply(this, arguments);
+    }
+
+    heal() {
+        H.Minion.prototype.heal.apply(this, arguments);
     }
 
     kill() {

@@ -12,7 +12,7 @@ H.ACTIVATIONS = {
     'add-mana': function(o) {
         o.player.hero.addMana(1);
     },
-    'give-attack': function(o) {
+    'add-attack': function(o) {
         const amount = this.params[0];
         o.targets.forEach(target => {
             target.attack += amount;
@@ -96,10 +96,7 @@ H.ACTIVATIONS = {
     },
     'heal': function(o) {
         o.targets.forEach(target => {
-            target.hp += this.params[0];
-            if (target.hp > target.maxHp) {
-                target.hp = target.maxHp;
-            }
+            target.heal(this.params[0]);
         });
     },
     'x2': function(o) {

@@ -59,6 +59,13 @@ H.Minion = class Minion extends EventEmitter {
         }
     }
 
+    heal(amount) {
+        this.hp += amount;
+        if (this.hp > this.maxHp) {
+            this.hp = this.maxHp;
+        }
+    }
+
     addFlag(flag) {
         this.flags[flag] = true;
     }
