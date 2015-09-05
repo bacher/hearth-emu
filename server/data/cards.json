@@ -1350,6 +1350,27 @@
     }
   },
   {
+    "id": 127,
+    "name": "Assassinate",
+    "cost": 5,
+    "pic": "147/507/568",
+    "clas": 3,
+    "type": 2,
+    "flags": [],
+    "targetsType": {
+      "names": [
+        "minions",
+        "enemies"
+      ]
+    },
+    "acts": [
+      {
+        "name": "kill",
+        "params": []
+      }
+    ]
+  },
+  {
     "id": 35,
     "name": "Booty Bay Bodyguard",
     "cost": 5,
