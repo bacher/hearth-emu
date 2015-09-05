@@ -944,6 +944,33 @@
     }
   },
   {
+    "id": 128,
+    "name": "Fan of Knives",
+    "cost": 3,
+    "pic": "147/984/378",
+    "clas": 3,
+    "type": 2,
+    "flags": [],
+    "acts": [
+      {
+        "name": "deal-damage",
+        "params": [
+          1
+        ],
+        "targetsType": {
+          "names": [
+            "enemies",
+            "minions"
+          ]
+        }
+      },
+      {
+        "name": "draw-card",
+        "params": []
+      }
+    ]
+  },
+  {
     "id": 103,
     "name": "Feral Spirit",
     "cost": 3,
