@@ -1591,6 +1591,53 @@
     }
   },
   {
+    "id": 126,
+    "name": "Vanish",
+    "cost": 6,
+    "pic": "149/450/658",
+    "clas": 3,
+    "type": 2,
+    "flags": [],
+    "acts": [
+      {
+        "name": "return-to-hand",
+        "params": [],
+        "targetsType": {
+          "names": [
+            "minions"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": 125,
+    "name": "Sprint",
+    "cost": 7,
+    "pic": "147/510/90",
+    "clas": 3,
+    "type": 2,
+    "flags": [],
+    "acts": [
+      {
+        "name": "draw-card",
+        "params": []
+      },
+      {
+        "name": "draw-card",
+        "params": []
+      },
+      {
+        "name": "draw-card",
+        "params": []
+      },
+      {
+        "name": "draw-card",
+        "params": []
+      }
+    ]
+  },
+  {
     "id": 30,
     "name": "War Golem",
     "cost": 7,
