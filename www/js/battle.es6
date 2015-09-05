@@ -366,6 +366,7 @@ H.updateInGameData = function() {
 
         const $avatar = $('.avatar.' + side);
 
+        $avatar.find('.health').show();
         $avatar.find('.health .value').text(hero.hp);
 
         $avatar.find('.armor').toggle(hero.armor > 0)
@@ -441,6 +442,9 @@ H.drawWelcome = function(data) {
 
     const myClass = H.CLASSES_L[data.my.clas];
     const opClass = H.CLASSES_L[data.op.clas];
+
+    $('.avatar.my').addClass(myClass);
+    $('.avatar.op').addClass(opClass);
 
     $welcome.find('.hero.my').addClass(myClass);
     $welcome.find('.hero.op').addClass(opClass);
