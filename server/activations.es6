@@ -31,6 +31,13 @@ H.ACTIVATIONS = {
             target.dealDamage(this.params[0]);
         });
     },
+    'deal-spell-damage': function(o) {
+        o.targets.forEach(target => {
+            const damage = o.battle.auras.applyEffect(o.player, 'spell-damage', this.params[0]);
+
+            target.dealDamage(damage);
+        });
+    },
     'overload': function(o) {
         o.player.hero.addOverload(this.params[0]);
     },

@@ -891,15 +891,14 @@
     "flags": [],
     "acts": [
       {
-        "name": "deal-damage",
+        "name": "deal-spell-damage",
         "params": [
           2
         ],
         "targetsType": {
           "names": [
             "enemies"
-          ],
-          "mergeType": "intersect"
+          ]
         }
       },
       {
@@ -910,8 +909,7 @@
         "targetsType": {
           "names": [
             "friends"
-          ],
-          "mergeType": "intersect"
+          ]
         }
       }
     ]
@@ -954,8 +952,10 @@
       "race": 0,
       "events": {
         "aura": {
-          "name": "prophet-velen",
-          "params": []
+          "name": "multiply-spell-damage",
+          "params": [
+            2
+          ]
         }
       }
     }

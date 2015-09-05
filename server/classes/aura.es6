@@ -2,41 +2,42 @@
 const H = require('../namespace');
 
 const AURAS = {
-    'spell-damage': {
-        effect: hero => hero.spellDamage++,
-        side: 'own',
-        target: H.Hero
-    },
-    'prophet-velen': {
-        effect: spell => {
-
+    'add-spell-damage': {
+        affect: 'spell-damage',
+        effect(dmg) {
+            return dmg + this.params[0];
         },
-        side: 'both',
-        target: ''
+        side: 'own'
+    },
+    'multiply-spell-damage': {
+        affect: 'spell-damage',
+        effect(dmg) {
+            return dmg * this.params[0]
+        },
+        side: 'own'
     }
 };
 
 H.Aura = class Aura {
     constructor(player, auraName, params) {
         this.aura = AURAS[auraName];
+
         this.player = player;
-        this.effect = this.aura.effect;
 
         if (this.aura.side === 'own') {
             this.affectSide = player;
         } else if (this.aura.side === 'enemy') {
-            this.affectSide = this.player.getEnemy();
+            this.affectSide = this.player.enemy;
         } else {
             this.affectSide = null;
         }
     }
 
-    isTarget(instance) {
-        const target = this.aura.target;
-        if (target) {
-            return instance instanceof target;
-        } else {
-            return true;
-        }
+    isTargetSide(side) {
+        return !this.affectSide || this.affectSide === side;
+    }
+
+    isAffect(affect) {
+        return this.aura.affect === affect;
     }
 };

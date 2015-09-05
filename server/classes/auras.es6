@@ -17,18 +17,11 @@ H.Auras = class Auras {
         this.list.splice(this.list.indexOf(aura), 1);
     }
 
-    applyEffect(object) {
-        const base = object.getBaseData();
-
-        this.list.forEach(aura => {
-            if (
-                !(aura.affectSide && aura.affectSide !== object.player) &&
-                !(aura.target && !(object instanceof aura.target))
-            ) {
-                aura.effect(base);
-            }
-        });
-
-        return base;
+    applyEffect(player, objectType, obj) {
+        return this.list
+            .filter(aura => aura.isTargetSide(player) && aura.isAffect(objectType))
+            .reduce((base, aura) => {
+                return aura.effect(obj);
+            }, obj);
     }
 };
