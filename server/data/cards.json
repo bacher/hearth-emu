@@ -817,6 +817,34 @@
     ]
   },
   {
+    "id": 137,
+    "name": "Cruel Taskmaster",
+    "cost": 2,
+    "pic": "148/538/328",
+    "clas": 1,
+    "type": 1,
+    "flags": [],
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": {
+          "name": "deal-damage",
+          "params": [
+            1
+          ]
+        }
+      }
+    }
+  },
+  {
     "id": 128,
     "name": "Dagger",
     "cost": 2,
@@ -1019,6 +1047,26 @@
     ]
   },
   {
+    "id": 16,
+    "name": "Spirit Wolf",
+    "cost": 2,
+    "pic": "148/608/451",
+    "clas": 2,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [
+        "taunt"
+      ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 22,
     "name": "Succubus",
     "cost": 2,
@@ -1096,13 +1144,13 @@
       {
         "name": "summon",
         "params": [
-          "Feral Spirit"
+          "Spirit Wolf"
         ]
       },
       {
         "name": "summon",
         "params": [
-          "Feral Spirit"
+          "Spirit Wolf"
         ]
       },
       {
@@ -1112,26 +1160,6 @@
         ]
       }
     ]
-  },
-  {
-    "id": 16,
-    "name": "Feral Spirit",
-    "cost": 3,
-    "pic": "148/136/214",
-    "clas": 2,
-    "type": 1,
-    "flags": [
-      "uncollectable"
-    ],
-    "minion": {
-      "attack": 2,
-      "maxHp": 3,
-      "flags": [
-        "taunt"
-      ],
-      "events": {},
-      "race": 0
-    }
   },
   {
     "id": 28,
