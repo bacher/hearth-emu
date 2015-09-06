@@ -1462,6 +1462,27 @@
     }
   },
   {
+    "id": 135,
+    "name": "Lightspawn",
+    "cost": 4,
+    "pic": "148/253/192",
+    "clas": 9,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 0,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "aura": {
+          "name": "attack-equal-hp",
+          "params": []
+        }
+      }
+    }
+  },
+  {
     "id": 8,
     "name": "Oasis Snapjaw",
     "cost": 4,
@@ -1654,16 +1675,13 @@
       "attack": 4,
       "maxHp": 4,
       "flags": [],
+      "race": 0,
       "events": {
         "battlecry": {
-          "name": "heal",
-          "params": [
-            1,
-            1
-          ]
+          "name": "frostwolf-warlord",
+          "params": []
         }
-      },
-      "race": 0
+      }
     }
   },
   {

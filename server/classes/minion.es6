@@ -29,7 +29,19 @@ H.Minion = class Minion extends EventEmitter {
 
     static createByName(name) {
         return new H.Minion(H.CARDS.getByName(name, H.CARD_TYPES.minion));
+    }
 
+    getData() {
+        return this.player.battle.auras.applyEffect(this.player, 'minions', this.getBaseData());
+    }
+
+    getBaseData() {
+        const data = {};
+        ['id', 'card', 'base', 'attack', 'hp', 'maxHp', 'flags', 'race'].forEach(prop => {
+            data[prop] = this[prop];
+        });
+        data.that = this;
+        return data;
     }
 
     enterInGame(player) {

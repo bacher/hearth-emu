@@ -377,7 +377,7 @@ $.ajax('/cards.json').then(data => {
 
             $root.find('.event[data-type="' + prop + '"]').val(eventRaw);
 
-            if (prop === 'battlecry') {
+            if (prop === 'battlecry' && eventInfo.targetsType) {
                 $root.find('.battlecry-target').val(getRawTargetsType(eventInfo.targetsType));
             }
         }
@@ -398,7 +398,11 @@ $.ajax('/cards.json').then(data => {
                 };
 
                 if (type === 'battlecry') {
-                    events[type].targetsType = parseTargetsType($obj.find('.battlecry-target').val().trim());
+                    const targetsType = $obj.find('.battlecry-target').val().trim();
+
+                    if (targetsType) {
+                        events[type].targetsType = parseTargetsType(targetsType);
+                    }
                 }
             }
         });

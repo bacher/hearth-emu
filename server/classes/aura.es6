@@ -14,7 +14,16 @@ const AURAS = {
         effect(dmg) {
             return dmg * this.params[0]
         },
-        side: 'own'
+        side: 'own',
+        priority: 100
+    },
+    'attack-equal-hp': {
+        affect: 'minions',
+        effect(minion) {
+            minion.attack = minion.hp;
+        },
+        side: 'own',
+        priority: 100
     }
 };
 

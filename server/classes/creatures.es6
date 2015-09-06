@@ -30,6 +30,10 @@ H.Creatures = class Creatures {
         }
     }
 
+    getCount() {
+        return this.creatures.length;
+    }
+
     getGameData() {
         return this.creatures;
     }

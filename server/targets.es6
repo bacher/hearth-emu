@@ -72,6 +72,13 @@ const T = {
 
         return targets;
     },
+    'self': function(player, handCard) {
+        const targets = new H.Targets(player);
+
+        targets.addMinion(handCard.minion);
+
+        return targets;
+    },
     'physic': function(player) {
         const taunts = player.enemy.creatures.getTauntMinions();
 

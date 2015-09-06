@@ -149,5 +149,12 @@ H.ACTIVATIONS = {
     },
     'add-weapon-attack': function(o) {
         o.player.hero.weapon.attack += this.params[0];
+    },
+    'frostwolf-warlord': function(o) {
+        const minion = o.handCard.minion;
+        const otherMinionsCount = o.player.creatures.getCount() - 1;
+        minion.attack += otherMinionsCount;
+        minion.hp += otherMinionsCount;
+        minion.maxHp += otherMinionsCount;
     }
 };
