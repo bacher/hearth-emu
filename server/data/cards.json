@@ -787,27 +787,6 @@
     }
   },
   {
-    "id": 133,
-    "name": "Cabal Shadow Priest",
-    "cost": 2,
-    "pic": "147/933/147",
-    "clas": 9,
-    "type": 1,
-    "flags": [],
-    "minion": {
-      "attack": 4,
-      "maxHp": 5,
-      "flags": [],
-      "race": 0,
-      "events": {
-        "battlecry": {
-          "name": "switch-owner",
-          "params": []
-        }
-      }
-    }
-  },
-  {
     "id": 122,
     "name": "Cleave",
     "cost": 2,
@@ -962,29 +941,6 @@
         }
       }
     ]
-  },
-  {
-    "id": 132,
-    "name": "Prophet Velen",
-    "cost": 2,
-    "pic": "148/271/228",
-    "clas": 9,
-    "type": 1,
-    "flags": [],
-    "minion": {
-      "attack": 7,
-      "maxHp": 7,
-      "flags": [],
-      "race": 0,
-      "events": {
-        "aura": {
-          "name": "multiply-spell-damage",
-          "params": [
-            2
-          ]
-        }
-      }
-    }
   },
   {
     "id": 129,
@@ -1652,15 +1608,21 @@
       "attack": 4,
       "maxHp": 5,
       "flags": [],
+      "race": 0,
       "events": {
         "battlecry": {
           "name": "heal",
           "params": [
             2
-          ]
+          ],
+          "targetsType": {
+            "names": [
+              "minions",
+              "friends"
+            ]
+          }
         }
-      },
-      "race": 0
+      }
     }
   },
   {
@@ -1826,6 +1788,27 @@
     }
   },
   {
+    "id": 133,
+    "name": "Cabal Shadow Priest",
+    "cost": 6,
+    "pic": "147/933/147",
+    "clas": 9,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": {
+          "name": "switch-owner",
+          "params": []
+        }
+      }
+    }
+  },
+  {
     "id": 33,
     "name": "Dread Infernal",
     "cost": 6,
@@ -1959,6 +1942,29 @@
         }
       }
     ]
+  },
+  {
+    "id": 132,
+    "name": "Prophet Velen",
+    "cost": 7,
+    "pic": "148/271/228",
+    "clas": 9,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 7,
+      "maxHp": 7,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "aura": {
+          "name": "multiply-spell-damage",
+          "params": [
+            2
+          ]
+        }
+      }
+    }
   },
   {
     "id": 125,
