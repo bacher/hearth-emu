@@ -81,7 +81,7 @@ H.ACTIVATIONS = {
     'add-flags': function(o) {
         this.params.forEach(flag => {
             o.targets.forEach(target => {
-                target.addFlags(flag);
+                target.addFlag(flag);
             });
         });
     },

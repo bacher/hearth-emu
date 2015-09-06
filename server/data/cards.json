@@ -1387,16 +1387,29 @@
       "attack": 4,
       "maxHp": 3,
       "flags": [],
+      "race": 0,
       "events": {
         "battlecry": {
-          "name": "heal",
+          "name": "add-flags",
           "params": [
-            2,
-            2
-          ]
+            "taunt"
+          ],
+          "targetsType": {
+            "names": [
+              "minions",
+              "friends"
+            ],
+            "modificators": [
+              {
+                "name": "race",
+                "params": [
+                  "beast"
+                ]
+              }
+            ]
+          }
         }
-      },
-      "race": 0
+      }
     }
   },
   {

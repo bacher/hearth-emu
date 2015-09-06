@@ -336,7 +336,7 @@ $.ajax('/cards.json').then(data => {
             const mods = match[2].split('.');
 
             targetsType.modificators = mods.map(mod => {
-                const modMatch = mod.match(/^([^(]+)(?:\(([^)])\))?/);
+                const modMatch = mod.match(/^([^(]+)(?:\(([^)]+)\))?/);
 
                 return {
                     name: modMatch[1],

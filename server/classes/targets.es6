@@ -167,6 +167,11 @@ H.Targets = class Targets {
         this._filterAll(obj => obj.hp < obj.maxHp);
     }
 
+    'race'(race) {
+        const raceId = H.RACES[race];
+        this._filterAll(obj => obj.race === raceId);
+    }
+
     _filterAll(filterFunc) {
         this._filterMinions(filterFunc);
 
