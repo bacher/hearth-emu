@@ -890,6 +890,36 @@
     transform-origin: 60% -554px;
   }
 
+  .hand {
+    .card {
+      transform: rotate(0deg);
+    }
+
+    &.my {
+      &.hand4 .card,
+      &.hand5 .card,
+      &.hand6 .card,
+      &.hand7 .card,
+      &.hand8 .card,
+      &.hand9 .card,
+      &.hand10 .card {
+        transform: rotate(-8deg);
+      }
+    }
+
+    &.op {
+      &.hand4 .card,
+      &.hand5 .card,
+      &.hand6 .card,
+      &.hand7 .card,
+      &.hand8 .card,
+      &.hand9 .card,
+      &.hand10 .card {
+        transform: rotate(-4deg);
+      }
+    }
+  }
+
   .hand1 .c1 { transform: rotate(0deg); }
 
   .hand2 .c1 { transform: rotate(0deg) translate(-41px,0); }
@@ -899,20 +929,17 @@
   .hand3 .c2 { transform: rotate(0deg); }
   .hand3 .c3 { transform: rotate(0deg) translate(81px,0); }
 
-  .hand4 .card { transform: rotate(-8deg); }
   .hand4 .c1 { transform: rotate(-12deg); }
   .hand4 .c2 { transform: rotate(-4deg); }
   .hand4 .c3 { transform: rotate(4deg); }
   .hand4 .c4 { transform: rotate(12deg); }
 
-  .hand5 .card { transform: rotate(-8deg); }
   .hand5 .c1 { transform: rotate(-16deg); }
   .hand5 .c2 { transform: rotate(-8deg); }
   .hand5 .c3 { transform: rotate(0deg); }
   .hand5 .c4 { transform: rotate(8deg); }
   .hand5 .c5 { transform: rotate(16deg); }
 
-  .hand6 .card { transform: rotate(-8deg); }
   .hand6 .c1 { transform: rotate(-15deg); }
   .hand6 .c2 { transform: rotate(-9deg); }
   .hand6 .c3 { transform: rotate(-3deg); }
@@ -920,7 +947,6 @@
   .hand6 .c5 { transform: rotate(9deg); }
   .hand6 .c6 { transform: rotate(15deg); }
 
-  .hand7 .card { transform: rotate(-8deg); }
   .hand7 .c1 { transform: rotate(-15deg); }
   .hand7 .c2 { transform: rotate(-10deg); }
   .hand7 .c3 { transform: rotate(-5deg); }
@@ -929,7 +955,6 @@
   .hand7 .c6 { transform: rotate(10deg); }
   .hand7 .c7 { transform: rotate(15deg); }
 
-  .hand8 .card { transform: rotate(-8deg); }
   .hand8 .c1 { transform: rotate(-14deg); }
   .hand8 .c2 { transform: rotate(-10deg); }
   .hand8 .c3 { transform: rotate(-6deg); }
@@ -939,7 +964,6 @@
   .hand8 .c7 { transform: rotate(10deg); }
   .hand8 .c8 { transform: rotate(14deg); }
 
-  .hand9 .card { transform: rotate(-8deg); }
   .hand9 .c1 { transform: rotate(-16deg); }
   .hand9 .c2 { transform: rotate(-12deg); }
   .hand9 .c3 { transform: rotate(-8deg); }
@@ -950,7 +974,6 @@
   .hand9 .c8 { transform: rotate(12deg); }
   .hand9 .c9 { transform: rotate(16deg); }
 
-  .hand10 .card { transform: rotate(-8deg); }
   .hand10 .c1 { transform: rotate(-18deg); }
   .hand10 .c2 { transform: rotate(-14deg); }
   .hand10 .c3 { transform: rotate(-10deg); }

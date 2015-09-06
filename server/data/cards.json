@@ -1435,7 +1435,8 @@
         "battlecry": {
           "name": "heal",
           "params": [
-            2,2
+            2,
+            2
           ]
         }
       },
