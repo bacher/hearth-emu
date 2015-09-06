@@ -22,7 +22,7 @@ H.Player = class Player extends EventEmitter {
         this.active = false;
         this.deck = null;
         this.hero = null;
-        this.hand = new H.Hand();
+        this.hand = new H.Hand(this);
         this.creatures = new H.Creatures(this);
 
         ws

@@ -50,6 +50,18 @@ H.Targets = class Targets {
         minions.forEach(minion => this.addMinion(minion));
     }
 
+    removeMinion(minion) {
+        var minions;
+
+        if (minion.player === this.player) {
+            minions = this.my.minions;
+        } else {
+            minions = this.op.minions;
+        }
+
+        minions.splice(minions.indexOf(minion), 1);
+    }
+
     addHero(hero) {
         if (hero.player === this.player) {
             this.addMyHero();

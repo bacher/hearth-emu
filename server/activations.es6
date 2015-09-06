@@ -4,10 +4,20 @@ const H = require('./namespace');
 const SILENCE_IGNORE_FLAGS = ['tired', 'freeze', 'sleep'];
 
 H.ACTIVATIONS = {
+    'summon': function(o) {
+        const minionCardName = this.params[0];
+
+        const minion = H.Minion.createByName(minionCardName);
+
+        o.player.creatures.addCreature(minion);
+    },
     'card-summon': function(o) {
         const card = H.CARDS.getById(this.params[0]);
 
-        o.player.creatures.addCreature(new H.Minion(card));
+        const minion = new H.Minion(card);
+        o.handCard.minion = minion;
+
+        o.player.creatures.addCreature(minion);
     },
     'add-mana': function(o) {
         o.player.hero.addMana(1);
@@ -58,13 +68,6 @@ H.ACTIVATIONS = {
 
             target.addFlag('silence');
         });
-    },
-    'summon': function(o) {
-        const minionCardName = this.params[0];
-
-        const minion = H.Minion.createByName(minionCardName);
-
-        o.player.creatures.addCreature(minion);
     },
     'kill': function(o) {
         o.targets.forEach(obj => {

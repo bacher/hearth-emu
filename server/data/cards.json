@@ -1819,15 +1819,20 @@
       "attack": 6,
       "maxHp": 6,
       "flags": [],
+      "race": 2,
       "events": {
         "battlecry": {
           "name": "deal-damage",
           "params": [
             1
-          ]
+          ],
+          "targetsType": {
+            "names": [
+              "all-except-self"
+            ]
+          }
         }
-      },
-      "race": 2
+      }
     }
   },
   {

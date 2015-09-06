@@ -191,6 +191,7 @@ new H.Screen({
                         $('.hero.my .avatar').removeClass('casting');
                         $dragAim.hide();
 
+                        battlecryTargeting = false;
                         spellTargeting = false;
                         aimTargeting = false;
 

@@ -6,13 +6,15 @@ const MAX_HAND_CARD_COUNT = 10;
 
 
 H.Hand = class Hand {
-    constructor() {
+    constructor(player) {
+        this.player = player;
+
         this.cards = [];
     }
 
     addCard(card) {
         if (this.cards.length <= 10) {
-            this.cards.push(new H.HandCard(card));
+            this.cards.push(new H.HandCard(this.player, card));
         }
     }
 

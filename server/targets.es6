@@ -65,6 +65,13 @@ const T = {
 
         return targets;
     },
+    'all-except-self': function(player, handCard) {
+        const targets = T['all'](player);
+
+        targets.removeMinion(handCard.minion);
+
+        return targets;
+    },
     'physic': function(player) {
         const taunts = player.enemy.creatures.getTauntMinions();
 
@@ -90,8 +97,8 @@ H.TARGETS = {
         return T[name](player);
     },
 
-    getByTargetsType(player, targetsType) {
-        const allTargets = targetsType.names.map(name => T[name](player));
+    getByTargetsType(player, targetsType, handCard) {
+        const allTargets = targetsType.names.map(name => T[name](player, handCard));
 
         const targets = allTargets.reduce((base, nextTarget) => {
             return base[targetsType.mergeType || 'intersect'](nextTarget);

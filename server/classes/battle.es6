@@ -101,9 +101,6 @@ H.Battle = class Battle extends EventEmitter {
     }
 
     _bindListeners() {
-        const player1 = this.players[0];
-        const player2 = this.players[1];
-
         this.players.forEach(player => {
             player.on('client-message', msg => {
                 this._handleClientMessage(player, msg.msg, msg.data);
@@ -267,7 +264,7 @@ H.Battle = class Battle extends EventEmitter {
                 const targetsType = act.targetsType;
 
                 if (targetsType.names.length > 1 || targetsType.names[0] !== 'not-need') {
-                    targets = H.TARGETS.getByTargetsType(player, targetsType);
+                    targets = H.TARGETS.getByTargetsType(player, targetsType, handCard);
                 }
 
             } else {
@@ -278,7 +275,8 @@ H.Battle = class Battle extends EventEmitter {
                 params: data,
                 player,
                 battle: this,
-                targets: targets
+                targets: targets,
+                handCard: handCard
             });
         });
 
