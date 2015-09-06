@@ -1828,7 +1828,7 @@
           ],
           "targetsType": {
             "names": [
-              "all-except-self"
+              "except-self"
             ]
           }
         }
@@ -1890,6 +1890,36 @@
         "charge"
       ],
       "events": {}
+    }
+  },
+  {
+    "id": 134,
+    "name": "Temple Enforcer",
+    "cost": 6,
+    "pic": "148/593/232",
+    "clas": 9,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 6,
+      "maxHp": 6,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": {
+          "name": "add-hp",
+          "params": [
+            3
+          ],
+          "targetsType": {
+            "names": [
+              "friends",
+              "minions",
+              "except-self"
+            ]
+          }
+        }
+      }
     }
   },
   {

@@ -65,7 +65,7 @@ const T = {
 
         return targets;
     },
-    'all-except-self': function(player, handCard) {
+    'except-self': function(player, handCard) {
         const targets = T['all'](player);
 
         targets.removeMinion(handCard.minion);
