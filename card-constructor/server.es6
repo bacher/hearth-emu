@@ -14,9 +14,12 @@ const CARDS_FILENAME = '../server/data/cards.json';
 
 var cards = JSON.parse(fs.readFileSync(CARDS_FILENAME).toString());
 
-//cards.forEach(card => {
-//});
-//writeCards();
+cards.forEach(card => {
+    if (card.minion) {
+        card.minion.events = card.minion.events || {};
+    }
+});
+writeCards();
 
 function writeCards() {
     fs.writeFile(CARDS_FILENAME, JSON.stringify(cards, null, '  '));

@@ -64,14 +64,17 @@
             <label>Flags:<input class="card-flags"></label>
             <a class="flag-suggest" data-for="card-flags" href="#">uncollectable</a>
             <label class="card-type-section">Card Type:
+                <button class="spell-btn">Spell</button>
                 <select class="type">
                     <option value="1">Minion</option>
                     <option value="2">Spell</option>
                     <option value="3">Weapon</option>
                     <option value="4">Trap</option>
                 </select>
-                <button class="spell-btn">Spell</button>
             </label>
+
+            <label class="play-targets">Play targets: <input class="targets" placeholder="not-need"></label>
+
         </div>
 
         <br>
@@ -96,7 +99,10 @@
                 </select>
             </label>
             <div class="events">Events
-                <label>Battlecry:<input class="event" data-type="battlecry"></label>
+                <label>Battlecry:
+                    <input class="event" data-type="battlecry" style="width:250px">
+                    <input class="battlecry-target" placeholder="inherit" style="width:200px">
+                </label>
                 <label>Deathrattle:<input class="event" data-type="deathrattle"></label>
                 <label>Aura:<input class="event" data-type="aura"></label>
                 <label>Start turn:<input class="event" data-type="start-turn"></label>
@@ -107,7 +113,6 @@
 
         <div class="spell-info">
             <div>Spell:</div>
-            <label>Play targets: <input class="target" placeholder="not-need"></label>
             <div class="acts">Acts:
                 <label class="act">1:<input class="act-command"><input class="act-targets" placeholder="inherit"></label>
                 <label class="act">2:<input class="act-command"><input class="act-targets" placeholder="inherit"></label>

@@ -13,6 +13,7 @@ new H.Screen({
         var dragging = false;
         var aimTargeting = false;
         var spellTargeting = false;
+        var battlecryTargeting = false;
         var $dragCard;
         var $aimingObject = null;
 
@@ -53,47 +54,7 @@ new H.Screen({
 
                 const $card = $(e.currentTarget);
 
-                const isNeedTarget = $card.hasClass('need-target');
-
-                dragging = true;
-
-                if (!isNeedTarget) {
-                    $('.battle').addClass('dragging');
-
-                    $dragCard = $card.clone();
-
-                    $dragCard.data('linked-card', $card[0]);
-
-                    $dragCard.addClass('card-drag');
-
-                    $dragCard.appendTo('.battle');
-
-                } else {
-                    send('get-targets', {
-                        cardId: $card.data('id')
-                    });
-
-                    $app.addClass('targeting');
-                    $app.removeClass('normal');
-
-                    $('.hero.my .avatar').addClass('casting');
-
-                    aimTargeting = true;
-                    spellTargeting = true;
-
-                    $dragAim.css({
-                        bottom: 167,
-                        left: 643
-                    });
-
-                    $dragAim.data('linked-card', $card[0]);
-
-                    $dragAim.show();
-
-                    $app.addClass('hide-cursor');
-                }
-
-                $card.hide();
+                startCardDrag($card);
 
             })
             .on('mousedown', '.avatar.my.available, .creatures.my .creature.available, .hero-skill.my.available.need-target', e => {
@@ -177,6 +138,8 @@ new H.Screen({
             })
             .on('mouseup', e => {
                 if (dragging) {
+                    dragging = false;
+
                     $app.removeClass('hide-cursor');
 
                     $app.addClass('normal');
@@ -197,7 +160,7 @@ new H.Screen({
                             const $myCard = $($dragAim.data('linked-card'));
                             const id = $myCard.data('id');
 
-                            if (spellTargeting) {
+                            if (spellTargeting || battlecryTargeting) {
                                 send('play-card', {
                                     id: id,
                                     targetSide: targetSide,
@@ -232,20 +195,26 @@ new H.Screen({
                         aimTargeting = false;
 
                     } else {
+                        const $linkedCard = $($dragCard.data('linked-card'));
+
                         if ($target.closest('.battleground').length) {
-                            send('play-card', {
-                                id: $dragCard.data('id')
-                            });
+                            if ($linkedCard.hasClass('need-battlecry-target')) {
+                                battlecryTargeting = true;
+
+                                startCardDrag($linkedCard)
+                            } else {
+                                send('play-card', {
+                                    id: $dragCard.data('id')
+                                });
+                            }
 
                         } else {
-                            $($dragCard.data('linked-card')).show();
+                            $linkedCard.show();
                         }
 
                         $dragCard.remove();
                         $dragCard = null;
                     }
-
-                    dragging = false;
 
                     $('.purpose').removeClass('purpose');
 
@@ -281,6 +250,51 @@ new H.Screen({
             //        $blow.remove();
             //    }, 200);
             //});
+
+
+        function startCardDrag($card) {
+            const isNeedTarget = $card.hasClass('need-target');
+            const isNeedBattlecryTarget = $card.hasClass('need-battlecry-target');
+
+            dragging = true;
+
+            if (isNeedTarget && (!isNeedBattlecryTarget || battlecryTargeting)) {
+                send('get-targets', {
+                    cardId: $card.data('id')
+                });
+
+                $app.addClass('targeting');
+                $app.removeClass('normal');
+
+                $('.hero.my .avatar').addClass('casting');
+
+                aimTargeting = true;
+                spellTargeting = true;
+
+                $dragAim.css({
+                    bottom: 167,
+                    left: 643
+                });
+
+                $dragAim.data('linked-card', $card[0]);
+
+                $dragAim.show();
+
+                $app.addClass('hide-cursor');
+            } else {
+                $('.battle').addClass('dragging');
+
+                $dragCard = $card.clone();
+
+                $dragCard.data('linked-card', $card[0]);
+
+                $dragCard.addClass('card-drag');
+
+                $dragCard.appendTo('.battle');
+            }
+
+            $card.hide();
+        }
     }
 });
 

@@ -18,18 +18,18 @@ H.Card = class Card {
             });
         }
 
-        if (info.type === H.CARD_TYPES.spell) {
-            this.targetsType = info.targetsType;
+        this.targetsType = info.targetsType;
 
-            this.acts = info.acts.map(act => {
+        if (info.type === H.CARD_TYPES.spell) {
+            this.acts = info.acts;
+
+            this.acts.forEach(act => {
                 act.actFunc = H.ACTIVATIONS[act.name];
 
                 if (!act.actFunc) {
                     console.warn('Activation not founded "%s".', act.name);
                     throw 0;
                 }
-
-                return act;
             });
 
         } else if (info.type === H.CARD_TYPES.minion) {
@@ -38,6 +38,18 @@ H.Card = class Card {
                 targetsType: 'not-need',
                 params: [this.id]
             }];
+
+            const battlecry = info.minion.events['battlecry'];
+            if (battlecry) {
+                battlecry.actFunc = H.ACTIVATIONS[battlecry.name];
+
+                if (!battlecry.actFunc) {
+                    console.warn('Activation not founded "%s".', battlecry.name);
+                    throw 0;
+                }
+
+                this.acts.push(battlecry);
+            }
 
             this.minion = info.minion;
 
@@ -51,6 +63,10 @@ H.Card = class Card {
                 });
             } else {
                 this.minion.flags = {};
+            }
+
+            if (this.targetsType) {
+                this.flags['need-battlecry-target'] = true;
             }
         }
 

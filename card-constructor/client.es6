@@ -71,7 +71,7 @@ $.ajax('/cards.json').then(data => {
 
     $cards.on('click', '.card', e => {
 
-        $details.find('.new-btn').click();
+        newCard();
 
         const $card = $(e.currentTarget);
 
@@ -86,6 +86,10 @@ $.ajax('/cards.json').then(data => {
         $details.find('.type').val(card.type);
         $details.find('.card-flags').val(card.flags && card.flags.join(','));
 
+        if (card.targetsType) {
+            $spell.find('.targets').val(getRawTargetsType(card.targetsType));
+        }
+
         $minion.hide();
         $spell.hide();
         $weapon.hide();
@@ -98,7 +102,7 @@ $.ajax('/cards.json').then(data => {
             $minion.find('.minion-flags').val(minion.flags && minion.flags.join(','));
             $minion.find('.race').val(minion.race || 0);
 
-            $minion.find('.events').val('');
+            $minion.find('.events, .battlecry-target').val('');
 
             drawEvents($minion, card.minion.events);
 
@@ -106,18 +110,12 @@ $.ajax('/cards.json').then(data => {
             $weapon.show();
 
             $weapon.find('.attack-durability').val(card.attack + '/' + card.durability);
-            $weapon.find('.events').val('');
+            $weapon.find('.events, .battlecry-target').val('');
 
             drawEvents($weapon, card.events);
 
         } else if (card.type === CARD_TYPES.spell) {
             $spell.show();
-
-            if (card.targetsType) {
-                $spell.find('.target').val(getRawTargetsType(card.targetsType));
-            } else {
-                $spell.find('.target').val('');
-            }
 
             $spell.find('.act-command').val('');
             $spell.find('.act-targets').val('');
@@ -163,17 +161,7 @@ $.ajax('/cards.json').then(data => {
             checkType();
         })
         .on('click', '.new-btn', () => {
-            $details.find('.id').text('NEW_CARD');
-            $details.find('INPUT').val('');
-            $details.find('SELECT').val(0);
-            $details.find('.type').val(1);
-            $details.find('.class-pic').removeClass('active').eq(0).addClass('active');
-
-            $details.find('.card-pic').attr('src', '');
-
-            $minion.show();
-            $spell.hide();
-            $weapon.hide();
+            newCard();
         })
         .on('click', '.class-pic', e => {
             $(e.currentTarget).siblings().removeClass('active').end().addClass('active');
@@ -217,6 +205,11 @@ $.ajax('/cards.json').then(data => {
                 $details.find('.id').text(card.id);
             }
 
+            const targets = $details.find('.targets').val().trim();
+
+            if (targets) {
+                card.targetsType = parseTargetsType(targets);
+            }
 
             if (card.type === CARD_TYPES.minion) {
                 const attackMaxhpPart = $minion.find('.attack-maxhp').val().split(/[, \/]/);
@@ -243,14 +236,8 @@ $.ajax('/cards.json').then(data => {
                 card.durability = attackDurParts[1];
 
                 card.events = parseEvents($weapon);
+
             } else if (card.type === CARD_TYPES.spell) {
-
-                const targets = $spell.find('.target').val().trim();
-
-                if (targets) {
-                    card.targetsType = parseTargetsType(targets);
-                }
-
                 card.acts = $spell.find('.act').map((i, actNode) => {
                     const $act = $(actNode);
 
@@ -305,6 +292,20 @@ $.ajax('/cards.json').then(data => {
         });
 
     $details.find('.new-btn').click();
+
+    function newCard() {
+        $details.find('.id').text('NEW_CARD');
+        $details.find('INPUT').val('');
+        $details.find('SELECT').val(0);
+        $details.find('.type').val(1);
+        $details.find('.class-pic').removeClass('active').eq(0).addClass('active');
+
+        $details.find('.card-pic').attr('src', '');
+
+        $minion.show();
+        $spell.hide();
+        $weapon.hide();
+    }
 
     function checkType() {
         const type = Number($details.find('.type').val());
@@ -365,15 +366,20 @@ $.ajax('/cards.json').then(data => {
 
     function drawEvents($root, events) {
         for (var prop in events) {
+            const eventInfo = events[prop];
 
-            var eventRaw = events[prop].name;
-            const params = events[prop].params.join(',');
+            var eventRaw = eventInfo.name;
+            const params = eventInfo.params.join(',');
 
             if (params) {
                 eventRaw += ':' + params;
             }
 
             $root.find('.event[data-type="' + prop + '"]').val(eventRaw);
+
+            if (prop === 'battlecry') {
+                $root.find('.battlecry-target').val(eventInfo.target);
+            }
         }
     }
 

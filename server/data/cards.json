@@ -218,10 +218,16 @@
     "clas": 0,
     "type": 1,
     "flags": [],
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
     "minion": {
       "attack": 1,
       "maxHp": 1,
       "flags": [],
+      "race": 0,
       "events": {
         "battlecry": {
           "name": "deal-damage",
@@ -229,8 +235,7 @@
             1
           ]
         }
-      },
-      "race": 0
+      }
     }
   },
   {
@@ -670,7 +675,7 @@
       "flags": [],
       "events": {
         "battlecry": {
-          "name": "restore-health",
+          "name": "heal",
           "params": [
             2
           ]
@@ -779,6 +784,27 @@
       "flags": [],
       "events": {},
       "race": 5
+    }
+  },
+  {
+    "id": 133,
+    "name": "Cabal Shadow Priest",
+    "cost": 2,
+    "pic": "147/933/147",
+    "clas": 9,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": {
+          "name": "switch-owner",
+          "params": []
+        }
+      }
     }
   },
   {
@@ -1214,7 +1240,8 @@
     "minion": {
       "attack": 5,
       "maxHp": 1,
-      "flags": null
+      "flags": null,
+      "events": {}
     }
   },
   {
@@ -1309,7 +1336,8 @@
       "maxHp": 1,
       "flags": [
         "charge"
-      ]
+      ],
+      "events": {}
     }
   },
   {
@@ -1322,7 +1350,8 @@
     "minion": {
       "attack": 4,
       "maxHp": 4,
-      "flags": null
+      "flags": null,
+      "events": {}
     }
   },
   {
@@ -1335,7 +1364,8 @@
     "minion": {
       "attack": 4,
       "maxHp": 4,
-      "flags": null
+      "flags": null,
+      "events": {}
     }
   },
   {
@@ -1371,7 +1401,8 @@
     "minion": {
       "attack": 4,
       "maxHp": 4,
-      "flags": null
+      "flags": null,
+      "events": {}
     }
   },
   {
@@ -1384,7 +1415,8 @@
     "minion": {
       "attack": 4,
       "maxHp": 4,
-      "flags": null
+      "flags": null,
+      "events": {}
     }
   },
   {
@@ -1401,9 +1433,9 @@
       "flags": [],
       "events": {
         "battlecry": {
-          "name": "beasts-gain-attack-maxhp-taunt",
+          "name": "heal",
           "params": [
-            "2,2"
+            2,2
           ]
         }
       },
@@ -1538,7 +1570,7 @@
       "flags": [],
       "events": {
         "battlecry": {
-          "name": "give-flag",
+          "name": "add-flags",
           "params": [
             "windfury"
           ]
@@ -1600,7 +1632,7 @@
       "flags": [],
       "events": {
         "battlecry": {
-          "name": "restore-to-all-friends",
+          "name": "heal",
           "params": [
             2
           ]
@@ -1623,7 +1655,7 @@
       "flags": [],
       "events": {
         "battlecry": {
-          "name": "gain-attack-maxhp-for-minions-count",
+          "name": "heal",
           "params": [
             1,
             1
@@ -1668,7 +1700,8 @@
       "maxHp": 4,
       "flags": [
         "bc:deal-dmg-to-hero"
-      ]
+      ],
+      "events": {}
     }
   },
   {
@@ -1769,7 +1802,8 @@
     "minion": {
       "attack": 6,
       "maxHp": 6,
-      "flags": null
+      "flags": null,
+      "events": {}
     }
   },
   {
@@ -1786,7 +1820,7 @@
       "flags": [],
       "events": {
         "battlecry": {
-          "name": "deal-damage-to-all-other",
+          "name": "deal-damage",
           "params": [
             1
           ]
@@ -1848,7 +1882,8 @@
       "maxHp": 2,
       "flags": [
         "charge"
-      ]
+      ],
+      "events": {}
     }
   },
   {
