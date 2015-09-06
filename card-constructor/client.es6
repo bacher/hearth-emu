@@ -386,7 +386,7 @@ $.ajax('/cards.json').then(data => {
     function parseEvents($obj) {
         const events = {};
 
-        ['start-turn', 'end-turn', 'battlecry', 'deathrattle', 'aura', 'custom'].forEach(type => {
+        ['start-turn', 'end-turn', 'battlecry', 'deathrattle', 'enrage', 'aura', 'custom'].forEach(type => {
             const event = $obj.find('.event[data-type="' + type + '"]').val().trim();
 
             if (event) {

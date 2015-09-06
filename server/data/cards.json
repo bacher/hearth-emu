@@ -2023,6 +2023,31 @@
     }
   },
   {
+    "id": 136,
+    "name": "Grommash Hellscream",
+    "cost": 8,
+    "pic": "148/367/643",
+    "clas": 1,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 9,
+      "flags": [
+        "charge"
+      ],
+      "race": 0,
+      "events": {
+        "enrage": {
+          "name": "add-attack",
+          "params": [
+            6
+          ]
+        }
+      }
+    }
+  },
+  {
     "id": 27,
     "name": "Ironbark Protector",
     "cost": 8,
