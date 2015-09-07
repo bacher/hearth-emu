@@ -305,7 +305,7 @@ H.Battle = class Battle extends EventEmitter {
             op.dealDamage(by.attack);
         }
 
-        by.flags['tired'] = true;
+        by.setHitFlags();
 
         this.sendGameData();
     }

@@ -39,13 +39,7 @@ H.Creatures = class Creatures {
     }
 
     wakeUpAll() {
-        this.creatures.forEach(creature => {
-            delete creature.flags['sleep'];
-
-            if (!creature.flags['freeze']) {
-                delete creature.flags['tired'];
-            }
-        });
+        this.creatures.forEach(creature => creature.wakeUp());
     }
 
     resetFlag(flag) {

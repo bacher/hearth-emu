@@ -313,7 +313,10 @@ new H.Screen({
                     const alreadyInDeck = activeDeck.cardIds.filter(cardId => cardId === id).length;
 
                     $card.removeClass('lock one');
-                    if (alreadyInDeck >= 2) {
+
+                    if (alreadyInDeck >= 1 && $card.hasClass('unique')) {
+                        $card.addClass('lock');
+                    } else if (alreadyInDeck >= 2) {
                         $card.addClass('lock');
                     } else if (alreadyInDeck === 1) {
                         $card.addClass('one');

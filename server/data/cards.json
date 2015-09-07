@@ -2051,6 +2051,29 @@
     }
   },
   {
+    "id": 138,
+    "name": "Al'Akir the Windlord",
+    "cost": 8,
+    "pic": "149/478/335",
+    "clas": 2,
+    "type": 1,
+    "flags": [
+      "unique"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 5,
+      "flags": [
+        "taunt",
+        "charge",
+        "windfury",
+        "shield"
+      ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 136,
     "name": "Grommash Hellscream",
     "cost": 8,

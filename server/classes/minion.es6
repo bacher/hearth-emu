@@ -59,6 +59,23 @@ H.Minion = class Minion extends EventEmitter {
         }
     }
 
+    wakeUp() {
+        delete this.flags['sleep'];
+        delete this.flags['windfury-hit'];
+
+        if (!this.flags['freeze']) {
+            delete this.flags['tired'];
+        }
+    }
+
+    setHitFlags() {
+        if (this.flags['windfury'] && !this.flags['windfury-hit']) {
+            this.flags['windfury-hit'] = true;
+        } else {
+            this.flags['tired'] = true;
+        }
+    }
+
     dealDamage(dmg) {
         if (/\d+-\d+/.test(dmg)) {
             const dmgRandom = dmg.split('-').map(Number);

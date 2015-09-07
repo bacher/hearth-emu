@@ -1,5 +1,5 @@
 
 each card in cards
-   .card(data-id=card.id)
+   .card(data-id=card.id,class=card.flags['unique'] ? 'unique' : '')
       IMG.img(src='http://media-hearth.cursecdn.com/avatars/'+card.pic+'.png')
       .glow
