@@ -1667,6 +1667,31 @@
     }
   },
   {
+    "id": 139,
+    "name": "Earth Elemental",
+    "cost": 5,
+    "pic": "148/142/124",
+    "clas": 2,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 7,
+      "maxHp": 8,
+      "flags": [
+        "taunt"
+      ],
+      "race": 0,
+      "events": {
+        "battlecry": {
+          "name": "overload",
+          "params": [
+            3
+          ]
+        }
+      }
+    }
+  },
+  {
     "id": 37,
     "name": "Frostwolf Warlord",
     "cost": 5,
