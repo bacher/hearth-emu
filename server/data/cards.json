@@ -1330,6 +1330,49 @@
     ]
   },
   {
+    "id": 141,
+    "name": "Unbound Elemental",
+    "cost": 3,
+    "pic": "148/148/51",
+    "clas": 2,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "name": "add-attack",
+            "params": [
+              1
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "eventName": "play-card"
+          },
+          {
+            "name": "add-hp",
+            "params": [
+              1
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "eventName": "play-card"
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 21,
     "type": 1,
     "name": "Wolfrider",

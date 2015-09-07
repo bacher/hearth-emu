@@ -249,6 +249,8 @@ H.Battle = class Battle extends EventEmitter {
         player.hand.removeHandCard(handCard);
         player.hero.removeMana(card.cost);
 
+        this.emit('play-card', handCard);
+
         var cardTargets = null;
 
         if (card.targetsType) {

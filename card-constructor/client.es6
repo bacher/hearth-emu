@@ -123,20 +123,7 @@ $.ajax('/cards.json').then(data => {
             card.acts.forEach((act, i) => {
                 const $act = $spell.find('.act').eq(i);
 
-                var commandParamPart = '';
-                if (act.params.length) {
-                    commandParamPart = ':' + act.params.join(',');
-                }
-                $act.find('.act-command').val(act.name + commandParamPart);
-                const $actTargets = $act.find('.act-targets');
-
-                if (act.targetsType === 'not-need') {
-                    $actTargets.val('not-need');
-
-                } else if (act.targetsType) {
-                    $actTargets.val(getRawTargetsType(act.targetsType));
-                }
-
+                drawAct(act, $act);
             });
         }
 
@@ -241,27 +228,7 @@ $.ajax('/cards.json').then(data => {
                 card.acts = $spell.find('.act').map((i, actNode) => {
                     const $act = $(actNode);
 
-                    const command = $act.find('.act-command').val();
-                    const targetsType = $act.find('.act-targets').val().trim();
-                    const [name, params] = command.split(':').map(part => part.trim());
-
-                    if (name) {
-                        const actParams = params && params.split(/\s*,\s*/).map(tryParseNumber);
-
-                        const act = {
-                            name: name,
-                            params: actParams || []
-                        };
-
-                        if (targetsType === 'not-need') {
-                            act.targetsType = 'not-need';
-
-                        } else if (targetsType) {
-                            act.targetsType = parseTargetsType(targetsType);
-                        }
-
-                        return act;
-                    }
+                    return parseAct($act);
                 }).get();
             }
 
@@ -367,26 +334,36 @@ $.ajax('/cards.json').then(data => {
     function drawEvents($root, events) {
         for (var prop in events) {
             const eventInfo = events[prop];
+            if (prop === 'custom') {
+                eventInfo.forEach((act, i) => {
+                    const $customEvent = $root.find('.custom-event').eq(i);
+                    drawAct(act, $customEvent);
 
-            var eventRaw = eventInfo.name;
-            const params = eventInfo.params.join(',');
+                    $customEvent.find('.event-name').val(act.eventName);
+                });
+            } else {
 
-            if (params) {
-                eventRaw += ':' + params;
+                var eventRaw = eventInfo.name;
+                const params = eventInfo.params.join(',');
+
+                if (params) {
+                    eventRaw += ':' + params;
+                }
+
+                $root.find('.event[data-type="' + prop + '"]').val(eventRaw);
+
+                if (prop === 'battlecry' && eventInfo.targetsType) {
+                    $root.find('.battlecry-target').val(getRawTargetsType(eventInfo.targetsType));
+                }
             }
 
-            $root.find('.event[data-type="' + prop + '"]').val(eventRaw);
-
-            if (prop === 'battlecry' && eventInfo.targetsType) {
-                $root.find('.battlecry-target').val(getRawTargetsType(eventInfo.targetsType));
-            }
         }
     }
 
     function parseEvents($obj) {
         const events = {};
 
-        ['start-turn', 'end-turn', 'battlecry', 'deathrattle', 'enrage', 'aura', 'custom'].forEach(type => {
+        ['start-turn', 'end-turn', 'battlecry', 'deathrattle', 'enrage', 'aura'].forEach(type => {
             const event = $obj.find('.event[data-type="' + type + '"]').val().trim();
 
             if (event) {
@@ -407,7 +384,63 @@ $.ajax('/cards.json').then(data => {
             }
         });
 
+        $obj.find('.custom-event').each((i, label) => {
+            const $customEvent = $(label);
+
+            const eventName = $customEvent.find('.event-name');
+
+            if (eventName) {
+                events['custom'] = events['custom'] || [];
+
+                const event = parseAct($customEvent);
+                event.eventName = $customEvent.find('.event-name').val().trim();
+
+                events['custom'].push(event);
+            }
+        });
+
         return events;
+    }
+
+    function drawAct(act, $act) {
+        var commandParamPart = '';
+        if (act.params.length) {
+            commandParamPart = ':' + act.params.join(',');
+        }
+
+        $act.find('.act-command').val(act.name + commandParamPart);
+        const $actTargets = $act.find('.act-targets');
+
+        if (act.targetsType === 'not-need') {
+            $actTargets.val('not-need');
+
+        } else if (act.targetsType) {
+            $actTargets.val(getRawTargetsType(act.targetsType));
+        }
+    }
+
+    function parseAct($act) {
+        const command = $act.find('.act-command').val();
+        const targetsType = $act.find('.act-targets').val().trim();
+        const [name, params] = command.split(':').map(part => part.trim());
+
+        if (name) {
+            const actParams = params && params.split(/\s*,\s*/).map(tryParseNumber);
+
+            const act = {
+                name: name,
+                params: actParams || []
+            };
+
+            if (targetsType === 'not-need') {
+                act.targetsType = 'not-need';
+
+            } else if (targetsType) {
+                act.targetsType = parseTargetsType(targetsType);
+            }
+
+            return act;
+        }
     }
 
 });

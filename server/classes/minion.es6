@@ -5,13 +5,19 @@ const H = require('../namespace');
 
 
 H.Minion = class Minion extends EventEmitter {
-    constructor(card) {
+    constructor(handCard, card) {
         super();
 
         this.id = _.uniqueId('minion');
 
-        this.card = card;
-        this.base = card.minion;
+        if (handCard) {
+            this.handCard = handCard;
+            this.card = handCard.base;
+        } else {
+            this.card = card;
+        }
+
+        this.base = this.card.minion;
         this.attack = this.base.attack;
         this.hp = this.base.maxHp;
         this.maxHp = this.base.maxHp;
@@ -21,15 +27,21 @@ H.Minion = class Minion extends EventEmitter {
 
         for (var eventName in this.base.events) {
             const eventInfo = _.clone(this.base.events[eventName]);
-            eventInfo.actFunc = H.ACTIVATIONS.getByName(eventInfo.name);
-
             this.events[eventName] = eventInfo;
+
+            if (_.contains(['battlecry', 'end-turn', 'start-turn', 'deathrattle'], eventName)) {
+                eventInfo.actFunc = H.ACTIVATIONS.getByName(eventInfo.name);
+            }
+        }
+
+        if (this.events['custom']) {
+            this.events['custom'].forEach(eventInfo => {
+                eventInfo.actFunc = H.ACTIVATIONS.getByName(eventInfo.name);
+            });
         }
 
         this._listeners = [];
 
-        //this._auras = [];
-        //Object.defineProperty(this, '_auras', { enumerable: false });
 
         if (!this.base.flags['charge']) {
             this.flags['sleep'] = true;
@@ -38,7 +50,19 @@ H.Minion = class Minion extends EventEmitter {
     }
 
     static createByName(name) {
-        return new H.Minion(H.CARDS.getByName(name, H.CARD_TYPES.minion));
+        return new H.Minion(null, H.CARDS.getByName(name, H.CARD_TYPES.minion));
+    }
+
+    getGameData() {
+        return {
+            card: this.card,
+            base: this.base,
+            attack: this.attack,
+            hp: this.hp,
+            maxHp: this.maxHp,
+            flags: this.flags,
+            events: this.events
+        };
     }
 
     getData() {
@@ -65,7 +89,6 @@ H.Minion = class Minion extends EventEmitter {
 
     enterInGame(player) {
         this.player = player;
-        Object.defineProperty(this, 'player', { enumerable: false });
 
         for (var eventName in this.events) {
             const eventInfo = this.events[eventName];
@@ -83,6 +106,18 @@ H.Minion = class Minion extends EventEmitter {
                             player
                         });
                     }
+                });
+            }
+
+            if (eventName === 'custom') {
+                eventInfo.forEach(eventInfo => {
+                    this._onBattle(eventInfo.eventName, () => {
+                        eventInfo.actFunc({
+                            params: arguments,
+                            player,
+                            targets: eventInfo.targetsType && H.TARGETS.getByTargetsType(player, eventInfo.targetsType, this.handCard) || []
+                        });
+                    });
                 });
             }
         }

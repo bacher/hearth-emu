@@ -12,9 +12,7 @@ const A = {
         o.player.creatures.addCreature(minion);
     },
     'card-summon': function(o) {
-        const card = H.CARDS.getById(this.params[0]);
-
-        const minion = new H.Minion(card);
+        const minion = new H.Minion(o.handCard);
         o.handCard.minion = minion;
 
         o.player.creatures.addCreature(minion);
@@ -101,7 +99,7 @@ const A = {
         if (totemsLeft.length) {
             const totem = totemsLeft[Math.floor(Math.random() * totemsLeft.length)];
 
-            creatures.addCreature(new H.Minion(totem));
+            creatures.addCreature(new H.Minion(null, totem));
         }
     },
     'heal': function(o) {
