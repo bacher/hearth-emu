@@ -24,24 +24,19 @@ H.Card = class Card {
             this.acts = info.acts;
 
             this.acts.forEach(act => {
-                act.actFunc = H.ACTIVATIONS[act.name];
-
-                if (!act.actFunc) {
-                    console.warn('Activation not founded "%s".', act.name);
-                    throw 0;
-                }
+                act.actFunc = H.ACTIVATIONS.getByName(act.name);
             });
 
         } else if (info.type === H.CARD_TYPES.minion) {
             this.acts = [{
-                actFunc: H.ACTIVATIONS['card-summon'],
+                actFunc: H.ACTIVATIONS.getByName('card-summon'),
                 targetsType: 'not-need',
                 params: [this.id]
             }];
 
             const battlecry = info.minion.events['battlecry'];
             if (battlecry) {
-                battlecry.actFunc = H.ACTIVATIONS[battlecry.name];
+                battlecry.actFunc = H.ACTIVATIONS.getByName(battlecry.name);
 
                 if (!battlecry.actFunc) {
                     console.warn('Activation not founded "%s".', battlecry.name);

@@ -1229,6 +1229,27 @@
     }
   },
   {
+    "id": 140,
+    "name": "Mana Tide Totem",
+    "cost": 3,
+    "pic": "148/485/613",
+    "clas": 2,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 0,
+      "maxHp": 3,
+      "flags": [],
+      "race": 7,
+      "events": {
+        "end-turn": {
+          "name": "draw-card",
+          "params": []
+        }
+      }
+    }
+  },
+  {
     "id": 20,
     "name": "Raid Leader",
     "cost": 3,

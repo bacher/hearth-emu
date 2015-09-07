@@ -97,8 +97,8 @@ H.Player = class Player extends EventEmitter {
 
         this.enemy = battle.getOpponent(this);
 
-        this.battle.on('turn-end', this._onTurnEnd.bind(this));
-        this.battle.on('turn-start', this._onTurnStart.bind(this));
+        this.battle.on('end-turn', this._onTurnEnd.bind(this));
+        this.battle.on('start-turn', this._onTurnStart.bind(this));
 
         this.emit('battle-enter', battle);
     }

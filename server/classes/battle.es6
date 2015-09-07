@@ -197,9 +197,9 @@ H.Battle = class Battle extends EventEmitter {
     switchTurn() {
         const players = this.getPlayers();
 
-        this.emit('turn-end', players[0]);
+        this.emit('end-turn', players[0]);
 
-        this.emit('turn-start', players[1]);
+        this.emit('start-turn', players[1]);
     }
 
     _getTargets(player, data) {

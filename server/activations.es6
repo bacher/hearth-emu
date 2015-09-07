@@ -3,7 +3,7 @@ const H = require('./namespace');
 
 const SILENCE_IGNORE_FLAGS = ['tired', 'freeze', 'sleep'];
 
-H.ACTIVATIONS = {
+const A = {
     'summon': function(o) {
         const minionCardName = this.params[0];
 
@@ -156,5 +156,16 @@ H.ACTIVATIONS = {
         minion.attack += otherMinionsCount;
         minion.hp += otherMinionsCount;
         minion.maxHp += otherMinionsCount;
+    }
+};
+
+H.ACTIVATIONS = {
+    getByName(name) {
+        if (A[name]) {
+            return A[name];
+        } else {
+            console.warn('ACTIVATION NOT FOUNDED:', name);
+            throw 0;
+        }
     }
 };

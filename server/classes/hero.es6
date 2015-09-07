@@ -34,13 +34,13 @@ H.Hero = class Hero {
         this.player.on('battle-enter', battle => {
             this.battle = battle;
 
-            battle.on('turn-start', player => {
+            battle.on('start-turn', player => {
                 if (player === this.player) {
                     this._onTurnStart();
                 }
             });
 
-            battle.on('turn-end', player => {
+            battle.on('end-turn', player => {
                 if (player === this.player) {
                     this._onTurnEnd();
                 }

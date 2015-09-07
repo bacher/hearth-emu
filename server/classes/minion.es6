@@ -17,9 +17,19 @@ H.Minion = class Minion extends EventEmitter {
         this.maxHp = this.base.maxHp;
         this.flags = _.clone(this.base.flags);
         this.race = this.base.race;
+        this.events = {};
 
-        this._auras = [];
-        Object.defineProperty(this, '_auras', { enumerable: false });
+        for (var eventName in this.base.events) {
+            const eventInfo = _.clone(this.base.events[eventName]);
+            eventInfo.actFunc = H.ACTIVATIONS.getByName(eventInfo.name);
+
+            this.events[eventName] = eventInfo;
+        }
+
+        this._listeners = [];
+
+        //this._auras = [];
+        //Object.defineProperty(this, '_auras', { enumerable: false });
 
         if (!this.base.flags['charge']) {
             this.flags['sleep'] = true;
@@ -44,19 +54,45 @@ H.Minion = class Minion extends EventEmitter {
         return data;
     }
 
+    _onBattle(eventName, method) {
+        method = method.bind(this);
+        this._listeners.push({
+            eventName,
+            method
+        });
+        this.player.battle.on(eventName, method);
+    }
+
     enterInGame(player) {
         this.player = player;
         Object.defineProperty(this, 'player', { enumerable: false });
 
-        for (var eventName in this.base.events) {
-            const eventInfo = this.base.events[eventName];
+        for (var eventName in this.events) {
+            const eventInfo = this.events[eventName];
 
             if (eventName === 'aura') {
                 const aura = new H.Aura(player, eventInfo);
 
                 this.player.battle.auras.addAura(this, aura);
             }
+
+            if (eventName === 'end-turn') {
+                this._onBattle('end-turn', player => {
+                    if (this.player === player) {
+                        eventInfo.actFunc({
+                            player
+                        });
+                    }
+                });
+            }
         }
+    }
+
+    leaveGame() {
+        this._listeners.forEach(info => {
+            this.player.battle.removeListener(info.eventName, info.method);
+        });
+        this._listeners.length = 0;
     }
 
     wakeUp() {
@@ -104,12 +140,16 @@ H.Minion = class Minion extends EventEmitter {
     }
 
     detach() {
+        this.leaveGame();
+
         this.emit('detach', this);
 
         this.player = null;
     }
 
     kill() {
+        this.leaveGame();
+
         this.emit('death', this);
     }
 

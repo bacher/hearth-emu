@@ -13,7 +13,7 @@ H.Druid = class Druid extends H.Hero {
 
         this.attack = 1;
 
-        this.player.battle.once('turn-end', () => {
+        this.player.battle.once('end-turn', () => {
             this.attack = 0;
         });
     }

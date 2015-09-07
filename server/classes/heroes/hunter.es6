@@ -8,7 +8,7 @@ H.Hunter = class Hunter extends H.Hero {
         this.clas = H.CLASSES['hunter'];
 
         this.heroSkill = {
-            actFunc: H.ACTIVATIONS['deal-damage'],
+            actFunc: H.ACTIVATIONS.getByName('deal-damage'),
             params: [2],
             targetsType: {
                 names: ['enemies', 'heroes']

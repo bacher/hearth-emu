@@ -8,7 +8,7 @@ H.Shaman = class Shaman extends H.Hero {
         this.clas = H.CLASSES['shaman'];
 
         this.heroSkill = {
-            actFunc: H.ACTIVATIONS['call-totem'],
+            actFunc: H.ACTIVATIONS.getByName('call-totem'),
             params: []
         };
 
