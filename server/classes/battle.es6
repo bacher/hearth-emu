@@ -265,27 +265,13 @@ H.Battle = class Battle extends EventEmitter {
     }
 
     _hit(player, data) {
-        const enemy = player.getEnemy();
-
         const by = data.by === 'hero' ?
             player.hero :
             player.creatures.getCreatureByCrid(data.by);
 
-        //FIXME: add targetSide condition
-        if (data.target === 'hero') {
-            const opHero = enemy.hero;
+        const targets = H.Targets.parseUserData(player, data);
 
-            if (opHero.hp <= by.attack) {
-                console.log('DEATH');
-            } else {
-                opHero.hp -= by.attack;
-            }
-        } else {
-            const op = enemy.creatures.getCreatureByCrid(data.target);
-
-            op.dealDamage(by.attack);
-        }
-
+        targets.forEach(obj => obj.dealDamage(by.getData().attack));
         by.setHitFlags();
 
         this.sendGameData();

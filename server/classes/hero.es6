@@ -1,4 +1,5 @@
 
+const _ = require('lodash');
 const H = require('../namespace');
 
 const Constructors = {
@@ -60,6 +61,28 @@ H.Hero = class Hero {
         H.Minion.prototype.heal.apply(this, arguments);
     }
 
+    wakeUp() {
+        delete this.flags['tired'];
+
+        this.attack = 0;
+
+        if (this.weapon) {
+            this.weapon.wakeUp();
+        }
+    }
+
+    setHitFlags() {
+        if (this.weapon) {
+            this.weapon.setHitFlags();
+
+            if (!this.weapon) {
+                this.flags['tired'] = true;
+            }
+        } else {
+            this.flags['tired'] = true;
+        }
+    }
+
     kill() {
         this.player.emit('message', { msg: 'death' });
     }
@@ -93,6 +116,10 @@ H.Hero = class Hero {
         }
     }
 
+    getData() {
+        return this.getBaseData();
+    }
+
     getBaseData() {
         return {
             attack: (this.weapon ? this.weapon.attack : 0) + this.attack,
@@ -106,8 +133,8 @@ H.Hero = class Hero {
             skillUsed: this.skillUsed,
             canUseSkill: this.canUseSkill(),
             isHeroSkillTargeting: !!this.heroSkill.skillTargetsType,
-            weapon: this.weapon,
-            flags: this.flags
+            weapon: this.weapon ? this.weapon.getClientData() : null,
+            flags: this.weapon ? _.extend({}, this.flags, this.weapon.getFlags()) : this.flags
         };
     }
 
@@ -123,6 +150,12 @@ H.Hero = class Hero {
         this.nextOverload += count;
     }
 
+    equipWeapon(weapon) {
+        this.weapon = weapon;
+
+        this.weapon.enterInGame(this.player);
+    }
+
     _onTurnStart() {
         this.overload = this.nextOverload;
         this.nextOverload = 0;
@@ -134,6 +167,6 @@ H.Hero = class Hero {
     }
 
     _onTurnEnd() {
-        this.attack = 0;
+
     }
 };

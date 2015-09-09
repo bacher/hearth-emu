@@ -136,14 +136,9 @@ const A = {
         });
     },
     'equip-weapon': function(o) {
-        const weapon = {
-            card: H.CARDS.getByName(this.params[0], H.CARD_TYPES['weapon'])
-        };
+        const card = H.CARDS.getByName(this.params[0], H.CARD_TYPES['weapon']);
 
-        weapon.attack = weapon.card.attack;
-        weapon.durability = weapon.card.durability;
-
-        o.player.hero.weapon = weapon;
+        o.player.hero.equipWeapon(new H.Weapon(card));
     },
     'add-weapon-attack': function(o) {
         o.player.hero.weapon.attack += this.params[0];

@@ -1,4 +1,6 @@
 
-const H = {};
+const H = {
+    Mixins: {}
+};
 
 module.exports = H;

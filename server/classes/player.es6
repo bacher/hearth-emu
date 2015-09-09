@@ -174,6 +174,7 @@ H.Player = class Player extends EventEmitter {
             this.creatures.resetFlag('freeze');
 
             this.creatures.wakeUpAll();
+            this.hero.wakeUp();
         }
     }
 

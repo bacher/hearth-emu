@@ -1027,7 +1027,9 @@
     "pic": "126/749/201",
     "clas": 3,
     "type": 3,
-    "flags": [],
+    "flags": [
+      "uncollectable"
+    ],
     "weapon": {
       "attack": 1,
       "durability": 2,
