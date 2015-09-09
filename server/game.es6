@@ -22,9 +22,12 @@ require('./classes/hero');
 require('./classes/heroes/warrior');
 require('./classes/heroes/shaman');
 require('./classes/heroes/rogue');
-require('./classes/heroes/druid');
-require('./classes/heroes/priest');
+require('./classes/heroes/paladin');
 require('./classes/heroes/hunter');
+require('./classes/heroes/druid');
+require('./classes/heroes/warlock');
+require('./classes/heroes/mage');
+require('./classes/heroes/priest');
 require('./classes/player');
 
 require('./activations');
