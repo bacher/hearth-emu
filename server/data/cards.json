@@ -2527,6 +2527,41 @@
     }
   },
   {
+    "id": 142,
+    "name": "Guardian of Kings",
+    "cost": 7,
+    "pic": "147/525/283",
+    "clas": 4,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 6,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "heal",
+                "params": [
+                  6
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "heroes",
+                "friends"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 132,
     "name": "Prophet Velen",
     "cost": 7,
