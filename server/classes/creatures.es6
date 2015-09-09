@@ -42,6 +42,10 @@ H.Creatures = class Creatures {
         this.creatures.forEach(creature => creature.wakeUp());
     }
 
+    onTurnEnd() {
+        this.creatures.forEach(creature => creature.onTurnEnd());
+    }
+
     resetFlag(flag) {
         this.creatures.forEach(creature => {
             delete creature[flag];

@@ -185,6 +185,15 @@ const A = {
     'draw-card-deal-self-damage': function(o) {
         o.player.hero.dealDamage(2);
         o.player.drawCard();
+    },
+    'transform': function(o) {
+        o.targets.forEach(minion => {
+            const owner = minion.player;
+
+            minion.detach();
+
+            owner.creatures.addCreature(H.Minion.createByName('Sheep'));
+        });
     }
 };
 

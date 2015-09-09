@@ -61,7 +61,7 @@ const T = {
     'all-but-my-hero': function(player) {
         const targets = T['all'](player);
 
-        T.removeMyHero();
+        targets.removeMyHero();
 
         return targets;
     },

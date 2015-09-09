@@ -103,6 +103,11 @@ H.GameObject = class GameObject extends EventEmitter {
         delete this.flags['second-hit'];
     }
 
+    onEndTurn() {
+        delete this.flags['freeze'];
+        delete this.flags['sleep'];
+    }
+
     detach() {
         this._detachListeners();
 
@@ -115,6 +120,8 @@ H.GameObject = class GameObject extends EventEmitter {
         this._detachListeners();
 
         this.emit('death', this);
+
+        //TODO: Deathrattle
     }
 
     is(prop) {
