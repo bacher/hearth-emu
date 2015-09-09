@@ -1,4 +1,5 @@
 
+const _ = require('lodash');
 const H = require('../namespace');
 
 H.Card = class Card {
@@ -7,63 +8,64 @@ H.Card = class Card {
         this.name = info.name;
         this.type = info.type;
         this.cost = info.cost;
-        this.clas = info.clas || 0;
-        this.rarity = info.rarity || 0;
+        this.clas = info.clas;
         this.pic = info.pic;
-        this.flags = {};
-
-        if (info.flags) {
-            info.flags.forEach(flag => {
-                this.flags[flag] = true;
-            });
-        }
-
+        this.flags = parseFlags(info.flags);
         this.targetsType = info.targetsType;
 
         if (info.type === H.CARD_TYPES.spell) {
-            this.acts = info.acts;
+            this.acts = new H.Acts(info.spell.acts);
 
-            this.acts.forEach(act => {
-                act.actFunc = H.ACTIVATIONS.getByName(act.name);
-            });
+        } else if (info.type === H.CARD_TYPES.minion || info.type === H.CARD_TYPES.weapon) {
+            this.acts = new H.Acts();
+            var activation;
+            var object;
 
-        } else if (info.type === H.CARD_TYPES.minion) {
-            this.acts = [{
-                actFunc: H.ACTIVATIONS.getByName('card-summon'),
-                targetsType: 'not-need',
-                params: [this.id]
-            }];
+            if (info.type === H.CARD_TYPES.minion) {
+                activation = 'card-summon';
+                this.minion = object = info.minion;
 
-            const battlecry = info.minion.events['battlecry'];
-            if (battlecry) {
-                battlecry.actFunc = H.ACTIVATIONS.getByName(battlecry.name);
-
-                if (!battlecry.actFunc) {
-                    console.warn('Activation not founded "%s".', battlecry.name);
-                    throw 0;
-                }
-
-                this.acts.push(battlecry);
+            } else {
+                activation = 'equip-weapon';
+                this.weapon = object = info.weapon;
             }
 
-            this.minion = info.minion;
+            if (!object) {
+                console.log(info.name);
+            }
+            object.flags = parseFlags(object.flags);
 
-            if (this.minion.flags) {
-                const flagsArray = this.minion.flags;
+            this.acts.addCommand({
+                name: activation,
+                params: [this.id],
+                targetsType: 'not-need'
+            });
 
-                this.minion.flags = {};
+            for (var eventTypeName in object.events) {
+                const commands = object.events[eventTypeName];
 
-                flagsArray.forEach(flag => {
-                    this.minion.flags[flag] = true;
-                });
-            } else {
-                this.minion.flags = {};
+                if (eventTypeName === 'battlecry') {
+                    this.acts.addCommands(commands);
+                } else if (_.contains(['deathrattle', 'end-turn', 'start-turn'], eventTypeName)) {
+                    object.events[eventTypeName] = new H.Acts(commands);
+                }
             }
 
             if (this.targetsType) {
                 this.flags['need-battlecry-target'] = true;
             }
         }
-
     }
 };
+
+function parseFlags(flags) {
+    const flagsHash = {};
+
+    if (flags) {
+        flags.forEach(flag => {
+            flagsHash[flag] = true;
+        });
+    }
+
+    return flagsHash;
+}

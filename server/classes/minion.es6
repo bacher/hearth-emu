@@ -25,27 +25,10 @@ H.Minion = class Minion extends EventEmitter {
         this.race = this.base.race;
         this.events = {};
 
-        for (var eventName in this.base.events) {
-            const eventInfo = _.clone(this.base.events[eventName]);
-            this.events[eventName] = eventInfo;
-
-            if (_.contains(['battlecry', 'end-turn', 'start-turn', 'deathrattle'], eventName)) {
-                eventInfo.actFunc = H.ACTIVATIONS.getByName(eventInfo.name);
-            }
-        }
-
-        if (this.events['custom']) {
-            this.events['custom'].forEach(eventInfo => {
-                eventInfo.actFunc = H.ACTIVATIONS.getByName(eventInfo.name);
-            });
-        }
-
         this._listeners = [];
-
 
         if (!this.base.flags['charge']) {
             this.flags['sleep'] = true;
-            this.flags['tired'] = true;
         }
     }
 
@@ -55,13 +38,13 @@ H.Minion = class Minion extends EventEmitter {
 
     getGameData() {
         return {
+            id: this.id,
             card: this.card,
             base: this.base,
             attack: this.attack,
             hp: this.hp,
             maxHp: this.maxHp,
-            flags: this.flags,
-            events: this.events
+            flags: this.getFlags()
         };
     }
 
@@ -90,27 +73,31 @@ H.Minion = class Minion extends EventEmitter {
     enterInGame(player) {
         this.player = player;
 
-        for (var eventName in this.events) {
-            const eventInfo = this.events[eventName];
+        for (var eventName in this.base.events) {
+            const eventActs = this.base.events[eventName];
 
             if (eventName === 'aura') {
-                const aura = new H.Aura(player, eventInfo);
+                const aura = new H.Aura(player, eventActs);
 
                 this.player.battle.auras.addAura(this, aura);
             }
 
             if (eventName === 'end-turn') {
-                this._onBattle('end-turn', player => {
-                    if (this.player === player) {
-                        eventInfo.actFunc({
-                            player
+                this._onBattle('end-turn', eventPlayer => {
+                    if (player === eventPlayer) {
+                        eventActs.act({
+                            battle: player.battle,
+                            player,
+                            handCard: null,
+                            data: null,
+                            globalTargets: null
                         });
                     }
                 });
             }
 
             if (eventName === 'custom') {
-                eventInfo.forEach(eventInfo => {
+                eventActs.forEach(eventInfo => {
                     this._onBattle(eventInfo.eventName, () => {
                         eventInfo.actFunc({
                             params: arguments,
@@ -132,18 +119,15 @@ H.Minion = class Minion extends EventEmitter {
 
     wakeUp() {
         delete this.flags['sleep'];
-        delete this.flags['windfury-hit'];
-
-        if (!this.flags['freeze']) {
-            delete this.flags['tired'];
-        }
+        delete this.flags['hit'];
+        delete this.flags['second-hit'];
     }
 
     setHitFlags() {
-        if (this.flags['windfury'] && !this.flags['windfury-hit']) {
-            this.flags['windfury-hit'] = true;
+        if (this.flags['hit']) {
+            this.flags['second-hit'] = true;
         } else {
-            this.flags['tired'] = true;
+            this.flags['hit'] = true;
         }
     }
 
@@ -172,6 +156,26 @@ H.Minion = class Minion extends EventEmitter {
 
     addFlag(flag) {
         this.flags[flag] = true;
+    }
+
+    getFlags() {
+        const flags = _.clone(this.flags);
+
+        if (flags['freeze']) {
+            flags['tired'] = true;
+        } else {
+            if (flags['hit']) {
+                if (flags['windfury']) {
+                    if (flags['second-hit']) {
+                        flags['tired'] = true;
+                    }
+                } else {
+                    flags['tired'] = true;
+                }
+            }
+        }
+
+        return flags;
     }
 
     detach() {

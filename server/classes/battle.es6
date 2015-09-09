@@ -251,35 +251,14 @@ H.Battle = class Battle extends EventEmitter {
 
         this.emit('play-card', handCard);
 
-        var cardTargets = null;
+        const globalTargets = card.targetsType ? H.Targets.parseUserData(player, data) : null;
 
-        if (card.targetsType) {
-            cardTargets = H.Targets.parseUserData(player, data);
-        }
-
-        card.acts.forEach(act => {
-            var targets;
-
-            if (act.targetsType === 'not-need') {
-                targets = null;
-            } else if (act.targetsType) {
-                const targetsType = act.targetsType;
-
-                if (targetsType.names.length > 1 || targetsType.names[0] !== 'not-need') {
-                    targets = H.TARGETS.getByTargetsType(player, targetsType, handCard);
-                }
-
-            } else {
-                targets = cardTargets;
-            }
-
-            act.actFunc({
-                params: data,
-                player,
-                battle: this,
-                targets: targets,
-                handCard: handCard
-            });
+        card.acts.act({
+            battle: this,
+            player,
+            handCard,
+            data,
+            globalTargets
         });
 
         this.sendGameData();

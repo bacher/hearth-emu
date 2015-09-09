@@ -58,7 +58,7 @@ new H.Screen({
 
             })
             .on('mousedown', '.avatar.my.available, .creatures.my .creature.available, .hero-skill.my.available.need-target', e => {
-                if (!H.battleData.my.active) { return; }
+                if (!H.battleData.my.active || dragging) { return; }
 
                 $app.addClass('targeting');
                 $app.removeClass('normal');
@@ -202,7 +202,7 @@ new H.Screen({
                             if ($linkedCard.hasClass('need-battlecry-target')) {
                                 battlecryTargeting = true;
 
-                                startCardDrag($linkedCard)
+                                startCardDrag($linkedCard);
                             } else {
                                 send('play-card', {
                                     id: $dragCard.data('id')

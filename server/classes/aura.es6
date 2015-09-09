@@ -12,7 +12,7 @@ const AURAS = {
     'multiply-spell-damage': {
         affect: 'spell-damage',
         effect(dmg) {
-            return dmg * this.params[0]
+            return dmg * this.params[0];
         },
         side: 'own',
         priority: 100

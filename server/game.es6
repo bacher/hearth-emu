@@ -7,6 +7,7 @@ require('./constants');
 
 require('./classes/aura');
 require('./classes/auras');
+require('./classes/acts');
 require('./classes/battle');
 require('./classes/targets');
 require('./classes/card');

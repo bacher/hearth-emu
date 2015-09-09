@@ -444,13 +444,25 @@
           {
             "acts": [
               {
-                "name": "race-gain-attack",
+                "name": "add-attack",
                 "params": [
-                  "murlock",
                   1
                 ]
               }
-            ]
+            ],
+            "targetsType": {
+              "names": [
+                "minions"
+              ],
+              "modificators": [
+                {
+                  "name": "race",
+                  "params": [
+                    "murloc"
+                  ]
+                }
+              ]
+            }
           }
         ]
       },
@@ -477,12 +489,18 @@
           {
             "acts": [
               {
-                "name": "heal-own-minions",
+                "name": "heal",
                 "params": [
                   1
                 ]
               }
-            ]
+            ],
+            "targetsType": {
+              "names": [
+                "minions",
+                "friends"
+              ]
+            }
           }
         ]
       }
@@ -744,18 +762,7 @@
       "flags": [
         "charge"
       ],
-      "events": {
-        "custom": [
-          {
-            "acts": [
-              {
-                "name": "freeze",
-                "params": []
-              }
-            ]
-          }
-        ]
-      },
+      "events": {},
       "race": 1
     }
   },
@@ -936,7 +943,9 @@
     "minion": {
       "attack": 2,
       "maxHp": 2,
-      "flags": [],
+      "flags": [
+        "charge"
+      ],
       "events": {},
       "race": 5
     }
@@ -1019,9 +1028,12 @@
     "clas": 3,
     "type": 3,
     "flags": [],
-    "attack": 1,
-    "durability": 2,
-    "events": {}
+    "weapon": {
+      "attack": 1,
+      "durability": 2,
+      "events": {},
+      "flags": []
+    }
   },
   {
     "id": 118,
@@ -1970,8 +1982,10 @@
           {
             "acts": [
               {
-                "name": "freeze",
-                "params": []
+                "name": "addFlags",
+                "params": [
+                  "freeze"
+                ]
               }
             ]
           }
@@ -1987,6 +2001,12 @@
     "pic": "148/510/151",
     "clas": 2,
     "type": 1,
+    "targetsType": {
+      "names": [
+        "minions",
+        "friends"
+      ]
+    },
     "flags": [],
     "minion": {
       "attack": 3,
