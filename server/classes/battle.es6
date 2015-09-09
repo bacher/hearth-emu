@@ -271,7 +271,11 @@ H.Battle = class Battle extends EventEmitter {
 
         const targets = H.Targets.parseUserData(player, data);
 
-        targets.forEach(obj => obj.dealDamage(by.getData().attack));
+        targets.forEach(obj => {
+            this.emit('hit', by, obj);
+
+            obj.dealDamage(by.getData().attack);
+        });
         by.setHitFlags();
 
         this.sendGameData();

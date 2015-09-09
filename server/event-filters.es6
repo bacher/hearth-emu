@@ -40,6 +40,31 @@ const E = {
                 }
             };
         }
+    },
+    'hit-by': {
+        eventName: 'hit',
+        filterFunc: function(o, params, callback) {
+            const target = params[0];
+            var minion;
+            var allowPlayer;
+
+            if (target === 'self') {
+                minion = o.minion;
+            } else if (target === 'my') {
+                allowPlayer = o.player;
+            } else if (target === 'op') {
+                allowPlayer = o.player.enemy;
+            }
+
+            return function(source, target) {
+                const targets = new H.Targets(source.player);
+                targets.addMinion(target);
+
+                if ((!minion || minion === source) && (!allowPlayer || allowPlayer === source.player)) {
+                    callback(targets);
+                }
+            };
+        }
     }
 };
 

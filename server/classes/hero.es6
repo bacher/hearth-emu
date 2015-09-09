@@ -119,6 +119,10 @@ H.Hero = class Hero {
         }
     }
 
+    addFlag(flag) {
+        this.flags[flag] = true;
+    }
+
     restoreMana() {
         this.mana = this.crystals - this.overload;
     }

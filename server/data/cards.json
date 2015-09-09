@@ -2519,7 +2519,18 @@
                   "freeze"
                 ]
               }
-            ]
+            ],
+            "targetsType": {
+              "names": [
+                "target"
+              ]
+            },
+            "event": {
+              "name": "hit-by",
+              "params": [
+                "self"
+              ]
+            }
           }
         ]
       },

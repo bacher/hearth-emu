@@ -42,14 +42,14 @@ H.GameObject = class GameObject extends EventEmitter {
                     const eventListener = H.EventFilters.getCallback(event, {
                         player,
                         minion: this
-                    }, () => {
+                    }, (globalTargets) => {
                         command.act({
                             battle: this.player.battle,
                             player,
                             handCard: null,
                             minion: this,
                             params: null,
-                            globalTargets: null
+                            globalTargets: globalTargets
                         });
                     });
 
