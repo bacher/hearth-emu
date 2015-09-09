@@ -39,15 +39,21 @@ H.GameObject = class GameObject extends EventEmitter {
                 eventActs.forEach(command => {
                     const event = command.event;
 
-                    this._onBattle(event.name, H.Events[event.name](player, event.params, () => {
+                    const eventListener = H.EventFilters.getCallback(event, {
+                        player,
+                        minion: this
+                    }, () => {
                         command.act({
                             battle: this.player.battle,
                             player,
                             handCard: null,
+                            minion: this,
                             params: null,
                             globalTargets: null
                         });
-                    }));
+                    });
+
+                    this._onBattle(eventListener.eventName, eventListener.callback);
                 });
             }
         }

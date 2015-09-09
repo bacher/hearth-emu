@@ -225,11 +225,7 @@ H.Battle = class Battle extends EventEmitter {
             });
 
         } else if (creatureId === 'hero-skill') {
-            targets = player.hero.heroSkill.getTargets({
-                battle: this,
-                player: player,
-                handCard: null
-            }).getGameData();
+            targets = H.TARGETS.getByTargetsType(player, player.hero.heroSkillTargets).getGameData();
 
             player.sendMessage('targets', {
                 creatureId,

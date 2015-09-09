@@ -59,6 +59,8 @@ H.Minion = class Minion extends H.GameObject {
     }
 
     dealDamage(dmg) {
+        this.player.battle.emit('deal-damage', null, this);
+
         if (/\d+-\d+/.test(dmg)) {
             const dmgRandom = dmg.split('-').map(Number);
 

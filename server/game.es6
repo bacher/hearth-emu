@@ -34,7 +34,7 @@ require('./classes/player');
 require('./activations');
 require('./targets');
 require('./cards');
-require('./events');
+require('./event-filters');
 
 
 module.exports = class Game {

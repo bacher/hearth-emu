@@ -67,9 +67,9 @@ H.Hero = class Hero {
     setHeroSkill(activation, params, targets) {
         this.heroSkill = new H.Command({
             name: activation,
-            params: params || [],
-            targetsType: targets
+            params: params || []
         });
+        this.heroSkillTargets = targets;
     }
 
     useHeroSkill(o) {
@@ -147,7 +147,7 @@ H.Hero = class Hero {
             crystals: this.crystals,
             skillUsed: this.skillUsed,
             canUseSkill: this.canUseSkill(),
-            isHeroSkillTargeting: this.heroSkill.skillNeedTarget,
+            isHeroSkillTargeting: !!this.heroSkillTargets,
             weapon: this.weapon ? this.weapon.getClientData() : null,
             flags: this.weapon ? _.extend({}, this.flags, this.weapon.getFlags()) : this.flags
         };

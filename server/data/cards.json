@@ -2739,7 +2739,31 @@
       "attack": 2,
       "maxHp": 7,
       "flags": [],
-      "events": {},
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  3
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "take-damage",
+              "params": [
+                "self"
+              ]
+            }
+          }
+        ]
+      },
       "race": 0
     }
   },

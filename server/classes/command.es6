@@ -42,6 +42,9 @@ H.Command = class Command {
                 targets = o.globalTargets.clone();
 
                 targets.applyModificators(this.targetsType.modificators);
+            } else if (this.targetsType.names[0] === 'self') {
+                targets = new H.Targets(o.player);
+                targets.addMinion(o.minion);
             } else {
                 targets = H.TARGETS.getByTargetsType(o.player, this.targetsType, o.handCard);
             }
@@ -55,6 +58,7 @@ H.Command = class Command {
                 battle: o.battle,
                 player: o.player,
                 handCard: o.handCard,
+                minion: o.minion,
                 targets: targets,
                 params: o.data
             });
