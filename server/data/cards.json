@@ -36,6 +36,24 @@
     }
   },
   {
+    "id": 144,
+    "name": "Ashbringer",
+    "cost": 0,
+    "pic": "148/307/53",
+    "clas": 4,
+    "type": 3,
+    "flags": [
+      "uncollectable"
+    ],
+    "weapon": {
+      "attack": 5,
+      "durability": 3,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 50,
     "name": "Frog",
     "cost": 0,
@@ -217,6 +235,24 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 147,
+    "name": "Defender",
+    "cost": 1,
+    "pic": "147/990/318",
+    "clas": 4,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 1,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -917,6 +953,41 @@
     }
   },
   {
+    "id": 146,
+    "name": "Argent Protector",
+    "cost": 2,
+    "pic": "148/283/191",
+    "clas": 4,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-flags",
+                "params": [
+                  "shield"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "friends",
+                "minions"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 9,
     "name": "Bloodfen Raptor",
     "cost": 2,
@@ -1311,6 +1382,41 @@
       "flags": [],
       "events": {},
       "race": 2
+    }
+  },
+  {
+    "id": 145,
+    "name": "Aldor Peacekeeper",
+    "cost": 3,
+    "pic": "148/301/23",
+    "clas": 4,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "set-attack",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies",
+                "minions"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -2059,6 +2165,34 @@
     }
   },
   {
+    "id": 150,
+    "name": "Blessed Champion",
+    "cost": 5,
+    "pic": "148/277/7",
+    "clas": 4,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "x2",
+              "params": [
+                "attack"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 35,
     "name": "Booty Bay Bodyguard",
     "cost": 5,
@@ -2199,6 +2333,34 @@
     }
   },
   {
+    "id": 151,
+    "name": "Holy Wrath",
+    "cost": 5,
+    "pic": "148/289/355",
+    "clas": 4,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "draw-card-and-deal-cost-damage",
+              "params": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 18,
     "type": 1,
     "name": "Nightblade",
@@ -2324,6 +2486,203 @@
         ]
       },
       "race": 0
+    }
+  },
+  {
+    "id": 149,
+    "name": "Avenging Wrath",
+    "cost": 6,
+    "pic": "198/220/142",
+    "clas": 4,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                1
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies"
+            ],
+            "modificators": [
+              {
+                "name": "random",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                1
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies"
+            ],
+            "modificators": [
+              {
+                "name": "random",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                1
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies"
+            ],
+            "modificators": [
+              {
+                "name": "random",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                1
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies"
+            ],
+            "modificators": [
+              {
+                "name": "random",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                1
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies"
+            ],
+            "modificators": [
+              {
+                "name": "random",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                1
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies"
+            ],
+            "modificators": [
+              {
+                "name": "random",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                1
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies"
+            ],
+            "modificators": [
+              {
+                "name": "random",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                1
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies"
+            ],
+            "modificators": [
+              {
+                "name": "random",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        }
+      ]
     }
   },
   {
@@ -2721,6 +3080,84 @@
       ],
       "events": {},
       "race": 0
+    }
+  },
+  {
+    "id": 148,
+    "name": "Lay on Hands",
+    "cost": 8,
+    "pic": "148/274/506",
+    "clas": 4,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "heal",
+              "params": [
+                8
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "all"
+            ],
+            "modificators": [
+              {
+                "name": "damaged",
+                "params": []
+              }
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "draw-card",
+              "params": [
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 143,
+    "name": "Tirion Fordring",
+    "cost": 8,
+    "pic": "148/304/391",
+    "clas": 4,
+    "type": 1,
+    "flags": [
+      "unique"
+    ],
+    "minion": {
+      "attack": 6,
+      "maxHp": 6,
+      "flags": [
+        "shield",
+        "taunt"
+      ],
+      "race": 0,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "equip-weapon",
+                "params": [
+                  "Ashbringer"
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   }
 ]

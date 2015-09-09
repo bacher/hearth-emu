@@ -16,7 +16,7 @@ H.Deck = class Deck {
         return this.deckCards.slice(-count).reverse();
     }
 
-    getNextCard() {
+    popCard() {
         if (this.deckCards.length) {
             return this.deckCards.pop().card;
         }

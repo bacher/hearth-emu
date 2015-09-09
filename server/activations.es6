@@ -115,7 +115,10 @@ const A = {
         });
     },
     'draw-card': function(o) {
-        o.player.drawCard();
+        const max = this.params[0] || 1;
+        for (var i = 0; i < max; ++i) {
+            o.player.drawCard();
+        }
     },
     'copy-random-enemy-card': function(o) {
         o.player.hand.addCard(o.player.enemy.hand.getRandomHandCard().base);
@@ -149,6 +152,15 @@ const A = {
         minion.attack += otherMinionsCount;
         minion.hp += otherMinionsCount;
         minion.maxHp += otherMinionsCount;
+    },
+    'draw-card-and-deal-cost-damage': function(o) {
+        const card = o.player.drawCard();
+
+        if (card) {
+            o.targets.forEach(target => {
+                target.dealDamage(card.cost);
+            });
+        }
     }
 };
 

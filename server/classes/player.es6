@@ -126,7 +126,7 @@ H.Player = class Player extends EventEmitter {
     }
 
     drawCard() {
-        const card = this.deck.getNextCard();
+        const card = this.deck.popCard();
 
         if (card) {
             if (this.hand.canAddCard()) {
@@ -140,6 +140,8 @@ H.Player = class Player extends EventEmitter {
             // Make damage
             console.log('IMPL!');
         }
+
+        return card;
     }
 
     endTurn() {
