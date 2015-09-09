@@ -108,14 +108,10 @@ H.TARGETS = {
         const allTargets = targetsType.names.map(name => T[name](player, handCard));
 
         const targets = allTargets.reduce((base, nextTarget) => {
-            return base[targetsType.mergeType || 'intersect'](nextTarget);
+            return base.intersect(nextTarget);
         });
 
-        if (targetsType.modificators) {
-            targetsType.modificators.forEach(mod => {
-                targets[mod.name](...mod.params);
-            });
-        }
+        targets.applyModificators(targetsType.modificators);
 
         return targets;
     }

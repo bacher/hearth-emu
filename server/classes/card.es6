@@ -30,9 +30,6 @@ H.Card = class Card {
                 this.weapon = object = info.weapon;
             }
 
-            if (!object) {
-                console.log(info.name);
-            }
             object.flags = parseFlags(object.flags);
 
             this.acts.addCommand({

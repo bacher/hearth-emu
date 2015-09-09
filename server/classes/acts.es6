@@ -52,7 +52,13 @@ H.Acts = class Acts {
                 targets = null;
 
             } else if (command.targetsType) {
-                targets = H.TARGETS.getByTargetsType(o.player, command.targetsType, o.handCard);
+                if (command.targetsType.names[0] === 'target') {
+                    targets = o.globalTargets.clone();
+
+                    targets.applyModificators(command.targetsType.modificators);
+                } else {
+                    targets = H.TARGETS.getByTargetsType(o.player, command.targetsType, o.handCard);
+                }
 
             } else {
                 targets = o.globalTargets;

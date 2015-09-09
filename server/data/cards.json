@@ -2154,6 +2154,51 @@
     }
   },
   {
+    "id": 166,
+    "name": "Cone of Cold",
+    "cost": 4,
+    "pic": "148/157/26",
+    "clas": 8,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-flags",
+              "params": [
+                "freeze"
+              ]
+            },
+            {
+              "name": "deal-damage",
+              "params": [
+                1
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "target"
+            ],
+            "modificators": [
+              {
+                "name": "add-adjacent",
+                "params": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 42,
     "name": "Dragonling Mechanic",
     "cost": 4,
@@ -3048,6 +3093,41 @@
     }
   },
   {
+    "id": 165,
+    "name": "Blizzard",
+    "cost": 6,
+    "pic": "147/426/276",
+    "clas": 8,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                2
+              ]
+            },
+            {
+              "name": "add-flags",
+              "params": [
+                "freeze"
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies",
+              "minions"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 2,
     "type": 1,
     "name": "Boulderfist Ogre",
@@ -3549,6 +3629,34 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 164,
+    "name": "Pyroblast",
+    "cost": 10,
+    "pic": "148/166/496",
+    "clas": 8,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                10
+              ]
+            }
+          ]
+        }
+      ]
     }
   }
 ]

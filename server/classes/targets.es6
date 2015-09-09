@@ -32,6 +32,14 @@ H.Targets = class Targets {
         return targets;
     }
 
+    applyModificators(modificators) {
+        if (modificators) {
+            modificators.forEach(mod => {
+                this[mod.name](...mod.params);
+            });
+        }
+    }
+
     addMinion(minion) {
         var destination;
 
@@ -119,6 +127,18 @@ H.Targets = class Targets {
         return this;
     }
 
+    clone() {
+        const targets = new H.Targets(this.player);
+
+        targets.my.minions = _.clone(this.my.minions);
+        targets.op.minions = _.clone(this.op.minions);
+
+        targets.my.hero = this.my.hero;
+        targets.op.hero = this.op.hero;
+
+        return targets;
+    }
+
     'random'(count) {
         const objects = this.my.minions.concat(this.op.minions);
 
@@ -170,6 +190,29 @@ H.Targets = class Targets {
     'race'(race) {
         const raceId = H.RACES[race];
         this._filterAll(obj => obj.race === raceId);
+    }
+
+    'add-adjacent'() {
+        var creatures;
+        var minion;
+
+        if (this.my.minions.length) {
+            minion = this.my.minions[0];
+            creatures = this.player.creatures.creatures;
+        } else {
+            minion = this.op.minions[0];
+            creatures = this.player.enemy.creatures.creatures;
+        }
+
+        const index = creatures.indexOf(minion);
+
+        if (index > 0) {
+            this.addMinion(creatures[index - 1]);
+        }
+
+        if (index + 1 < creatures.length) {
+            this.addMinion(creatures[index + 1]);
+        }
     }
 
     _filterAll(filterFunc) {
