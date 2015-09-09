@@ -36,20 +36,16 @@ H.GameObject = class GameObject extends EventEmitter {
             }
 
             if (eventTypeName === 'custom') {
-                eventActs.forEach(eventInfo => {
-                    const event = eventInfo.event;
+                eventActs.forEach(command => {
+                    const event = command.event;
 
-                    this._onBattle(event.name, H.Events[event.name](player, event.params, (event, data) => {
-                        eventInfo.acts.forEach(act => {
-
-                            act.actFunc = H.ACTIVATIONS.getByName(act.name);
-                            act.actFunc({
-                                battle: this.player.battle,
-                                player,
-                                handCard: null,
-                                params: null,
-                                targets: null
-                            });
+                    this._onBattle(event.name, H.Events[event.name](player, event.params, () => {
+                        command.act({
+                            battle: this.player.battle,
+                            player,
+                            handCard: null,
+                            params: null,
+                            globalTargets: null
                         });
                     }));
                 });

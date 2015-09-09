@@ -14,10 +14,11 @@ H.Card = class Card {
         this.targetsType = info.targetsType;
 
         if (info.type === H.CARD_TYPES.spell) {
-            this.acts = new H.Acts(info.spell.acts);
+            this.acts = new H.Commands(info.spell.acts);
 
         } else if (info.type === H.CARD_TYPES.minion || info.type === H.CARD_TYPES.weapon) {
-            this.acts = new H.Acts();
+            this.acts = new H.Commands();
+
             var activation;
             var object;
 
@@ -44,7 +45,11 @@ H.Card = class Card {
                 if (eventTypeName === 'battlecry') {
                     this.acts.addCommands(commands);
                 } else if (_.contains(['deathrattle', 'end-turn', 'start-turn'], eventTypeName)) {
-                    object.events[eventTypeName] = new H.Acts(commands);
+                    object.events[eventTypeName] = new H.Commands(commands);
+                } else if (eventTypeName === 'custom') {
+                    object.events[eventTypeName] = commands.map(command => {
+                        return new H.Command(command);
+                    });
                 }
             }
 

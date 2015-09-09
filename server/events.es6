@@ -7,11 +7,16 @@ H.Events = {
 
     },
     'play-card': function(player, params, callback) {
-        const allowFrom = params[0] === 'my' ? player : player.enemy;
+        var allowPlayer;
+        if (params[0] === 'my') {
+            allowPlayer = player;
+        } else if (params[0] === 'op') {
+            allowPlayer = player.enemy;
+        }
 
         return function(handCard) {
-            if (allowFrom === handCard.player && handCard.base.type === params[1]) {
-                callback.apply(null, arguments);
+            if ((!allowPlayer || allowPlayer === handCard.player) && (!params[1] || handCard.base.type === params[1])) {
+                callback();
             }
         };
     }

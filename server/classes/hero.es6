@@ -65,9 +65,7 @@ H.Hero = class Hero {
     }
 
     setHeroSkill(activation, params, targets) {
-        this.heroSkill = new H.Acts();
-
-        this.heroSkill.addCommand({
+        this.heroSkill = new H.Command({
             name: activation,
             params: params || [],
             targetsType: targets

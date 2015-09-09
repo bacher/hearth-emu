@@ -2005,28 +2005,6 @@
               }
             ]
           }
-        ],
-        "custom": [
-          {
-            "acts": [
-              {
-                "name": "freeze",
-                "params": []
-              }
-            ]
-          }
-        ],
-        "battlecry": [
-          {
-            "acts": [
-              {
-                "name": "deal-damage",
-                "params": [
-                  2
-                ]
-              }
-            ]
-          }
         ]
       },
       "race": 0
@@ -2536,7 +2514,7 @@
           {
             "acts": [
               {
-                "name": "addFlags",
+                "name": "add-flags",
                 "params": [
                   "freeze"
                 ]
@@ -2761,20 +2739,7 @@
       "attack": 2,
       "maxHp": 7,
       "flags": [],
-      "events": {
-        "custom": [
-          {
-            "acts": [
-              {
-                "name": "take-damage-gain-attack",
-                "params": [
-                  3
-                ]
-              }
-            ]
-          }
-        ]
-      },
+      "events": {},
       "race": 0
     }
   },
@@ -2834,18 +2799,7 @@
       "attack": 3,
       "maxHp": 2,
       "flags": [],
-      "events": {
-        "custom": [
-          {
-            "acts": [
-              {
-                "name": "summon-beast-draw-card",
-                "params": []
-              }
-            ]
-          }
-        ]
-      },
+      "events": {},
       "race": 1
     }
   },
