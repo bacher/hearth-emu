@@ -12,16 +12,16 @@ H.GameObject = class GameObject extends EventEmitter {
     enterInGame(player) {
         this.player = player;
 
-        for (var eventName in this.base.events) {
-            const eventActs = this.base.events[eventName];
+        for (var eventTypeName in this.base.events) {
+            const eventActs = this.base.events[eventTypeName];
 
-            if (eventName === 'aura') {
+            if (eventTypeName === 'aura') {
                 const aura = new H.Aura(player, eventActs);
 
                 this.player.battle.auras.addAura(this, aura);
             }
 
-            if (eventName === 'end-turn') {
+            if (eventTypeName === 'end-turn') {
                 this._onBattle('end-turn', eventPlayer => {
                     if (player === eventPlayer) {
                         eventActs.act({
@@ -35,15 +35,23 @@ H.GameObject = class GameObject extends EventEmitter {
                 });
             }
 
-            if (eventName === 'custom') {
+            if (eventTypeName === 'custom') {
                 eventActs.forEach(eventInfo => {
-                    this._onBattle(eventInfo.eventName, () => {
-                        eventInfo.actFunc({
-                            params: arguments,
-                            player,
-                            targets: eventInfo.targetsType && H.TARGETS.getByTargetsType(player, eventInfo.targetsType, this.handCard) || []
+                    const event = eventInfo.event;
+
+                    this._onBattle(event.name, H.Events[event.name](player, event.params, (event, data) => {
+                        eventInfo.acts.forEach(act => {
+
+                            act.actFunc = H.ACTIVATIONS.getByName(act.name);
+                            act.actFunc({
+                                battle: this.player.battle,
+                                player,
+                                handCard: null,
+                                params: null,
+                                targets: null
+                            });
                         });
-                    });
+                    }));
                 });
             }
         }

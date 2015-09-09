@@ -33,6 +33,7 @@ require('./classes/player');
 require('./activations');
 require('./targets');
 require('./cards');
+require('./events');
 
 
 module.exports = class Game {

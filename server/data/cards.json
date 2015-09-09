@@ -1122,6 +1122,45 @@
     }
   },
   {
+    "id": 167,
+    "name": "Archmage Antonidas",
+    "cost": 2,
+    "pic": "148/440/220",
+    "clas": 8,
+    "type": 1,
+    "flags": [
+      "unique"
+    ],
+    "minion": {
+      "attack": 5,
+      "maxHp": 7,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-hand-card",
+                "params": [
+                  "Fireball",
+                  2
+                ]
+              }
+            ],
+            "event": {
+              "name": "play-card",
+              "params": [
+                "my",
+                2
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 146,
     "name": "Argent Protector",
     "cost": 2,

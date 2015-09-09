@@ -194,6 +194,9 @@ const A = {
 
             owner.creatures.addCreature(H.Minion.createByName('Sheep'));
         });
+    },
+    'add-hand-card': function(o) {
+        o.player.hand.addCard(H.CARDS.getByName(this.params[0], this.params[1]));
     }
 };
 
