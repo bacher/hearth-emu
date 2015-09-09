@@ -215,6 +215,35 @@
     }
   },
   {
+    "id": 154,
+    "name": "Blessing of Wisdom",
+    "cost": 1,
+    "pic": "148/286/100",
+    "clas": 4,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-custom-event",
+              "params": [
+                "attack",
+                "draw-card"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 131,
     "name": "Deadly Poison",
     "cost": 1,
@@ -1138,6 +1167,34 @@
     }
   },
   {
+    "id": 153,
+    "name": "Equality",
+    "cost": 2,
+    "pic": "148/581/383",
+    "clas": 4,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "set-health",
+              "params": [
+                1
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "minions"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 11,
     "name": "Frostwolf Grunt",
     "cost": 2,
@@ -1446,6 +1503,29 @@
         ]
       },
       "race": 0
+    }
+  },
+  {
+    "id": 152,
+    "name": "Divine Favor",
+    "cost": 3,
+    "pic": "148/268/581",
+    "clas": 4,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "draw-card-until-less-than-op",
+              "params": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {

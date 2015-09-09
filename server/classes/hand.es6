@@ -22,6 +22,10 @@ H.Hand = class Hand {
         return this.cards.length !== MAX_HAND_CARD_COUNT;
     }
 
+    getCount() {
+        return this.cards.length;
+    }
+
     getGameData() {
         return this.cards;
     }

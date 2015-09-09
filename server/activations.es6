@@ -114,6 +114,16 @@ const A = {
             });
         });
     },
+    'set-attack': function(o) {
+        o.targets.forEach(obj => {
+            obj.attack = this.params[0];
+        });
+    },
+    'set-health': function(o) {
+        o.targets.forEach(obj => {
+            obj.hp = obj.maxHp = this.params[0];
+        });
+    },
     'draw-card': function(o) {
         const max = this.params[0] || 1;
         for (var i = 0; i < max; ++i) {
@@ -161,6 +171,16 @@ const A = {
                 target.dealDamage(card.cost);
             });
         }
+    },
+    'draw-card-until-less-than-op': function(o) {
+        const delta = o.player.enemy.hand.getCount() - o.player.hand.getCount();
+
+        for (var i = 0; i < delta; ++i) {
+            o.player.drawCard();
+        }
+    },
+    'add-custom-event': function(o) {
+        throw 11;
     }
 };
 
