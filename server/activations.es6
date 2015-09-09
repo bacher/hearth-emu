@@ -190,9 +190,11 @@ const A = {
         o.targets.forEach(minion => {
             const owner = minion.player;
 
+            const index = owner.creatures.indexOf(minion);
+
             minion.detach();
 
-            owner.creatures.addCreature(H.Minion.createByName('Sheep'));
+            owner.creatures.addCreature(H.Minion.createByName('Sheep'), index);
         });
     },
     'add-hand-card': function(o) {

@@ -19,15 +19,23 @@ H.Creatures = class Creatures {
         return this.creatures.length !== MAX_MINIONS_COUNT;
     }
 
-    addCreature(minion) {
+    addCreature(minion, index) {
         if (this.canAddCreature()) {
-            this.creatures.push(minion);
+            if (index != null) {
+                this.creatures.splice(index, 0, minion);
+            } else {
+                this.creatures.push(minion);
+            }
 
             minion.enterInGame(this.player);
 
             minion.on('death', this._onCreatureDeath);
             minion.on('detach', this._onCreatureDetach);
         }
+    }
+
+    indexOf(creat) {
+        return this.creatures.indexOf(creat);
     }
 
     getCount() {
