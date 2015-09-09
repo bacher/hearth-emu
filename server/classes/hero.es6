@@ -6,9 +6,10 @@ const Constructors = {
     [H.CLASSES.warrior]: 'Warrior',
     [H.CLASSES.shaman]: 'Shaman',
     [H.CLASSES.rogue]: 'Rogue',
+    [H.CLASSES.hunter]: 'Hunter',
     [H.CLASSES.druid]: 'Druid',
-    [H.CLASSES.priest]: 'Priest',
-    [H.CLASSES.hunter]: 'Hunter'
+    [H.CLASSES.warlock]: 'Warlock',
+    [H.CLASSES.priest]: 'Priest'
 };
 
 H.Hero = class Hero {

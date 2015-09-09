@@ -181,6 +181,10 @@ const A = {
     },
     'add-custom-event': function(o) {
         throw 11;
+    },
+    'draw-card-deal-self-damage': function(o) {
+        o.player.hero.dealDamage(2);
+        o.player.drawCard();
     }
 };
 
