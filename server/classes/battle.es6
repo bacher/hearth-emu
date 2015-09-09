@@ -229,7 +229,7 @@ H.Battle = class Battle extends EventEmitter {
                 battle: this,
                 player: player,
                 handCard: null
-            })[0].getGameData();
+            }).getGameData();
 
             player.sendMessage('targets', {
                 creatureId,
