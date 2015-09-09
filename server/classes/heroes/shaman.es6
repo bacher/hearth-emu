@@ -7,10 +7,7 @@ H.Shaman = class Shaman extends H.Hero {
 
         this.clas = H.CLASSES['shaman'];
 
-        this.heroSkill = {
-            actFunc: H.ACTIVATIONS.getByName('call-totem'),
-            params: []
-        };
+        this.setHeroSkill('call-totem');
 
         this.totems = [
             H.CARDS.getByName('Searing Totem'),

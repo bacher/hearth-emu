@@ -150,24 +150,24 @@ H.Battle = class Battle extends EventEmitter {
                 break;
 
             case 'use-hero-skill': {
-                var heroSkill = player.hero.heroSkill;
+                const hero = player.hero;
+                const heroSkill = hero.heroSkill;
 
                 player.hero.mana -= 2;
                 player.hero.skillUsed = true;
 
-                var targets = null;
+                var globalTargets = null;
 
-                if (heroSkill.skillTargetsType) {
-                    targets = H.Targets.parseUserData(player, data);
-                } else if (heroSkill.targetsType) {
-                    targets = H.TARGETS.getByTargetsType(player, heroSkill.targetsType);
+                if (heroSkill.skillNeedTarget) {
+                    globalTargets = H.Targets.parseUserData(player, data);
                 }
 
-                heroSkill.actFunc({
-                    //params: data,
-                    player,
+                hero.useHeroSkill({
                     battle: this,
-                    targets
+                    player,
+                    handCard: null,
+                    globalTargets,
+                    params: null
                 });
 
                 this.sendGameData();
@@ -223,15 +223,19 @@ H.Battle = class Battle extends EventEmitter {
                 cardId,
                 targets
             });
+
         } else if (creatureId === 'hero-skill') {
-            targets = H.TARGETS
-                .getByTargetsType(player, player.hero.heroSkill.skillTargetsType)
-                .getGameData();
+            targets = player.hero.heroSkill.getTargets({
+                battle: this,
+                player: player,
+                handCard: null
+            })[0].getGameData();
 
             player.sendMessage('targets', {
                 creatureId,
                 targets
             });
+
         } else if (creatureId) {
             targets = H.TARGETS.getTargets(player, 'physic').getGameData();
 

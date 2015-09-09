@@ -8,13 +8,9 @@ H.Druid = class Druid extends H.Hero {
         this.clas = H.CLASSES['druid'];
     }
 
-    _useSkill() {
+    useHeroSkill() {
         this.armor += 1;
 
         this.attack = 1;
-
-        this.player.battle.once('end-turn', () => {
-            this.attack = 0;
-        });
     }
 };

@@ -17,6 +17,7 @@ H.Hero = class Hero {
 
         this.attack = 0;
         this.hp = 30;
+        this.maxHp = 30;
         this.armor = 0;
         this.spellDamage = 0;
 
@@ -59,6 +60,20 @@ H.Hero = class Hero {
 
     heal() {
         H.Minion.prototype.heal.apply(this, arguments);
+    }
+
+    setHeroSkill(activation, params, targets) {
+        this.heroSkill = new H.Acts();
+
+        this.heroSkill.addCommand({
+            name: activation,
+            params: params || [],
+            targetsType: targets
+        });
+    }
+
+    useHeroSkill(o) {
+        this.heroSkill.act(o);
     }
 
     wakeUp() {
@@ -132,7 +147,7 @@ H.Hero = class Hero {
             crystals: this.crystals,
             skillUsed: this.skillUsed,
             canUseSkill: this.canUseSkill(),
-            isHeroSkillTargeting: !!this.heroSkill.skillTargetsType,
+            isHeroSkillTargeting: this.heroSkill.skillNeedTarget,
             weapon: this.weapon ? this.weapon.getClientData() : null,
             flags: this.weapon ? _.extend({}, this.flags, this.weapon.getFlags()) : this.flags
         };

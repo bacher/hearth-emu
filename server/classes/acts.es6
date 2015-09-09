@@ -38,6 +38,12 @@ H.Acts = class Acts {
         });
     }
 
+    getTargets(o) {
+        return this.commands.map(command => {
+            return H.TARGETS.getByTargetsType(o.player, command.targetsType, o.handCard);
+        });
+    }
+
     act(o) {
         this.commands.forEach(command => {
             var targets;
@@ -54,11 +60,11 @@ H.Acts = class Acts {
 
             command.acts.forEach(act => {
                 act.actFunc({
-                    params: o.data,
-                    player: o.player,
                     battle: o.battle,
+                    player: o.player,
                     handCard: o.handCard,
-                    targets: targets
+                    targets: targets,
+                    params: o.data
                 });
             });
         });

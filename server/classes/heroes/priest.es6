@@ -7,12 +7,14 @@ H.Priest = class Priest extends H.Hero {
 
         this.clas = H.CLASSES['priest'];
 
-        this.heroSkill = {
-            actFunc: H.ACTIVATIONS.getByName('heal'),
-            params: [2],
-            skillTargetsType: {
-                names: ['all']
-            }
-        };
+        this.setHeroSkill('heal', [2], {
+            "names": ["all"],
+            "modificators": [{
+                "name": "damaged",
+                "params": []
+            }]
+        });
+        this.heroSkill.skillNeedTarget = true;
+
     }
 };
