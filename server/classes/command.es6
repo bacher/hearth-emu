@@ -59,8 +59,9 @@ H.Command = class Command {
                 player: o.player,
                 handCard: o.handCard,
                 minion: o.minion,
-                targets: targets,
-                params: o.data
+                params: o.params,
+                eventMessage: o.eventMessage,
+                targets: targets
             });
         });
     }

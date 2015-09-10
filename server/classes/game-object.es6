@@ -39,7 +39,7 @@ H.GameObject = class GameObject extends EventEmitter {
                             battle: player.battle,
                             player,
                             handCard: null,
-                            data: null,
+                            params: null,
                             globalTargets: null
                         });
                     }
@@ -53,14 +53,15 @@ H.GameObject = class GameObject extends EventEmitter {
                     const eventListener = H.EventFilters.getCallback(event, {
                         player,
                         minion: this
-                    }, (globalTargets) => {
+                    }, (eventMessage, globalTargets) => {
                         command.act({
                             battle: this.player.battle,
                             player,
                             handCard: null,
                             minion: this,
                             params: null,
-                            globalTargets: globalTargets
+                            globalTargets,
+                            eventMessage
                         });
 
                         if (this.card.type === H.CARD_TYPES['trap']) {

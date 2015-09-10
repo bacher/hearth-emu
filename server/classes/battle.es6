@@ -249,17 +249,25 @@ H.Battle = class Battle extends EventEmitter {
         player.hand.removeHandCard(handCard);
         player.hero.removeMana(card.cost);
 
-        this.emit('play-card', handCard);
-
         const globalTargets = card.targetsType ? H.Targets.parseUserData(player, data) : null;
 
-        card.acts.act({
-            battle: this,
-            player,
+        const eventMessage = {
             handCard,
-            data,
-            globalTargets
-        });
+            globalTargets,
+            prevent: false
+        };
+
+        this.emit('play-card', eventMessage);
+
+        if (!eventMessage.prevent) {
+            card.acts.act({
+                battle: this,
+                player,
+                handCard,
+                params: data,
+                globalTargets: eventMessage.globalTargets
+            });
+        }
 
         this.sendGameData();
     }
@@ -272,10 +280,16 @@ H.Battle = class Battle extends EventEmitter {
         const targets = H.Targets.parseUserData(player, data);
 
         targets.forEach(obj => {
-            this.emit('hit', by, obj);
+            const eventMessage = {
+                by: by,
+                to: obj,
+                prevent: false
+            };
 
-            if (!by.is('dead') && !by.is('detached')) {
-                obj.dealDamage(by.getData().attack);
+            this.emit('hit', eventMessage);
+
+            if (!eventMessage.prevent) {
+                eventMessage.to.dealDamage(eventMessage.by.getData().attack);
             }
         });
         by.setHitFlags();

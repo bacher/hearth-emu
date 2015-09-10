@@ -211,6 +211,9 @@ const A = {
                 target.addFlag('freeze');
             }
         });
+    },
+    'prevent': function(o) {
+        o.eventMessage.prevent = true;
     }
 };
 

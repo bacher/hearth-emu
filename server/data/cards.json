@@ -1631,6 +1631,36 @@
     }
   },
   {
+    "id": 172,
+    "name": "Counterspell",
+    "cost": 3,
+    "pic": "148/175/531",
+    "clas": 8,
+    "type": 4,
+    "flags": [],
+    "trap": {
+      "events": {
+        "custom": [
+          {
+            "event": {
+              "name": "play-card",
+              "params": [
+                "op",
+                2
+              ]
+            },
+            "acts": [
+              {
+                "name": "prevent",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 29,
     "name": "Dalaran Mage",
     "cost": 3,
@@ -2131,6 +2161,10 @@
               ]
             },
             "acts": [
+              {
+                "name": "prevent",
+                "params": []
+              },
               {
                 "name": "kill",
                 "params": []

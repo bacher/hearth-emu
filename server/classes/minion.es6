@@ -54,19 +54,23 @@ H.Minion = class Minion extends H.GameObject {
     dealDamage(dmg) {
         dmg = H.parseValue(dmg);
 
-        this.player.battle.emit('deal-damage', {
-            by: null,
+        const eventMessage = {
             to: this,
             dmg: dmg,
-            willDie: this.hp <= dmg
-        });
+            willDie: this.hp <= dmg, //fixme maybe DMG modification
+            prevent: false
+        };
 
-        this.hp -= dmg;
+        this.player.battle.emit('deal-damage', eventMessage);
 
-        if (this.hp <= 0) {
-            this.hp = 0;
+        if (!eventMessage.prevent) {
+            this.hp -= eventMessage.dmg;
 
-            this.kill();
+            if (this.hp <= 0) {
+                this.hp = 0;
+
+                this.kill();
+            }
         }
     }
 

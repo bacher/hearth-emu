@@ -6,15 +6,19 @@ const E = {
         eventName: 'play-card',
         filterFunc: function(o, params, callback) {
             var allowPlayer;
+            var allowType = params[1];
+
             if (params[0] === 'my') {
                 allowPlayer = o.player;
             } else if (params[0] === 'op') {
                 allowPlayer = o.player.enemy;
             }
 
-            return function(handCard) {
-                if ((!allowPlayer || allowPlayer === handCard.player) && (!params[1] || handCard.base.type === params[1])) {
-                    callback();
+            return function(eventMessage) {
+                const handCard = eventMessage.handCard;
+
+                if ((!allowPlayer || allowPlayer === handCard.player) && (!allowType || handCard.base.type === allowType)) {
+                    callback(eventMessage);
                 }
             };
         }
@@ -37,11 +41,11 @@ const E = {
                 allowHero = o.player.hero;
             }
 
-            return function(eventInfo) {
-                if ((!minion || minion === eventInfo.to) &&
-                    (!allowPlayer || allowPlayer === eventInfo.to.player) &&
-                    (!allowHero || allowHero === eventInfo.to)) {
-                    callback();
+            return function(eventMessage) {
+                if ((!minion || minion === eventMessage.to) &&
+                    (!allowPlayer || allowPlayer === eventMessage.to.player) &&
+                    (!allowHero || allowHero === eventMessage.to)) {
+                    callback(eventMessage);
                 }
             };
         }
@@ -61,12 +65,12 @@ const E = {
                 allowPlayer = o.player.enemy;
             }
 
-            return function(source, target) {
-                const targets = new H.Targets(target.player);
-                targets.addMinion(source);
+            return function(eventMessage) {
+                const targets = new H.Targets(eventMessage.to.player);
+                targets.addMinion(eventMessage.by);
 
-                if ((!minion || minion === target) && (!allowPlayer || allowPlayer === target.player)) {
-                    callback(targets);
+                if ((!minion || minion === eventMessage.to) && (!allowPlayer || allowPlayer === eventMessage.to.player)) {
+                    callback(eventMessage, targets);
                 }
             };
         }
@@ -86,12 +90,12 @@ const E = {
                 allowPlayer = o.player.enemy;
             }
 
-            return function(source, target) {
-                const targets = new H.Targets(source.player);
-                targets.addMinion(target);
+            return function(eventMessage) {
+                const targets = new H.Targets(eventMessage.by.player);
+                targets.addMinion(eventMessage.to);
 
-                if ((!minion || minion === source) && (!allowPlayer || allowPlayer === source.player)) {
-                    callback(targets);
+                if ((!minion || minion === eventMessage.by) && (!allowPlayer || allowPlayer === eventMessage.by.player)) {
+                    callback(eventMessage, targets);
                 }
             };
         }
@@ -110,11 +114,11 @@ const E = {
                 allowHero = o.player.hero;
             }
 
-            return function(eventInfo) {
-                if (eventInfo.willDie &&
-                    (!minion || minion === eventInfo.to) &&
-                    (!allowHero || allowHero === eventInfo.to)) {
-                    callback();
+            return function(eventMessage) {
+                if (eventMessage.willDie &&
+                    (!minion || minion === eventMessage.to) &&
+                    (!allowHero || allowHero === eventMessage.to)) {
+                    callback(eventMessage);
                 }
             };
         }
