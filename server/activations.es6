@@ -202,6 +202,15 @@ const A = {
     },
     'play-trap-card': function(o) {
         o.player.traps.addTrap(new H.Trap(o.handCard));
+    },
+    'ice-lance': function(o) {
+        o.targets.forEach(target => {
+            if (target.is('freeze')) {
+                target.dealDamage(this.params[0]);
+            } else {
+                target.addFlag('freeze');
+            }
+        });
     }
 };
 

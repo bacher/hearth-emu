@@ -682,6 +682,34 @@
     }
   },
   {
+    "id": 170,
+    "name": "Ice Lance",
+    "cost": 1,
+    "pic": "147/432/188",
+    "clas": 8,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "ice-lance",
+              "params": [
+                4
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 101,
     "name": "Lightning Bolt",
     "cost": 1,
@@ -1804,7 +1832,7 @@
     "flags": [],
     "trap": {
       "events": {
-        "custom":[
+        "custom": [
           {
             "event": {
               "name": "will-die",
