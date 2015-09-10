@@ -738,34 +738,6 @@
     }
   },
   {
-    "id": 111,
-    "name": "Mind Control",
-    "cost": 1,
-    "pic": "147/369/401",
-    "clas": 9,
-    "type": 2,
-    "flags": [],
-    "targetsType": {
-      "names": [
-        "enemies",
-        "minions"
-      ],
-      "mergeType": "intersect"
-    },
-    "spell": {
-      "acts": [
-        {
-          "acts": [
-            {
-              "name": "switch-owner",
-              "params": []
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
     "id": 119,
     "name": "Mind Vision",
     "cost": 1,
@@ -1444,49 +1416,6 @@
               ]
             }
           ]
-        }
-      ]
-    }
-  },
-  {
-    "id": 112,
-    "name": "Holy Nova",
-    "cost": 2,
-    "pic": "147/366/671",
-    "clas": 9,
-    "type": 2,
-    "flags": [],
-    "spell": {
-      "acts": [
-        {
-          "acts": [
-            {
-              "name": "deal-spell-damage",
-              "params": [
-                2
-              ]
-            }
-          ],
-          "targetsType": {
-            "names": [
-              "enemies"
-            ]
-          }
-        },
-        {
-          "acts": [
-            {
-              "name": "heal",
-              "params": [
-                2
-              ]
-            }
-          ],
-          "targetsType": {
-            "names": [
-              "friends"
-            ]
-          }
         }
       ]
     }
@@ -2779,6 +2708,49 @@
     }
   },
   {
+    "id": 112,
+    "name": "Holy Nova",
+    "cost": 5,
+    "pic": "147/366/671",
+    "clas": 9,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-spell-damage",
+              "params": [
+                2
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies"
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "heal",
+              "params": [
+                2
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "friends"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 151,
     "name": "Holy Wrath",
     "cost": 5,
@@ -3657,6 +3629,35 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 111,
+    "name": "Mind Control",
+    "cost": 10,
+    "pic": "147/369/401",
+    "clas": 9,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "enemies",
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "switch-owner",
+              "params": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {
