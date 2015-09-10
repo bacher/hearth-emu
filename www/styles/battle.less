@@ -1120,6 +1120,16 @@
       left: 444px;
     }
 
+    .opponent-choosing {
+      position: absolute;
+      top: 481px;
+      left: 495px;
+      width: 305px;
+      height: 97px;
+      background: url("../textures/opponent-choosing.png");
+      display: none;
+    }
+
     .scroll {
       position: absolute;
       width: 394px;
@@ -1146,6 +1156,10 @@
       top: 231px;
       left: 131px;
       text-align: center;
+
+      &.waiting .card-repick:before {
+        display: none;
+      }
     }
 
     .confirm {

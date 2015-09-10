@@ -230,7 +230,12 @@ new H.Screen({
 
                 send('replace-cards', replaceIds);
 
-                $(e.currentTarget).remove();
+                const $repickLayer = $('.repick-layer');
+
+                $repickLayer.find('.title').hide();
+                $repickLayer.find('.cards').addClass('waiting');
+                $repickLayer.find('.confirm').hide();
+                $repickLayer.find('.opponent-choosing').show();
             });
             //.on('click', '.battleground', e => {
             //    const $blow = $('<div>');
