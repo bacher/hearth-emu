@@ -1,4 +1,6 @@
 
+H.loadedCardImages = [];
+
 new H.Screen({
     gClass: 'c',
     name: 'collection',
@@ -280,8 +282,33 @@ new H.Screen({
             if (cards.length === 0) {
                 $cards.empty();
             } else {
-                jade.render($cards[0], 'collection-cards', {
+                cards.forEach(card => {
+                    if (H.loadedCardImages.indexOf(card.pic) !== -1) {
+                        card.loaded = true;
+                    }
+                });
+
+                render($cards, 'collection-cards', {
                     cards: cards
+                });
+
+                cards.forEach((card, i) => {
+                    if (!card.loaded) {
+                        const img = new Image();
+
+                        const picUrl = 'http://media-hearth.cursecdn.com/avatars/' + card.pic + '.png';
+
+                        img.onload = () => {
+                            H.loadedCardImages.push(card.pic);
+
+                            const $card = $cards.find('.card').eq(i);
+
+                            $card.find('.front').attr('src', picUrl);
+                            $card.removeClass('loading');
+                        };
+
+                        img.src = picUrl;
+                    }
                 });
 
                 checkLimits();
