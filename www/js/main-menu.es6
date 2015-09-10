@@ -13,5 +13,10 @@ new H.Screen({
             .on('click', '.my-collection', () => {
                 H.activateScreen('collection');
             });
+
+        setTimeout(function() {
+            $app.find('.disk').addClass('ready');
+            $app.find('.footer').addClass('ready');
+        }, 1500);
     }
 });

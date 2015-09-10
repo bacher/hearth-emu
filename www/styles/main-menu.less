@@ -1,33 +1,102 @@
-
-.main-menu {
-  height: 720px;
-  overflow: hidden;
-  background: url("../textures/main-menu_1280.jpg");
-  background-repeat: no-repeat;
-}
-
-.play {
-  position: absolute;
-  top: 203px;
-  left: 534px;
-  width: 208px;
-  height: 37px;
-  background: url("../textures/play.png");
-
-  &:hover {
-    background: url("../textures/play_hover.png");
+.m {
+  .main-menu {
+    height: 720px;
+    overflow: hidden;
+    background: url("../textures/main-menu.jpg");
+    background-repeat: no-repeat;
   }
-}
 
-.my-collection {
-  position: absolute;
-  top: 568px;
-  left: 581px;
-  width: 239px;
-  height: 92px;
-  background: url("../textures/my-collection.png");
+  .disk {
+    position: absolute;
+    top: 157px;
+    left: 497px;
+    width: 288px;
+    height: 288px;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
 
-  &:hover {
-    background: url("../textures/my-collection_hover.png");
+    transform: rotateY(180deg);
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease-in-out;
+
+    &.ready {
+      transform: rotateY(0);
+    }
+  }
+
+  .side {
+    position: absolute;
+    width: 288px;
+    height: 288px;
+
+    backface-visibility: hidden;
+
+    &.panel {
+      transform: rotateY(0deg);
+      background: url("../textures/main-menu-panel.png");
+    }
+
+    &.back {
+      transform: rotateY(180deg);
+      background: url("../textures/main-menu-panel_back.png");
+
+      .border {
+        position: absolute;
+        width: 288px;
+        height: 288px;
+        background: url("../textures/main-menu-disk-border.png");
+        animation: rotate 20s linear;
+      }
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .play {
+    position: absolute;
+    top: 45px;
+    left: 37px;
+    width: 208px;
+    height: 37px;
+    background: url("../textures/play.png");
+
+    &:hover {
+      background: url("../textures/play_hover.png");
+    }
+  }
+
+  .footer {
+    position: absolute;
+    top: 566px;
+    left: 403px;
+    width: 475px;
+    height: 111px;
+    background: url("../textures/main-menu-footer.png") no-repeat;
+    background-position-y: -200px;
+    transition: background-position-y 0.6s ease-out;
+
+    &.ready {
+      background-position-y: 0;
+    }
+  }
+
+  .my-collection {
+    position: absolute;
+    top: -1px;
+    left: 177px;
+    width: 239px;
+    height: 92px;
+    //background: url("../textures/my-collection.png");
+
+    &:hover {
+      background: url("../textures/my-collection_hover.png");
+    }
   }
 }
