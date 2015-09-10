@@ -282,11 +282,16 @@
     }
 
     .name {
+      display: inline-block;
+      width: 120px;
       margin-left: 3px;
-      font-size: 12px;
-      letter-spacing: 0.5px;
-      text-shadow: 0 0 2px #000;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
+      font-size: 10px;
+      letter-spacing: 0.2px;
+      text-shadow: 0 0 2px #000, 0 0 1px #000;
+      white-space: nowrap;
     }
   }
 
