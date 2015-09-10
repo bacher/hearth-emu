@@ -24,8 +24,11 @@ H.Card = class Card {
                 targetsType: 'not-need'
             });
 
-            this.trap = {};
-            this.trap.events = info.trap.events.map(command => {
+            this.trap = {
+                events: {}
+            };
+
+            this.trap.events['custom'] = info.trap.events['custom'].map(command => {
                 return new H.Command(command);
             });
 

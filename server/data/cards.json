@@ -1764,6 +1764,37 @@
     }
   },
   {
+    "id": 169,
+    "name": "Ice Barrier",
+    "cost": 3,
+    "pic": "148/178/672",
+    "clas": 8,
+    "type": 4,
+    "flags": [],
+    "trap": {
+      "events": {
+        "custom": [
+          {
+            "event": {
+              "name": "take-damage",
+              "params": [
+                "my-hero"
+              ]
+            },
+            "acts": [
+              {
+                "name": "add-armor",
+                "params": [
+                  8
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 168,
     "name": "Ice Block",
     "cost": 3,
@@ -1772,30 +1803,32 @@
     "type": 4,
     "flags": [],
     "trap": {
-      "events": [
-        {
-          "event": {
-            "name": "will-die",
-            "params": [
-              "my-hero"
-            ]
-          },
-          "acts": [
-            {
-              "name": "add-flags",
+      "events": {
+        "custom":[
+          {
+            "event": {
+              "name": "will-die",
               "params": [
-                "immune"
+                "my-hero"
+              ]
+            },
+            "acts": [
+              {
+                "name": "add-flags",
+                "params": [
+                  "immune"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "heroes",
+                "friends"
               ]
             }
-          ],
-          "targetsType": {
-            "names": [
-              "heroes",
-              "friends"
-            ]
           }
-        }
-      ]
+        ]
+      }
     }
   },
   {
