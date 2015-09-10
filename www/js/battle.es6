@@ -307,7 +307,9 @@ H.updateInGameData = function() {
 
     const game = H.battleData;
 
-    $('.battle').toggleClass('active', game.my.active);
+    $('.battle')
+        .toggleClass('active', game.my.active)
+        .toggleClass('wait', !game.my.active);
 
     const $hand = $('.hand.my .cards').empty();
     const $handOp = $('.hand.op .cards').empty();
@@ -421,6 +423,10 @@ H.updateInGameData = function() {
         $('.stats.' + side + ' .mana .all').text(hero.crystals);
 
         $('.deck-helper.' + side + ' .value').text(player.deck.count);
+
+        render($('.traps.' + side), 'traps', {
+            traps: player.traps
+        });
     });
 
     const hero = game.my.hero;
@@ -432,17 +438,6 @@ H.updateInGameData = function() {
         .addClass('co' + (hero.crystals - hero.mana - hero.overload))
         .addClass('cl' + hero.overload)
         .addClass('no' + hero.nextOverload);
-
-    const $myTraps = $('.traps.my').empty();
-
-    game.my.traps.forEach((trap, i) => {
-        const $container = $('<div>');
-        render($container, 'trap', {
-            trap,
-            i
-        });
-        $myTraps.append($container.children());
-    });
 
     $('.hand-helper.op .value').text(game.op.hand.length);
 

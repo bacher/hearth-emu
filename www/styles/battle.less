@@ -618,6 +618,7 @@
     text-align: left;
     cursor: default;
     pointer-events: none;
+    z-index: 10;
     display: none;
 
     &:before {
@@ -1284,6 +1285,10 @@
   .traps {
     position: absolute;
     z-index: 1;
+
+    &.my .trap:hover .trap-preview {
+      display: block;
+    }
   }
 
   .trap {
@@ -1302,10 +1307,6 @@
       background: url("../textures/trap_glow.png");
     }
 
-    &:hover .trap-preview {
-      display: block;
-    }
-
     &.t0 {
       top: -22px;
       left: 33px;
@@ -1320,7 +1321,8 @@
     }
   }
 
-  .active .trap:after {
+  .active .my .trap:after,
+  .wait .op .trap:after {
     position: absolute;
     top: -9px;
     left: -10px;
