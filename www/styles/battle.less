@@ -1281,4 +1281,63 @@
 
   }
 
+  .traps {
+    position: absolute;
+    z-index: 1;
+  }
+
+  .trap {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+
+    &:after {
+      position: absolute;
+      top: -9px;
+      left: -10px;
+      width: 60px;
+      height: 58px;
+      content: "";
+      pointer-events: none;
+      background: url("../textures/trap_glow.png");
+    }
+
+    &:hover .trap-preview {
+      display: block;
+    }
+
+    &.t0 {
+      top: -22px;
+      left: 33px;
+    }
+    &.t1 {
+      top: 1px;
+      left: -4px;
+    }
+    &.t2 {
+      top: 1px;
+      left: 70px;
+    }
+  }
+
+  .active .trap:after {
+    position: absolute;
+    top: -9px;
+    left: -10px;
+    width: 60px;
+    height: 58px;
+    pointer-events: none;
+    content: "";
+    background: url("../textures/trap.png");
+  }
+
+  .trap-preview {
+    position: absolute;
+    display: none;
+    top: -144px;
+    left: 42px;
+    width: 223px;
+    pointer-events: none;
+  }
+
 }

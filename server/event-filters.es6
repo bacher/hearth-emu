@@ -25,6 +25,7 @@ const E = {
             const target = params[0];
             var minion;
             var allowPlayer;
+            var allowHero;
 
             if (target === 'self') {
                 minion = o.minion;
@@ -32,10 +33,14 @@ const E = {
                 allowPlayer = o.player;
             } else if (target === 'op') {
                 allowPlayer = o.player.enemy;
+            } else if (target === 'my-hero') {
+                allowHero = o.player.hero;
             }
 
             return function(source, target) {
-                if ((!minion || minion === target) && (!allowPlayer || allowPlayer === target.player)) {
+                if ((!minion || minion === target) &&
+                    (!allowPlayer || allowPlayer === target.player) &&
+                    (!allowHero || allowHero === target.player.hero)) {
                     callback();
                 }
             };

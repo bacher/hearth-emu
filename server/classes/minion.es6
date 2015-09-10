@@ -5,16 +5,9 @@ const H = require('../namespace');
 
 H.Minion = class Minion extends H.GameObject {
     constructor(handCard, card) {
-        super();
+        super(handCard, card);
 
         this.id = _.uniqueId('minion');
-
-        if (handCard) {
-            this.handCard = handCard;
-            this.card = handCard.base;
-        } else {
-            this.card = card;
-        }
 
         this.base = this.card.minion;
         this.attack = this.base.attack;
@@ -61,18 +54,21 @@ H.Minion = class Minion extends H.GameObject {
     dealDamage(dmg) {
         this.player.battle.emit('deal-damage', null, this);
 
-        if (/\d+-\d+/.test(dmg)) {
-            const dmgRandom = dmg.split('-').map(Number);
+        if (!this.flags['immune']) {
 
-            dmg = dmgRandom[0] + Math.floor(Math.random() * (dmgRandom[1] - dmgRandom[0]));
-        }
+            if (/\d+-\d+/.test(dmg)) {
+                const dmgRandom = dmg.split('-').map(Number);
 
-        this.hp -= dmg;
+                dmg = dmgRandom[0] + Math.floor(Math.random() * (dmgRandom[1] - dmgRandom[0]));
+            }
 
-        if (this.hp <= 0) {
-            this.hp = 0;
+            this.hp -= dmg;
 
-            this.kill();
+            if (this.hp <= 0) {
+                this.hp = 0;
+
+                this.kill();
+            }
         }
     }
 

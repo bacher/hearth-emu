@@ -5,8 +5,16 @@ const H = require('../namespace');
 
 
 H.GameObject = class GameObject extends EventEmitter {
-    constructor() {
+    constructor(handCard, card) {
         super();
+
+        this.handCard = handCard;
+
+        if (this.handCard) {
+            this.card = this.handCard.base;
+        } else {
+            this.card = card;
+        }
     }
 
     enterInGame(player) {

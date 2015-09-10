@@ -16,6 +16,19 @@ H.Card = class Card {
         if (info.type === H.CARD_TYPES.spell) {
             this.acts = new H.Commands(info.spell.acts);
 
+        } else if (info.type === H.CARD_TYPES.trap) {
+
+            this.acts = new H.Command({
+                name: 'play-trap-card',
+                params: [],
+                targetsType: 'not-need'
+            });
+
+            this.trap = {};
+            this.trap.events = info.trap.events.map(command => {
+                return new H.Command(command);
+            });
+
         } else if (info.type === H.CARD_TYPES.minion || info.type === H.CARD_TYPES.weapon) {
             this.acts = new H.Commands();
 

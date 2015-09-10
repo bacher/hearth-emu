@@ -1803,6 +1803,41 @@
     }
   },
   {
+    "id": 168,
+    "name": "Ice Block",
+    "cost": 3,
+    "pic": "148/184/28",
+    "clas": 8,
+    "type": 4,
+    "flags": [],
+    "trap": {
+      "events": [
+        {
+          "event": {
+            "name": "take-damage",
+            "params": [
+              "my-hero"
+            ]
+          },
+          "acts": [
+            {
+              "name": "add-flags",
+              "params": [
+                "immune"
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "heroes",
+              "friends"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 28,
     "name": "Ironforge Riffleman",
     "cost": 3,

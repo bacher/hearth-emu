@@ -24,6 +24,7 @@ H.Player = class Player extends EventEmitter {
         this.hero = null;
         this.hand = new H.Hand(this);
         this.creatures = new H.Creatures(this);
+        this.traps = [];
 
         ws
             .on('message', json => {
@@ -157,6 +158,7 @@ H.Player = class Player extends EventEmitter {
             hero: this.hero.getClientData(),
             hand: this.hand.getGameData(),
             deck: this.deck.getGameData(),
+            traps: this.traps.map(trap => trap.getClientData()),
             creatures: this.creatures.getGameData()
         };
     }

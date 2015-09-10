@@ -433,6 +433,17 @@ H.updateInGameData = function() {
         .addClass('cl' + hero.overload)
         .addClass('no' + hero.nextOverload);
 
+    const $myTraps = $('.traps.my').empty();
+
+    game.my.traps.forEach((trap, i) => {
+        const $container = $('<div>');
+        render($container, 'trap', {
+            trap,
+            i
+        });
+        $myTraps.append($container.children());
+    });
+
     $('.hand-helper.op .value').text(game.op.hand.length);
 
     $('.end-turn').toggleClass('active', game.my.active);
