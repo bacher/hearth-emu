@@ -37,10 +37,10 @@ const E = {
                 allowHero = o.player.hero;
             }
 
-            return function(source, target) {
-                if ((!minion || minion === target) &&
-                    (!allowPlayer || allowPlayer === target.player) &&
-                    (!allowHero || allowHero === target.player.hero)) {
+            return function(eventInfo) {
+                if ((!minion || minion === eventInfo.to) &&
+                    (!allowPlayer || allowPlayer === eventInfo.to.player) &&
+                    (!allowHero || allowHero === eventInfo.to)) {
                     callback();
                 }
             };
@@ -67,6 +67,29 @@ const E = {
 
                 if ((!minion || minion === source) && (!allowPlayer || allowPlayer === source.player)) {
                     callback(targets);
+                }
+            };
+        }
+    },
+    'will-die': {
+        eventName: 'deal-damage',
+        filterFunc: function(o, params, callback) {
+            const target = params[0];
+            var minion;
+            var allowHero;
+
+            if (target === 'self') {
+                minion = o.minion;
+
+            } else if (target === 'my-hero') {
+                allowHero = o.player.hero;
+            }
+
+            return function(eventInfo) {
+                if (eventInfo.willDie &&
+                    (!minion || minion === eventInfo.to) &&
+                    (!allowHero || allowHero === eventInfo.to)) {
+                    callback();
                 }
             };
         }

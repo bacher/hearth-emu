@@ -4,6 +4,7 @@ const WebSocketServer = new require('ws');
 const H = require('./namespace');
 
 require('./constants');
+require('./utils');
 
 require('./classes/aura');
 require('./classes/auras');
@@ -13,12 +14,14 @@ require('./classes/battle');
 require('./classes/targets');
 require('./classes/card');
 require('./classes/creatures');
+require('./classes/traps');
 require('./classes/deck');
 require('./classes/hand');
 require('./classes/hand-card');
 require('./classes/game-object');
 require('./classes/minion');
 require('./classes/weapon');
+require('./classes/trap');
 require('./classes/hero');
 require('./classes/heroes/warrior');
 require('./classes/heroes/shaman');

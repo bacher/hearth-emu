@@ -267,7 +267,7 @@ H.Battle = class Battle extends EventEmitter {
     _hit(player, data) {
         const by = data.by === 'hero' ?
             player.hero :
-            player.creatures.getCreatureByCrid(data.by);
+            player.creatures.getCreatureById(data.by);
 
         const targets = H.Targets.parseUserData(player, data);
 

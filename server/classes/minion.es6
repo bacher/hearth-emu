@@ -52,23 +52,21 @@ H.Minion = class Minion extends H.GameObject {
     }
 
     dealDamage(dmg) {
-        this.player.battle.emit('deal-damage', null, this);
+        dmg = H.parseValue(dmg);
 
-        if (!this.flags['immune']) {
+        this.player.battle.emit('deal-damage', {
+            by: null,
+            to: this,
+            dmg: dmg,
+            willDie: this.hp <= dmg
+        });
 
-            if (/\d+-\d+/.test(dmg)) {
-                const dmgRandom = dmg.split('-').map(Number);
+        this.hp -= dmg;
 
-                dmg = dmgRandom[0] + Math.floor(Math.random() * (dmgRandom[1] - dmgRandom[0]));
-            }
+        if (this.hp <= 0) {
+            this.hp = 0;
 
-            this.hp -= dmg;
-
-            if (this.hp <= 0) {
-                this.hp = 0;
-
-                this.kill();
-            }
+            this.kill();
         }
     }
 

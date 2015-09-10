@@ -10,18 +10,14 @@ H.Trap = class Trap extends H.GameObject {
 
         this.id = _.uniqueId('trap');
 
-        this.base = card.trap;
+        this.base = this.card.trap;
 
         this.flags = _.clone(this.base.flags);
     }
 
-    getClientData() {
+    getGameData() {
         return {
             pic: this.card.pic
         };
-    }
-
-    setHitFlags() {
-
     }
 };

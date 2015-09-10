@@ -64,10 +64,8 @@ H.Creatures = class Creatures {
         return this.creatures.indexOf(creature);
     }
 
-    getCreatureByCrid(crid) {
-        const index = _.findIndex(this.creatures, { id: crid });
-
-        return this.creatures[index];
+    getCreatureById(id) {
+        return _.find(this.creatures, { id: id });
     }
 
     hasCardCreature(card) {

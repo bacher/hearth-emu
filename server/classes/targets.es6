@@ -24,7 +24,7 @@ H.Targets = class Targets {
         if (params.target === 'hero') {
             targets.addHero(targetPlayer.hero);
         } else {
-            const target = targetPlayer.creatures.getCreatureByCrid(params.target);
+            const target = targetPlayer.creatures.getCreatureById(params.target);
 
             targets.addMinion(target);
         }

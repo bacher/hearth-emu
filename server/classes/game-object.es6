@@ -59,6 +59,10 @@ H.GameObject = class GameObject extends EventEmitter {
                             params: null,
                             globalTargets: globalTargets
                         });
+
+                        if (this.card.type === H.CARD_TYPES['trap']) {
+                            this.detach();
+                        }
                     });
 
                     this._onBattle(eventListener.eventName, eventListener.callback);

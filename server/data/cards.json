@@ -1814,7 +1814,7 @@
       "events": [
         {
           "event": {
-            "name": "take-damage",
+            "name": "will-die",
             "params": [
               "my-hero"
             ]

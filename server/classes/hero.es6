@@ -56,8 +56,33 @@ H.Hero = class Hero {
         return new H[Constructors[clas]](player);
     }
 
-    dealDamage() {
-        H.Minion.prototype.dealDamage.apply(this, arguments);
+    dealDamage(dmg) {
+        if (!this.flags['immune']) {
+
+            dmg = H.parseValue(dmg);
+
+            this.player.battle.emit('deal-damage', {
+                by: null,
+                to: this,
+                dmg: dmg,
+                willDie: this.armor + this.hp <= dmg
+            });
+
+            if (!this.flags['immune']) {
+                this.armor -= dmg;
+
+                if (this.armor < 0) {
+                    this.hp += this.armor;
+                    this.armor = 0;
+                }
+
+                if (this.hp <= 0) {
+                    this.hp = 0;
+
+                    this.kill();
+                }
+            }
+        }
     }
 
     heal() {

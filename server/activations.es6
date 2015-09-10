@@ -201,10 +201,7 @@ const A = {
         o.player.hand.addCard(H.CARDS.getByName(this.params[0], this.params[1]));
     },
     'play-trap-card': function(o) {
-        const trap = new H.Trap(o.handCard);
-        o.player.traps.push(trap);
-
-        trap.enterInGame(o.player);
+        o.player.traps.addTrap(new H.Trap(o.handCard));
     }
 };
 
