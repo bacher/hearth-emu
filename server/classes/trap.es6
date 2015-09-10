@@ -12,7 +12,7 @@ H.Trap = class Trap extends H.GameObject {
 
         this.base = this.card.trap;
 
-        this.flags = _.clone(this.base.flags);
+        this.flags = {};
     }
 
     getGameData() {

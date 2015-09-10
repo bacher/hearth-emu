@@ -46,6 +46,31 @@ const E = {
             };
         }
     },
+    'hit-to': {
+        eventName: 'hit',
+        filterFunc: function(o, params, callback) {
+            const target = params[0];
+            var minion;
+            var allowPlayer;
+
+            if (target === 'self') {
+                minion = o.minion;
+            } else if (target === 'my') {
+                allowPlayer = o.player;
+            } else if (target === 'op') {
+                allowPlayer = o.player.enemy;
+            }
+
+            return function(source, target) {
+                const targets = new H.Targets(target.player);
+                targets.addMinion(source);
+
+                if ((!minion || minion === target) && (!allowPlayer || allowPlayer === target.player)) {
+                    callback(targets);
+                }
+            };
+        }
+    },
     'hit-by': {
         eventName: 'hit',
         filterFunc: function(o, params, callback) {

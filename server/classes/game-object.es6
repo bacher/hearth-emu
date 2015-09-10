@@ -20,6 +20,9 @@ H.GameObject = class GameObject extends EventEmitter {
     enterInGame(player) {
         this.player = player;
 
+        delete this.flags['dead'];
+        delete this.flags['detached'];
+
         for (var eventTypeName in this.base.events) {
             const eventActs = this.base.events[eventTypeName];
 
@@ -133,6 +136,8 @@ H.GameObject = class GameObject extends EventEmitter {
     detach() {
         this._detachListeners();
 
+        this.flags['detached'] = true;
+
         this.emit('detach', this);
 
         this.player = null;
@@ -140,6 +145,8 @@ H.GameObject = class GameObject extends EventEmitter {
 
     kill() {
         this._detachListeners();
+
+        this.flags['dead'] = true;
 
         this.emit('death', this);
 

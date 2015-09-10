@@ -274,7 +274,9 @@ H.Battle = class Battle extends EventEmitter {
         targets.forEach(obj => {
             this.emit('hit', by, obj);
 
-            obj.dealDamage(by.getData().attack);
+            if (!by.is('dead') && !by.is('detached')) {
+                obj.dealDamage(by.getData().attack);
+            }
         });
         by.setHitFlags();
 

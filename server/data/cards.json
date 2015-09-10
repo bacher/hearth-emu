@@ -2113,6 +2113,35 @@
     }
   },
   {
+    "id": 171,
+    "name": "Vaporize",
+    "cost": 3,
+    "pic": "148/522/160",
+    "clas": 8,
+    "type": 4,
+    "flags": [],
+    "trap": {
+      "events": {
+        "custom": [
+          {
+            "event": {
+              "name": "hit-to",
+              "params": [
+                "my-hero"
+              ]
+            },
+            "acts": [
+              {
+                "name": "kill",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 21,
     "type": 1,
     "name": "Wolfrider",
