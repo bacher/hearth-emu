@@ -1,6 +1,4 @@
 
-H.loadedCardImages = [];
-
 new H.Screen({
     gClass: 'c',
     name: 'collection',
@@ -190,36 +188,44 @@ new H.Screen({
                 drawCards();
             });
 
-        $.ajax({
-            url: '/cards.json'
-        }).then(data => {
-            H.cards = {
-                all: data.cards,
-                [H.CLASSES.neutral]: [],
-                [H.CLASSES.warrior]: [],
-                [H.CLASSES.shaman]: [],
-                [H.CLASSES.rogue]: [],
-                [H.CLASSES.paladin]: [],
-                [H.CLASSES.hunter]: [],
-                [H.CLASSES.druid]: [],
-                [H.CLASSES.warlock]: [],
-                [H.CLASSES.mage]: [],
-                [H.CLASSES.priest]: []
-            };
+        if (H.cards) {
+            afterLoad();
+        } else {
+            $.ajax({
+                url: '/cards.json'
+            }).then(data => {
+                H.cards = {
+                    all: data.cards,
+                    [H.CLASSES.neutral]: [],
+                    [H.CLASSES.warrior]: [],
+                    [H.CLASSES.shaman]: [],
+                    [H.CLASSES.rogue]: [],
+                    [H.CLASSES.paladin]: [],
+                    [H.CLASSES.hunter]: [],
+                    [H.CLASSES.druid]: [],
+                    [H.CLASSES.warlock]: [],
+                    [H.CLASSES.mage]: [],
+                    [H.CLASSES.priest]: []
+                };
 
-            H.cardsHash = {};
+                H.cardsHash = {};
 
-            data.cards.forEach(card => {
-                H.cards[card.clas].push(card);
-                H.cardsHash[card.id] = card;
+                data.cards.forEach(card => {
+                    H.cards[card.clas].push(card);
+                    H.cardsHash[card.id] = card;
+                });
+
+                afterLoad();
             });
+        }
 
+        function afterLoad() {
             makeBaseFiltering();
 
             filterCards();
 
             drawCards();
-        });
+        }
 
         function removeCardPreview() {
             if ($previewImage) {
@@ -281,35 +287,46 @@ new H.Screen({
 
             if (cards.length === 0) {
                 $cards.empty();
-            } else {
-                cards.forEach(card => {
-                    if (H.loadedCardImages.indexOf(card.pic) !== -1) {
-                        card.loaded = true;
-                    }
-                });
 
+            } else {
                 render($cards, 'collection-cards', {
                     cards: cards
                 });
+
+                const loadCards = [];
 
                 cards.forEach((card, i) => {
                     if (!card.loaded) {
                         const img = new Image();
 
                         const picUrl = 'http://media-hearth.cursecdn.com/avatars/' + card.pic + '.png';
+                        const $card = $cards.find('.card').eq(i);
+                        const $img = $(img).addClass('img front').hide();
+                        $card.append($img);
+                        loadCards.push($card);
 
                         img.onload = () => {
-                            H.loadedCardImages.push(card.pic);
-
-                            const $card = $cards.find('.card').eq(i);
-
-                            $card.find('.front').attr('src', picUrl);
+                            $card.addClass('animate');
                             $card.removeClass('loading');
+                            $img.data('loaded', true).show();
+
+                            card.loaded = true;
                         };
 
                         img.src = picUrl;
                     }
                 });
+
+                setTimeout(() => {
+                    loadCards.forEach($card => {
+                        const $cardFront = $card.find('.front');
+
+                        if (!$cardFront.data('loaded')) {
+                            $card.append($('<IMG>').addClass('img back').attr('src', '../cards/card_back.png'));
+                            $card.addClass('loading');
+                        }
+                    });
+                }, 0);
 
                 checkLimits();
             }

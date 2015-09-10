@@ -1,11 +1,8 @@
 
 each card in cards
    .card-wrapper
-      .card(data-id=card.id,class=card.flags['unique'] ? 'unique' : '',class=card.loaded ? '' : 'loading')
-         - if (card.loaded)
+      .card(data-id=card.id,class=card.flags['unique'] ? 'unique' : '')
+         if (card.loaded)
             IMG.img.front(src='http://media-hearth.cursecdn.com/avatars/' + card.pic + '.png')
-         - else
-            IMG.img.back(src='../cards/card_back.png')
-            IMG.img.front
 
          .glow
