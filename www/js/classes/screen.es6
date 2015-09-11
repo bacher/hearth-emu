@@ -13,19 +13,28 @@ H.Screen = class Screen {
         H.screens.push(this);
     }
 
-    draw() {
+    draw($node) {
         this.setLocationHash();
+        this.$node = $node;
 
-        $app.addClass(this.gClass);
+        $node.addClass(this.gClass);
 
         this._draw();
 
         $(window).scrollTop(0);
     }
 
+    screenIn() {
+        console.log('screenIn');
+    }
+
+    screenOut() {
+        console.log('screenOut');
+    }
+
     destroy() {
-        $app.off();
-        $app.removeClass();
+        this.$node.off();
+        this.$node.removeClass();
 
         if (this._destroy) {
             this._destroy();
