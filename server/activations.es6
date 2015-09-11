@@ -137,6 +137,12 @@ const A = {
             o.player.drawCard();
         }
     },
+    'discard-card': function(o) {
+        const max = this.params[0] || 1;
+        for (var i = 0; i < max; ++i) {
+            o.player.deck.popCard();
+        }
+    },
     'copy-random-enemy-card': function(o) {
         o.player.hand.addCard(o.player.enemy.hand.getRandomHandCard().base);
     },

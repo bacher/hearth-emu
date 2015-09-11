@@ -74,6 +74,34 @@
     }
   },
   {
+    "id": 180,
+    "name": "Hunter's Mark",
+    "cost": 0,
+    "pic": "147/519/22",
+    "clas": 5,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "set-health",
+              "params": [
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 104,
     "name": "Innervate",
     "cost": 0,
@@ -292,6 +320,34 @@
               }
             ]
           }
+        }
+      ]
+    }
+  },
+  {
+    "id": 179,
+    "name": "Arcane Shot",
+    "cost": 1,
+    "pic": "147/766/167",
+    "clas": 5,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                2
+              ]
+            }
+          ]
         }
       ]
     }
@@ -956,6 +1012,33 @@
       "flags": [],
       "events": {},
       "race": 1
+    }
+  },
+  {
+    "id": 181,
+    "name": "Tracking",
+    "cost": 1,
+    "pic": "147/763/163",
+    "clas": 5,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "draw-card",
+              "params": []
+            },
+            {
+              "name": "discard-card",
+              "params": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {
