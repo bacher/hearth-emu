@@ -74,19 +74,19 @@ H.RACES = {
     beast: 1,
     demon: 2,
     dragon: 3,
-    mechanical: 4,
+    mech: 4,
     murloc: 5,
     pirate: 6,
     totem: 7
 };
 
 H.RACES_L = [
-    'General',
-    'Beast',
-    'Demon',
-    'Dragon',
-    'Mechanical',
-    'Murloc',
-    'Pirate',
-    'Totem'
+    'general',
+    'beast',
+    'demon',
+    'dragon',
+    'mech',
+    'murloc',
+    'pirate',
+    'totem'
 ];

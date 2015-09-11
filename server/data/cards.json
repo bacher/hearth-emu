@@ -1847,6 +1847,26 @@
     }
   },
   {
+    "id": 175,
+    "name": "Huffer",
+    "cost": 3,
+    "pic": "149/548/369",
+    "clas": 5,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 4,
+      "maxHp": 2,
+      "flags": [
+        "charge"
+      ],
+      "race": 1,
+      "events": {}
+    }
+  },
+  {
     "id": 169,
     "name": "Ice Barrier",
     "cost": 3,
