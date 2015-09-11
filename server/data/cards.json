@@ -1964,6 +1964,24 @@
     }
   },
   {
+    "id": 176,
+    "name": "Leokk",
+    "cost": 3,
+    "pic": "149/545/32",
+    "clas": 5,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 4,
+      "flags": [],
+      "race": 1,
+      "events": {}
+    }
+  },
+  {
     "id": 106,
     "name": "Lightning Storm",
     "cost": 3,
@@ -2042,6 +2060,26 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 177,
+    "name": "Misha",
+    "cost": 3,
+    "pic": "149/541/593",
+    "clas": 5,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [
+        "taunt"
+      ],
+      "race": 1,
+      "events": {}
     }
   },
   {
