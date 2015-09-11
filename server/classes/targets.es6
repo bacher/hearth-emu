@@ -6,14 +6,7 @@ H.Targets = class Targets {
     constructor(player) {
         this.player = player;
 
-        this.my = {
-            minions: [],
-            hero: false
-        };
-        this.op = {
-            minions: [],
-            hero: false
-        };
+        this.empty();
     }
 
     static parseUserData(player, params) {
@@ -127,6 +120,18 @@ H.Targets = class Targets {
         return this;
     }
 
+    empty() {
+        this.my = {
+            minions: [],
+            hero: false
+        };
+
+        this.op = {
+            minions: [],
+            hero: false
+        };
+    }
+
     clone() {
         const targets = new H.Targets(this.player);
 
@@ -137,6 +142,33 @@ H.Targets = class Targets {
         targets.op.hero = this.op.hero;
 
         return targets;
+    }
+
+    getAdjacent() {
+        var creatures;
+        var minion;
+
+        if (this.my.minions.length) {
+            minion = this.my.minions[0];
+            creatures = this.player.creatures.creatures;
+        } else {
+            minion = this.op.minions[0];
+            creatures = this.player.enemy.creatures.creatures;
+        }
+
+        const index = creatures.indexOf(minion);
+
+        const minions = [];
+
+        if (index > 0) {
+            minions.push(creatures[index - 1]);
+        }
+
+        if (index + 1 < creatures.length) {
+            minions.push(creatures[index + 1]);
+        }
+
+        return minions;
     }
 
     'random'(count) {
@@ -191,28 +223,13 @@ H.Targets = class Targets {
         const raceId = H.RACES[race];
         this._filterAll(obj => obj.race === raceId);
     }
+    'adjacent'() {
+        this.empty();
 
+        this.addMinions(this.getAdjacent());
+    }
     'add-adjacent'() {
-        var creatures;
-        var minion;
-
-        if (this.my.minions.length) {
-            minion = this.my.minions[0];
-            creatures = this.player.creatures.creatures;
-        } else {
-            minion = this.op.minions[0];
-            creatures = this.player.enemy.creatures.creatures;
-        }
-
-        const index = creatures.indexOf(minion);
-
-        if (index > 0) {
-            this.addMinion(creatures[index - 1]);
-        }
-
-        if (index + 1 < creatures.length) {
-            this.addMinion(creatures[index + 1]);
-        }
+        this.addMinions(this.getAdjacent());
     }
 
     _filterAll(filterFunc) {

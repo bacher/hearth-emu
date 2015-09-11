@@ -2990,6 +2990,55 @@
     }
   },
   {
+    "id": 182,
+    "name": "Explosive Shot",
+    "cost": 5,
+    "pic": "148/403/114",
+    "clas": 5,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                2
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "target"
+            ],
+            "modificators": [
+              {
+                "name": "adjacent",
+                "params": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 37,
     "name": "Frostwolf Warlord",
     "cost": 5,
