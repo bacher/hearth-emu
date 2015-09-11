@@ -221,6 +221,12 @@ const A = {
     },
     'prevent': function(o) {
         o.eventMessage.prevent = true;
+    },
+    'kill-command': function(o) {
+        const beasts = o.player.creatures.getAllByRace(H.RACES['beast']);
+        const dmg = beasts.length ? 5 : 3;
+
+        A['deal-damage'].call({ params: [dmg] }, o);
     }
 };
 

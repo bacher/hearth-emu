@@ -1964,6 +1964,32 @@
     }
   },
   {
+    "id": 178,
+    "name": "Kill Command",
+    "cost": 3,
+    "pic": "148/412/488",
+    "clas": 5,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "kill-command",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 176,
     "name": "Leokk",
     "cost": 3,
