@@ -11,6 +11,13 @@ const A = {
 
         o.player.creatures.addCreature(minion);
     },
+    'summon-random': function(o) {
+        const index = Math.floor(Math.random() * this.params.length);
+
+        const minionCardName = this.params[index];
+
+        A['summon'].call({ params: [minionCardName] }, o);
+    },
     'card-summon': function(o) {
         const minion = new H.Minion(o.handCard);
         o.handCard.minion = minion;

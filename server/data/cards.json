@@ -1608,6 +1608,31 @@
     }
   },
   {
+    "id": 174,
+    "name": "Animal Companion",
+    "cost": 3,
+    "pic": "149/538/578",
+    "clas": 5,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "summon-random",
+              "params": [
+                "Huffer",
+                "Leokk",
+                "Misha"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 158,
     "name": "Arcane Intellect",
     "cost": 3,
@@ -2435,6 +2460,43 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 173,
+    "name": "Multi-Shot",
+    "cost": 4,
+    "pic": "147/758/407",
+    "clas": 5,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                3
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "minions",
+              "enemies"
+            ],
+            "modificators": [
+              {
+                "name": "random",
+                "params": [
+                  2
+                ]
+              }
+            ]
+          }
+        }
+      ]
     }
   },
   {
