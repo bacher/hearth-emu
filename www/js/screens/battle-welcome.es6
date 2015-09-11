@@ -41,6 +41,11 @@ H.Screens['battle-welcome'] = class BattleWelcomeScreen extends H.Screen {
         const $cards = this.$node.find('.repick-layer .cards');
 
         render($cards, 'repick-cards', { cards: this._repickCards });
+
+        // FIXME
+        if (H.checkParam('endturn')) {
+            this.$node.find('.repick-layer .confirm').click();
+        }
     }
 
     _bindEventListeners() {

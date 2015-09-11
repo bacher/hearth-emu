@@ -29,14 +29,6 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             .hide();
 
         this.$dragAim = $('<div>').addClass('targeting').appendTo(this.$node);
-
-        if (H.checkParam('endturn')) {
-            setInterval(() => {
-                if (H.battleData && H.battleData.my.active) {
-                    H.socket.send('end-turn');
-                }
-            }, 500);
-        }
     }
 
     _bindEventListeners() {
@@ -85,6 +77,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
     _show() {
         this.$node.show();
+
         this.showWelcomeScreen();
     }
 
@@ -257,16 +250,26 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
     }
 
     _onGameData(data) {
+        if (this.welcomeScreen) {
+            this.welcomeScreen.hideThenDestroy();
+            this.welcomeScreen = null;
+
+            if (H.checkParam('endturn')) {
+                // FIXME
+                setInterval(() => {
+                    if (this.battleData && this.battleData.my.active) {
+                        H.socket.send('end-turn');
+                    }
+                }, 200);
+            }
+        }
+
         this.battleData = data;
         this.updateInGameData();
     }
 
     _onCardsForPick(data) {
         this.welcomeScreen.setPickCardsData(data);
-
-        //if (H.checkParam('endturn')) {
-        //    $('.repick-layer .confirm').click();
-        //}
     }
 
     updateInGameData() {
