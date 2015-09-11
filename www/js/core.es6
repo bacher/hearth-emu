@@ -88,14 +88,6 @@ H.getDeckById = function(id) {
     return _.find(H.decks, deck => deck.id === id);
 };
 
-function send(msg, data) {
-    const packet = { msg, data: data || null };
-
-    console.log('Client Message:', packet);
-
-    H.socket.send(JSON.stringify(packet));
-}
-
 function render($cont, tmplName, params) {
     try {
         jade.render($cont[0], tmplName, params || {});

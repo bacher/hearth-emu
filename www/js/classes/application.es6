@@ -21,6 +21,8 @@ H.Application = class Application {
         this.activeScreen = newActiveScreen;
 
         this.activeScreen.show();
+
+        return this.activeScreen;
     }
 
     activateOverlay(name) {
@@ -31,6 +33,8 @@ H.Application = class Application {
         this.$node.append(overlayScreen.getNode());
 
         overlayScreen.show();
+
+        return overlayScreen;
     }
 
     getActiveScreen() {

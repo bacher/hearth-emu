@@ -29,17 +29,29 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             .hide();
 
         this.$dragAim = $('<div>').addClass('targeting').appendTo(this.$node);
+
+        if (H.checkParam('endturn')) {
+            setInterval(() => {
+                if (H.battleData && H.battleData.my.active) {
+                    H.socket.send('end-turn');
+                }
+            }, 500);
+        }
     }
 
     _bindEventListeners() {
+        H.socket.on('game-data', this._onGameData.bind(this));
+        H.socket.on('targets', this.updateInGameTargets.bind(this));
+        H.socket.on('cards-for-repick', this._onCardsForPick.bind(this));
+
         this.$node
             .on('click', '.end-turn', () => {
-                if (H.battleData.my.active) {
-                    send('end-turn');
+                if (this.battleData.my.active) {
+                    H.socket.send('end-turn');
                 }
             })
             .on('click', '.hero-skill.my.available', () => {
-                send('use-hero-skill', {});
+                H.socket.send('use-hero-skill', {});
             })
             .on('mouseenter', '.hand.my .card-wrap', e => {
                 if (!this.dragging) {
@@ -57,7 +69,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                 this.$cardPreview.hide();
             })
             .on('mousedown', '.card-wrap.available', e => {
-                if (!H.battleData.my.active) {
+                if (!this.battleData.my.active) {
                     return;
                 }
 
@@ -68,26 +80,16 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             })
             .on('mousedown', '.avatar.my.available, .creatures.my .creature.available, .hero-skill.my.available.need-target', this._onMouseDown1.bind(this))
             .on('mousemove', this._onMouseMove.bind(this))
-            .on('mouseup', this._onMouseUp.bind(this))
-            .on('click', '.card-repick', e => {
-                $(e.currentTarget).toggleClass('replace');
-            })
-            .on('click', '.repick-layer .confirm', e => {
-                const replaceIds = $('.card-repick.replace').map((i, el) => $(el).data('id')).get();
+            .on('mouseup', this._onMouseUp.bind(this));
+    }
 
-                send('replace-cards', replaceIds);
-
-                const $repickLayer = $('.repick-layer');
-
-                $repickLayer.find('.title').hide();
-                $repickLayer.find('.cards').addClass('waiting');
-                $repickLayer.find('.confirm').hide();
-                $repickLayer.find('.opponent-choosing').show();
-            });
+    _show() {
+        this.$node.show();
+        this.showWelcomeScreen();
     }
 
     _onMouseDown1(e) {
-        if (!H.battleData.my.active || this.dragging) {
+        if (!this.battleData.my.active || this.dragging) {
             return;
         }
 
@@ -98,7 +100,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
         this.dragging = true;
 
-        send('get-targets', {
+        H.socket.send('get-targets', {
             creatureId: this.$aimingObject.data('id')
         });
 
@@ -192,18 +194,18 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                     const id = $myCard.data('id');
 
                     if (this.spellTargeting || this.battlecryTargeting) {
-                        send('play-card', {
+                        H.socket.send('play-card', {
                             id: id,
                             targetSide: targetSide,
                             target: purposeId
                         });
                     } else if (id === 'hero-skill') {
-                        send('use-hero-skill', {
+                        H.socket.send('use-hero-skill', {
                             targetSide: targetSide,
                             target: purposeId
                         });
                     } else {
-                        send('hit', {
+                        H.socket.send('hit', {
                             by: id,
                             targetSide: targetSide,
                             target: purposeId
@@ -235,7 +237,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
                         this.startCardDrag($linkedCard);
                     } else {
-                        send('play-card', {
+                        H.socket.send('play-card', {
                             id: this.$dragCard.data('id')
                         });
                     }
@@ -254,13 +256,26 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         }
     }
 
+    _onGameData(data) {
+        this.battleData = data;
+        this.updateInGameData();
+    }
+
+    _onCardsForPick(data) {
+        this.welcomeScreen.setPickCardsData(data);
+
+        //if (H.checkParam('endturn')) {
+        //    $('.repick-layer .confirm').click();
+        //}
+    }
+
     updateInGameData() {
 
         $('.shadow').remove();
 
         this.clearPurposes();
 
-        const game = H.battleData;
+        const game = this.battleData;
 
         $('.battle')
             .toggleClass('active', game.my.active)
@@ -439,17 +454,14 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         }
     }
 
-    drawWelcome(data) {
-        const $welcome = this.$node.find('.welcome');
+    setBattleData(data) {
+        this.welcomeScreen.setBattleData(data);
 
         const myClass = H.CLASSES_L[data.my.clas];
         const opClass = H.CLASSES_L[data.op.clas];
 
         this.$node.find('.avatar.my').addClass(myClass);
         this.$node.find('.avatar.op').addClass(opClass);
-
-        $welcome.find('.hero.my').addClass(myClass);
-        $welcome.find('.hero.op').addClass(opClass);
 
         this.$node.find('.hero-skill.my').addClass(myClass);
         this.$node.find('.hero-skill.op').addClass(opClass);
@@ -458,17 +470,8 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         this.$node.find('.name.op').text(data.op.name);
     }
 
-    drawCardsForPick(deckCards) {
-        this.$node.find('.welcome').hide();
-        this.$node.find('.repick-layer').show();
-        const $cards = this.$node.find('.repick-layer .cards');
-
-        deckCards.forEach(deckCard => {
-            const $card = $('<div>').addClass('card-repick').data('id', deckCard.id);
-            $card.append($('<img>').attr('src', 'http://media-hearth.cursecdn.com/avatars/'+deckCard.card.pic+'.png'));
-
-            $cards.append($card);
-        });
+    showWelcomeScreen() {
+        this.welcomeScreen = H.app.activateOverlay('battle-welcome');
     }
 
     startCardDrag($card) {
@@ -477,8 +480,8 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
         this.dragging = true;
 
-        if (isNeedTarget && (!isNeedBattlecryTarget || battlecryTargeting)) {
-            send('get-targets', {
+        if (isNeedTarget && (!isNeedBattlecryTarget || this.battlecryTargeting)) {
+            H.socket.send('get-targets', {
                 cardId: $card.data('id')
             });
 
