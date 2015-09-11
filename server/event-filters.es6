@@ -56,6 +56,7 @@ const E = {
             const target = params[0];
             var minion;
             var allowPlayer;
+            var allowType;
 
             if (target === 'self') {
                 minion = o.minion;
@@ -63,13 +64,18 @@ const E = {
                 allowPlayer = o.player;
             } else if (target === 'op') {
                 allowPlayer = o.player.enemy;
+            } else if (target === 'my-minions') {
+                allowPlayer = o.player;
+                allowType = H.CARD_TYPES['minion'];
             }
 
             return function(eventMessage) {
                 const targets = new H.Targets(eventMessage.to.player);
                 targets.addMinion(eventMessage.by);
 
-                if ((!minion || minion === eventMessage.to) && (!allowPlayer || allowPlayer === eventMessage.to.player)) {
+                if ((!minion || minion === eventMessage.to) &&
+                    (!allowPlayer || allowPlayer === eventMessage.to.player) &&
+                    (!allowType || (eventMessage.to.card && eventMessage.to.card.type === allowType))) {
                     callback(eventMessage, targets);
                 }
             };

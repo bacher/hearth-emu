@@ -189,6 +189,24 @@
     }
   },
   {
+    "id": 185,
+    "name": "Snake",
+    "cost": 0,
+    "pic": "148/427/512",
+    "clas": 5,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 1,
+      "events": {}
+    }
+  },
+  {
     "id": 100,
     "name": "The Coin",
     "cost": 0,
@@ -1620,6 +1638,38 @@
     }
   },
   {
+    "id": 184,
+    "name": "Snake Trap",
+    "cost": 2,
+    "pic": "148/424/210",
+    "clas": 5,
+    "type": 4,
+    "flags": [],
+    "trap": {
+      "events": {
+        "custom": [
+          {
+            "event": {
+              "name": "hit-to",
+              "params": [
+                "my-minions"
+              ]
+            },
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "Snake",
+                  3
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 16,
     "name": "Spirit Wolf",
     "cost": 2,
@@ -1795,6 +1845,41 @@
         ]
       },
       "race": 0
+    }
+  },
+  {
+    "id": 183,
+    "name": "Deadly Shot",
+    "cost": 3,
+    "pic": "148/578/239",
+    "clas": 5,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "kill",
+              "params": []
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies",
+              "minions"
+            ],
+            "modificators": [
+              {
+                "name": "random",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        }
+      ]
     }
   },
   {

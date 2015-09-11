@@ -6,10 +6,13 @@ const SILENCE_IGNORE_FLAGS = ['tired', 'freeze', 'sleep'];
 const A = {
     'summon': function(o) {
         const minionCardName = this.params[0];
+        const count = this.params[1] || 1;
 
-        const minion = H.Minion.createByName(minionCardName);
+        for (var i = 0; i < count; ++i) {
+            const minion = H.Minion.createByName(minionCardName);
 
-        o.player.creatures.addCreature(minion);
+            o.player.creatures.addCreature(minion);
+        }
     },
     'summon-random': function(o) {
         const index = Math.floor(Math.random() * this.params.length);
