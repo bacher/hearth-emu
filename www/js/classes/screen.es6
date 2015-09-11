@@ -3,42 +3,58 @@ H.Screen = class Screen {
     constructor(info) {
         this.gClass = info.gClass;
         this.name = info.name;
-        this._draw = info.draw;
-        this._destroy = info.destroy;
 
         if (info.hash !== false) {
             this.hashLocation = '#' + (info.hash || '');
         }
-
-        H.screens.push(this);
     }
 
-    draw($node) {
+    make() {
         this.setLocationHash();
-        this.$node = $node;
 
-        $node.addClass(this.gClass);
+        this.$node = $('<DIV>')
+            .css('display', 'none')
+            .addClass('screen')
+            .addClass(this.gClass);
 
-        this._draw();
+        this._render();
+
+        this._bindEventListeners();
 
         $(window).scrollTop(0);
     }
 
-    screenIn() {
-        console.log('screenIn');
+    _bindEventListeners() {}
+
+    getNode() {
+        return this.$node;
     }
 
-    screenOut() {
-        console.log('screenOut');
+    show() {
+        this._show();
+    }
+
+    _show() {
+        this.$node.show();
+    }
+
+    hide() {
+        const promise = this._hide();
+
+        return promise || Promise.resolve();
+    }
+
+    _hide() {
+        this.$node.hide();
     }
 
     destroy() {
-        this.$node.off();
-        this.$node.removeClass();
-
         if (this._destroy) {
             this._destroy();
         }
+
+        this.$node.off();
+        this.$node.remove();
     }
 
     setLocationHash() {

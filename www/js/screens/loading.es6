@@ -1,77 +1,81 @@
 
-new H.Screen({
-    gClass: 'l',
-    name: 'loading',
-    hash: false,
-    draw: function() {
+H.Screens['loading'] = class LoadingScreen extends H.Screen {
+    constructor() {
+        super({
+            gClass: 'l',
+            name: 'loading',
+            hash: false
+        });
+    }
 
-        render($app, 'loading');
-
-        const $stone = $app.find('.stone');
+    _render() {
+        render(this.$node, 'loading');
 
         H.loadDecks();
 
         $.ajax({
             url: 'textures.json'
-        }).then(data => {
+        }).then(this._onTexturesLoad.bind(this));
+    }
 
-            var loaded = 0;
-            var bad = 0;
-            var all = data.length - 1;
+    _show() {
+        this.$node.show();
 
-            data.forEach(imageName => {
-                const img = new Image();
+        this._glowTimeout = setTimeout(() => {
+            this.$node.find('.stone').addClass('glow-1');
+            this.$node.find('.label').addClass('loaded');
+        }, 500);
+    }
 
-                img.onload = () => {
-                    loaded++;
-                    check();
-                };
+    _destroy() {
+        clearTimeout(this._glowTimeout);
+    }
 
-                img.onerror = () => {
-                    bad++;
-                    check();
-                };
+    _onTexturesLoad(data) {
+        this.loaded = 0;
+        this.bad = 0;
+        this.all = data.length - 1;
 
-                img.src = 'textures/' + imageName;
-            });
+        data.forEach(imageName => {
+            const img = new Image();
 
-            setTimeout(() => {
-                onLoaded();
-            }, 2000);
+            img.onload = () => {
+                this.loaded++;
+                this.check();
+            };
 
-            function check() {
-                if (all === loaded + bad) {
-                    onLoaded();
-                }
-            }
+            img.onerror = () => {
+                this.bad++;
+                this.check();
+            };
 
-            var alreadyCalled = false;
-
-            function onLoaded() {
-                if (alreadyCalled) { return; }
-
-                alreadyCalled = true;
-
-                const hash = window.location.hash;
-
-                if (H.checkParam('gobattle')) {
-                    H.activateScreen('waiting-opponent');
-                } else if (hash === '#collection') {
-                    H.activateScreen('collection');
-                } else if (hash === '#start-game' || hash === '#battle') {
-                    H.activateScreen('start-game-menu');
-                } else {
-                    H.activateScreen('main-menu');
-                }
-            }
+            img.src = 'textures/' + imageName;
         });
 
         setTimeout(() => {
-            $stone.addClass('glow-1');
-
-            $app.find('.label').addClass('loaded');
-
-        }, 500);
-
+            this._onLoad();
+        }, 2000);
     }
-});
+
+    check() {
+        if (this.all === this.loaded + this.bad) {
+            this._onLoad();
+        }
+    }
+
+    _onLoad() {
+        this._onLoad = $.noop;
+
+        const hash = window.location.hash;
+
+        if (H.checkParam('gobattle')) {
+            H.app.activateScreen('waiting-opponent');
+        } else if (hash === '#collection') {
+            H.app.activateScreen('collection');
+        } else if (hash === '#start-game' || hash === '#battle') {
+            H.app.activateScreen('start-game-menu');
+        } else {
+            H.app.activateScreen('main-menu');
+        }
+    }
+};

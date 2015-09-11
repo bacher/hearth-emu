@@ -56,45 +56,13 @@ const H = {
     ]
 };
 
-H.screens = [];
-H.activeScreen = null;
-
-H.fitScreen = function() {
-    const windowWidth = $(window).width();
-
-    if (windowWidth !== 1280) {
-        $('BODY').css({
-            'transform': 'scale(' + (windowWidth / 1280) + ')',
-            'transform-origin': '0 0'
-        });
-    }
-};
-
-H.activateScreen = function(name) {
-    var setScreen = null;
-    this.screens.some(screen => {
-        if (screen.name === name) {
-            setScreen = screen;
-            return true;
-        }
-    });
-
-    if (setScreen) {
-        if (this.activeScreen) {
-            this.activeScreen.destroy();
-        }
-
-        this.activeScreen = setScreen;
-
-        this.activeScreen.draw();
-    }
-};
+H.Screens = {};
 
 H.checkParam = function(string) {
     return new RegExp('[?&]' + string + '(?:&|$)').test(window.location.search);
 };
 
-H.generatePicUrl = function(part) {
+H.makeCardUrl = function(part) {
     return 'http://media-hearth.cursecdn.com/avatars/' + part + '.png';
 };
 
@@ -137,8 +105,6 @@ function render($cont, tmplName, params) {
         throw e;
     }
 }
-
-H.fitScreen();
 
 if (H.checkParam('cursor')) {
     const $cursor = $('<div>').addClass('cursor').appendTo('BODY');

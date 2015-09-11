@@ -1,13 +1,18 @@
 
-new H.Screen({
-    gClass: 'cl',
-    name: 'connection-lost',
-    hash: '',
-    draw: function() {
-        $app.empty();
+H.Screens['connection-lost'] = class ConnectionLostScreen extends H.Screen {
+    constructor() {
+        super({
+            gClass: 'cl',
+            name: 'connection-lost',
+            hash: ''
+        });
+    }
 
-        $app.on('click', () => {
+    _render() {}
+
+    _bindEventListeners() {
+        this.$node.on('click', () => {
             window.location.reload();
         });
     }
-});
+};

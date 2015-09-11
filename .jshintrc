@@ -21,7 +21,6 @@
   "globals": {
     "$": true,
     "_": true,
-    "$app": true,
     "H": true,
     "jade": true,
 

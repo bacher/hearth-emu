@@ -1,10 +1,15 @@
 
-new H.Screen({
-    gClass: 'sg',
-    name: 'start-game-menu',
-    hash: 'start-game',
-    draw: function() {
-        render($app, 'start-game-menu', {
+H.Screens['start-game-menu'] = class StartGameMenuScreen extends H.Screen {
+    constructor() {
+        super({
+            gClass: 'sg',
+            name: 'start-game-menu',
+            hash: 'start-game'
+        });
+    }
+
+    _render() {
+        render(this.$node, 'start-game-menu', {
             decks: H.decks
         });
 
@@ -15,8 +20,10 @@ new H.Screen({
                 $('.deck[data-id="' + H.activeDeck.id + '"]').click();
             }, 4);
         }
+    }
 
-        $app
+    _bindEventListeners() {
+        this.$node
             .on('click', '.deck:not(.selected)', e => {
                 const $deck = $(e.currentTarget);
 
@@ -44,4 +51,4 @@ new H.Screen({
                 H.activateScreen('main-menu');
             });
     }
-});
+};

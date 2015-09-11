@@ -1,31 +1,38 @@
 
 var socket = null;
 
-new H.Screen({
-    gClass: 'b',
-    name: 'battle',
-    hash: 'battle',
-    draw: function() {
-        render($app, 'battle');
+H.Screens['battle'] = class BattleScreen extends H.Screen {
+    constructor() {
+        super({
+            gClass: 'b',
+            name: 'battle',
+            hash: 'battle'
+        });
 
-        $app.addClass('normal');
+        this.dragging = false;
+        this.aimTargeting = false;
+        this.spellTargeting = false;
+        this.battlecryTargeting = false;
+        this.$dragCard = null;
+        this.$aimingObject = null;
+    }
 
-        var dragging = false;
-        var aimTargeting = false;
-        var spellTargeting = false;
-        var battlecryTargeting = false;
-        var $dragCard;
-        var $aimingObject = null;
+    _render() {
+        render(this.$node, 'battle');
 
-        const $cardPreview = $('<DIV>')
+        this.$node.addClass('normal');
+
+        this.$cardPreview = $('<DIV>')
             .addClass('card-preview')
             .append($('<IMG>'))
             .appendTo('.hand.my')
             .hide();
 
-        const $dragAim = $('<div>').addClass('targeting').appendTo($app);
+        this.$dragAim = $('<div>').addClass('targeting').appendTo(this.$node);
+    }
 
-        $app
+    _bindEventListeners() {
+        this.$node
             .on('click', '.end-turn', () => {
                 if (H.battleData.my.active) {
                     send('end-turn');
@@ -35,193 +42,33 @@ new H.Screen({
                 send('use-hero-skill', {});
             })
             .on('mouseenter', '.hand.my .card-wrap', e => {
-                if (!dragging) {
+                if (!this.dragging) {
                     const $cardWrap = $(e.currentTarget);
                     const $img = $cardWrap.find('IMG');
                     const picUrl = $img.attr('src');
 
-                    $cardPreview.find('IMG').attr('src', picUrl);
-                    $cardPreview
+                    this.$cardPreview.find('IMG').attr('src', picUrl);
+                    this.$cardPreview
                         .toggleClass('available', $cardWrap.hasClass('available'))
                         .show();
                 }
             })
             .on('mouseleave', '.card-wrap', () => {
-                $cardPreview.hide();
+                this.$cardPreview.hide();
             })
             .on('mousedown', '.card-wrap.available', e => {
-                if (!H.battleData.my.active) { return; }
+                if (!H.battleData.my.active) {
+                    return;
+                }
 
                 const $card = $(e.currentTarget);
 
-                startCardDrag($card);
+                this.startCardDrag($card);
 
             })
-            .on('mousedown', '.avatar.my.available, .creatures.my .creature.available, .hero-skill.my.available.need-target', e => {
-                if (!H.battleData.my.active || dragging) { return; }
-
-                $app.addClass('targeting');
-                $app.removeClass('normal');
-
-                $aimingObject = $(e.currentTarget);
-
-                dragging = true;
-
-                send('get-targets', {
-                    creatureId: $aimingObject.data('id')
-                });
-
-                aimTargeting = true;
-                spellTargeting = false;
-
-                const minionPosition = $aimingObject.offset();
-
-                $dragAim.css({
-                    bottom: 720 - (minionPosition.top + $aimingObject.outerHeight() / 2),
-                    left: minionPosition.left + $aimingObject.outerWidth() / 2
-                });
-
-                $dragAim.data('linked-card', $aimingObject[0]);
-
-                $dragAim.show();
-
-                $aimingObject.addClass('aiming');
-
-            })
-            .on('mousemove', e => {
-
-                if (dragging) {
-
-                    if (aimTargeting) {
-
-                        var sourcePos;
-
-                        if (spellTargeting) {
-                            sourcePos = {
-                                x: 643,
-                                y: 548
-                            };
-                        } else {
-                            const minionPosition = $aimingObject.offset();
-                            sourcePos = {
-                                // TODO: Why +4/+20 ?
-                                x: minionPosition.left + $aimingObject.outerWidth() / 2 + 4,
-                                y: minionPosition.top + $aimingObject.outerWidth() / 2 + 20
-                            };
-                        }
-
-                        const dX = sourcePos.x - e.pageX;
-                        const dY = sourcePos.y - e.pageY;
-                        const distance = Math.sqrt(dX * dX + dY * dY);
-
-                        var angle = Math.atan(dX / dY);
-
-                        if (dY < 0) {
-                            angle = angle + Math.PI;
-                        }
-
-                        $dragAim
-                            .height(distance - 60)
-                            .css('transform', 'rotate(' + -angle + 'rad)');
-
-
-                        const $purpose = $(e.target).closest('.purpose');
-                        $('.targeting').toggleClass('aim', $purpose.length > 0);
-
-                    } else {
-                        $dragCard.css({
-                            top: e.pageY,
-                            left: e.pageX
-                        });
-                    }
-                }
-            })
-            .on('mouseup', e => {
-                if (dragging) {
-                    dragging = false;
-
-                    $app.removeClass('hide-cursor');
-
-                    $app.addClass('normal');
-                    $app.removeClass('targeting');
-
-                    const $target = $(e.target);
-
-                    if (aimTargeting) {
-                        const $purpose = $target.closest('.purpose');
-                        var purposeId;
-
-                        purposeId = $purpose.data('id');
-
-                        const $collection = $purpose.closest('.my, .op');
-                        const targetSide = $collection.hasClass('my') ? 'my' : 'op';
-
-                        if ($purpose.length) {
-                            const $myCard = $($dragAim.data('linked-card'));
-                            const id = $myCard.data('id');
-
-                            if (spellTargeting || battlecryTargeting) {
-                                send('play-card', {
-                                    id: id,
-                                    targetSide: targetSide,
-                                    target: purposeId
-                                });
-                            } else if (id === 'hero-skill') {
-                                send('use-hero-skill', {
-                                    targetSide: targetSide,
-                                    target: purposeId
-                                });
-                            } else {
-                                send('hit', {
-                                    by: id,
-                                    targetSide: targetSide,
-                                    target: purposeId
-                                });
-                            }
-
-                        } else {
-                            const $source = $($dragAim.data('linked-card'));
-                            if (spellTargeting) {
-                                $source.show();
-                            } else {
-                                $source.removeClass('aiming');
-                            }
-                        }
-
-                        $('.hero.my .avatar').removeClass('casting');
-                        $dragAim.hide();
-
-                        battlecryTargeting = false;
-                        spellTargeting = false;
-                        aimTargeting = false;
-
-                    } else {
-                        const $linkedCard = $($dragCard.data('linked-card'));
-
-                        if ($target.closest('.battleground').length) {
-                            if ($linkedCard.hasClass('need-battlecry-target')) {
-                                battlecryTargeting = true;
-
-                                startCardDrag($linkedCard);
-                            } else {
-                                send('play-card', {
-                                    id: $dragCard.data('id')
-                                });
-                            }
-
-                        } else {
-                            $linkedCard.show();
-                        }
-
-                        $dragCard.remove();
-                        $dragCard = null;
-                    }
-
-                    $('.purpose').removeClass('purpose');
-
-                    $('.battle').removeClass('dragging');
-                }
-            })
+            .on('mousedown', '.avatar.my.available, .creatures.my .creature.available, .hero-skill.my.available.need-target', this._onMouseDown1.bind(this))
+            .on('mousemove', this._onMouseMove.bind(this))
+            .on('mouseup', this._onMouseUp.bind(this))
             .on('click', '.card-repick', e => {
                 $(e.currentTarget).toggleClass('replace');
             })
@@ -237,287 +84,437 @@ new H.Screen({
                 $repickLayer.find('.confirm').hide();
                 $repickLayer.find('.opponent-choosing').show();
             });
-            //.on('click', '.battleground', e => {
-            //    const $blow = $('<div>');
-            //
-            //    $blow.addClass('cursor-blow');
-            //    $blow.css({
-            //        top: e.pageY,
-            //        left: e.pageX
-            //    });
-            //
-            //    $app.append($blow);
-            //
-            //    setTimeout(() => {
-            //        $blow.addClass('step2');
-            //    }, 100);
-            //
-            //    setTimeout(() => {
-            //        $blow.remove();
-            //    }, 200);
-            //});
+    }
+
+    _onMouseDown1(e) {
+        if (!H.battleData.my.active || this.dragging) {
+            return;
+        }
+
+        this.$node.addClass('targeting');
+        this.$node.removeClass('normal');
+
+        this.$aimingObject = $(e.currentTarget);
+
+        this.dragging = true;
+
+        send('get-targets', {
+            creatureId: this.$aimingObject.data('id')
+        });
+
+        this.aimTargeting = true;
+        this.spellTargeting = false;
+
+        const minionPosition = this.$aimingObject.offset();
+
+        this.$dragAim.css({
+            bottom: 720 - (minionPosition.top + this.$aimingObject.outerHeight() / 2),
+            left: minionPosition.left + this.$aimingObject.outerWidth() / 2
+        });
+
+        this.$dragAim.data('linked-card', this.$aimingObject[0]);
+
+        this.$dragAim.show();
+
+        this.$aimingObject.addClass('aiming');
+    }
+
+    _onMouseMove(e) {
+        if (this.dragging) {
+
+            if (this.aimTargeting) {
+
+                var sourcePos;
+
+                if (this.spellTargeting) {
+                    sourcePos = {
+                        x: 643,
+                        y: 548
+                    };
+                } else {
+                    const minionPosition = this.$aimingObject.offset();
+                    sourcePos = {
+                        // TODO: Why +4/+20 ?
+                        x: minionPosition.left + this.$aimingObject.outerWidth() / 2 + 4,
+                        y: minionPosition.top + this.$aimingObject.outerWidth() / 2 + 20
+                    };
+                }
+
+                const dX = sourcePos.x - e.pageX;
+                const dY = sourcePos.y - e.pageY;
+                const distance = Math.sqrt(dX * dX + dY * dY);
+
+                var angle = Math.atan(dX / dY);
+
+                if (dY < 0) {
+                    angle = angle + Math.PI;
+                }
+
+                this.$dragAim
+                    .height(distance - 60)
+                    .css('transform', 'rotate(' + -angle + 'rad)');
 
 
-        function startCardDrag($card) {
-            const isNeedTarget = $card.hasClass('need-target');
-            const isNeedBattlecryTarget = $card.hasClass('need-battlecry-target');
+                const $purpose = $(e.target).closest('.purpose');
+                $('.targeting').toggleClass('aim', $purpose.length > 0);
 
-            dragging = true;
-
-            if (isNeedTarget && (!isNeedBattlecryTarget || battlecryTargeting)) {
-                send('get-targets', {
-                    cardId: $card.data('id')
-                });
-
-                $app.addClass('targeting');
-                $app.removeClass('normal');
-
-                $('.hero.my .avatar').addClass('casting');
-
-                aimTargeting = true;
-                spellTargeting = true;
-
-                $dragAim.css({
-                    bottom: 167,
-                    left: 643
-                });
-
-                $dragAim.data('linked-card', $card[0]);
-
-                $dragAim.show();
-
-                $app.addClass('hide-cursor');
             } else {
-                $('.battle').addClass('dragging');
-
-                $dragCard = $card.clone();
-
-                $dragCard.data('linked-card', $card[0]);
-
-                $dragCard.addClass('card-drag');
-
-                $dragCard.appendTo('.battle');
-            }
-
-            $card.hide();
-        }
-    }
-});
-
-H.updateInGameData = function() {
-
-    $('.shadow').remove();
-
-    clearPurposes();
-
-    const game = H.battleData;
-
-    $('.battle')
-        .toggleClass('active', game.my.active)
-        .toggleClass('wait', !game.my.active);
-
-    const $hand = $('.hand.my .cards').empty();
-    const $handOp = $('.hand.op .cards').empty();
-
-    $('.creatures').empty();
-
-    game.my.hand.forEach((handCard, i) => {
-        const base = handCard.base;
-        var $container = $('<div>');
-
-        render($container, 'card', handCard);
-
-        const $cardWrapper = $container.children();
-
-        if (base.targetsType) {
-            $cardWrapper.addClass('need-target');
-        }
-
-        $cardWrapper.addClass('c' + (i + 1));
-
-        if (game.my.active) {
-            if (base.cost <= game.my.hero.mana) {
-                $cardWrapper.addClass('available');
+                this.$dragCard.css({
+                    top: e.pageY,
+                    left: e.pageX
+                });
             }
         }
-
-        $hand.append($cardWrapper);
-    });
-
-
-    $('.avatar.my').toggleClass('available', game.my.active && game.my.hero.attack > 0 && !game.my.hero.flags['tired']);
-
-    $('.hero-skill.my')
-        .toggleClass('available', game.my.active && game.my.hero.canUseSkill)
-        .toggleClass('off', game.my.hero.skillUsed)
-        .toggleClass('need-target', game.my.hero.isHeroSkillTargeting);
-
-    $('.hero-skill.op')
-        .toggleClass('used', game.op.hero.skillUsed);
-
-    var $container = $('<div>');
-    render($container, 'card');
-
-    const $cardPattern = $container.children();
-
-    for (var i = game.op.hand.length - 1; i >= 0; --i) {
-        const $card = $cardPattern.clone();
-
-        $card.addClass('c' + (i + 1));
-
-        $handOp.append($card);
     }
 
-    ['my', 'op'].forEach(side => {
-        const player = game[side];
-        const hero = player.hero;
+    _onMouseUp(e) {
+        if (this.dragging) {
+            this.dragging = false;
 
-        $('.hand.' + side).removeClass().addClass('hand ' + side).addClass('hand' + player.hand.length);
+            this.$node.removeClass('hide-cursor');
 
-        const $creatures = $('.creatures.' + side);
+            this.$node.addClass('normal');
+            this.$node.removeClass('targeting');
 
-        player.creatures.forEach(minion => {
+            const $target = $(e.target);
+
+            if (this.aimTargeting) {
+                const $purpose = $target.closest('.purpose');
+                var purposeId;
+
+                purposeId = $purpose.data('id');
+
+                const $collection = $purpose.closest('.my, .op');
+                const targetSide = $collection.hasClass('my') ? 'my' : 'op';
+
+                if ($purpose.length) {
+                    const $myCard = $(this.$dragAim.data('linked-card'));
+                    const id = $myCard.data('id');
+
+                    if (this.spellTargeting || this.battlecryTargeting) {
+                        send('play-card', {
+                            id: id,
+                            targetSide: targetSide,
+                            target: purposeId
+                        });
+                    } else if (id === 'hero-skill') {
+                        send('use-hero-skill', {
+                            targetSide: targetSide,
+                            target: purposeId
+                        });
+                    } else {
+                        send('hit', {
+                            by: id,
+                            targetSide: targetSide,
+                            target: purposeId
+                        });
+                    }
+
+                } else {
+                    const $source = $(this.$dragAim.data('linked-card'));
+                    if (this.spellTargeting) {
+                        $source.show();
+                    } else {
+                        $source.removeClass('aiming');
+                    }
+                }
+
+                $('.hero.my .avatar').removeClass('casting');
+                this.$dragAim.hide();
+
+                this.battlecryTargeting = false;
+                this.spellTargeting = false;
+                this.aimTargeting = false;
+
+            } else {
+                const $linkedCard = $(this.$dragCard.data('linked-card'));
+
+                if ($target.closest('.battleground').length) {
+                    if ($linkedCard.hasClass('need-battlecry-target')) {
+                        this.battlecryTargeting = true;
+
+                        this.startCardDrag($linkedCard);
+                    } else {
+                        send('play-card', {
+                            id: this.$dragCard.data('id')
+                        });
+                    }
+
+                } else {
+                    $linkedCard.show();
+                }
+
+                this.$dragCard.remove();
+                this.$dragCard = null;
+            }
+
+            $('.purpose').removeClass('purpose');
+
+            $('.battle').removeClass('dragging');
+        }
+    }
+
+    updateInGameData() {
+
+        $('.shadow').remove();
+
+        this.clearPurposes();
+
+        const game = H.battleData;
+
+        $('.battle')
+            .toggleClass('active', game.my.active)
+            .toggleClass('wait', !game.my.active);
+
+        const $hand = $('.hand.my .cards').empty();
+        const $handOp = $('.hand.op .cards').empty();
+
+        $('.creatures').empty();
+
+        game.my.hand.forEach((handCard, i) => {
+            const base = handCard.base;
             var $container = $('<div>');
 
-            var classes = '';
-            for (var prop in minion.flags) {
-                classes += ' ';
-                classes += prop;
+            render($container, 'card', handCard);
+
+            const $cardWrapper = $container.children();
+
+            if (base.targetsType) {
+                $cardWrapper.addClass('need-target');
             }
 
-            render($container, 'creature', {
-                id: minion.id,
-                classes: classes,
-                minion: minion,
-                card: minion.card
-            });
-
-            const $minion = $container.children();
+            $cardWrapper.addClass('c' + (i + 1));
 
             if (game.my.active) {
-                if (side === 'my' && !minion.flags['sleep'] && !minion.flags['tired'] && minion.attack > 0) {
-                    $minion.addClass('available');
+                if (base.cost <= game.my.hero.mana) {
+                    $cardWrapper.addClass('available');
                 }
             }
-            $creatures.append($minion);
+
+            $hand.append($cardWrapper);
         });
 
-        const $avatar = $('.avatar.' + side);
 
-        $avatar.find('.health').show();
-        $avatar.find('.health .value').text(hero.hp);
+        $('.avatar.my').toggleClass('available', game.my.active && game.my.hero.attack > 0 && !game.my.hero.flags['tired']);
 
-        $avatar.find('.armor').toggle(hero.armor > 0)
-            .find('.value').text(hero.armor);
+        $('.hero-skill.my')
+            .toggleClass('available', game.my.active && game.my.hero.canUseSkill)
+            .toggleClass('off', game.my.hero.skillUsed)
+            .toggleClass('need-target', game.my.hero.isHeroSkillTargeting);
 
-        $avatar.find('.attack').toggle(hero.attack > 0)
-            .find('.value').text(hero.attack);
+        $('.hero-skill.op')
+            .toggleClass('used', game.op.hero.skillUsed);
 
+        var $container = $('<div>');
+        render($container, 'card');
 
-        const $weapon = $('.weapon.' + side);
-        if (player.hero.weapon) {
-            $weapon.show();
-            $weapon.toggleClass('off', !player.active);
-            $weapon.find('.attack').text(player.hero.weapon.attack);
-            $weapon.find('.durability').text(player.hero.weapon.durability);
-        } else {
-            $weapon.hide();
+        const $cardPattern = $container.children();
+
+        for (var i = game.op.hand.length - 1; i >= 0; --i) {
+            const $card = $cardPattern.clone();
+
+            $card.addClass('c' + (i + 1));
+
+            $handOp.append($card);
         }
 
-        $('.stats.' + side + ' .mana .active').text(hero.mana);
-        $('.stats.' + side + ' .mana .all').text(hero.crystals);
+        ['my', 'op'].forEach(side => {
+            const player = game[side];
+            const hero = player.hero;
 
-        $('.deck-helper.' + side + ' .value').text(player.deck.count);
+            $('.hand.' + side).removeClass().addClass('hand ' + side).addClass('hand' + player.hand.length);
 
-        render($('.traps.' + side), 'traps', {
-            traps: player.traps
+            const $creatures = $('.creatures.' + side);
+
+            player.creatures.forEach(minion => {
+                var $container = $('<div>');
+
+                var classes = '';
+                for (var prop in minion.flags) {
+                    classes += ' ';
+                    classes += prop;
+                }
+
+                render($container, 'creature', {
+                    id: minion.id,
+                    classes: classes,
+                    minion: minion,
+                    card: minion.card
+                });
+
+                const $minion = $container.children();
+
+                if (game.my.active) {
+                    if (side === 'my' && !minion.flags['sleep'] && !minion.flags['tired'] && minion.attack > 0) {
+                        $minion.addClass('available');
+                    }
+                }
+                $creatures.append($minion);
+            });
+
+            const $avatar = $('.avatar.' + side);
+
+            $avatar.find('.health').show();
+            $avatar.find('.health .value').text(hero.hp);
+
+            $avatar.find('.armor').toggle(hero.armor > 0)
+                .find('.value').text(hero.armor);
+
+            $avatar.find('.attack').toggle(hero.attack > 0)
+                .find('.value').text(hero.attack);
+
+
+            const $weapon = $('.weapon.' + side);
+            if (player.hero.weapon) {
+                $weapon.show();
+                $weapon.toggleClass('off', !player.active);
+                $weapon.find('.attack').text(player.hero.weapon.attack);
+                $weapon.find('.durability').text(player.hero.weapon.durability);
+            } else {
+                $weapon.hide();
+            }
+
+            $('.stats.' + side + ' .mana .active').text(hero.mana);
+            $('.stats.' + side + ' .mana .all').text(hero.crystals);
+
+            $('.deck-helper.' + side + ' .value').text(player.deck.count);
+
+            render($('.traps.' + side), 'traps', {
+                traps: player.traps
+            });
         });
-    });
 
-    const hero = game.my.hero;
+        const hero = game.my.hero;
 
-    $('.stats .crystals')
-        .removeClass()
-        .addClass('crystals')
-        .addClass('cn' + hero.mana)
-        .addClass('co' + (hero.crystals - hero.mana - hero.overload))
-        .addClass('cl' + hero.overload)
-        .addClass('no' + hero.nextOverload);
+        $('.stats .crystals')
+            .removeClass()
+            .addClass('crystals')
+            .addClass('cn' + hero.mana)
+            .addClass('co' + (hero.crystals - hero.mana - hero.overload))
+            .addClass('cl' + hero.overload)
+            .addClass('no' + hero.nextOverload);
 
-    $('.hand-helper.op .value').text(game.op.hand.length);
+        $('.hand-helper.op .value').text(game.op.hand.length);
 
-    $('.end-turn').toggleClass('active', game.my.active);
+        $('.end-turn').toggleClass('active', game.my.active);
 
-};
+    }
 
-function clearPurposes() {
-    $('.avatar .creature')
-        .removeClass('purpose');
-}
+    clearPurposes() {
+        this.$node.find('.avatar .creature').removeClass('purpose');
+    }
 
-H.updateInGameTargets = function(data) {
-    const targets = data.targets;
+    updateInGameTargets(data) {
+        const targets = data.targets;
 
-    clearPurposes();
+        this.clearPurposes();
 
-    if (targets !== 'not-need') {
+        if (targets !== 'not-need') {
 
-        if (targets.my) {
+            if (targets.my) {
 
-            if (targets.my.hero) {
-                $('.avatar.my').addClass('purpose');
+                if (targets.my.hero) {
+                    $('.avatar.my').addClass('purpose');
+                }
+
+                if (targets.my.minions) {
+                    targets.my.minions.forEach(minionId => {
+                        $('.creatures.my .creature[data-id="' + minionId + '"]').addClass('purpose');
+                    });
+                }
             }
 
-            if (targets.my.minions) {
-                targets.my.minions.forEach(minionId => {
-                    $('.creatures.my .creature[data-id="' + minionId + '"]').addClass('purpose');
-                });
-            }
-        }
+            if (targets.op) {
 
-        if (targets.op) {
+                if (targets.op.hero) {
+                    $('.avatar.op').addClass('purpose');
+                }
 
-            if (targets.op.hero) {
-                $('.avatar.op').addClass('purpose');
-            }
-
-            if (targets.op.minions) {
-                targets.op.minions.forEach(minionId => {
-                    $('.creatures.op .creature[data-id="' + minionId + '"]').addClass('purpose');
-                });
+                if (targets.op.minions) {
+                    targets.op.minions.forEach(minionId => {
+                        $('.creatures.op .creature[data-id="' + minionId + '"]').addClass('purpose');
+                    });
+                }
             }
         }
     }
-};
 
-H.drawWelcome = function(data) {
-    const $welcome = $('.welcome');
+    drawWelcome(data) {
+        const $welcome = this.$node.find('.welcome');
 
-    const myClass = H.CLASSES_L[data.my.clas];
-    const opClass = H.CLASSES_L[data.op.clas];
+        const myClass = H.CLASSES_L[data.my.clas];
+        const opClass = H.CLASSES_L[data.op.clas];
 
-    $('.avatar.my').addClass(myClass);
-    $('.avatar.op').addClass(opClass);
+        this.$node.find('.avatar.my').addClass(myClass);
+        this.$node.find('.avatar.op').addClass(opClass);
 
-    $welcome.find('.hero.my').addClass(myClass);
-    $welcome.find('.hero.op').addClass(opClass);
+        $welcome.find('.hero.my').addClass(myClass);
+        $welcome.find('.hero.op').addClass(opClass);
 
-    $('.hero-skill.my').addClass(myClass);
-    $('.hero-skill.op').addClass(opClass);
+        this.$node.find('.hero-skill.my').addClass(myClass);
+        this.$node.find('.hero-skill.op').addClass(opClass);
 
-    $('.name.my').text(data.my.name);
-    $('.name.op').text(data.op.name);
-};
+        this.$node.find('.name.my').text(data.my.name);
+        this.$node.find('.name.op').text(data.op.name);
+    }
 
-H.drawCardsForPick = function(deckCards) {
-    $('.welcome').hide();
-    $('.repick-layer').show();
-    const $cards = $('.repick-layer .cards');
+    drawCardsForPick(deckCards) {
+        this.$node.find('.welcome').hide();
+        this.$node.find('.repick-layer').show();
+        const $cards = this.$node.find('.repick-layer .cards');
 
-    deckCards.forEach(deckCard => {
-        const $card = $('<div>').addClass('card-repick').data('id', deckCard.id);
-        $card.append($('<img>').attr('src', 'http://media-hearth.cursecdn.com/avatars/'+deckCard.card.pic+'.png'));
+        deckCards.forEach(deckCard => {
+            const $card = $('<div>').addClass('card-repick').data('id', deckCard.id);
+            $card.append($('<img>').attr('src', 'http://media-hearth.cursecdn.com/avatars/'+deckCard.card.pic+'.png'));
 
-        $cards.append($card);
-    });
+            $cards.append($card);
+        });
+    }
+
+    startCardDrag($card) {
+        const isNeedTarget = $card.hasClass('need-target');
+        const isNeedBattlecryTarget = $card.hasClass('need-battlecry-target');
+
+        this.dragging = true;
+
+        if (isNeedTarget && (!isNeedBattlecryTarget || battlecryTargeting)) {
+            send('get-targets', {
+                cardId: $card.data('id')
+            });
+
+            this.$node.addClass('targeting');
+            this.$node.removeClass('normal');
+
+            this.$node.find('.hero.my .avatar').addClass('casting');
+
+            this.aimTargeting = true;
+            this.spellTargeting = true;
+
+            const $dragAim = this.$dragAim;
+
+            $dragAim.css({
+                bottom: 167,
+                left: 643
+            });
+
+            $dragAim.data('linked-card', $card[0]);
+
+            $dragAim.show();
+
+            this.$node.addClass('hide-cursor');
+
+        } else {
+            $('.battle').addClass('dragging');
+
+            this.$dragCard = $card.clone();
+
+            this.$dragCard.data('linked-card', $card[0]);
+
+            this.$dragCard.addClass('card-drag');
+
+            this.$dragCard.appendTo('.battle');
+        }
+
+        $card.hide();
+    }
 };

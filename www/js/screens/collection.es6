@@ -1,34 +1,73 @@
 
-new H.Screen({
-    gClass: 'c',
-    name: 'collection',
-    hash: 'collection',
-    draw: function() {
-        var page = 0;
-        var heroMode = false;
-        var activeDeck = null;
-        var $cardToRemove = null;
-        var $previewImage = null;
+H.CollectionScreen = class CollectionScreen extends H.Screen {
+    constructor() {
+        super({
+            gClass: 'c',
+            name: 'collection',
+            hash: 'collection'
+        });
 
-        var showCardsBase;
-        var showCards;
+        this.page = 0;
+        this.heroMode = false;
+        this.activeDeck = null;
+        this.$cardToRemove = null;
+        this.$previewImage = null;
 
-        var costFilter = null;
+        this.showCardsBase = null;
+        this.showCards = null;
 
-        render($app, 'collection');
+        this.costFilter = null;
+    }
 
-        selectTab($('.tab.druid'));
+    _render() {
+        render(this.$node, 'collection');
 
-        drawDecks();
+        this.selectTab(this.$node.find('.tab.druid'));
 
-        $app
+        this.drawDecks();
+
+        if (H.cards) {
+            this.afterLoad();
+        } else {
+            $.ajax({
+                url: '/cards.json'
+            }).then(data => {
+                H.cards = {
+                    all: data.cards,
+                    [H.CLASSES.neutral]: [],
+                    [H.CLASSES.warrior]: [],
+                    [H.CLASSES.shaman]: [],
+                    [H.CLASSES.rogue]: [],
+                    [H.CLASSES.paladin]: [],
+                    [H.CLASSES.hunter]: [],
+                    [H.CLASSES.druid]: [],
+                    [H.CLASSES.warlock]: [],
+                    [H.CLASSES.mage]: [],
+                    [H.CLASSES.priest]: []
+                };
+
+                H.cardsHash = {};
+
+                data.cards.forEach(card => {
+                    H.cards[card.clas].push(card);
+                    H.cardsHash[card.id] = card;
+                });
+
+                this.afterLoad();
+            });
+        }
+
+    }
+
+    _bindEventListeners() {
+        this.$node
             .on('click', '.new-deck', () => {
                 $('.create-deck-screen').addClass('show');
             })
             .on('click', '.tab', e => {
                 const $tab = $(e.currentTarget);
 
-                selectTab($tab);
+                this.selectTab($tab);
             })
             .on('click', '.my-decks .deck', e => {
                 const $deck = $(e.currentTarget);
@@ -36,62 +75,62 @@ new H.Screen({
 
                 const deck = _.find(H.decks, deck => deck.id === id);
 
-                switchMode(deck);
+                this.switchMode(deck);
             })
             .on('click', '.card:not(.lock)', e => {
-                if (activeDeck && activeDeck.cardIds.length < 30) {
-                    activeDeck.cardIds.push($(e.currentTarget).data('id'));
+                if (this.activeDeck && this.activeDeck.cardIds.length < 30) {
+                    this.activeDeck.cardIds.push($(e.currentTarget).data('id'));
 
-                    sortCards(activeDeck);
+                    this.sortCards(this.activeDeck);
 
                     H.saveDecks();
 
-                    checkLimits();
+                    this.checkLimits();
 
-                    updateDeckCards();
+                    this.updateDeckCards();
                 }
             })
             .on('click', '.btn-back', () => {
-                if (heroMode) {
-                    activeDeck.label = $('.label-edit').val();
+                if (this.heroMode) {
+                    this.activeDeck.label = $('.label-edit').val();
                     H.saveDecks();
 
-                    switchMode(null);
+                    this.switchMode(null);
                 } else {
                     H.activateScreen('main-menu');
                 }
             })
             .on('click', '.scroll-zone.left', () => {
-                page--;
+                this.page--;
 
-                drawCards();
+                this.drawCards();
             })
             .on('click', '.scroll-zone.right', () => {
-                page++;
+                this.page++;
 
-                drawCards();
+                this.drawCards();
             })
             .on('click', '.card-line', e => {
                 const $cardLine = $(e.currentTarget);
 
                 const id = $cardLine.data('id');
 
-                const index = activeDeck.cardIds.indexOf(id);
-                activeDeck.cardIds.splice(index, 1);
+                const index = this.activeDeck.cardIds.indexOf(id);
+                this.activeDeck.cardIds.splice(index, 1);
 
                 H.saveDecks();
 
-                checkLimits();
-                updateDeckCards();
+                this.checkLimits();
+                this.updateDeckCards();
             })
             .on('click', '.deck .remove', e => {
-                $cardToRemove = $(e.currentTarget).parent();
+                this.$cardToRemove = $(e.currentTarget).parent();
                 $('.confirm').show();
 
                 e.stopPropagation();
             })
             .on('click', '.confirm .ok', () => {
-                removeDeck($cardToRemove.data('id'));
+                this.removeDeck(this.$cardToRemove.data('id'));
                 $('.confirm').hide();
             })
             .on('click', '.confirm .cancel', () => {
@@ -129,9 +168,9 @@ new H.Screen({
 
                 H.saveDecks();
 
-                drawDecks();
+                this.drawDecks();
 
-                switchMode(H.decks[H.decks.length - 1]);
+                this.switchMode(H.decks[H.decks.length - 1]);
             })
             .on('click', '.create-deck-screen .back', () => {
                 $('.create-deck-screen').removeClass('show');
@@ -140,9 +179,9 @@ new H.Screen({
                 $('.choose').removeClass('show');
             })
             .on('focusout', '.search', () => {
-                filterCards();
+                this.filterCards();
 
-                drawCards();
+                this.drawCards();
             })
             .on('keydown', '.search', e => {
                 if (e.which === 13) {
@@ -153,21 +192,21 @@ new H.Screen({
                 const $cardLine = $(e.currentTarget);
                 const cardPosition = $cardLine.position();
 
-                if ($previewImage) {
-                    $previewImage.remove();
-                    $previewImage = null;
+                if (this.$previewImage) {
+                    this.$previewImage.remove();
+                    this.$previewImage = null;
                 }
 
-                $previewImage = $('<img>')
+                this.$previewImage = $('<img>')
                     .addClass('card-preview')
                     .attr('src', $cardLine.data('pic'))
                     .css({
                         top: Math.min(268, Math.max(20, cardPosition.top + - 123))
                     })
-                    .appendTo($app);
+                    .appendTo(this.$node);
             })
             .on('mouseleave', '.card-line', () => {
-                removeCardPreview();
+                this.removeCardPreview();
             })
             .on('click', '.mana', e => {
                 const $mana = $(e.currentTarget);
@@ -175,302 +214,268 @@ new H.Screen({
                 if ($mana.hasClass('selected')) {
                     $mana.removeClass('selected');
 
-                    costFilter = null;
+                    this.costFilter = null;
 
                 } else {
                     $('.mana.selected').removeClass('selected');
                     $mana.addClass('selected');
 
-                    costFilter = $mana.data('cost');
+                    this.costFilter = $mana.data('cost');
                 }
 
-                filterCards();
-                drawCards();
+                this.filterCards();
+                this.drawCards();
             });
-
-        if (H.cards) {
-            afterLoad();
-        } else {
-            $.ajax({
-                url: '/cards.json'
-            }).then(data => {
-                H.cards = {
-                    all: data.cards,
-                    [H.CLASSES.neutral]: [],
-                    [H.CLASSES.warrior]: [],
-                    [H.CLASSES.shaman]: [],
-                    [H.CLASSES.rogue]: [],
-                    [H.CLASSES.paladin]: [],
-                    [H.CLASSES.hunter]: [],
-                    [H.CLASSES.druid]: [],
-                    [H.CLASSES.warlock]: [],
-                    [H.CLASSES.mage]: [],
-                    [H.CLASSES.priest]: []
-                };
-
-                H.cardsHash = {};
-
-                data.cards.forEach(card => {
-                    H.cards[card.clas].push(card);
-                    H.cardsHash[card.id] = card;
-                });
-
-                afterLoad();
-            });
-        }
-
-        function afterLoad() {
-            makeBaseFiltering();
-
-            filterCards();
-
-            drawCards();
-        }
-
-        function removeCardPreview() {
-            if ($previewImage) {
-                $previewImage.remove();
-                $previewImage = null;
-            }
-        }
-
-        function makeBaseFiltering() {
-            showCardsBase = [];
-
-            for (var i = 0; i < 10; ++i) {
-                showCardsBase[i] = H.cards[i].filter(card => !card.flags['uncollectable']);
-            }
-        }
-
-        function filterCards() {
-            const searchQuery = $('.search').val().toLowerCase();
-
-            showCards = showCardsBase.map((cardPack, i) => {
-                var filteredPack = cardPack;
-
-                if (i === 0 || !heroMode || i === activeDeck.clas) {
-                    if (searchQuery) {
-                        filteredPack = filteredPack.filter(card => _.contains(card.name.toLowerCase(), searchQuery));
-                    }
-
-                    if (costFilter !== null) {
-                        if (costFilter < 7) {
-                            filteredPack = filteredPack.filter(card => card.cost === costFilter);
-                        } else {
-                            filteredPack = filteredPack.filter(card => card.cost >= 7);
-                        }
-                    }
-                } else {
-                    filteredPack = [];
-                }
-
-                return filteredPack;
-            });
-
-            toggleTabs();
-        }
-
-        function drawCards() {
-            if (!showCardsBase) { return; }
-
-            const selectedClas = H.CLASSES[$('.tab.selected').data('clas')];
-
-            const cardsPool = (showCards || showCardsBase)[selectedClas];
-
-            const $cards = $('.cards');
-            const cards = cardsPool.slice(page * 8, page * 8 + 8);
-
-            $('.scroll-zone.left').toggle(page !== 0);
-            $('.scroll-zone.right').toggle(page * 8 + 8 < cardsPool.length);
-
-            $('.cards-empty').toggle(cards.length === 0);
-
-            if (cards.length === 0) {
-                $cards.empty();
-
-            } else {
-                render($cards, 'collection-cards', {
-                    cards: cards
-                });
-
-                const loadCards = [];
-
-                cards.forEach((card, i) => {
-                    if (!card.loaded) {
-                        const img = new Image();
-
-                        const picUrl = 'http://media-hearth.cursecdn.com/avatars/' + card.pic + '.png';
-                        const $card = $cards.find('.card').eq(i);
-                        const $img = $(img).addClass('img front').hide();
-                        $card.append($img);
-                        loadCards.push($card);
-
-                        img.onload = () => {
-                            $card.addClass('animate');
-                            $card.removeClass('loading');
-                            $img.data('loaded', true).show();
-
-                            card.loaded = true;
-                        };
-
-                        img.src = picUrl;
-                    }
-                });
-
-                setTimeout(() => {
-                    loadCards.forEach($card => {
-                        const $cardFront = $card.find('.front');
-
-                        if (!$cardFront.data('loaded')) {
-                            $card.append($('<IMG>').addClass('img back').attr('src', '../cards/card_back.png'));
-                            $card.addClass('loading');
-                        }
-                    });
-                }, 0);
-
-                checkLimits();
-            }
-        }
-
-        function toggleTabs() {
-            for (var i = 0; i < 10; ++i) {
-                $('.tab.' + H.CLASSES_L[i]).toggle(showCards[i].length > 0);
-            }
-
-            if ($('.tab.selected:visible').length === 0) {
-                selectTab($('.tab:visible:eq(0)'));
-            } else {
-                $('.tab.selected').removeClass('.selected');
-            }
-        }
-
-        function drawDecks() {
-            render($('.decks-wrapper'), 'decks', { decks: H.decks });
-        }
-
-        function checkLimits() {
-            if (heroMode && activeDeck) {
-                $('.card').each(function() {
-                    const $card = $(this);
-                    const id = $card.data('id');
-
-                    const alreadyInDeck = activeDeck.cardIds.filter(cardId => cardId === id).length;
-
-                    $card.removeClass('lock one');
-
-                    if (alreadyInDeck >= 1 && $card.hasClass('unique')) {
-                        $card.addClass('lock');
-                    } else if (alreadyInDeck >= 2) {
-                        $card.addClass('lock');
-                    } else if (alreadyInDeck === 1) {
-                        $card.addClass('one');
-                    }
-                });
-            }
-        }
-
-        function switchMode(deck) {
-            heroMode = !!deck;
-            $('.collection').toggleClass('hero-mode', !!deck);
-
-            activeDeck = deck || null;
-
-            if (deck) {
-                filterCards();
-
-                const $deck = $('.deck[data-id="' + deck.id + '"]');
-                const $deckInfo = $deck.clone();
-                $deckInfo.append($('<INPUT>').addClass('label-edit').val($deck.find('.label').text()));
-
-                $('.hero-right-panel .deck-info').html($deckInfo);
-
-                updateDeckCards();
-
-            } else {
-                filterCards();
-                toggleTabs();
-
-                $('.card').removeClass('lock one');
-
-            }
-
-            drawDecks();
-        }
-
-        function selectTab($tab) {
-            $tab.siblings().removeClass('selected');
-            $tab.addClass('selected');
-
-            $('.class-bg')
-                .removeClass('warrior warlock paladin mage priest rogue shaman hunter druid neutral')
-                .addClass($tab.data('clas'));
-
-            page = 0;
-
-            drawCards();
-        }
-
-        function updateDeckCards() {
-            const $cards = $('.deck-cards');
-
-            const cards = [];
-
-            const ids = activeDeck.cardIds;
-
-            for (var i = 0; i < ids.length; ++i) {
-                const id = ids[i];
-
-                const card = H.cardsHash[id];
-                var multiplyer = 1;
-
-                if (id === ids[i + 1]) {
-                    multiplyer = 2;
-                    i++;
-                }
-
-                cards.push({
-                    card,
-                    x2: multiplyer === 2
-                });
-            }
-
-            cards.forEach(card => {
-                new Image().src = H.generatePicUrl(card.card.pic);
-            });
-
-            removeCardPreview();
-
-            render($cards, 'card-lines', { cards: cards });
-
-            $('.card-count .number').text(activeDeck.cardIds.length + '/30');
-
-            $('.hero-right-panel').toggleClass('full', activeDeck.cardIds.length === 30);
-        }
-
-
-
-        function removeDeck(removeId) {
-            H.decks = H.decks.filter(deck => deck.id !== removeId);
-            H.saveDecks();
-            drawDecks();
-        }
-
-        function sortCards(deck) {
-            deck.cardIds = deck.cardIds.sort((cardId1, cardId2) => {
-                if (cardId1 === cardId2) {
-                    return 0;
-                }
-
-                const card1 = H.cardsHash[cardId1];
-                const card2 = H.cardsHash[cardId2];
-
-                if (card1.cost !== card2.cost) {
-                    return card1.cost - card2.cost;
-                } else {
-                    return card1.name.localeCompare(card2.name);
-                }
-            });
-        }
-
     }
-});
+
+    afterLoad() {
+        this.makeBaseFiltering();
+
+        this.filterCards();
+
+        this.drawCards();
+    }
+
+    removeCardPreview() {
+        if (this.$previewImage) {
+            this.$previewImage.remove();
+            this.$previewImage = null;
+        }
+    }
+
+    makeBaseFiltering() {
+        this.showCardsBase = [];
+
+        for (var i = 0; i < 10; ++i) {
+            this.showCardsBase[i] = H.cards[i].filter(card => !card.flags['uncollectable']);
+        }
+    }
+
+    filterCards() {
+        const searchQuery = $('.search').val().toLowerCase();
+
+        this.showCards = this.showCardsBase.map((cardPack, i) => {
+            var filteredPack = cardPack;
+
+            if (i === 0 || !this.heroMode || i === this.activeDeck.clas) {
+                if (searchQuery) {
+                    filteredPack = filteredPack.filter(card => _.contains(card.name.toLowerCase(), searchQuery));
+                }
+
+                if (this.costFilter !== null) {
+                    if (this.costFilter < 7) {
+                        filteredPack = filteredPack.filter(card => card.cost === this.costFilter);
+                    } else {
+                        filteredPack = filteredPack.filter(card => card.cost >= 7);
+                    }
+                }
+            } else {
+                filteredPack = [];
+            }
+
+            return filteredPack;
+        });
+
+        this.toggleTabs();
+    }
+
+    drawCards() {
+        if (!this.showCardsBase) { return; }
+
+        const selectedClas = H.CLASSES[$('.tab.selected').data('clas')];
+
+        const cardsPool = (this.showCards || this.showCardsBase)[selectedClas];
+
+        const $cards = $('.cards');
+        const cards = cardsPool.slice(this.page * 8, this.page * 8 + 8);
+
+        $('.scroll-zone.left').toggle(this.page !== 0);
+        $('.scroll-zone.right').toggle(this.page * 8 + 8 < cardsPool.length);
+
+        $('.cards-empty').toggle(cards.length === 0);
+
+        if (cards.length === 0) {
+            $cards.empty();
+
+        } else {
+            render($cards, 'collection-cards', {
+                cards: cards
+            });
+
+            const loadCards = [];
+
+            cards.forEach((card, i) => {
+                if (!card.loaded) {
+                    const img = new Image();
+
+                    const picUrl = H.makeCardUrl(card.pic);
+                    const $card = $cards.find('.card').eq(i);
+                    const $img = $(img).addClass('img front').hide();
+                    $card.append($img);
+                    loadCards.push($card);
+
+                    img.onload = () => {
+                        $card.addClass('animate');
+                        $card.removeClass('loading');
+                        $img.data('loaded', true).show();
+
+                        card.loaded = true;
+                    };
+
+                    img.src = picUrl;
+                }
+            });
+
+            setTimeout(() => {
+                loadCards.forEach($card => {
+                    const $cardFront = $card.find('.front');
+
+                    if (!$cardFront.data('loaded')) {
+                        $card.append($('<IMG>').addClass('img back').attr('src', '../cards/card_back.png'));
+                        $card.addClass('loading');
+                    }
+                });
+            }, 0);
+
+            this.checkLimits();
+        }
+    }
+
+    toggleTabs() {
+        for (var i = 0; i < 10; ++i) {
+            $('.tab.' + H.CLASSES_L[i]).toggle(this.showCards[i].length > 0);
+        }
+
+        if ($('.tab.selected:visible').length === 0) {
+            this.selectTab($('.tab:visible:eq(0)'));
+        } else {
+            $('.tab.selected').removeClass('.selected');
+        }
+    }
+
+    drawDecks() {
+        render(this.$node.find('.decks-wrapper'), 'decks', { decks: H.decks });
+    }
+
+    checkLimits() {
+        if (this.heroMode && this.activeDeck) {
+            this.$node.find('.card').each((i, cardNode) => {
+                const $card = $(cardNode);
+                const id = $card.data('id');
+
+                const alreadyInDeck = this.activeDeck.cardIds.filter(cardId => cardId === id).length;
+
+                $card.removeClass('lock one');
+
+                if (alreadyInDeck >= 1 && $card.hasClass('unique')) {
+                    $card.addClass('lock');
+                } else if (alreadyInDeck >= 2) {
+                    $card.addClass('lock');
+                } else if (alreadyInDeck === 1) {
+                    $card.addClass('one');
+                }
+            });
+        }
+    }
+
+    switchMode(deck) {
+        this.heroMode = !!deck;
+        $('.collection').toggleClass('hero-mode', !!deck);
+
+        this.activeDeck = deck || null;
+
+        if (deck) {
+            this.filterCards();
+
+            const $deck = $('.deck[data-id="' + deck.id + '"]');
+            const $deckInfo = $deck.clone();
+            $deckInfo.append($('<INPUT>').addClass('label-edit').val($deck.find('.label').text()));
+
+            $('.hero-right-panel .deck-info').html($deckInfo);
+
+            this.updateDeckCards();
+
+        } else {
+            this.filterCards();
+            this.toggleTabs();
+
+            $('.card').removeClass('lock one');
+
+        }
+
+        this.drawDecks();
+    }
+
+    selectTab($tab) {
+        $tab.siblings().removeClass('selected');
+        $tab.addClass('selected');
+
+        $('.class-bg')
+            .removeClass('warrior warlock paladin mage priest rogue shaman hunter druid neutral')
+            .addClass($tab.data('clas'));
+
+        this.page = 0;
+
+        this.drawCards();
+    }
+
+    updateDeckCards() {
+        const $cards = $('.deck-cards');
+
+        const cards = [];
+
+        const ids = this.activeDeck.cardIds;
+
+        for (var i = 0; i < ids.length; ++i) {
+            const id = ids[i];
+
+            const card = H.cardsHash[id];
+            var multiplyer = 1;
+
+            if (id === ids[i + 1]) {
+                multiplyer = 2;
+                i++;
+            }
+
+            cards.push({
+                card,
+                x2: multiplyer === 2
+            });
+        }
+
+        cards.forEach(card => {
+            new Image().src = H.makeCardUrl(card.card.pic);
+        });
+
+        this.removeCardPreview();
+
+        render($cards, 'card-lines', { cards: cards });
+
+        $('.card-count .number').text(this.activeDeck.cardIds.length + '/30');
+
+        $('.hero-right-panel').toggleClass('full', this.activeDeck.cardIds.length === 30);
+    }
+
+    removeDeck(removeId) {
+        H.decks = H.decks.filter(deck => deck.id !== removeId);
+        H.saveDecks();
+        this.drawDecks();
+    }
+
+    sortCards(deck) {
+        deck.cardIds = deck.cardIds.sort((cardId1, cardId2) => {
+            if (cardId1 === cardId2) {
+                return 0;
+            }
+
+            const card1 = H.cardsHash[cardId1];
+            const card2 = H.cardsHash[cardId2];
+
+            if (card1.cost !== card2.cost) {
+                return card1.cost - card2.cost;
+            } else {
+                return card1.name.localeCompare(card2.name);
+            }
+        });
+    }
+};

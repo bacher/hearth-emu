@@ -1,12 +1,20 @@
 
-new H.Screen({
-    gClass: 'w',
-    name: 'waiting-opponent',
-    hash: '',
-    draw: function() {
-        render($app, 'waiting-opponent');
+H.Screens['waiting-opponent'] = class WaitingOpponentScreen extends H.Screen {
+    constructor() {
+        super({
+            gClass: 'w',
+            name: 'waiting-opponent',
+            hash: ''
+        });
 
-        const $anim = $app.find('.animation');
+        H.socket = new WebSocket('ws://localhost:8081/');
+        this._bindSocketListeners();
+    }
+
+    _render() {
+        render(this.$node, 'waiting-opponent');
+
+        const $anim = this.$node.find('.animation');
         var step = 1;
 
         this.intervalId = setInterval(function() {
@@ -19,11 +27,13 @@ new H.Screen({
 
             $anim.addClass('s' + step);
         }, 100);
+    }
 
-        H.socket = new WebSocket('ws://localhost:8081/');
+    _bindEventListeners() {}
+
+    _bindSocketListeners() {
 
         H.socket.onopen = () => {
-
             var name;
             const nameMatch = window.location.search.match(/[?&]name=([^&]*)/);
 
@@ -43,7 +53,6 @@ new H.Screen({
             } else {
                 window.alert('Deck is not selected');
             }
-
         };
 
         H.socket.onclose = event => {
@@ -110,13 +119,13 @@ new H.Screen({
             }
         };
 
-        $app.on('click', '.cancel', () => {
+        this.$node.on('click', '.cancel', () => {
             H.socket.close();
             H.activateScreen('main-menu');
         });
-    },
+    }
 
-    destroy: function() {
+    destroy() {
         clearInterval(this.intervalId);
     }
-});
+};

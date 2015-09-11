@@ -1,4 +1,6 @@
 
-window.$app = $('#app');
+H.app = new H.Application();
 
-H.activateScreen('loading');
+H.app.fitScreen();
+H.app.activateScreen('loading');
+
