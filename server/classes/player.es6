@@ -68,8 +68,13 @@ H.Player = class Player extends EventEmitter {
                         this.emit('client-message', { msg, data });
                         break;
                     default:
-                        this.warn('Unregistered Client Message:', msg);
-
+                        if (this._listeners && this._listeners[msg] && this._listeners[msg].length) {
+                            this._listeners[msg].forEach(callback => {
+                                callback(data);
+                            });
+                        } else {
+                            this.warn('Unregistered Client Message:', msg);
+                        }
                 }
             } else {
                 this.warn('Inactive Client Message:', msg);
@@ -90,6 +95,34 @@ H.Player = class Player extends EventEmitter {
             this.warn = console.warn.bind(console, brackedName);
 
             this.emit('logged');
+        }
+    }
+
+    addMessageListener(msg, callback) {
+        if (!this._listeners) {
+            this._listeners = {};
+        }
+
+        this._listeners[msg] = this._listeners[msg] || [];
+
+        this._listeners[msg].push(callback);
+    }
+
+    addOnceMessageListener(msg, callback) {
+        const that = this;
+
+        const func = function() {
+            that.removeMessageListener(msg, func);
+
+            callback.apply(this, arguments);
+        };
+
+        this.addMessageListener(msg, func);
+    }
+
+    removeMessageListener(msg, callback) {
+        if (this._listeners && this._listeners[msg]) {
+            this._listeners[msg] = this._listeners[msg].filter(func => func !== callback);
         }
     }
 

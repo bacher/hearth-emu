@@ -260,13 +260,20 @@ H.Battle = class Battle extends EventEmitter {
         this.emit('play-card', eventMessage);
 
         if (!eventMessage.prevent) {
-            card.acts.act({
-                battle: this,
-                player,
-                handCard,
-                params: data,
-                globalTargets: eventMessage.globalTargets
-            });
+
+            if (card.customAction) {
+                H.CustomActions.getByName(card.customAction)({
+                    player
+                });
+            } else {
+                card.acts.act({
+                    battle: this,
+                    player,
+                    handCard,
+                    params: data,
+                    globalTargets: eventMessage.globalTargets
+                });
+            }
         }
 
         this.sendGameData();

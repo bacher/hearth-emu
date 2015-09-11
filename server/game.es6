@@ -38,6 +38,7 @@ require('./activations');
 require('./targets');
 require('./cards');
 require('./event-filters');
+require('./custom-actions');
 
 
 module.exports = class Game {

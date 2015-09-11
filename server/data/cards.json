@@ -1040,23 +1040,9 @@
     "clas": 5,
     "type": 2,
     "flags": [],
+    "customAction": "tracking",
     "spell": {
-      "acts": [
-        {
-          "acts": [
-            {
-              "name": "draw-card",
-              "params": []
-            },
-            {
-              "name": "discard-card",
-              "params": [
-                2
-              ]
-            }
-          ]
-        }
-      ]
+      "acts": []
     }
   },
   {

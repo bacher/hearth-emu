@@ -35,6 +35,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         H.socket.on('game-data', this._onGameData.bind(this));
         H.socket.on('targets', this.updateInGameTargets.bind(this));
         H.socket.on('cards-for-repick', this._onCardsForPick.bind(this));
+        H.socket.on('select-card', this._onCardSelection.bind(this));
 
         this.$node
             .on('click', '.end-turn', () => {
@@ -72,7 +73,8 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             })
             .on('mousedown', '.avatar.my.available, .creatures.my .creature.available, .hero-skill.my.available.need-target', this._onMouseDown1.bind(this))
             .on('mousemove', this._onMouseMove.bind(this))
-            .on('mouseup', this._onMouseUp.bind(this));
+            .on('mouseup', this._onMouseUp.bind(this))
+            .on('click', '.card-select-wrapper', this._onCardSelect.bind(this));
     }
 
     _show() {
@@ -270,6 +272,33 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
     _onCardsForPick(data) {
         this.welcomeScreen.setPickCardsData(data);
+    }
+
+    _onCardSelection(data) {
+        const $cardSelection = this.$node.find('.card-selection');
+        const $container = $cardSelection.find('.cards-container').empty();
+        data.cards.forEach((card, i) => {
+            const $wrapper = $('<div>')
+                .addClass('card-select-wrapper')
+                .data('index', i);
+
+            $('<img>')
+                .addClass('card-select-preview')
+                .attr('src', H.makeCardUrl(card.pic))
+                .appendTo($wrapper);
+
+            $container.append($wrapper);
+        });
+
+        $cardSelection.show();
+    }
+
+    _onCardSelect(e) {
+        const $preview = $(e.currentTarget);
+
+        H.socket.send('card-selection', { index: $preview.data('index') });
+
+        this.$node.find('.card-selection').hide();
     }
 
     updateInGameData() {

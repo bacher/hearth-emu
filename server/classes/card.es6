@@ -12,6 +12,7 @@ H.Card = class Card {
         this.pic = info.pic;
         this.flags = parseFlags(info.flags);
         this.targetsType = info.targetsType;
+        this.customAction = info.customAction;
 
         if (info.type === H.CARD_TYPES.spell) {
             this.acts = new H.Commands(info.spell.acts);
