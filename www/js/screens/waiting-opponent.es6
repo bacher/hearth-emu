@@ -66,7 +66,7 @@ H.Screens['waiting-opponent'] = class WaitingOpponentScreen extends H.Screen {
                     }, 500);
                 }
 
-                H.activateScreen('connection-lost');
+                H.app.activateScreen('connection-lost');
             }
         };
 
@@ -85,7 +85,7 @@ H.Screens['waiting-opponent'] = class WaitingOpponentScreen extends H.Screen {
 
             switch (msg) {
                 case 'battle-started':
-                    H.activateScreen('battle');
+                    H.app.activateScreen('battle');
 
                     if (H.checkParam('endturn')) {
                         setInterval(() => {
@@ -121,7 +121,7 @@ H.Screens['waiting-opponent'] = class WaitingOpponentScreen extends H.Screen {
 
         this.$node.on('click', '.cancel', () => {
             H.socket.close();
-            H.activateScreen('main-menu');
+            H.app.activateScreen('main-menu');
         });
     }
 

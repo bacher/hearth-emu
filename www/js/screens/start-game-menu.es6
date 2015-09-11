@@ -45,10 +45,10 @@ H.Screens['start-game-menu'] = class StartGameMenuScreen extends H.Screen {
                 H.saveDecks();
             })
             .on('click', '.play-btn', () => {
-                H.activateScreen('waiting-opponent');
+                H.app.activateScreen('waiting-opponent');
             })
             .on('click', '.back', () => {
-                H.activateScreen('main-menu');
+                H.app.activateScreen('main-menu');
             });
     }
 };

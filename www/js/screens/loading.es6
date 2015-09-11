@@ -6,6 +6,9 @@ H.Screens['loading'] = class LoadingScreen extends H.Screen {
             name: 'loading',
             hash: false
         });
+
+        this._onSuccessLoad = this._onSuccessLoad.bind(this);
+        this._onBadLoad = this._onBadLoad.bind(this);
     }
 
     _render() {
@@ -39,15 +42,8 @@ H.Screens['loading'] = class LoadingScreen extends H.Screen {
         data.forEach(imageName => {
             const img = new Image();
 
-            img.onload = () => {
-                this.loaded++;
-                this.check();
-            };
-
-            img.onerror = () => {
-                this.bad++;
-                this.check();
-            };
+            img.onload = this._onSuccessLoad;
+            img.onerror = this._onBadLoad;
 
             img.src = 'textures/' + imageName;
         });
@@ -57,7 +53,17 @@ H.Screens['loading'] = class LoadingScreen extends H.Screen {
         }, 2000);
     }
 
-    check() {
+    _onSuccessLoad() {
+        this.loaded++;
+        this._check();
+    }
+
+    _onBadLoad() {
+        this.bad++;
+        this._check();
+    }
+
+    _check() {
         if (this.all === this.loaded + this.bad) {
             this._onLoad();
         }

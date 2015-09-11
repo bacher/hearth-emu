@@ -15,14 +15,26 @@ H.Application = class Application {
         if (this.activeScreen) {
             const prevScreen = this.activeScreen;
 
-            prevScreen.hide().then(() => {
-                prevScreen.destroy();
-            });
+            prevScreen.hideThenDestroy();
         }
 
         this.activeScreen = newActiveScreen;
 
         this.activeScreen.show();
+    }
+
+    activateOverlay(name) {
+        const overlayScreen = new H.Screens[name]();
+
+        overlayScreen.make();
+
+        this.$node.append(overlayScreen.getNode());
+
+        overlayScreen.show();
+    }
+
+    getActiveScreen() {
+        return this.activeScreen;
     }
 
     fitScreen() {

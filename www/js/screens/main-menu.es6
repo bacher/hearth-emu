@@ -19,10 +19,10 @@ H.Screens['main-menu'] = class MainMenuScreen extends H.Screen {
     _bindEventListeners() {
         this.$node
             .on('click', '.play', () => {
-                H.activateScreen('start-game-menu');
+                H.app.activateScreen('start-game-menu');
             })
             .on('click', '.my-collection', () => {
-                H.activateScreen('collection');
+                H.app.activateScreen('collection');
             });
     }
 };

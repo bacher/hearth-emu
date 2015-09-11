@@ -44,6 +44,12 @@ H.Screen = class Screen {
         return promise || Promise.resolve();
     }
 
+    hideThenDestroy() {
+        this.hide().then(() => {
+            this.destroy();
+        });
+    }
+
     _hide() {
         this.$node.hide();
     }

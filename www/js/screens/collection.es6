@@ -1,5 +1,5 @@
 
-H.CollectionScreen = class CollectionScreen extends H.Screen {
+H.Screens['collection'] = class CollectionScreen extends H.Screen {
     constructor() {
         super({
             gClass: 'c',
@@ -62,7 +62,7 @@ H.CollectionScreen = class CollectionScreen extends H.Screen {
     _bindEventListeners() {
         this.$node
             .on('click', '.new-deck', () => {
-                $('.create-deck-screen').addClass('show');
+                H.app.activateOverlay('create-deck');
             })
             .on('click', '.tab', e => {
                 const $tab = $(e.currentTarget);
@@ -97,7 +97,7 @@ H.CollectionScreen = class CollectionScreen extends H.Screen {
 
                     this.switchMode(null);
                 } else {
-                    H.activateScreen('main-menu');
+                    H.app.activateScreen('main-menu');
                 }
             })
             .on('click', '.scroll-zone.left', () => {
@@ -135,48 +135,6 @@ H.CollectionScreen = class CollectionScreen extends H.Screen {
             })
             .on('click', '.confirm .cancel', () => {
                 $('.confirm').hide();
-            })
-            .on('click', '.hero', e => {
-                const $hero = $(e.currentTarget);
-
-                $hero.siblings().removeClass('selected');
-                $hero.addClass('selected');
-
-                const clas = $hero.data('clas');
-
-                $('.avatar')
-                    .removeClass()
-                    .addClass('avatar')
-                    .addClass(H.CLASSES_L[clas]);
-
-                $('.hero-details .label').text(H.HERO_NAMES[clas]);
-
-                $('.choose').addClass('show');
-            })
-            .on('click', '.choose', () => {
-                $('.create-deck-screen').removeClass('show');
-
-                const clas = $('.hero.selected').data('clas');
-                const className = H.CLASSES_L[clas];
-
-                H.decks.push({
-                    label: 'Custom ' + className[0].toUpperCase() + className.substr(1),
-                    clas: clas,
-                    cardIds: [],
-                    id: Math.floor(Math.random() * 10000)
-                });
-
-                H.saveDecks();
-
-                this.drawDecks();
-
-                this.switchMode(H.decks[H.decks.length - 1]);
-            })
-            .on('click', '.create-deck-screen .back', () => {
-                $('.create-deck-screen').removeClass('show');
-                $('.hero.selected').removeClass('selected');
-                $('.avatar').removeClass().addClass('avatar');
-                $('.choose').removeClass('show');
             })
             .on('focusout', '.search', () => {
                 this.filterCards();
