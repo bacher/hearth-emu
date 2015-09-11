@@ -92,7 +92,7 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
             })
             .on('click', '.btn-back', () => {
                 if (this.heroMode) {
-                    this.activeDeck.label = $('.label-edit').val();
+                    this.activeDeck.label = this.$node.find('.label-edit').val();
                     H.saveDecks();
 
                     this.switchMode(null);
@@ -125,16 +125,16 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
             })
             .on('click', '.deck .remove', e => {
                 this.$cardToRemove = $(e.currentTarget).parent();
-                $('.confirm').show();
+                this.$node.find('.confirm').show();
 
                 e.stopPropagation();
             })
             .on('click', '.confirm .ok', () => {
                 this.removeDeck(this.$cardToRemove.data('id'));
-                $('.confirm').hide();
+                this.$node.find('.confirm').hide();
             })
             .on('click', '.confirm .cancel', () => {
-                $('.confirm').hide();
+                this.$node.find('.confirm').hide();
             })
             .on('focusout', '.search', () => {
                 this.filterCards();
@@ -175,7 +175,7 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
                     this.costFilter = null;
 
                 } else {
-                    $('.mana.selected').removeClass('selected');
+                    this.$node.find('.mana.selected').removeClass('selected');
                     $mana.addClass('selected');
 
                     this.costFilter = $mana.data('cost');
@@ -186,10 +186,22 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
             });
     }
 
+    _show() {
+        setTimeout(() => {
+            this.$node.show();
+
+            setTimeout(() => {
+                this.$node.find('.collection').removeClass('initial');
+            }, 100);
+        }, 1000);
+    }
+
     afterLoad() {
         this.makeBaseFiltering();
 
         this.filterCards();
+
+        this.toggleTabs();
 
         this.drawCards();
     }
@@ -210,7 +222,7 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
     }
 
     filterCards() {
-        const searchQuery = $('.search').val().toLowerCase();
+        const searchQuery = this.$node.find('.search').val().toLowerCase();
 
         this.showCards = this.showCardsBase.map((cardPack, i) => {
             var filteredPack = cardPack;
@@ -240,17 +252,17 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
     drawCards() {
         if (!this.showCardsBase) { return; }
 
-        const selectedClas = H.CLASSES[$('.tab.selected').data('clas')];
+        const selectedClas = H.CLASSES[this.$node.find('.tab.selected').data('clas')];
 
         const cardsPool = (this.showCards || this.showCardsBase)[selectedClas];
 
-        const $cards = $('.cards');
+        const $cards = this.$node.find('.cards');
         const cards = cardsPool.slice(this.page * 8, this.page * 8 + 8);
 
-        $('.scroll-zone.left').toggle(this.page !== 0);
-        $('.scroll-zone.right').toggle(this.page * 8 + 8 < cardsPool.length);
+        this.$node.find('.scroll-zone.left').toggle(this.page !== 0);
+        this.$node.find('.scroll-zone.right').toggle(this.page * 8 + 8 < cardsPool.length);
 
-        $('.cards-empty').toggle(cards.length === 0);
+        this.$node.find('.cards-empty').toggle(cards.length === 0);
 
         if (cards.length === 0) {
             $cards.empty();
@@ -301,13 +313,13 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
 
     toggleTabs() {
         for (var i = 0; i < 10; ++i) {
-            $('.tab.' + H.CLASSES_L[i]).toggle(this.showCards[i].length > 0);
+            this.$node.find('.tab.' + H.CLASSES_L[i]).toggleClass('hide', this.showCards[i].length === 0);
         }
 
-        if ($('.tab.selected:visible').length === 0) {
-            this.selectTab($('.tab:visible:eq(0)'));
+        if (this.$node.find('.tab.selected:not(hide)').length === 0) {
+            this.selectTab(this.$node.find('.tab:not(hide):eq(0)'));
         } else {
-            $('.tab.selected').removeClass('.selected');
+            this.$node.find('.tab.selected').removeClass('selected');
         }
     }
 
@@ -338,18 +350,18 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
 
     switchMode(deck) {
         this.heroMode = !!deck;
-        $('.collection').toggleClass('hero-mode', !!deck);
+        this.$node.find('.collection').toggleClass('hero-mode', !!deck);
 
         this.activeDeck = deck || null;
 
         if (deck) {
             this.filterCards();
 
-            const $deck = $('.deck[data-id="' + deck.id + '"]');
+            const $deck = this.$node.find('.deck[data-id="' + deck.id + '"]');
             const $deckInfo = $deck.clone();
             $deckInfo.append($('<INPUT>').addClass('label-edit').val($deck.find('.label').text()));
 
-            $('.hero-right-panel .deck-info').html($deckInfo);
+            this.$node.find('.hero-right-panel .deck-info').html($deckInfo);
 
             this.updateDeckCards();
 
@@ -357,7 +369,7 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
             this.filterCards();
             this.toggleTabs();
 
-            $('.card').removeClass('lock one');
+            this.$node.find('.card').removeClass('lock one');
 
         }
 
@@ -365,10 +377,12 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
     }
 
     selectTab($tab) {
+        if (!$tab.length) { return; }
+
         $tab.siblings().removeClass('selected');
         $tab.addClass('selected');
 
-        $('.class-bg')
+        this.$node.find('.class-bg')
             .removeClass('warrior warlock paladin mage priest rogue shaman hunter druid neutral')
             .addClass($tab.data('clas'));
 
@@ -378,7 +392,7 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
     }
 
     updateDeckCards() {
-        const $cards = $('.deck-cards');
+        const $cards = this.$node.find('.deck-cards');
 
         const cards = [];
 
@@ -409,9 +423,9 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
 
         render($cards, 'card-lines', { cards: cards });
 
-        $('.card-count .number').text(this.activeDeck.cardIds.length + '/30');
+        this.$node.find('.card-count .number').text(this.activeDeck.cardIds.length + '/30');
 
-        $('.hero-right-panel').toggleClass('full', this.activeDeck.cardIds.length === 30);
+        this.$node.find('.hero-right-panel').toggleClass('full', this.activeDeck.cardIds.length === 30);
     }
 
     removeDeck(removeId) {

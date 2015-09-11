@@ -4,6 +4,12 @@
     width: 1280px;
     height: 720px;
     background: url("/textures/collection.jpg");
+    transform-origin: 50% 33%;
+    transition: transform 1s linear;
+
+    &.initial {
+      transform: scale(0.48);
+    }
   }
 
   .confirm {
@@ -265,6 +271,10 @@
     cursor: pointer;
     transform-origin: bottom;
     transition: transform 0.1s;
+
+    &.hide {
+      display: none;
+    }
 
     &.neutral { background: url("/textures/class-icons-neutral.png"); }
     &.druid { background: url("/textures/class-icons-druid.png"); }

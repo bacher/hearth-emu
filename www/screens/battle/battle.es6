@@ -151,7 +151,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
 
                 const $purpose = $(e.target).closest('.purpose');
-                $('.targeting').toggleClass('aim', $purpose.length > 0);
+                this.$node.find('.targeting').toggleClass('aim', $purpose.length > 0);
 
             } else {
                 this.$dragCard.css({
@@ -214,7 +214,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                     }
                 }
 
-                $('.hero.my .avatar').removeClass('casting');
+                this.$node.find('.hero.my .avatar').removeClass('casting');
                 this.$dragAim.hide();
 
                 this.battlecryTargeting = false;
@@ -243,9 +243,9 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                 this.$dragCard = null;
             }
 
-            $('.purpose').removeClass('purpose');
+            this.$node.find('.purpose').removeClass('purpose');
 
-            $('.battle').removeClass('dragging');
+            this.$node.find('.battle').removeClass('dragging');
         }
     }
 
@@ -274,20 +274,20 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
     updateInGameData() {
 
-        $('.shadow').remove();
+        this.$node.find('.shadow').remove();
 
         this.clearPurposes();
 
         const game = this.battleData;
 
-        $('.battle')
+        this.$node.find('.battle')
             .toggleClass('active', game.my.active)
             .toggleClass('wait', !game.my.active);
 
-        const $hand = $('.hand.my .cards').empty();
-        const $handOp = $('.hand.op .cards').empty();
+        const $hand = this.$node.find('.hand.my .cards').empty();
+        const $handOp = this.$node.find('.hand.op .cards').empty();
 
-        $('.creatures').empty();
+        this.$node.find('.creatures').empty();
 
         game.my.hand.forEach((handCard, i) => {
             const base = handCard.base;
@@ -313,14 +313,14 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         });
 
 
-        $('.avatar.my').toggleClass('available', game.my.active && game.my.hero.attack > 0 && !game.my.hero.flags['tired']);
+        this.$node.find('.avatar.my').toggleClass('available', game.my.active && game.my.hero.attack > 0 && !game.my.hero.flags['tired']);
 
-        $('.hero-skill.my')
+        this.$node.find('.hero-skill.my')
             .toggleClass('available', game.my.active && game.my.hero.canUseSkill)
             .toggleClass('off', game.my.hero.skillUsed)
             .toggleClass('need-target', game.my.hero.isHeroSkillTargeting);
 
-        $('.hero-skill.op')
+        this.$node.find('.hero-skill.op')
             .toggleClass('used', game.op.hero.skillUsed);
 
         var $container = $('<div>');
@@ -340,9 +340,9 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             const player = game[side];
             const hero = player.hero;
 
-            $('.hand.' + side).removeClass().addClass('hand ' + side).addClass('hand' + player.hand.length);
+            this.$node.find('.hand.' + side).removeClass().addClass('hand ' + side).addClass('hand' + player.hand.length);
 
-            const $creatures = $('.creatures.' + side);
+            const $creatures = this.$node.find('.creatures.' + side);
 
             player.creatures.forEach(minion => {
                 var $container = $('<div>');
@@ -370,7 +370,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                 $creatures.append($minion);
             });
 
-            const $avatar = $('.avatar.' + side);
+            const $avatar = this.$node.find('.avatar.' + side);
 
             $avatar.find('.health').show();
             $avatar.find('.health .value').text(hero.hp);
@@ -382,7 +382,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                 .find('.value').text(hero.attack);
 
 
-            const $weapon = $('.weapon.' + side);
+            const $weapon = this.$node.find('.weapon.' + side);
             if (player.hero.weapon) {
                 $weapon.show();
                 $weapon.toggleClass('off', !player.active);
@@ -392,19 +392,19 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                 $weapon.hide();
             }
 
-            $('.stats.' + side + ' .mana .active').text(hero.mana);
-            $('.stats.' + side + ' .mana .all').text(hero.crystals);
+            this.$node.find('.stats.' + side + ' .mana .active').text(hero.mana);
+            this.$node.find('.stats.' + side + ' .mana .all').text(hero.crystals);
 
-            $('.deck-helper.' + side + ' .value').text(player.deck.count);
+            this.$node.find('.deck-helper.' + side + ' .value').text(player.deck.count);
 
-            render($('.traps.' + side), 'traps', {
+            render(this.$node.find('.traps.' + side), 'traps', {
                 traps: player.traps
             });
         });
 
         const hero = game.my.hero;
 
-        $('.stats .crystals')
+        this.$node.find('.stats .crystals')
             .removeClass()
             .addClass('crystals')
             .addClass('cn' + hero.mana)
@@ -412,9 +412,9 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             .addClass('cl' + hero.overload)
             .addClass('no' + hero.nextOverload);
 
-        $('.hand-helper.op .value').text(game.op.hand.length);
+        this.$node.find('.hand-helper.op .value').text(game.op.hand.length);
 
-        $('.end-turn').toggleClass('active', game.my.active);
+        this.$node.find('.end-turn').toggleClass('active', game.my.active);
 
     }
 
@@ -432,12 +432,12 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             if (targets.my) {
 
                 if (targets.my.hero) {
-                    $('.avatar.my').addClass('purpose');
+                    this.$node.find('.avatar.my').addClass('purpose');
                 }
 
                 if (targets.my.minions) {
                     targets.my.minions.forEach(minionId => {
-                        $('.creatures.my .creature[data-id="' + minionId + '"]').addClass('purpose');
+                        this.$node.find('.creatures.my .creature[data-id="' + minionId + '"]').addClass('purpose');
                     });
                 }
             }
@@ -445,12 +445,12 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             if (targets.op) {
 
                 if (targets.op.hero) {
-                    $('.avatar.op').addClass('purpose');
+                    this.$node.find('.avatar.op').addClass('purpose');
                 }
 
                 if (targets.op.minions) {
                     targets.op.minions.forEach(minionId => {
-                        $('.creatures.op .creature[data-id="' + minionId + '"]').addClass('purpose');
+                        this.$node.find('.creatures.op .creature[data-id="' + minionId + '"]').addClass('purpose');
                     });
                 }
             }
@@ -510,7 +510,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             this.$node.addClass('hide-cursor');
 
         } else {
-            $('.battle').addClass('dragging');
+            this.$node.find('.battle').addClass('dragging');
 
             this.$dragCard = $card.clone();
 
