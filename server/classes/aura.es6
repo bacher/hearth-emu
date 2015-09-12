@@ -7,14 +7,14 @@ const AURAS = {
         effect(dmg) {
             return dmg + this.params[0];
         },
-        side: 'own'
+        defaultSide: 'own'
     },
     'multiply-spell-damage': {
         affect: 'spell-damage',
         effect(dmg) {
             return dmg * this.params[0];
         },
-        side: 'own',
+        defaultSide: 'own',
         priority: 100
     },
     'attack-equal-hp': {
@@ -22,19 +22,17 @@ const AURAS = {
         effect(minion) {
             minion.attack = minion.hp;
         },
-        side: 'own',
+        defaultSide: 'own',
         priority: 100
     },
     'add-attack': {
         affect: 'minions',
-        target: true,
         effect(minion) {
             minion.attack += this.params[0];
         }
     },
     'add-flags': {
-        affect: 'all',
-        target: true,
+        affect: 'minions',
         effect(target) {
             this.params.forEach(flag => {
                 target.flags[flag] = true;
@@ -47,18 +45,24 @@ H.Aura = class Aura {
     constructor(player, auraInfo) {
         this.aura = AURAS[auraInfo.name];
         this.params = auraInfo.params;
-        this.target = auraInfo.target;
+
+        this.side = auraInfo.side || this.aura.defaultSide;
+
+        this.affectSide = null;
+        this.target = null;
 
         this.effect = this.aura.effect;
 
         this.player = player;
 
-        if (this.aura.side === 'own') {
+        if (this.side === 'target') {
+            this.target = auraInfo.target;
+
+        } else if (this.side === 'own') {
             this.affectSide = player;
-        } else if (this.aura.side === 'enemy') {
+
+        } else if (this.side === 'enemy') {
             this.affectSide = this.player.enemy;
-        } else {
-            this.affectSide = null;
         }
     }
 

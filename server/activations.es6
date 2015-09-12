@@ -241,17 +241,29 @@ const A = {
         const auraName = this.params[0];
         const auraParam = this.params[1];
         const isThisTurn = this.params[2] === 'this-turn';
-        const isTarget = this.params[3] === 'target';
 
-        o.targets.forEach(target => {
-            const aura = new H.Aura(target.player, {
+        const side = this.params[3];
+
+        if (o.targets) {
+            o.targets.forEach(target => {
+                const aura = new H.Aura(target.player, {
+                    name: auraName,
+                    params: [auraParam],
+                    side: side,
+                    target: target
+                });
+
+                o.battle.auras.addAura(target, aura, isThisTurn);
+            });
+        } else {
+            const aura = new H.Aura(o.player, {
                 name: auraName,
                 params: [auraParam],
-                target: isTarget ? target : null
+                side: side
             });
 
-            o.battle.auras.addAura(target, aura, isThisTurn);
-        });
+            o.battle.auras.addAura(null, aura, isThisTurn);
+        }
     }
 };
 

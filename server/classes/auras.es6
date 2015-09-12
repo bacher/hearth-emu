@@ -13,18 +13,23 @@ H.Auras = class Auras {
         this.list.push(aura);
 
         const removeAura = () => {
-            minion.removeListener('death', removeAura);
-            minion.removeListener('detach', removeAura);
+            if (minion) {
+                minion.removeListener('death', removeAura);
+                minion.removeListener('detach', removeAura);
+            }
 
             this.removeAura(aura);
         };
 
-        minion.on('detach', removeAura);
-        minion.on('death', removeAura);
+        if (minion) {
+            minion.on('detach', removeAura);
+            minion.on('death', removeAura);
+        }
 
         if (onlyThisTurn) {
             this.battle.once('end-turn', removeAura);
         }
+
     }
 
     removeAura(aura) {

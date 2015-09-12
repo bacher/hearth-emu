@@ -1123,6 +1123,11 @@
     "pic": "147/808/410",
     "clas": 0,
     "type": 1,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
     "flags": [],
     "minion": {
       "attack": 2,
@@ -3022,6 +3027,32 @@
               "name": "x2",
               "params": [
                 "attack"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 187,
+    "name": "Bloodlust",
+    "cost": 5,
+    "pic": "147/459/256",
+    "clas": 2,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-aura",
+              "params": [
+                "add-attack",
+                3,
+                "this-turn",
+                "own"
               ]
             }
           ]
