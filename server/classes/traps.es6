@@ -20,12 +20,8 @@ H.Traps = class Traps {
         trap.on('detach', this._onTrapDetach);
     }
 
-    getGameData() {
-        return this.traps.map(trap => trap.getGameData());
-    }
-
     getClientData() {
-        return this.getGameData();
+        return this.traps.map(trap => trap.getClientData());
     }
 
     getTrapById(id) {

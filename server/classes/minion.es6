@@ -7,6 +7,8 @@ H.Minion = class Minion extends H.GameObject {
     constructor(handCard, card) {
         super(handCard, card);
 
+        this.objType = 'minion';
+
         this.id = _.uniqueId('minion');
 
         this.base = this.card.minion;
@@ -24,17 +26,6 @@ H.Minion = class Minion extends H.GameObject {
 
     static createByName(name) {
         return new H.Minion(null, H.CARDS.getByName(name, H.CARD_TYPES.minion));
-    }
-
-    getGameData() {
-        const data = this.getData();
-        delete data.race;
-        delete data.that;
-        return data;
-    }
-
-    getData() {
-        return this.player.battle.auras.applyEffect(this.player, 'minions', this.getBaseData());
     }
 
     getBaseData() {
@@ -84,3 +75,5 @@ H.Minion = class Minion extends H.GameObject {
     }
 
 };
+
+H.mixGameDataAccessors(H.Minion);

@@ -18,7 +18,7 @@ const AURAS = {
         priority: 100
     },
     'attack-equal-hp': {
-        affect: 'minions',
+        affect: 'minion',
         effect(minion) {
             minion.attack = minion.hp;
         },
@@ -26,13 +26,13 @@ const AURAS = {
         priority: 100
     },
     'add-attack': {
-        affect: 'minions',
+        affect: 'minion',
         effect(minion) {
             minion.attack += this.params[0];
         }
     },
     'add-flags': {
-        affect: 'minions',
+        affect: 'minion',
         effect(target) {
             this.params.forEach(flag => {
                 target.flags[flag] = true;

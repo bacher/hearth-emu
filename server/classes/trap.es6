@@ -15,7 +15,7 @@ H.Trap = class Trap extends H.GameObject {
         this.flags = {};
     }
 
-    getGameData() {
+    getClientData() {
         return {
             pic: this.card.pic
         };

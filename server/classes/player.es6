@@ -174,8 +174,6 @@ H.Player = class Player extends EventEmitter {
             // Make damage
             console.log('IMPL!');
         }
-
-        return;
     }
 
     endTurn() {
@@ -191,8 +189,8 @@ H.Player = class Player extends EventEmitter {
             hero: this.hero.getClientData(),
             hand: this.hand.getGameData(),
             deck: this.deck.getGameData(),
-            traps: this.traps.getGameData(),
-            creatures: this.creatures.getGameData()
+            traps: this.traps.getClientData(),
+            creatures: this.creatures.getData()
         };
     }
 

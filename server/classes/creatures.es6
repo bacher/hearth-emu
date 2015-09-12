@@ -42,8 +42,8 @@ H.Creatures = class Creatures {
         return this.creatures.length;
     }
 
-    getGameData() {
-        return this.creatures.map(creat => creat.getGameData());
+    getData() {
+        return this.creatures.map(creat => creat.getClientData());
     }
 
     wakeUpAll() {
