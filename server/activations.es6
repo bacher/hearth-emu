@@ -236,6 +236,22 @@ const A = {
         const dmg = beasts.length ? 5 : 3;
 
         A['deal-damage'].call({ params: [dmg] }, o);
+    },
+    'add-aura': function(o) {
+        const auraName = this.params[0];
+        const auraParam = this.params[1];
+        const isThisTurn = this.params[2] === 'this-turn';
+        const isTarget = this.params[3] === 'target';
+
+        o.targets.forEach(target => {
+            const aura = new H.Aura(target.player, {
+                name: auraName,
+                params: [auraParam],
+                target: isTarget ? target : null
+            });
+
+            o.battle.auras.addAura(target, aura, isThisTurn);
+        });
     }
 };
 

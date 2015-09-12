@@ -371,6 +371,59 @@
     }
   },
   {
+    "id": 186,
+    "name": "Bestial Wrath",
+    "cost": 1,
+    "pic": "148/421/304",
+    "clas": 5,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "friends",
+        "minions"
+      ],
+      "modificators": [
+        {
+          "name": "race",
+          "params": [
+            "beast"
+          ]
+        }
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-aura",
+              "params": [
+                "add-attack",
+                2,
+                "this-turn",
+                "target"
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "add-aura",
+              "params": [
+                "add-flags",
+                "immune",
+                "this-turn",
+                "target"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 154,
     "name": "Blessing of Wisdom",
     "cost": 1,

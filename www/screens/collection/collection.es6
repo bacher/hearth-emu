@@ -192,8 +192,8 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
 
             setTimeout(() => {
                 this.$node.find('.collection').removeClass('initial');
-            }, 100);
-        }, 1000);
+            }, 50);
+        }, 1050);
     }
 
     afterLoad() {

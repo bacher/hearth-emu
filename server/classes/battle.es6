@@ -13,7 +13,7 @@ H.Battle = class Battle extends EventEmitter {
         this.p1 = this.players[0];
         this.p2 = this.players[1];
 
-        this.auras = new H.Auras();
+        this.auras = new H.Auras(this);
 
         this._bindListeners();
 

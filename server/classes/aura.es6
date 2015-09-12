@@ -24,6 +24,22 @@ const AURAS = {
         },
         side: 'own',
         priority: 100
+    },
+    'add-attack': {
+        affect: 'minions',
+        target: true,
+        effect(minion) {
+            minion.attack += this.params[0];
+        }
+    },
+    'add-flags': {
+        affect: 'all',
+        target: true,
+        effect(target) {
+            this.params.forEach(flag => {
+                target.flags[flag] = true;
+            });
+        }
     }
 };
 
@@ -31,6 +47,7 @@ H.Aura = class Aura {
     constructor(player, auraInfo) {
         this.aura = AURAS[auraInfo.name];
         this.params = auraInfo.params;
+        this.target = auraInfo.target;
 
         this.effect = this.aura.effect;
 
@@ -51,5 +68,9 @@ H.Aura = class Aura {
 
     isAffect(affect) {
         return this.aura.affect === affect;
+    }
+
+    isTarget(obj) {
+        return !this.target || this.target === obj;
     }
 };

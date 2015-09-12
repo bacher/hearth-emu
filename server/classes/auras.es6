@@ -9,24 +9,41 @@ H.Auras = class Auras {
         this.battle = battle;
     }
 
-    addAura(minion, aura) {
+    addAura(minion, aura, onlyThisTurn) {
         this.list.push(aura);
 
-        //FIXME: How unbind?
-        minion.on('detach', () => {
+        const removeAura = () => {
+            minion.removeListener('death', removeAura);
+            minion.removeListener('detach', removeAura);
+
             this.removeAura(aura);
-        });
+        };
+
+        minion.on('detach', removeAura);
+        minion.on('death', removeAura);
+
+        if (onlyThisTurn) {
+            this.battle.once('end-turn', removeAura);
+        }
     }
 
     removeAura(aura) {
-        this.list.splice(this.list.indexOf(aura), 1);
+        const auraIndex = this.list.indexOf(aura);
+
+        if (auraIndex !== -1) {
+            this.list.splice(auraIndex, 1);
+        } else {
+            console.warn('AURA ALREADY REMOVED');
+        }
     }
 
     applyEffect(player, objectType, obj) {
-        return this.list
+        this.list
             .filter(aura => aura.isTargetSide(player) && aura.isAffect(objectType))
-            .reduce((base, aura) => {
-                return aura.effect(obj);
-            }, obj);
+            .forEach(aura => {
+                aura.effect(obj);
+            });
+
+        return obj;
     }
 };

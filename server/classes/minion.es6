@@ -27,15 +27,10 @@ H.Minion = class Minion extends H.GameObject {
     }
 
     getGameData() {
-        return {
-            id: this.id,
-            card: this.card,
-            base: this.base,
-            attack: this.attack,
-            hp: this.hp,
-            maxHp: this.maxHp,
-            flags: this.getFlags()
-        };
+        const data = this.getData();
+        delete data.race;
+        delete data.that;
+        return data;
     }
 
     getData() {
@@ -44,10 +39,13 @@ H.Minion = class Minion extends H.GameObject {
 
     getBaseData() {
         const data = {};
-        ['id', 'card', 'base', 'attack', 'hp', 'maxHp', 'flags', 'race'].forEach(prop => {
+        ['id', 'card', 'base', 'attack', 'hp', 'maxHp', 'race'].forEach(prop => {
             data[prop] = this[prop];
         });
+
+        data.flags = this.getFlags();
         data.that = this;
+
         return data;
     }
 
