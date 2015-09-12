@@ -1016,6 +1016,34 @@
     }
   },
   {
+    "id": 191,
+    "name": "Rockbiter Weapon",
+    "cost": 1,
+    "pic": "147/456/491",
+    "clas": 2,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "friends"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-attack",
+              "params": [
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 12,
     "name": "Searing Totem",
     "cost": 1,
@@ -1767,6 +1795,29 @@
       "flags": [],
       "events": {},
       "race": 2
+    }
+  },
+  {
+    "id": 190,
+    "name": "Windfury",
+    "cost": 2,
+    "pic": "147/447/146",
+    "clas": 2,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-flags",
+              "params": [
+                "windfury"
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {
