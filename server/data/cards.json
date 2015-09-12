@@ -74,6 +74,26 @@
     }
   },
   {
+    "id": 189,
+    "name": "Frog",
+    "cost": 0,
+    "pic": "149/184/115",
+    "clas": 2,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 0,
+      "maxHp": 1,
+      "flags": [
+        "taunt"
+      ],
+      "race": 1,
+      "events": {}
+    }
+  },
+  {
     "id": 180,
     "name": "Hunter's Mark",
     "cost": 0,
@@ -2054,6 +2074,29 @@
               "enemies"
             ]
           }
+        }
+      ]
+    }
+  },
+  {
+    "id": 188,
+    "name": "Hex",
+    "cost": 3,
+    "pic": "148/130/270",
+    "clas": 2,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "transform",
+              "params": [
+                "Frog"
+              ]
+            }
+          ]
         }
       ]
     }

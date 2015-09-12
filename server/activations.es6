@@ -210,7 +210,7 @@ const A = {
 
             minion.detach();
 
-            owner.creatures.addCreature(H.Minion.createByName('Sheep'), index);
+            owner.creatures.addCreature(H.Minion.createByName(this.params[0]), index);
         });
     },
     'add-hand-card': function(o) {
