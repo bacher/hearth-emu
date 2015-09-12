@@ -1,0 +1,217 @@
+.cde {
+
+  .hero-right-panel {
+    position: absolute;
+    top: 0;
+    left: 887px;
+    width: 232px;
+    height: 647px;
+    background: url("/textures/deck-right-panel.jpg");
+
+    &.full:before {
+      position: absolute;
+      content: "";
+      top: 62px;
+      left: 12px;
+      width: 176px;
+      height: 587px;
+      background: url("/textures/deck-cards-glow.jpg");
+    }
+  }
+
+  .hero-mode .hero-right-panel {
+    display: block;
+  }
+
+  .deck-cards {
+    position: absolute;
+    top: 73px;
+    left: 19px;
+    height: 566px;
+    overflow: scroll;
+  }
+
+  .card-preview {
+    position: absolute;
+    left: 623px;
+  }
+
+  .card-line {
+    position: relative;
+    width: 159px;
+    height: 27px;
+    background: url("/textures/card-line.png");
+    cursor: pointer;
+
+    &:hover .card-preview {
+      display: block;
+    }
+
+    &.x2:after {
+      position: absolute;
+      content: "";
+      top: 4px;
+      right: 4px;
+      width: 17px;
+      height: 17px;
+      background: url("/textures/card-line-x2.png");
+    }
+
+    .cost, .name {
+      line-height: 28px;
+      color: #FFF;
+      font-weight: bold;
+      vertical-align: middle;
+    }
+
+    .cost {
+      margin: 0 7px;
+      font-size: 16px;
+      text-shadow: -1px -1px 1px #000, 1px 1px 1px #000;
+    }
+
+    .name {
+      display: inline-block;
+      width: 120px;
+      margin-left: 3px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      font-size: 10px;
+      letter-spacing: 0.2px;
+      text-shadow: 0 0 2px #000, 0 0 1px #000;
+      white-space: nowrap;
+    }
+  }
+
+  .card-count {
+    position: absolute;
+    top: 651px;
+    left: 41px;
+    color: #FFF;
+    font-family: "Belwe Bold", Times, serif;
+    letter-spacing: 0.3px;
+    text-align: center;
+
+    .number {
+      font-weight: bold;
+      font-size: 18px;
+      text-shadow: 0 0 1px #000, 0 0 3px #000;
+    }
+
+    .label {
+      margin-top: -3px;
+      font-size: 11px;
+      text-shadow: 0 0 1px #000, 0 0 1px #000;
+    }
+  }
+
+  // COPYIED FROM COLLECTION-DECKS
+  .deck {
+    width: 143px;
+    height: 57px;
+    margin-bottom: 7px;
+    cursor: pointer;
+
+    .frame {
+      width: 143px;
+      height: 57px;
+      background: url("/textures/deck-hero-frame.png");
+    }
+
+    .label-edit {
+      position: absolute;
+      width: 118px;
+      height: 30px;
+      margin-top: 32px;
+      margin-left: 17px;
+      color: #FFF;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      font-family: "Belwe Bold", Times, serif;
+      font-size: 13px;
+      text-shadow: 0 0 1px #000, 0 0 3px #000;
+      letter-spacing: 0.3px;
+    }
+
+    .remove {
+      position: absolute;
+      display: none;
+      left: 134px;
+      width: 23px;
+      height: 22px;
+      margin-top: -57px;
+      background: url("/textures/button-remove.png");
+    }
+
+    .background {
+      position: absolute;
+      width: 125px;
+      height: 37px;
+      margin: 10px 0 0 11px;
+
+      &.druid {
+        background: url("/textures/deck-hero-druid.jpg");
+      }
+      &.hunter {
+        background: url("/textures/deck-hero-hunter.jpg");
+      }
+      &.mage {
+        background: url("/textures/deck-hero-mage.jpg");
+      }
+      &.paladin {
+        background: url("/textures/deck-hero-paladin.jpg");
+      }
+      &.priest {
+        background: url("/textures/deck-hero-priest.jpg");
+      }
+      &.rogue {
+        background: url("/textures/deck-hero-rogue.jpg");
+      }
+      &.shaman {
+        background: url("/textures/deck-hero-shaman.jpg");
+      }
+      &.warlock {
+        background: url("/textures/deck-hero-warlock.jpg");
+      }
+      &.warrior {
+        background: url("/textures/deck-hero-warrior.jpg");
+      }
+    }
+  }
+
+  .deck {
+    transform: scale(1.25);
+    margin-left: 31px;
+    margin-top: 7px;
+
+    .label-edit {
+      top: 0;
+      margin-top: 31px;
+      height: 15px;
+      border: none;
+      outline: none;
+      background: transparent;
+    }
+  }
+
+  .btn-done {
+    position: absolute;
+    top: 654px;
+    left: 140px;
+    width: 64px;
+    height: 29px;
+    background: url("/textures/btn-done.png");
+
+    &:hover:after {
+      display: block;
+      width: 64px;
+      height: 29px;
+      content: "";
+      background: url("/textures/blink2.png") no-repeat center;
+    }
+  }
+
+}

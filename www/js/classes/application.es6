@@ -25,8 +25,8 @@ H.Application = class Application {
         return this.activeScreen;
     }
 
-    activateOverlay(name) {
-        const overlayScreen = new H.Screens[name]();
+    activateOverlay(name, params) {
+        const overlayScreen = new H.Screens[name](params);
 
         overlayScreen.make();
 

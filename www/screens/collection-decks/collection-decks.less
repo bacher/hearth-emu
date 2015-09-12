@@ -1,0 +1,134 @@
+.cds {
+
+  .my-decks {
+    position: absolute;
+    top: 56px;
+    left: 907px;
+    width: 163px;
+    height: 586px;
+    padding: 6px 5px;
+  }
+
+  .new-deck {
+    width: 151px;
+    height: 62px;
+    background: url("/textures/new-deck.png");
+  }
+
+  .decks-wrapper {
+    margin-top: 2px;
+    margin-left: 5px;
+  }
+
+  .my-decks .deck:hover {
+    box-shadow: 0 0 10px 4px rgba(255,255,255,0.6);
+
+    .remove {
+      display: block;
+    }
+  }
+
+  .deck {
+    width: 143px;
+    height: 57px;
+    margin-bottom: 7px;
+    cursor: pointer;
+
+    .frame {
+      width: 143px;
+      height: 57px;
+      background: url("/textures/deck-hero-frame.png");
+    }
+
+    .label {
+      position: absolute;
+      width: 118px;
+      height: 30px;
+      margin-top: 32px;
+      margin-left: 17px;
+      color: #FFF;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      font-family: "Belwe Bold", Times, serif;
+      font-size: 13px;
+      text-shadow: 0 0 1px #000, 0 0 3px #000;
+      letter-spacing: 0.3px;
+    }
+
+    .remove {
+      position: absolute;
+      display: none;
+      left: 134px;
+      width: 23px;
+      height: 22px;
+      margin-top: -57px;
+      background: url("/textures/button-remove.png");
+    }
+
+    .background {
+      position: absolute;
+      width: 125px;
+      height: 37px;
+      margin: 10px 0 0 11px;
+
+      &.druid {
+        background: url("/textures/deck-hero-druid.jpg");
+      }
+      &.hunter {
+        background: url("/textures/deck-hero-hunter.jpg");
+      }
+      &.mage {
+        background: url("/textures/deck-hero-mage.jpg");
+      }
+      &.paladin {
+        background: url("/textures/deck-hero-paladin.jpg");
+      }
+      &.priest {
+        background: url("/textures/deck-hero-priest.jpg");
+      }
+      &.rogue {
+        background: url("/textures/deck-hero-rogue.jpg");
+      }
+      &.shaman {
+        background: url("/textures/deck-hero-shaman.jpg");
+      }
+      &.warlock {
+        background: url("/textures/deck-hero-warlock.jpg");
+      }
+      &.warrior {
+        background: url("/textures/deck-hero-warrior.jpg");
+      }
+    }
+  }
+
+  .confirm {
+    display: none;
+    position: absolute;
+    top: 0;
+    width: 1280px;
+    height: 720px;
+    background: url("/textures/confirm.png") no-repeat 431px 294px;
+
+    .button {
+      position: absolute;
+      top: 396px;
+      width: 138px;
+      height: 38px;
+      cursor: pointer;
+
+      &:hover {
+        background: url("/textures/blink3.png") no-repeat center;
+      }
+
+      &.ok {
+        left: 491px;
+      }
+      &.cancel {
+        left: 645px;
+      }
+    }
+  }
+
+}

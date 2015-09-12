@@ -21,6 +21,11 @@ BODY {
   width: 1280px;
   height: 720px;
   overflow: hidden;
+  pointer-events: none;
+
+  > * {
+    pointer-events: all;
+  }
 }
 
 @font-face {

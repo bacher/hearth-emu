@@ -7,27 +7,105 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
             hash: 'collection'
         });
 
+        this._cards = null;
+        this._currentCards = null;
+
+        this._costFilter = null;
+
+        this._decksScreen = null;
+        this._deckScreen = null;
+
         this.page = 0;
-        this.heroMode = false;
-        this.activeDeck = null;
-        this.$cardToRemove = null;
-        this.$previewImage = null;
+        //this.activeDeck = null;
 
-        this.showCardsBase = null;
-        this.showCards = null;
+        //this.$cardToRemove = null;
 
-        this.costFilter = null;
     }
 
     _render() {
         render(this.$node, 'collection');
 
-        this.selectTab(this.$node.find('.tab.druid'));
+        this._$cards = this.$node.find('.cards');
 
-        this.drawDecks();
+        this._checkCardsCache();
 
+        setTimeout(() => {
+            this._decksScreen = H.app.activateOverlay('collection-decks');
+        }, 0);
+    }
+
+    _bindEventListeners() {
+        this.$node
+            .on('click', '.tab', e => {
+                const $tab = $(e.currentTarget);
+
+                this._selectTab($tab);
+
+                this.drawCards();
+            })
+            .on('click', '.card:not(.lock)', e => {
+                if (!this._deckScreen || !this._deckScreen.canAddCard()) {
+                    return;
+                }
+
+                this._deckScreen.addCard($(e.currentTarget).data('id'));
+            })
+            .on('click', '.btn-back', () => {
+                H.app.activateScreen('main-menu');
+            })
+            .on('click', '.scroll-zone.left', () => {
+                this.page--;
+
+                this.drawCards();
+            })
+            .on('click', '.scroll-zone.right', () => {
+                this.page++;
+
+                this.drawCards();
+            })
+            .on('focusout', '.search', () => {
+                this._filterCards();
+
+                this.drawCards();
+            })
+            .on('keydown', '.search', e => {
+                if (e.which === 13) {
+                    $(e.currentTarget).blur();
+                }
+            })
+            .on('click', '.mana', e => {
+                const $mana = $(e.currentTarget);
+
+                if ($mana.hasClass('selected')) {
+                    $mana.removeClass('selected');
+
+                    this._costFilter = null;
+
+                } else {
+                    this.$node.find('.mana.selected').removeClass('selected');
+                    $mana.addClass('selected');
+
+                    this._costFilter = $mana.data('cost');
+                }
+
+                this._filterCards();
+                this.drawCards();
+            });
+    }
+
+    _show() {
+        setTimeout(() => {
+            this.$node.show();
+
+            setTimeout(() => {
+                this.$node.find('.collection').removeClass('initial');
+            }, 50);
+        }, 1050);
+    }
+
+    _checkCardsCache() {
         if (H.cards) {
-            this.afterLoad();
+            this._cardsLoaded();
         } else {
             $.ajax({
                 url: '/cards.json'
@@ -53,287 +131,154 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
                     H.cardsHash[card.id] = card;
                 });
 
-                this.afterLoad();
+                this._cardsLoaded();
             });
         }
-
     }
 
-    _bindEventListeners() {
-        this.$node
-            .on('click', '.new-deck', () => {
-                H.app.activateOverlay('create-deck');
-            })
-            .on('click', '.tab', e => {
-                const $tab = $(e.currentTarget);
+    _cardsLoaded() {
+        this._getCards();
 
-                this.selectTab($tab);
-            })
-            .on('click', '.my-decks .deck', e => {
-                const $deck = $(e.currentTarget);
-                const id = $deck.data('id');
+        this._selectTab(this.$node.find('.tab.druid'));
 
-                const deck = _.find(H.decks, deck => deck.id === id);
+        this._filterCards();
 
-                this.switchMode(deck);
-            })
-            .on('click', '.card:not(.lock)', e => {
-                if (this.activeDeck && this.activeDeck.cardIds.length < 30) {
-                    this.activeDeck.cardIds.push($(e.currentTarget).data('id'));
-
-                    this.sortCards(this.activeDeck);
-
-                    H.saveDecks();
-
-                    this.checkLimits();
-
-                    this.updateDeckCards();
-                }
-            })
-            .on('click', '.btn-back', () => {
-                if (this.heroMode) {
-                    this.activeDeck.label = this.$node.find('.label-edit').val();
-                    H.saveDecks();
-
-                    this.switchMode(null);
-                } else {
-                    H.app.activateScreen('main-menu');
-                }
-            })
-            .on('click', '.scroll-zone.left', () => {
-                this.page--;
-
-                this.drawCards();
-            })
-            .on('click', '.scroll-zone.right', () => {
-                this.page++;
-
-                this.drawCards();
-            })
-            .on('click', '.card-line', e => {
-                const $cardLine = $(e.currentTarget);
-
-                const id = $cardLine.data('id');
-
-                const index = this.activeDeck.cardIds.indexOf(id);
-                this.activeDeck.cardIds.splice(index, 1);
-
-                H.saveDecks();
-
-                this.checkLimits();
-                this.updateDeckCards();
-            })
-            .on('click', '.deck .remove', e => {
-                this.$cardToRemove = $(e.currentTarget).parent();
-                this.$node.find('.confirm').show();
-
-                e.stopPropagation();
-            })
-            .on('click', '.confirm .ok', () => {
-                this.removeDeck(this.$cardToRemove.data('id'));
-                this.$node.find('.confirm').hide();
-            })
-            .on('click', '.confirm .cancel', () => {
-                this.$node.find('.confirm').hide();
-            })
-            .on('focusout', '.search', () => {
-                this.filterCards();
-
-                this.drawCards();
-            })
-            .on('keydown', '.search', e => {
-                if (e.which === 13) {
-                    $(e.currentTarget).blur();
-                }
-            })
-            .on('mouseenter', '.card-line', e => {
-                const $cardLine = $(e.currentTarget);
-                const cardPosition = $cardLine.position();
-
-                if (this.$previewImage) {
-                    this.$previewImage.remove();
-                    this.$previewImage = null;
-                }
-
-                this.$previewImage = $('<img>')
-                    .addClass('card-preview')
-                    .attr('src', $cardLine.data('pic'))
-                    .css({
-                        top: Math.min(268, Math.max(20, cardPosition.top + - 123))
-                    })
-                    .appendTo(this.$node);
-            })
-            .on('mouseleave', '.card-line', () => {
-                this.removeCardPreview();
-            })
-            .on('click', '.mana', e => {
-                const $mana = $(e.currentTarget);
-
-                if ($mana.hasClass('selected')) {
-                    $mana.removeClass('selected');
-
-                    this.costFilter = null;
-
-                } else {
-                    this.$node.find('.mana.selected').removeClass('selected');
-                    $mana.addClass('selected');
-
-                    this.costFilter = $mana.data('cost');
-                }
-
-                this.filterCards();
-                this.drawCards();
-            });
-    }
-
-    _show() {
-        setTimeout(() => {
-            this.$node.show();
-
-            setTimeout(() => {
-                this.$node.find('.collection').removeClass('initial');
-            }, 50);
-        }, 1050);
-    }
-
-    afterLoad() {
-        this.makeBaseFiltering();
-
-        this.filterCards();
-
-        this.toggleTabs();
+        this._updateTabs();
 
         this.drawCards();
     }
 
-    removeCardPreview() {
-        if (this.$previewImage) {
-            this.$previewImage.remove();
-            this.$previewImage = null;
-        }
-    }
-
-    makeBaseFiltering() {
-        this.showCardsBase = [];
+    _getCards() {
+        this._cards = [];
 
         for (var i = 0; i < 10; ++i) {
-            this.showCardsBase[i] = H.cards[i].filter(card => !card.flags['uncollectable']);
+            this._cards[i] = H.cards[i].filter(card => !card.flags['uncollectable']);
         }
     }
 
-    filterCards() {
+    _filterCards() {
         const searchQuery = this.$node.find('.search').val().toLowerCase();
 
-        this.showCards = this.showCardsBase.map((cardPack, i) => {
+        this._currentCards = this._cards.map((cardPack, i) => {
+            if (this._deckScreen) {
+                if (i !== 0 && i !== this._deckScreen.getDeckInfo().clas) {
+                    return [];
+                }
+            }
+
             var filteredPack = cardPack;
 
-            if (i === 0 || !this.heroMode || i === this.activeDeck.clas) {
-                if (searchQuery) {
-                    filteredPack = filteredPack.filter(card => _.contains(card.name.toLowerCase(), searchQuery));
-                }
+            if (searchQuery) {
+                filteredPack = filteredPack.filter(card => _.contains(card.name.toLowerCase(), searchQuery));
+            }
 
-                if (this.costFilter !== null) {
-                    if (this.costFilter < 7) {
-                        filteredPack = filteredPack.filter(card => card.cost === this.costFilter);
-                    } else {
-                        filteredPack = filteredPack.filter(card => card.cost >= 7);
-                    }
+            if (this._costFilter !== null) {
+                if (this._costFilter < 7) {
+                    filteredPack = filteredPack.filter(card => card.cost === this._costFilter);
+                } else {
+                    filteredPack = filteredPack.filter(card => card.cost >= 7);
                 }
-            } else {
-                filteredPack = [];
             }
 
             return filteredPack;
         });
+    }
 
-        this.toggleTabs();
+    _getSelectedClass() {
+        const $tab = this.$node.find('.tab.selected');
+
+        if ($tab.length) {
+            return H.CLASSES[$tab.data('clas')];
+        }
     }
 
     drawCards() {
-        if (!this.showCardsBase) { return; }
+        this._$cards.empty();
 
-        const selectedClas = H.CLASSES[this.$node.find('.tab.selected').data('clas')];
+        const clas = this._getSelectedClass();
 
-        const cardsPool = (this.showCards || this.showCardsBase)[selectedClas];
+        if (clas != null) {
+            const cardsPool = this._currentCards[clas];
 
-        const $cards = this.$node.find('.cards');
-        const cards = cardsPool.slice(this.page * 8, this.page * 8 + 8);
+            const cards = cardsPool.slice(this.page * 8, this.page * 8 + 8);
 
-        this.$node.find('.scroll-zone.left').toggle(this.page !== 0);
-        this.$node.find('.scroll-zone.right').toggle(this.page * 8 + 8 < cardsPool.length);
+            this.$node.find('.scroll-zone.left').toggle(this.page !== 0);
+            this.$node.find('.scroll-zone.right').toggle(this.page * 8 + 8 < cardsPool.length);
 
-        this.$node.find('.cards-empty').toggle(cards.length === 0);
+            this.$node.find('.cards-empty').toggle(cards.length === 0);
 
-        if (cards.length === 0) {
-            $cards.empty();
-
-        } else {
-            render($cards, 'collection-cards', {
+            render(this._$cards, 'collection-cards', {
                 cards: cards
             });
 
-            const loadCards = [];
+            this._initCardsLoadAnimation(cards);
 
-            cards.forEach((card, i) => {
-                if (!card.loaded) {
-                    const img = new Image();
+            this.checkCardLimits();
+        }
+    }
 
-                    const picUrl = H.makeCardUrl(card.pic);
-                    const $card = $cards.find('.card').eq(i);
-                    const $img = $(img).addClass('img front').hide();
-                    $card.append($img);
-                    loadCards.push($card);
+    _initCardsLoadAnimation(cards) {
+        const loadCards = [];
 
-                    img.onload = () => {
-                        $card.addClass('animate');
-                        $card.removeClass('loading');
-                        $img.data('loaded', true).show();
+        cards.forEach((card, i) => {
+            if (!card.loaded) {
+                const img = new Image();
 
-                        card.loaded = true;
-                    };
+                const picUrl = H.makeCardUrl(card.pic);
+                const $card = this._$cards.find('.card').eq(i);
+                const $img = $(img).addClass('img front').hide();
+                $card.append($img);
+                loadCards.push($card);
 
-                    img.src = picUrl;
+                img.onload = () => {
+                    $card.addClass('animate');
+                    $card.removeClass('loading');
+                    $img.data('loaded', true).show();
+
+                    card.loaded = true;
+                };
+
+                img.src = picUrl;
+            }
+        });
+
+        setTimeout(() => {
+            loadCards.forEach($card => {
+                const $cardFront = $card.find('.front');
+
+                if (!$cardFront.data('loaded')) {
+                    $card.append($('<IMG>').addClass('img back').attr('src', '../cards/card_back.png'));
+                    $card.addClass('loading');
                 }
             });
-
-            setTimeout(() => {
-                loadCards.forEach($card => {
-                    const $cardFront = $card.find('.front');
-
-                    if (!$cardFront.data('loaded')) {
-                        $card.append($('<IMG>').addClass('img back').attr('src', '../cards/card_back.png'));
-                        $card.addClass('loading');
-                    }
-                });
-            }, 0);
-
-            this.checkLimits();
-        }
+        }, 0);
     }
 
-    toggleTabs() {
+    _updateTabs() {
         for (var i = 0; i < 10; ++i) {
-            this.$node.find('.tab.' + H.CLASSES_L[i]).toggleClass('hide', this.showCards[i].length === 0);
+            this.$node.find('.tab.' + H.CLASSES_L[i]).toggleClass('hide', this._currentCards[i].length === 0);
         }
 
-        if (this.$node.find('.tab.selected:not(hide)').length === 0) {
-            this.selectTab(this.$node.find('.tab:not(hide):eq(0)'));
-        } else {
-            this.$node.find('.tab.selected').removeClass('selected');
+        if (this.$node.find('.tab.selected:not(.hide)').length === 0) {
+            const $tab = this.$node.find('.tab:not(.hide)').eq(0);
+
+            if ($tab.length) {
+                this._selectTab($tab);
+            } else {
+                this._selectTab(null);
+            }
         }
     }
 
-    drawDecks() {
-        render(this.$node.find('.decks-wrapper'), 'decks', { decks: H.decks });
-    }
-
-    checkLimits() {
-        if (this.heroMode && this.activeDeck) {
+    checkCardLimits() {
+        if (this._deckScreen) {
             this.$node.find('.card').each((i, cardNode) => {
                 const $card = $(cardNode);
                 const id = $card.data('id');
 
-                const alreadyInDeck = this.activeDeck.cardIds.filter(cardId => cardId === id).length;
+                const cardIds = this._deckScreen.getCardIds();
+
+                const alreadyInDeck = cardIds.filter(cardId => cardId === id).length;
 
                 $card.removeClass('lock one');
 
@@ -345,109 +290,60 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
                     $card.addClass('one');
                 }
             });
-        }
-    }
-
-    switchMode(deck) {
-        this.heroMode = !!deck;
-        this.$node.find('.collection').toggleClass('hero-mode', !!deck);
-
-        this.activeDeck = deck || null;
-
-        if (deck) {
-            this.filterCards();
-
-            const $deck = this.$node.find('.deck[data-id="' + deck.id + '"]');
-            const $deckInfo = $deck.clone();
-            $deckInfo.append($('<INPUT>').addClass('label-edit').val($deck.find('.label').text()));
-
-            this.$node.find('.hero-right-panel .deck-info').html($deckInfo);
-
-            this.updateDeckCards();
-
         } else {
-            this.filterCards();
-            this.toggleTabs();
-
             this.$node.find('.card').removeClass('lock one');
-
         }
-
-        this.drawDecks();
     }
 
-    selectTab($tab) {
-        if (!$tab.length) { return; }
+    deckCreated(deckId) {
+        this._decksScreen.hideThenDestroy();
+        this._decksScreen = null;
 
-        $tab.siblings().removeClass('selected');
-        $tab.addClass('selected');
+        this._deckScreen = H.app.activateOverlay('collection-deck', {
+            deckId: deckId
+        });
 
-        this.$node.find('.class-bg')
-            .removeClass('warrior warlock paladin mage priest rogue shaman hunter druid neutral')
-            .addClass($tab.data('clas'));
+        this._afterChange();
+    }
 
+    switchMode(mode, deckId) {
+        if (mode === 'deck') {
+            this._decksScreen.hideThenDestroy();
+            this._decksScreen = null;
+
+            this._deckScreen = H.app.activateOverlay('collection-deck', {
+                deckId: deckId
+            });
+        } else {
+            this._deckScreen.hideThenDestroy();
+            this._deckScreen = null;
+
+            this._decksScreen = H.app.activateOverlay('collection-decks');
+        }
+
+        this._afterChange();
+    }
+
+    _afterChange() {
+        this._filterCards();
+        this._updateTabs();
+        this.drawCards();
+        this.checkCardLimits();
+    }
+
+    _selectTab($tab) {
         this.page = 0;
 
-        this.drawCards();
-    }
+        this.$node.find('.tab.selected').removeClass('selected');
 
-    updateDeckCards() {
-        const $cards = this.$node.find('.deck-cards');
+        this.$node.find('.class-bg')
+            .removeClass('warrior warlock paladin mage priest rogue shaman hunter druid neutral');
 
-        const cards = [];
+        if ($tab) {
+            $tab.addClass('selected');
 
-        const ids = this.activeDeck.cardIds;
-
-        for (var i = 0; i < ids.length; ++i) {
-            const id = ids[i];
-
-            const card = H.cardsHash[id];
-            var multiplyer = 1;
-
-            if (id === ids[i + 1]) {
-                multiplyer = 2;
-                i++;
-            }
-
-            cards.push({
-                card,
-                x2: multiplyer === 2
-            });
+            this.$node.find('.class-bg').addClass($tab.data('clas'));
         }
-
-        cards.forEach(card => {
-            new Image().src = H.makeCardUrl(card.card.pic);
-        });
-
-        this.removeCardPreview();
-
-        render($cards, 'card-lines', { cards: cards });
-
-        this.$node.find('.card-count .number').text(this.activeDeck.cardIds.length + '/30');
-
-        this.$node.find('.hero-right-panel').toggleClass('full', this.activeDeck.cardIds.length === 30);
     }
 
-    removeDeck(removeId) {
-        H.decks = H.decks.filter(deck => deck.id !== removeId);
-        H.saveDecks();
-        this.drawDecks();
-    }
-
-    sortCards(deck) {
-        deck.cardIds = deck.cardIds.sort((cardId1, cardId2) => {
-            if (cardId1 === cardId2) {
-                return 0;
-            }
-
-            const card1 = H.cardsHash[cardId1];
-            const card2 = H.cardsHash[cardId2];
-
-            if (card1.cost !== card2.cost) {
-                return card1.cost - card2.cost;
-            } else {
-                return card1.name.localeCompare(card2.name);
-            }
-        });
-    }
 };

@@ -35,20 +35,18 @@ H.Screens['create-deck'] = class CreateDeckScreen extends H.Screen {
                 const clas = this.$node.find('.hero.selected').data('clas');
                 const className = H.CLASSES_L[clas];
 
-                H.decks.push({
+                const deckInfo = {
                     label: 'Custom ' + className[0].toUpperCase() + className.substr(1),
                     clas: clas,
                     cardIds: [],
                     id: Math.floor(Math.random() * 10000)
-                });
+                };
+
+                H.decks.push(deckInfo);
 
                 H.saveDecks();
 
-                const collectionScreen = H.app.getActiveScreen();
-
-                collectionScreen.drawDecks();
-
-                collectionScreen.switchMode(H.decks[H.decks.length - 1]);
+                H.app.getActiveScreen().deckCreated(deckInfo.id);
 
                 this.hideThenDestroy();
             })
