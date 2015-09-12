@@ -333,7 +333,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             $cardWrapper.addClass('c' + (i + 1));
 
             if (game.my.active) {
-                if (base.cost <= game.my.hero.mana) {
+                if (handCard.cost <= game.my.hero.mana) {
                     $cardWrapper.addClass('available');
                 }
             }

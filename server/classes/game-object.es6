@@ -145,7 +145,7 @@ H.GameObject = class GameObject extends EventEmitter {
     }
 
     kill() {
-        this._detachListeners();
+        this.detach();
 
         this.flags['dead'] = true;
 

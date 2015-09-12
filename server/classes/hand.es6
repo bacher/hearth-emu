@@ -14,7 +14,11 @@ H.Hand = class Hand {
 
     addCard(card) {
         if (this.cards.length <= 10) {
-            this.cards.push(new H.HandCard(this.player, card));
+            const handCard = new H.HandCard(this.player, card);
+
+            this.cards.push(handCard);
+
+            return handCard;
         }
     }
 
@@ -27,7 +31,9 @@ H.Hand = class Hand {
     }
 
     getGameData() {
-        return this.cards;
+        return this.cards.map(handCard => {
+            return handCard.getClientData();
+        });
     }
 
     addCoinCard() {

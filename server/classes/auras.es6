@@ -9,21 +9,19 @@ H.Auras = class Auras {
         this.battle = battle;
     }
 
-    addAura(minion, aura, onlyThisTurn) {
+    addAura(object, aura, onlyThisTurn) {
         this.list.push(aura);
 
         const removeAura = () => {
-            if (minion) {
-                minion.removeListener('death', removeAura);
-                minion.removeListener('detach', removeAura);
+            if (object) {
+                object.removeListener('detach', removeAura);
             }
 
             this.removeAura(aura);
         };
 
-        if (minion) {
-            minion.on('detach', removeAura);
-            minion.on('death', removeAura);
+        if (object) {
+            object.on('detach', removeAura);
         }
 
         if (onlyThisTurn) {
@@ -40,6 +38,10 @@ H.Auras = class Auras {
         } else {
             console.warn('AURA ALREADY REMOVED');
         }
+    }
+
+    applyEffects(object) {
+        return this.applyEffect(object.player, object.objType, object.getBaseData());
     }
 
     applyEffect(player, objectType, obj) {

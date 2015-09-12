@@ -58,26 +58,6 @@
     "name": "Frog",
     "cost": 0,
     "pic": "149/184/115",
-    "clas": 0,
-    "type": 1,
-    "flags": [
-      "uncollectable"
-    ],
-    "minion": {
-      "attack": 0,
-      "maxHp": 1,
-      "flags": [
-        "taunt"
-      ],
-      "events": {},
-      "race": 1
-    }
-  },
-  {
-    "id": 189,
-    "name": "Frog",
-    "cost": 0,
-    "pic": "149/184/115",
     "clas": 2,
     "type": 1,
     "flags": [
@@ -2050,6 +2030,27 @@
           "acts": [
             {
               "name": "draw-card",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 192,
+    "name": "Far Sight",
+    "cost": 3,
+    "pic": "147/471/107",
+    "clas": 2,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "far-sight",
               "params": []
             }
           ]

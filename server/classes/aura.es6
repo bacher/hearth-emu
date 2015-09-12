@@ -38,6 +38,16 @@ const AURAS = {
                 target.flags[flag] = true;
             });
         }
+    },
+    'reduce-cost': {
+        affect: 'hand-card',
+        effect(card) {
+            card.cost -= this.params[0];
+
+            if (card.cost < 0) {
+                card.cost = 0;
+            }
+        }
     }
 };
 

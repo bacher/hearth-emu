@@ -164,7 +164,7 @@ H.Player = class Player extends EventEmitter {
 
         if (card) {
             if (this.hand.canAddCard()) {
-                this.hand.addCard(card);
+                return this.hand.addCard(card);
             } else {
                 // Burn card
                 console.log('IMPL!');
@@ -175,7 +175,7 @@ H.Player = class Player extends EventEmitter {
             console.log('IMPL!');
         }
 
-        return card;
+        return;
     }
 
     endTurn() {

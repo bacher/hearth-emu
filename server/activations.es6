@@ -1,4 +1,5 @@
 
+const _ = require('lodash');
 const H = require('./namespace');
 
 const SILENCE_IGNORE_FLAGS = ['tired', 'freeze', 'sleep'];
@@ -180,11 +181,11 @@ const A = {
         minion.maxHp += otherMinionsCount;
     },
     'draw-card-and-deal-cost-damage': function(o) {
-        const card = o.player.drawCard();
+        const handCard = o.player.drawCard();
 
-        if (card) {
+        if (handCard) {
             o.targets.forEach(target => {
-                target.dealDamage(card.cost);
+                target.dealDamage(handCard.base.cost);
             });
         }
     },
@@ -236,6 +237,15 @@ const A = {
         const dmg = beasts.length ? 5 : 3;
 
         A['deal-damage'].call({ params: [dmg] }, o);
+    },
+    'far-sight': function(o) {
+        const card = o.player.drawCard();
+
+        A['add-aura'].call({
+            params: ['reduce-cost', 3]
+        }, _.extend(o, {
+            targets: [card]
+        }));
     },
     'add-aura': function(o) {
         const auraName = this.params[0];
