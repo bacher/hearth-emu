@@ -494,6 +494,37 @@
     }
   },
   {
+    "id": 193,
+    "name": "Dust Devil",
+    "cost": 1,
+    "pic": "148/121/129",
+    "clas": 2,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 1,
+      "flags": [
+        "windfury"
+      ],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "overload",
+                "params": [
+                  2
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 102,
     "name": "Earth Shock",
     "cost": 1,
@@ -1505,6 +1536,46 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 194,
+    "name": "Flametongue Totem",
+    "cost": 2,
+    "pic": "148/458/390",
+    "clas": 2,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 0,
+      "maxHp": 3,
+      "flags": [],
+      "race": 7,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ],
+              "modificators": [
+                {
+                  "name": "adjacent",
+                  "params": []
+                }
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {

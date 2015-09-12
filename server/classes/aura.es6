@@ -53,8 +53,13 @@ const AURAS = {
 
 H.Aura = class Aura {
     constructor(player, auraInfo) {
+        this.player = player;
+
         this.aura = AURAS[auraInfo.name];
         this.params = auraInfo.params;
+
+        this.targetsType = auraInfo.targetsType;
+        this.self = auraInfo.self;
 
         this.side = auraInfo.side || this.aura.defaultSide;
 
@@ -62,8 +67,6 @@ H.Aura = class Aura {
         this.target = null;
 
         this.effect = this.aura.effect;
-
-        this.player = player;
 
         if (this.side === 'target') {
             this.target = auraInfo.target;
@@ -85,6 +88,15 @@ H.Aura = class Aura {
     }
 
     isTarget(obj) {
-        return !this.target || this.target === obj;
+        if (this.target) {
+            return this.target === obj;
+
+        } else if (this.targetsType) {
+            const targets = H.TARGETS.getByTargetsType(this.player, this.targetsType, null, this.self);
+
+            return targets.contains(obj);
+        } else {
+            return true;
+        }
     }
 };

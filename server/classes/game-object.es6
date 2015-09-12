@@ -27,9 +27,16 @@ H.GameObject = class GameObject extends EventEmitter {
             const eventActs = this.base.events[eventTypeName];
 
             if (eventTypeName === 'aura') {
-                const aura = new H.Aura(player, eventActs);
+                eventActs.forEach(act => {
+                    const auraInfo = _.clone(act.acts[0]);
 
-                this.player.battle.auras.addAura(this, aura);
+                    auraInfo.targetsType = act.targetsType;
+                    auraInfo.self = this;
+
+                    const aura = new H.Aura(player, auraInfo);
+
+                    this.player.battle.auras.addAura(this, aura);
+                });
             }
 
             if (eventTypeName === 'end-turn') {

@@ -65,17 +65,17 @@ const T = {
 
         return targets;
     },
-    'except-self': function(player, handCard) {
+    'except-self': function(player, minion) {
         const targets = T['all'](player);
 
-        targets.removeMinion(handCard.minion);
+        targets.removeMinion(minion);
 
         return targets;
     },
-    'self': function(player, handCard) {
+    'self': function(player, minion) {
         const targets = new H.Targets(player);
 
-        targets.addMinion(handCard.minion);
+        targets.addMinion(minion);
 
         return targets;
     },
@@ -104,8 +104,10 @@ H.TARGETS = {
         return T[name](player);
     },
 
-    getByTargetsType(player, targetsType, handCard) {
-        const allTargets = targetsType.names.map(name => T[name](player, handCard));
+    getByTargetsType(player, targetsType, handCard, minion) {
+        minion = minion || (handCard && handCard.minion);
+
+        const allTargets = targetsType.names.map(name => T[name](player, minion));
 
         const targets = allTargets.reduce((base, nextTarget) => {
             return base.intersect(nextTarget);

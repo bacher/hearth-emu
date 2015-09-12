@@ -33,6 +33,12 @@ H.Targets = class Targets {
         }
     }
 
+    contains(object) {
+        return (
+            object === this.my.hero || _.contains(this.my.minions, object) ||
+            object === this.op.hero || _.contains(this.op.minions, object));
+    }
+
     addMinion(minion) {
         var destination;
 
@@ -224,9 +230,11 @@ H.Targets = class Targets {
         this._filterAll(obj => obj.race === raceId);
     }
     'adjacent'() {
+        const adjacent = this.getAdjacent();
+
         this.empty();
 
-        this.addMinions(this.getAdjacent());
+        this.addMinions(adjacent);
     }
     'add-adjacent'() {
         this.addMinions(this.getAdjacent());
