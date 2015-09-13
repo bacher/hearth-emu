@@ -116,20 +116,24 @@
 
     .confirm {
       position: absolute;
-      top: 540px;
-      left: 586px;
-      width: 114px;
-      height: 63px;
+      top: 534px;
+      left: 578px;
+      width: 130px;
+      height: 76px;
 
       &:after {
         position: absolute;
-        top: -19px;
-        left: -14px;
+        top: -13px;
+        left: -6px;
         content: "";
         width: 165px;
         height: 95px;
         background: url("/textures/starting-hand-confirm.png");
         pointer-events: none;
+      }
+
+      &:hover:after {
+        top: -12px;
       }
     }
   }
