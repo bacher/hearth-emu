@@ -31,13 +31,16 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             .hide();
 
         this.$dragAim = $('<div>').addClass('targeting').appendTo(this.$node);
+
+        this._playCard = new H.PlayCard(this);
     }
 
     _bindEventListeners() {
         H.socket.on('game-data', this._onGameData.bind(this));
-        H.socket.on('targets', this.updateInGameTargets.bind(this));
         H.socket.on('cards-for-repick', this._onCardsForPick.bind(this));
         H.socket.on('select-card', this._onCardSelection.bind(this));
+
+        this._playCard.bindEventListeners();
 
         this.$node
             .on('click', '.end-turn', () => {
@@ -63,19 +66,19 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             .on('mouseleave', '.card-wrap', () => {
                 this.$cardPreview.hide();
             })
-            .on('mousedown', '.card-wrap.available', e => {
-                if (!this.battleData.my.active) {
-                    return;
-                }
-
-                const $card = $(e.currentTarget);
-
-                this.startCardDrag($card);
-
-            })
-            .on('mousedown', '.avatar.my.available, .creatures.my .creature.available, .hero-skill.my.available.need-target', this._onMouseDown1.bind(this))
-            .on('mousemove', this._onMouseMove.bind(this))
-            .on('mouseup', this._onMouseUp.bind(this))
+            //.on('mousedown', '.card-wrap.available', e => {
+            //    if (!this.battleData.my.active) {
+            //        return;
+            //    }
+            //
+            //    const $card = $(e.currentTarget);
+            //
+            //    this.startCardDrag($card);
+            //
+            //})
+            //.on('mousedown', '.avatar.my.available, .creatures.my .creature.available, .hero-skill.my.available.need-target', this._onMouseDown1.bind(this))
+            //.on('mousemove', this._onMouseMove.bind(this))
+            //.on('mouseup', console.log.bind(console, 'MOUSEUP'))//this._onMouseUp.bind(this))
             .on('click', '.card-select-wrapper', this._onCardSelect.bind(this));
     }
 
@@ -452,41 +455,6 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
     clearPurposes() {
         this.$node.find('.avatar .creature').removeClass('purpose');
-    }
-
-    updateInGameTargets(data) {
-        const targets = data.targets;
-
-        this.clearPurposes();
-
-        if (targets !== 'not-need') {
-
-            if (targets.my) {
-
-                if (targets.my.hero) {
-                    this.$node.find('.avatar.my').addClass('purpose');
-                }
-
-                if (targets.my.minions) {
-                    targets.my.minions.forEach(minionId => {
-                        this.$node.find('.creatures.my .creature[data-id="' + minionId + '"]').addClass('purpose');
-                    });
-                }
-            }
-
-            if (targets.op) {
-
-                if (targets.op.hero) {
-                    this.$node.find('.avatar.op').addClass('purpose');
-                }
-
-                if (targets.op.minions) {
-                    targets.op.minions.forEach(minionId => {
-                        this.$node.find('.creatures.op .creature[data-id="' + minionId + '"]').addClass('purpose');
-                    });
-                }
-            }
-        }
     }
 
     setBattleData(data) {

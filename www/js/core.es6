@@ -56,6 +56,8 @@ const H = {
     ]
 };
 
+H.Mixins = {};
+
 H.Screens = {};
 
 H.checkParam = function(string) {

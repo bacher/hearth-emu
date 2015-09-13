@@ -95,16 +95,6 @@
     transform: scale(1.12);
   }
 
-  &.normal .creature.available:before {
-    position: absolute;
-    content: "";
-    top: -9px;
-    left: -11px;
-    width: 98px;
-    height: 105px;
-    background: url("/textures/card-glow.png");
-  }
-
   .creature {
     position: relative;
     display: inline-block;
@@ -193,7 +183,17 @@
     }
   }
 
-  &.normal .card-wrap.available .card:before {
+  &.normal-mode .creature.available:before {
+    position: absolute;
+    content: "";
+    top: -9px;
+    left: -11px;
+    width: 98px;
+    height: 105px;
+    background: url("/textures/card-glow.png");
+  }
+
+  .card-wrap.available .card:before {
     position: absolute;
     content: "";
     top: -9px;
@@ -297,7 +297,7 @@
     }
   }
 
-  &.normal .avatar.available:before {
+  &.normal-mode .avatar.available:before {
     position: absolute;
     content: "";
     left: -8px;
@@ -514,7 +514,7 @@
     }
   }
 
-  &.normal .hero-skill.my.available:after {
+  &.normal-mode .hero-skill.my.available:after {
     content: '';
     display: block;
     width: 115px;
@@ -1053,37 +1053,45 @@
     100% { background-position: 0 -107px; }
   }
 
-  .targeting {
+  .arrow {
     position: absolute;
     display: none;
     width: 47px;
     height: 0;
-    background: url("/textures/targeting.png");
-    animation: bg-offset linear 4s infinite;
+
     margin-left: -24px;
 
     transform: rotate(0deg);
     transform-origin: 50% 100%;
     pointer-events: none;
 
-    &.aim:before {
-      position: absolute;
-      content: "";
-      top: -103px;
-      left: -17px;
-      width: 82px;
-      height: 82px;
-      background: url("/textures/target.png");
-    }
-
     &:after {
       position: absolute;
-      content: "";
-      top: -56px;
+      top: 4px;
       left: -16px;
       width: 78px;
       height: 32px;
+      content: "";
       background: url("/textures/targeting-arrow.png");
+    }
+
+    &.with-crosshair:before {
+      position: absolute;
+      top: -39px;
+      left: -17px;
+      width: 82px;
+      height: 82px;
+      content: "";
+      background: url("/textures/target.png");
+    }
+
+    .dash {
+      position: absolute;
+      top: 54px;
+      bottom: 0;
+      width: 47px;
+      background: url("/textures/targeting.png");
+      animation: bg-offset linear 4s infinite;
     }
 
   }
@@ -1287,6 +1295,29 @@
     background: url("/textures/your-turn.png");
 
     animation: scale-in-out linear 2.5s forwards;
+  }
+
+  .grab-card {
+    position: absolute;
+    transform: scale(1.2);
+
+    transition: none;
+
+    &.blue-glow .card {
+      &:before {
+        display: none !important;
+      }
+
+      &:after {
+        position: absolute;
+        content: "";
+        top: -16px;
+        left: -11px;
+        width: 100px;
+        height: 112px;
+        background: url("/textures/card-blue-glow.png");
+      }
+    }
   }
 
 }

@@ -11,7 +11,7 @@ H.HandCard = class HandCard extends EventEmitter {
 
         this.objType = 'hand-card';
 
-        this.id = _.uniqueId('hand_');
+        this.id = _.uniqueId('hand');
         this.base = info;
     }
 
