@@ -20,4 +20,8 @@ H.Paladin = class Paladin extends H.Hero {
             this.attack = 0;
         });
     }
+
+    _canUseSkill() {
+        return H.Conditions.check('can-add-creature', this);
+    }
 };

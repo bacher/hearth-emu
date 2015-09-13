@@ -6,6 +6,8 @@ H.Druid = class Druid extends H.Hero {
         super(player);
 
         this.clas = H.CLASSES['druid'];
+
+        this._heroSkillCost = 2;
     }
 
     useHeroSkill() {

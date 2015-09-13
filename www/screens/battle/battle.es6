@@ -339,7 +339,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         this.$node.find('.avatar.my').toggleClass('available', game.my.active && game.my.hero.attack > 0 && !game.my.hero.flags['tired']);
 
         this.$node.find('.hero-skill.my')
-            .toggleClass('available', game.my.active && game.my.hero.canUseSkill)
+            .toggleClass('available', game.my.hero.canUseSkill)
             .toggleClass('off', game.my.hero.skillUsed)
             .toggleClass('need-target', game.my.hero.isHeroSkillTargeting);
 

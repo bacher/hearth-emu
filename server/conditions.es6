@@ -2,18 +2,18 @@
 const H = require('./namespace');
 
 const C = {
-    'can-add-creature'(handCard) {
-        return handCard.player.creatures.canAddCreature();
+    'can-add-creature'(obj) {
+        return obj.player.creatures.canAddCreature();
     }
 };
 
 H.Conditions = {
-    check(name, handCard) {
+    check(name, obj) {
         if (!C[name]) {
             console.warn('CONDITION NOT FOUND, NAME:', name);
             throw 1;
         }
 
-        return C[name](handCard);
+        return C[name](obj);
     }
 };

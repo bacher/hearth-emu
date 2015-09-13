@@ -17,9 +17,10 @@ H.Shaman = class Shaman extends H.Hero {
         ];
     }
 
-    canUseSkill() {
-        const totemsLeft = this.totems.filter(totem => !this.player.creatures.hasCardCreature(totem));
-
-        return !this.skillUsed && this.mana >= 2 && totemsLeft.length !== 0;
+    _canUseSkill() {
+        return (
+            H.Conditions.check('can-add-creature', this) &&
+            this.totems.some(totem => !this.player.creatures.hasCardCreature(totem))
+        );
     }
 };

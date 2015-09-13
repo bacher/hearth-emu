@@ -89,12 +89,13 @@ H.Hero = class Hero {
         H.Minion.prototype.heal.apply(this, arguments);
     }
 
-    setHeroSkill(activation, params, targets) {
+    setHeroSkill(activation, params, cost, targets) {
         this.heroSkill = new H.Command({
             name: activation,
             params: params || []
         });
         this.heroSkillTargets = targets;
+        this._heroSkillCost = cost || 2;
     }
 
     useHeroSkill(o) {
@@ -191,7 +192,12 @@ H.Hero = class Hero {
     }
 
     canUseSkill() {
-        return !this.skillUsed && this.mana >= 2;
+        return (
+            this.player.active &&
+            !this.skillUsed &&
+            this.mana >= this._heroSkillCost &&
+            (!this._canUseSkill || this._canUseSkill())
+        );
     }
 
     addOverload(count) {
