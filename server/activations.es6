@@ -242,7 +242,7 @@ const A = {
         const card = o.player.drawCard();
 
         A['add-aura'].call({
-            params: ['reduce-cost', 3]
+            params: ['reduce-cost', 3, '', 'target']
         }, _.extend(o, {
             targets: [card]
         }));
