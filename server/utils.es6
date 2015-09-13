@@ -24,8 +24,12 @@ H.mixGameDataAccessors = function(clas) {
             var data = this.getData();
             delete data.that;
 
-            if (this._filterClientData) {
-                data = this._filterClientData(data);
+            if (this._modifyClientData) {
+                const newData = this._modifyClientData(data);
+
+                if (newData) {
+                    data = newData;
+                }
             }
 
             return data;

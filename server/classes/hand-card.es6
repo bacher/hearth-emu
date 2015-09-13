@@ -23,6 +23,15 @@ H.HandCard = class HandCard extends EventEmitter {
             cost: this.base.cost
         };
     }
+
+    _modifyClientData(data) {
+        data.flags = {};
+        data.flags['can-play'] = this.player.active && this.player.hero.mana >= data.cost;
+
+        if (data.flags['can-play']) {
+            data.flags['can-play'] = !this.base.conditions.some(condition => !H.Conditions.check(condition, this));
+        }
+    }
 };
 
 H.mixGameDataAccessors(H.HandCard);

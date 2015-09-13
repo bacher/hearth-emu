@@ -2136,6 +2136,9 @@
     "pic": "148/136/214",
     "clas": 2,
     "type": 2,
+    "conditions": [
+      "can-add-creature"
+    ],
     "flags": [],
     "spell": {
       "acts": [

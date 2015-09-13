@@ -13,6 +13,7 @@ H.Card = class Card {
         this.flags = parseFlags(info.flags);
         this.targetsType = info.targetsType;
         this.customAction = info.customAction;
+        this.conditions = info.conditions || [];
 
         if (info.type === H.CARD_TYPES.spell) {
             this.acts = new H.Commands(info.spell.acts);
@@ -42,6 +43,8 @@ H.Card = class Card {
             if (info.type === H.CARD_TYPES.minion) {
                 activation = 'card-summon';
                 this.minion = object = info.minion;
+
+                this.conditions = ['can-add-creature'].concat(this.conditions);
 
             } else {
                 activation = 'equip-weapon';
