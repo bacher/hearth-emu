@@ -15,6 +15,8 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         this.battlecryTargeting = false;
         this.$dragCard = null;
         this.$aimingObject = null;
+
+        this._prevActiveStatus = false;
     }
 
     _render() {
@@ -439,6 +441,13 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
         this.$node.find('.end-turn').toggleClass('active', game.my.active);
 
+        if (this._prevActiveStatus !== game.my.active) {
+            if (game.my.active) {
+                this._showYourTurnSplash();
+            }
+
+            this._prevActiveStatus = game.my.active;
+        }
     }
 
     clearPurposes() {
@@ -545,5 +554,13 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         }
 
         $card.hide();
+    }
+
+    _showYourTurnSplash() {
+        const $yourTurn = this.$node.find('.your-turn').show();
+
+        $yourTurn.on('animationend', () => {
+            $yourTurn.hide();
+        });
     }
 };

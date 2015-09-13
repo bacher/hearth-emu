@@ -1261,4 +1261,32 @@
     }
   }
 
+  @keyframes scale-in-out {
+    0% {
+      transform: scale(0);
+    }
+    10% {
+      transform: scale(1);
+    }
+    95% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+
+  .your-turn {
+    position: absolute;
+    display: none;
+    top: 162px;
+    left: 290px;
+    width: 667px;
+    height: 301px;
+    pointer-events: none;
+    background: url("/textures/your-turn.png");
+
+    animation: scale-in-out linear 2.5s forwards;
+  }
+
 }
