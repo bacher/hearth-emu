@@ -3,6 +3,7 @@ if locals.id
    .card-wrap(data-id=id,class=base.flags['need-battlecry-target']?'need-battlecry-target':'')
       .card
          IMG(src="http://media-hearth.cursecdn.com/avatars/"+base.pic+".png")
+         .cost(class=(cost>base.cost?'red':(cost<base.cost?'green':'')))= cost
 else
    .card-wrap
       .card

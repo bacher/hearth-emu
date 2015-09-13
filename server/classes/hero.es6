@@ -136,6 +136,10 @@ H.Hero = class Hero {
 
     addMana(count) {
         this.mana += count;
+
+        if (this.mana > 10) {
+            this.mana = 10;
+        }
     }
 
     addCrystal() {

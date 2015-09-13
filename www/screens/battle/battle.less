@@ -869,6 +869,30 @@
     height: 109px;
     top: 0;
     transform: rotate(0);
+
+    .cost {
+      position: absolute;
+      top: -6px;
+      left: -4px;
+      width: 22px;
+      height: 22px;
+      background: url("/textures/mana-gem-big.png");
+
+      color: #FFF;
+      font-family: "Belwe Bold", Times, serif;
+      text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 2px #000;
+      font-size: 20px;
+      text-align: center;
+      line-height: 22px;
+
+      &.red {
+        color: #F00;
+      }
+
+      &.green {
+        color: #0F0;
+      }
+    }
   }
 
   .card-wrap {
