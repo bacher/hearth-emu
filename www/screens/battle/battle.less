@@ -54,6 +54,7 @@
     width: 40px;
     height: 290px;
     top: @h/2-145px;
+    top: @h/2-145px;
     left: 3px;
   }
 
@@ -105,11 +106,11 @@
     transition: transform ease-out 0.2s;
 
     &.shift-right {
-      transform: translate(44px, 0);
+      transform: translate(48px, 0);
     }
 
     &.shift-left {
-      transform: translate(-44px, 0);
+      transform: translate(-48px, 0);
     }
 
     &.sleep:after {
@@ -132,6 +133,17 @@
       width: 98px;
       height: 105px;
       background: url("/textures/card-fire-glow-square.png");
+    }
+
+    &.battlecry-preview:before {
+      position: absolute;
+      top: -28px;
+      left: -28px;
+      width: 140px;
+      height: 159px;
+      content: "";
+      pointer-events: none;
+      background: url("/textures/card-battlecry-glow.png");
     }
 
     &.taunt .o1 {
