@@ -346,6 +346,8 @@ H.PlayCard = class PlayCard {
     }
 
     _toggleAimTargeting(enable) {
+        H.disableMenu = enable;
+
         this.$node.toggleClass('arrow-mode', enable);
         this.$node.toggleClass('normal-mode', !enable);
 

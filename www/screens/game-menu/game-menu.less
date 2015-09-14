@@ -1,0 +1,73 @@
+
+.gm {
+  pointer-events: all;
+
+  .game-menu {
+    position: absolute;
+    top: 218px;
+    left: 522px;
+    width: 239px;
+    height: 312px;
+    padding: 35px;
+    box-sizing: border-box;
+    background: url("/textures/game-menu.png");
+
+    animation: grow-up 0.4s linear forwards;
+  }
+  
+  @keyframes grow-up {
+    0% {
+      transform: scale(0);
+    }
+    60% {
+      transform: scale(1.1);
+    }
+    65% {
+      transform: scale(1.13);
+    }
+    70% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .splitter {
+    width: 170px;
+    height: 17px;
+    background: url("/textures/game-menu-splitter.png") no-repeat 50% 50%;
+  }
+
+  .btn {
+    position: relative;
+    width: 170px;
+    height: 39px;
+    background: url("/textures/game-menu-button.png");
+    margin: 8.8px 0;
+
+    color: #503C1F;
+    font-family: "Belwe Bold", Times, serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 36px;
+
+    &:hover:before {
+      position: absolute;
+      top: 4px;
+      left: 25px;
+      width: 121px;
+      height: 29px;
+      content: "";
+      background: url("/textures/game-menu-button-glow.png");
+    }
+
+    SPAN {
+      position: absolute;
+      left: 0;
+      width: 100%;
+    }
+  }
+
+}
