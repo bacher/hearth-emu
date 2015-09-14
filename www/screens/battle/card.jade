@@ -1,9 +1,12 @@
 
 if locals.id
    .card-wrap(
-      data-id=id,
-      class=base.flags['need-battlecry-target']?'need-battlecry-target':'',
-      class=flags['can-play']?'available':'')
+      data-id= id,
+      class= (
+         (base.type === H.CARD_TYPES['minion']?'minion':'') +
+         (base.flags['need-battlecry-target']?' need-battlecry-target':'') +
+         (flags['can-play']?' available':'')
+      ))
 
       .card
          IMG(src="http://media-hearth.cursecdn.com/avatars/"+base.pic+".png")

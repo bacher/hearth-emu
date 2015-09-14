@@ -26,7 +26,7 @@ const A = {
         const minion = new H.Minion(o.handCard);
         o.handCard.minion = minion;
 
-        o.player.creatures.addCreature(minion);
+        o.player.creatures.addCreature(minion, o.params.index);
     },
     'add-mana': function(o) {
         o.player.hero.addMana(1);

@@ -61,7 +61,9 @@ H.PlayCard = class PlayCard {
                             this._toggleCrosshair($(e.target).closest('.purpose').length > 0);
 
                         } else {
-                            this._$grabCard.addClass('blue-glow');
+                            this._toggleCardActivation(true);
+
+                            this._shiftMinions();
                         }
                     } else {
                         this._toggleCrosshair($(e.target).closest('.purpose').length > 0);
@@ -80,7 +82,7 @@ H.PlayCard = class PlayCard {
                             this._$grabCard.show();
                         }
                     } else {
-                        this._$grabCard.removeClass('blue-glow');
+                        this._toggleCardActivation(false);
                     }
                 } else {
                     this._release(true);
@@ -129,6 +131,7 @@ H.PlayCard = class PlayCard {
             }
         }
 
+        this._toggleCardActivation(false);
         this._toggleAimTargeting(false);
 
         this._clearPurposes();
@@ -147,6 +150,8 @@ H.PlayCard = class PlayCard {
         this._targeting = true;
 
         this._isCard = this._$clickObject.hasClass('card-wrap');
+        this._isMinionCard = this._isCard && this._$clickObject.hasClass('minion');
+
         this._isMinion = this._$clickObject.hasClass('creature');
 
         if (this._isMinion) {
@@ -204,6 +209,13 @@ H.PlayCard = class PlayCard {
         if (this._isCard) {
             actionName = 'play-card';
             actionData.id = this._$clickObject.data('id');
+
+            if (this._isMinionCard) {
+
+                const index = this.$node.find('.creature.shift-right').index();
+
+                actionData.index = index === -1 ? 0 : index;
+            }
         } else {
             actionName = 'hit';
             actionData.by = this._$clickObject.data('id');
@@ -253,6 +265,45 @@ H.PlayCard = class PlayCard {
         } else {
             this._$arrow.removeClass('with-crosshair');
         }
+    }
+
+    _toggleCardActivation(enable) {
+        if (this._isCard) {
+
+            this._$grabCard.toggleClass('blue-glow', enable);
+
+            if (enable) {
+                if (this._isMinionCard) {
+                    if (!this._minionsPositions) {
+                        this._minions = this.$node.find('.my .creature');
+                        this._minionsPositions = this._minions.map((i, node) => {
+                            const $minion = $(node);
+
+                            return $minion.offset().left + $minion.outerWidth() / 2;
+                        });
+                    }
+                }
+            } else {
+                if (this._isMinionCard) {
+                    this._minions = null;
+                    this._minionsPositions = null;
+                }
+            }
+        }
+    }
+
+    _shiftMinions() {
+        const x = this._mouse.x;
+
+        this._minions.each((i, node) => {
+            const $minion = $(node);
+
+            const minionX = this._minionsPositions[i];
+
+            $minion
+                .toggleClass('shift-right', x <= minionX)
+                .toggleClass('shift-left', x > minionX);
+        });
     }
 
     _showErrorMessage() {
