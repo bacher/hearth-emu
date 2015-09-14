@@ -5,7 +5,7 @@ H.PlayCard = class PlayCard {
 
         this.$node = battle.$node;
 
-        this._$clickCard = null;
+        this._$clickObject = null;
         this._$grabCard = null;
         this._$arrow = this.$node.find('.arrow');
 
@@ -33,12 +33,13 @@ H.PlayCard = class PlayCard {
         H.socket.on('targets', this._setPurposes.bind(this));
 
         this.$node
-            .on('mousedown', '.card-wrap', this._ifActiveWrap(this._onMouseDown));
+            .on('mousedown', '.card-wrap', this._ifActiveWrap(this._onMouseDown))
+            .on('mousedown', '.creature.available', this._ifActiveWrap(this._onMouseDown));
     }
 
     _onMouseDown(e) {
         if (!this._targeting) {
-            this._$clickCard = $(e.currentTarget);
+            this._$clickObject = $(e.currentTarget);
 
             this.$node
                 .on('mousemove', this._onMouseMove)
@@ -47,20 +48,23 @@ H.PlayCard = class PlayCard {
     }
 
     _onMouseMove(e) {
-        window.p = e;
         if (this._targeting) {
             if (this._mouse.y < this.PLAY_CARD_HEIGHT) {
                 if (this._isCardPlayable) {
-                    if (this._needTarget) {
-                        if (!this._arrowMode) {
-                            this._$grabCard.hide();
-                            this._toggleAimTargeting(true);
+                    if (this._isCard) {
+                        if (this._needTarget) {
+                            if (!this._arrowMode) {
+                                this._$grabCard.hide();
+                                this._toggleAimTargeting(true);
+                            }
+
+                            this._toggleCrosshair($(e.target).closest('.purpose').length > 0);
+
+                        } else {
+                            this._$grabCard.addClass('blue-glow');
                         }
-
-                        this._toggleCrosshair($(e.target).closest('.purpose').length > 0);
-
                     } else {
-                        this._$grabCard.addClass('blue-glow');
+                        this._toggleCrosshair($(e.target).closest('.purpose').length > 0);
                     }
                 } else {
                     this._showErrorMessage();
@@ -69,26 +73,31 @@ H.PlayCard = class PlayCard {
                 }
 
             } else {
-                if (this._needTarget) {
-                    if (this._arrowMode) {
-                        this._toggleAimTargeting(false);
-                        this._$grabCard.show();
+                if (this._isCard) {
+                    if (this._needTarget) {
+                        if (this._arrowMode) {
+                            this._toggleAimTargeting(false);
+                            this._$grabCard.show();
+                        }
+                    } else {
+                        this._$grabCard.removeClass('blue-glow');
                     }
                 } else {
-                    this._$grabCard.removeClass('blue-glow');
+                    this._release(true);
+                    return;
                 }
             }
 
             this._updateDragItemPosition();
 
         } else {
-            this._grabCard();
+            this._grabObject();
         }
     }
 
     _onMouseUp(e) {
         if (this._targeting) {
-            if (this._needTarget) {
+            if (this._needTarget || this._isMinion) {
                 const $targetPurpose = $(e.target).closest('.purpose');
 
                 if ($targetPurpose.length) {
@@ -102,7 +111,7 @@ H.PlayCard = class PlayCard {
             }
 
         } else {
-            this._grabCard();
+            this._grabObject();
         }
     }
 
@@ -112,10 +121,12 @@ H.PlayCard = class PlayCard {
             .off('mouseup', this._onMouseUp);
 
         if (!isCancel && this._mouse.y < this.PLAY_CARD_HEIGHT) {
-            this._playCard();
+            this._makeAction();
 
         } else {
-            this._$clickCard.show();
+            if (this._isCard) {
+                this._$clickObject.show();
+            }
         }
 
         this._toggleAimTargeting(false);
@@ -123,23 +134,38 @@ H.PlayCard = class PlayCard {
         this._clearPurposes();
 
         this._targeting = false;
-        this._$clickCard = null;
+        this._$clickObject = null;
         this._$targetPurpose = null;
-        this._$grabCard.remove();
-        this._$grabCard = null;
+
+        if (this._isCard) {
+            this._$grabCard.remove();
+            this._$grabCard = null;
+        }
     }
 
-    _grabCard() {
+    _grabObject() {
         this._targeting = true;
-        this._$grabCard = this._$clickCard.clone().addClass('grab-card');
-        this._needTarget = this._$grabCard.hasClass('need-target');
-        this._isCardPlayable = this._$grabCard.hasClass('available');
 
-        this._$clickCard.hide();
+        this._isCard = this._$clickObject.hasClass('card-wrap');
+        this._isMinion = this._$clickObject.hasClass('creature');
+
+        if (this._isMinion) {
+            this._$clickObject.addClass('find-target');
+            this._toggleAimTargeting(true);
+
+        } else {
+            this._$grabCard = this._$clickObject.clone();
+            this._$grabCard.addClass('grab-card');
+
+            this._needTarget = this._$grabCard.hasClass('need-target');
+            this._isCardPlayable = this._$grabCard.hasClass('available');
+
+            this._$clickObject.hide();
+
+            this._$grabCard.appendTo(this.$node);
+        }
 
         this._updateDragItemPosition();
-
-        this._$grabCard.appendTo(this.$node);
     }
 
     _updateDragItemPosition() {
@@ -171,17 +197,24 @@ H.PlayCard = class PlayCard {
         }
     }
 
-    _playCard() {
-        const playCardData = {
-            id: this._$grabCard.data('id')
-        };
+    _makeAction() {
+        var actionName;
+        const actionData = {};
 
-        if (this._needTarget) {
-            playCardData.target = this._$targetPurpose.data('id');
-            playCardData.side = this._$targetPurpose.closest('.creatures').hasClass('my') ? 'my' : 'op';
+        if (this._isCard) {
+            actionName = 'play-card';
+            actionData.id = this._$clickObject.data('id');
+        } else {
+            actionName = 'hit';
+            actionData.by = this._$clickObject.data('id');
         }
 
-        H.socket.send('play-card', playCardData);
+        if (this._isMinion || this._needTarget) {
+            actionData.targetSide = this._$targetPurpose.closest('.creatures').hasClass('my') ? 'my' : 'op';
+            actionData.target = this._$targetPurpose.data('id');
+        }
+
+        H.socket.send(actionName, actionData);
     }
 
     _ifActiveWrap(callback) {
@@ -207,9 +240,16 @@ H.PlayCard = class PlayCard {
                 left: this._arrowBasePosition.x
             });
 
-            H.socket.send('get-targets', {
-                cardId: this._$grabCard.data('id')
-            });
+            const actionData = {};
+
+            if (this._isCard) {
+                actionData.cardId = this._$clickObject.data('id');
+            } else {
+                actionData.creatureId = this._$clickObject.data('id');
+            }
+
+            H.socket.send('get-targets', actionData);
+
         } else {
             this._$arrow.removeClass('with-crosshair');
         }

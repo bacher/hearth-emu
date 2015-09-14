@@ -90,9 +90,11 @@
     }
   }
 
-  .creature.aiming, .avatar.aiming {
-    transform-origin: 50% 50%;
-    transform: scale(1.12);
+  .creature, .avatar {
+    &.find-target {
+      //transform-origin: 50% 50%;
+      transform: scale(1.12);
+    }
   }
 
   .creature {
@@ -1032,6 +1034,7 @@
 
   .card-preview {
     position: absolute;
+    display: none;
     pointer-events: none;
     top: -310px;
     left: -90px;
@@ -1305,7 +1308,7 @@
 
     &.blue-glow .card {
       &:before {
-        display: none !important;
+        display: none;
       }
 
       &:after {

@@ -24,11 +24,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
         this.$node.addClass('normal');
 
-        this.$cardPreview = $('<DIV>')
-            .addClass('card-preview')
-            .append($('<IMG>'))
-            .appendTo('.hand.my')
-            .hide();
+        this.$cardPreview = this.$node.find('.card-preview');
 
         this.$dragAim = $('<div>').addClass('targeting').appendTo(this.$node);
 
