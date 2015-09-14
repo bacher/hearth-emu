@@ -20,8 +20,6 @@ H.Screen = class Screen {
         this._render();
 
         this._bindEventListeners();
-
-        $(window).scrollTop(0);
     }
 
     _bindEventListeners() {}
