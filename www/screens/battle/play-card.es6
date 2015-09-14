@@ -20,10 +20,7 @@ H.PlayCard = class PlayCard {
 
         this.$node.addClass('normal-mode');
 
-        this._arrowBasePosition = {
-            x: 644,
-            y: 720 - 167
-        };
+        this._arrowBasePosition = null;
 
         this.PLAY_CARD_HEIGHT = 575;
     }
@@ -55,6 +52,7 @@ H.PlayCard = class PlayCard {
                         if (this._needTarget) {
                             if (!this._arrowMode) {
                                 this._$grabCard.hide();
+
                                 this._toggleAimTargeting(true);
                             }
 
@@ -128,6 +126,8 @@ H.PlayCard = class PlayCard {
         } else {
             if (this._isCard) {
                 this._$clickObject.show();
+            } else {
+                this._$clickObject.removeClass('find-target');
             }
         }
 
@@ -139,6 +139,7 @@ H.PlayCard = class PlayCard {
         this._targeting = false;
         this._$clickObject = null;
         this._$targetPurpose = null;
+        this._$arrowBaseObject = null;
 
         if (this._isCard) {
             this._$grabCard.remove();
@@ -156,9 +157,13 @@ H.PlayCard = class PlayCard {
 
         if (this._isMinion) {
             this._$clickObject.addClass('find-target');
+            this._$arrowBaseObject = this._$clickObject;
+
             this._toggleAimTargeting(true);
 
-        } else {
+        } else if (this._isCard) {
+            this._$arrowBaseObject = this.$node.find('.avatar.my');
+
             this._$grabCard = this._$clickObject.clone();
             this._$grabCard.addClass('grab-card');
 
@@ -247,10 +252,7 @@ H.PlayCard = class PlayCard {
         this._arrowMode = enable;
 
         if (enable) {
-            this._$arrow.css({
-                bottom: 720 - this._arrowBasePosition.y,
-                left: this._arrowBasePosition.x
-            });
+            this._setArrowBase();
 
             const actionData = {};
 
@@ -303,6 +305,20 @@ H.PlayCard = class PlayCard {
             $minion
                 .toggleClass('shift-right', x <= minionX)
                 .toggleClass('shift-left', x > minionX);
+        });
+    }
+
+    _setArrowBase() {
+        const pos = this._$arrowBaseObject.offset();
+
+        this._arrowBasePosition = {
+            x: pos.left + this._$arrowBaseObject.outerWidth() / 2,
+            y: pos.top + this._$arrowBaseObject.outerHeight() / 2
+        };
+
+        this._$arrow.css({
+            bottom: 720 - this._arrowBasePosition.y,
+            left: this._arrowBasePosition.x
         });
     }
 
