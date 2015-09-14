@@ -1,4 +1,9 @@
 
+H.KEYS = {
+    escape: 27
+};
+
+
 H.PlayCard = class PlayCard {
     constructor(battle) {
         this.battle = battle;
@@ -14,6 +19,8 @@ H.PlayCard = class PlayCard {
         this._onMouseDown = this._addUpdateMouseWrap(this._onMouseDown);
         this._onMouseMove = this._addUpdateMouseWrap(this._onMouseMove);
         this._onMouseUp = this._addUpdateMouseWrap(this._onMouseUp);
+        this._onKeyDown = this._onKeyDown.bind(this);
+        this._onContextMenu = this._onContextMenu.bind(this);
 
         this._arrowMode = false;
         this._targeting = false;
@@ -39,6 +46,18 @@ H.PlayCard = class PlayCard {
             });
     }
 
+    _onKeyDown(e) {
+        if (e.which === H.KEYS.escape && !e.metaKey && !e.ctrlKey && !e.altKey) {
+            this._release();
+        }
+    }
+
+    _onContextMenu(e) {
+        e.preventDefault();
+
+        this._release();
+    }
+
     _onMouseDown(e) {
         if (!this._targeting) {
             this._$clickObject = $(e.currentTarget);
@@ -46,6 +65,9 @@ H.PlayCard = class PlayCard {
             this.$node
                 .on('mousemove', this._onMouseMove)
                 .on('mouseup', this._onMouseUp);
+
+            $(document).on('keydown', this._onKeyDown);
+            $(document).on('contextmenu', this._onContextMenu);
         }
     }
 
@@ -72,7 +94,9 @@ H.PlayCard = class PlayCard {
                         } else {
                             this._toggleCardActivation(true);
 
-                            this._shiftMinions();
+                            if (this._isMinionCard) {
+                                this._shiftMinions();
+                            }
                         }
                     } else {
                         this._toggleCrosshair($(e.target).closest('.purpose').length > 0);
@@ -120,6 +144,9 @@ H.PlayCard = class PlayCard {
             .off('mousemove', this._onMouseMove)
             .off('mouseup', this._onMouseUp);
 
+        $(document)
+            .off('keydown', this._onKeyDown)
+            .off('contextmenu', this._onContextMenu);
 
         if (this._isCard) {
             this._$clickObject.show();
@@ -243,7 +270,7 @@ H.PlayCard = class PlayCard {
                     }
                 }
             }
-        } else if (this._minions || this._isHero) {
+        } else if (this._isMinion || this._isHero) {
             actionName = 'hit';
             actionData.by = this._$clickObject.data('id');
 
