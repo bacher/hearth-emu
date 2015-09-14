@@ -14,3 +14,9 @@ $(document).on('keyup', e => {
 $('BODY').append($('<DIV>').addClass('settings-btn').on('click', () => {
     H.toggleMenu();
 }));
+
+if (H.checkParam('fullscreen')) {
+    $(document).on('mousedown', () => {
+        document.body.webkitRequestFullscreen();
+    });
+}

@@ -16,10 +16,6 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
         this._deckScreen = null;
 
         this.page = 0;
-        //this.activeDeck = null;
-
-        //this.$cardToRemove = null;
-
     }
 
     _render() {
@@ -51,6 +47,14 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
                 this._deckScreen.addCard($(e.currentTarget).data('id'));
             })
             .on('click', '.btn-back', () => {
+                if (this._deckScreen) {
+                    this._deckScreen.hideThenDestroy();
+                }
+
+                if (this._decksScreen) {
+                    this._decksScreen.hideThenDestroy();
+                }
+
                 H.app.activateScreen('main-menu');
             })
             .on('click', '.scroll-zone.left', () => {
