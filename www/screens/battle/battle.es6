@@ -9,13 +9,6 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             hash: 'battle'
         });
 
-        this.dragging = false;
-        this.aimTargeting = false;
-        this.spellTargeting = false;
-        this.battlecryTargeting = false;
-        this.$dragCard = null;
-        this.$aimingObject = null;
-
         this._prevActiveStatus = false;
     }
 
@@ -25,8 +18,6 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         this.$node.addClass('normal');
 
         this.$cardPreview = this.$node.find('.card-preview');
-
-        this.$dragAim = $('<div>').addClass('targeting').appendTo(this.$node);
 
         this._playCard = new H.PlayCard(this);
     }
@@ -45,33 +36,18 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                 }
             })
             .on('mouseenter', '.hand.my .card-wrap', e => {
-                if (!this.dragging) {
-                    const $cardWrap = $(e.currentTarget);
-                    const $img = $cardWrap.find('IMG');
-                    const picUrl = $img.attr('src');
+                const $cardWrap = $(e.currentTarget);
+                const $img = $cardWrap.find('IMG');
+                const picUrl = $img.attr('src');
 
-                    this.$cardPreview.find('IMG').attr('src', picUrl);
-                    this.$cardPreview
-                        .toggleClass('available', $cardWrap.hasClass('available'))
-                        .show();
-                }
+                this.$cardPreview.find('IMG').attr('src', picUrl);
+                this.$cardPreview
+                    .toggleClass('available', $cardWrap.hasClass('available'))
+                    .show();
             })
             .on('mouseleave', '.card-wrap', () => {
                 this.$cardPreview.hide();
             })
-            //.on('mousedown', '.card-wrap.available', e => {
-            //    if (!this.battleData.my.active) {
-            //        return;
-            //    }
-            //
-            //    const $card = $(e.currentTarget);
-            //
-            //    this.startCardDrag($card);
-            //
-            //})
-            //.on('mousedown', '.avatar.my.available, .creatures.my .creature.available, .hero-skill.my.available.need-target', this._onMouseDown1.bind(this))
-            //.on('mousemove', this._onMouseMove.bind(this))
-            //.on('mouseup', console.log.bind(console, 'MOUSEUP'))//this._onMouseUp.bind(this))
             .on('click', '.card-select-wrapper', this._onCardSelect.bind(this));
     }
 
@@ -79,174 +55,6 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         this.$node.show();
 
         this.showWelcomeScreen();
-    }
-
-    _onMouseDown1(e) {
-        if (!this.battleData.my.active || this.dragging) {
-            return;
-        }
-
-        this.$node.addClass('targeting');
-        this.$node.removeClass('normal');
-
-        this.$aimingObject = $(e.currentTarget);
-
-        this.dragging = true;
-
-        H.socket.send('get-targets', {
-            creatureId: this.$aimingObject.data('id')
-        });
-
-        this.aimTargeting = true;
-        this.spellTargeting = false;
-
-        const minionPosition = this.$aimingObject.offset();
-
-        this.$dragAim.css({
-            bottom: 720 - (minionPosition.top + this.$aimingObject.outerHeight() / 2),
-            left: minionPosition.left + this.$aimingObject.outerWidth() / 2
-        });
-
-        this.$dragAim.data('linked-card', this.$aimingObject[0]);
-
-        this.$dragAim.show();
-
-        this.$aimingObject.addClass('aiming');
-    }
-
-    _onMouseMove(e) {
-        if (this.dragging) {
-
-            if (this.aimTargeting) {
-
-                var sourcePos;
-
-                if (this.spellTargeting) {
-                    sourcePos = {
-                        x: 643,
-                        y: 548
-                    };
-                } else {
-                    const minionPosition = this.$aimingObject.offset();
-                    sourcePos = {
-                        // TODO: Why +4/+20 ?
-                        x: minionPosition.left + this.$aimingObject.outerWidth() / 2 + 4,
-                        y: minionPosition.top + this.$aimingObject.outerWidth() / 2 + 20
-                    };
-                }
-
-                const dX = sourcePos.x - e.pageX;
-                const dY = sourcePos.y - e.pageY;
-                const distance = Math.sqrt(dX * dX + dY * dY);
-
-                var angle = Math.atan(dX / dY);
-
-                if (dY < 0) {
-                    angle = angle + Math.PI;
-                }
-
-                this.$dragAim
-                    .height(distance - 60)
-                    .css('transform', 'rotate(' + -angle + 'rad)');
-
-
-                const $purpose = $(e.target).closest('.purpose');
-                this.$node.find('.targeting').toggleClass('aim', $purpose.length > 0);
-
-            } else {
-                this.$dragCard.css({
-                    top: e.pageY,
-                    left: e.pageX
-                });
-            }
-        }
-    }
-
-    _onMouseUp(e) {
-        if (this.dragging) {
-            this.dragging = false;
-
-            this.$node.removeClass('hide-cursor');
-
-            this.$node.addClass('normal');
-            this.$node.removeClass('targeting');
-
-            const $target = $(e.target);
-
-            if (this.aimTargeting) {
-                const $purpose = $target.closest('.purpose');
-                var purposeId;
-
-                purposeId = $purpose.data('id');
-
-                const $collection = $purpose.closest('.my, .op');
-                const targetSide = $collection.hasClass('my') ? 'my' : 'op';
-
-                if ($purpose.length) {
-                    const $myCard = $(this.$dragAim.data('linked-card'));
-                    const id = $myCard.data('id');
-
-                    if (this.spellTargeting || this.battlecryTargeting) {
-                        H.socket.send('play-card', {
-                            id: id,
-                            targetSide: targetSide,
-                            target: purposeId
-                        });
-                    } else if (id === 'hero-skill') {
-                        H.socket.send('use-hero-skill', {
-                            targetSide: targetSide,
-                            target: purposeId
-                        });
-                    } else {
-                        H.socket.send('hit', {
-                            by: id,
-                            targetSide: targetSide,
-                            target: purposeId
-                        });
-                    }
-
-                } else {
-                    const $source = $(this.$dragAim.data('linked-card'));
-                    if (this.spellTargeting) {
-                        $source.show();
-                    } else {
-                        $source.removeClass('aiming');
-                    }
-                }
-
-                this.$node.find('.hero.my .avatar').removeClass('casting');
-                this.$dragAim.hide();
-
-                this.battlecryTargeting = false;
-                this.spellTargeting = false;
-                this.aimTargeting = false;
-
-            } else {
-                const $linkedCard = $(this.$dragCard.data('linked-card'));
-
-                if ($target.closest('.battleground').length) {
-                    if ($linkedCard.hasClass('need-battlecry-target')) {
-                        this.battlecryTargeting = true;
-
-                        this.startCardDrag($linkedCard);
-                    } else {
-                        H.socket.send('play-card', {
-                            id: this.$dragCard.data('id')
-                        });
-                    }
-
-                } else {
-                    $linkedCard.show();
-                }
-
-                this.$dragCard.remove();
-                this.$dragCard = null;
-            }
-
-            this.$node.find('.purpose').removeClass('purpose');
-
-            this.$node.find('.battle').removeClass('dragging');
-        }
     }
 
     _onGameData(data) {
@@ -270,33 +78,6 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
     _onCardsForPick(data) {
         this.welcomeScreen.setPickCardsData(data);
-    }
-
-    _onCardSelection(data) {
-        const $cardSelection = this.$node.find('.card-selection');
-        const $container = $cardSelection.find('.cards-container').empty();
-        data.cards.forEach((card, i) => {
-            const $wrapper = $('<div>')
-                .addClass('card-select-wrapper')
-                .data('index', i);
-
-            $('<img>')
-                .addClass('card-select-preview')
-                .attr('src', H.makeCardUrl(card.pic))
-                .appendTo($wrapper);
-
-            $container.append($wrapper);
-        });
-
-        $cardSelection.show();
-    }
-
-    _onCardSelect(e) {
-        const $preview = $(e.currentTarget);
-
-        H.socket.send('card-selection', { index: $preview.data('index') });
-
-        this.$node.find('.card-selection').hide();
     }
 
     updateInGameData() {
@@ -470,58 +251,39 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         this.welcomeScreen = H.app.activateOverlay('battle-welcome');
     }
 
-    startCardDrag($card) {
-        const isNeedTarget = $card.hasClass('need-target');
-        const isNeedBattlecryTarget = $card.hasClass('need-battlecry-target');
-
-        this.dragging = true;
-
-        if (isNeedTarget && (!isNeedBattlecryTarget || this.battlecryTargeting)) {
-            H.socket.send('get-targets', {
-                cardId: $card.data('id')
-            });
-
-            this.$node.addClass('targeting');
-            this.$node.removeClass('normal');
-
-            this.$node.find('.hero.my .avatar').addClass('casting');
-
-            this.aimTargeting = true;
-            this.spellTargeting = true;
-
-            const $dragAim = this.$dragAim;
-
-            $dragAim.css({
-                bottom: 167,
-                left: 643
-            });
-
-            $dragAim.data('linked-card', $card[0]);
-
-            $dragAim.show();
-
-            this.$node.addClass('hide-cursor');
-
-        } else {
-            this.$node.find('.battle').addClass('dragging');
-
-            this.$dragCard = $card.clone();
-
-            this.$dragCard.data('linked-card', $card[0]);
-
-            this.$dragCard.addClass('card-drag');
-
-            this.$dragCard.appendTo('.battle');
-        }
-
-        $card.hide();
-    }
-
     _showYourTurnSplash() {
         const $yourTurn = this.$node.find('.your-turn').show();
 
         $yourTurn.on('animationend', () => {
             $yourTurn.hide();
         });
+    }
+
+    _onCardSelection(data) {
+        const $cardSelection = this.$node.find('.card-selection');
+        const $container = $cardSelection.find('.cards-container').empty();
+
+        data.cards.forEach((card, i) => {
+            const $wrapper = $('<div>')
+                .addClass('card-select-wrapper')
+                .data('index', i);
+
+            $('<img>')
+                .addClass('card-select-preview')
+                .attr('src', H.makeCardUrl(card.pic))
+                .appendTo($wrapper);
+
+            $container.append($wrapper);
+        });
+
+        $cardSelection.show();
+    }
+
+    _onCardSelect(e) {
+        const $preview = $(e.currentTarget);
+
+        H.socket.send('card-selection', { index: $preview.data('index') });
+
+        this.$node.find('.card-selection').hide();
     }
 };
