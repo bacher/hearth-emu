@@ -30,8 +30,12 @@ H.PlayCard = class PlayCard {
         H.socket.on('targets', this._setPurposes.bind(this));
 
         this.$node
-            .on('mousedown', '.card-wrap', this._ifActiveWrap(this._onMouseDown))
-            .on('mousedown', '.creature.available', this._ifActiveWrap(this._onMouseDown));
+            .on('mousedown', '.my .card-wrap', this._ifActiveWrap(this._onMouseDown))
+            .on('mousedown', '.my .creature.available', this._ifActiveWrap(this._onMouseDown))
+            .on('mousedown', '.my .hero-skill.need-target.available', this._ifActiveWrap(this._onMouseDown))
+            .on('click', '.my .hero-skill.available:not(.need-target)', () => {
+                H.socket.send('use-hero-skill');
+            });
     }
 
     _onMouseDown(e) {
@@ -47,7 +51,13 @@ H.PlayCard = class PlayCard {
     _onMouseMove(e) {
         if (this._targeting) {
             if (this._mouse.y < this.PLAY_CARD_HEIGHT) {
-                if (this._isCardPlayable) {
+
+                if (this._isCard && !this._isCardPlayable) {
+                    this._showErrorMessage();
+                    this._release();
+                    return;
+
+                } else {
                     if (this._isCard) {
                         if (this._needTarget) {
                             if (!this._arrowMode) {
@@ -66,10 +76,6 @@ H.PlayCard = class PlayCard {
                     } else {
                         this._toggleCrosshair($(e.target).closest('.purpose').length > 0);
                     }
-                } else {
-                    this._showErrorMessage();
-                    this._release(true);
-                    return;
                 }
 
             } else {
@@ -83,7 +89,7 @@ H.PlayCard = class PlayCard {
                         this._toggleCardActivation(false);
                     }
                 } else {
-                    this._release(true);
+                    this._release();
                     return;
                 }
             }
@@ -97,38 +103,27 @@ H.PlayCard = class PlayCard {
 
     _onMouseUp(e) {
         if (this._targeting) {
-            if (this._needTarget || this._isMinion) {
-                const $targetPurpose = $(e.target).closest('.purpose');
-
-                if ($targetPurpose.length) {
-                    this._$targetPurpose = $targetPurpose;
-
-                    this._release();
-                }
+            if (this._mouse.y < this.PLAY_CARD_HEIGHT) {
+                this._tryMakeAction(e);
 
             } else {
                 this._release();
             }
-
         } else {
             this._grabObject();
         }
     }
 
-    _release(isCancel) {
+    _release() {
         this.$node
             .off('mousemove', this._onMouseMove)
             .off('mouseup', this._onMouseUp);
 
-        if (!isCancel && this._mouse.y < this.PLAY_CARD_HEIGHT) {
-            this._makeAction();
 
-        } else {
-            if (this._isCard) {
-                this._$clickObject.show();
-            } else {
-                this._$clickObject.removeClass('find-target');
-            }
+        if (this._isCard) {
+            this._$clickObject.show();
+        } else if (this._isMinion) {
+            this._$clickObject.removeClass('find-target');
         }
 
         this._toggleCardActivation(false);
@@ -154,9 +149,12 @@ H.PlayCard = class PlayCard {
         this._isMinionCard = this._isCard && this._$clickObject.hasClass('minion');
 
         this._isMinion = this._$clickObject.hasClass('creature');
+        this._isHeroSkill = this._$clickObject.hasClass('hero-skill');
 
-        if (this._isMinion) {
-            this._$clickObject.addClass('find-target');
+        if (this._isMinion || this._isHeroSkill) {
+            if (this._isMinion) {
+                this._$clickObject.addClass('find-target');
+            }
             this._$arrowBaseObject = this._$clickObject;
 
             this._toggleAimTargeting(true);
@@ -207,6 +205,21 @@ H.PlayCard = class PlayCard {
         }
     }
 
+    _tryMakeAction(e) {
+        if (this._needTarget || this._isMinion || this._isHeroSkill) {
+            const $targetPurpose = $(e.target).closest('.purpose');
+
+            if ($targetPurpose.length) {
+                this._$targetPurpose = $targetPurpose;
+
+                this._makeAction();
+            }
+
+        } else {
+            this._makeAction();
+        }
+    }
+
     _makeAction() {
         var actionName;
         const actionData = {};
@@ -216,22 +229,26 @@ H.PlayCard = class PlayCard {
             actionData.id = this._$clickObject.data('id');
 
             if (this._isMinionCard) {
-
                 const index = this.$node.find('.creature.shift-right').index();
 
                 actionData.index = index === -1 ? 0 : index;
             }
-        } else {
+        } else if (this._minions) {
             actionName = 'hit';
             actionData.by = this._$clickObject.data('id');
+
+        } else if (this._isHeroSkill) {
+            actionName = 'use-hero-skill';
         }
 
-        if (this._isMinion || this._needTarget) {
-            actionData.targetSide = this._$targetPurpose.closest('.creatures').hasClass('my') ? 'my' : 'op';
+        if (this._isMinion || this._needTarget || this._isHeroSkill) {
+            actionData.targetSide = this._$targetPurpose.closest('.my,.op').hasClass('my') ? 'my' : 'op';
             actionData.target = this._$targetPurpose.data('id');
         }
 
         H.socket.send(actionName, actionData);
+
+        this._release();
     }
 
     _ifActiveWrap(callback) {
@@ -258,7 +275,7 @@ H.PlayCard = class PlayCard {
 
             if (this._isCard) {
                 actionData.cardId = this._$clickObject.data('id');
-            } else {
+            } else if (this._isMinion || this._isHeroSkill) {
                 actionData.creatureId = this._$clickObject.data('id');
             }
 
@@ -315,6 +332,11 @@ H.PlayCard = class PlayCard {
             x: pos.left + this._$arrowBaseObject.outerWidth() / 2,
             y: pos.top + this._$arrowBaseObject.outerHeight() / 2
         };
+
+        if (this._isHeroSkill) {
+            this._arrowBasePosition.x += 5;
+            this._arrowBasePosition.y += 10;
+        }
 
         this._$arrow.css({
             bottom: 720 - this._arrowBasePosition.y,

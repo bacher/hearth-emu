@@ -44,9 +44,6 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                     H.socket.send('end-turn');
                 }
             })
-            .on('click', '.hero-skill.my.available', () => {
-                H.socket.send('use-hero-skill', {});
-            })
             .on('mouseenter', '.hand.my .card-wrap', e => {
                 if (!this.dragging) {
                     const $cardWrap = $(e.currentTarget);
