@@ -12,7 +12,9 @@
     box-sizing: border-box;
     background: url("/textures/game-menu.png");
 
-    animation: grow-up 0.4s linear forwards;
+    transform-origin: 50% 10%;
+
+    animation: grow-up 0.3s linear forwards;
   }
   
   @keyframes grow-up {
@@ -22,10 +24,10 @@
     60% {
       transform: scale(1.1);
     }
-    65% {
+    75% {
       transform: scale(1.13);
     }
-    70% {
+    80% {
       transform: scale(1.1);
     }
     100% {
@@ -39,11 +41,11 @@
     background: url("/textures/game-menu-splitter.png") no-repeat 50% 50%;
   }
 
-  .btn {
+  .btn-place {
     position: relative;
     width: 170px;
     height: 39px;
-    background: url("/textures/game-menu-button.png");
+    background: url("/textures/game-menu-button-place.png");
     margin: 8.8px 0;
 
     color: #503C1F;
@@ -51,16 +53,35 @@
     font-size: 18px;
     font-weight: bold;
     text-align: center;
-    line-height: 36px;
+    line-height: 26px;
+  }
 
-    &:hover:before {
-      position: absolute;
-      top: 4px;
-      left: 25px;
-      width: 121px;
-      height: 29px;
-      content: "";
+  .btn {
+    position: absolute;
+    top: 4px;
+    left: 25px;
+    width: 121px;
+    height: 29px;
+    background: url("/textures/game-menu-button.png");
+
+    &:hover {
       background: url("/textures/game-menu-button-glow.png");
+      animation: jerk 0.1s linear forwards;
+    }
+
+    @keyframes jerk {
+      0% {
+        transform: rotateX(0);
+      }
+      35% {
+        transform: rotateX(60deg);
+      }
+      80% {
+        transform: rotateX(-20deg);
+      }
+      100% {
+        transform: rotateX(0);
+      }
     }
 
     SPAN {
