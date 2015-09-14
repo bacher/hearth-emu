@@ -33,6 +33,7 @@ H.PlayCard = class PlayCard {
             .on('mousedown', '.my .card-wrap', this._ifActiveWrap(this._onMouseDown))
             .on('mousedown', '.my .creature.available', this._ifActiveWrap(this._onMouseDown))
             .on('mousedown', '.my .hero-skill.need-target.available', this._ifActiveWrap(this._onMouseDown))
+            .on('mousedown', '.my .avatar.available', this._ifActiveWrap(this._onMouseDown))
             .on('click', '.my .hero-skill.available:not(.need-target)', () => {
                 H.socket.send('use-hero-skill');
             });
@@ -150,9 +151,10 @@ H.PlayCard = class PlayCard {
 
         this._isMinion = this._$clickObject.hasClass('creature');
         this._isHeroSkill = this._$clickObject.hasClass('hero-skill');
+        this._isHero = this._$clickObject.hasClass('avatar');
 
-        if (this._isMinion || this._isHeroSkill) {
-            if (this._isMinion) {
+        if (this._isMinion || this._isHeroSkill || this._isHero) {
+            if (this._isMinion || this._isHero) {
                 this._$clickObject.addClass('find-target');
             }
             this._$arrowBaseObject = this._$clickObject;
@@ -229,11 +231,19 @@ H.PlayCard = class PlayCard {
             actionData.id = this._$clickObject.data('id');
 
             if (this._isMinionCard) {
-                const index = this.$node.find('.creature.shift-right').index();
+                const $creatures = this.$node.find('.my .creature');
 
-                actionData.index = index === -1 ? 0 : index;
+                if ($creatures.length) {
+                    const $right = $creatures.filter('.shift-right:eq(0)').index();
+
+                    if ($right.length) {
+                        actionData.index = $right.index();
+                    } else {
+                        actionData.index = $creatures.length;
+                    }
+                }
             }
-        } else if (this._minions) {
+        } else if (this._minions || this._isHero) {
             actionName = 'hit';
             actionData.by = this._$clickObject.data('id');
 
@@ -241,7 +251,7 @@ H.PlayCard = class PlayCard {
             actionName = 'use-hero-skill';
         }
 
-        if (this._isMinion || this._needTarget || this._isHeroSkill) {
+        if (!this._isMinionCard) {
             actionData.targetSide = this._$targetPurpose.closest('.my,.op').hasClass('my') ? 'my' : 'op';
             actionData.target = this._$targetPurpose.data('id');
         }
@@ -275,7 +285,7 @@ H.PlayCard = class PlayCard {
 
             if (this._isCard) {
                 actionData.cardId = this._$clickObject.data('id');
-            } else if (this._isMinion || this._isHeroSkill) {
+            } else if (this._isMinion || this._isHeroSkill || this._isHero) {
                 actionData.creatureId = this._$clickObject.data('id');
             }
 
