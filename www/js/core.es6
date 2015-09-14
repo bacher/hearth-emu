@@ -90,6 +90,16 @@ H.getDeckById = function(id) {
     return _.find(H.decks, deck => deck.id === id);
 };
 
+H.toggleMenu = function() {
+    if (!H.disableMenu) {
+        if (H.gameMenu && !H.gameMenu.closed) {
+            H.gameMenu.close();
+        } else {
+            H.gameMenu = H.app.activateOverlay('game-menu');
+        }
+    }
+};
+
 function render($cont, tmplName, params) {
     try {
         jade.render($cont[0], tmplName, params || {});

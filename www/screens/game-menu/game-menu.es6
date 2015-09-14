@@ -14,6 +14,12 @@ H.Screens['game-menu'] = class GameMenuScreen extends H.Screen {
         });
     }
 
+    _show() {
+        this.$node.show();
+
+        $('.settings-btn').addClass('active');
+    }
+
     _bindEventListeners() {
         this.$node
             .on('click', e => {
@@ -32,11 +38,17 @@ H.Screens['game-menu'] = class GameMenuScreen extends H.Screen {
             })
             .on('click', '.quit', () => {
                 window.location = '/';
+            })
+            .on('click', '.resume', () => {
+                this.close();
             });
     }
 
     close() {
         this.closed = true;
+
+        $('.settings-btn').removeClass('active');
+
         this.hideThenDestroy();
     }
 };
