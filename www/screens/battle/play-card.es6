@@ -120,6 +120,8 @@ H.PlayCard = class PlayCard {
 
         this._toggleAimTargeting(false);
 
+        this._clearPurposes();
+
         this._targeting = false;
         this._$clickCard = null;
         this._$targetPurpose = null;
@@ -231,9 +233,9 @@ H.PlayCard = class PlayCard {
     }
 
     _setPurposes(data) {
-        const targetsDetails = data.targets;
+        this._clearPurposes();
 
-        this.$node.find('.purpose').removeClass('purpose');
+        const targetsDetails = data.targets;
 
         if (targetsDetails !== 'not-need') {
 
@@ -253,6 +255,10 @@ H.PlayCard = class PlayCard {
                 }
             });
         }
+    }
+
+    _clearPurposes() {
+        this.$node.find('.purpose').removeClass('purpose');
     }
 
     _toggleCrosshair(enable) {
