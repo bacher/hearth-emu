@@ -26,10 +26,12 @@ H.Socket = class Socket {
 
         H.loadDecks();
 
-        if (H.activeDeck) {
+        const deck = H.playDeck || H.activeDeck;
+
+        if (deck) {
             H.socket.send('join', {
                 name: name,
-                deck: H.activeDeck
+                deck: deck
             });
         } else {
             window.alert('Deck is not selected');

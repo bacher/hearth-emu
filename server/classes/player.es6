@@ -85,7 +85,11 @@ H.Player = class Player extends EventEmitter {
 
             this.joinParams = data;
 
-            const deck = this.joinParams.deck;
+            var deck = this.joinParams.deck;
+
+            if (typeof deck !== 'object') {
+                deck = H.BASIC_DECKS[deck];
+            }
 
             this.deck = new H.Deck(deck.cardIds);
             this.hero = H.Hero.create(this, deck.clas);

@@ -40,6 +40,7 @@ require('./cards');
 require('./event-filters');
 require('./custom-actions');
 require('./conditions');
+require('./basic-decks');
 
 
 module.exports = class Game {

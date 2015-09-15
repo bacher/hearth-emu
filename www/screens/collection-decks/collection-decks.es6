@@ -18,7 +18,8 @@ H.Screens['collection-decks'] = class CollectionDecksScreen extends H.Screen {
             .on('click', '.new-deck', () => {
                 const chooseHero = H.app.activateOverlay('choose-hero-deck', {
                     onlyBasic: true,
-                    onChoose: clas => {
+                    onChoose: selectInfo => {
+                        const clas = selectInfo.heroClass;
                         const className = H.CLASSES_L[clas];
 
                         const deckInfo = {
