@@ -1,0 +1,309 @@
+.chd {
+
+  .choose-hero-deck {
+    width: 1280px;
+    height: 720px;
+    background: url("/textures/start-game-menu.jpg");
+  }
+
+  .ok {
+    position: absolute;
+    display: none;
+
+    &.choose {
+      top: 518px;
+      left: 851px;
+      width: 160px;
+      height: 152px;
+      background: url("/textures/choose.png");
+    }
+
+    &.play {
+      top: 526px;
+      left: 867px;
+      width: 134px;
+      height: 135px;
+      background: url("/textures/play-button.png");
+    }
+  }
+
+  .back {
+    position: absolute;
+    top: 652px;
+    left: 1027px;
+    width: 68px;
+    height: 33px;
+
+    &:hover {
+      background: url("/textures/blink2.png");
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .panel {
+    display: none;
+
+    &.heroes {
+      position: absolute;
+      top: 39px;
+      left: 200px;
+      width: 552px;
+      height: 611px;
+      background: url("/textures/choose-hero-panel.jpg");
+    }
+  }
+
+  .heroes-wrapper {
+    position: absolute;
+    top: 66px;
+    left: 35px;
+  }
+
+  .hero {
+    display: inline-block;
+    width: 155px;
+    margin-right: 5px;
+    height: 133px;
+    margin-top: 15px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.selected:after {
+      position: absolute;
+      content: '';
+      width: 169px;
+      height: 140px;
+      margin-left: -7px;
+      margin-top: 4px;
+      background: url("/textures/select-hero-glow.png");
+    }
+  }
+
+  .hero-details {
+    position: absolute;
+    top: 202px;
+    left: 833px;
+
+    .label {
+      position: absolute;
+      top: 250px;
+      width: 200px;
+      text-align: center;
+
+      color: #FFF;
+      font-family: "Belwe Bold", Times, serif;
+      font-size: 15px;
+      text-shadow: 0 0 1px #000, 0 0 3px #000;
+      letter-spacing: 0.7px;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .avatar {
+    position: absolute;
+    width: 226px;
+    height: 227px;
+
+    &.druid {
+      background: url("/textures/hero-big-avatar_druid.png");
+    }
+    &.hunter {
+      background: url("/textures/hero-big-avatar_hunter.png");
+    }
+    &.mage {
+      background: url("/textures/hero-big-avatar_mage.png");
+    }
+    &.paladin {
+      background: url("/textures/hero-big-avatar_paladin.png");
+    }
+    &.priest {
+      background: url("/textures/hero-big-avatar_priest.png");
+    }
+    &.rogue {
+      background: url("/textures/hero-big-avatar_rogue.png");
+    }
+    &.shaman {
+      background: url("/textures/hero-big-avatar_shaman.png");
+    }
+    &.warlock {
+      background: url("/textures/hero-big-avatar_warlock.png");
+    }
+    &.warrior {
+      background: url("/textures/hero-big-avatar_warrior.png");
+    }
+  }
+
+  .select-decks-type {
+    position: absolute;
+    top: 642px;
+    left: 342px;
+
+    &.basic {
+      .label.basic {
+        display: block;
+      }
+      .btn.right {
+        display: block;
+      }
+    }
+
+    &.custom {
+      .label.custom {
+        display: block;
+      }
+      .btn.left {
+        display: block;
+      }
+    }
+
+    .label {
+      position: absolute;
+      display: none;
+      left: 52px;
+      width: 166px;
+      height: 29px;
+
+      color: #FFF;
+      font-family: "Belwe Bold", Times, serif;
+      font-size: 18px;
+      text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 1px #000;
+      text-align: center;
+      line-height: 26px;
+      letter-spacing: 0.7px;
+    }
+
+    .btn {
+      position: absolute;
+      display: none;
+      width: 43px;
+      height: 31px;
+
+      &.left {
+        left: 0;
+        background: url("/textures/select-decks-type_left.png");
+
+        &:hover {
+          top: -10px;
+          left: -8px;
+          width: 59px;
+          height: 52px;
+          background: url("/textures/select-decks-type-glow_left.png");
+        }
+      }
+
+      &.right {
+        left: 228px;
+        background: url("/textures/select-decks-type_right.png");
+
+        &:hover {
+          top: -10px;
+          left: 220px;
+          width: 59px;
+          height: 52px;
+          background: url("/textures/select-decks-type-glow_right.png");
+        }
+      }
+    }
+  }
+
+  .decks {
+    position: absolute;
+    top: 168px;
+    left: 242px;
+    width: 470px;
+
+    transform: scale(1.07);
+    transform-origin: 0 0;
+  }
+
+  .deck {
+    position: relative;
+    display: inline-block;
+    width: 145px;
+    height: 57px;
+    margin-top: 3px;
+    margin-right: 4px;
+    margin-bottom: 75px;
+
+    &.selected:after {
+      position: absolute;
+      content: "";
+      width: 150px;
+      height: 66px;
+      top: -4px;
+      left: -1px;
+      background: url("/textures/deck-preview-glow.png");
+    }
+
+    &:hover:not(.selected) {
+      box-shadow: 0 0 12px 7px rgba(200, 200, 200, 0.8);
+    }
+
+    .background {
+      position: absolute;
+      left: 11px;
+      top: 10px;
+      width: 127px;
+      height: 37px;
+
+      &.shaman {
+        background: url("/textures/deck-hero-shaman.jpg");
+      }
+      &.rogue {
+        background: url("/textures/deck-hero-rogue.jpg");
+      }
+      &.paladin {
+        background: url("/textures/deck-hero-paladin.jpg");
+      }
+      &.priest {
+        background: url("/textures/deck-hero-priest.jpg");
+      }
+      &.druid {
+        background: url("/textures/deck-hero-druid.jpg");
+      }
+      &.mage {
+        background: url("/textures/deck-hero-mage.jpg");
+      }
+      &.warlock {
+        background: url("/textures/deck-hero-warlock.jpg");
+      }
+      &.hunter {
+        background: url("/textures/deck-hero-hunter.jpg");
+      }
+      &.warrior {
+        background: url("/textures/deck-hero-warrior.jpg");
+      }
+    }
+
+    .label {
+      position: absolute;
+      top: 31px;
+      left: 17px;
+      width: 118px;
+      height: 30px;
+
+      color: #FFF;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      font-family: "Belwe Bold", Times, serif;
+      font-size: 13px;
+      text-shadow: 0 0 1px #000, 0 0 3px #000;
+      letter-spacing: 0.3px;
+    }
+
+    .frame {
+      position: absolute;
+      width: 144px;
+      height: 58px;
+      background: url("/textures/deck-hero-frame.png");
+    }
+  }
+}

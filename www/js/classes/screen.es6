@@ -1,7 +1,7 @@
 
 H.Screen = class Screen {
     constructor(info) {
-        this.gClass = info.gClass;
+        this.gClass = info.gClass || null;
         this.name = info.name;
 
         if (info.hash !== false) {
@@ -14,13 +14,18 @@ H.Screen = class Screen {
 
         this.$node = $('<DIV>')
             .css('display', 'none')
-            .addClass('screen')
-            .addClass(this.gClass);
+            .addClass('screen');
+
+        if (this.gClass) {
+            this.$node.addClass(this.gClass);
+        }
 
         this._render();
 
         this._bindEventListeners();
     }
+
+    _render() {}
 
     _bindEventListeners() {}
 
@@ -34,7 +39,11 @@ H.Screen = class Screen {
 
     _show() {
         this.$node.show();
+
+        this._onShow();
     }
+
+    _onShow() {}
 
     hide() {
         const promise = this._hide();

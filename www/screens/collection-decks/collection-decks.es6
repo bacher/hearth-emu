@@ -16,7 +16,30 @@ H.Screens['collection-decks'] = class CollectionDecksScreen extends H.Screen {
     _bindEventListeners() {
         this.$node
             .on('click', '.new-deck', () => {
-                H.app.activateOverlay('create-deck');
+                const chooseHero = H.app.activateOverlay('choose-hero-deck', {
+                    onlyBasic: true,
+                    onChoose: clas => {
+                        const className = H.CLASSES_L[clas];
+
+                        const deckInfo = {
+                            label: 'Custom ' + className[0].toUpperCase() + className.substr(1),
+                            clas: clas,
+                            cardIds: [],
+                            id: Math.floor(Math.random() * 10000)
+                        };
+
+                        H.decks.push(deckInfo);
+
+                        H.saveDecks();
+
+                        H.app.getActiveScreen().deckCreated(deckInfo.id);
+
+                        chooseHero.close();
+                    },
+                    onBack: () => {
+                        chooseHero.close();
+                    }
+                });
             })
             .on('click', '.deck', e => {
                 const $deck = $(e.currentTarget);

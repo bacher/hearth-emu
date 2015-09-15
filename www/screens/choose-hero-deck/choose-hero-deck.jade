@@ -1,0 +1,38 @@
+
+.choose-hero-deck
+
+   - if (!onlyBasic)
+      .panel.decks
+         each deck in decks
+            .deck(data-id=deck.id)
+               .background(class=H.CLASSES_L[deck.clas])
+               .label= deck.label
+               .frame
+
+   .panel.heroes
+      .heroes-wrapper
+         .hero.warrior(data-clas=1)
+         .hero.shaman(data-clas=2)
+         .hero.rogue(data-clas=3)
+         .hero.paladin(data-clas=4)
+         .hero.hunter(data-clas=5)
+         .hero.druid(data-clas=6)
+         .hero.warlock(data-clas=7)
+         .hero.mage(data-clas=8)
+         .hero.priest(data-clas=9)
+
+
+   .hero-details
+      .avatar
+      .label
+
+   - if (!onlyBasic)
+      .select-decks-type
+         .btn.left
+         .label.custom Custom Decks
+         .label.basic Basic Decks
+         .btn.right
+
+   .ok
+
+   .back

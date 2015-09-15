@@ -2,53 +2,37 @@
 H.Screens['start-game-menu'] = class StartGameMenuScreen extends H.Screen {
     constructor() {
         super({
-            gClass: 'sg',
             name: 'start-game-menu',
             hash: 'start-game'
         });
     }
 
-    _render() {
-        render(this.$node, 'start-game-menu', {
-            decks: H.decks
-        });
+    _onShow() {
+        const chooseDeck = H.app.activateOverlay('choose-hero-deck', {
+            okButtonType: 'play',
 
-        H.loadDecks();
+            onChoose: selection => {
+                chooseDeck.close();
 
-        if (H.activeDeck) {
-            setTimeout(() => {
-                $('.deck[data-id="' + H.activeDeck.id + '"]').click();
-            }, 4);
-        }
-    }
+                if (selection.heroClass) {
+                    H.playDeck = selection.heroClass;
+                } else {
+                    H.playDeck = H.activeDeck;
+                }
 
-    _bindEventListeners() {
-        this.$node
-            .on('click', '.deck:not(.selected)', e => {
-                const $deck = $(e.currentTarget);
-
-                $('.deck.selected').removeClass('selected');
-                $deck.addClass('selected');
-
-                const deckId = $deck.data('id');
-
-                H.activeDeck = H.getDeckById(deckId);
-
-                $('.hero .avatar')
-                    .removeClass()
-                    .addClass('avatar')
-                    .addClass(H.CLASSES_L[H.activeDeck.clas]);
-                $('.hero .label').text(H.activeDeck.label);
-
-                $('.play-btn').show();
-
-                H.saveDecks();
-            })
-            .on('click', '.play-btn', () => {
                 H.app.activateScreen('waiting-opponent');
-            })
-            .on('click', '.back', () => {
+            },
+            onBack: () => {
+                chooseDeck.close();
+
                 H.app.activateScreen('main-menu');
-            });
+            },
+            onHighlight: selection => {
+                if (selection.deckId) {
+                    H.activeDeck = H.getDeckById(selection.deckId);
+                    H.saveDecks();
+                }
+            }
+        });
     }
 };
