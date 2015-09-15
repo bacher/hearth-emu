@@ -37,6 +37,16 @@ const A = {
             target.attack += amount;
         });
     },
+    'add-attack-of-weapon': function(o) {
+        o.targets.forEach(minion => {
+            const weapon = minion.player.hero.weapon;
+
+            if (weapon) {
+                //FIXME applyFilters
+                minion.attack += weapon.attack;
+            }
+        });
+    },
     'add-hp': function(o) {
         const amount = this.params[0];
 

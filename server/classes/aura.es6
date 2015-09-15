@@ -48,6 +48,14 @@ const AURAS = {
                 card.cost = 0;
             }
         }
+    },
+    'enrage': {
+        affect: 'minion',
+        effect(minion) {
+            AURAS[this.params[0]].effect.apply({
+                params: this.params.slice(1)
+            }, arguments);
+        }
     }
 };
 

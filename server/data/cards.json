@@ -1609,6 +1609,41 @@
     }
   },
   {
+    "id": 221,
+    "name": "Amari Berserker",
+    "cost": 2,
+    "pic": "148/322/641",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "enrage",
+                "params": [
+                  "add-attack",
+                  3
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 105,
     "name": "Ancestral Spirit",
     "cost": 2,
@@ -1717,6 +1752,33 @@
     }
   },
   {
+    "id": 228,
+    "name": "Bloodsail Raider",
+    "cost": 2,
+    "pic": "149/499/637",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 6,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-attack-of-weapon",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 10,
     "name": "Bluegill Warrior",
     "cost": 2,
@@ -1822,6 +1884,46 @@
     }
   },
   {
+    "id": 222,
+    "name": "Dire Wolf Alpha",
+    "cost": 2,
+    "pic": "148/60/305",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 1,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ],
+              "modificators": [
+                {
+                  "name": "adjacent",
+                  "params": []
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 118,
     "name": "Divine Spirit",
     "cost": 2,
@@ -1876,6 +1978,24 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 223,
+    "name": "Faerie Dragon",
+    "cost": 2,
+    "pic": "149/514/213",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [
+        "spell-stealth"
+      ],
+      "race": 3,
+      "events": {}
     }
   },
   {
@@ -2022,6 +2142,38 @@
     }
   },
   {
+    "id": 224,
+    "name": "Ironbeak Owl",
+    "cost": 2,
+    "pic": "147/679/500",
+    "clas": 0,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 1,
+      "flags": [],
+      "race": 1,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "silence",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 211,
     "name": "Kobold Geomancer",
     "cost": 2,
@@ -2045,6 +2197,79 @@
                 ]
               }
             ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 225,
+    "name": "Loot Hoarder",
+    "cost": 2,
+    "pic": "147/942/395",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 1,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "draw-card",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 226,
+    "name": "Mad Bomber",
+    "cost": 2,
+    "pic": "147/917/80",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ],
+              "modificators": [
+                {
+                  "name": "invert",
+                  "params": []
+                },
+                {
+                  "name": "random",
+                  "params": [
+                    3
+                  ]
+                }
+              ]
+            }
           }
         ]
       }
@@ -2338,6 +2563,39 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 227,
+    "name": "Youthful Brewmaster",
+    "cost": 2,
+    "pic": "147/878/247",
+    "clas": 0,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "minions",
+        "friends"
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "return-to-hand",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
