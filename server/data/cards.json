@@ -424,6 +424,34 @@
     }
   },
   {
+    "id": 199,
+    "name": "Blessing of Might",
+    "cost": 1,
+    "pic": "147/522/394",
+    "clas": 4,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-attack",
+              "params": [
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 154,
     "name": "Blessing of Wisdom",
     "cost": 1,
@@ -775,6 +803,34 @@
     }
   },
   {
+    "id": 200,
+    "name": "Hand of Protector",
+    "cost": 1,
+    "pic": "148/295/499",
+    "clas": 4,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-flags",
+              "params": [
+                "shield"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 15,
     "name": "Healing Totem",
     "cost": 1,
@@ -832,6 +888,34 @@
               "name": "deal-damage",
               "params": [
                 2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 201,
+    "name": "Humility",
+    "cost": 1,
+    "pic": "148/280/189",
+    "clas": 4,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "set-attack",
+              "params": [
+                1
               ]
             }
           ]
@@ -1646,6 +1730,34 @@
               "name": "add-hero-attack",
               "params": [
                 4
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 198,
+    "name": "Holy Light",
+    "cost": 2,
+    "pic": "147/528/108",
+    "clas": 4,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "heal",
+              "params": [
+                6
               ]
             }
           ]
@@ -2682,6 +2794,40 @@
     }
   },
   {
+    "id": 195,
+    "name": "Blessing of Kings",
+    "cost": 4,
+    "pic": "147/534/29",
+    "clas": 4,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-attack",
+              "params": [
+                4
+              ]
+            },
+            {
+              "name": "add-hp",
+              "params": [
+                4
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 3,
     "type": 1,
     "name": "Brewmaster",
@@ -2748,6 +2894,34 @@
                 "name": "add-adjacent",
                 "params": []
               }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 196,
+    "name": "Consecration",
+    "cost": 4,
+    "pic": "147/537/260",
+    "clas": 4,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                2
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies"
             ]
           }
         }
@@ -2837,6 +3011,42 @@
       "maxHp": 4,
       "flags": null,
       "events": {}
+    }
+  },
+  {
+    "id": 197,
+    "name": "Hammer of Wrath",
+    "cost": 4,
+    "pic": "147/540/350",
+    "clas": 4,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "draw-card",
+              "params": []
+            }
+          ]
+        }
+      ]
     }
   },
   {
