@@ -175,6 +175,11 @@ const A = {
             hero.destroyWeapon();
         });
     },
+    'add-charge-if-weapon': function(o) {
+        if (o.player.hero.weapon) {
+            o.minion.addFlag('charge');
+        }
+    },
     'add-weapon-attack': function(o) {
         o.player.hero.weapon.attack += this.params[0];
     },

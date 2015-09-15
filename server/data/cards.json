@@ -263,6 +263,59 @@
     }
   },
   {
+    "id": 213,
+    "name": "Wisp",
+    "cost": 0,
+    "pic": "147/697/273",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 214,
+    "name": "Abusive Sergeant",
+    "cost": 1,
+    "pic": "147/661/577",
+    "clas": 0,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 1,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-aura",
+                "params": [
+                  "add-attack",
+                  2,
+                  "this-turn",
+                  "target"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 162,
     "name": "Arcane Missiles",
     "cost": 1,
@@ -370,6 +423,24 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 215,
+    "name": "Argent Squire",
+    "cost": 1,
+    "pic": "147/798/473",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [
+        "shield"
+      ],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -972,6 +1043,41 @@
     }
   },
   {
+    "id": 216,
+    "name": "Leper Gnome",
+    "cost": 1,
+    "pic": "147/851/513",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 1,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies",
+                "heroes"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 202,
     "name": "Light's Justice",
     "cost": 1,
@@ -1193,6 +1299,24 @@
     }
   },
   {
+    "id": 217,
+    "name": "Shieldbearer",
+    "cost": 1,
+    "pic": "148/343/24",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 0,
+      "maxHp": 4,
+      "flags": [
+        "taunt"
+      ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 23,
     "name": "Silver Hand Recruit",
     "cost": 1,
@@ -1208,6 +1332,33 @@
       "flags": [],
       "events": {},
       "race": 0
+    }
+  },
+  {
+    "id": 218,
+    "name": "Southsea Deckhand",
+    "cost": 1,
+    "pic": "147/607/103",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 1,
+      "flags": [],
+      "race": 6,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-charge-if-weapon",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
@@ -1358,6 +1509,24 @@
     }
   },
   {
+    "id": 219,
+    "name": "Worgen Infiltrator",
+    "cost": 1,
+    "pic": "147/804/112",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 1,
+      "flags": [
+        "stealth"
+      ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 14,
     "name": "Wrath of Air Totem",
     "cost": 1,
@@ -1386,6 +1555,24 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 220,
+    "name": "Young Dragonhawk",
+    "cost": 1,
+    "pic": "147/634/629",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [
+        "windfury"
+      ],
+      "race": 1,
+      "events": {}
     }
   },
   {
