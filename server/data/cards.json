@@ -58,7 +58,7 @@
     "name": "Frog",
     "cost": 0,
     "pic": "149/184/115",
-    "clas": 2,
+    "clas": 0,
     "type": 1,
     "flags": [
       "uncollectable"
@@ -161,7 +161,9 @@
     "pic": "148/373/486",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "uncollectable"
+    ],
     "minion": {
       "attack": 1,
       "maxHp": 1,
@@ -478,6 +480,24 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 209,
+    "name": "Boar",
+    "cost": 1,
+    "pic": "147/719/65",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 1,
+      "events": {}
     }
   },
   {
