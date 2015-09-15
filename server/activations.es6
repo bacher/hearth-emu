@@ -170,6 +170,11 @@ const A = {
 
         o.player.hero.equipWeapon(new H.Weapon(card));
     },
+    'destroy-weapon': function(o) {
+        o.targets.forEach(hero => {
+            hero.destroyWeapon();
+        });
+    },
     'add-weapon-attack': function(o) {
         o.player.hero.weapon.attack += this.params[0];
     },

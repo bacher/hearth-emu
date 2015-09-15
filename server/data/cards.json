@@ -1389,6 +1389,39 @@
     }
   },
   {
+    "id": 210,
+    "name": "Acidic Swamp Ooze",
+    "cost": 2,
+    "pic": "147/903/74",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "destroy-weapon",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies",
+                "hero"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 105,
     "name": "Ancestral Spirit",
     "cost": 2,
@@ -1802,6 +1835,35 @@
     }
   },
   {
+    "id": 211,
+    "name": "Kobold Geomancer",
+    "cost": 2,
+    "pic": "147/604/479",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "add-spell-damage",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 115,
     "name": "Mind Blast",
     "cost": 2,
@@ -1828,6 +1890,35 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 212,
+    "name": "Murloc Tidehunter",
+    "cost": 2,
+    "pic": "148/370/357",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 1,
+      "flags": [],
+      "race": 5,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "murloc scout"
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {

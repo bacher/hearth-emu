@@ -210,6 +210,12 @@ H.Hero = class Hero {
         this.weapon.enterInGame(this.player);
     }
 
+    destroyWeapon() {
+        this.weapon.detach();
+
+        this.weapon = null;
+    }
+
     _onTurnStart() {
         this.overload = this.nextOverload;
         this.nextOverload = 0;
