@@ -1811,6 +1811,49 @@
     }
   },
   {
+    "id": 204,
+    "name": "Novice Engineer",
+    "cost": 2,
+    "pic": "147/820/435",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "draw-card",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 205,
+    "name": "River Crocolisk",
+    "cost": 2,
+    "pic": "147/580/535",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 1,
+      "events": {}
+    }
+  },
+  {
     "id": 129,
     "name": "Sap",
     "cost": 2,
