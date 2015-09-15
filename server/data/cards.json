@@ -572,6 +572,24 @@
     }
   },
   {
+    "id": 230,
+    "name": "Damaged Golem",
+    "cost": 1,
+    "pic": "149/605/200",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 1,
+      "flags": [],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
     "id": 131,
     "name": "Deadly Poison",
     "cost": 1,
@@ -2599,6 +2617,42 @@
     }
   },
   {
+    "id": 238,
+    "name": "Acolyte of Pain",
+    "cost": 3,
+    "pic": "147/795/428",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "draw-card",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "take-damage",
+              "params": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 145,
     "name": "Aldor Peacekeeper",
     "cost": 3,
@@ -2799,6 +2853,40 @@
     }
   },
   {
+    "id": 236,
+    "name": "Earthen Ring Farseer",
+    "cost": 3,
+    "pic": "147/570/557",
+    "clas": 0,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "heal",
+                "params": [
+                  3
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 128,
     "name": "Fan of Knives",
     "cost": 3,
@@ -2903,6 +2991,44 @@
     }
   },
   {
+    "id": 237,
+    "name": "Flesheating Ghoul",
+    "cost": 3,
+    "pic": "149/608/610",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "death",
+              "params": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 159,
     "name": "Frost Nova",
     "cost": 3,
@@ -2929,6 +3055,35 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 229,
+    "name": "Harvest Golem",
+    "cost": 3,
+    "pic": "148/430/386",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "damaged golem"
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
@@ -3069,6 +3224,24 @@
         ]
       },
       "race": 0
+    }
+  },
+  {
+    "id": 235,
+    "name": "Jungle Panther",
+    "cost": 3,
+    "pic": "147/826/392",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 2,
+      "flags": [
+        "stealth"
+      ],
+      "race": 1,
+      "events": {}
     }
   },
   {
@@ -3217,6 +3390,47 @@
     }
   },
   {
+    "id": 232,
+    "name": "Raging Worgen",
+    "cost": 3,
+    "pic": "148/364/95",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "enrage",
+                "params": [
+                  "add-flags",
+                  "windfury"
+                ]
+              }
+            ]
+          },
+          {
+            "acts": [
+              {
+                "name": "enrage",
+                "params": [
+                  "add-attack",
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 20,
     "name": "Raid Leader",
     "cost": 3,
@@ -3270,6 +3484,24 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 231,
+    "name": "Scarlet Crusader",
+    "cost": 3,
+    "pic": "147/833/475",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 1,
+      "flags": [
+        "shield"
+      ],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -3352,6 +3584,56 @@
         "taunt"
       ],
       "race": 1,
+      "events": {}
+    }
+  },
+  {
+    "id": 233,
+    "name": "Tauren Warrior",
+    "cost": 3,
+    "pic": "148/313/477",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [
+        "taunt"
+      ],
+      "race": 0,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "enrage",
+                "params": [
+                  "add-attack",
+                  3
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 234,
+    "name": "Thrallmar Farseer",
+    "cost": 3,
+    "pic": "147/836/265",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [
+        "windfury"
+      ],
+      "race": 0,
       "events": {}
     }
   },
