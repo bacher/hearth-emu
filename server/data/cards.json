@@ -952,6 +952,22 @@
     }
   },
   {
+    "id": 202,
+    "name": "Light's Justice",
+    "cost": 1,
+    "pic": "147/531/250",
+    "clas": 4,
+    "type": 3,
+    "flags": [],
+    "weapon": {
+      "attack": 1,
+      "durability": 4,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 101,
     "name": "Lightning Bolt",
     "cost": 1,
@@ -4434,6 +4450,47 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 203,
+    "name": "Stormwind Champion",
+    "cost": 7,
+    "pic": "147/688/310",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 6,
+      "maxHp": 6,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              },
+              {
+                "name": "add-hp",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions",
+                "friends"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
