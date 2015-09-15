@@ -290,7 +290,7 @@ H.PlayCard = class PlayCard {
             actionName = 'use-hero-skill';
         }
 
-        if (!this._isMinionCard) {
+        if (this._$targetPurpose) {
             if (this._isBattlecryPreview) {
                 actionName = this._savedAction.actionName;
                 actionData = this._savedAction.actionData;
