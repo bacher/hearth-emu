@@ -8,11 +8,20 @@ const A = {
     'summon': function(o) {
         const minionCardName = this.params[0];
         const count = this.params[1] || 1;
+        var index = null;
+
+        if (o.minion) {
+            const minionPosition = o.player.creatures.indexOf(o.minion);
+
+            if (minionPosition !== -1) {
+                index = minionPosition + 1;
+            }
+        }
 
         for (var i = 0; i < count; ++i) {
             const minion = H.Minion.createByName(minionCardName);
 
-            o.player.creatures.addCreature(minion);
+            o.player.creatures.addCreature(minion, index);
         }
     },
     'summon-random': function(o) {
