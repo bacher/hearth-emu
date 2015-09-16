@@ -2301,6 +2301,58 @@
     }
   },
   {
+    "id": 250,
+    "name": "Lightwell",
+    "cost": 2,
+    "pic": "148/259/117",
+    "clas": 9,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 0,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "heal",
+                "params": [
+                  3
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "friends"
+              ],
+              "modificators": [
+                {
+                  "name": "damaged",
+                  "params": []
+                },
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            },
+            "event": {
+              "name": "start-turn",
+              "params": [
+                "own"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 225,
     "name": "Loot Hoarder",
     "cost": 2,
@@ -5257,26 +5309,12 @@
     }
   },
   {
-    "id": 248,
+    "id": 133,
     "name": "Cabal Shadow Priest",
     "cost": 6,
     "pic": "147/933/147",
     "clas": 9,
     "type": 1,
-    "targetsType": {
-      "names": [
-        "enemies",
-        "minions"
-      ],
-      "modificators": [
-        {
-          "name": "attack-less",
-          "params": [
-            3
-          ]
-        }
-      ]
-    },
     "flags": [],
     "minion": {
       "attack": 4,
@@ -5298,12 +5336,26 @@
     }
   },
   {
-    "id": 133,
+    "id": 248,
     "name": "Cabal Shadow Priest",
     "cost": 6,
     "pic": "147/933/147",
     "clas": 9,
     "type": 1,
+    "targetsType": {
+      "names": [
+        "enemies",
+        "minions"
+      ],
+      "modificators": [
+        {
+          "name": "attack-less",
+          "params": [
+            3
+          ]
+        }
+      ]
+    },
     "flags": [],
     "minion": {
       "attack": 4,

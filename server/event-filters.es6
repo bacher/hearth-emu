@@ -129,6 +129,46 @@ const E = {
                 }
             };
         }
+    },
+    'start-turn': {
+        eventName: 'start-turn',
+        filterFunc(o, params, callback) {
+            const side = params[0];
+
+            var playerSide = null;
+
+            if (side === 'own') {
+                playerSide = o.player;
+            } else if (side === 'op') {
+                playerSide = o.player.enemy;
+            }
+
+            return function(player) {
+                if (!playerSide || playerSide === player) {
+                    callback.apply(null, arguments);
+                }
+            };
+        }
+    },
+    'end-turn': {
+        eventName: 'end-turn',
+        filterFunc(o, params, callback) {
+            const side = params[0];
+
+            var playerSide = null;
+
+            if (side === 'own') {
+                playerSide = o.player;
+            } else if (side === 'op') {
+                playerSide = o.player.enemy;
+            }
+
+            return function(player) {
+                if (!playerSide || playerSide === player) {
+                    callback.apply(null, arguments);
+                }
+            };
+        }
     }
 };
 
