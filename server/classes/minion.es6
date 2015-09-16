@@ -40,6 +40,11 @@ H.Minion = class Minion extends H.GameObject {
         return data;
     }
 
+    _modifyClientData(data) {
+        data.pic = data.card.pic;
+        delete data.card;
+    }
+
     dealDamage(dmg) {
         dmg = H.parseValue(dmg);
 

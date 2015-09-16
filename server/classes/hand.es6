@@ -30,7 +30,7 @@ H.Hand = class Hand {
         return this.cards.length;
     }
 
-    getGameData() {
+    getClientData() {
         return this.cards.map(handCard => {
             return handCard.getClientData();
         });

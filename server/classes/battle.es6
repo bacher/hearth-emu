@@ -54,11 +54,20 @@ H.Battle = class Battle extends EventEmitter {
     _sendCardsForRepick() {
         var cards = this.p1.deck.showLastCards(3);
         this.p1.startingCardCount = 3;
-        this.p1.sendMessage('cards-for-repick', cards);
+        this.p1.sendMessage('cards-for-repick', extractInfo(cards));
 
         cards = this.p2.deck.showLastCards(4);
         this.p2.startingCardCount = 4;
-        this.p2.sendMessage('cards-for-repick', cards);
+        this.p2.sendMessage('cards-for-repick', extractInfo(cards));
+
+        function extractInfo(cards) {
+            return cards.map(deckCard => {
+                return {
+                    id: deckCard.id,
+                    pic: deckCard.card.pic
+                };
+            });
+        }
     }
 
     _start2() {
@@ -247,14 +256,16 @@ H.Battle = class Battle extends EventEmitter {
 
     _playCard(player, data) {
         const handCard = player.hand.getCardById(data.id);
-        const card = handCard.base;
+        const handCardInfo = handCard.getData();
+        const card = handCardInfo.base;
 
         player.hand.removeHandCard(handCard);
-        player.hero.removeMana(card.cost);
+        player.hero.removeMana(handCardInfo.cost);
 
         const globalTargets = card.targetsType ? H.Targets.parseUserData(player, data) : null;
 
         const eventMessage = {
+            player,
             handCard,
             globalTargets,
             prevent: false
@@ -273,6 +284,7 @@ H.Battle = class Battle extends EventEmitter {
                     battle: this,
                     player,
                     handCard,
+                    handCardInfo,
                     params: data,
                     globalTargets: eventMessage.globalTargets
                 });

@@ -43,6 +43,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                 this.$cardPreview.find('IMG').attr('src', picUrl);
                 this.$cardPreview
                     .toggleClass('available', $cardWrap.hasClass('available'))
+                    .toggleClass('combo-mode', $cardWrap.hasClass('combo-mode'))
                     .show();
             })
             .on('mouseleave', '.card-wrap', () => {
@@ -98,14 +99,26 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         this.$node.find('.creatures').empty();
 
         game.my.hand.forEach((handCard, i) => {
-            const base = handCard.base;
             var $container = $('<div>');
 
-            render($container, 'card', handCard);
+            var classes = handCard.type === H.CARD_TYPES['minion'] ? 'minion' : '';
+
+            for (var flag in handCard.flags) {
+                if (flag === 'can-play') {
+                    flag = 'available';
+                }
+
+                classes += ' ' + flag;
+            }
+
+            render($container, 'card', {
+                classes,
+                handCard
+            });
 
             const $cardWrapper = $container.children();
 
-            if (base.targetsType) {
+            if (handCard.targetsType) {
                 $cardWrapper.addClass('need-target');
             }
 
@@ -155,12 +168,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                     classes += prop;
                 }
 
-                render($container, 'creature', {
-                    id: minion.id,
-                    classes: classes,
-                    minion: minion,
-                    card: minion.card
-                });
+                render($container, 'creature', { minion, classes });
 
                 const $minion = $container.children();
 

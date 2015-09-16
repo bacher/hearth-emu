@@ -26,6 +26,8 @@ H.Player = class Player extends EventEmitter {
         this.creatures = new H.Creatures(this);
         this.traps = new H.Traps(this);
 
+        this._playedCardCount = 0;
+
         ws
             .on('message', json => {
                 const packet = JSON.parse(json);
@@ -137,6 +139,7 @@ H.Player = class Player extends EventEmitter {
 
         this.battle.on('end-turn', this._onTurnEnd.bind(this));
         this.battle.on('start-turn', this._onTurnStart.bind(this));
+        this.battle.on('play-card', this._onPlayCard.bind(this));
 
         this.emit('battle-enter', battle);
     }
@@ -157,6 +160,12 @@ H.Player = class Player extends EventEmitter {
 
     activate() {
         this.active = true;
+
+        this._playedCardCount = 0;
+    }
+
+    getPlayedCardCount() {
+        return this._playedCardCount;
     }
 
     deactivate() {
@@ -191,10 +200,10 @@ H.Player = class Player extends EventEmitter {
             active: this.active,
             name: this.userName,
             hero: this.hero.getClientData(),
-            hand: this.hand.getGameData(),
-            deck: this.deck.getGameData(),
+            hand: this.hand.getClientData(),
+            deck: this.deck.getClientData(),
             traps: this.traps.getClientData(),
-            creatures: this.creatures.getData()
+            creatures: this.creatures.getClientData()
         };
     }
 
@@ -216,6 +225,12 @@ H.Player = class Player extends EventEmitter {
 
             this.creatures.onEndTurn();
             this.hero.wakeUp();
+        }
+    }
+
+    _onPlayCard(o) {
+        if (o.player === this) {
+            this._playedCardCount++;
         }
     }
 

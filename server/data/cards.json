@@ -685,6 +685,24 @@
     }
   },
   {
+    "id": 252,
+    "name": "Defias Bandit",
+    "cost": 1,
+    "pic": "147/996/9",
+    "clas": 3,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 1,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 193,
     "name": "Dust Devil",
     "cost": 1,
@@ -1979,6 +1997,45 @@
       "durability": 2,
       "events": {},
       "flags": []
+    }
+  },
+  {
+    "id": 251,
+    "name": "Defias Ringleader",
+    "cost": 2,
+    "pic": "147/993/417",
+    "clas": 3,
+    "type": 1,
+    "combo": {
+      "object": {
+        "events": {
+          "battlecry": [
+            {
+              "acts": [
+                {
+                  "name": "summon",
+                  "params": [
+                    "defias bandit"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "spell": {
+        "acts": [
+          {}
+        ]
+      }
+    },
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {

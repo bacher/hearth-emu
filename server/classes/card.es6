@@ -15,8 +15,16 @@ H.Card = class Card {
         this.customAction = info.customAction;
         this.conditions = info.conditions || [];
 
+        if (info.combo) {
+            this.combo = info.combo;
+        }
+
         if (info.type === H.CARD_TYPES.spell) {
             this.acts = new H.Commands(info.spell.acts);
+
+            if (this.combo) {
+                this.combo.acts = new H.Commands(info.combo.spell.acts);
+            }
 
         } else if (info.type === H.CARD_TYPES.trap) {
 
@@ -59,25 +67,56 @@ H.Card = class Card {
                 targetsType: 'not-need'
             });
 
-            for (var eventTypeName in object.events) {
-                const commands = object.events[eventTypeName];
+            if (this.combo) {
+                this.combo.acts = new H.Commands();
 
-                if (eventTypeName === 'battlecry') {
-                    this.acts.addCommands(commands);
-                } else if (_.contains(['deathrattle', 'end-turn', 'start-turn'], eventTypeName)) {
-                    object.events[eventTypeName] = new H.Commands(commands);
-                } else if (eventTypeName === 'custom') {
-                    object.events[eventTypeName] = commands.map(command => {
-                        return new H.Command(command);
-                    });
-                }
+                this.combo.acts.addCommand({
+                    name: activation,
+                    params: [this.id],
+                    targetsType: 'not-need'
+                });
             }
 
-            if (this.targetsType) {
-                this.flags['need-battlecry-target'] = true;
+            processEvents(this, object.events);
+
+            if (this.combo) {
+                processEvents(this.combo, this.combo.object.events);
+            }
+        }
+
+        this._saveVariants();
+    }
+
+    getInfo(isCombo) {
+        if (isCombo && this._comboCopy) {
+            return this._comboCopy;
+        } else {
+            return this._normalCopy;
+        }
+    }
+
+    _saveVariants() {
+        this._normalCopy = _.clone(this);
+
+        this._normalCopy.that = this;
+
+        delete this._normalCopy.combo;
+
+        if (this.combo) {
+            this._comboCopy = _.clone(this._normalCopy);
+
+            this._comboCopy.minion = _.clone(this._comboCopy.minion);
+
+            for (var prop in this.combo) {
+                if (prop === 'object') {
+                    this._comboCopy.minion.events = this.combo.object.events;
+                } else {
+                    this._comboCopy[prop] = this.combo[prop];
+                }
             }
         }
     }
+
 };
 
 function parseFlags(flags) {
@@ -90,4 +129,22 @@ function parseFlags(flags) {
     }
 
     return flagsHash;
+}
+
+function processEvents(obj, events) {
+    for (var eventTypeName in events) {
+        const commands = events[eventTypeName];
+
+        if (eventTypeName === 'battlecry') {
+            obj.acts.addCommands(commands);
+
+        } else if (_.contains(['deathrattle', 'end-turn', 'start-turn'], eventTypeName)) {
+            events[eventTypeName] = new H.Commands(commands);
+
+        } else if (eventTypeName === 'custom') {
+            events[eventTypeName] = commands.map(command => {
+                return new H.Command(command);
+            });
+        }
+    }
 }

@@ -1,16 +1,9 @@
 
-if locals.id
-   .card-wrap(
-      data-id= id,
-      class= (
-         (base.type === H.CARD_TYPES['minion']?'minion':'') +
-         (base.flags['need-battlecry-target']?' need-battlecry-target':'') +
-         (flags['can-play']?' available':'')
-      ))
-
+if locals.handCard
+   .card-wrap(data-id=handCard.id,class=classes)
       .card
-         IMG(src="http://media-hearth.cursecdn.com/avatars/"+base.pic+".png")
-         .cost(class=(cost>base.cost?'red':(cost<base.cost?'green':'')))= cost
+         IMG(src="http://media-hearth.cursecdn.com/avatars/"+handCard.pic+".png")
+         .cost= handCard.cost
 else
    .card-wrap
       .card

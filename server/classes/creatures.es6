@@ -46,6 +46,10 @@ H.Creatures = class Creatures {
         return this.creatures.map(creat => creat.getClientData());
     }
 
+    getClientData() {
+        return this.getData();
+    }
+
     wakeUpAll() {
         this.creatures.forEach(creature => creature.wakeUp());
     }

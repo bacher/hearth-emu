@@ -4,7 +4,7 @@ const EventEmitter = require('events').EventEmitter;
 const H = require('../namespace');
 
 H.HandCard = class HandCard extends EventEmitter {
-    constructor(player, info) {
+    constructor(player, card) {
         super();
 
         this.player = player;
@@ -12,25 +12,48 @@ H.HandCard = class HandCard extends EventEmitter {
         this.objType = 'hand-card';
 
         this.id = _.uniqueId('hand');
-        this.base = info;
+        this.base = card;
     }
 
     getBaseData() {
+        const comboMode = this.base.combo && this.player.getPlayedCardCount() > 0;
+
+        const base = this.base.getInfo(comboMode);
+
         return {
             that: this,
             id: this.id,
-            base: this.base,
-            cost: this.base.cost
+            cost: base.cost,
+            base: base,
+            isComboMode: comboMode
         };
     }
 
     _modifyClientData(data) {
         data.flags = {};
-        data.flags['can-play'] = this.player.active && this.player.hero.mana >= data.cost;
-
-        if (data.flags['can-play']) {
-            data.flags['can-play'] = !this.base.conditions.some(condition => !H.Conditions.check(condition, this));
+        if (this.player.active && this.player.hero.mana >= data.cost &&
+            !this.base.conditions.some(condition => !H.Conditions.check(condition, this))
+        ) {
+            data.flags['can-play'] = true;
         }
+
+        if (data.targetsType) {
+            data.flags['need-battlecry-target'] = true;
+        }
+
+        data.type = data.base.type;
+        data.targetsType = !!data.base.targetsType;
+        data.pic = data.base.pic;
+
+        if (data.isComboMode) {
+            delete data.isComboMode;
+
+            if (data.flags['can-play']) {
+                data.flags['combo-mode'] = true;
+            }
+        }
+
+        delete data.base;
     }
 };
 

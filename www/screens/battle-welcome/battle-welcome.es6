@@ -16,6 +16,7 @@ H.Screens['battle-welcome'] = class BattleWelcomeScreen extends H.Screen {
         this.$node.show();
 
         setTimeout(() => {
+            // FIXME: maybe not data at this moment
             this._drawRepickCards();
         }, 2500);
     }

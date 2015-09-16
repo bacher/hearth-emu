@@ -229,24 +229,34 @@
     }
   }
 
-  &.normal-mode .creature.available:before {
-    position: absolute;
-    content: "";
-    top: -9px;
-    left: -11px;
-    width: 98px;
-    height: 105px;
-    background: url("/textures/card-glow.png");
+  &.normal-mode .creature.available {
+    &:before {
+      position: absolute;
+      content: "";
+      top: -9px;
+      left: -11px;
+      width: 98px;
+      height: 105px;
+      background: url("/textures/card-glow.png");
+    }
   }
 
-  .card-wrap.available .card:before {
-    position: absolute;
-    content: "";
-    top: -9px;
-    left: -11px;
-    width: 98px;
-    height: 105px;
-    background: url("/textures/card-glow.png");
+  .card-wrap.available {
+    .card:before {
+      position: absolute;
+      content: "";
+      top: -9px;
+      left: -11px;
+      width: 98px;
+      height: 105px;
+      background: url("/textures/card-glow.png");
+    }
+
+    &.combo-mode .card:before {
+      top: -12px;
+      left: -10px;
+      background: url("/textures/card-combo-glow.png");
+    }
   }
 
   .hand.my .card {
@@ -1084,14 +1094,20 @@
     left: -90px;
     animation: up ease-out 2s forwards;
 
-    &.available:before {
-      position: absolute;
-      content: "";
-      top: 13px;
-      left: -12px;
-      width: 306px;
-      height: 326px;
-      background: url("/textures/card-glow-large.png");
+    &.available {
+      &:before {
+        position: absolute;
+        content: "";
+        top: 13px;
+        left: -12px;
+        width: 306px;
+        height: 326px;
+        background: url("/textures/card-glow-large.png");
+      }
+
+      &.combo-mode:before {
+        background: url("/textures/card-combo-glow-big.png");
+      }
     }
   }
 

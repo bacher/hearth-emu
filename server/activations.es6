@@ -32,7 +32,7 @@ const A = {
         const cards = o.player.enemy.deck.getRandomCards(1, H.CARD_TYPES.minion);
 
         if (cards.length) {
-            const minion = new H.Minion(null, o.handCard.minion);
+            const minion = new H.Minion(null, cards[0]);
 
             o.player.creatures.addCreature(minion);
         }
@@ -243,8 +243,9 @@ const A = {
         o.player.hero.weapon.attack += this.params[0];
     },
     'frostwolf-warlord': function(o) {
-        const minion = o.handCard.minion;
+        const minion = o.minion;
         const otherMinionsCount = o.player.creatures.getCount() - 1;
+
         minion.attack += otherMinionsCount;
         minion.hp += otherMinionsCount;
         minion.maxHp += otherMinionsCount;
@@ -254,7 +255,7 @@ const A = {
 
         if (handCard) {
             o.targets.forEach(target => {
-                target.dealDamage(handCard.base.cost);
+                target.dealDamage(handCard.getData().cost);
             });
         }
     },

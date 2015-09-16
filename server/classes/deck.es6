@@ -26,7 +26,7 @@ H.Deck = class Deck {
         return this.deckCards.length;
     }
 
-    getGameData() {
+    getClientData() {
         return {
             count: this.getCount()
         };
