@@ -36,3 +36,13 @@ H.mixGameDataAccessors = function(clas) {
         };
     }
 };
+
+H.parseParams = function(paramNames, values) {
+    const params = {};
+
+    paramNames.forEach((paramName, i) => {
+        params[paramName] = values[i];
+    });
+
+    return params;
+};

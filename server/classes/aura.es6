@@ -67,11 +67,16 @@ H.Aura = class Aura {
         this.params = auraInfo.params;
 
         this.targetsType = auraInfo.targetsType;
-        this.owner = auraInfo.owner;
 
+        /** @type {Hero|Minion|Weapon|null} */
+        this.owner = auraInfo.owner || null;
+
+        /** @type {'target'|'own'|'enemy'} */
         this.side = auraInfo.side || this.aura.defaultSide;
 
-        this.affectSide = null;
+        /** @type {?Player} */
+        this.affectPlayer = null;
+
         this.target = null;
 
         this.effect = this.aura.effect;
@@ -80,15 +85,15 @@ H.Aura = class Aura {
             this.target = auraInfo.target;
 
         } else if (this.side === 'own') {
-            this.affectSide = player;
+            this.affectPlayer = player;
 
         } else if (this.side === 'enemy') {
-            this.affectSide = this.player.enemy;
+            this.affectPlayer = this.player.enemy;
         }
     }
 
-    isTargetSide(side) {
-        return !this.affectSide || this.affectSide === side;
+    isTargetPlayerSide(player) {
+        return !this.affectPlayer || this.affectPlayer === player;
     }
 
     isAffect(affect) {
@@ -106,5 +111,9 @@ H.Aura = class Aura {
         } else {
             return true;
         }
+    }
+
+    getOwner() {
+        return this.owner;
     }
 };

@@ -9,19 +9,21 @@ H.Auras = class Auras {
         this.battle = battle;
     }
 
-    addAura(object, aura, onlyThisTurn) {
+    addAura(aura, onlyThisTurn) {
         this.list.push(aura);
 
+        const owner = aura.getOwner();
+
         const removeAura = () => {
-            if (object) {
-                object.removeListener('detach', removeAura);
+            if (owner) {
+                owner.removeListener('detach', removeAura);
             }
 
             this.removeAura(aura);
         };
 
-        if (object) {
-            object.on('detach', removeAura);
+        if (owner) {
+            owner.on('detach', removeAura);
         }
 
         if (onlyThisTurn) {
@@ -46,7 +48,7 @@ H.Auras = class Auras {
 
     applyEffect(player, objectType, obj) {
         this.list
-            .filter(aura => aura.isTargetSide(player) && aura.isAffect(objectType) && aura.isTarget(obj.that))
+            .filter(aura => aura.isTargetPlayerSide(player) && aura.isAffect(objectType) && aura.isTarget(obj.that))
             .forEach(aura => {
                 aura.effect(obj);
             });

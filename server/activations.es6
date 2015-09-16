@@ -268,31 +268,30 @@ const A = {
         }));
     },
     'add-aura': function(o) {
-        const auraName = this.params[0];
-        const auraParam = this.params[1];
-        const isThisTurn = this.params[2] === 'this-turn';
+        const params = H.parseParams(['auraName', 'auraParam', 'lifeTime', 'side'], this.params);
 
-        const side = this.params[3];
+        const isThisTurn = params.lifeTime === 'this-turn';
 
         if (o.targets) {
             o.targets.forEach(target => {
                 const aura = new H.Aura(target.player, {
-                    name: auraName,
-                    params: [auraParam],
-                    side: side,
-                    target: target
+                    name: params.auraName,
+                    params: [params.auraParam],
+                    side: params.side,
+                    target: target,
+                    owner: target
                 });
 
-                o.battle.auras.addAura(target, aura, isThisTurn);
+                o.battle.auras.addAura(aura, isThisTurn);
             });
         } else {
             const aura = new H.Aura(o.player, {
-                name: auraName,
-                params: [auraParam],
-                side: side
+                name: params.auraName,
+                params: [params.auraParam],
+                side: params.side
             });
 
-            o.battle.auras.addAura(null, aura, isThisTurn);
+            o.battle.auras.addAura(aura, isThisTurn);
         }
     }
 };

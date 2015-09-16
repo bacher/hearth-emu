@@ -35,7 +35,7 @@ H.GameObject = class GameObject extends EventEmitter {
 
                     const aura = new H.Aura(player, auraInfo);
 
-                    this.player.battle.auras.addAura(this, aura);
+                    this.player.battle.auras.addAura(aura);
                 });
             }
 
