@@ -32,8 +32,13 @@ H.Deck = class Deck {
         };
     }
 
-    getRandomCards(count) {
-        const deckCards = this.deckCards;
+    getRandomCards(count, type) {
+        var deckCards = this.deckCards;
+
+        if (type) {
+            deckCards = deckCards.filter(deckCard => deckCard.card.type === type);
+        }
+
         const cardCount = deckCards.length;
 
         if (cardCount === 0) {

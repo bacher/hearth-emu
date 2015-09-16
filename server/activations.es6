@@ -28,6 +28,15 @@ const A = {
 
         o.player.creatures.addCreature(minion, o.params.index);
     },
+    'summon-random-enemy-deck-minion'(o) {
+        const cards = o.player.enemy.deck.getRandomCards(1, H.CARD_TYPES.minion);
+
+        if (cards.length) {
+            const minion = new H.Minion(null, o.handCard.minion);
+
+            o.player.creatures.addCreature(minion);
+        }
+    },
     'add-mana': function(o) {
         o.player.hero.addMana(1);
     },
@@ -110,6 +119,23 @@ const A = {
 
             target.player.enemy.creatures.addCreature(target);
             target.addFlag('sleep');
+        });
+    },
+    'switch-owner-this-turn'(o) {
+        o.targets.forEach(target => {
+            target.detach();
+
+            target.player.enemy.creatures.addCreature(target);
+        });
+
+        o.battle.once('end-turn', () => {
+            o.targets.forEach(target => {
+                if (!target.is('detached')) {
+                    target.detach();
+
+                    target.player.enemy.creatures.addCreature(target);
+                }
+            });
         });
     },
     'call-totem': function(o) {

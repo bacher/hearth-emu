@@ -4191,6 +4191,62 @@
     }
   },
   {
+    "id": 244,
+    "name": "Mass Dispel",
+    "cost": 4,
+    "pic": "148/602/249",
+    "clas": 9,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "silence",
+              "params": []
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "minions",
+              "enemies"
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "draw-card",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 245,
+    "name": "Mindgames",
+    "cost": 4,
+    "pic": "148/262/301",
+    "clas": 9,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "summon-random-enemy-deck-minion",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 173,
     "name": "Multi-Shot",
     "cost": 4,
@@ -4316,6 +4372,41 @@
       ],
       "events": {},
       "race": 0
+    }
+  },
+  {
+    "id": 246,
+    "name": "Shadow Madness",
+    "cost": 4,
+    "pic": "148/250/442",
+    "clas": 9,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "enemies",
+        "minions"
+      ],
+      "modificators": [
+        {
+          "name": "attack-less",
+          "params": [
+            4
+          ]
+        }
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "switch-owner-this-turn",
+              "params": []
+            }
+          ]
+        }
+      ]
     }
   },
   {
@@ -5214,6 +5305,50 @@
         ]
       },
       "race": 0
+    }
+  },
+  {
+    "id": 243,
+    "name": "Holy Fire",
+    "cost": 6,
+    "pic": "148/596/457",
+    "clas": 9,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "heal",
+              "params": [
+                5
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "friends",
+              "heroes"
+            ]
+          }
+        }
+      ]
     }
   },
   {
