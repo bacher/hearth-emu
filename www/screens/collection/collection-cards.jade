@@ -1,8 +1,13 @@
 
 each card in cards
    .card-wrapper
-      .card(data-id=card.id,class=card.flags['unique'] ? 'unique' : '')
+      .card(data-id= card.id,
+         class= (card.flags['unique'] ? 'unique' : '') + (card.flags['unimplemented'] ? ' not-impl': ''))
+
          if (card.loaded)
             IMG.img.front(src='http://media-hearth.cursecdn.com/avatars/' + card.pic + '.png')
 
          .glow
+
+         if (card.flags['unimplemented'])
+            .unimplemented Not implemented

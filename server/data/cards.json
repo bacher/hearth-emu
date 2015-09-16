@@ -3868,6 +3868,24 @@
     }
   },
   {
+    "id": 249,
+    "name": "Auchenai Soulpriest",
+    "cost": 4,
+    "pic": "148/516/656",
+    "clas": 9,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 195,
     "name": "Blessing of Kings",
     "cost": 4,
@@ -5236,6 +5254,47 @@
       "maxHp": 6,
       "flags": null,
       "events": {}
+    }
+  },
+  {
+    "id": 248,
+    "name": "Cabal Shadow Priest",
+    "cost": 6,
+    "pic": "147/933/147",
+    "clas": 9,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "enemies",
+        "minions"
+      ],
+      "modificators": [
+        {
+          "name": "attack-less",
+          "params": [
+            3
+          ]
+        }
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "switch-owner",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
