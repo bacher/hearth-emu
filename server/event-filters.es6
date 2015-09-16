@@ -70,12 +70,13 @@ const E = {
             }
 
             return function(eventMessage) {
-                const targets = new H.Targets(eventMessage.to.player);
-                targets.addMinion(eventMessage.by);
-
                 if ((!minion || minion === eventMessage.to) &&
                     (!allowPlayer || allowPlayer === eventMessage.to.player) &&
                     (!allowType || (eventMessage.to.card && eventMessage.to.card.type === allowType))) {
+
+                    const targets = new H.Targets(eventMessage.to.player);
+                    targets.addMinion(eventMessage.by);
+
                     callback(eventMessage, targets);
                 }
             };

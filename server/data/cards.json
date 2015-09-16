@@ -2634,14 +2634,11 @@
                 "params": []
               }
             ],
-            "targetsType": {
-              "names": [
-                "self"
-              ]
-            },
             "event": {
               "name": "take-damage",
-              "params": []
+              "params": [
+                "self"
+              ]
             }
           }
         ]
