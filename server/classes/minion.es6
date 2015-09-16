@@ -42,7 +42,11 @@ H.Minion = class Minion extends H.GameObject {
 
     _modifyClientData(data) {
         data.pic = data.card.pic;
+
         delete data.card;
+        delete data.base;
+        delete data.race;
+        delete data.maxHp;
     }
 
     dealDamage(dmg) {
