@@ -5309,33 +5309,6 @@
     }
   },
   {
-    "id": 133,
-    "name": "Cabal Shadow Priest",
-    "cost": 6,
-    "pic": "147/933/147",
-    "clas": 9,
-    "type": 1,
-    "flags": [],
-    "minion": {
-      "attack": 4,
-      "maxHp": 5,
-      "flags": [],
-      "race": 0,
-      "events": {
-        "battlecry": [
-          {
-            "acts": [
-              {
-                "name": "switch-owner",
-                "params": []
-              }
-            ]
-          }
-        ]
-      }
-    }
-  },
-  {
     "id": 248,
     "name": "Cabal Shadow Priest",
     "cost": 6,
