@@ -160,6 +160,13 @@ const A = {
     'copy-random-enemy-card': function(o) {
         o.player.hand.addCard(o.player.enemy.hand.getRandomHandCard().base);
     },
+    'copy-cards-from-opp-deck'(o) {
+        const count = this.params[0];
+
+        o.player.enemy.deck.getRandomCards(count).forEach(card => {
+            o.player.hand.addCard(card);
+        });
+    },
     'add-armor': function(o) {
         o.player.hero.armor += this.params[0];
     },

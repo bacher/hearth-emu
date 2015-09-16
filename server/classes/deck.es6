@@ -32,6 +32,29 @@ H.Deck = class Deck {
         };
     }
 
+    getRandomCards(count) {
+        const deckCards = this.deckCards;
+        const cardCount = deckCards.length;
+
+        if (cardCount === 0) {
+            return [];
+        } else if (cardCount <= count) {
+            return _.shuffle(deckCards.map(deckCard => deckCard.card));
+        } else {
+            const cards = [];
+
+            while (cards.length < count) {
+                const card = this.deckCards[Math.floor(Math.random() * this.deckCards.length)].card;
+
+                if (!_.contains(cards, card)) {
+                    cards.push(card);
+                }
+            }
+
+            return cards;
+        }
+    }
+
     replaceCards(cardIds, drawCount) {
         const banCards = [];
         const allowCards = this.deckCards.filter(card => {

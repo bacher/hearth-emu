@@ -3626,6 +3626,29 @@
     }
   },
   {
+    "id": 239,
+    "name": "Thoughtsteal",
+    "cost": 3,
+    "pic": "148/256/62",
+    "clas": 9,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "copy-cards-from-opp-deck",
+              "params": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 234,
     "name": "Thrallmar Farseer",
     "cost": 3,
