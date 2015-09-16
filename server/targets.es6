@@ -89,7 +89,7 @@ const T = {
 
             return targets;
         } else {
-            return T['enemies'](player);
+            return T['enemies'](player).removeHiddenEnemies();
         }
     }
 };

@@ -69,6 +69,14 @@ H.Targets = class Targets {
         minions.splice(minions.indexOf(minion), 1);
     }
 
+    removeHiddenEnemies() {
+        this.op.minions = this.op.minions.filter(minion => {
+            return !minion.is('stealth');
+        });
+
+        return this;
+    }
+
     addHero(hero) {
         if (hero.player === this.player) {
             this.addMyHero();

@@ -214,6 +214,7 @@ H.Battle = class Battle extends EventEmitter {
             if (handCard.base.targetsType) {
                 targets = H.TARGETS
                     .getByTargetsType(player, handCard.base.targetsType)
+                    .removeHiddenEnemies()
                     .getGameData();
             } else {
                 targets = 'not-need';
@@ -225,7 +226,9 @@ H.Battle = class Battle extends EventEmitter {
             });
 
         } else if (creatureId === 'hero-skill') {
-            targets = H.TARGETS.getByTargetsType(player, player.hero.heroSkillTargets).getGameData();
+            targets = H.TARGETS.getByTargetsType(player, player.hero.heroSkillTargets)
+                .removeHiddenEnemies()
+                .getGameData();
 
             player.sendMessage('targets', {
                 creatureId,

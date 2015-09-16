@@ -108,6 +108,8 @@ H.GameObject = class GameObject extends EventEmitter {
         } else {
             this.flags['hit'] = true;
         }
+
+        delete this.flags['stealth'];
     }
 
     _onBattle(eventName, method) {
