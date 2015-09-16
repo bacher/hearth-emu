@@ -85,6 +85,16 @@ H.GameObject = class GameObject extends EventEmitter {
     getFlags() {
         const flags = _.clone(this.flags);
 
+        return this._processFlags(flags);
+    }
+
+    _modifyData(data) {
+        data.flags = this._processFlags(data.flags);
+    }
+
+    _processFlags(flags) {
+        delete flags['tired'];
+
         if (flags['freeze']) {
             flags['tired'] = true;
         } else {

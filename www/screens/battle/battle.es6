@@ -165,7 +165,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                 const $minion = $container.children();
 
                 if (game.my.active) {
-                    if (side === 'my' && !minion.flags['sleep'] && !minion.flags['tired'] && minion.attack > 0) {
+                    if (side === 'my' && !minion.flags['tired'] && minion.attack > 0) {
                         $minion.addClass('available');
                     }
                 }

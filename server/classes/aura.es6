@@ -52,9 +52,11 @@ const AURAS = {
     'enrage': {
         affect: 'minion',
         effect(minion) {
-            AURAS[this.params[0]].effect.apply({
-                params: this.params.slice(1)
-            }, arguments);
+            if (minion.hp < minion.maxHp) {
+                AURAS[this.params[0]].effect.apply({
+                    params: this.params.slice(1)
+                }, arguments);
+            }
         }
     }
 };

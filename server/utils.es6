@@ -15,7 +15,17 @@ H.parseValue = function(value) {
 H.mixGameDataAccessors = function(clas) {
     if (!clas.prototype.getData) {
         clas.prototype.getData = function() {
-            return this.player.battle.auras.applyEffects(this);
+            var data = this.player.battle.auras.applyEffects(this);
+
+            if (this._modifyData) {
+                const newData = this._modifyData(data);
+
+                if (newData) {
+                    data = newData;
+                }
+            }
+
+            return data;
         };
     }
 
