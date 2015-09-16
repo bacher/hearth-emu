@@ -204,6 +204,17 @@ const A = {
     'add-hero-attack': function(o) {
         o.player.hero.attack = this.params[0];
     },
+    'shadowform'(o) {
+        const hero = o.player.hero;
+
+        const dmg = hero._isShadowform ? 3 : 2;
+
+        hero._isShadowform = true;
+
+        hero.setHeroSkill('deal-damage', [dmg], 2, {
+            "names": ["all"]
+        });
+    },
     'return-to-hand': function(o) {
         o.targets.forEach(minion => {
             const player = minion.player;

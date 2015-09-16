@@ -3625,6 +3625,27 @@
     }
   },
   {
+    "id": 247,
+    "name": "Shadowform",
+    "cost": 3,
+    "pic": "148/599/421",
+    "clas": 9,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "shadowform",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 121,
     "name": "Shield Block",
     "cost": 3,
