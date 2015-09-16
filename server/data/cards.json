@@ -54,6 +54,34 @@
     }
   },
   {
+    "id": 241,
+    "name": "Circle of Healing",
+    "cost": 0,
+    "pic": "148/587/38",
+    "clas": 9,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "heal",
+              "params": [
+                4
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "minions"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 50,
     "name": "Frog",
     "cost": 0,
@@ -188,6 +216,32 @@
       "flags": [],
       "events": {},
       "race": 1
+    }
+  },
+  {
+    "id": 242,
+    "name": "Silence",
+    "cost": 0,
+    "pic": "148/247/544",
+    "clas": 9,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "silence",
+              "params": []
+            }
+          ]
+        }
+      ]
     }
   },
   {
@@ -1054,6 +1108,32 @@
               "params": [
                 4
               ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 240,
+    "name": "Inner Fire",
+    "cost": 1,
+    "pic": "147/372/207",
+    "clas": 9,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "set-attack-equal-hp",
+              "params": []
             }
           ]
         }
