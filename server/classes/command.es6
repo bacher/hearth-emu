@@ -53,6 +53,7 @@ H.Command = class Command {
 
         this.acts.forEach(act => {
             act.actFunc({
+                baseParams: o,
                 battle: o.battle,
                 player: o.player,
                 handCard: o.handCard,

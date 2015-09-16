@@ -24,7 +24,7 @@ const A = {
     },
     'card-summon': function(o) {
         const minion = new H.Minion(o.handCard);
-        o.handCard.minion = minion;
+        o.handCard.minion = o.baseParams.minion = minion;
 
         o.player.creatures.addCreature(minion, o.params.index);
     },

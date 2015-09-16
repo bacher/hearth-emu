@@ -72,6 +72,10 @@ H.Minion = class Minion extends H.GameObject {
 
     addFlag(flag) {
         this.flags[flag] = true;
+
+        if (flag === 'charge') {
+            delete this.flags['sleep'];
+        }
     }
 
 };
