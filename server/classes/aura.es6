@@ -67,7 +67,7 @@ H.Aura = class Aura {
         this.params = auraInfo.params;
 
         this.targetsType = auraInfo.targetsType;
-        this.self = auraInfo.self;
+        this.owner = auraInfo.owner;
 
         this.side = auraInfo.side || this.aura.defaultSide;
 
@@ -100,7 +100,7 @@ H.Aura = class Aura {
             return this.target === obj;
 
         } else if (this.targetsType) {
-            const targets = H.TARGETS.getByTargetsType(this.player, this.targetsType, null, this.self);
+            const targets = H.TARGETS.getByTargetsType(this.player, this.targetsType, null, this.owner);
 
             return targets.contains(obj);
         } else {

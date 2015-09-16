@@ -31,7 +31,7 @@ H.GameObject = class GameObject extends EventEmitter {
                     const auraInfo = _.clone(act.acts[0]);
 
                     auraInfo.targetsType = act.targetsType;
-                    auraInfo.self = this;
+                    auraInfo.owner = this;
 
                     const aura = new H.Aura(player, auraInfo);
 

@@ -2273,13 +2273,9 @@
             ],
             "targetsType": {
               "names": [
-                "self"
+                "except-self"
               ],
               "modificators": [
-                {
-                  "name": "invert",
-                  "params": []
-                },
                 {
                   "name": "random",
                   "params": [
@@ -3093,6 +3089,11 @@
     "pic": "148/130/270",
     "clas": 2,
     "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
     "flags": [],
     "spell": {
       "acts": [
@@ -3101,7 +3102,7 @@
             {
               "name": "transform",
               "params": [
-                "Frog"
+                "frog"
               ]
             }
           ]
@@ -3447,10 +3448,18 @@
           {
             "acts": [
               {
-                "name": "gain-attack-to-other-friendly-minions",
-                "params": []
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
               }
-            ]
+            ],
+            "targetsType": {
+              "names": [
+                "minions",
+                "except-self"
+              ]
+            }
           }
         ]
       },
