@@ -101,13 +101,20 @@ H.toggleMenu = function() {
 };
 
 function render($cont, tmplName, params) {
+    if (!$cont) {
+        $cont = $('<div>');
+    }
+
     try {
         jade.render($cont[0], tmplName, params || {});
+
     } catch(e) {
         /* jshint debug:true */
         debugger;
         throw e;
     }
+
+    return $cont.children();
 }
 
 if (H.checkParam('cursor')) {

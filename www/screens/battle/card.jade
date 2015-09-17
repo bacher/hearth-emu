@@ -1,10 +1,6 @@
 
-if locals.handCard
-   .card-wrap(data-id=handCard.id,class=classes)
-      .card
-         IMG(src="http://media-hearth.cursecdn.com/avatars/"+handCard.pic+".png")
-         .cost= handCard.cost
-else
-   .card-wrap
-      .card
-         IMG(src="cards/card_back.png")
+.card-wrap(data-id=handCard.id,class=classes)
+   .card
+      IMG(src="http://media-hearth.cursecdn.com/avatars/"+handCard.pic+".png")
+      .cost= handCard.cost
+

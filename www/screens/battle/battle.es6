@@ -17,9 +17,8 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
         this.$node.addClass('normal');
 
-        this.$cardPreview = this.$node.find('.card-preview');
-
         this._playCard = new H.PlayCard(this);
+        this._hand = new H.Hand(this);
     }
 
     _bindEventListeners() {
@@ -36,20 +35,6 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                 if (this.battleData.my.active) {
                     H.socket.send('end-turn');
                 }
-            })
-            .on('mouseenter', '.hand.my .card-wrap', e => {
-                const $cardWrap = $(e.currentTarget);
-                const $img = $cardWrap.find('IMG');
-                const picUrl = $img.attr('src');
-
-                this.$cardPreview.find('IMG').attr('src', picUrl);
-                this.$cardPreview
-                    .toggleClass('available', $cardWrap.hasClass('available'))
-                    .toggleClass('combo-mode', $cardWrap.hasClass('combo-mode'))
-                    .show();
-            })
-            .on('mouseleave', '.card-wrap', () => {
-                this.$cardPreview.hide();
             })
             .on('click', '.card-select-wrapper', this._onCardSelect.bind(this));
     }
@@ -95,40 +80,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             .toggleClass('active', game.my.active)
             .toggleClass('wait', !game.my.active);
 
-        const $hand = this.$node.find('.hand.my .cards').empty();
-        const $handOp = this.$node.find('.hand.op .cards').empty();
-
         this.$node.find('.creatures').empty();
-
-        game.my.hand.forEach((handCard, i) => {
-            var $container = $('<div>');
-
-            var classes = handCard.type === H.CARD_TYPES['minion'] ? 'minion' : '';
-
-            for (var flag in handCard.flags) {
-                if (flag === 'can-play') {
-                    flag = 'available';
-                }
-
-                classes += ' ' + flag;
-            }
-
-            render($container, 'card', {
-                classes,
-                handCard
-            });
-
-            const $cardWrapper = $container.children();
-
-            if (handCard.targetsType) {
-                $cardWrapper.addClass('need-target');
-            }
-
-            $cardWrapper.addClass('c' + (i + 1));
-
-            $hand.append($cardWrapper);
-        });
-
 
         this.$node.find('.avatar.my').toggleClass('available', game.my.active && game.my.hero.attack > 0 && !game.my.hero.flags['tired']);
 
@@ -140,24 +92,9 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         this.$node.find('.hero-skill.op')
             .toggleClass('used', game.op.hero.skillUsed);
 
-        var $container = $('<div>');
-        render($container, 'card');
-
-        const $cardPattern = $container.children();
-
-        for (var i = game.op.hand.length - 1; i >= 0; --i) {
-            const $card = $cardPattern.clone();
-
-            $card.addClass('c' + (i + 1));
-
-            $handOp.append($card);
-        }
-
         ['my', 'op'].forEach(side => {
             const player = game[side];
             const hero = player.hero;
-
-            this.$node.find('.hand.' + side).removeClass().addClass('hand ' + side).addClass('hand' + player.hand.length);
 
             const $creatures = this.$node.find('.creatures.' + side);
 
@@ -212,6 +149,8 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             render(this.$node.find('.traps.' + side), 'traps', {
                 traps: player.traps
             });
+
+            this._hand.onGameData(game);
         });
 
         const hero = game.my.hero;
@@ -238,7 +177,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
     }
 
     clearPurposes() {
-        this.$node.find('.avatar .creature').removeClass('purpose');
+        this.$node.find('.avatar, .creature').removeClass('purpose');
     }
 
     setBattleData(data) {

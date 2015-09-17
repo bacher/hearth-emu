@@ -54,11 +54,8 @@
     width: 40px;
     height: 290px;
     top: @h/2-145px;
-    top: @h/2-145px;
     left: 3px;
   }
-
-
 
   .hand-helper-zone {
     position: absolute;
@@ -239,37 +236,6 @@
       height: 105px;
       background: url("/textures/card-glow.png");
     }
-  }
-
-  .card-wrap.available {
-    .card:before {
-      position: absolute;
-      content: "";
-      top: -9px;
-      left: -11px;
-      width: 98px;
-      height: 105px;
-      background: url("/textures/card-glow.png");
-    }
-
-    &.combo-mode .card:before {
-      top: -12px;
-      left: -10px;
-      background: url("/textures/card-combo-glow.png");
-    }
-  }
-
-  .hand.my .card {
-    //transition: margin 0.3s;
-
-    &.selected {
-      box-shadow: 0 0 12px 10px #F00;
-    }
-
-    //&:hover {
-    //  margin-top: -44px;
-    //  margin-right: 0;
-    //}
   }
 
   .stats {
@@ -903,214 +869,6 @@
   //  }
   //}
 
-
-  .hand {
-    position: absolute;
-
-    &.my {
-      top: 599px;
-      left: 395px;
-    }
-
-    &.op {
-      transform: scale(0.8);
-      top: -79px;
-      left: 403px;
-    }
-  }
-
-  .card {
-    position: absolute;
-    width: 77px;
-    height: 109px;
-    top: 0;
-    transform: rotate(0);
-
-    .cost {
-      position: absolute;
-      top: -6px;
-      left: -4px;
-      width: 22px;
-      height: 22px;
-      background: url("/textures/mana-gem-big.png");
-
-      color: #FFF;
-      font-family: "Belwe Bold", Times, serif;
-      text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 2px #000;
-      font-size: 20px;
-      text-align: center;
-      line-height: 22px;
-
-      &.red {
-        color: #F00;
-      }
-
-      &.green {
-        color: #0F0;
-      }
-    }
-  }
-
-  .card-wrap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 77px;
-    height: 109px;
-    transition: top ease-out 0.2s;
-  }
-
-  .active .card-wrap {
-    cursor: -webkit-grab;
-  }
-
-  .hand.my .card-wrap {
-    transform-origin: 60% 554px;
-  }
-
-  .hand.op .card-wrap {
-    transform-origin: 60% -554px;
-  }
-
-  .hand {
-    .card {
-      transform: rotate(0deg);
-    }
-
-    &.my {
-      &.hand4 .card,
-      &.hand5 .card,
-      &.hand6 .card,
-      &.hand7 .card,
-      &.hand8 .card,
-      &.hand9 .card,
-      &.hand10 .card {
-        transform: rotate(-8deg);
-      }
-    }
-
-    &.op {
-      &.hand4 .card,
-      &.hand5 .card,
-      &.hand6 .card,
-      &.hand7 .card,
-      &.hand8 .card,
-      &.hand9 .card,
-      &.hand10 .card {
-        transform: rotate(-4deg);
-      }
-    }
-  }
-
-  .hand1 .c1 { transform: rotate(0deg); }
-
-  .hand2 .c1 { transform: rotate(0deg) translate(-41px,0); }
-  .hand2 .c2 { transform: rotate(0deg) translate(40px,0); }
-
-  .hand3 .c1 { transform: rotate(0deg) translate(-81px,0); }
-  .hand3 .c2 { transform: rotate(0deg); }
-  .hand3 .c3 { transform: rotate(0deg) translate(81px,0); }
-
-  .hand4 .c1 { transform: rotate(-12deg); }
-  .hand4 .c2 { transform: rotate(-4deg); }
-  .hand4 .c3 { transform: rotate(4deg); }
-  .hand4 .c4 { transform: rotate(12deg); }
-
-  .hand5 .c1 { transform: rotate(-16deg); }
-  .hand5 .c2 { transform: rotate(-8deg); }
-  .hand5 .c3 { transform: rotate(0deg); }
-  .hand5 .c4 { transform: rotate(8deg); }
-  .hand5 .c5 { transform: rotate(16deg); }
-
-  .hand6 .c1 { transform: rotate(-15deg); }
-  .hand6 .c2 { transform: rotate(-9deg); }
-  .hand6 .c3 { transform: rotate(-3deg); }
-  .hand6 .c4 { transform: rotate(3deg); }
-  .hand6 .c5 { transform: rotate(9deg); }
-  .hand6 .c6 { transform: rotate(15deg); }
-
-  .hand7 .c1 { transform: rotate(-15deg); }
-  .hand7 .c2 { transform: rotate(-10deg); }
-  .hand7 .c3 { transform: rotate(-5deg); }
-  .hand7 .c4 { transform: rotate(0deg); }
-  .hand7 .c5 { transform: rotate(5deg); }
-  .hand7 .c6 { transform: rotate(10deg); }
-  .hand7 .c7 { transform: rotate(15deg); }
-
-  .hand8 .c1 { transform: rotate(-14deg); }
-  .hand8 .c2 { transform: rotate(-10deg); }
-  .hand8 .c3 { transform: rotate(-6deg); }
-  .hand8 .c4 { transform: rotate(-2deg); }
-  .hand8 .c5 { transform: rotate(2deg); }
-  .hand8 .c6 { transform: rotate(6deg); }
-  .hand8 .c7 { transform: rotate(10deg); }
-  .hand8 .c8 { transform: rotate(14deg); }
-
-  .hand9 .c1 { transform: rotate(-16deg); }
-  .hand9 .c2 { transform: rotate(-12deg); }
-  .hand9 .c3 { transform: rotate(-8deg); }
-  .hand9 .c4 { transform: rotate(-4deg); }
-  .hand9 .c5 { transform: rotate(0deg); }
-  .hand9 .c6 { transform: rotate(4deg); }
-  .hand9 .c7 { transform: rotate(8deg); }
-  .hand9 .c8 { transform: rotate(12deg); }
-  .hand9 .c9 { transform: rotate(16deg); }
-
-  .hand10 .c1 { transform: rotate(-18deg); }
-  .hand10 .c2 { transform: rotate(-14deg); }
-  .hand10 .c3 { transform: rotate(-10deg); }
-  .hand10 .c4 { transform: rotate(-6deg); }
-  .hand10 .c5 { transform: rotate(-2deg); }
-  .hand10 .c6 { transform: rotate(2deg); }
-  .hand10 .c7 { transform: rotate(6deg); }
-  .hand10 .c8 { transform: rotate(10deg); }
-  .hand10 .c9 { transform: rotate(14deg); }
-  .hand10 .c10 { transform: rotate(18deg); }
-
-  .hand.my .card-wrap:hover {
-    top: -28px;
-  }
-
-  .card-drag {
-    position: absolute;
-    margin-top: -52px;
-    margin-left: -40px;
-    transition: none;
-    pointer-events: none;
-  }
-
-
-  @keyframes up {
-    100% {
-      top: -320px;
-    }
-  }
-
-  .card-preview {
-    position: absolute;
-    display: none;
-    pointer-events: none;
-    top: -310px;
-    left: -90px;
-    animation: up ease-out 2s forwards;
-
-    &.available {
-      &:before {
-        position: absolute;
-        content: "";
-        top: 13px;
-        left: -12px;
-        width: 306px;
-        height: 326px;
-        background: url("/textures/card-glow-large.png");
-      }
-
-      &.combo-mode:before {
-        background: url("/textures/card-combo-glow-big.png");
-      }
-    }
-  }
-
   @keyframes bg-offset {
     0% { background-position: 0 0; }
     100% { background-position: 0 -107px; }
@@ -1358,29 +1116,6 @@
     background: url("/textures/your-turn.png");
 
     animation: scale-in-out linear 2.5s forwards;
-  }
-
-  .grab-card {
-    position: absolute;
-    transform: scale(1.2);
-
-    transition: none;
-
-    &.blue-glow .card {
-      &:before {
-        display: none;
-      }
-
-      &:after {
-        position: absolute;
-        content: "";
-        top: -16px;
-        left: -11px;
-        width: 100px;
-        height: 112px;
-        background: url("/textures/card-blue-glow.png");
-      }
-    }
   }
 
   .boom {
