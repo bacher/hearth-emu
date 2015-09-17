@@ -17,8 +17,41 @@ const E = {
             return function(eventMessage) {
                 const handCard = eventMessage.handCard;
 
-                if ((!allowPlayer || allowPlayer === handCard.player) && (!allowType || handCard.base.type === allowType)) {
+                if ((!allowPlayer || allowPlayer === handCard.player) &&
+                    (!allowType || handCard.base.type === allowType)) {
                     callback(eventMessage);
+                }
+            };
+        }
+    },
+    'summon': {
+        eventName: 'summon',
+        filterFunc: function(o, params, callback) {
+            var allowPlayer;
+            var attackLessThen;
+
+            if (params[0] === 'my') {
+                allowPlayer = o.player;
+            } else if (params[0] === 'op') {
+                allowPlayer = o.player.enemy;
+            }
+
+            const filter = params[1];
+
+            if (filter === 'attack3') {
+                attackLessThen = 4;
+            }
+
+            return function(eventMessage) {
+                const minion = eventMessage.minion;
+
+                if ((!allowPlayer || allowPlayer === minion.player) &&
+                    (!attackLessThen || minion.attack < attackLessThen)) {
+
+                    const targets = new H.Targets(o.player);
+                    targets.addMinion(minion);
+
+                    callback(eventMessage, targets);
                 }
             };
         }

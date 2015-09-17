@@ -16,6 +16,7 @@ for (var i = 0; i < cards.length; ++i) {
 H.CARDS = {
     list: cards,
     hash: cardsHash,
+    clientList: cards.map(card => card.getInfo(false, true)),
     getById: function(id) {
         return this.hash[id];
     },

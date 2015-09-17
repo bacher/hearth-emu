@@ -87,11 +87,23 @@ H.Card = class Card {
         this._saveVariants();
     }
 
-    getInfo(isCombo) {
-        if (isCombo && this._comboCopy) {
-            return this._comboCopy;
+    getInfo(isCombo, isClient) {
+        if (isClient) {
+            return {
+                id: this.id,
+                name: this.name,
+                clas: this.clas,
+                type: this.type,
+                cost: this.cost,
+                pic: this.pic,
+                flags: this.flags
+            };
         } else {
-            return this._normalCopy;
+            if (isCombo && this._comboCopy) {
+                return this._comboCopy;
+            } else {
+                return this._normalCopy;
+            }
         }
     }
 

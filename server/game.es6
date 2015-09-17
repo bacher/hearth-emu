@@ -55,7 +55,7 @@ module.exports = class Game {
         this.app.get('/cards.json', (req, res) => {
             res.json({
                 ok: true,
-                cards: H.CARDS.list
+                cards: H.CARDS.clientList
             });
         });
     }

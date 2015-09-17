@@ -33,9 +33,11 @@ const A = {
     },
     'card-summon': function(o) {
         const minion = new H.Minion(o.handCard);
-        o.handCard.minion = o.baseParams.minion = minion;
+        o.handCard.minion = o.baseParams.minion = o.minion = minion;
 
         o.player.creatures.addCreature(minion, o.params.index);
+
+        o.battle.emit('summon', o);
     },
     'summon-random-enemy-deck-minion'(o) {
         const cards = o.player.enemy.deck.getRandomCards(1, H.CARD_TYPES.minion);

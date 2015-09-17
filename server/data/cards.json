@@ -2918,6 +2918,41 @@
     }
   },
   {
+    "id": 253,
+    "name": "Charge",
+    "cost": 3,
+    "pic": "147/549/646",
+    "clas": 1,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions",
+        "friends"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-attack",
+              "params": [
+                2
+              ]
+            },
+            {
+              "name": "add-flags",
+              "params": [
+                "charge"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 172,
     "name": "Counterspell",
     "cost": 3,
@@ -3955,6 +3990,42 @@
                 "params": []
               }
             ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 254,
+    "name": "Warsong Commander",
+    "cost": 3,
+    "pic": "147/923/193",
+    "clas": 1,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-flags",
+                "params": [
+                  "charge"
+                ]
+              }
+            ],
+            "event": {
+              "name": "summon",
+              "params": [
+                "my",
+                "attack3"
+              ]
+            }
           }
         ]
       }
