@@ -1852,6 +1852,41 @@
     }
   },
   {
+    "id": 259,
+    "name": "Armorsmith",
+    "cost": 2,
+    "pic": "148/340/644",
+    "clas": 1,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-armor",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "event": {
+              "name": "take-damage",
+              "params": [
+                "my-minions"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 9,
     "name": "Bloodfen Raptor",
     "cost": 2,

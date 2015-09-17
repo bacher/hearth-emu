@@ -75,6 +75,9 @@ const E = {
                 allowHero = o.player.hero;
             } else if (target === 'minions') {
                 onlyMinions = true;
+            } else if (target === 'my-minions') {
+                allowPlayer = o.player;
+                onlyMinions = true;
             }
 
             return function(eventMessage) {
