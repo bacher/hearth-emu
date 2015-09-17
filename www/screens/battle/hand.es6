@@ -39,17 +39,41 @@ H.Hand = class Hand {
             });
     }
 
+    _getCardById(id) {
+        return this._$cards.find('[data-id="' + id + '"]');
+    }
+
     onGameData(game) {
 
-        this._$cards.empty();
+        const prevHand = this._prevGame ? this._prevGame.my.hand : [];
+        const hand = game.my.hand;
 
-        game.my.hand.forEach((handCard, i) => {
-            const $cardWrapper = render(null, 'card', {
-                classes: this._extractClasses(handCard, i + 1),
-                handCard
-            });
+        prevHand.forEach(handCard => {
+            const card = _.find(hand, { id: handCard.id });
 
-            this._$cards.append($cardWrapper);
+            if (!card) {
+                this._getCardById(handCard.id).remove();
+            }
+        });
+
+        hand.forEach((handCard, i) => {
+
+            var $card;
+
+            const card = _.find(prevHand, { id: handCard.id });
+
+            if (card) {
+                $card = this._getCardById(card.id);
+
+            } else {
+                $card = render(null, 'card', {
+                    handCard
+                });
+
+                this._$cards.append($card);
+            }
+
+            this._updateClasses($card, handCard, i);
         });
 
 
@@ -61,10 +85,16 @@ H.Hand = class Hand {
 
         this._updateHandCountClass(this.$node, game.my.hand.length);
         this._updateHandCountClass(this.$opNode, game.op.hand.length);
+
+        this._prevGame = game;
     }
 
-    _extractClasses(handCard, i) {
-        var classes = handCard.type === H.CARD_TYPES['minion'] ? 'minion' : '';
+    _updateClasses($card, handCard, i) {
+        var classes = 'card-wrap';
+
+        if (handCard.type === H.CARD_TYPES['minion']) {
+            classes += ' minion';
+        }
 
         for (var flag in handCard.flags) {
             if (flag === 'can-play') {
@@ -75,12 +105,12 @@ H.Hand = class Hand {
         }
 
         if (handCard.targetsType) {
-            classes += 'need-target';
+            classes += ' need-target';
         }
 
-        classes += ' c' + i;
+        classes += ' c' + (i + 1);
 
-        return classes;
+        $card.get(0).className = classes;
     }
 
     _updateHandCountClass($hand, count) {
