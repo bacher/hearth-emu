@@ -97,16 +97,6 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
             });
     }
 
-    _show() {
-        setTimeout(() => {
-            this.$node.show();
-
-            setTimeout(() => {
-                this.$node.find('.collection').removeClass('initial');
-            }, 50);
-        }, 1050);
-    }
-
     _checkCardsCache() {
         if (H.cards) {
             this._cardsLoaded();

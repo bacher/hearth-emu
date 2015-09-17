@@ -1,8 +1,4 @@
 .m {
-  &.layer {
-    display: none;
-    pointer-events: none;
-  }
 
   .main-menu {
     width: 1280px;
@@ -16,53 +12,6 @@
 
     &.opening {
       transform: scale(2.1);
-    }
-  }
-
-  .overlay {
-    position: absolute;
-    width: 1280px;
-    height: 720px;
-
-    transform-origin: 50% 23%;
-    transition: transform 1s linear;
-
-    &.opening {
-      transform: scale(2.1);
-
-      .part.left {
-        transform: translate(-460px, 0);
-      }
-
-      .part.right {
-        transform: translate(460px, 0);
-      }
-    }
-  }
-
-  .box {
-    position: absolute;
-    top: 18px;
-    left: 261px;
-    width: 759px;
-    z-index: 10;
-  }
-
-  .part {
-    position: absolute;
-    transition: transform 1s linear;
-
-    &.left {
-      width: 380px;
-      height: 556px;
-      background: url('/textures/main-menu-box-left.png');
-    }
-
-    &.right {
-      right: 0;
-      width: 527px;
-      height: 557px;
-      background: url('/textures/main-menu-box-right.png');
     }
   }
 
@@ -147,13 +96,12 @@
     }
   }
 
-  .my-collection {
+  &.loaded .my-collection {
     position: absolute;
     top: -1px;
     left: 177px;
     width: 239px;
     height: 92px;
-    //background: url("../textures/my-collection.png");
 
     &:hover {
       background: url("/textures/my-collection_hover.png");

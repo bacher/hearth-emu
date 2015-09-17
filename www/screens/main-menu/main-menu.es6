@@ -12,7 +12,11 @@ H.Screens['main-menu'] = class MainMenuScreen extends H.Screen {
 
         setTimeout(() => {
             this.$node.find('.disk').addClass('ready');
-            this.$node.find('.footer').addClass('ready');
+            this.$node.find('.footer')
+                .addClass('ready')
+                .one('transitionend', () => {
+                    this.$node.addClass('loaded');
+                });
         }, 1500);
     }
 
@@ -27,25 +31,14 @@ H.Screens['main-menu'] = class MainMenuScreen extends H.Screen {
     }
 
     _hide() {
-        return new Promise((resolve, reject) => {
-
+        return new Promise(resolve => {
             this.$node.find('.disk').removeClass('ready');
 
             setTimeout(() => {
-                const $layer = this.$node.find('.layer');
-                $layer.appendTo($('#app'));
-                $layer.show();
+                this.$node.hide();
 
-                setTimeout(() => {
-                    this.$node.find('.main-menu').addClass('opening');
-                    $layer.find('.overlay').addClass('opening');
-
-                    setTimeout(() => {
-                        $layer.remove();
-                        resolve();
-                    }, 1200);
-                }, 100);
-            }, 1000);
+                resolve();
+            }, 500);
         });
     }
 };
