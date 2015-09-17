@@ -141,6 +141,11 @@ H.Battle = class Battle extends EventEmitter {
                 player.sendMessage('defeat');
                 player.enemy.sendMessage('win');
 
+                setTimeout(() => {
+                    player.closeSocket();
+                    player.enemy.closeSocket();
+                }, 100);
+
                 break;
         }
     }

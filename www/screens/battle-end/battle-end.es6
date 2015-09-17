@@ -8,12 +8,13 @@ H.Screens['battle-end'] = class BattleEndScreen extends H.Screen {
         });
 
         this._isWin = params.win;
-
+        this._className = params.className;
     }
 
     _render() {
         render(this.$node, 'battle-end', {
-            isWin: this._isWin
+            isWin: this._isWin,
+            className: this._className
         });
     }
 

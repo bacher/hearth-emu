@@ -244,6 +244,8 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
     setBattleData(data) {
         this.welcomeScreen.setBattleData(data);
 
+        this._myClass = data.my.clas;
+
         const myClass = H.CLASSES_L[data.my.clas];
         const opClass = H.CLASSES_L[data.op.clas];
 
@@ -298,21 +300,28 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
     }
 
     _onDefeat() {
-        this.$node.find('.hero.my').hide();
-        this.$node.find('.boom.my').show();
-
-        setTimeout(() => {
-            this._battleEndOverlay = H.app.activateOverlay('battle-end', { win: false });
-        }, 4000);
+        this._onBattleEnd(false);
     }
 
     _onWin() {
-        this.$node.find('.hero.op').hide();
-        this.$node.find('.boom.op').show();
+        this._onBattleEnd(true);
+    }
 
+    _onBattleEnd(isWin) {
         setTimeout(() => {
-            this._battleEndOverlay = H.app.activateOverlay('battle-end', { win: true });
-        }, 4000);
+            const boomSide = isWin ? 'op' : 'my';
+
+            this.$node.find('.hero.' + boomSide).hide();
+            this.$node.find('.boom.' + boomSide).show();
+
+            setTimeout(() => {
+                const className = H.CLASSES_L[this._myClass];
+                this._battleEndOverlay = H.app.activateOverlay('battle-end', {
+                    win: isWin,
+                    className
+                });
+            }, 2500);
+        }, 500);
     }
 
     onBattleEndSplashClose() {

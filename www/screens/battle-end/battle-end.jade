@@ -1,8 +1,5 @@
 
-if (isWin)
-   .splash.win
-else
-   .splash.defeat
-
+.splash(class=isWin?'win':'defeat')
+   IMG.avatar(src='/textures/hero-big_'+className+'.png')
 
 .continue Click to continue

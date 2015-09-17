@@ -234,4 +234,8 @@ H.Player = class Player extends EventEmitter {
         }
     }
 
+    closeSocket() {
+        this.ws.close();
+    }
+
 };

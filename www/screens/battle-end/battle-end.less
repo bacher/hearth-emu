@@ -1,22 +1,28 @@
 .be {
   pointer-events: all;
+  background: rgba(0,0,0,0.4);
 
   .splash {
     position: absolute;
-    top: 77px;
-    left: 375px;
+    top: 79px;
+    left: 378px;
+    width: 523px;
+    height: 564px;
 
     &.win {
-      width: 497px;
-      height: 519px;
-      background: url("/textures/win-splash.png");
+      background: url("/textures/battle-end_win.png");
     }
 
     &.defeat {
-      width: 506px;
-      height: 536px;
-      background: url("/textures/defeat-splash.png");
+      background: url("/textures/battle-end_defeat.png");
     }
+  }
+
+  .avatar {
+    position: absolute;
+    top: 96px;
+    left: 165px;
+    width: 190px;
   }
 
   .continue {
