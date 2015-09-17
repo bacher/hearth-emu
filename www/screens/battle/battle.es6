@@ -26,6 +26,8 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         H.socket.on('game-data', this._onGameData.bind(this));
         H.socket.on('cards-for-repick', this._onCardsForPick.bind(this));
         H.socket.on('select-card', this._onCardSelection.bind(this));
+        H.socket.on('defeat', this._onDefeat.bind(this));
+        H.socket.on('win', this._onWin.bind(this));
 
         this._playCard.bindEventListeners();
 
@@ -293,5 +295,29 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         H.socket.send('card-selection', { index: $preview.data('index') });
 
         this.$node.find('.card-selection').hide();
+    }
+
+    _onDefeat() {
+        this.$node.find('.hero.my').hide();
+        this.$node.find('.boom.my').show();
+
+        setTimeout(() => {
+            this._battleEndOverlay = H.app.activateOverlay('battle-end', { win: false });
+        }, 4000);
+    }
+
+    _onWin() {
+        this.$node.find('.hero.op').hide();
+        this.$node.find('.boom.op').show();
+
+        setTimeout(() => {
+            this._battleEndOverlay = H.app.activateOverlay('battle-end', { win: true });
+        }, 4000);
+    }
+
+    onBattleEndSplashClose() {
+        this._battleEndOverlay.hideThenDestroy();
+
+        H.app.activateScreen('start-game-menu');
     }
 };

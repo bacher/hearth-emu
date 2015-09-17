@@ -137,9 +137,10 @@ H.Battle = class Battle extends EventEmitter {
                     this._start2();
                 }
                 break;
-            case 'death':
-                //
-                console.log('BATTLE END');
+            case 'defeat':
+                player.sendMessage('defeat');
+                player.enemy.sendMessage('win');
+
                 break;
         }
     }

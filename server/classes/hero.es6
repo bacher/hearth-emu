@@ -125,7 +125,7 @@ H.Hero = class Hero {
     }
 
     kill() {
-        this.player.emit('message', { msg: 'death' });
+        this.player.emit('message', { msg: 'defeat' });
     }
 
     getManaStatus() {
