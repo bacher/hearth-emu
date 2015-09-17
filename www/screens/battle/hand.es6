@@ -72,48 +72,35 @@ H.Hand = class Hand {
 
                 if (!isFirstFill) {
                     $card.hide();
+
+                    const $newCard = $('<div>').addClass('new-card my');
+                    $newCard.append($card.children().clone());
+
+                    this._startCardDrawAnimation($newCard, $card, true);
                 }
 
                 this._$cards.append($card);
-
-                if (!isFirstFill) {
-
-                    const $newCard = $('<div>').addClass('new-card');
-                    $newCard.append($card.children().clone());
-
-                    this._battle.$node.find('.new-cards').append($newCard);
-
-                    setTimeout(() => {
-                        $newCard.addClass('up');
-
-                        setTimeout(() => {
-                            $newCard.removeClass('up');
-                            $newCard.addClass('big');
-
-                            setTimeout(() => {
-                                $newCard.removeClass('big');
-                                $newCard.addClass('in-hand');
-
-                                setTimeout(() => {
-                                    $newCard.remove();
-                                    $card.show();
-                                }, 500);
-                            }, 1800);
-                        }, 400)
-                    }, 100);
-                }
             }
 
             this._updateClasses($card, handCard, i);
 
         });
 
-
         const opCardCount = game.op.hand.length;
 
+        const prevOpCardCount = isFirstFill ? opCardCount : this._prevGame.op.hand.length;
+
         this._$opCards.find('.card-wrap').each((i, node) => {
-            $(node).toggle(i < opCardCount);
+            $(node).toggle(i < prevOpCardCount);
         });
+
+        for (var i = prevOpCardCount; i < opCardCount; ++i) {
+            const $newCard = render(null, 'simple-card', { side: 'op' });
+
+            const $card = this._$opCards.find('.card-wrap').eq(i);
+
+            this._startCardDrawAnimation($newCard, $card, false);
+        }
 
         this._updateHandCountClass(this.$node, game.my.hand.length);
         this._updateHandCountClass(this.$opNode, game.op.hand.length);
@@ -121,8 +108,42 @@ H.Hand = class Hand {
         this._prevGame = game;
     }
 
+    _startCardDrawAnimation($newCard, $card, isOwn) {
+        this._battle.$node.find('.new-cards').append($newCard);
+
+        setTimeout(() => {
+            $newCard.addClass('up');
+
+            setTimeout(() => {
+                $newCard.removeClass('up');
+
+                if (isOwn) {
+                    $newCard.addClass('big');
+
+                    setTimeout(() => {
+                        $newCard.removeClass('big');
+                        $newCard.addClass('in-hand');
+
+                        setTimeout(() => {
+                            $newCard.remove();
+                            $card.show();
+                        }, 500);
+                    }, 1800);
+
+                } else {
+                    $newCard.addClass('in-hand');
+
+                    setTimeout(() => {
+                        $newCard.remove();
+                        $card.show();
+                    }, 800);
+                }
+            }, 400)
+        }, 100);
+    }
+
     burnCard(data) {
-        const $newCard = render(null, 'burn-card', {
+        const $newCard = render(null, 'simple-card', {
             pic: data.cardPic,
             side: data.side
         });
