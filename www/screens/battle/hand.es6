@@ -45,6 +45,8 @@ H.Hand = class Hand {
 
     onGameData(game) {
 
+        const isFirstFill = !this._prevGame;
+
         const prevHand = this._prevGame ? this._prevGame.my.hand : [];
         const hand = game.my.hand;
 
@@ -57,7 +59,6 @@ H.Hand = class Hand {
         });
 
         hand.forEach((handCard, i) => {
-
             var $card;
 
             const card = _.find(prevHand, { id: handCard.id });
@@ -70,10 +71,40 @@ H.Hand = class Hand {
                     handCard
                 });
 
+                if (!isFirstFill) {
+                    $card.hide();
+                }
+
                 this._$cards.append($card);
+
+                if (!isFirstFill) {
+                    const $newCard = $('<div>').addClass('new-card');
+                    $newCard.append($card.children().clone());
+
+                    this._battle.$node.find('.new-cards').append($newCard);
+
+                    setTimeout(() => {
+                        $newCard.addClass('up');
+                        setTimeout(() => {
+                            $newCard.removeClass('up');
+                            $newCard.addClass('big');
+
+                            setTimeout(() => {
+                                $newCard.removeClass('big');
+                                $newCard.addClass('in-hand');
+
+                                setTimeout(() => {
+                                    $newCard.remove();
+                                    $card.show();
+                                }, 500);
+                            }, 1800);
+                        }, 400)
+                    }, 100);
+                }
             }
 
             this._updateClasses($card, handCard, i);
+
         });
 
 

@@ -15,6 +15,10 @@
     }
   }
 
+  .cards {
+    -webkit-perspective: 502px;
+  }
+
   .card {
     position: absolute;
     width: 77px;
@@ -47,13 +51,46 @@
     }
   }
 
+  .new-cards {
+    position: absolute;
+    top: 360px;
+    left: 640px;
+    transform-style: preserve-3d;
+    perspective: 500px;
+    -webkit-perspective: 500px;
+  }
+
+  .new-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 77px;
+    height: 109px;
+    transition: transform ease-out 1s;
+
+    transform: translate(484px, 20px) translateZ(-60px) scale(1.7) rotateZ(90deg) rotateX(-90deg);
+
+    &.up {
+      transform: translate(484px, 20px) translateZ(0) scale(1.7) rotateZ(90deg) rotateX(-90deg);
+    }
+
+    &.big {
+      transform: translate(307px, -53px) scale(2.3);
+    }
+
+    &.in-hand {
+      transition: transform ease-out 0.5s;
+      transform: translate(80px, 278px) rotate(15deg);
+    }
+  }
+
   .card-wrap {
     position: absolute;
     top: 0;
     left: 0;
     width: 77px;
     height: 109px;
-    transition: top ease-out 0.2s;
+    transition: top ease-out 0.2s, transform linear 0.2s;
   }
 
   .active .card-wrap {
@@ -74,13 +111,13 @@
     }
 
     &.my {
-      &.hand4 .card,
-      &.hand5 .card,
-      &.hand6 .card,
-      &.hand7 .card,
-      &.hand8 .card,
-      &.hand9 .card,
-      &.hand10 .card {
+      &.hand4 .in-hand .card,
+      &.hand5 .in-hand .card,
+      &.hand6 .in-hand .card,
+      &.hand7 .in-hand .card,
+      &.hand8 .in-hand .card,
+      &.hand9 .in-hand .card,
+      &.hand10 .in-hand .card {
         transform: rotate(-8deg);
       }
     }
