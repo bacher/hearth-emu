@@ -137,6 +137,18 @@ H.Battle = class Battle extends EventEmitter {
                     this._start2();
                 }
                 break;
+            case 'burn-card':
+                player.sendMessage('burn-card', {
+                    side: 'my',
+                    cardPic: data.pic
+                });
+
+                player.sendMessage('burn-card', {
+                    side: 'op',
+                    cardPic: data.pic
+                });
+
+                break;
             case 'defeat':
                 player.sendMessage('defeat');
                 player.enemy.sendMessage('win');

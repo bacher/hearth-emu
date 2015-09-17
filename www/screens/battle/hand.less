@@ -66,21 +66,61 @@
     left: 0;
     width: 77px;
     height: 109px;
-    transition: transform ease-out 1s;
+    transition: transform ease-out 1s, opacity linear 1s;
 
-    transform: translate(484px, 20px) translateZ(-60px) scale(1.7) rotateZ(90deg) rotateX(-90deg);
+    &.burn {
+      top: -50px;
+      left: -50px;
+      width: 200px;
+      height: 196px;
+      background: url("/textures/card-burn.png");
+      opacity: 0;
 
-    &.up {
-      transform: translate(484px, 20px) translateZ(0) scale(1.7) rotateZ(90deg) rotateX(-90deg);
+      IMG {
+        display: none;
+      }
     }
 
-    &.big {
-      transform: translate(307px, -53px) scale(2.3);
+    &.my {
+      transform: translate(484px, 20px) translateZ(-60px) scale(1.7) rotateZ(90deg) rotateX(-90deg);
+
+      &.up {
+        transform: translate(484px, 20px) translateZ(0) scale(1.7) rotateZ(90deg) rotateX(-90deg);
+      }
+
+      &.big {
+        transform: translate(307px, -53px) scale(2.3);
+      }
+
+      &.in-hand {
+        transition: transform ease-out 0.5s;
+        transform: translate(80px, 278px) rotate(15deg);
+      }
+
+      &.burn {
+        transform: translate(307px, -53px) scale(3);
+      }
     }
 
-    &.in-hand {
-      transition: transform ease-out 0.5s;
-      transform: translate(80px, 278px) rotate(15deg);
+    &.op {
+      transform: translate(484px, -225px) translateZ(-60px) scale(1.7) rotateZ(90deg) rotateX(-90deg);
+
+      &.up {
+        transform: translate(484px, -225px) translateZ(0) scale(1.7) rotateZ(90deg) rotateX(-90deg)
+      }
+
+      &.big {
+        transform: translate(307px, -213px) scale(2.3);
+      }
+
+      &.in-hand {
+        transition: transform ease-out 0.5s;
+        transform: translate(-180px, -436px) rotate(14deg);
+      }
+
+      &.burn {
+        transform: translate(307px, -213px) scale(3);
+      }
     }
   }
 

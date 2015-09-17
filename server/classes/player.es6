@@ -179,8 +179,10 @@ H.Player = class Player extends EventEmitter {
             if (this.hand.canAddCard()) {
                 return this.hand.addCard(card);
             } else {
-                // Burn card
-                console.log('IMPL!');
+                this.emit('message', {
+                    msg: 'burn-card',
+                    data: card
+                });
             }
 
         } else {

@@ -1,6 +1,7 @@
 
 H.Hand = class Hand {
     constructor(battle) {
+        window.a = this;
         this._battle = battle;
 
         this.$node = battle.$node.find('.hand.my');
@@ -67,9 +68,7 @@ H.Hand = class Hand {
                 $card = this._getCardById(card.id);
 
             } else {
-                $card = render(null, 'card', {
-                    handCard
-                });
+                $card = render(null, 'card', handCard);
 
                 if (!isFirstFill) {
                     $card.hide();
@@ -78,6 +77,7 @@ H.Hand = class Hand {
                 this._$cards.append($card);
 
                 if (!isFirstFill) {
+
                     const $newCard = $('<div>').addClass('new-card');
                     $newCard.append($card.children().clone());
 
@@ -85,6 +85,7 @@ H.Hand = class Hand {
 
                     setTimeout(() => {
                         $newCard.addClass('up');
+
                         setTimeout(() => {
                             $newCard.removeClass('up');
                             $newCard.addClass('big');
@@ -118,6 +119,32 @@ H.Hand = class Hand {
         this._updateHandCountClass(this.$opNode, game.op.hand.length);
 
         this._prevGame = game;
+    }
+
+    burnCard(data) {
+        const $newCard = render(null, 'burn-card', {
+            pic: data.cardPic,
+            side: data.side
+        });
+
+        this._battle.$node.find('.new-cards').append($newCard);
+
+        setTimeout(() => {
+            $newCard.addClass('up');
+
+            setTimeout(() => {
+                $newCard.removeClass('up');
+                $newCard.addClass('big');
+
+                setTimeout(() => {
+                    $newCard.addClass('burn');
+
+                    setTimeout(() => {
+                        $newCard.remove();
+                    }, 1000);
+                }, 1800);
+            }, 400)
+        }, 100);
     }
 
     _updateClasses($card, handCard, i) {
