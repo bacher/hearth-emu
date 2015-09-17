@@ -63,6 +63,7 @@ const E = {
             var minion;
             var allowPlayer;
             var allowHero;
+            var onlyMinions;
 
             if (target === 'self') {
                 minion = o.minion;
@@ -72,12 +73,15 @@ const E = {
                 allowPlayer = o.player.enemy;
             } else if (target === 'my-hero') {
                 allowHero = o.player.hero;
+            } else if (target === 'minions') {
+                onlyMinions = true;
             }
 
             return function(eventMessage) {
                 if ((!minion || minion === eventMessage.to) &&
                     (!allowPlayer || allowPlayer === eventMessage.to.player) &&
-                    (!allowHero || allowHero === eventMessage.to)) {
+                    (!allowHero || allowHero === eventMessage.to) &&
+                    (!onlyMinions || eventMessage.to.objType === 'minion')) {
                     callback(eventMessage);
                 }
             };

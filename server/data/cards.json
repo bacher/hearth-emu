@@ -2154,6 +2154,22 @@
     }
   },
   {
+    "id": 257,
+    "name": "Fiery War Axe",
+    "cost": 2,
+    "pic": "147/558/632",
+    "clas": 1,
+    "type": 3,
+    "flags": [],
+    "weapon": {
+      "attack": 3,
+      "durability": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 194,
     "name": "Flametongue Totem",
     "cost": 2,
@@ -3275,6 +3291,46 @@
     }
   },
   {
+    "id": 258,
+    "name": "Frothing Berserker",
+    "cost": 3,
+    "pic": "148/541/69",
+    "clas": 1,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "take-damage",
+              "params": [
+                "minions"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 229,
     "name": "Harvest Golem",
     "cost": 3,
@@ -4048,6 +4104,35 @@
     }
   },
   {
+    "id": 255,
+    "name": "Arathi Weaponsmith",
+    "cost": 4,
+    "pic": "148/328/504",
+    "clas": 1,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "equip-weapon",
+                "params": [
+                  "weapon-2-2"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 249,
     "name": "Auchenai Soulpriest",
     "cost": 4,
@@ -4722,6 +4807,22 @@
     }
   },
   {
+    "id": 256,
+    "name": "Arcanite Reaper",
+    "cost": 5,
+    "pic": "147/564/182",
+    "clas": 1,
+    "type": 3,
+    "flags": [],
+    "weapon": {
+      "attack": 5,
+      "durability": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 127,
     "name": "Assassinate",
     "cost": 5,
@@ -5112,6 +5213,11 @@
     "pic": "147/613/325",
     "clas": 0,
     "type": 1,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
     "flags": [],
     "minion": {
       "attack": 4,
