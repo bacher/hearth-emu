@@ -3455,6 +3455,50 @@
     }
   },
   {
+    "id": 281,
+    "name": "Drain Life",
+    "cost": 3,
+    "pic": "147/480/332",
+    "clas": 7,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "heal",
+              "params": [
+                2
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "heroes",
+              "friends"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 236,
     "name": "Earthen Ring Farseer",
     "cost": 3,
@@ -4160,6 +4204,34 @@
     }
   },
   {
+    "id": 282,
+    "name": "Shadow Bolt",
+    "cost": 3,
+    "pic": "147/474/647",
+    "clas": 7,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                4
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 113,
     "name": "Shadow Word: Death",
     "cost": 3,
@@ -4859,6 +4931,34 @@
               "params": []
             }
           ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 280,
+    "name": "Hellfire",
+    "cost": 4,
+    "pic": "147/483/122",
+    "clas": 7,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                3
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "all"
+            ]
+          }
         }
       ]
     }

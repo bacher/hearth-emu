@@ -317,7 +317,9 @@ const A = {
         }
     },
     'add-custom-event': function(o) {
-        throw 11;
+        const params = H.parseParams(['eventName', 'eventParam', 'actName'], this.params[0]);
+
+
     },
     'draw-card-deal-self-damage': function(o) {
         o.player.hero.dealDamage(2);
