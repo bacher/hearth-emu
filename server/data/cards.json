@@ -1887,6 +1887,38 @@
     }
   },
   {
+    "id": 261,
+    "name": "Battle Rage",
+    "cost": 2,
+    "pic": "148/319/664",
+    "clas": 1,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "draw-card-at-each-target",
+              "params": []
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "friends"
+            ],
+            "modificators": [
+              {
+                "name": "damaged",
+                "params": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 9,
     "name": "Bloodfen Raptor",
     "cost": 2,
@@ -4954,6 +4986,44 @@
       ],
       "events": {},
       "race": 0
+    }
+  },
+  {
+    "id": 260,
+    "name": "Brawl",
+    "cost": 5,
+    "pic": "148/346/297",
+    "clas": 1,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "kill",
+              "params": []
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "minions"
+            ],
+            "modificators": [
+              {
+                "name": "random",
+                "params": [
+                  1
+                ]
+              },
+              {
+                "name": "invert-minions",
+                "params": []
+              }
+            ]
+          }
+        }
+      ]
     }
   },
   {

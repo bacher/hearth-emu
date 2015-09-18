@@ -193,6 +193,11 @@ const A = {
             o.player.drawCard();
         }
     },
+    'draw-card-at-each-target'(o) {
+        A['draw-card'].call({
+            params: [o.targets.getCount()]
+        }, o)
+    },
     'discard-card': function(o) {
         const max = this.params[0] || 1;
         for (var i = 0; i < max; ++i) {

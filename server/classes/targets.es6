@@ -111,6 +111,11 @@ H.Targets = class Targets {
         return this;
     }
 
+    getCount() {
+        return this.my.minions.length + this.op.minions.length +
+            (this.my.hero ? 1 : 0) + (this.op.hero ? 1 : 0);
+    }
+
     forEach(func) {
         this.my.minions.forEach(func);
         this.op.minions.forEach(func);
@@ -246,6 +251,23 @@ H.Targets = class Targets {
     }
     'add-adjacent'() {
         this.addMinions(this.getAdjacent());
+    }
+    'invert'() {
+        this._invertMinions(this.my, this.player.creatures);
+        this._invertMinions(this.op, this.player.enemy.creatures);
+
+        this.my.hero = !this.my.hero;
+        this.op.hero = !this.op.hero;
+    }
+    'invert-minions'() {
+        this._invertMinions(this.my, this.player.creatures);
+        this._invertMinions(this.op, this.player.enemy.creatures);
+    }
+
+    _invertMinions(side, playerCreatures) {
+        side.minions = playerCreatures.getAll().filter(creature => {
+            return !_.contains(side.minions, creature);
+        });
     }
 
     _filterAll(filterFunc) {

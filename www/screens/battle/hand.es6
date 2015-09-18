@@ -8,8 +8,6 @@ H.Hand = class Hand {
         this.$opNode = battle.$node.find('.hand.op');
 
         this._render();
-
-        this._bindEventListeners();
     }
 
     _render() {
@@ -20,11 +18,13 @@ H.Hand = class Hand {
         this._$opCards = this.$opNode.find('.cards');
 
         this._$cardPreview = this.$node.find('.card-preview');
+
+        this._bindEventListeners();
     }
 
     _bindEventListeners() {
         this.$node
-            .on('mouseenter', '.hand.my .card-wrap', e => {
+            .on('mouseenter', '.card-wrap', e => {
                 const $cardWrap = $(e.currentTarget);
                 const $img = $cardWrap.find('IMG');
                 const picUrl = $img.attr('src');
