@@ -149,6 +149,10 @@ H.Hero = class Hero {
         }
     }
 
+    removeCrystal(count = 1) {
+        this.crystals = Math.max(0, this.crystals - count);
+    }
+
     addFlag(flag) {
         this.flags[flag] = true;
     }

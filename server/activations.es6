@@ -412,6 +412,9 @@ const A = {
             targets: [card]
         }));
     },
+    'destroy-crystal'(o) {
+        o.player.hero.removeCrystal();
+    },
     'add-aura': function(o) {
         const params = H.parseParams(['auraName', 'auraParam', 'lifeTime', 'side'], this.params);
 

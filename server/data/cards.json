@@ -692,6 +692,50 @@
     }
   },
   {
+    "id": 300,
+    "name": "Blood Imp",
+    "cost": 1,
+    "pic": "147/477/196",
+    "clas": 7,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 0,
+      "maxHp": 1,
+      "flags": [
+        "stealth"
+      ],
+      "race": 2,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-hp",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "except-self",
+                "friends",
+                "minions"
+              ]
+            },
+            "event": {
+              "name": "end-turn",
+              "params": [
+                "own"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 209,
     "name": "Boar",
     "cost": 1,
@@ -979,6 +1023,41 @@
     "trap": {
       "events": {
         "custom": []
+      }
+    }
+  },
+  {
+    "id": 299,
+    "name": "Flame Imp",
+    "cost": 1,
+    "pic": "148/232/85",
+    "clas": 7,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [],
+      "race": 2,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  3
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "friends",
+                "heroes"
+              ]
+            }
+          }
+        ]
       }
     }
   },
@@ -1558,6 +1637,66 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 298,
+    "name": "Power Overwhelming",
+    "cost": 1,
+    "pic": "148/223/170",
+    "clas": 7,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "friends",
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-attack",
+              "params": [
+                4
+              ]
+            },
+            {
+              "name": "add-hp",
+              "params": [
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "add-custom-event",
+              "params": []
+            }
+          ],
+          "customEvent": {
+            "acts": [
+              {
+                "name": "kill",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "end-turn",
+              "params": []
+            }
+          }
+        }
+      ]
     }
   },
   {
@@ -3780,6 +3919,35 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 301,
+    "name": "Felguard",
+    "cost": 3,
+    "pic": "148/190/236",
+    "clas": 7,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 5,
+      "flags": [
+        "taunt"
+      ],
+      "race": 2,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "destroy-crystal",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
