@@ -13,7 +13,6 @@ const T = {
     },
     'enemies': function(player) {
         const targets = T['enemy-minions'](player);
-        targets.addMinions(player.enemy.creatures.getAll());
         targets.addEnemyHero();
 
         return targets;

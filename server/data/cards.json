@@ -5463,6 +5463,33 @@
     }
   },
   {
+    "id": 292,
+    "name": "Shadowflame",
+    "cost": 4,
+    "pic": "148/196/673",
+    "clas": 7,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions",
+        "friends"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "warlock-shadowflame",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 45,
     "name": "Stormwind Knight",
     "cost": 4,
@@ -5658,6 +5685,36 @@
     }
   },
   {
+    "id": 290,
+    "name": "Bane of Doom",
+    "cost": 5,
+    "pic": "148/235/670",
+    "clas": 7,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 150,
     "name": "Blessed Champion",
     "cost": 5,
@@ -5797,6 +5854,37 @@
                 "friends"
               ]
             }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 291,
+    "name": "Doomguard",
+    "cost": 5,
+    "pic": "148/211/507",
+    "clas": 7,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 7,
+      "flags": [
+        "charge"
+      ],
+      "race": 2,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "discard-random-hand-card",
+                "params": [
+                  2
+                ]
+              }
+            ]
           }
         ]
       }
@@ -6571,6 +6659,48 @@
     }
   },
   {
+    "id": 289,
+    "name": "Siphon Soul",
+    "cost": 6,
+    "pic": "148/208/573",
+    "clas": 7,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "kill",
+              "params": []
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "heal",
+              "params": [
+                3
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "friends",
+              "heroes"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 134,
     "name": "Temple Enforcer",
     "cost": 6,
@@ -7046,6 +7176,46 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 288,
+    "name": "Twisting Nether",
+    "cost": 8,
+    "pic": "148/214/398",
+    "clas": 7,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "kill",
+              "params": []
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "minions"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 287,
+    "name": "Lord Jaraxxus",
+    "cost": 9,
+    "pic": "148/238/482",
+    "clas": 7,
+    "type": 2,
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": []
     }
   },
   {

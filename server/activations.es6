@@ -217,12 +217,25 @@ const A = {
             }
         });
     },
-    'discard-card': function(o) {
-        const max = this.params[0] || 1;
+    //'discard-card': function(o) {
+    //    const max = this.params[0] || 1;
+    //
+    //    for (var i = 0; i < max; ++i) {
+    //        o.player.deck.popCard();
+    //    }
+    //},
+    'warlock-shadowflame'(o) {
+        o.targets.each(target => {
+            const attack = target.getData().attack;
 
-        for (var i = 0; i < max; ++i) {
-            o.player.deck.popCard();
-        }
+            target.kill();
+
+            A['deal-damage'].call({
+                params: [attack]
+            }, {
+                targets: H.TARGETS.getTargets(o.player, 'enemy-minions')
+            });
+        });
     },
     'discard-random-hand-card': function(o) {
         const max = this.params[0] || 1;
