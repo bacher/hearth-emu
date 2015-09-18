@@ -2498,6 +2498,32 @@
     }
   },
   {
+    "id": 297,
+    "name": "Demonfire",
+    "cost": 2,
+    "pic": "148/529/452",
+    "clas": 7,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "warlock-demonfire",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 222,
     "name": "Dire Wolf Alpha",
     "cost": 2,
@@ -4765,6 +4791,24 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 296,
+    "name": "Void Terror",
+    "cost": 3,
+    "pic": "148/199/119",
+    "clas": 7,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 2,
+      "events": {}
     }
   },
   {

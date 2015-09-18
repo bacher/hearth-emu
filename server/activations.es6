@@ -282,6 +282,17 @@ const A = {
             o.player.hand.addCard(deckCard.card);
         });
     },
+    'warlock-demonfire'(o) {
+        o.targets.forEach(target => {
+            if (target.race === H.RACES.demon && target.player === o.player) {
+                target.attack += 2;
+                target.maxHp += 2;
+                target.hp += 2;
+            } else {
+                target.dealDamage(2);
+            }
+        });
+    },
     'return-to-hand': function(o) {
         o.targets.forEach(minion => {
             const player = minion.player;
