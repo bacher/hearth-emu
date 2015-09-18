@@ -26,12 +26,24 @@ H.Weapon = class Weapon extends H.GameObject {
     setHitFlags() {
         H.GameObject.prototype.setHitFlags.apply(this);
 
-        this.durability--;
+        if (this.card.name === 'Gorehowl') {
+            this.attack--;
 
-        if (this.durability === 0) {
-            this.kill();
+            if (this.attack === 0) {
+                this.detachWeapon();
+            }
+        } else {
+            this.durability--;
 
-            this.player.hero.weapon = null;
+            if (this.durability === 0) {
+                this.detachWeapon();
+            }
         }
+    }
+
+    detachWeapon() {
+        this.kill();
+
+        this.player.hero.weapon = null;
     }
 };

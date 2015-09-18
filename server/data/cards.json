@@ -6209,6 +6209,22 @@
     }
   },
   {
+    "id": 271,
+    "name": "Gorehowl",
+    "cost": 7,
+    "pic": "148/361/96",
+    "clas": 1,
+    "type": 3,
+    "flags": [],
+    "weapon": {
+      "attack": 7,
+      "durability": 1,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 142,
     "name": "Guardian of Kings",
     "cost": 7,
