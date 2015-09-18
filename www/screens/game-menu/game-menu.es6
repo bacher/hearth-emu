@@ -34,7 +34,7 @@ H.Screens['game-menu'] = class GameMenuScreen extends H.Screen {
                 H.app.getActiveScreen().concede();
             })
             .on('click', '.options', () => {
-                console.log('O');
+                H.app.activateOverlay('options');
             })
             .on('click', '.quit', () => {
                 window.location = '/';
