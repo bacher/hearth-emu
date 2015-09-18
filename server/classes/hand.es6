@@ -51,4 +51,8 @@ H.Hand = class Hand {
     removeHandCard(card) {
         this.cards.splice(this.cards.indexOf(card), 1);
     }
+
+    removeRandomHandCard() {
+        this.removeHandCard(this.getRandomHandCard());
+    }
 };

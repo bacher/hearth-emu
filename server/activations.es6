@@ -219,8 +219,16 @@ const A = {
     },
     'discard-card': function(o) {
         const max = this.params[0] || 1;
+
         for (var i = 0; i < max; ++i) {
             o.player.deck.popCard();
+        }
+    },
+    'discard-random-hand-card': function(o) {
+        const max = this.params[0] || 1;
+
+        for (var i = 0; i < max; ++i) {
+            o.player.removeRandomHandCard();
         }
     },
     'copy-random-enemy-card': function(o) {

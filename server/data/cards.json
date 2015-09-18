@@ -217,6 +217,56 @@
     }
   },
   {
+    "id": 286,
+    "name": "Sacrificial Pact",
+    "cost": 0,
+    "pic": "149/447/348",
+    "clas": 7,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ],
+      "modificators": [
+        {
+          "name": "race",
+          "params": [
+            "demon"
+          ]
+        }
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "kill",
+              "params": []
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "heal",
+              "params": [
+                5
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "heroes",
+              "friends"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 48,
     "name": "Sheep",
     "cost": 0,
@@ -1414,6 +1464,38 @@
     }
   },
   {
+    "id": 284,
+    "name": "Mortal Coil",
+    "cost": 1,
+    "pic": "148/193/43",
+    "clas": 7,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                1
+              ]
+            },
+            {
+              "name": "if-target-alive-draw-card",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 57,
     "name": "Murloc Raider",
     "cost": 1,
@@ -1669,6 +1751,42 @@
       "flags": [],
       "events": {},
       "race": 0
+    }
+  },
+  {
+    "id": 285,
+    "name": "Soulfire",
+    "cost": 1,
+    "pic": "148/205/529",
+    "clas": 7,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "discard-random-hand-card",
+              "params": []
+            }
+          ]
+        }
+      ]
     }
   },
   {
