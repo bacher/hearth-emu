@@ -194,7 +194,7 @@ const A = {
             obj.attack = obj.getData().hp;
         });
     },
-    'set-health': function(o) {
+    'set-hp': function(o) {
         o.targets.forEach(obj => {
             obj.hp = obj.maxHp = this.params[0];
         });

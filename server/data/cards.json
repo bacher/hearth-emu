@@ -101,7 +101,7 @@
         {
           "acts": [
             {
-              "name": "set-health",
+              "name": "set-hp",
               "params": [
                 1
               ]
@@ -2413,7 +2413,7 @@
         {
           "acts": [
             {
-              "name": "set-health",
+              "name": "set-hp",
               "params": [
                 1
               ]
