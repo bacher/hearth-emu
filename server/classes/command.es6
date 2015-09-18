@@ -73,6 +73,7 @@ H.Command = class Command {
 
             if (act.name === 'add-custom-event') {
                 params.customEvent = this._customEvent;
+
             } else if (act.name === 'add-aura') {
                 params.aura = this._aura;
             }

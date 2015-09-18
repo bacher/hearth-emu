@@ -448,16 +448,23 @@ const A = {
         o.player.hero.removeCrystal();
     },
     'add-aura': function(o) {
-        const params = H.parseParams(['auraName', 'auraParam', 'lifeTime', 'side'], this.params);
+        const params = H.parseParams(['lifeTime', 'side'], this.params);
 
         const isThisTurn = params.lifeTime === 'this-turn';
 
+        const auraDetails = o.aura.acts[0];
+
+        console.log('TARGETS COUNT: ', o.targets.getCount());
+
         if (o.targets) {
             o.targets.forEach(target => {
+                console.log('ADD aura for ', target.id);
+
                 const aura = new H.Aura(target.player, {
-                    name: params.auraName,
-                    params: [params.auraParam],
+                    name: auraDetails.name,
+                    params: auraDetails.params,
                     side: params.side,
+                    // FIXME target -> targetsType
                     target: target,
                     owner: target
                 });
@@ -466,8 +473,8 @@ const A = {
             });
         } else {
             const aura = new H.Aura(o.player, {
-                name: params.auraName,
-                params: [params.auraParam],
+                name: auraDetails.name,
+                params: auraDetails.params,
                 side: params.side
             });
 

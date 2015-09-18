@@ -1,4 +1,5 @@
 
+const _ = require('lodash');
 const H = require('../namespace');
 
 const AURAS = {
@@ -26,7 +27,7 @@ const AURAS = {
         priority: 100
     },
     'add-attack': {
-        affect: 'minion',
+        affect: ['minion', 'hero'],
         effect(minion) {
             minion.attack += this.params[0];
         }
@@ -71,6 +72,12 @@ H.Aura = class Aura {
         this.aura = AURAS[auraInfo.name];
         this.params = auraInfo.params;
 
+        this.affect = this.aura.affect;
+
+        if (!Array.isArray(this.affect)) {
+            this.affect = [this.affect];
+        }
+
         this.targetsType = auraInfo.targetsType;
 
         /** @type {Hero|Minion|Weapon|null} */
@@ -86,7 +93,7 @@ H.Aura = class Aura {
 
         this.effect = this.aura.effect;
 
-        if (this.side === 'target') {
+        if (this.side === 'target') { // FIXME target ? self ?
             this.target = auraInfo.target;
 
         } else if (this.side === 'own') {
@@ -102,7 +109,7 @@ H.Aura = class Aura {
     }
 
     isAffect(affect) {
-        return this.aura.affect === affect;
+        return _.contains(this.affect, affect);
     }
 
     isTarget(obj) {

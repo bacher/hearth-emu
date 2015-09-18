@@ -5108,21 +5108,22 @@
     "pic": "147/396/329",
     "clas": 6,
     "type": 2,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "spell": {
       "acts": [
         {
           "acts": [
             {
               "name": "add-aura",
-              "params": []
+              "params": [
+                "this-turn",
+                "target"
+              ]
             }
           ],
           "targetsType": {
             "names": [
-              "self"
+              "friends"
             ]
           },
           "aura": {

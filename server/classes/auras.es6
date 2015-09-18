@@ -13,23 +13,23 @@ H.Auras = class Auras {
         this.list.push(aura);
 
         const owner = aura.getOwner();
+        const isOwnerEmitter = owner && !!owner.on;
 
         const removeAura = () => {
-            if (owner) {
+            if (isOwnerEmitter) {
                 owner.removeListener('detach', removeAura);
             }
 
             this.removeAura(aura);
         };
 
-        if (owner) {
+        if (isOwnerEmitter) {
             owner.on('detach', removeAura);
         }
 
         if (onlyThisTurn) {
             this.battle.once('end-turn', removeAura);
         }
-
     }
 
     removeAura(aura) {
