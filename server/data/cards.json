@@ -4153,6 +4153,47 @@
     }
   },
   {
+    "id": 273,
+    "name": "Shattered Sun Cleric",
+    "cost": 3,
+    "pic": "147/829/434",
+    "clas": 0,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "friends",
+        "minions"
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              },
+              {
+                "name": "add-hp",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 121,
     "name": "Shield Block",
     "cost": 3,
