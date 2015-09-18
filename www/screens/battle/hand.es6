@@ -1,7 +1,6 @@
 
 H.Hand = class Hand {
     constructor(battle) {
-        window.a = this;
         this._battle = battle;
 
         this.$node = battle.$node.find('.hand.my');
@@ -163,6 +162,25 @@ H.Hand = class Hand {
                     setTimeout(() => {
                         $newCard.remove();
                     }, 1000);
+                }, 1800);
+            }, 400)
+        }, 100);
+    }
+
+    fatigue(data) {
+        const $newCard = render(null, 'fatigue-card', data);
+
+        this._battle.$node.find('.new-cards').append($newCard);
+
+        setTimeout(() => {
+            $newCard.addClass('up');
+
+            setTimeout(() => {
+                $newCard.removeClass('up');
+                $newCard.addClass('big-center');
+
+                setTimeout(() => {
+                    $newCard.remove();
                 }, 1800);
             }, 400)
         }, 100);

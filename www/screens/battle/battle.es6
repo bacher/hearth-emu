@@ -28,6 +28,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         H.socket.on('defeat', this._onDefeat.bind(this));
         H.socket.on('win', this._onWin.bind(this));
         H.socket.on('burn-card', this._onBurnCard.bind(this));
+        H.socket.on('fatigue', this._onFatigue.bind(this));
 
         this._playCard.bindEventListeners();
 
@@ -71,6 +72,10 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
     _onBurnCard(data) {
         this._hand.burnCard(data);
+    }
+
+    _onFatigue(data) {
+        this._hand.fatigue(data);
     }
 
     updateInGameData() {

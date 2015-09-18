@@ -27,6 +27,7 @@ H.Player = class Player extends EventEmitter {
         this.traps = new H.Traps(this);
 
         this._playedCardCount = 0;
+        this._outOfCardCount = 0;
 
         ws
             .on('message', json => {
@@ -186,8 +187,14 @@ H.Player = class Player extends EventEmitter {
             }
 
         } else {
-            // Make damage
-            console.log('IMPL!');
+            this._outOfCardCount++;
+
+            this.emit('message', {
+                msg: 'fatigue',
+                data: {
+                    damage: this._outOfCardCount
+                }
+            });
         }
     }
 
