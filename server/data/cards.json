@@ -4370,6 +4370,27 @@
     }
   },
   {
+    "id": 295,
+    "name": "Sense Demons",
+    "cost": 3,
+    "pic": "148/226/327",
+    "clas": 7,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "warlock-sense-demons",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 282,
     "name": "Shadow Bolt",
     "cost": 3,

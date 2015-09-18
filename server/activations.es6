@@ -271,6 +271,17 @@ const A = {
             "names": ["all"]
         });
     },
+    'warlock-sense-demons'(o) {
+        const deck = o.player.deck;
+
+        const deckCards = deck.getRandomCards(2, null, H.RACES.demon);
+
+        deck.removeCards(deckCards);
+
+        deckCards.forEach(deckCard => {
+            o.player.hand.addCard(deckCard.card);
+        });
+    },
     'return-to-hand': function(o) {
         o.targets.forEach(minion => {
             const player = minion.player;

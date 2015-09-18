@@ -32,11 +32,15 @@ H.Deck = class Deck {
         };
     }
 
-    getRandomCards(count, type) {
+    getRandomCards(count, type, race) {
         var deckCards = this.deckCards;
 
         if (type) {
             deckCards = deckCards.filter(deckCard => deckCard.card.type === type);
+        }
+
+        if (race) {
+            deckCards = deckCards.filter(deckCards => deckCards.card.minion && deckCards.card.minion.race === race);
         }
 
         const cardCount = deckCards.length;
@@ -58,6 +62,10 @@ H.Deck = class Deck {
 
             return cards;
         }
+    }
+
+    removeCards(cards) {
+        this.deckCards = this.deckCards.filter(deckCard => !_.contains(cards, deckCard));
     }
 
     replaceCards(cardIds, drawCount) {
