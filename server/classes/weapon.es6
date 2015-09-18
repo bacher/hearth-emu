@@ -41,7 +41,7 @@ H.Weapon = class Weapon extends H.GameObject {
                 this.detachWeapon();
             }
         } else {
-            reduceDurability(1);
+            this.reduceDurability(1);
         }
     }
 

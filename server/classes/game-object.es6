@@ -54,32 +54,34 @@ H.GameObject = class GameObject extends EventEmitter {
             }
 
             if (eventTypeName === 'custom') {
-                eventActs.forEach(command => {
-                    const event = command.event;
-
-                    const eventListener = H.EventFilters.getCallback(event, {
-                        player,
-                        minion: this
-                    }, (eventMessage, globalTargets) => {
-                        command.act({
-                            battle: this.player.battle,
-                            player,
-                            handCard: null,
-                            minion: this,
-                            params: null,
-                            globalTargets,
-                            eventMessage
-                        });
-
-                        if (this.card.type === H.CARD_TYPES['trap']) {
-                            this.detach();
-                        }
-                    });
-
-                    this._onBattle(eventListener.eventName, eventListener.callback);
-                });
+                eventActs.forEach(command => this.addCustomEvent(command));
             }
         }
+    }
+
+    addCustomEvent(command) {
+        const event = command.event;
+
+        const eventListener = H.EventFilters.getCallback(event, {
+            player: this.player,
+            minion: this
+        }, (eventMessage, globalTargets) => {
+            command.act({
+                battle: this.player.battle,
+                player: this.player,
+                handCard: null,
+                minion: this,
+                params: null,
+                globalTargets,
+                eventMessage
+            });
+
+            if (this.card.type === H.CARD_TYPES['trap']) {
+                this.detach();
+            }
+        });
+
+        this._onBattle(eventListener.eventName, eventListener.callback);
     }
 
     getFlags() {

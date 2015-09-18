@@ -208,7 +208,7 @@ const A = {
     'draw-card-at-each-target'(o) {
         A['draw-card'].call({
             params: [o.targets.getCount()]
-        }, o)
+        }, o);
     },
     'if-target-alive-draw-card'(o) {
         o.targets.forEach(target => {
@@ -317,9 +317,9 @@ const A = {
         }
     },
     'add-custom-event': function(o) {
-        const params = H.parseParams(['eventName', 'eventParam', 'actName'], this.params[0]);
-
-
+        o.targets.forEach(target => {
+            target.addCustomEvent(new H.Command(o.customEvent));
+        });
     },
     'draw-card-deal-self-damage': function(o) {
         o.player.hero.dealDamage(2);

@@ -18,6 +18,14 @@ H.Command = class Command {
         this.event = command.event;
         this.targetsType = command.targetsType;
 
+        if (command.customEvent) {
+            this._customEvent = command.customEvent;
+        }
+
+        if (command.aura) {
+            this._aura = command.aura;
+        }
+
         this.addActFuncs();
     }
 
@@ -52,7 +60,7 @@ H.Command = class Command {
         }
 
         this.acts.forEach(act => {
-            act.actFunc({
+            const params = {
                 baseParams: o,
                 battle: o.battle,
                 player: o.player,
@@ -61,7 +69,15 @@ H.Command = class Command {
                 params: o.params,
                 eventMessage: o.eventMessage,
                 targets: targets
-            });
+            };
+
+            if (act.name === 'add-custom-event') {
+                params.customEvent = this._customEvent;
+            } else if (act.name === 'add-aura') {
+                params.aura = this._aura;
+            }
+
+            act.actFunc(params);
         });
     }
 

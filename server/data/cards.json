@@ -660,6 +660,52 @@
     }
   },
   {
+    "id": 283,
+    "name": "Corruption",
+    "cost": 1,
+    "pic": "147/486/252",
+    "clas": 7,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "enemies",
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-custom-event",
+              "params": []
+            }
+          ],
+          "customEvent": {
+            "acts": [
+              {
+                "name": "kill",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "start-turn",
+              "params": [
+                "op"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 230,
     "name": "Damaged Golem",
     "cost": 1,
@@ -1306,7 +1352,9 @@
     "pic": "147/845/680",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "uncollectable"
+    ],
     "minion": {
       "attack": 2,
       "maxHp": 1,
