@@ -106,6 +106,15 @@ const A = {
             params: [o.player.hero.armor]
         }, o);
     },
+    'deal-weapon-damage-and-destroy-it'(o) {
+        const weapon = o.player.hero.weapon;
+
+        A['deal-damage'].call({
+            params: [weapon.attack]
+        }, o);
+
+        weapon.detachWeapon();
+    },
     'warrior-mortal-strike'(o) {
         const dmg = o.player.hero.hp <= 12 ? 6 : 4;
 

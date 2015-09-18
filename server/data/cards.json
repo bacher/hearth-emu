@@ -788,6 +788,65 @@
     }
   },
   {
+    "id": 314,
+    "name": "Cold Blood",
+    "cost": 1,
+    "pic": "147/498/92",
+    "clas": 3,
+    "type": 2,
+    "combo": {
+      "object": {
+        "events": {
+          "battlecry": [],
+          "deathrattle": [],
+          "end-turn": [],
+          "start-turn": [],
+          "aura": [],
+          "custom": []
+        }
+      },
+      "spell": {
+        "acts": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  4
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "targetsType": {
+        "names": [
+          "minions"
+        ]
+      }
+    },
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-attack",
+              "params": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 283,
     "name": "Corruption",
     "cost": 1,
@@ -2526,6 +2585,32 @@
     }
   },
   {
+    "id": 312,
+    "name": "Blade Flurry",
+    "cost": 2,
+    "pic": "147/703/244",
+    "clas": 3,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-weapon-damage-and-destroy-it",
+              "params": []
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 9,
     "name": "Bloodfen Raptor",
     "cost": 2,
@@ -2845,6 +2930,65 @@
               "minions"
             ]
           }
+        }
+      ]
+    }
+  },
+  {
+    "id": 313,
+    "name": "Eviscerate",
+    "cost": 2,
+    "pic": "147/975/382",
+    "clas": 3,
+    "type": 2,
+    "combo": {
+      "object": {
+        "events": {
+          "battlecry": [],
+          "deathrattle": [],
+          "end-turn": [],
+          "start-turn": [],
+          "aura": [],
+          "custom": []
+        }
+      },
+      "spell": {
+        "acts": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  4
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "targetsType": {
+        "names": [
+          "all"
+        ]
+      }
+    },
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                2
+              ]
+            }
+          ]
         }
       ]
     }
