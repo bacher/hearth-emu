@@ -36,6 +36,40 @@
     }
   },
   {
+    "id": 304,
+    "name": "Backstab",
+    "cost": 0,
+    "pic": "147/495/471",
+    "clas": 3,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ],
+      "modificators": [
+        {
+          "name": "undamaged",
+          "params": []
+        }
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 241,
     "name": "Circle of Healing",
     "cost": 0,
@@ -1893,6 +1927,35 @@
     }
   },
   {
+    "id": 303,
+    "name": "Sinister Strike",
+    "cost": 1,
+    "pic": "147/504/205",
+    "clas": 3,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                3
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies",
+              "heroes"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 285,
     "name": "Soulfire",
     "cost": 1,
@@ -2431,6 +2494,33 @@
               }
             ]
           }
+        }
+      ]
+    }
+  },
+  {
+    "id": 311,
+    "name": "Betrayal",
+    "cost": 2,
+    "pic": "147/978/198",
+    "clas": 3,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions",
+        "enemies"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage-to-adjacent",
+              "params": []
+            }
+          ]
         }
       ]
     }
@@ -3864,6 +3954,35 @@
     }
   },
   {
+    "id": 309,
+    "name": "Edwin VanCleef",
+    "cost": 3,
+    "pic": "148/565/3",
+    "clas": 3,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-attack-hp-for-each-played-card",
+                "params": [
+                  2
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 128,
     "name": "Fan of Knives",
     "cost": 3,
@@ -4130,6 +4249,93 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 308,
+    "name": "Headcrack",
+    "cost": 3,
+    "pic": "148/11/135",
+    "clas": 3,
+    "type": 2,
+    "combo": {
+      "object": {
+        "events": {
+          "battlecry": [],
+          "deathrattle": [],
+          "end-turn": [],
+          "start-turn": [],
+          "aura": [],
+          "custom": []
+        }
+      },
+      "spell": {
+        "acts": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "heroes",
+                "enemies"
+              ]
+            }
+          },
+          {
+            "acts": [
+              {
+                "name": "add-custom-event",
+                "params": []
+              }
+            ],
+            "customEvent": {
+              "acts": [
+                {
+                  "name": "add-hand-card",
+                  "params": [
+                    "headcrack"
+                  ]
+                }
+              ],
+              "event": {
+                "name": "start-turn",
+                "params": [
+                  "own"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                2
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "heroes",
+              "enemies"
+            ]
+          }
+        }
+      ]
     }
   },
   {
@@ -4441,6 +4647,66 @@
     }
   },
   {
+    "id": 307,
+    "name": "Perdition's Blade",
+    "cost": 3,
+    "pic": "148/2/82",
+    "clas": 3,
+    "type": 3,
+    "combo": {
+      "object": {
+        "events": {
+          "battlecry": [
+            {
+              "acts": [
+                {
+                  "name": "deal-damage",
+                  "params": [
+                    2
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "spell": {
+        "acts": []
+      },
+      "targetsType": {
+        "names": [
+          "all"
+        ]
+      }
+    },
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "weapon": {
+      "attack": 2,
+      "durability": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 232,
     "name": "Raging Worgen",
     "cost": 3,
@@ -4543,6 +4809,48 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 310,
+    "name": "SI:7 Agent",
+    "cost": 3,
+    "pic": "148/5/286",
+    "clas": 3,
+    "type": 1,
+    "combo": {
+      "object": {
+        "events": {
+          "battlecry": [
+            {
+              "acts": [
+                {
+                  "name": "deal-damage",
+                  "params": [
+                    2
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "spell": {
+        "acts": []
+      },
+      "targetsType": {
+        "names": [
+          "all"
+        ]
+      }
+    },
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -5486,6 +5794,41 @@
     }
   },
   {
+    "id": 306,
+    "name": "Master of Disquise",
+    "cost": 4,
+    "pic": "149/487/127",
+    "clas": 3,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "friends",
+        "minions"
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-flags",
+                "params": [
+                  "stealth"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 245,
     "name": "Mindgames",
     "cost": 4,
@@ -5957,6 +6300,22 @@
     }
   },
   {
+    "id": 302,
+    "name": "Assasin's Blade",
+    "cost": 5,
+    "pic": "147/513/433",
+    "clas": 3,
+    "type": 3,
+    "flags": [],
+    "weapon": {
+      "attack": 3,
+      "durability": 4,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 127,
     "name": "Assassinate",
     "cost": 5,
@@ -6405,6 +6764,46 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 305,
+    "name": "Kidnapper",
+    "cost": 5,
+    "pic": "149/453/562",
+    "clas": 3,
+    "type": 1,
+    "combo": {
+      "object": {
+        "events": {
+          "battlecry": [
+            {
+              "acts": [
+                {
+                  "name": "return-to-hand",
+                  "params": []
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "spell": {
+        "acts": []
+      },
+      "targetsType": {
+        "names": [
+          "minions"
+        ]
+      }
+    },
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -7239,31 +7638,9 @@
           "acts": [
             {
               "name": "draw-card",
-              "params": []
-            }
-          ]
-        },
-        {
-          "acts": [
-            {
-              "name": "draw-card",
-              "params": []
-            }
-          ]
-        },
-        {
-          "acts": [
-            {
-              "name": "draw-card",
-              "params": []
-            }
-          ]
-        },
-        {
-          "acts": [
-            {
-              "name": "draw-card",
-              "params": []
+              "params": [
+                4
+              ]
             }
           ]
         }

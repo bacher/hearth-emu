@@ -117,13 +117,23 @@ H.Card = class Card {
         if (this.combo) {
             this._comboCopy = _.clone(this._normalCopy);
 
-            this._comboCopy.minion = _.clone(this._comboCopy.minion);
+            var object;
 
-            for (var prop in this.combo) {
-                if (prop === 'object') {
-                    this._comboCopy.minion.events = this.combo.object.events;
-                } else {
-                    this._comboCopy[prop] = this.combo[prop];
+            if (this.type === H.CARD_TYPES.minion) {
+                this._comboCopy.minion = _.clone(this._comboCopy.minion);
+                object = this._comboCopy.minion;
+            } else if (this.type === H.CARD_TYPES.weapon){
+                this._comboCopy.weapon = _.clone(this._comboCopy.weapon);
+                object = this._comboCopy.weapon;
+            }
+
+            if (object) {
+                for (var prop in this.combo) {
+                    if (prop === 'object') {
+                        object.events = this.combo.object.events;
+                    } else {
+                        this._comboCopy[prop] = this.combo[prop];
+                    }
                 }
             }
         }

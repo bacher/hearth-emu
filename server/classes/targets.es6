@@ -120,6 +120,18 @@ H.Targets = class Targets {
             (this.my.hero ? 1 : 0) + (this.op.hero ? 1 : 0);
     }
 
+    getOne() {
+        if (this.my.minions.length) {
+            return this.my.minions[0];
+        } else if (this.op.minions.length) {
+            return this.op.minions[0];
+        } else if (this.my.hero) {
+            return this.player.hero;
+        } else if (this.op.hero) {
+            return this.player.enemy.hero;
+        }
+    }
+
     forEach(func) {
         this.my.minions.forEach(func);
         this.op.minions.forEach(func);
@@ -240,6 +252,10 @@ H.Targets = class Targets {
 
     'damaged'() {
         this._filterAll(obj => obj.hp < obj.maxHp);
+    }
+
+    'undamaged'() {
+        this._filterAll(obj => obj.hp === obj.maxHp);
     }
 
     'race'(race) {

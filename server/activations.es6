@@ -75,6 +75,13 @@ const A = {
             target.hp += amount;
         });
     },
+    'add-attack-hp-for-each-played-card'(o) {
+        const value = (o.minion.player.getPlayedCardCount() - 1) * 2;
+
+        o.minion.attack += value;
+        o.minion.hp += value;
+        o.minion.maxHp += value;
+    },
     'deal-damage': function(o) {
         o.targets.forEach(target => {
             target.dealDamage(this.params[0]);
@@ -85,6 +92,13 @@ const A = {
             const damage = o.battle.auras.applyEffect(o.player, 'spell-damage', this.params[0]);
 
             target.dealDamage(damage);
+        });
+    },
+    'deal-damage-to-adjacent'(o) {
+        const minion = o.targets.getOne().getData();
+
+        o.targets.adjacent().forEach(target => {
+            target.dealDamage(minion.attack);
         });
     },
     'deal-damage-equal-armor'(o) {
@@ -360,9 +374,14 @@ const A = {
         }
     },
     'add-custom-event': function(o) {
-        o.targets.forEach(target => {
-            target.addCustomEvent(new H.Command(o.customEvent));
-        });
+        if (o.targets.getCount()) {
+            o.targets.forEach(target => {
+                target.addCustomEvent(new H.Command(o.customEvent));
+            });
+        } else {
+            // FIXME Implement
+            console.warn('add custom event to nobody');
+        }
     },
     'draw-card-deal-self-damage': function(o) {
         o.player.hero.dealDamage(2);
@@ -380,6 +399,7 @@ const A = {
         });
     },
     'add-hand-card': function(o) {
+        console.log('ADD HAND CARD');
         o.player.hand.addCard(H.CARDS.getByName(this.params[0], this.params[1]));
     },
     'play-trap-card': function(o) {
