@@ -147,6 +147,22 @@ const E = {
             };
         }
     },
+    'heal': {
+        eventName: 'heal',
+        filterFunc(o, params, callback) {
+            var isMinionsOnly = false;
+
+            if (params[0] === 'minion') {
+                isMinionsOnly = true;
+            }
+
+            return function(eventMessage) {
+                if (!isMinionsOnly || eventMessage.objType === 'minion') {
+                    callback(eventMessage);
+                }
+            };
+        }
+    },
     'will-die': {
         eventName: 'deal-damage',
         filterFunc: function(o, params, callback) {

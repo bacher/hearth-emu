@@ -73,9 +73,10 @@ H.Minion = class Minion extends H.GameObject {
     }
 
     heal(amount) {
-        this.hp += amount;
-        if (this.hp > this.maxHp) {
-            this.hp = this.maxHp;
+        if (this.hp < this.maxHp) {
+            this.hp = Math.min(this.maxHp, this.hp + amount);
+
+            this.player.battle.emit('heal', this);
         }
     }
 

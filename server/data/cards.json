@@ -1384,6 +1384,39 @@
     }
   },
   {
+    "id": 272,
+    "name": "Northshire Cleric",
+    "cost": 1,
+    "pic": "147/709/600",
+    "clas": 9,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "draw-card",
+                "params": []
+              }
+            ],
+            "event": {
+              "name": "heal",
+              "params": [
+                "minion"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 117,
     "name": "Power Word: Shield",
     "cost": 1,
