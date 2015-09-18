@@ -17,6 +17,8 @@ H.Hero = class Hero {
     constructor(player) {
         this.player = player;
 
+        this.objType = 'hero';
+
         this.attack = 0;
         this.hp = 30;
         this.maxHp = 30;
@@ -169,12 +171,9 @@ H.Hero = class Hero {
         }
     }
 
-    getData() {
-        return this.getBaseData();
-    }
-
     getBaseData() {
         return {
+            that: this,
             attack: (this.weapon ? this.weapon.attack : 0) + this.attack,
             hp: this.hp,
             armor: this.armor,
@@ -189,10 +188,6 @@ H.Hero = class Hero {
             weapon: this.weapon ? this.weapon.getClientData() : null,
             flags: this.weapon ? _.extend({}, this.flags, this.weapon.getFlags()) : this.flags
         };
-    }
-
-    getClientData() {
-        return this.player.battle.auras.applyEffect(this.player, 'hero', this.getBaseData());
     }
 
     canUseSkill() {
@@ -234,3 +229,5 @@ H.Hero = class Hero {
 
     }
 };
+
+H.mixGameDataAccessors(H.Hero);
