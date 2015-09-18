@@ -23,6 +23,14 @@ H.Weapon = class Weapon extends H.GameObject {
         };
     }
 
+    reduceDurability(count) {
+        this.durability -= count;
+
+        if (this.durability <= 0) {
+            this.detachWeapon();
+        }
+    }
+
     setHitFlags() {
         H.GameObject.prototype.setHitFlags.apply(this);
 
@@ -33,11 +41,7 @@ H.Weapon = class Weapon extends H.GameObject {
                 this.detachWeapon();
             }
         } else {
-            this.durability--;
-
-            if (this.durability === 0) {
-                this.detachWeapon();
-            }
+            reduceDurability(1);
         }
     }
 

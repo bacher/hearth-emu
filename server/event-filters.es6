@@ -15,6 +15,7 @@ const E = {
             }
 
             return function(eventMessage) {
+                var targets;
                 const handCard = eventMessage.handCard;
 
                 if ((!allowPlayer || allowPlayer === handCard.player) &&
@@ -128,6 +129,7 @@ const E = {
             const target = params[0];
             var minion;
             var allowPlayer;
+            var allowHero;
 
             if (target === 'self') {
                 minion = o.minion;
@@ -135,13 +137,16 @@ const E = {
                 allowPlayer = o.player;
             } else if (target === 'op') {
                 allowPlayer = o.player.enemy;
+            } else if (target === 'my-hero') {
+                allowHero = o.player.hero;
             }
 
             return function(eventMessage) {
                 const targets = new H.Targets(eventMessage.by.player);
                 targets.addMinion(eventMessage.to);
 
-                if ((!minion || minion === eventMessage.by) && (!allowPlayer || allowPlayer === eventMessage.by.player)) {
+                if ((!minion || minion === eventMessage.by) && (!allowPlayer || allowPlayer === eventMessage.by.player) &&
+                    (!allowHero || allowHero === eventMessage.by)) {
                     callback(eventMessage, targets);
                 }
             };

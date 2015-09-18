@@ -36,24 +36,6 @@
     }
   },
   {
-    "id": 144,
-    "name": "Ashbringer",
-    "cost": 0,
-    "pic": "148/307/53",
-    "clas": 4,
-    "type": 3,
-    "flags": [
-      "uncollectable"
-    ],
-    "weapon": {
-      "attack": 5,
-      "durability": 3,
-      "flags": [],
-      "race": 0,
-      "events": {}
-    }
-  },
-  {
     "id": 241,
     "name": "Circle of Healing",
     "cost": 0,
@@ -889,6 +871,22 @@
     }
   },
   {
+    "id": 276,
+    "name": "Eye for an Eye",
+    "cost": 1,
+    "pic": "147/999/206",
+    "clas": 4,
+    "type": 4,
+    "flags": [
+      "unimplemented"
+    ],
+    "trap": {
+      "events": {
+        "custom": []
+      }
+    }
+  },
+  {
     "id": 107,
     "name": "Forked Lightning",
     "cost": 1,
@@ -1384,6 +1382,22 @@
     }
   },
   {
+    "id": 277,
+    "name": "Noble Sacrifice",
+    "cost": 1,
+    "pic": "147/987/158",
+    "clas": 4,
+    "type": 4,
+    "flags": [
+      "unimplemented"
+    ],
+    "trap": {
+      "events": {
+        "custom": []
+      }
+    }
+  },
+  {
     "id": 272,
     "name": "Northshire Cleric",
     "cost": 1,
@@ -1451,6 +1465,54 @@
           "targetsType": "not-need"
         }
       ]
+    }
+  },
+  {
+    "id": 278,
+    "name": "Redemption",
+    "cost": 1,
+    "pic": "148/8/657",
+    "clas": 4,
+    "type": 4,
+    "flags": [
+      "unimplemented"
+    ],
+    "trap": {
+      "events": {
+        "custom": []
+      }
+    }
+  },
+  {
+    "id": 279,
+    "name": "Repentance",
+    "cost": 1,
+    "pic": "148/298/642",
+    "clas": 4,
+    "type": 4,
+    "comment": "Может сработать на существо призванное не из карты",
+    "flags": [],
+    "trap": {
+      "events": {
+        "custom": [
+          {
+            "event": {
+              "name": "summon",
+              "params": [
+                "op"
+              ]
+            },
+            "acts": [
+              {
+                "name": "set-hp",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
@@ -4243,6 +4305,53 @@
     }
   },
   {
+    "id": 275,
+    "name": "Sword of Justice",
+    "cost": 3,
+    "pic": "148/292/567",
+    "clas": 4,
+    "type": 3,
+    "flags": [],
+    "weapon": {
+      "attack": 1,
+      "durability": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              },
+              {
+                "name": "add-hp",
+                "params": [
+                  1
+                ]
+              },
+              {
+                "name": "reduce-weapon-durability",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "event": {
+              "name": "summon",
+              "params": [
+                "my"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 233,
     "name": "Tauren Warrior",
     "cost": 3,
@@ -5106,6 +5215,47 @@
     }
   },
   {
+    "id": 274,
+    "name": "Truesilver Champion",
+    "cost": 4,
+    "pic": "147/543/293",
+    "clas": 4,
+    "type": 3,
+    "flags": [],
+    "weapon": {
+      "attack": 4,
+      "durability": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "heal",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "heroes",
+                "friends"
+              ]
+            },
+            "event": {
+              "name": "hit-by",
+              "params": [
+                "my-hero"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 46,
     "name": "Water Elemental",
     "cost": 4,
@@ -5191,6 +5341,24 @@
     "weapon": {
       "attack": 5,
       "durability": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 144,
+    "name": "Ashbringer",
+    "cost": 5,
+    "pic": "148/307/53",
+    "clas": 4,
+    "type": 3,
+    "flags": [
+      "uncollectable"
+    ],
+    "weapon": {
+      "attack": 5,
+      "durability": 3,
       "flags": [],
       "race": 0,
       "events": {}

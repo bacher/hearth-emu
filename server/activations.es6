@@ -276,6 +276,9 @@ const A = {
             }, o);
         }
     },
+    'reduce-weapon-durability'(o) {
+        o.player.hero.weapon.reduceDurability(this.params[0]);
+    },
     'destroy-weapon': function(o) {
         o.targets.forEach(hero => {
             hero.destroyWeapon();
