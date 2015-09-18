@@ -92,6 +92,13 @@ const A = {
             params: [o.player.hero.armor]
         }, o);
     },
+    'warrior-mortal-strike'(o) {
+        const dmg = o.player.hero.hp <= 12 ? 6 : 4;
+
+        A['deal-damage'].call({
+            params: [dmg]
+        }, o);
+    },
     'overload': function(o) {
         o.player.hero.addOverload(this.params[0]);
     },
@@ -203,6 +210,13 @@ const A = {
             params: [o.targets.getCount()]
         }, o)
     },
+    'if-target-alive-draw-card'(o) {
+        o.targets.forEach(target => {
+            if (!target.is('dead')) {
+                A['draw-card'].call(this, o);
+            }
+        });
+    },
     'discard-card': function(o) {
         const max = this.params[0] || 1;
         for (var i = 0; i < max; ++i) {
@@ -249,6 +263,18 @@ const A = {
         const card = H.CARDS.getByName(this.params[0], H.CARD_TYPES['weapon']);
 
         o.player.hero.equipWeapon(new H.Weapon(card));
+    },
+    'warrior-upgrade'(o) {
+        const weapon = o.player.hero.weapon;
+        if (weapon) {
+            weapon.attack += 1;
+            weapon.durability += 1;
+
+        } else {
+            A['equip-weapon'].call({
+                params: ['weapon-1-3']
+            }, o);
+        }
     },
     'destroy-weapon': function(o) {
         o.targets.forEach(hero => {

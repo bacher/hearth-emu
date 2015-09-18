@@ -1605,6 +1605,27 @@
     }
   },
   {
+    "id": 265,
+    "name": "Upgrade!",
+    "cost": 1,
+    "pic": "148/352/638",
+    "clas": 1,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "warrior-upgrade",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 26,
     "name": "Voidwalker",
     "cost": 1,
@@ -2073,6 +2094,20 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 268,
+    "name": "Commanding Shout",
+    "cost": 2,
+    "pic": "149/551/166",
+    "clas": 1,
+    "type": 2,
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": []
     }
   },
   {
@@ -2856,6 +2891,42 @@
             }
           ],
           "targetsType": "not-need"
+        }
+      ]
+    }
+  },
+  {
+    "id": 266,
+    "name": "Slam",
+    "cost": 2,
+    "pic": "148/316/215",
+    "clas": 1,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "if-target-alive-draw-card",
+              "params": []
+            }
+          ]
         }
       ]
     }
@@ -4710,6 +4781,32 @@
           "acts": [
             {
               "name": "summon-random-enemy-deck-minion",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 267,
+    "name": "Mortal Strike",
+    "cost": 4,
+    "pic": "148/349/345",
+    "clas": 1,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "warrior-mortal-strike",
               "params": []
             }
           ]
