@@ -42,10 +42,13 @@ const AURAS = {
     'reduce-cost': {
         affect: 'hand-card',
         effect(card) {
-            card.cost -= this.params[0];
+            const reduceBy = this.params[0];
+            const minimum = this.params[1] || 0;
 
-            if (card.cost < 0) {
-                card.cost = 0;
+            card.cost -= reduceBy;
+
+            if (card.cost < minimum) {
+                card.cost = minimum;
             }
         }
     },

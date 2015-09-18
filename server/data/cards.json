@@ -5382,6 +5382,41 @@
     }
   },
   {
+    "id": 293,
+    "name": "Pit Lord",
+    "cost": 4,
+    "pic": "148/217/402",
+    "clas": 7,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 6,
+      "flags": [],
+      "race": 2,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  5
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "friends",
+                "heroes"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 157,
     "name": "Polymorph",
     "cost": 4,
@@ -5505,6 +5540,37 @@
       ],
       "events": {},
       "race": 0
+    }
+  },
+  {
+    "id": 294,
+    "name": "Summoning Portal",
+    "cost": 4,
+    "pic": "148/220/566",
+    "clas": 7,
+    "type": 1,
+    "comment": "Пока что действует на все карты",
+    "flags": [],
+    "minion": {
+      "attack": 0,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "reduce-cost",
+                "params": [
+                  2,
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
