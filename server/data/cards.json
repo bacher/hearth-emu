@@ -194,17 +194,7 @@
             {
               "name": "add-mana",
               "params": [
-                1
-              ]
-            }
-          ]
-        },
-        {
-          "acts": [
-            {
-              "name": "add-mana",
-              "params": [
-                1
+                2
               ]
             }
           ]
@@ -230,6 +220,34 @@
       ],
       "events": {},
       "race": 0
+    }
+  },
+  {
+    "id": 320,
+    "name": "Moonfire",
+    "cost": 0,
+    "pic": "147/390/619",
+    "clas": 6,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                1
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {
@@ -785,6 +803,20 @@
       "flags": [],
       "race": 1,
       "events": {}
+    }
+  },
+  {
+    "id": 321,
+    "name": "Claw",
+    "cost": 1,
+    "pic": "147/384/532",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": []
     }
   },
   {
@@ -3353,6 +3385,50 @@
     }
   },
   {
+    "id": 319,
+    "name": "Mark of the Wild",
+    "cost": 2,
+    "pic": "147/393/480",
+    "clas": 6,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-flags",
+              "params": [
+                "taunt"
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "add-attack",
+              "params": [
+                2
+              ]
+            },
+            {
+              "name": "add-hp",
+              "params": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 115,
     "name": "Mind Blast",
     "cost": 2,
@@ -4483,6 +4559,34 @@
     }
   },
   {
+    "id": 317,
+    "name": "Healing Touch",
+    "cost": 3,
+    "pic": "147/387/258",
+    "clas": 6,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "heal",
+              "params": [
+                8
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 188,
     "name": "Hex",
     "cost": 3,
@@ -4995,6 +5099,49 @@
       "flags": [],
       "race": 0,
       "events": {}
+    }
+  },
+  {
+    "id": 318,
+    "name": "Savage Roar",
+    "cost": 3,
+    "pic": "147/396/329",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-aura",
+              "params": []
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "self"
+            ]
+          },
+          "aura": {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            }
+          }
+        }
+      ]
     }
   },
   {
@@ -6294,6 +6441,46 @@
     }
   },
   {
+    "id": 316,
+    "name": "Swipe",
+    "cost": 4,
+    "pic": "147/399/620",
+    "clas": 6,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "enemies"
+      ]
+    },
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 274,
     "name": "Truesilver Champion",
     "cost": 4,
@@ -7538,6 +7725,42 @@
               "heroes"
             ]
           }
+        }
+      ]
+    }
+  },
+  {
+    "id": 315,
+    "name": "Starfire",
+    "cost": 6,
+    "pic": "148/103/667",
+    "clas": 6,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "draw-card",
+              "params": []
+            }
+          ]
         }
       ]
     }

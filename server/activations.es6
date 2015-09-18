@@ -441,6 +441,9 @@ const A = {
             targets: [card]
         }));
     },
+    'add-crystal'(o) {
+        o.player.hero.addCrystal();
+    },
     'destroy-crystal'(o) {
         o.player.hero.removeCrystal();
     },
