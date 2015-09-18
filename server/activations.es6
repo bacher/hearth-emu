@@ -272,7 +272,7 @@ const A = {
 
         } else {
             A['equip-weapon'].call({
-                params: ['weapon-1-3']
+                params: ['weapon-1-1']
             }, o);
         }
     },

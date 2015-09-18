@@ -532,6 +532,24 @@
     }
   },
   {
+    "id": 269,
+    "name": "Battle Axe",
+    "cost": 1,
+    "pic": "148/331/403",
+    "clas": 1,
+    "type": 3,
+    "flags": [
+      "uncollectable"
+    ],
+    "weapon": {
+      "attack": 2,
+      "durability": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 186,
     "name": "Bestial Wrath",
     "cost": 1,
@@ -1769,6 +1787,24 @@
         "windfury"
       ],
       "race": 1,
+      "events": {}
+    }
+  },
+  {
+    "id": 270,
+    "name": "weapon-1-1",
+    "cost": 1,
+    "pic": "148/331/403",
+    "clas": 1,
+    "type": 3,
+    "flags": [
+      "uncollectable"
+    ],
+    "weapon": {
+      "attack": 1,
+      "durability": 1,
+      "flags": [],
+      "race": 0,
       "events": {}
     }
   },
@@ -4361,7 +4397,7 @@
               {
                 "name": "equip-weapon",
                 "params": [
-                  "weapon-2-2"
+                  "battle axe"
                 ]
               }
             ]
