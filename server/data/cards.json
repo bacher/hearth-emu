@@ -130,6 +130,40 @@
     }
   },
   {
+    "id": 264,
+    "name": "Inner Rage",
+    "cost": 0,
+    "pic": "148/547/366",
+    "clas": 1,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                1
+              ]
+            },
+            {
+              "name": "add-attack",
+              "params": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 104,
     "name": "Innervate",
     "cost": 0,
@@ -1415,6 +1449,32 @@
     }
   },
   {
+    "id": 263,
+    "name": "Shield Slam",
+    "cost": 1,
+    "pic": "148/358/50",
+    "clas": 1,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage-equal-armor",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 217,
     "name": "Shieldbearer",
     "cost": 1,
@@ -2644,6 +2704,46 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 262,
+    "name": "Rampage",
+    "cost": 2,
+    "pic": "147/552/454",
+    "clas": 1,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ],
+      "modificators": [
+        {
+          "name": "damaged",
+          "params": []
+        }
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-attack",
+              "params": [
+                3
+              ]
+            },
+            {
+              "name": "add-hp",
+              "params": [
+                3
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {

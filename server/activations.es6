@@ -87,6 +87,11 @@ const A = {
             target.dealDamage(damage);
         });
     },
+    'deal-damage-equal-armor'(o) {
+        A['deal-damage'].call({
+            params: [o.player.hero.armor]
+        }, o);
+    },
     'overload': function(o) {
         o.player.hero.addOverload(this.params[0]);
     },
