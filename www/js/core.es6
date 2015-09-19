@@ -100,6 +100,30 @@ H.toggleMenu = function() {
     }
 };
 
+H.minInterval = function(func, interval) {
+    var nextStartTime = 0;
+
+    return function() {
+        const now = _.now();
+        const delta = now - nextStartTime;
+
+        if (delta < interval) {
+            const that = this;
+            const args = arguments;
+
+            setTimeout(function() {
+                func.apply(that, args);
+            }, interval - delta);
+
+            nextStartTime += interval;
+        } else {
+            nextStartTime = now;
+
+            func.apply(this, arguments);
+        }
+    }
+};
+
 function render($cont, tmplName, params) {
     if (!$cont) {
         $cont = $('<div>');

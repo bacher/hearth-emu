@@ -7,6 +7,8 @@ H.Hand = class Hand {
         this.$opNode = battle.$node.find('.hand.op');
 
         this._render();
+
+        this._startCardDrawAnimation = H.minInterval(this._startCardDrawAnimation, 600);
     }
 
     _render() {
@@ -127,7 +129,7 @@ H.Hand = class Hand {
                             $newCard.remove();
                             $card.show();
                         }, 500);
-                    }, 1800);
+                    }, 1300);
 
                 } else {
                     $newCard.addClass('in-hand');

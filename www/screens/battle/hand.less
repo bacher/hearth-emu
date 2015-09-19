@@ -81,27 +81,16 @@
       }
     }
 
-    .text {
-      position: absolute;
-      top: 80px;
-      left: 13px;
-      width: 51px;
-
-      font-family: sans-serif;
-      font-weight: bold;
-      font-size: 5px;
-      line-height: 1.6em;
-      text-align: center;
-    }
-
     &.my {
       transform: translate(484px, 20px) translateZ(-60px) scale(1.7) rotateZ(90deg) rotateX(-90deg);
 
       &.up {
+        transition-duration: 0.5s;
         transform: translate(484px, 20px) translateZ(0) scale(1.7) rotateZ(90deg) rotateX(-90deg);
       }
 
       &.big {
+        transition-duration: 0.4s;
         transform: translate(307px, -53px) scale(2.3);
       }
 
@@ -119,15 +108,17 @@
       transform: translate(484px, -225px) translateZ(-60px) scale(1.7) rotateZ(90deg) rotateX(-90deg);
 
       &.up {
+        transition-duration: 0.5s;
         transform: translate(484px, -225px) translateZ(0) scale(1.7) rotateZ(90deg) rotateX(-90deg)
       }
 
       &.big {
+        transition-duration: 0.4s;
         transform: translate(307px, -213px) scale(2.3);
       }
 
       &.in-hand {
-        transition: transform ease-out 0.8s;
+        transition-duration: 0.8s;
         transform: translate(-180px, -436px) rotate(14deg);
       }
 
@@ -138,6 +129,19 @@
 
     &.big-center {
       transform: translate(-38px, -80px) scale(2.4);
+    }
+
+    .text {
+      position: absolute;
+      top: 80px;
+      left: 13px;
+      width: 51px;
+
+      font-family: sans-serif;
+      font-weight: bold;
+      font-size: 5px;
+      line-height: 1.6em;
+      text-align: center;
     }
   }
 
