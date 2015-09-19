@@ -1,4 +1,3 @@
-
 var socket = null;
 
 H.Screens['battle'] = class BattleScreen extends H.Screen {
@@ -154,7 +153,25 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             this.$node.find('.stats.' + side + ' .mana .active').text(hero.mana);
             this.$node.find('.stats.' + side + ' .mana .all').text(hero.crystals);
 
-            this.$node.find('.deck-helper.' + side + ' .value').text(player.deck.count);
+            const cardsLeft = player.deck.count;
+            var deckClass;
+
+            if (cardsLeft === 0) {
+                deckClass = 'hole';
+            } else if (cardsLeft === 1) {
+                deckClass = 's1';
+            } else if (cardsLeft < 7) {
+                deckClass = 's2'
+            } else if (cardsLeft < 14) {
+                deckClass = 's3';
+            } else if (cardsLeft < 20) {
+                deckClass = 's4';
+            } else {
+                deckClass = 's5'
+            }
+
+            this.$node.find('.deck.' + side).removeClass('s1 s2 s3 s4 s5').addClass(deckClass);
+            this.$node.find('.deck-helper.' + side + ' .value').text(cardsLeft);
 
             render(this.$node.find('.traps.' + side), 'traps', {
                 traps: player.traps

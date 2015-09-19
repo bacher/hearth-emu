@@ -604,33 +604,6 @@
   .hunter  .skill-helper { background: url("/textures/skill-helper-hunter.png"); }
 
 
-  .decks {
-    position: absolute;
-    width: 40px;
-    height: 400px;
-    top: @h/2-200px;
-    right: 0;
-  }
-
-  .deck {
-    position: absolute;
-    width: 61px;
-
-    &.op {
-      top: 14px;
-      height: 120px;
-    }
-
-    &.my {
-      top: 222px;
-      height: 106px;
-    }
-
-    &:hover .deck-helper {
-      display: block;
-    }
-  }
-
   .table {
     position: absolute;
     width: 178px;
@@ -699,30 +672,6 @@
     &.my {
       top: 57px;
       left: -150px;
-    }
-  }
-
-  .end-turn {
-    position: absolute;
-    top: 149px;
-    right: 3px;
-    width: 103px;
-    height: 55px;
-    background: url("/textures/enemy-turn.png");
-
-    &.active {
-      background: url("/textures/end-turn.png");
-
-      &:hover:after {
-        position: absolute;
-        display: block;
-        content: '';
-        width: 117px;
-        height: 70px;
-        top: -10px;
-        right: -11px;
-        background: url("/textures/end-turn_active.png");
-      }
     }
   }
 

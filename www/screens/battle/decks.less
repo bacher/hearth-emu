@@ -1,0 +1,89 @@
+.b {
+
+  .decks {
+    position: absolute;
+    top: 142px;
+    left: 871px;
+    width: 40px;
+    height: 400px;
+  }
+
+  .deck {
+    position: absolute;
+
+    &.my {
+      top: 206px;
+      left: 3px;
+      width: 48px;
+      height: 107px;
+      background: url("/textures/deck_my.png");
+
+      &.hole {
+        top: 191px;
+        left: -8px;
+        width: 48px;
+        height: 135px;
+        background: url("/textures/hole_my.png");
+      }
+    }
+
+    &.op {
+      width: 48px;
+      height: 117px;
+      background: url("/textures/deck_op.png");
+
+      &.hole {
+        top: -2px;
+        left: -6px;
+        width: 46px;
+        height: 136px;
+        background: url("/textures/hole_op.png");
+      }
+    }
+
+    &.s1 {
+      background-position: 0 0;
+    }
+    &.s2 {
+      background-position: -48px 0;
+    }
+    &.s3 {
+      background-position: -96px 0;
+    }
+    &.s4 {
+      background-position: -144px 0;
+    }
+    &.s5 {
+      background-position: -192px 0;
+    }
+
+    &:hover .deck-helper {
+      display: block;
+    }
+  }
+
+  .end-turn {
+    position: absolute;
+    top: 135px;
+    left: -77px;
+    width: 103px;
+    height: 55px;
+    background: url("/textures/enemy-turn.png");
+
+    &.active {
+      background: url("/textures/end-turn.png");
+
+      &:hover:after {
+        position: absolute;
+        display: block;
+        content: '';
+        width: 117px;
+        height: 70px;
+        top: -10px;
+        right: -11px;
+        background: url("/textures/end-turn_active.png");
+      }
+    }
+  }
+
+}

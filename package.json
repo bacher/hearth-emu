@@ -1,0 +1,22 @@
+{
+  "name": "hearthstone",
+  "version": "0.0.0",
+  "description": "",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bacher/hearth-emu.git"
+  },
+  "author": "Bacher <bacherko@gmail.com>",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/Bacher/hearth-emu/issues"
+  },
+  "homepage": "https://github.com/Bacher/hearth-emu#readme",
+  "dependencies": {
+    "grunt-spritesmith": "^5.1.0"
+  }
+}

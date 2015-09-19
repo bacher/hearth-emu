@@ -1,5 +1,7 @@
 /.idea/
 
+/node_modules/
+
 /server/node_modules/
 /server/**/*.js
 /server/**/*.js.map
@@ -11,3 +13,6 @@
 /www/screens/**/*.js
 /www/screens/**/*.js.map
 /www/screens/**/*.css
+
+/Gruntfile.js
+/Gruntfile.js.map
