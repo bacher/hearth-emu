@@ -269,6 +269,20 @@
     }
   },
   {
+    "id": 322,
+    "name": "Preparation",
+    "cost": 0,
+    "pic": "148/17/364",
+    "clas": 3,
+    "type": 2,
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": []
+    }
+  },
+  {
     "id": 286,
     "name": "Sacrificial Pact",
     "cost": 0,
@@ -314,6 +328,35 @@
               "friends"
             ]
           }
+        }
+      ]
+    }
+  },
+  {
+    "id": 325,
+    "name": "Shadowstep",
+    "cost": 0,
+    "pic": "148/14/550",
+    "clas": 3,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "friends",
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "return-to-hand-reduce-cost",
+              "params": [
+                2
+              ]
+            }
+          ]
         }
       ]
     }
@@ -876,6 +919,20 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 324,
+    "name": "Conceal",
+    "cost": 1,
+    "pic": "147/981/284",
+    "clas": 3,
+    "type": 2,
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": []
     }
   },
   {
@@ -3511,6 +3568,26 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 323,
+    "name": "Patient Assassin",
+    "cost": 2,
+    "pic": "148/385/14",
+    "clas": 3,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [
+        "stealth"
+      ],
+      "race": 0,
+      "events": {}
     }
   },
   {

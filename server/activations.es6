@@ -325,6 +325,17 @@ const A = {
             player.hand.addCard(minion.card);
         });
     },
+    'return-to-hand-reduce-cost'(o) {
+        o.targets.forEach(minion => {
+            const player = minion.player;
+
+            minion.detach();
+
+            const handCard = player.hand.addCard(minion.card);
+
+            handCard.cost = Math.max(0, handCard.cost - this.params[0]);
+        });
+    },
     'equip-weapon': function(o) {
         const card = H.CARDS.getByName(this.params[0], H.CARD_TYPES['weapon']);
 
