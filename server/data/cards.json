@@ -8114,7 +8114,17 @@
                 "params": [
                   1
                 ]
-              },
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions",
+                "friends"
+              ]
+            }
+          },
+          {
+            "acts": [
               {
                 "name": "add-hp",
                 "params": [

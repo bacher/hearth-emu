@@ -15,6 +15,9 @@ H.Minion = class Minion extends H.GameObject {
         this.attack = this.base.attack;
         this.hp = this.base.maxHp;
         this.maxHp = this.base.maxHp;
+
+        this.hpBuffers = [];
+
         this.flags = _.clone(this.base.flags);
         this.race = this.base.race;
         this.events = {};
@@ -40,6 +43,13 @@ H.Minion = class Minion extends H.GameObject {
         return data;
     }
 
+    _modifyData(data) {
+        this.hpBuffers.forEach(buffer => {
+            data.hp += buffer.hp;
+            data.maxHp += buffer.maxHp; // TODO проверить как работает аура если моба ударить, а потом отхилить обратно.
+        });
+    }
+
     _modifyClientData(data) {
         data.pic = data.card.pic;
 
@@ -52,23 +62,42 @@ H.Minion = class Minion extends H.GameObject {
     dealDamage(dmg) {
         dmg = H.parseValue(dmg);
 
+        const minionDetails = this.getData();
+
         const eventMessage = {
             to: this,
             dmg: dmg,
-            willDie: this.hp <= dmg, //fixme maybe DMG modification
+            willDie: minionDetails.hp <= dmg, //fixme maybe DMG modification
             prevent: false
         };
 
         this.player.battle.emit('deal-damage', eventMessage);
 
         if (!eventMessage.prevent) {
-            this.hp -= eventMessage.dmg;
+            this._dealDamage(dmg);
+        }
+    }
 
-            if (this.hp <= 0) {
-                this.hp = 0;
+    _dealDamage(dmg) {
+        this.hpBuffers.forEach(buffer => {
+            if (buffer.hp) {
+                buffer.hp -= dmg;
 
-                this.kill();
+                if (buffer.hp < 0) {
+                    dmg = -buffer.hp;
+                    buffer.hp = 0;
+                } else {
+                    dmg = 0;
+                }
             }
+        });
+
+        this.hp -= dmg;
+
+        if (this.hp <= 0) {
+            this.hp = 0;
+
+            this.kill();
         }
     }
 

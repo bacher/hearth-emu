@@ -16,7 +16,7 @@ const AURAS = {
             return dmg * this.params[0];
         },
         defaultSide: 'own',
-        priority: 100
+        priority: 100 // FIXME not work yet
     },
     'attack-equal-hp': {
         affect: 'minion',
@@ -30,6 +30,20 @@ const AURAS = {
         affect: ['minion', 'hero'],
         effect(minion) {
             minion.attack += this.params[0];
+        }
+    },
+    'add-hp': {
+        affect: 'minion',
+        effect(minion) {
+            const aura = _.find(minion.that.hpBuffers, { aura: this });
+
+            if (!aura) {
+                minion.that.hpBuffers.push({
+                    aura: this,
+                    hp: 1,
+                    maxHp: 1
+                });
+            }
         }
     },
     'add-flags': {

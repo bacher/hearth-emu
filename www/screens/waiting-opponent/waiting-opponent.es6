@@ -7,7 +7,7 @@ H.Screens['waiting-opponent'] = class WaitingOpponentScreen extends H.Screen {
             hash: ''
         });
 
-        H.socket = new H.Socket(new WebSocket('ws://localhost:8081/'));
+        H.socket = new H.Socket(new WebSocket('ws://' + window.location.hostname + ':8081/'));
     }
 
     _render() {
