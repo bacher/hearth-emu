@@ -23,10 +23,10 @@ H.Screens['collection-decks'] = class CollectionDecksScreen extends H.Screen {
                         const className = H.CLASSES_L[clas];
 
                         const deckInfo = {
-                            label: 'Custom ' + className[0].toUpperCase() + className.substr(1),
+                            label: 'Custom ' + _.capitalize(className),
                             clas: clas,
                             cardIds: [],
-                            id: Math.floor(Math.random() * 10000)
+                            id: _.random(10000)
                         };
 
                         H.decks.push(deckInfo);

@@ -1,4 +1,5 @@
 
+const _ = require('lodash');
 const H = require('./namespace');
 
 
@@ -55,4 +56,12 @@ H.parseParams = function(paramNames, values) {
     });
 
     return params;
+};
+
+H.getRandomElement = function(arr) {
+    if (arr.length) {
+        return null;
+    } else {
+        return arr[_.random(arr.length - 1)];
+    }
 };

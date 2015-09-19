@@ -53,7 +53,7 @@ H.Deck = class Deck {
             const cards = [];
 
             while (cards.length < count) {
-                const card = this.deckCards[Math.floor(Math.random() * this.deckCards.length)].card;
+                const card = H.getRandomElement(this.deckCards).card;
 
                 if (!_.contains(cards, card)) {
                     cards.push(card);
@@ -81,7 +81,7 @@ H.Deck = class Deck {
         const offset = drawCount - cardIds.length;
 
         banCards.forEach(card => {
-            const insertIndex = Math.floor(Math.random() * (allowCards.length - offset + 1));
+            const insertIndex = _.random(allowCards.length - offset);
 
             allowCards.splice(insertIndex, 0, card);
         });

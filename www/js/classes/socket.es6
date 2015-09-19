@@ -21,7 +21,7 @@ H.Socket = class Socket {
         if (nameMatch) {
             name = nameMatch[1];
         } else {
-            name = 'Random_' + Math.floor(Math.random() * 100 + 1);
+            name = 'Random_' + _.random(1, 100);
         }
 
         H.loadDecks();

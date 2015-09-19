@@ -45,7 +45,7 @@ H.Hand = class Hand {
     }
 
     getRandomHandCard() {
-        return this.cards[Math.floor(Math.random() * this.cards.length)];
+        return H.getRandomElement(this.cards);
     }
 
     removeHandCard(card) {

@@ -25,7 +25,7 @@ const A = {
         }
     },
     'summon-random': function(o) {
-        const index = Math.floor(Math.random() * this.params.length);
+        const index = _.random(this.params.length - 1);
 
         const minionCardName = this.params[index];
 
@@ -190,7 +190,7 @@ const A = {
         const totemsLeft = o.player.hero.totems.filter(totem => !creatures.hasCardCreature(totem));
 
         if (totemsLeft.length) {
-            const totem = totemsLeft[Math.floor(Math.random() * totemsLeft.length)];
+            const totem = H.getRandomElement(totemsLeft);
 
             creatures.addCreature(new H.Minion(null, totem));
         }

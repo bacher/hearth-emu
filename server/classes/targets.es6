@@ -228,8 +228,9 @@ H.Targets = class Targets {
         };
 
         for (var i = 0; i < count && objects.length; ++i) {
-            const index = Math.floor(Math.random() * objects.length);
+            const index = _.random(objects.length - 1);
             const obj = objects[index];
+
             objects.splice(index, 1);
 
             const side = this[obj.player === this.player ? 'my' : 'op'];
