@@ -176,6 +176,8 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
 
             return filteredPack;
         });
+
+        this.page = 0;
     }
 
     _getSelectedClass() {
