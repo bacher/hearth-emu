@@ -1,7 +1,12 @@
 
+H.loadOptions();
+
 H.app = new H.Application();
 
-H.app.fitScreen();
+if (H.options['scale']) {
+    H.app.fitScreen();
+}
+
 H.app.activateScreen('loading');
 
 
@@ -15,7 +20,7 @@ $('BODY').append($('<DIV>').addClass('settings-btn').on('click', () => {
     H.toggleMenu();
 }));
 
-if (H.checkParam('fullscreen')) {
+if (H.options['fullscreen']) {
     $(document).on('mousedown', () => {
         document.body.webkitRequestFullscreen();
     });

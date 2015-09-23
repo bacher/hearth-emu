@@ -64,6 +64,22 @@ H.checkParam = function(string) {
     return new RegExp('[?&]' + string + '(?:&|$)').test(window.location.search);
 };
 
+H.loadOptions = function() {
+    const optionsString = window.localStorage.getItem('options');
+
+    var options;
+
+    if (optionsString) {
+        options = JSON.parse(optionsString);
+    } else {
+        options = {
+            scale: false
+        };
+    }
+
+    H.options = options;
+};
+
 H.makeCardUrl = function(part) {
     return 'http://media-hearth.cursecdn.com/avatars/' + part + '.png';
 };
