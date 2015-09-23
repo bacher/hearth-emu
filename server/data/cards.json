@@ -8118,6 +8118,7 @@
             ],
             "targetsType": {
               "names": [
+                "except-self",
                 "minions",
                 "friends"
               ]
@@ -8134,6 +8135,7 @@
             ],
             "targetsType": {
               "names": [
+                "except-self",
                 "minions",
                 "friends"
               ]
