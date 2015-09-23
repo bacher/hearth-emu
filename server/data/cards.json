@@ -3849,6 +3849,27 @@
     }
   },
   {
+    "id": 326,
+    "name": "Wild Growth",
+    "cost": 2,
+    "pic": "147/402/282",
+    "clas": 6,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-crystal",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 190,
     "name": "Windfury",
     "cost": 2,
