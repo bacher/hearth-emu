@@ -36,6 +36,8 @@ H.Auras = class Auras {
         const auraIndex = this.list.indexOf(aura);
 
         if (auraIndex !== -1) {
+            aura.destroy();
+
             this.list.splice(auraIndex, 1);
         } else {
             console.warn('AURA ALREADY REMOVED');

@@ -13,6 +13,14 @@ H.parseValue = function(value) {
     return value;
 };
 
+H.makeArray = function(value) {
+    if (Array.isArray(value)) {
+        return value;
+    } else {
+        return [value];
+    }
+};
+
 H.mixGameDataAccessors = function(clas) {
     if (!clas.prototype.getData) {
         clas.prototype.getData = function() {

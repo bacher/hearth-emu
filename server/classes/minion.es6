@@ -15,8 +15,8 @@ H.Minion = class Minion extends H.GameObject {
         this.attack = this.base.attack;
         this.hp = this.base.maxHp;
         this.maxHp = this.base.maxHp;
-
-        this.hpBuffers = [];
+        this.bufferHp = 0;
+        this.bufferMaxHp = 0;
 
         this.flags = _.clone(this.base.flags);
         this.race = this.base.race;
@@ -44,10 +44,8 @@ H.Minion = class Minion extends H.GameObject {
     }
 
     _modifyData(data) {
-        this.hpBuffers.forEach(buffer => {
-            data.hp += buffer.hp;
-            data.maxHp += buffer.maxHp; // TODO проверить как работает аура если моба ударить, а потом отхилить обратно.
-        });
+        data.hp += this.bufferHp;
+        data.maxHp += this.bufferMaxHp;
     }
 
     _modifyClientData(data) {
@@ -79,34 +77,39 @@ H.Minion = class Minion extends H.GameObject {
     }
 
     _dealDamage(dmg) {
-        this.hpBuffers.forEach(buffer => {
-            if (buffer.hp) {
-                buffer.hp -= dmg;
+        this.bufferHp -= dmg;
 
-                if (buffer.hp < 0) {
-                    dmg = -buffer.hp;
-                    buffer.hp = 0;
-                } else {
-                    dmg = 0;
-                }
+        if (this.bufferHp < 0) {
+            this.hp += this.bufferHp;
+            this.bufferHp = 0;
+
+            if (this.hp <= 0) {
+                this.hp = 0;
+
+                this.kill();
             }
-        });
-
-        this.hp -= dmg;
-
-        if (this.hp <= 0) {
-            this.hp = 0;
-
-            this.kill();
         }
     }
 
     heal(amount) {
-        if (this.hp < this.maxHp) {
-            this.hp = Math.min(this.maxHp, this.hp + amount);
-
-            this.player.battle.emit('heal', this);
+        if (this.hp === this.maxHp && this.bufferHp === this.bufferMaxHp) {
+            return;
         }
+
+        const mayHealHp = this.maxHp - this.hp;
+
+        if (mayHealHp >= amount) {
+            this.hp += amount;
+
+        } else {
+            this.hp += mayHealHp;
+
+            const mayHealBufferHp = this.bufferMaxHp - this.bufferHp;
+
+            this.bufferHp += Math.min(mayHealBufferHp, amount - mayHealHp);
+        }
+
+        this.player.battle.emit('heal', this);
     }
 
     addFlag(flag) {

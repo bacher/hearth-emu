@@ -35,15 +35,25 @@ const AURAS = {
     'add-hp': {
         affect: 'minion',
         effect(minion) {
-            const aura = _.find(minion.that.hpBuffers, { aura: this });
+            const amount = this.params[0];
 
-            if (!aura) {
-                minion.that.hpBuffers.push({
-                    aura: this,
-                    hp: 1,
-                    maxHp: 1
-                });
+            if (!_.contains(this._affectedMinions, minion.that)) {
+                minion.that.bufferHp += amount;
+                minion.that.bufferMaxHp += amount;
+
+                this._affectedMinions = this._affectedMinions || [];
+
+                this._affectedMinions.push(minion.that);
             }
+        },
+        destroy() {
+            this._affectedMinions.forEach(minion => {
+                minion.bufferMaxHp--;
+
+                if (minion.bufferHp > minion.bufferMaxHp) {
+                    minion.bufferHp = minion.bufferMaxHp;
+                }
+            });
         }
     },
     'add-flags': {
@@ -83,29 +93,30 @@ H.Aura = class Aura {
     constructor(player, auraInfo) {
         this.player = player;
 
-        this.aura = AURAS[auraInfo.name];
+        const aura = AURAS[auraInfo.name];
+
+        /** @type {string[]} */
+        this.affect = H.makeArray(aura.affect);
+
+        /** @type {Function} */
+        this._effect = aura.effect;
+        /** @type {?Function} */
+        this._destroy = aura.destroy;
+
         this.params = auraInfo.params;
-
-        this.affect = this.aura.affect;
-
-        if (!Array.isArray(this.affect)) {
-            this.affect = [this.affect];
-        }
 
         this.targetsType = auraInfo.targetsType;
 
-        /** @type {Hero|Minion|Weapon|null} */
+        /** @type {H.Hero|H.Minion|H.Weapon|null} */
         this.owner = auraInfo.owner || null;
 
         /** @type {'target'|'own'|'enemy'} */
-        this.side = auraInfo.side || this.aura.defaultSide;
+        this.side = auraInfo.side || aura.defaultSide;
 
-        /** @type {?Player} */
+        /** @type {?H.Player} */
         this.affectPlayer = null;
 
         this.target = null;
-
-        this.effect = this.aura.effect;
 
         if (this.side === 'target') { // FIXME target ? self ?
             this.target = auraInfo.target;
@@ -116,6 +127,10 @@ H.Aura = class Aura {
         } else if (this.side === 'enemy') {
             this.affectPlayer = this.player.enemy;
         }
+    }
+
+    effect() {
+        this._effect.apply(this, arguments);
     }
 
     isTargetPlayerSide(player) {
@@ -141,5 +156,11 @@ H.Aura = class Aura {
 
     getOwner() {
         return this.owner;
+    }
+
+    destroy() {
+        if (this._destroy) {
+            this._destroy.apply(this, arguments);
+        }
     }
 };
