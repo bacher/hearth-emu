@@ -13,6 +13,8 @@ H.Battle = class Battle extends EventEmitter {
         this.p1 = this.players[0];
         this.p2 = this.players[1];
 
+        this._actions = [];
+
         this.auras = new H.Auras(this);
 
         this._bindListeners();
@@ -94,19 +96,27 @@ H.Battle = class Battle extends EventEmitter {
         });
     }
 
+    addBattleAction(action) {
+        this._actions.push(action);
+    }
+
     sendGameData() {
         const p1data = this.players[0].getGameData();
         const p2data = this.players[1].getGameData();
 
         this.players[0].sendMessage('game-data', {
             my: p1data,
-            op: p2data
+            op: p2data,
+            actions: this._actions
         });
 
         this.players[1].sendMessage('game-data', {
             my: p2data,
-            op: p1data
+            op: p1data,
+            actions: this._actions
         });
+
+        this._actions = [];
     }
 
     _bindListeners() {
@@ -365,7 +375,15 @@ H.Battle = class Battle extends EventEmitter {
             this.emit('hit', eventMessage);
 
             if (!eventMessage.prevent) {
-                eventMessage.to.dealDamage(eventMessage.by.getData().attack);
+                const damage = eventMessage.by.getData().attack;
+                eventMessage.to.dealDamage(damage);
+
+                this.addBattleAction({
+                    name: 'hit',
+                    by: by.id,
+                    to: obj.id,
+                    damage
+                });
             }
         });
         by.setHitFlags();

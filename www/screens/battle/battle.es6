@@ -61,7 +61,11 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         }
 
         this.battleData = data;
-        this.updateInGameData();
+
+        this._animations = new H.Animations(this, this.battleData.actions);
+        this._animations.play().then(() => {
+            this.updateInGameData();
+        });
     }
 
     _onCardsForPick(data) {
@@ -77,7 +81,6 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
     }
 
     updateInGameData() {
-
         this.$node.find('.shadow').remove();
 
         this.clearPurposes();
