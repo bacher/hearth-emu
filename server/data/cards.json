@@ -664,6 +664,74 @@
     }
   },
   {
+    "id": 337,
+    "name": "Wrath1",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/e/ec/Wrath%28234%29.png",
+    "clas": 6,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 338,
+    "name": "Wrath2",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/6/61/Wrath%28501%29.png",
+    "clas": 6,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "draw-card",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 214,
     "name": "Abusive Sergeant",
     "cost": 1,
@@ -4114,6 +4182,22 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 339,
+    "name": "Wrath",
+    "cost": 2,
+    "pic": "148/21/633",
+    "clas": 6,
+    "type": 2,
+    "additionActions": [
+      "Wrath1",
+      "Wrath2"
+    ],
+    "flags": [],
+    "spell": {
+      "acts": []
     }
   },
   {
