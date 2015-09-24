@@ -48,6 +48,14 @@ const A = {
             o.player.creatures.addCreature(minion);
         }
     },
+    'redemption'(o) {
+        const minion = o.eventMessage;
+
+        const newMinion = new H.Minion(null, minion.card);
+        newMinion.hp = 1;
+
+        o.player.creatures.addCreature(newMinion);
+    },
     'add-mana': function(o) {
         o.player.hero.addMana(1);
     },

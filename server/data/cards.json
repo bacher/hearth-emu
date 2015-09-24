@@ -2595,12 +2595,25 @@
     "pic": "148/8/657",
     "clas": 4,
     "type": 4,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "trap": {
       "events": {
-        "custom": []
+        "custom": [
+          {
+            "event": {
+              "name": "death",
+              "params": [
+                "own"
+              ]
+            },
+            "acts": [
+              {
+                "name": "redemption",
+                "params": []
+              }
+            ]
+          }
+        ]
       }
     }
   },

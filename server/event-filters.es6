@@ -230,6 +230,25 @@ const E = {
                 }
             };
         }
+    },
+    'death': {
+        eventName: 'death',
+        filterFunc(o, params, callback) {
+            const side = params[0];
+
+            var playerSide = null;
+
+            if (side === 'own') {
+                playerSide = o.player;
+            } else if (side === 'op') {
+                playerSide = o.player.enemy;
+            }
+            return function(minion) {
+                if (!playerSide || playerSide === minion.player) {
+                    callback.apply(null, arguments);
+                }
+            };
+        }
     }
 };
 

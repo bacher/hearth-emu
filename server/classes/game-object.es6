@@ -165,6 +165,8 @@ H.GameObject = class GameObject extends EventEmitter {
     }
 
     kill() {
+        this.player.battle.emit('death', this);
+
         this.detach();
 
         this.flags['dead'] = true;
