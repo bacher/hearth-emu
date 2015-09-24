@@ -153,6 +153,34 @@
     }
   },
   {
+    "id": 331,
+    "name": "Dispel",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/2/24/Dispel%28524%29.png",
+    "clas": 6,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "silence",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 50,
     "name": "Frog",
     "cost": 0,
@@ -258,6 +286,43 @@
     }
   },
   {
+    "id": 335,
+    "name": "Leader of the Pack",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/d/d6/Leader_of_the_Pack%28204%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-attack",
+              "params": [
+                1
+              ]
+            },
+            {
+              "name": "add-hp",
+              "params": [
+                1
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "minions",
+              "friends"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 51,
     "name": "Mirror Image",
     "cost": 0,
@@ -275,6 +340,31 @@
       ],
       "events": {},
       "race": 0
+    }
+  },
+  {
+    "id": 330,
+    "name": "Moonfire",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/4/40/Moonfire%28111%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {
@@ -476,6 +566,31 @@
       "flags": [],
       "race": 1,
       "events": {}
+    }
+  },
+  {
+    "id": 336,
+    "name": "Summon a Panther",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/c/c4/Summon_a_Panther%28219%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "summon",
+              "params": [
+                "Panther"
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {
@@ -3646,6 +3761,24 @@
     }
   },
   {
+    "id": 334,
+    "name": "Panther",
+    "cost": 2,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/2/23/Panther%28190%29.png",
+    "clas": 6,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [],
+      "race": 1,
+      "events": {}
+    }
+  },
+  {
     "id": 323,
     "name": "Patient Assassin",
     "cost": 2,
@@ -3663,6 +3796,22 @@
       ],
       "race": 0,
       "events": {}
+    }
+  },
+  {
+    "id": 333,
+    "name": "Power of the Wild",
+    "cost": 2,
+    "pic": "148/45/165",
+    "clas": 6,
+    "type": 2,
+    "additionActions": [
+      "Leader of the Pack",
+      "Summon a Panther"
+    ],
+    "flags": [],
+    "spell": {
+      "acts": []
     }
   },
   {
@@ -6176,6 +6325,26 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 332,
+    "name": "Keeper of the Grove",
+    "cost": 4,
+    "pic": "148/88/459",
+    "clas": 6,
+    "type": 1,
+    "additionActions": [
+      "Moonfire",
+      "Dispel"
+    ],
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {
