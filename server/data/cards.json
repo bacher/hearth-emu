@@ -425,6 +425,71 @@
     }
   },
   {
+    "id": 360,
+    "name": "Mark of Nature",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/a/a3/Mark_of_Nature%28430%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-attack",
+              "params": [
+                4
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "target"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 361,
+    "name": "Mark of Nature2",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/2/2e/Mark_of_Nature%28133%29.png",
+    "clas": 6,
+    "type": 2,
+    "customAction": "uncollectable",
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-hp",
+              "params": [
+                4
+              ]
+            },
+            {
+              "name": "add-flags",
+              "params": [
+                "taunt"
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "target"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 51,
     "name": "Mirror Image",
     "cost": 0,
@@ -5647,6 +5712,27 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 362,
+    "name": "Mark of Nature",
+    "cost": 3,
+    "pic": "148/30/149",
+    "clas": 6,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "additionActions": [
+      "Mark of Nature1",
+      "Mark of Nature2"
+    ],
+    "flags": [],
+    "spell": {
+      "acts": []
     }
   },
   {
