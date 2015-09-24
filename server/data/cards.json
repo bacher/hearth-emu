@@ -125,6 +125,70 @@
     }
   },
   {
+    "id": 357,
+    "name": "Bear Form",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/f/f4/Bear_Form%28662%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-hp",
+              "params": [
+                2
+              ]
+            },
+            {
+              "name": "add-flags",
+              "params": [
+                "taunt"
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "self"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 356,
+    "name": "Cat Form",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/d/d4/Cat_Form%28287%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-flags",
+              "params": [
+                "charge"
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "self"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 241,
     "name": "Circle of Healing",
     "cost": 0,
@@ -7157,6 +7221,20 @@
     }
   },
   {
+    "id": 359,
+    "name": "Soul of the Forest",
+    "cost": 4,
+    "pic": "148/39/311",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": []
+    }
+  },
+  {
     "id": 45,
     "name": "Stormwind Knight",
     "cost": 4,
@@ -7642,6 +7720,26 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 358,
+    "name": "Druid of the Claw",
+    "cost": 5,
+    "pic": "148/73/587",
+    "clas": 6,
+    "type": 1,
+    "additionActions": [
+      "Cat Form",
+      "Bear Form"
+    ],
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [],
+      "race": 1,
+      "events": {}
     }
   },
   {
@@ -8404,6 +8502,24 @@
         ]
       },
       "race": 0
+    }
+  },
+  {
+    "id": 355,
+    "name": "Force of Nature",
+    "cost": 6,
+    "pic": "148/467/237",
+    "clas": 6,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 0,
+      "maxHp": 0,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {
