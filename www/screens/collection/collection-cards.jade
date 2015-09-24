@@ -5,7 +5,7 @@ each card in cards
          class= (card.flags['unique'] ? 'unique' : '') + (card.flags['unimplemented'] ? ' not-impl': ''))
 
          if (card.loaded)
-            IMG.img.front(src='http://media-hearth.cursecdn.com/avatars/' + card.pic + '.png')
+            IMG.img.front(src=H.makeCardUrl(card.pic))
 
          .glow
 

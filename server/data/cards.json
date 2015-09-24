@@ -131,7 +131,9 @@
     "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/f/f4/Bear_Form%28662%29.png",
     "clas": 6,
     "type": 2,
-    "flags": [],
+    "flags": [
+      "uncollectable"
+    ],
     "spell": {
       "acts": [
         {
@@ -461,8 +463,9 @@
     "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/2/2e/Mark_of_Nature%28133%29.png",
     "clas": 6,
     "type": 2,
-    "customAction": "uncollectable",
-    "flags": [],
+    "flags": [
+      "uncollectable"
+    ],
     "spell": {
       "acts": [
         {
@@ -1470,11 +1473,26 @@
     "pic": "147/384/532",
     "clas": 6,
     "type": 2,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "spell": {
-      "acts": []
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-hero-attack",
+              "params": [
+                2
+              ]
+            },
+            {
+              "name": "add-armor",
+              "params": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {
@@ -7415,9 +7433,7 @@
         "enemies"
       ]
     },
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "spell": {
       "acts": [
         {
@@ -7425,7 +7441,7 @@
             {
               "name": "deal-damage",
               "params": [
-                4
+                3
               ]
             }
           ]
@@ -7438,7 +7454,12 @@
                 1
               ]
             }
-          ]
+          ],
+          "targetsType": {
+            "names": [
+              "enemies"
+            ]
+          }
         }
       ]
     }
