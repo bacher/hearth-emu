@@ -35,18 +35,26 @@ H.Screen = class Screen {
 
     show() {
         this._show();
-    }
-
-    _show() {
-        this.$node.show();
 
         this._onShow();
     }
 
+    _show() {
+        this.$node.show();
+    }
+
     _onShow() {}
 
+    _onHide() {}
+
     hide() {
+        this._onHide();
+
         const promise = this._hide();
+
+        setTimeout(() => {
+            this.enableMenu();
+        }, 10);
 
         return promise || Promise.resolve();
     }
@@ -74,5 +82,13 @@ H.Screen = class Screen {
         if (this.hashLocation) {
             window.location.hash = this.hashLocation;
         }
+    }
+
+    disableMenu() {
+        this._disableMenu = true;
+    }
+
+    enableMenu() {
+        this._disableMenu = false;
     }
 };

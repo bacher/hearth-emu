@@ -2,6 +2,6 @@
 .new-card(class= side)
    .card
       if (locals.pic)
-         IMG(src="http://media-hearth.cursecdn.com/avatars/" + pic + ".png")
+         IMG(src=H.makeCardUrl(pic))
       else
          IMG(src="cards/card_back.png")

@@ -242,16 +242,24 @@ H.Battle = class Battle extends EventEmitter {
 
     _getTargets(player, data) {
         const cardId = data.cardId;
+        const realCardId = data.realCardId;
         const creatureId = data.creatureId;
 
         var targets;
 
-        if (cardId) {
-            const handCard = player.hand.getCardById(cardId);
+        if (cardId || realCardId) {
 
-            if (handCard.base.targetsType) {
+            var card;
+
+            if (cardId) {
+                card = player.hand.getCardById(cardId).base;
+            } else {
+                card = H.CARDS.getById(realCardId);
+            }
+
+            if (card.targetsType) {
                 targets = H.TARGETS
-                    .getByTargetsType(player, handCard.base.targetsType)
+                    .getByTargetsType(player, card.targetsType)
                     .removeHiddenEnemies()
                     .getGameData();
             } else {
@@ -259,7 +267,7 @@ H.Battle = class Battle extends EventEmitter {
             }
 
             player.sendMessage('targets', {
-                cardId,
+                cardId, // FIXME not used
                 targets
             });
 
@@ -269,7 +277,7 @@ H.Battle = class Battle extends EventEmitter {
                 .getGameData();
 
             player.sendMessage('targets', {
-                creatureId,
+                creatureId,  // FIXME not used
                 targets
             });
 
@@ -291,6 +299,21 @@ H.Battle = class Battle extends EventEmitter {
         player.hand.removeHandCard(handCard);
         player.hero.removeMana(handCardInfo.cost);
 
+        this._activateCard(player, handCard, card, data);
+
+        const origBaseCard = handCard.base;
+
+        if (origBaseCard.additionActions) {
+            const additionCard = _.find(origBaseCard.additionActions, { id: data.choosenCard.id });
+
+            console.warn('ADDITION ACTIVATION', data);
+            this._activateCard(player, null, additionCard, data.choosenCard);
+        }
+
+        this.sendGameData();
+    }
+
+    _activateCard(player, handCard, card, data) {
         const globalTargets = card.targetsType ? H.Targets.parseUserData(player, data) : null;
 
         const eventMessage = {
@@ -303,7 +326,6 @@ H.Battle = class Battle extends EventEmitter {
         this.emit('play-card', eventMessage);
 
         if (!eventMessage.prevent) {
-
             if (card.customAction) {
                 H.CustomActions.getByName(card.customAction)({
                     player
@@ -313,14 +335,12 @@ H.Battle = class Battle extends EventEmitter {
                     battle: this,
                     player,
                     handCard,
-                    handCardInfo,
+                    handCardInfo: handCard && handCard.getData(),
                     params: data,
                     globalTargets: eventMessage.globalTargets
                 });
             }
         }
-
-        this.sendGameData();
     }
 
     _hit(player, data) {

@@ -53,6 +53,17 @@ H.HandCard = class HandCard extends EventEmitter {
             }
         }
 
+        if (data.flags['can-play'] && this.base.additionActions) {
+            data.flags['choose-action'] = true;
+            data.additionActions = this.base.additionActions.map(card => {
+                return {
+                    id: card.id,
+                    pic: card.pic,
+                    isNeedTarget: !!card.targetsType
+                };
+            });
+        }
+
         delete data.base;
     }
 };

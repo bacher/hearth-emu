@@ -1,0 +1,6 @@
+
+.card-selection
+   .cards-container
+      each card, i in cards
+         .card-select-wrapper(data-index=i)
+            IMG.card-select-preview(src=H.makeCardUrl(card.pic))

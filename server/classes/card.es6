@@ -15,6 +15,14 @@ H.Card = class Card {
         this.customAction = info.customAction;
         this.conditions = info.conditions || [];
 
+        if (info.additionActions) {
+            process.nextTick(() => {
+                this.additionActions = info.additionActions.map(cardName => {
+                    return H.CARDS.getByName(cardName);
+                });
+            });
+        }
+
         if (info.combo) {
             this.combo = info.combo;
         }

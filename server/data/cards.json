@@ -36,6 +36,61 @@
     }
   },
   {
+    "id": 329,
+    "name": "Ancient Secrets",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/1/10/Ancient_Secrets%28243%29.png",
+    "clas": 6,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "heal",
+              "params": [
+                5
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 328,
+    "name": "Ancient Teachings",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/f/f4/Ancient_Teachings%28517%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "draw-card",
+              "params": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 304,
     "name": "Backstab",
     "cost": 0,
@@ -2513,6 +2568,26 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 327,
+    "name": "Ancient of Lore",
+    "cost": 2,
+    "pic": "149/465/34",
+    "clas": 6,
+    "type": 1,
+    "additionActions": [
+      "Ancient Teachings",
+      "Ancient Secrets"
+    ],
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {

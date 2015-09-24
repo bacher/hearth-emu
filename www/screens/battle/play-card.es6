@@ -60,15 +60,21 @@ H.PlayCard = class PlayCard {
 
     _onMouseDown(e) {
         if (!this._targeting) {
-            this._$clickObject = $(e.currentTarget);
-
-            this.$node
-                .on('mousemove', this._onMouseMove)
-                .on('mouseup', this._onMouseUp);
-
-            $(document).on('keydown', this._onKeyDown);
-            $(document).on('contextmenu', this._onContextMenu);
+            this._initGrab({
+                $on: $(e.currentTarget)
+            });
         }
+    }
+
+    _initGrab(params = {}) {
+        this._$clickObject = params.$on || this.$node.find('.avatar.my');
+
+        this.$node
+            .on('mousemove', this._onMouseMove)
+            .on('mouseup', this._onMouseUp);
+
+        $(document).on('keydown', this._onKeyDown);
+        $(document).on('contextmenu', this._onContextMenu);
     }
 
     _onMouseMove(e) {
@@ -148,9 +154,11 @@ H.PlayCard = class PlayCard {
             .off('keydown', this._onKeyDown)
             .off('contextmenu', this._onContextMenu);
 
-        if (this._isBattlecryPreview) {
-            this._savedAction._$clickObject.show();
-            this._$clickObject.remove();
+        if (this._isBattlecryPreview || this._isChooseAction || this._isChooseDialogCanceled) {
+            if (!success) {
+                this._savedAction.$clickObject.show();
+                this._savedAction.$tmpObject.remove();
+            }
 
         } else if (this._isCard) {
             if (!success) {
@@ -171,18 +179,27 @@ H.PlayCard = class PlayCard {
         this._$targetPurpose = null;
         this._$arrowBaseObject = null;
 
-        this._isMinionNeedBattleCryTarget = false;
-
         if (this._isCard) {
             this._$grabCard.remove();
             this._$grabCard = null;
         }
+
+        this._isCard = false;
+        this._isMinionCard = false;
+        this._isMinionNeedBattleCryTarget = false;
+        this._isChooseAction = false;
+        this._choosenCardAction = false;
+        this._isChooseDialogCanceled = false;
     }
 
     _grabObject() {
         this._targeting = true;
 
         this._isCard = this._$clickObject.hasClass('card-wrap');
+        if (this._isCard) {
+            this._isChooseAction = this._$clickObject.hasClass('choose-action');
+        }
+
         this._isMinionCard = this._isCard && this._$clickObject.hasClass('minion');
         this._isMinionNeedBattleCryTarget = this._isMinionCard && this._$clickObject.hasClass('need-battlecry-target');
 
@@ -190,9 +207,11 @@ H.PlayCard = class PlayCard {
         this._isBattlecryPreview = this._isMinion && this._$clickObject.hasClass('battlecry-preview');
 
         this._isHeroSkill = this._$clickObject.hasClass('hero-skill');
-        this._isHero = this._$clickObject.hasClass('avatar');
+        if (!this._choosenCardAction) {
+            this._isHero = this._$clickObject.hasClass('avatar');
+        }
 
-        if (this._isMinion || this._isHeroSkill || this._isHero) {
+        if (this._isMinion || this._isHeroSkill || this._isHero || this._choosenCardAction) {
             if ((this._isMinion || this._isHero) && !this._isBattlecryPreview) {
                 this._$clickObject.addClass('find-target');
             }
@@ -247,7 +266,7 @@ H.PlayCard = class PlayCard {
     }
 
     _tryMakeAction(e) {
-        if (this._needTarget || this._isMinion || this._isHeroSkill) {
+        if (this._needTarget || this._isMinion || this._isHeroSkill || this._choosenCardAction) {
             const $targetPurpose = $(e.target).closest('.purpose');
 
             if ($targetPurpose.length) {
@@ -265,7 +284,7 @@ H.PlayCard = class PlayCard {
         var actionName;
         var actionData = {};
 
-        if (this._isCard) {
+        if (this._isCard || this._choosenCardAction) {
             actionName = 'play-card';
             actionData.id = this._$clickObject.data('id');
 
@@ -291,43 +310,81 @@ H.PlayCard = class PlayCard {
         }
 
         if (this._$targetPurpose) {
-            if (this._isBattlecryPreview) {
+            if (this._isBattlecryPreview || this._choosenCardAction) {
                 actionName = this._savedAction.actionName;
                 actionData = this._savedAction.actionData;
             }
 
-            actionData.targetSide = this._$targetPurpose.closest('.my,.op').hasClass('my') ? 'my' : 'op';
-            actionData.target = this._$targetPurpose.data('id');
+            var destination;
+
+            if (this._choosenCardAction) {
+                destination = actionData.choosenCard;
+            } else {
+                destination = actionData;
+            }
+
+            destination.targetSide = this._$targetPurpose.closest('.my,.op').hasClass('my') ? 'my' : 'op';
+            destination.target = this._$targetPurpose.data('id');
         }
 
-        if (this._isMinionNeedBattleCryTarget) {
+        if (this._isMinionNeedBattleCryTarget || this._isChooseAction) {
             this._savedAction = {
                 actionName,
                 actionData,
-                _$clickObject: this._$clickObject
+                $clickObject: this._$clickObject
             };
 
-            const $container = $('<DIV>');
+            if (this._isMinionNeedBattleCryTarget || this._isMinionCard) {
+                const $creature = render(null, 'creature', {
+                    id: 'new',
+                    classes: 'battlecry-preview',
+                    minion: { pic: '147/808/410' }
+                });
 
-            render($container, 'creature', {
-                id: 'new',
-                classes: 'battlecry-preview',
-                minion: {},
-                card: { pic: '147/808/410' }
-            });
+                if (actionData.index != null && actionData.index !== this._$minions.length) {
+                    $creature.insertBefore(this.$node.find('.my .creature').eq(actionData.index));
+                } else {
+                    $creature.appendTo('.my.creatures');
+                }
 
-            const $creature = $container.children();
+                this._savedAction.$tmpObject = $creature;
 
-            if (actionData.index != null && actionData.index !== this._$minions.length) {
-                $creature.insertBefore(this.$node.find('.my .creature').eq(actionData.index));
-            } else {
-                $creature.appendTo('.my.creatures');
+                this._release(true);
+
+                if (this._isMinionNeedBattleCryTarget) {
+                    this._initGrab({ $on: $creature });
+                    this._grabObject();
+
+                } else {
+                    const cardHandId = this._savedAction.$clickObject.data('id');
+                    const cardInfo = _.find(this.battle.battleData.my.hand, { id: cardHandId });
+
+                    H.app.activateOverlay('choose-card', {
+                        cards: cardInfo.additionActions,
+                        onSelect: index => {
+                            const selectedCard = cardInfo.additionActions[index];
+
+                            actionData.choosenCard = {
+                                id: selectedCard.id
+                            };
+
+                            if (selectedCard.isNeedTarget) {
+                                this._choosenCardAction = true;
+                                this._initGrab();
+                                this._grabObject();
+
+                            } else {
+                                H.socket.send('play-card', actionData);
+                            }
+                        },
+                        onCancel: () => {
+                            this._isChooseDialogCanceled = true;
+                            this._release();
+                        }
+                    });
+                }
+
             }
-
-            this._release(true);
-
-            this._onMouseDown({ currentTarget: $creature.get(0) });
-            this._grabObject();
 
         } else {
             this._release();
@@ -366,7 +423,10 @@ H.PlayCard = class PlayCard {
 
             const actionData = {};
 
-            if (this._isCard) {
+            if (this._choosenCardAction) {
+                actionData.realCardId = this._savedAction.actionData.choosenCard.id;
+
+            } else if (this._isCard) {
                 actionData.cardId = this._$clickObject.data('id');
 
             } else if (this._isBattlecryPreview) {

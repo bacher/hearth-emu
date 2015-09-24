@@ -36,8 +36,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                 if (this.battleData.my.active) {
                     H.socket.send('end-turn');
                 }
-            })
-            .on('click', '.card-select-wrapper', this._onCardSelect.bind(this));
+            });
     }
 
     _show() {
@@ -238,31 +237,12 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
     }
 
     _onCardSelection(data) {
-        const $cardSelection = this.$node.find('.card-selection');
-        const $container = $cardSelection.find('.cards-container').empty();
-
-        data.cards.forEach((card, i) => {
-            const $wrapper = $('<div>')
-                .addClass('card-select-wrapper')
-                .data('index', i);
-
-            $('<img>')
-                .addClass('card-select-preview')
-                .attr('src', H.makeCardUrl(card.pic))
-                .appendTo($wrapper);
-
-            $container.append($wrapper);
+        H.app.activateOverlay('choose-card', {
+            cards: data.cards,
+            onSelect(index) {
+                H.socket.send('card-selection', { index });
+            }
         });
-
-        $cardSelection.show();
-    }
-
-    _onCardSelect(e) {
-        const $preview = $(e.currentTarget);
-
-        H.socket.send('card-selection', { index: $preview.data('index') });
-
-        this.$node.find('.card-selection').hide();
     }
 
     _onDefeat() {

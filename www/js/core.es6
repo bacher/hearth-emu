@@ -81,7 +81,11 @@ H.loadOptions = function() {
 };
 
 H.makeCardUrl = function(part) {
-    return 'http://media-hearth.cursecdn.com/avatars/' + part + '.png';
+    if (/^http/.test(part)) {
+        return part;
+    } else {
+        return 'http://media-hearth.cursecdn.com/avatars/' + part + '.png';
+    }
 };
 
 H.loadDecks = function() {
@@ -107,7 +111,7 @@ H.getDeckById = function(id) {
 };
 
 H.toggleMenu = function() {
-    if (!H.disableMenu) {
+    if (H.app.checkAllowMenu()) {
         if (H.gameMenu && !H.gameMenu.closed) {
             H.gameMenu.close();
         } else {

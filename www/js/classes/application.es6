@@ -3,10 +3,14 @@ H.Application = class Application {
     constructor() {
         this.$node = $('#app');
         this.activeScreen = null;
+
+        this._sceens = [];
     }
 
     activateScreen(name) {
         const newActiveScreen = new H.Screens[name]();
+
+        this._sceens.push(newActiveScreen);
 
         newActiveScreen.make();
 
@@ -27,6 +31,8 @@ H.Application = class Application {
 
     activateOverlay(name, params) {
         const overlayScreen = new H.Screens[name](params);
+
+        this._sceens.push(overlayScreen);
 
         overlayScreen.make();
 
@@ -55,5 +61,9 @@ H.Application = class Application {
                 'transform-origin': ''
             });
         }
+    }
+
+    checkAllowMenu() {
+        return !this._sceens.some(screen => screen._disableMenu);
     }
 };
