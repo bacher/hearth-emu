@@ -2011,6 +2011,43 @@
     }
   },
   {
+    "id": 340,
+    "name": "Naturalize",
+    "cost": 1,
+    "pic": "148/57/154",
+    "clas": 6,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minion"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "kill",
+              "params": []
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "opp-draw-card",
+              "params": [
+                2
+              ]
+            }
+          ],
+          "targetsType": "not-need"
+        }
+      ]
+    }
+  },
+  {
     "id": 277,
     "name": "Noble Sacrifice",
     "cost": 1,

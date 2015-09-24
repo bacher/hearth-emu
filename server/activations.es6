@@ -228,6 +228,9 @@ const A = {
             o.player.drawCard();
         }
     },
+    'opp-draw-card'(o) {
+        A['draw-card'].apply(this, { player: o.player.enemy });
+    },
     'draw-card-at-each-target'(o) {
         A['draw-card'].call({
             params: [o.targets.getCount()]
