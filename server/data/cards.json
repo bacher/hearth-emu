@@ -2920,6 +2920,46 @@
     }
   },
   {
+    "id": 364,
+    "name": "Treant Charge",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/6/64/Treant%28337%29.png",
+    "clas": 6,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [
+        "charge"
+      ],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "kill",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "end-turn",
+              "params": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 265,
     "name": "Upgrade!",
     "cost": 1,
@@ -3199,26 +3239,6 @@
           ]
         }
       ]
-    }
-  },
-  {
-    "id": 327,
-    "name": "Ancient of Lore",
-    "cost": 2,
-    "pic": "149/465/34",
-    "clas": 6,
-    "type": 1,
-    "additionActions": [
-      "Ancient Teachings",
-      "Ancient Secrets"
-    ],
-    "flags": [],
-    "minion": {
-      "attack": 5,
-      "maxHp": 5,
-      "flags": [],
-      "race": 0,
-      "events": {}
     }
   },
   {
@@ -8610,16 +8630,22 @@
     "cost": 6,
     "pic": "148/467/237",
     "clas": 6,
-    "type": 1,
-    "flags": [
-      "unimplemented"
-    ],
-    "minion": {
-      "attack": 0,
-      "maxHp": 0,
-      "flags": [],
-      "race": 0,
-      "events": {}
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "summon",
+              "params": [
+                "Treant Charge",
+                3
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {
@@ -8838,6 +8864,26 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 327,
+    "name": "Ancient of Lore",
+    "cost": 7,
+    "pic": "149/465/34",
+    "clas": 6,
+    "type": 1,
+    "additionActions": [
+      "Ancient Teachings",
+      "Ancient Secrets"
+    ],
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {
