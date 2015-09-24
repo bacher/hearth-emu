@@ -153,6 +153,44 @@
     }
   },
   {
+    "id": 348,
+    "name": "Demigod's Favor",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/2/2c/Demigod%27s_Favor%28358%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-attack",
+              "params": [
+                2
+              ]
+            },
+            {
+              "name": "add-hp",
+              "params": [
+                2
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "except-self",
+              "minions",
+              "friends"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 331,
     "name": "Dispel",
     "cost": 0,
@@ -343,6 +381,31 @@
     }
   },
   {
+    "id": 330,
+    "name": "Moonfire",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/4/40/Moonfire%28111%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 320,
     "name": "Moonfire",
     "cost": 0,
@@ -363,31 +426,6 @@
               "name": "deal-damage",
               "params": [
                 1
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    "id": 330,
-    "name": "Moonfire",
-    "cost": 0,
-    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/4/40/Moonfire%28111%29.png",
-    "clas": 6,
-    "type": 2,
-    "flags": [
-      "uncollectable"
-    ],
-    "spell": {
-      "acts": [
-        {
-          "acts": [
-            {
-              "name": "deal-damage",
-              "params": [
-                2
               ]
             }
           ]
@@ -551,6 +589,37 @@
               "name": "return-to-hand-reduce-cost",
               "params": [
                 2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 350,
+    "name": "Shan'do's Lesson",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/2/25/Shan%27do%27s_Lesson%28159%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "summon",
+              "params": [
+                "Treant"
+              ]
+            },
+            {
+              "name": "summon",
+              "params": [
+                "Treant"
               ]
             }
           ]
@@ -2619,6 +2688,26 @@
     "customAction": "tracking",
     "spell": {
       "acts": []
+    }
+  },
+  {
+    "id": 349,
+    "name": "Treant",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/6/62/Treant%28181%29.png",
+    "clas": 6,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [
+        "taunt"
+      ],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -6235,6 +6324,39 @@
     }
   },
   {
+    "id": 347,
+    "name": "Bite",
+    "cost": 4,
+    "pic": "148/464/266",
+    "clas": 6,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-hero-attack",
+              "params": [
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "add-armor",
+              "params": [
+                4
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 195,
     "name": "Blessing of Kings",
     "cost": 4,
@@ -8866,6 +8988,26 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 351,
+    "name": "Cenarius",
+    "cost": 9,
+    "pic": "148/473/605",
+    "clas": 6,
+    "type": 1,
+    "additionActions": [
+      "Demigod's Favor",
+      "Shan'do's Lesson"
+    ],
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 6,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {

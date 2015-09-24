@@ -306,14 +306,18 @@ H.Battle = class Battle extends EventEmitter {
         if (origBaseCard.additionActions) {
             const additionCard = _.find(origBaseCard.additionActions, { id: data.choosenCard.id });
 
-            console.warn('ADDITION ACTIVATION', data);
-            this._activateCard(player, null, additionCard, data.choosenCard);
+            var minion;
+            if (card.type === H.CARD_TYPES.minion) {
+                minion = handCard.minion;
+            }
+
+            this._activateCard(player, null, additionCard, data.choosenCard, minion);
         }
 
         this.sendGameData();
     }
 
-    _activateCard(player, handCard, card, data) {
+    _activateCard(player, handCard, card, data, minion) {
         const globalTargets = card.targetsType ? H.Targets.parseUserData(player, data) : null;
 
         const eventMessage = {
@@ -336,6 +340,7 @@ H.Battle = class Battle extends EventEmitter {
                     player,
                     handCard,
                     handCardInfo: handCard && handCard.getData(),
+                    minion: minion,
                     params: data,
                     globalTargets: eventMessage.globalTargets
                 });

@@ -1,6 +1,6 @@
 
 .creature(data-id=minion.id,class=classes)
-   IMG.img(src='http://media-hearth.cursecdn.com/avatars/'+minion.pic+'.png')
+   IMG.img(src=H.makeCardUrl(minion.pic))
    .overlay.o1
    .overlay.o2
    .attack= minion.attack
