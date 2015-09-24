@@ -569,6 +569,67 @@
     }
   },
   {
+    "id": 341,
+    "name": "Starfall1",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/0/03/Starfall%28195%29.png",
+    "clas": 6,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                5
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 342,
+    "name": "Starfall2",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/5/5a/Starfall%28653%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                2
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies",
+              "minions"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 336,
     "name": "Summon a Panther",
     "cost": 0,
@@ -7615,6 +7676,22 @@
         "bc:deal-dmg-to-hero"
       ],
       "events": {}
+    }
+  },
+  {
+    "id": 343,
+    "name": "Starfall",
+    "cost": 5,
+    "pic": "149/456/464",
+    "clas": 6,
+    "type": 2,
+    "additionActions": [
+      "Starfall1",
+      "Starfall2"
+    ],
+    "flags": [],
+    "spell": {
+      "acts": []
     }
   },
   {
