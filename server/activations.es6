@@ -169,17 +169,16 @@ const A = {
     },
     'switch-owner-this-turn'(o) {
         o.targets.forEach(target => {
+            const prevPlayer = target.player;
             target.detach();
 
-            target.player.enemy.creatures.addCreature(target);
-        });
+            prevPlayer.enemy.creatures.addCreature(target);
 
-        o.battle.once('end-turn', () => {
-            o.targets.forEach(target => {
+            o.battle.once('end-turn', () => {
                 if (!target.is('detached')) {
                     target.detach();
 
-                    target.player.enemy.creatures.addCreature(target);
+                    prevPlayer.creatures.addCreature(target);
                 }
             });
         });
