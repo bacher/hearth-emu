@@ -343,31 +343,6 @@
     }
   },
   {
-    "id": 330,
-    "name": "Moonfire",
-    "cost": 0,
-    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/4/40/Moonfire%28111%29.png",
-    "clas": 6,
-    "type": 2,
-    "flags": [
-      "uncollectable"
-    ],
-    "spell": {
-      "acts": [
-        {
-          "acts": [
-            {
-              "name": "deal-damage",
-              "params": [
-                2
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
     "id": 320,
     "name": "Moonfire",
     "cost": 0,
@@ -396,6 +371,31 @@
     }
   },
   {
+    "id": 330,
+    "name": "Moonfire",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/4/40/Moonfire%28111%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 52,
     "name": "Murloc Scout",
     "cost": 0,
@@ -411,6 +411,58 @@
       "flags": [],
       "events": {},
       "race": 5
+    }
+  },
+  {
+    "id": 345,
+    "name": "Nourish",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/5/56/Nourish%28485%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "draw-card",
+              "params": [
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 344,
+    "name": "Nourish1",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/d/db/Nourish%2858%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-crystal",
+              "params": []
+            },
+            {
+              "name": "add-crystal",
+              "params": []
+            }
+          ]
+        }
+      ]
     }
   },
   {
@@ -7676,6 +7728,22 @@
         "bc:deal-dmg-to-hero"
       ],
       "events": {}
+    }
+  },
+  {
+    "id": 346,
+    "name": "Nourish",
+    "cost": 5,
+    "pic": "148/63/120",
+    "clas": 6,
+    "type": 2,
+    "additionActions": [
+      "Nourish1",
+      "Nourish2"
+    ],
+    "flags": [],
+    "spell": {
+      "acts": []
     }
   },
   {
