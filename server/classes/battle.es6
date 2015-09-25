@@ -355,6 +355,8 @@ H.Battle = class Battle extends EventEmitter {
             this.emit('hit', eventMessage);
 
             if (!eventMessage.prevent) {
+                const counterAttack = eventMessage.to.getData().attack;
+
                 eventMessage.to.dealDamage(eventMessage.by.getData().attack);
 
                 this.addBattleAction({
@@ -362,6 +364,10 @@ H.Battle = class Battle extends EventEmitter {
                     by: by.id,
                     to: target.id
                 });
+
+                if (counterAttack) {
+                    eventMessage.by.dealDamage(counterAttack);
+                }
             }
         });
         by.setHitFlags();
