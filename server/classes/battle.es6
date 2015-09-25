@@ -386,14 +386,12 @@ H.Battle = class Battle extends EventEmitter {
             this.emit('hit', eventMessage);
 
             if (!eventMessage.prevent) {
-                const damage = eventMessage.by.getData().attack;
-                eventMessage.to.dealDamage(damage);
+                eventMessage.to.dealDamage(eventMessage.by.getData().attack);
 
                 this.addBattleAction({
                     name: 'hit',
                     by: by.id,
-                    to: target.id,
-                    damage
+                    to: target.id
                 });
             }
         });
@@ -407,12 +405,12 @@ H.Battle = class Battle extends EventEmitter {
         const p2 = this.players[1];
 
         if (_.startsWith(id, 'minion')) {
-            const minion = p1.creatures.getById(id);
+            const minion = p1.creatures.getCreatureById(id);
 
             if (minion) {
                 return minion;
             } else {
-                return p2.creatures.getById(id);
+                return p2.creatures.getCreatureById(id);
             }
 
         } else if (_.startsWith(id, 'hero')) {

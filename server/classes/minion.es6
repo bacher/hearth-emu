@@ -73,6 +73,12 @@ H.Minion = class Minion extends H.GameObject {
 
         if (!eventMessage.prevent) {
             this._dealDamage(dmg);
+
+            this.player.battle.addBattleAction({
+                name: 'damage',
+                to: this.id,
+                amount: dmg
+            });
         }
     }
 

@@ -17,6 +17,8 @@ H.Animations = class Animations {
                         return this._startPlayCardAnimation(animation);
                     }
                     break;
+                case 'damage':
+                    return this._startDamageAnimation(animation);
             }
 
             return Promise.resolve();
@@ -37,8 +39,6 @@ H.Animations = class Animations {
 
             setTimeout(() => {
                 $by.css('transform', '');
-
-                this._newSplash(toPosition, animation.damage);
 
                 setTimeout(resolve, 1000);
             }, 200);
@@ -61,6 +61,17 @@ H.Animations = class Animations {
             });
 
             setTimeout(resolve, 100);
+        });
+    }
+
+    _startDamageAnimation(animation) {
+        return new Promise(resolve => {
+            const $to = this._getNodeById(animation.to);
+            setTimeout(() => {
+                this._newSplash($to.offset(), animation.amount);
+
+                setTimeout(resolve, 2000);
+            }, 200);
         });
     }
 
