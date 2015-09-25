@@ -8,9 +8,30 @@
     height: 94px;
     line-height: 94px;
     background: url("/textures/splash.png");
+    animation: scale-in-out 1s linear forwards;
 
     text-align: center;
     font-size: 30px;
   }
 
+
+  .play-card-preview {
+    position: absolute;
+    top: -60px;
+    left: 604px;
+
+    animation: up-from-op-deck 2s linear forwards;
+  }
+
+  @keyframes up-from-op-deck {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    30% {
+      transform: translate(-353px,229px) scale(2.5);
+    }
+    100% {
+      transform: translate(-353px,229px) scale(2.5);
+    }
+  }
 }

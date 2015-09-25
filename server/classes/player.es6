@@ -12,6 +12,8 @@ H.Player = class Player extends EventEmitter {
     constructor(ws) {
         super();
 
+        this.id = _.uniqueId('player');
+
         this.battle = null;
         this.ws = ws;
         this.status = 'waiting';

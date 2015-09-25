@@ -214,6 +214,12 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
         this._myClass = data.my.clas;
 
+        this.playerId = data.my.id;
+        this.heroId = data.my.heroId;
+
+        this.enemyPlayerId = data.op.id;
+        this.enemyHeroId = data.op.heroId;
+
         const myClass = H.CLASSES_L[data.my.clas];
         const opClass = H.CLASSES_L[data.op.clas];
 

@@ -18,6 +18,7 @@ H.Hero = class Hero {
     constructor(player) {
         this.player = player;
 
+        this.id = _.uniqueId('hero');
         this.objType = 'hero';
 
         this.attack = 0;
@@ -34,7 +35,6 @@ H.Hero = class Hero {
         this.weapon = null;
 
         this.skillUsed = false;
-        this.id = 'hero';
 
         this.flags = {};
 

@@ -323,8 +323,7 @@ H.PlayCard = class PlayCard {
                 destination = actionData;
             }
 
-            destination.targetSide = this._$targetPurpose.closest('.my,.op').hasClass('my') ? 'my' : 'op';
-            destination.target = this._$targetPurpose.data('id');
+            destination.targetId = this._$targetPurpose.data('id');
         }
 
         if (this._isMinionNeedBattleCryTarget || this._isChooseAction) {

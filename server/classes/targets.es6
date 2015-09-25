@@ -12,15 +12,7 @@ H.Targets = class Targets {
     static parseUserData(player, params) {
         const targets = new H.Targets(player);
 
-        const targetPlayer = (params.targetSide === 'op' ? player.enemy : player);
-
-        if (params.target === 'hero') {
-            targets.addHero(targetPlayer.hero);
-        } else {
-            const target = targetPlayer.creatures.getCreatureById(params.target);
-
-            targets.addMinion(target);
-        }
+        targets.addObject(player.battle.getObjectById(params.targetId));
 
         return targets;
     }
@@ -37,6 +29,15 @@ H.Targets = class Targets {
         return (
             object === this.my.hero || _.contains(this.my.minions, object) ||
             object === this.op.hero || _.contains(this.op.minions, object));
+    }
+
+    addObject(object) {
+        if (object.objType === 'minion') {
+            this.addMinion(object);
+
+        } else if (object.objType === 'hero') {
+            this.addHero(object);
+        }
     }
 
     addMinion(minion) {

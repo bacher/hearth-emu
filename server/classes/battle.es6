@@ -30,12 +30,16 @@ H.Battle = class Battle extends EventEmitter {
     _start() {
         const p1Info = {
             name: this.p1.joinParams.name,
-            clas: this.p1.hero.clas
+            clas: this.p1.hero.clas,
+            id: this.p1.id,
+            heroId: this.p1.hero.id
         };
 
         const p2Info = {
             name: this.p2.joinParams.name,
-            clas: this.p2.hero.clas
+            clas: this.p2.hero.clas,
+            id: this.p2.id,
+            heroId: this.p2.hero.id
         };
 
         this.p1.sendMessage('battle-started', {
@@ -311,6 +315,15 @@ H.Battle = class Battle extends EventEmitter {
 
         this._activateCard(player, handCard, card, data);
 
+        this.addBattleAction({
+            name: 'play-card',
+            player: player.id,
+            card: {
+                pic: handCardInfo.base.pic,
+                cost: handCardInfo.cost
+            }
+        });
+
         const origBaseCard = handCard.base;
 
         if (origBaseCard.additionActions) {
@@ -359,16 +372,14 @@ H.Battle = class Battle extends EventEmitter {
     }
 
     _hit(player, data) {
-        const by = data.by === 'hero' ?
-            player.hero :
-            player.creatures.getCreatureById(data.by);
+        const by = this.getObjectById(data.by);
 
         const targets = H.Targets.parseUserData(player, data);
 
-        targets.forEach(obj => {
+        targets.forEach(target => {
             const eventMessage = {
                 by: by,
-                to: obj,
+                to: target,
                 prevent: false
             };
 
@@ -381,7 +392,7 @@ H.Battle = class Battle extends EventEmitter {
                 this.addBattleAction({
                     name: 'hit',
                     by: by.id,
-                    to: obj.id,
+                    to: target.id,
                     damage
                 });
             }
@@ -389,5 +400,27 @@ H.Battle = class Battle extends EventEmitter {
         by.setHitFlags();
 
         this.sendGameData();
+    }
+
+    getObjectById(id) {
+        const p1 = this.players[0];
+        const p2 = this.players[1];
+
+        if (_.startsWith(id, 'minion')) {
+            const minion = p1.creatures.getById(id);
+
+            if (minion) {
+                return minion;
+            } else {
+                return p2.creatures.getById(id);
+            }
+
+        } else if (_.startsWith(id, 'hero')) {
+            if (p1.hero.id === id) {
+                return p1.hero;
+            } else {
+                return p2.hero;
+            }
+        }
     }
 };
