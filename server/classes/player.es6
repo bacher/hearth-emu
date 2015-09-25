@@ -191,12 +191,13 @@ H.Player = class Player extends EventEmitter {
         } else {
             this._outOfCardCount++;
 
-            this.emit('message', {
-                msg: 'fatigue',
-                data: {
-                    damage: this._outOfCardCount
-                }
+            this.battle.addBattleAction({
+                name: 'fatigue',
+                player: this.id,
+                damage: this._outOfCardCount
             });
+
+            this.hero.dealDamage(this._outOfCardCount);
         }
     }
 

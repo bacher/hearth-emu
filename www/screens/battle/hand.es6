@@ -169,25 +169,6 @@ H.Hand = class Hand {
         }, 100);
     }
 
-    fatigue(data) {
-        const $newCard = render(null, 'fatigue-card', data);
-
-        this._battle.$node.find('.new-cards').append($newCard);
-
-        setTimeout(() => {
-            $newCard.addClass('up');
-
-            setTimeout(() => {
-                $newCard.removeClass('up');
-                $newCard.addClass('big-center');
-
-                setTimeout(() => {
-                    $newCard.remove();
-                }, 1800);
-            }, 400)
-        }, 100);
-    }
-
     _updateClasses($card, handCard, i) {
         var classes = 'card-wrap';
 

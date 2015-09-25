@@ -151,17 +151,6 @@ H.Battle = class Battle extends EventEmitter {
                     this._start2();
                 }
                 break;
-            case 'fatigue':
-                player.sendMessage('fatigue', {
-                    side: 'my',
-                    damage: data.damage
-                });
-
-                player.sendMessage('fatigue', {
-                    side: 'op',
-                    damage: data.damage
-                });
-                break;
             case 'burn-card':
                 player.sendMessage('burn-card', {
                     side: 'my',

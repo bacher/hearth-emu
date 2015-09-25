@@ -19,6 +19,8 @@ H.Animations = class Animations {
                     break;
                 case 'damage':
                     return this._startDamageAnimation(animation);
+                case 'fatigue':
+                    return this._startFatigueAnimation(animation);
             }
 
             return Promise.resolve();
@@ -72,6 +74,31 @@ H.Animations = class Animations {
 
                 setTimeout(resolve, 2000);
             }, 200);
+        });
+    }
+
+    _startFatigueAnimation(animation) {
+        return new Promise(resolve => {
+            const $newCard = render(null, 'fatigue-card', {
+                side: animation.player === this._battle.playerId ? 'my' : 'op',
+                damage: animation.damage
+            });
+
+            this.$node.find('.new-cards').append($newCard);
+
+            setTimeout(() => {
+                $newCard.addClass('up');
+
+                setTimeout(() => {
+                    $newCard.removeClass('up');
+                    $newCard.addClass('big-center');
+
+                    setTimeout(() => {
+                        $newCard.remove();
+                        resolve();
+                    }, 1800);
+                }, 400)
+            }, 100);
         });
     }
 
