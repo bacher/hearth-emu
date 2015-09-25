@@ -4,7 +4,7 @@
    - if (!onlyBasic)
       .panel.decks
          each deck in decks
-            .deck(data-id=deck.id)
+            .deck(data-id=deck.id,class=deck.cardIds.length!==30?'disabled':'')
                .background(class=H.CLASSES_L[deck.clas])
                .label= deck.label
                .frame
