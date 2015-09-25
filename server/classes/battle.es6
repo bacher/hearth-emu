@@ -401,8 +401,8 @@ H.Battle = class Battle extends EventEmitter {
     }
 
     getObjectById(id) {
-        const p1 = this.players[0];
-        const p2 = this.players[1];
+        const p1 = this.p1;
+        const p2 = this.p2;
 
         if (_.startsWith(id, 'minion')) {
             const minion = p1.creatures.getCreatureById(id);

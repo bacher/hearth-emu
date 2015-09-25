@@ -46,8 +46,10 @@ H.Weapon = class Weapon extends H.GameObject {
     }
 
     detachWeapon() {
+        const player = this.player;
+
         this.kill();
 
-        this.player.hero.weapon = null;
+        player.hero.weapon = null;
     }
 };

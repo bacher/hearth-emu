@@ -266,7 +266,7 @@ H.PlayCard = class PlayCard {
     }
 
     _tryMakeAction(e) {
-        if (this._needTarget || this._isMinion || this._isHeroSkill || this._choosenCardAction) {
+        if (this._needTarget || this._isMinion || this._isHero || this._isHeroSkill || this._choosenCardAction) {
             const $targetPurpose = $(e.target).closest('.purpose');
 
             if ($targetPurpose.length) {
