@@ -191,27 +191,7 @@ H.Battle = class Battle extends EventEmitter {
                 break;
 
             case 'use-hero-skill': {
-                const hero = player.hero;
-                const heroSkill = hero.heroSkill;
-
-                player.hero.mana -= 2;
-                player.hero.skillUsed = true;
-
-                var globalTargets = null;
-
-                if (heroSkill.skillNeedTarget) {
-                    globalTargets = H.Targets.parseUserData(player, data);
-                }
-
-                hero.useHeroSkill({
-                    battle: this,
-                    player,
-                    handCard: null,
-                    globalTargets,
-                    params: null
-                });
-
-                this.sendGameData();
+                this._useHeroSkill(player, data);
                 break;
             }
             default:
@@ -385,6 +365,35 @@ H.Battle = class Battle extends EventEmitter {
             }
         });
         by.setHitFlags();
+
+        this.sendGameData();
+    }
+
+    _useHeroSkill(player, data) {
+        const hero = player.hero;
+        const heroSkill = hero.heroSkill;
+
+        player.hero.mana -= 2;
+        player.hero.skillUsed = true;
+
+        var globalTargets = null;
+
+        if (heroSkill.skillNeedTarget) {
+            globalTargets = H.Targets.parseUserData(player, data);
+        }
+
+        this.addBattleAction({
+            name: 'use-hero-skill',
+            player: player.id
+        });
+
+        hero.useHeroSkill({
+            battle: this,
+            player,
+            handCard: null,
+            globalTargets,
+            params: null
+        });
 
         this.sendGameData();
     }

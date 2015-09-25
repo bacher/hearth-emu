@@ -63,7 +63,7 @@ H.Card = class Card {
                 this.conditions = ['can-add-creature'].concat(this.conditions);
 
             } else {
-                activation = 'equip-weapon';
+                activation = 'equip-weapon-card';
                 this.weapon = object = info.weapon;
             }
 
@@ -130,7 +130,7 @@ H.Card = class Card {
             if (this.type === H.CARD_TYPES.minion) {
                 this._comboCopy.minion = _.clone(this._comboCopy.minion);
                 object = this._comboCopy.minion;
-            } else if (this.type === H.CARD_TYPES.weapon){
+            } else if (this.type === H.CARD_TYPES.weapon) {
                 this._comboCopy.weapon = _.clone(this._comboCopy.weapon);
                 object = this._comboCopy.weapon;
             }

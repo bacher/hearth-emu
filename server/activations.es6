@@ -355,6 +355,9 @@ const A = {
 
         o.player.hero.equipWeapon(new H.Weapon(card));
     },
+    'equip-weapon-card'(o) {
+        o.player.hero.equipWeapon(new H.Weapon(o.handCard.base));
+    },
     'warrior-upgrade'(o) {
         const weapon = o.player.hero.weapon;
         if (weapon) {
