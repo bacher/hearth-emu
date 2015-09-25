@@ -8,7 +8,7 @@
     height: 94px;
 
     background: url("/textures/splash.png");
-    animation: scale-in-out 2s linear forwards;
+    animation: scale-in-out 1s linear forwards;
 
     .value {
       color: #FFF;
@@ -40,5 +40,27 @@
     100% {
       transform: translate(-353px,229px) scale(2.5);
     }
+  }
+
+  @keyframes up-from-op-hero-skill {
+    0% {
+      transform: translate(0, 0) scale(0.6);
+    }
+    30% {
+      transform: translate(-453px,200px) scale(1.4);
+    }
+    100% {
+      transform: translate(-453px,200px) scale(1.4);
+    }
+  }
+
+  .hero-skill-card {
+    position: absolute;
+    top: 100px;
+    left: 700px;
+    width: 173px;
+    height: 259px;
+    background: url("/textures/skill-helper-druid.png");
+    animation: up-from-op-hero-skill 2s linear forwards;
   }
 }

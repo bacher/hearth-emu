@@ -17,6 +17,11 @@ H.Animations = class Animations {
                         return this._startPlayCardAnimation(animation);
                     }
                     break;
+                case 'use-hero-skill':
+                    if (animation.player === this._battle.enemyPlayerId) {
+                        return this._startHeroSkillAnimation(animation);
+                    }
+                    break;
                 case 'damage':
                     return this._startDamageAnimation(animation);
                 case 'fatigue':
@@ -32,17 +37,25 @@ H.Animations = class Animations {
             const $by = this._getNodeById(animation.by);
             const $to = this._getNodeById(animation.to);
 
+            $by.removeClass('available');
+
             const byPosition = $by.offset();
             const toPosition = $to.offset();
             const deltaX = toPosition.left - byPosition.left;
             const deltaY = toPosition.top - byPosition.top;
 
-            $by.css('transform', `translate(${deltaX}px,${deltaY}px)`);
+            $by.css({
+                'transform': `translate(${deltaX}px,${deltaY}px)`,
+                'z-index': 1
+            });
 
             setTimeout(() => {
-                $by.css('transform', '');
+                $by.css({
+                    'transform': '',
+                    'z-index': ''
+                });
 
-                setTimeout(resolve, 1000);
+                setTimeout(resolve, 600);
             }, 200);
         });
     }
@@ -80,7 +93,7 @@ H.Animations = class Animations {
     _startFatigueAnimation(animation) {
         return new Promise(resolve => {
             const $newCard = render(null, 'fatigue-card', {
-                side: animation.player === this._battle.playerId ? 'my' : 'op',
+                side: this._parseSide(animation.player),
                 damage: animation.damage
             });
 
@@ -100,6 +113,24 @@ H.Animations = class Animations {
                 }, 400)
             }, 100);
         });
+    }
+
+    _startHeroSkillAnimation(animation) {
+        return new Promise(resolve => {
+            const $card = render(null, 'hero-skill-card');
+
+            $card.appendTo(this.$node);
+
+            $card.on('animationend', () => {
+                $card.remove();
+            });
+
+            setTimeout(resolve, 100);
+        });
+    }
+
+    _parseSide(player) {
+        return player === this._battle.playerId ? 'my' : 'op';
     }
 
     _newSplash(position, damage) {
