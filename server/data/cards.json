@@ -114,7 +114,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 2
               ]
@@ -1161,7 +1161,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 1
               ]
@@ -1184,7 +1184,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 1
               ]
@@ -1207,7 +1207,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 1
               ]
@@ -1729,12 +1729,12 @@
     "pic": "148/127/77",
     "clas": 2,
     "type": 2,
-    "flags": [],
     "targetsType": {
       "names": [
         "minions"
       ]
     },
+    "flags": [],
     "spell": {
       "acts": [
         {
@@ -1748,9 +1748,9 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
-                "1"
+                1
               ]
             }
           ]
@@ -1889,7 +1889,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 2
               ]
@@ -1931,20 +1931,20 @@
     "pic": "147/441/233",
     "clas": 2,
     "type": 2,
-    "flags": [],
     "targetsType": {
       "names": [
         "enemies"
       ]
     },
+    "flags": [],
     "spell": {
       "acts": [
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
-                "1"
+                1
               ]
             }
           ]
@@ -2095,18 +2095,18 @@
     "pic": "147/375/409",
     "clas": 9,
     "type": 2,
-    "flags": [],
     "targetsType": {
       "names": [
         "all-but-my-hero"
       ]
     },
+    "flags": [],
     "spell": {
       "acts": [
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 2
               ]
@@ -2256,19 +2256,18 @@
     "pic": "148/115/10",
     "clas": 2,
     "type": 2,
-    "flags": [],
     "targetsType": {
       "names": [
         "all"
-      ],
-      "mergeType": "intersect"
+      ]
     },
+    "flags": [],
     "spell": {
       "acts": [
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 3
               ]
@@ -3803,7 +3802,7 @@
           {
             "acts": [
               {
-                "name": "deal-damage",
+                "name": "deal-spell-damage",
                 "params": [
                   4
                 ]
@@ -3829,7 +3828,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 2
               ]
@@ -4255,7 +4254,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 5
               ]
@@ -4505,18 +4504,18 @@
     "pic": "148/163/164",
     "clas": 3,
     "type": 2,
-    "flags": [],
     "targetsType": {
       "names": [
         "all-but-my-hero"
       ]
     },
+    "flags": [],
     "spell": {
       "acts": [
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 1
               ]
@@ -5108,7 +5107,7 @@
     }
   },
   {
-    "id": 128,
+    "id": 365,
     "name": "Fan of Knives",
     "cost": 3,
     "pic": "147/984/378",
@@ -5120,7 +5119,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 1
               ]
@@ -5711,7 +5710,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 "2-3"
               ]
@@ -6723,7 +6722,7 @@
               ]
             },
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 1
               ]
@@ -6819,7 +6818,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 6
               ]
@@ -8518,7 +8517,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 2
               ]
@@ -8700,7 +8699,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 5
               ]
@@ -9008,7 +9007,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 4
               ]
@@ -9453,7 +9452,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 10
               ]

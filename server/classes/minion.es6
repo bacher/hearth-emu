@@ -58,8 +58,6 @@ H.Minion = class Minion extends H.GameObject {
     }
 
     dealDamage(dmg) {
-        dmg = H.parseValue(dmg);
-
         const minionDetails = this.getData();
 
         const eventMessage = {

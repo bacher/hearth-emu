@@ -92,12 +92,16 @@ const A = {
     },
     'deal-damage': function(o) {
         o.targets.forEach(target => {
-            target.dealDamage(this.params[0]);
+            const damage = H.parseValue(this.params[0]);
+
+            target.dealDamage(damage);
         });
     },
     'deal-spell-damage': function(o) {
         o.targets.forEach(target => {
-            const damage = o.battle.auras.applyEffect(o.player, 'spell-damage', this.params[0]);
+            var damage = H.parseValue(this.params[0]);
+
+            damage = o.battle.auras.applyEffect(o.player, 'spell-damage', damage);
 
             target.dealDamage(damage);
         });
@@ -438,7 +442,7 @@ const A = {
     'ice-lance': function(o) {
         o.targets.forEach(target => {
             if (target.is('freeze')) {
-                target.dealDamage(this.params[0]);
+                A['deal-spell-damage'].call(this, o);
             } else {
                 target.addFlag('freeze');
             }
