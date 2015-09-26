@@ -1,7 +1,5 @@
 
 .b {
-  @w: 900px;
-  @h: 654px;
 
   &.arrow-mode * {
     cursor: none !important;
@@ -42,8 +40,8 @@
 
   .board {
     position: relative;
-    width: @w;
-    height: @h;
+    width: 900px;
+    height: 654px;
     margin: 0 auto;
   }
 
@@ -52,7 +50,7 @@
     position: absolute;
     width: 40px;
     height: 290px;
-    top: @h/2-145px;
+    top: 182px;
     left: 3px;
   }
 
@@ -282,7 +280,7 @@
     position: absolute;
     width: 650px;
     height: 400px;
-    top: @h/2-200px;
+    top: 127px;
     padding-left: 125px;
   }
 
@@ -306,7 +304,7 @@
     position: absolute;
     width: 340px;
     height: 124px;
-    left: @w/2-170px;
+    left: 280px;
 
     &.op {
       top: 45px;
@@ -798,19 +796,6 @@
     background: url("/textures/eyes.png");
     animation: eyes step-end 10s infinite;
   }
-
-  //.cursor-blow {
-  //  position: absolute;
-  //  margin-top: -36px;
-  //  margin-left: -35px;
-  //  width: 69px;
-  //  height: 73px;
-  //  background: url("../textures/cursor-blow.png");
-  //
-  //  &.step2 {
-  //    background: url("../textures/cursor-blow-3.png");
-  //  }
-  //}
 
   @keyframes bg-offset {
     0% { background-position: 0 0; }
