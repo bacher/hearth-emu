@@ -83,6 +83,12 @@ const A = {
             target.hp += amount;
         });
     },
+    'add-hp-for-card-count'(o) {
+        const count = o.player.hand.getCount();
+
+        o.minion.hp += count;
+        o.minion.maxHp += count;
+    },
     'add-attack-hp-for-each-played-card'(o) {
         const value = (o.minion.player.getPlayedCardCount() - 1) * 2;
 

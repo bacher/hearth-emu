@@ -1028,6 +1028,24 @@
     }
   },
   {
+    "id": 410,
+    "name": "Violet Apprentice",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/5/5e/Violet_Apprentice%2863%29.png",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 213,
     "name": "Wisp",
     "cost": 0,
@@ -7848,6 +7866,57 @@
     }
   },
   {
+    "id": 406,
+    "name": "Ancient Brewmaster",
+    "cost": 4,
+    "pic": "147/891/572",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "return-to-hand",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "friends",
+                "minions"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 412,
+    "name": "Ancient Mage",
+    "cost": 4,
+    "pic": "148/503/176",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 255,
     "name": "Arathi Weaponsmith",
     "cost": 4,
@@ -8063,6 +8132,125 @@
     }
   },
   {
+    "id": 413,
+    "name": "Cult Master",
+    "cost": 4,
+    "pic": "148/526/140",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "draw-card",
+                "params": []
+              }
+            ],
+            "event": {
+              "name": "death",
+              "params": [
+                "own"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 414,
+    "name": "Dark Iron Dwarf",
+    "cost": 4,
+    "pic": "147/871/128",
+    "clas": 0,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-aura",
+                "params": [
+                  "this-turn"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 408,
+    "name": "Defender of Argus",
+    "cost": 4,
+    "pic": "147/936/542",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              },
+              {
+                "name": "add-hp",
+                "params": [
+                  1
+                ]
+              },
+              {
+                "name": "add-flags",
+                "params": [
+                  "taunt"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ],
+              "modificators": [
+                {
+                  "name": "adjacent",
+                  "params": []
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 42,
     "name": "Dragonling Mechanic",
     "cost": 4,
@@ -8089,6 +8277,24 @@
         ]
       },
       "race": 0
+    }
+  },
+  {
+    "id": 415,
+    "name": "Dread Corsair",
+    "cost": 4,
+    "pic": "149/511/261",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 6,
+      "events": {}
     }
   },
   {
@@ -8411,6 +8617,24 @@
     }
   },
   {
+    "id": 404,
+    "name": "Mogu'shan Warden",
+    "cost": 4,
+    "pic": "148/325/346",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 7,
+      "flags": [
+        "taunt"
+      ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 267,
     "name": "Mortal Strike",
     "cost": 4,
@@ -8662,6 +8886,24 @@
     }
   },
   {
+    "id": 407,
+    "name": "Silvermoon Guardian",
+    "cost": 4,
+    "pic": "147/839/634",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [
+        "shield"
+      ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 359,
     "name": "Soul of the Forest",
     "cost": 4,
@@ -8673,6 +8915,38 @@
     ],
     "spell": {
       "acts": []
+    }
+  },
+  {
+    "id": 405,
+    "name": "Spellbreaker",
+    "cost": 4,
+    "pic": "147/874/42",
+    "clas": 0,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "silence",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
@@ -8801,6 +9075,69 @@
               "name": "hit-by",
               "params": [
                 "my-hero"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 409,
+    "name": "Twilight Drake",
+    "cost": 4,
+    "pic": "147/862/360",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 1,
+      "flags": [],
+      "race": 3,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-hp-for-card-count",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 411,
+    "name": "Violet Teacher",
+    "cost": 4,
+    "pic": "149/523/523",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "Violet Apprentice"
+                ]
+              }
+            ],
+            "event": {
+              "name": "play-card",
+              "params": [
+                "my",
+                2
               ]
             }
           }
