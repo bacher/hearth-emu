@@ -6151,43 +6151,6 @@
     }
   },
   {
-    "id": 128,
-    "name": "Fan of Knives",
-    "cost": 3,
-    "pic": "147/984/378",
-    "clas": 3,
-    "type": 2,
-    "flags": [],
-    "spell": {
-      "acts": [
-        {
-          "acts": [
-            {
-              "name": "deal-damage",
-              "params": [
-                1
-              ]
-            }
-          ],
-          "targetsType": {
-            "names": [
-              "enemies",
-              "minions"
-            ]
-          }
-        },
-        {
-          "acts": [
-            {
-              "name": "draw-card",
-              "params": []
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
     "id": 192,
     "name": "Far Sight",
     "cost": 3,
@@ -8192,7 +8155,22 @@
                   "this-turn"
                 ]
               }
-            ]
+            ],
+            "aura": {
+              "acts": [
+                {
+                  "name": "add-attack",
+                  "params": [
+                    2
+                  ]
+                }
+              ],
+              "targetsType": {
+                "names": [
+                  "self"
+                ]
+              }
+            }
           }
         ]
       }
