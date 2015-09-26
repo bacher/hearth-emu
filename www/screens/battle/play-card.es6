@@ -348,9 +348,11 @@ H.PlayCard = class PlayCard {
 
                 this._savedAction.$tmpObject = $creature;
 
+                const minionNeedBattleCry = this._isMinionNeedBattleCryTarget;
+
                 this._release(true);
 
-                if (this._isMinionNeedBattleCryTarget) {
+                if (minionNeedBattleCry) {
                     this._initGrab({ $on: $creature });
                     this._grabObject();
 

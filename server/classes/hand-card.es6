@@ -37,7 +37,7 @@ H.HandCard = class HandCard extends EventEmitter {
             data.flags['can-play'] = true;
         }
 
-        if (data.targetsType) {
+        if (data.base.targetsType) {
             data.flags['need-battlecry-target'] = true;
         }
 
