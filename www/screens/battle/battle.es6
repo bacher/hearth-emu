@@ -18,6 +18,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
         this._playCard = new H.PlayCard(this);
         this._hand = new H.Hand(this);
+        this._chat = new H.Chat(this);
     }
 
     _bindEventListeners() {
@@ -27,6 +28,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         H.socket.on('defeat', this._onDefeat.bind(this));
         H.socket.on('win', this._onWin.bind(this));
         H.socket.on('burn-card', this._onBurnCard.bind(this));
+        H.socket.on('chat-emotion', this._onOpChatEmotion.bind(this));
 
         this._playCard.bindEventListeners();
 
@@ -233,6 +235,14 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
     showWelcomeScreen() {
         this.welcomeScreen = H.app.activateOverlay('battle-welcome');
+    }
+
+    sendChatEmotion(message) {
+        H.socket.send('chat-emotion', message);
+    }
+
+    _onOpChatEmotion(message) {
+        this._chat.showMessage('op', message.text);
     }
 
     _showYourTurnSplash() {

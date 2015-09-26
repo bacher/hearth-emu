@@ -194,6 +194,12 @@ H.Battle = class Battle extends EventEmitter {
                 this._useHeroSkill(player, data);
                 break;
             }
+            case 'chat-emotion': {
+                player.enemy.sendMessage('chat-emotion', {
+                    text: data
+                });
+                break;
+            }
             default:
                 console.warn('Unhandled Player Message:', msg);
         }

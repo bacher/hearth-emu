@@ -70,6 +70,7 @@ H.Player = class Player extends EventEmitter {
                     case 'play-card':
                     case 'hit':
                     case 'use-hero-skill':
+                    case 'chat-emotion':
                         this.emit('client-message', { msg, data });
                         break;
                     default:
