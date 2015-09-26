@@ -156,13 +156,19 @@ const E = {
         eventName: 'heal',
         filterFunc(o, params, callback) {
             var isMinionsOnly = false;
+            var targetMinion;
 
-            if (params[0] === 'minion') {
+            const side = params[0];
+
+            if (side === 'minion') {
                 isMinionsOnly = true;
+            } else if (side === 'self') {
+                targetMinion = o.minion;
             }
 
             return function(eventMessage) {
-                if (!isMinionsOnly || eventMessage.objType === 'minion') {
+                if (!isMinionsOnly || eventMessage.objType === 'minion' &&
+                    !targetMinion || targetMinion === eventMessage) {
                     callback(eventMessage);
                 }
             };
@@ -248,6 +254,14 @@ const E = {
                     callback.apply(null, arguments);
                 }
             };
+        }
+    },
+    'play-secret': {
+        eventName: 'play-secret',
+        filterFunc(o, params, callback) {
+            return function(eventMessage) {
+                callback.apply(null, arguments);
+            }
         }
     }
 };

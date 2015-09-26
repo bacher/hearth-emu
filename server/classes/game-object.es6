@@ -77,6 +77,8 @@ H.GameObject = class GameObject extends EventEmitter {
             });
 
             if (this.card.type === H.CARD_TYPES['trap']) {
+                this.battle.emit('play-secret', this.player);
+
                 this.detach();
             }
         });

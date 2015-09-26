@@ -1149,6 +1149,36 @@
     }
   },
   {
+    "id": 365,
+    "name": "Angry Chicken",
+    "cost": 1,
+    "pic": "147/801/57",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 1,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "enrage",
+                "params": [
+                  "add-attack",
+                  5
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 162,
     "name": "Arcane Missiles",
     "cost": 1,
@@ -1443,6 +1473,35 @@
                 "own"
               ]
             }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 366,
+    "name": "Bloodsail Corsair",
+    "cost": 1,
+    "pic": "149/520/453",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 2,
+      "flags": [],
+      "race": 6,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "remove-op-weapon-durability",
+                "params": [
+                  1
+                ]
+              }
+            ]
           }
         ]
       }
@@ -2145,6 +2204,62 @@
     }
   },
   {
+    "id": 367,
+    "name": "Hungry Crab",
+    "cost": 1,
+    "pic": "149/495/660",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 2,
+      "flags": [],
+      "race": 1,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "kill",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions"
+              ],
+              "modificators": [
+                {
+                  "name": "race",
+                  "params": [
+                    "murloc"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  2
+                ]
+              },
+              {
+                "name": "add-hp",
+                "params": [
+                  2
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 170,
     "name": "Ice Lance",
     "cost": 1,
@@ -2289,6 +2404,46 @@
     }
   },
   {
+    "id": 368,
+    "name": "Lightwarden",
+    "cost": 1,
+    "pic": "147/778/436",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "heal",
+              "params": [
+                "self"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 56,
     "name": "Mechanical Dragonling",
     "cost": 1,
@@ -2402,6 +2557,24 @@
       "flags": [],
       "events": {},
       "race": 5
+    }
+  },
+  {
+    "id": 369,
+    "name": "Murloc Tidecaller",
+    "cost": 1,
+    "pic": "148/382/420",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 2,
+      "flags": [],
+      "race": 5,
+      "events": {}
     }
   },
   {
@@ -2706,6 +2879,45 @@
       "flags": [],
       "events": {},
       "race": 7
+    }
+  },
+  {
+    "id": 370,
+    "name": "Secretkeeper",
+    "cost": 1,
+    "pic": "147/914/483",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              },
+              {
+                "name": "add-hp",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "event": {
+              "name": "play-secret",
+              "params": []
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -3598,23 +3810,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "id": 128,
-    "name": "Dagger",
-    "cost": 2,
-    "pic": "126/749/201",
-    "clas": 3,
-    "type": 3,
-    "flags": [
-      "uncollectable"
-    ],
-    "weapon": {
-      "attack": 1,
-      "durability": 2,
-      "events": {},
-      "flags": []
     }
   },
   {
@@ -5107,7 +5302,7 @@
     }
   },
   {
-    "id": 365,
+    "id": 128,
     "name": "Fan of Knives",
     "cost": 3,
     "pic": "147/984/378",
@@ -5120,6 +5315,43 @@
           "acts": [
             {
               "name": "deal-spell-damage",
+              "params": [
+                1
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies",
+              "minions"
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "draw-card",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 128,
+    "name": "Fan of Knives",
+    "cost": 3,
+    "pic": "147/984/378",
+    "clas": 3,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
               "params": [
                 1
               ]

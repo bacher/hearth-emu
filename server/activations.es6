@@ -373,6 +373,9 @@ const A = {
     'reduce-weapon-durability'(o) {
         o.player.hero.weapon.reduceDurability(this.params[0]);
     },
+    'reduce-op-weapon-durability'(o) {
+        o.player.enemy.hero.weapon.reduceDurability(this.params[0]);
+    },
     'destroy-weapon': function(o) {
         o.targets.forEach(hero => {
             hero.destroyWeapon();
