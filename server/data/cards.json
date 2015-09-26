@@ -3370,6 +3370,56 @@
     }
   },
   {
+    "id": 371,
+    "name": "Young Priestess",
+    "cost": 1,
+    "pic": "147/785/123",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 1,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-hp",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "except-self",
+                "friends",
+                "minions"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            },
+            "event": {
+              "name": "end-turn",
+              "params": [
+                "own"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 270,
     "name": "weapon-1-1",
     "cost": 1,
@@ -5314,7 +5364,7 @@
         {
           "acts": [
             {
-              "name": "deal-spell-damage",
+              "name": "deal-damage",
               "params": [
                 1
               ]
@@ -5351,7 +5401,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 1
               ]
