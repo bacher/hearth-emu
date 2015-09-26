@@ -449,8 +449,12 @@ const A = {
         });
     },
     'add-hand-card': function(o) {
-        console.log('ADD HAND CARD');
         o.player.hand.addCard(H.CARDS.getByName(this.params[0], this.params[1]));
+    },
+    'add-op-hand-card': function(o) {
+        A['add-hand-card'].apply(this, {
+            player: o.player.enemy
+        });
     },
     'play-trap-card': function(o) {
         o.player.traps.addTrap(new H.Trap(o.handCard));
@@ -483,7 +487,11 @@ const A = {
         }));
     },
     'add-crystal'(o) {
-        o.player.hero.addCrystal();
+        if (this.params[0] === 'op') {
+            o.player.enemy.hero.addCrystal();
+        } else {
+            o.player.hero.addCrystal();
+        }
     },
     'destroy-crystal'(o) {
         o.player.hero.removeCrystal();

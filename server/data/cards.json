@@ -1307,6 +1307,42 @@
     }
   },
   {
+    "id": 397,
+    "name": "Bananas",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/b/bb/Bananas%28231%29.png",
+    "clas": 0,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-attack",
+              "params": [
+                1
+              ]
+            },
+            {
+              "name": "add-hp",
+              "params": [
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 269,
     "name": "Battle Axe",
     "cost": 1,
@@ -2285,6 +2321,24 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 395,
+    "name": "Imp",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/f/fd/Imp%28321%29.png",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 2,
+      "events": {}
     }
   },
   {
@@ -5457,6 +5511,24 @@
     }
   },
   {
+    "id": 387,
+    "name": "Alarm-o-Bot",
+    "cost": 3,
+    "pic": "147/792/425",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 0,
+      "maxHp": 3,
+      "flags": [],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
     "id": 145,
     "name": "Aldor Peacekeeper",
     "cost": 3,
@@ -5517,6 +5589,37 @@
     }
   },
   {
+    "id": 386,
+    "name": "Arcane Golem",
+    "cost": 3,
+    "pic": "147/930/97",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 2,
+      "flags": [
+        "charge"
+      ],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-crystal",
+                "params": [
+                  "op"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 158,
     "name": "Arcane Intellect",
     "cost": 3,
@@ -5537,6 +5640,42 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 389,
+    "name": "Big Game Hunter",
+    "cost": 3,
+    "pic": "147/789/73",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 4,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 388,
+    "name": "Blood Knight",
+    "cost": 3,
+    "pic": "148/513/75",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -5572,6 +5711,83 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 390,
+    "name": "Coldlight Oracle",
+    "cost": 3,
+    "pic": "147/885/88",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 5,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "draw-card",
+                "params": [
+                  2
+                ]
+              },
+              {
+                "name": "opp-draw-card",
+                "params": [
+                  2
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 391,
+    "name": "Coldlight Seer",
+    "cost": 3,
+    "pic": "147/954/424",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 5,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-hp",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "all"
+              ],
+              "modificators": [
+                {
+                  "name": "race",
+                  "params": [
+                    "murloc"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -5666,6 +5882,54 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 392,
+    "name": "Demolisher",
+    "cost": 3,
+    "pic": "147/951/212",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 4,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            },
+            "event": {
+              "name": "start-turn",
+              "params": [
+                "own"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -5799,6 +6063,39 @@
     }
   },
   {
+    "id": 393,
+    "name": "Emperor Cobra",
+    "cost": 3,
+    "pic": "148/100/625",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 1,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "kill",
+                "params": []
+              }
+            ],
+            "event": {
+              "name": "hit-by",
+              "params": [
+                "self"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 128,
     "name": "Fan of Knives",
     "cost": 3,
@@ -5811,7 +6108,7 @@
         {
           "acts": [
             {
-              "name": "deal-damage",
+              "name": "deal-spell-damage",
               "params": [
                 1
               ]
@@ -5848,7 +6145,7 @@
         {
           "acts": [
             {
-              "name": "deal-spell-damage",
+              "name": "deal-damage",
               "params": [
                 1
               ]
@@ -6089,16 +6386,22 @@
       "flags": [],
       "race": 4,
       "events": {
-        "deathrattle": [
+        "custom": [
           {
             "acts": [
               {
                 "name": "summon",
                 "params": [
-                  "damaged golem"
+                  "Damaged Golem"
                 ]
               }
-            ]
+            ],
+            "event": {
+              "name": "death",
+              "params": [
+                "self"
+              ]
+            }
           }
         ]
       }
@@ -6336,6 +6639,87 @@
     }
   },
   {
+    "id": 394,
+    "name": "Imp Master",
+    "cost": 3,
+    "pic": "148/532/178",
+    "clas": 0,
+    "type": 1,
+    "comment": "",
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  1
+                ]
+              },
+              {
+                "name": "summon",
+                "params": [
+                  "Imp"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "end-turn",
+              "params": [
+                "own"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 396,
+    "name": "Injured Blademaster",
+    "cost": 3,
+    "pic": "147/649/209",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 7,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  4
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 28,
     "name": "Ironforge Riffleman",
     "cost": 3,
@@ -6406,6 +6790,41 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 398,
+    "name": "King Mukla",
+    "cost": 3,
+    "pic": "147/814/373",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 5,
+      "flags": [],
+      "race": 1,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-op-hand-card",
+                "params": [
+                  "bananas"
+                ]
+              },
+              {
+                "name": "add-op-hand-card",
+                "params": [
+                  "bananas"
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
@@ -6529,6 +6948,24 @@
     }
   },
   {
+    "id": 399,
+    "name": "Mind Control Tech",
+    "cost": 3,
+    "pic": "147/927/368",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 177,
     "name": "Misha",
     "cost": 3,
@@ -6545,6 +6982,24 @@
         "taunt"
       ],
       "race": 1,
+      "events": {}
+    }
+  },
+  {
+    "id": 400,
+    "name": "Murloc Warleader",
+    "cost": 3,
+    "pic": "148/376/222",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 5,
       "events": {}
     }
   },
@@ -6603,6 +7058,47 @@
                 ]
               }
             ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 401,
+    "name": "Questing Adventurer",
+    "cost": 3,
+    "pic": "147/865/157",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              },
+              {
+                "name": "add-hp",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "event": {
+              "name": "play-card",
+              "params": [
+                "my"
+              ]
+            }
           }
         ]
       }
@@ -7012,6 +7508,54 @@
     }
   },
   {
+    "id": 402,
+    "name": "Southsea Captain",
+    "cost": 3,
+    "pic": "149/529/324",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 6,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              },
+              {
+                "name": "add-hp",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "all"
+              ],
+              "modificators": [
+                {
+                  "name": "race",
+                  "params": [
+                    "pirate"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 275,
     "name": "Sword of Justice",
     "cost": 3,
@@ -7127,6 +7671,24 @@
       "flags": [
         "windfury"
       ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 403,
+    "name": "Tinkmaster Overspark",
+    "cost": 3,
+    "pic": "147/920/245",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
       "race": 0,
       "events": {}
     }
