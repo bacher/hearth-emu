@@ -99,7 +99,7 @@ H.GameObject = class GameObject extends EventEmitter {
     _processFlags(flags) {
         delete flags['tired'];
 
-        if (flags['freeze'] || flags['sleep']) {
+        if (flags['freeze'] || flags['sleep'] || flags['cant-attack']) {
             flags['tired'] = true;
 
         } else if (flags['hit']) {

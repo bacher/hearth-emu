@@ -1496,7 +1496,7 @@
           {
             "acts": [
               {
-                "name": "remove-op-weapon-durability",
+                "name": "reduce-op-weapon-durability",
                 "params": [
                   1
                 ]
@@ -3534,6 +3534,24 @@
     }
   },
   {
+    "id": 372,
+    "name": "Ancient Watcher",
+    "cost": 2,
+    "pic": "147/868/153",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 5,
+      "flags": [
+        "cant-attack"
+      ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 160,
     "name": "Arcane Explosion",
     "cost": 2,
@@ -3734,6 +3752,51 @@
     }
   },
   {
+    "id": 373,
+    "name": "Bloodmage Thalnos",
+    "cost": 2,
+    "pic": "147/811/525",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "add-spell-damage",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        ],
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "draw-card",
+                "params": []
+              }
+            ],
+            "event": {
+              "name": "death",
+              "params": [
+                "self"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 228,
     "name": "Bloodsail Raider",
     "cost": 2,
@@ -3826,6 +3889,38 @@
     ],
     "spell": {
       "acts": []
+    }
+  },
+  {
+    "id": 374,
+    "name": "Crazed Alchemist",
+    "cost": 2,
+    "pic": "147/897/612",
+    "clas": 0,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "swap-attack-hp",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
@@ -3994,6 +4089,44 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 375,
+    "name": "Doomsayer",
+    "cost": 2,
+    "pic": "149/508/467",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 0,
+      "maxHp": 7,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "kill",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions"
+              ]
+            },
+            "event": {
+              "name": "start-turn",
+              "params": [
+                "own"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -4293,6 +4426,54 @@
     }
   },
   {
+    "id": 376,
+    "name": "Knife Juggler",
+    "cost": 2,
+    "pic": "149/502/422",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            },
+            "event": {
+              "name": "summon",
+              "params": [
+                "my"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 211,
     "name": "Kobold Geomancer",
     "cost": 2,
@@ -4401,6 +4582,24 @@
     }
   },
   {
+    "id": 377,
+    "name": "Lorewalker Cho",
+    "cost": 2,
+    "pic": "147/948/456",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 0,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 226,
     "name": "Mad Bomber",
     "cost": 2,
@@ -4437,6 +4636,53 @@
                 }
               ]
             }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 378,
+    "name": "Mana Addict",
+    "cost": 2,
+    "pic": "147/888/67",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 379,
+    "name": "Mana Wraith",
+    "cost": 2,
+    "pic": "148/575/197",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "change-minions-cost",
+                "params": [
+                  1
+                ]
+              }
+            ]
           }
         ]
       }
@@ -4484,6 +4730,73 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 380,
+    "name": "Master Swordsmith",
+    "cost": 2,
+    "pic": "149/554/584",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "friends",
+                "minions"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            },
+            "event": {
+              "name": "end-turn",
+              "params": [
+                "own"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 381,
+    "name": "Millhouse Manastorm",
+    "cost": 2,
+    "pic": "149/532/339",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -4539,6 +4852,41 @@
                 ]
               }
             ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 382,
+    "name": "Nat Pagle",
+    "cost": 2,
+    "pic": "148/433/19",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 0,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "draw-card-chance",
+                "params": [
+                  0.5
+                ]
+              }
+            ],
+            "event": {
+              "name": "start-turn",
+              "params": [
+                "own"
+              ]
+            }
           }
         ]
       }
@@ -4605,6 +4953,24 @@
       "flags": [
         "stealth"
       ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 385,
+    "name": "Pint-Sized Summoner",
+    "cost": 2,
+    "pic": "147/911/54",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
       "race": 0,
       "events": {}
     }
@@ -4884,6 +5250,46 @@
     }
   },
   {
+    "id": 383,
+    "name": "Sunfury Protector",
+    "cost": 2,
+    "pic": "147/894/372",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-flags",
+                "params": [
+                  "taunt"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ],
+              "modificators": [
+                {
+                  "name": "adjacent",
+                  "params": []
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 326,
     "name": "Wild Growth",
     "cost": 2,
@@ -4902,6 +5308,47 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 384,
+    "name": "Wild Pyromancer",
+    "cost": 2,
+    "pic": "149/505/25",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions"
+              ]
+            },
+            "event": {
+              "name": "play-card",
+              "params": [
+                "my",
+                2
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {

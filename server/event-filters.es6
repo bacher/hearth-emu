@@ -15,7 +15,6 @@ const E = {
             }
 
             return function(eventMessage) {
-                var targets;
                 const handCard = eventMessage.handCard;
 
                 if ((!allowPlayer || allowPlayer === handCard.player) &&
@@ -243,14 +242,19 @@ const E = {
             const side = params[0];
 
             var playerSide = null;
+            var targetMinion = null;
 
             if (side === 'own') {
                 playerSide = o.player;
             } else if (side === 'op') {
                 playerSide = o.player.enemy;
+            } else if (side === 'self') {
+                targetMinion = o.minion;
             }
+
             return function(minion) {
-                if (!playerSide || playerSide === minion.player) {
+                if (!playerSide || playerSide === minion.player &&
+                    !targetMinion || targetMinion === minion) {
                     callback.apply(null, arguments);
                 }
             };

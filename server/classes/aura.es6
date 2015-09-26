@@ -86,6 +86,14 @@ const AURAS = {
                 }, arguments);
             }
         }
+    },
+    'change-minions-cost': {
+        affect: 'hand-card',
+        effect(handCard) {
+            if (handCard.base.type === H.CARD_TYPES.minion) {
+                handCard.cost += this.params[0];
+            }
+        }
     }
 };
 

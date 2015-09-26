@@ -218,6 +218,11 @@ const A = {
             });
         });
     },
+    'swap-attack-hp'(o) {
+        o.targets.forEach(target => {
+            [target.hp, target.attack] = [target.attack, target.hp];
+        });
+    },
     'set-attack': function(o) {
         o.targets.forEach(obj => {
             obj.attack = this.params[0];
@@ -237,6 +242,11 @@ const A = {
         const max = this.params[0] || 1;
         for (var i = 0; i < max; ++i) {
             o.player.drawCard();
+        }
+    },
+    'draw-card-chance'(o) {
+        if (Math.random() < this.params[0]) {
+            A['draw-card'].apply(this, o);
         }
     },
     'opp-draw-card'(o) {
