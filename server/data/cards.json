@@ -1990,6 +1990,24 @@
     }
   },
   {
+    "id": 439,
+    "name": "Flame of Azzinoth",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/c/cb/Flame_of_Azzinoth%28685%29.png",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 1,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 107,
     "name": "Forked Lightning",
     "cost": 1,
@@ -4359,6 +4377,24 @@
     }
   },
   {
+    "id": 437,
+    "name": "Finkle Einhorn",
+    "cost": 2,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/9/9a/Finkle_Einhorn%28541%29.png",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 194,
     "name": "Flametongue Totem",
     "cost": 2,
@@ -4448,6 +4484,26 @@
       ],
       "events": {},
       "race": 0
+    }
+  },
+  {
+    "id": 444,
+    "name": "Gnoll",
+    "cost": 2,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/3/3e/Gnoll%28565%29.png",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [
+        "taunt"
+      ],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -7948,6 +8004,24 @@
     }
   },
   {
+    "id": 442,
+    "name": "Baine Bloodhoof",
+    "cost": 4,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/1/18/Baine_Bloodhoof%28359%29.png",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 4,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 347,
     "name": "Bite",
     "cost": 4,
@@ -10288,6 +10362,25 @@
     }
   },
   {
+    "id": 434,
+    "name": "Argent Commander",
+    "cost": 6,
+    "pic": "147/906/463",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 3,
+      "flags": [
+        "charge",
+        "shield"
+      ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 149,
     "name": "Avenging Wrath",
     "cost": 6,
@@ -10575,6 +10668,41 @@
     }
   },
   {
+    "id": 443,
+    "name": "Cairne Bloodhoof",
+    "cost": 6,
+    "pic": "147/960/498",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "Baine Bloodhoof"
+                ]
+              }
+            ],
+            "event": {
+              "name": "death",
+              "params": [
+                "self"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 33,
     "name": "Dread Infernal",
     "cost": 6,
@@ -10662,6 +10790,109 @@
     }
   },
   {
+    "id": 433,
+    "name": "Frost Elemental",
+    "cost": 6,
+    "pic": "148/169/598",
+    "clas": 0,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-flags",
+                "params": [
+                  "freeze"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 432,
+    "name": "Gadgetzan Auctioneer",
+    "cost": 6,
+    "pic": "147/939/131",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "draw-card",
+                "params": []
+              }
+            ],
+            "event": {
+              "name": "play-card",
+              "params": [
+                "my",
+                2
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 445,
+    "name": "Hogger",
+    "cost": 6,
+    "pic": "149/560/39",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "Gnoll"
+                ]
+              }
+            ],
+            "event": {
+              "name": "end-turn",
+              "params": [
+                "own"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 243,
     "name": "Holy Fire",
     "cost": 6,
@@ -10706,6 +10937,41 @@
     }
   },
   {
+    "id": 440,
+    "name": "Illidan Stormrage",
+    "cost": 6,
+    "pic": "148/568/203",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 7,
+      "maxHp": 5,
+      "flags": [],
+      "race": 2,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "Flame of Azzinoth"
+                ]
+              }
+            ],
+            "event": {
+              "name": "play-card",
+              "params": [
+                "my"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 34,
     "name": "Lord of the Arena",
     "cost": 6,
@@ -10721,6 +10987,41 @@
       ],
       "events": {},
       "race": 0
+    }
+  },
+  {
+    "id": 431,
+    "name": "Priestess of Elune",
+    "cost": 6,
+    "pic": "148/500/138",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "heal",
+                "params": [
+                  4
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "friends",
+                "heroes"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -10818,6 +11119,72 @@
     }
   },
   {
+    "id": 435,
+    "name": "Sunwalker",
+    "cost": 6,
+    "pic": "147/855/221",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 5,
+      "flags": [
+        "taunt",
+        "shield"
+      ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 436,
+    "name": "Sylvanas Windrunner",
+    "cost": 6,
+    "pic": "147/823/33",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "switch-owner",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies",
+                "minions"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            },
+            "event": {
+              "name": "death",
+              "params": [
+                "self"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 134,
     "name": "Temple Enforcer",
     "cost": 6,
@@ -10854,6 +11221,59 @@
     }
   },
   {
+    "id": 438,
+    "name": "The Beast",
+    "cost": 6,
+    "pic": "148/488/179",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 9,
+      "maxHp": 7,
+      "flags": [],
+      "race": 1,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "summon-op",
+                "params": [
+                  "Finkle Einhorn"
+                ]
+              }
+            ],
+            "event": {
+              "name": "death",
+              "params": [
+                "self"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 441,
+    "name": "The Black Knight",
+    "cost": 6,
+    "pic": "147/781/396",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 4,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 126,
     "name": "Vanish",
     "cost": 6,
@@ -10877,6 +11297,24 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 430,
+    "name": "Windfury Harpy",
+    "cost": 6,
+    "pic": "147/859/675",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 5,
+      "flags": [
+        "windfury"
+      ],
+      "race": 0,
+      "events": {}
     }
   },
   {
