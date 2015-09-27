@@ -11726,6 +11726,50 @@
     }
   },
   {
+    "id": 448,
+    "name": "Gruul",
+    "cost": 8,
+    "pic": "149/557/18",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 7,
+      "maxHp": 7,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              },
+              {
+                "name": "add-hp",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "end-turn",
+              "params": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 27,
     "name": "Ironbark Protector",
     "cost": 8,
@@ -11785,6 +11829,56 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 449,
+    "name": "Ragnaros the Firelord",
+    "cost": 8,
+    "pic": "148/187/503",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 8,
+      "maxHp": 8,
+      "flags": [
+        "cant-attack"
+      ],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  8
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            },
+            "event": {
+              "name": "end-turn",
+              "params": [
+                "own"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
