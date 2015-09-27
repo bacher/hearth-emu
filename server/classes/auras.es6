@@ -44,13 +44,13 @@ H.Auras = class Auras {
         }
     }
 
-    applyEffects(object) {
-        return this.applyEffect(object.objType, object.getBaseData());
+    applyEffects(player, object) {
+        return this.applyEffect(player, object.objType, object.getBaseData());
     }
 
-    applyEffect(objectType, obj) {
+    applyEffect(player, objectType, obj) {
         this.list
-            .filter(aura => aura.isAffect(objectType) && aura.isTarget(obj.that))
+            .filter(aura => aura.isTargetPlayer(player) && aura.isAffect(objectType) && aura.isTarget(obj.that))
             .forEach(aura => {
                 aura.effect(obj);
             });

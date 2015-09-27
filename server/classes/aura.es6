@@ -8,14 +8,14 @@ const AURAS = {
         effect(dmg) {
             return dmg + this.params[0];
         },
-        defaultSide: 'own'
+        defaultSide: 'my'
     },
     'multiply-spell-damage': {
         affect: 'spell-damage',
         effect(dmg) {
             return dmg * this.params[0];
         },
-        defaultSide: 'own',
+        defaultSide: 'my',
         priority: 100 // FIXME not work yet
     },
     'attack-equal-hp': {
@@ -23,7 +23,6 @@ const AURAS = {
         effect(minion) {
             minion.attack = minion.hp;
         },
-        defaultSide: 'own',
         priority: 100
     },
     'add-attack': {
@@ -115,25 +114,19 @@ H.Aura = class Aura {
 
         this.targetsType = auraInfo.targetsType;
 
+        /** @type {?H.Player} */
+        this._affectPlayer = null;
+
         /** @type {H.Hero|H.Minion|H.Weapon|null} */
         this.owner = auraInfo.owner || null;
 
-        /** @type {'target'|'own'|'enemy'} */
-        this.side = auraInfo.side || aura.defaultSide;
+        if (!this.targetsType && aura.defaultSide) {
+            if (aura.defaultSide === 'my') {
+                this._affectPlayer = player;
 
-        /** @type {?H.Player} */
-        this.affectPlayer = null;
-
-        this.target = null;
-
-        if (this.side === 'target') { // FIXME target ? self ?
-            this.target = auraInfo.target;
-
-        } else if (this.side === 'own') {
-            this.affectPlayer = player;
-
-        } else if (this.side === 'enemy') {
-            this.affectPlayer = this.player.enemy;
+            } else if (aura.defaultSide === 'op') {
+                this._affectPlayer = player.enemy;
+            }
         }
     }
 
@@ -157,6 +150,10 @@ H.Aura = class Aura {
 
     isAffect(affect) {
         return _.contains(this.affect, affect);
+    }
+
+    isTargetPlayer(player) {
+        return !this._affectPlayer || this._affectPlayer === player;
     }
 
     isTarget(obj) {
