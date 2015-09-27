@@ -3347,6 +3347,24 @@
     }
   },
   {
+    "id": 422,
+    "name": "Whelp",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/5/5d/Whelp%28527%29.png",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 3,
+      "events": {}
+    }
+  },
+  {
     "id": 120,
     "name": "Whirlwind",
     "cost": 1,
@@ -9891,6 +9909,38 @@
       "flags": [],
       "race": 0,
       "events": {}
+    }
+  },
+  {
+    "id": 423,
+    "name": "Leeroy Jenkins",
+    "cost": 5,
+    "pic": "147/969/674",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 6,
+      "maxHp": 2,
+      "flags": [
+        "charge"
+      ],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "Whelp",
+                  2
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {

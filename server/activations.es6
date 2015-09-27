@@ -24,6 +24,11 @@ const A = {
             o.player.creatures.addCreature(minion, index);
         }
     },
+    'summon-op'(o) {
+        A['summon'].apply(this, {
+            player: o.player.enemy
+        });
+    },
     'summon-random': function(o) {
         const index = _.random(this.params.length - 1);
 
