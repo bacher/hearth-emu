@@ -137,12 +137,22 @@ H.Aura = class Aura {
         }
     }
 
-    effect() {
-        this._effect.apply(this, arguments);
+    static addAura(player, minion, auraAct, isThisTurn) {
+        const auraInfo = _.clone(auraAct.acts[0]);
+
+        auraInfo.targetsType = auraAct.targetsType;
+
+        if (minion) {
+            auraInfo.owner = minion;
+        }
+
+        const aura = new H.Aura(player, auraInfo);
+
+        player.battle.auras.addAura(aura, isThisTurn);
     }
 
-    isTargetPlayerSide(player) {
-        return !this.affectPlayer || this.affectPlayer === player;
+    effect() {
+        this._effect.apply(this, arguments);
     }
 
     isAffect(affect) {
@@ -150,10 +160,7 @@ H.Aura = class Aura {
     }
 
     isTarget(obj) {
-        if (this.target) {
-            return this.target === obj;
-
-        } else if (this.targetsType) {
+        if (this.targetsType) {
             const targets = H.TARGETS.getByTargetsType(this.player, this.targetsType, null, this.owner);
 
             return targets.contains(obj);

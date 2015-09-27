@@ -27,15 +27,8 @@ H.GameObject = class GameObject extends EventEmitter {
             const eventActs = this.base.events[eventTypeName];
 
             if (eventTypeName === 'aura') {
-                eventActs.forEach(act => {
-                    const auraInfo = _.clone(act.acts[0]);
-
-                    auraInfo.targetsType = act.targetsType;
-                    auraInfo.owner = this;
-
-                    const aura = new H.Aura(player, auraInfo);
-
-                    this.player.battle.auras.addAura(aura);
+                eventActs.forEach(aura => {
+                    H.Aura.addAura(player, this, aura);
                 });
             }
 

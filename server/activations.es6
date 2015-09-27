@@ -503,37 +503,17 @@ const A = {
         o.player.hero.removeCrystal();
     },
     'add-aura': function(o) {
-        const params = H.parseParams(['lifeTime', 'side'], this.params);
+        const isThisTurn = this.params[0] === 'this-turn';
 
-        const isThisTurn = params.lifeTime === 'this-turn';
-
-        const auraDetails = o.aura.acts[0];
-
-        console.log('TARGETS COUNT: ', o.targets.getCount());
+        const auraDetails = _.clone(o.aura);
 
         if (o.targets) {
             o.targets.forEach(target => {
-                console.log('ADD aura for ', target.id);
-
-                const aura = new H.Aura(target.player, {
-                    name: auraDetails.name,
-                    params: auraDetails.params,
-                    side: params.side,
-                    // FIXME target -> targetsType
-                    target: target,
-                    owner: target
-                });
-
-                o.battle.auras.addAura(aura, isThisTurn);
+                H.Aura.addAura(o.player, target, auraDetails, isThisTurn);
             });
+
         } else {
-            const aura = new H.Aura(o.player, {
-                name: auraDetails.name,
-                params: auraDetails.params,
-                side: params.side
-            });
-
-            o.battle.auras.addAura(aura, isThisTurn);
+            H.Aura.addAura(o.player, null, auraDetails, isThisTurn);
         }
     }
 };
