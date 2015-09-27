@@ -150,25 +150,29 @@ H.GameObject = class GameObject extends EventEmitter {
     }
 
     detach() {
-        this._detachListeners();
+        if (!this.flags['detached']) {
+            this._detachListeners();
 
-        this.flags['detached'] = true;
+            this.flags['detached'] = true;
 
-        this.emit('detach', this);
+            this.emit('detach', this);
 
-        this.player = null;
+            this.player = null;
+        }
     }
 
     kill() {
-        this.player.battle.emit('death', this);
+        if (!this.flags['dead']) {
+            this.player.battle.emit('death', this);
 
-        this.detach();
+            this.detach();
 
-        this.flags['dead'] = true;
+            this.flags['dead'] = true;
 
-        this.emit('death', this);
+            this.emit('death', this);
 
-        //TODO: Deathrattle
+            //TODO: Deathrattle
+        }
     }
 
     is(prop) {

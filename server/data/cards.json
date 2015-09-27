@@ -6109,26 +6109,11 @@
     "minion": {
       "attack": 2,
       "maxHp": 3,
-      "flags": [],
+      "flags": [
+        "acid"
+      ],
       "race": 1,
-      "events": {
-        "custom": [
-          {
-            "acts": [
-              {
-                "name": "kill",
-                "params": []
-              }
-            ],
-            "event": {
-              "name": "hit-by",
-              "params": [
-                "self"
-              ]
-            }
-          }
-        ]
-      }
+      "events": {}
     }
   },
   {
