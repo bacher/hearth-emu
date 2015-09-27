@@ -80,8 +80,6 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
     updateInGameData() {
         this.$node.find('.shadow').remove();
 
-        this.clearPurposes();
-
         const game = this.battleData;
 
         this.$node.find('.battle')
@@ -200,10 +198,6 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
             this._prevActiveStatus = game.my.active;
         }
-    }
-
-    clearPurposes() {
-        this.$node.find('.avatar, .creature').removeClass('purpose');
     }
 
     setBattleData(data) {

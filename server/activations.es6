@@ -112,9 +112,10 @@ const A = {
         o.targets.forEach(target => {
             var damage = H.parseValue(this.params[0]);
 
-            damage = o.battle.auras.applyEffect(o.player, 'spell-damage', damage);
+            const damageInfo = { damage };
+            o.battle.auras.applyEffect(o.player, 'spell-damage', damageInfo);
 
-            target.dealDamage(damage);
+            target.dealDamage(damageInfo.damage);
         });
     },
     'deal-damage-to-adjacent'(o) {

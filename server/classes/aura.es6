@@ -5,15 +5,15 @@ const H = require('../namespace');
 const AURAS = {
     'add-spell-damage': {
         affect: 'spell-damage',
-        effect(dmg) {
-            return dmg + this.params[0];
+        effect(damageInfo) {
+            damageInfo.damage += this.params[0];
         },
         defaultSide: 'my'
     },
     'multiply-spell-damage': {
         affect: 'spell-damage',
-        effect(dmg) {
-            return dmg * this.params[0];
+        effect(damageInfo) {
+            damageInfo.damage *= this.params[0];
         },
         defaultSide: 'my',
         priority: 100 // FIXME not work yet
