@@ -12123,6 +12123,47 @@
     }
   },
   {
+    "id": 456,
+    "name": "Deathwing",
+    "cost": 10,
+    "pic": "149/535/474",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 12,
+      "maxHp": 12,
+      "flags": [],
+      "race": 3,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "kill",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "except-self",
+                "minions"
+              ]
+            }
+          },
+          {
+            "acts": [
+              {
+                "name": "discard-hand",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 111,
     "name": "Mind Control",
     "cost": 10,
@@ -12177,6 +12218,23 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 457,
+    "name": "Sea Giant",
+    "cost": 10,
+    "pic": "148/507/614",
+    "clas": 0,
+    "type": 1,
+    "costCalc": "minus-minion-count",
+    "flags": [],
+    "minion": {
+      "attack": 8,
+      "maxHp": 8,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   }
 ]

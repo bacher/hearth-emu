@@ -287,13 +287,9 @@ const A = {
             }
         });
     },
-    //'discard-card': function(o) {
-    //    const max = this.params[0] || 1;
-    //
-    //    for (var i = 0; i < max; ++i) {
-    //        o.player.deck.popCard();
-    //    }
-    //},
+    'discard-hand': function(o) {
+        o.player.hand.empty();
+    },
     'warlock-shadowflame'(o) {
         o.targets.each(target => {
             const attack = target.getData().attack;

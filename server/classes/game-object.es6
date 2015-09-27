@@ -32,6 +32,7 @@ H.GameObject = class GameObject extends EventEmitter {
                 });
             }
 
+            // FIXME что с этим делать?
             if (eventTypeName === 'end-turn') {
                 this._onBattle('end-turn', eventPlayer => {
                     if (player === eventPlayer) {

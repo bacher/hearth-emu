@@ -83,6 +83,7 @@ H.Hand = class Hand {
                 this._$cards.append($card);
             }
 
+            this._updateCost($card, handCard);
             this._updateClasses($card, handCard, i);
 
         });
@@ -167,6 +168,10 @@ H.Hand = class Hand {
                 }, 1800);
             }, 400)
         }, 100);
+    }
+
+    _updateCost($card, handCard) {
+        $card.find('.cost').text(handCard.cost);
     }
 
     _updateClasses($card, handCard, i) {

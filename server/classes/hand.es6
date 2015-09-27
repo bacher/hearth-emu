@@ -55,4 +55,8 @@ H.Hand = class Hand {
     removeRandomHandCard() {
         this.removeHandCard(this.getRandomHandCard());
     }
+
+    empty() {
+        this.cards.length = 0;
+    }
 };

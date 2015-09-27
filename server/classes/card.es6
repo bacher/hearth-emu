@@ -8,6 +8,7 @@ H.Card = class Card {
         this.name = info.name;
         this.type = info.type;
         this.cost = info.cost;
+        this.costCalc = info.costCalc;
         this.clas = info.clas;
         this.pic = info.pic;
         this.flags = parseFlags(info.flags);

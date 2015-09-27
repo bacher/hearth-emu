@@ -20,10 +20,23 @@ H.HandCard = class HandCard extends EventEmitter {
 
         const base = this.base.getInfo(comboMode);
 
+        var cost = base.cost;
+
+        if (this.base.costCalc) {
+            switch (this.base.costCalc) {
+                case 'minus-minion-count':
+                    cost = Math.max(0, cost - this.player.creatures.getCount() + this.player.enemy.creatures.getCount());
+                    break;
+                default:
+                    console.warn('Unimplemented cost calc!');
+                    throw 2;
+            }
+        }
+
         return {
             that: this,
             id: this.id,
-            cost: base.cost,
+            cost: cost,
             base: base,
             isComboMode: comboMode
         };
@@ -31,6 +44,13 @@ H.HandCard = class HandCard extends EventEmitter {
 
     _modifyClientData(data) {
         data.flags = {};
+
+        if (data.cost < data.base.cost) {
+            data.flags['cheap'] = true;
+        } else if (data.cost > data.base.cost) {
+            data.flags['expensive'] = true;
+        }
+
         if (this.player.active && this.player.hero.mana >= data.cost &&
             !this.base.conditions.some(condition => !H.Conditions.check(condition, this))
         ) {

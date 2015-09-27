@@ -68,8 +68,8 @@ H.parseParams = function(paramNames, values) {
 
 H.getRandomElement = function(arr) {
     if (arr.length) {
-        return null;
-    } else {
         return arr[_.random(arr.length - 1)];
+    } else {
+        return null;
     }
 };
