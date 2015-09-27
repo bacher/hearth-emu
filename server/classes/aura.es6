@@ -90,7 +90,14 @@ const AURAS = {
         affect: 'hand-card',
         effect(handCard) {
             if (handCard.base.type === H.CARD_TYPES.minion) {
-                handCard.cost += this.params[0];
+                const side = this.params[1];
+
+                if (!side ||
+                    (side === 'my' && this.player === handCard.player) ||
+                    (side === 'op' && this.player.enemy === handCard.player)
+                ) {
+                    handCard.cost += this.params[0];
+                }
             }
         }
     }

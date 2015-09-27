@@ -10128,6 +10128,36 @@
     }
   },
   {
+    "id": 424,
+    "name": "Venture Co. Mercenary",
+    "cost": 5,
+    "pic": "147/694/509",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 7,
+      "maxHp": 6,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "change-minions-cost",
+                "params": [
+                  3,
+                  "my"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 31,
     "name": "Archmage",
     "cost": 6,
