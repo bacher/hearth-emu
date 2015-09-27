@@ -79,6 +79,12 @@ H.Hero = class Hero {
                     this.armor = 0;
                 }
 
+                this.player.battle.addBattleAction({
+                    name: 'damage',
+                    to: this.id,
+                    amount: dmg
+                });
+
                 if (this.hp <= 0) {
                     this.hp = 0;
 
