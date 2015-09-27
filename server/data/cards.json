@@ -3147,6 +3147,24 @@
     }
   },
   {
+    "id": 427,
+    "name": "Squire",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/2/28/Squire%2821%29.png",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 13,
     "name": "Stoneclaw Totem",
     "cost": 1,
@@ -9701,6 +9719,29 @@
     }
   },
   {
+    "id": 425,
+    "name": "Faceless Manipulator",
+    "cost": 5,
+    "pic": "148/455/450",
+    "clas": 0,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 418,
     "name": "Fen Creeper",
     "cost": 5,
@@ -9783,6 +9824,33 @@
         ]
       },
       "race": 0
+    }
+  },
+  {
+    "id": 426,
+    "name": "Harrison Jones",
+    "cost": 5,
+    "pic": "148/437/602",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "destroy-op-weapon-draw-cards",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
@@ -9958,6 +10026,54 @@
     "flags": [],
     "spell": {
       "acts": []
+    }
+  },
+  {
+    "id": 428,
+    "name": "Silver Hand Knight",
+    "cost": 5,
+    "pic": "147/616/648",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "Squire",
+                  2
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 429,
+    "name": "Spiteful Smith",
+    "cost": 5,
+    "pic": "147/685/627",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 4,
+      "maxHp": 6,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {

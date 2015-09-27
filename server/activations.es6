@@ -138,6 +138,17 @@ const A = {
 
         weapon.detachWeapon();
     },
+    'destroy-op-weapon-draw-cards'(o) {
+        const opWeapon = o.player.enemy.hero.weapon;
+
+        if (opWeapon) {
+            A['draw-card'].apply({
+                params: [opWeapon.durability]
+            }, o);
+
+            opWeapon.detachWeapon();
+        }
+    },
     'warrior-mortal-strike'(o) {
         const dmg = o.player.hero.hp <= 12 ? 6 : 4;
 
