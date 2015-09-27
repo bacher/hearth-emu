@@ -12236,5 +12236,39 @@
       "race": 0,
       "events": {}
     }
+  },
+  {
+    "id": 458,
+    "name": "Mountain Giant",
+    "cost": 12,
+    "pic": "147/957/264",
+    "clas": 0,
+    "type": 1,
+    "costCalc": "minus-hand-card-count",
+    "flags": [],
+    "minion": {
+      "attack": 8,
+      "maxHp": 8,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 459,
+    "name": "Molten Giant",
+    "cost": 20,
+    "pic": "148/584/94",
+    "clas": 0,
+    "type": 1,
+    "costCalc": "minus-hero-loss-hp",
+    "flags": [],
+    "minion": {
+      "attack": 8,
+      "maxHp": 8,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
   }
 ]
