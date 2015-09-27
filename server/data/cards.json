@@ -3401,6 +3401,24 @@
     }
   },
   {
+    "id": 452,
+    "name": "Whelp",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/5/5d/Whelp%28527%29.png",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 3,
+      "events": {}
+    }
+  },
+  {
     "id": 120,
     "name": "Whirlwind",
     "cost": 1,
@@ -11832,6 +11850,36 @@
     }
   },
   {
+    "id": 453,
+    "name": "Onyxia",
+    "cost": 8,
+    "pic": "148/449/432",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 8,
+      "maxHp": 8,
+      "flags": [],
+      "race": 3,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "Whelp",
+                  6
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 449,
     "name": "Ragnaros the Firelord",
     "cost": 8,
@@ -11942,6 +11990,40 @@
     }
   },
   {
+    "id": 454,
+    "name": "Alexstrasza",
+    "cost": 9,
+    "pic": "148/446/303",
+    "clas": 0,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "heroes"
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 8,
+      "maxHp": 8,
+      "flags": [],
+      "race": 3,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "set-hp",
+                "params": [
+                  15
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 351,
     "name": "Cenarius",
     "cost": 9,
@@ -11973,6 +12055,71 @@
     ],
     "spell": {
       "acts": []
+    }
+  },
+  {
+    "id": 450,
+    "name": "Malygos",
+    "cost": 9,
+    "pic": "148/452/241",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 12,
+      "flags": [],
+      "race": 3,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "add-spell-damage",
+                "params": [
+                  5
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 451,
+    "name": "Nozdormu",
+    "cost": 9,
+    "pic": "148/443/285",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 8,
+      "maxHp": 8,
+      "flags": [],
+      "race": 3,
+      "events": {}
+    }
+  },
+  {
+    "id": 455,
+    "name": "Ysera",
+    "cost": 9,
+    "pic": "198/222/495",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 4,
+      "maxHp": 12,
+      "flags": [],
+      "race": 3,
+      "events": {}
     }
   },
   {
