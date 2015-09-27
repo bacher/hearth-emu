@@ -11397,6 +11397,46 @@
     }
   },
   {
+    "id": 446,
+    "name": "Baron Geddon",
+    "cost": 7,
+    "pic": "148/139/539",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 7,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "except-self"
+              ]
+            },
+            "event": {
+              "name": "end-turn",
+              "params": [
+                "own"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 208,
     "name": "Core Hound",
     "cost": 7,
@@ -11519,6 +11559,24 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 447,
+    "name": "Ravenholdt Assassin",
+    "cost": 7,
+    "pic": "147/625/518",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 7,
+      "maxHp": 5,
+      "flags": [
+        "stealth"
+      ],
+      "race": 0,
+      "events": {}
     }
   },
   {
