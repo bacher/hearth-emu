@@ -505,7 +505,13 @@ H.PlayCard = class PlayCard {
     }
 
     _showErrorMessage() {
-        window.alert('BAD MOVE');
+        const $cloud = render(null, 'notice-cloud', { text: 'Not enough Mana' });
+
+        $cloud.on('animation-end', () => {
+            $cloud.remove();
+        });
+
+        this.$node.append($cloud);
     }
 
     _addUpdateMouseWrap(method) {
