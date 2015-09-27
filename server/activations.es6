@@ -405,6 +405,9 @@ const A = {
     'add-weapon-attack': function(o) {
         o.player.hero.weapon.attack += this.params[0];
     },
+    'add-weapon-durability': function(o) {
+        o.player.hero.weapon.durability += this.params[0];
+    },
     'frostwolf-warlord': function(o) {
         const minion = o.minion;
         const otherMinionsCount = o.player.creatures.getCount() - 1;

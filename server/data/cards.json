@@ -9199,6 +9199,48 @@
     }
   },
   {
+    "id": 420,
+    "name": "Abomination",
+    "cost": 5,
+    "pic": "147/945/597",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [
+        "taunt"
+      ],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "all"
+              ]
+            },
+            "event": {
+              "name": "death",
+              "params": [
+                "self"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 256,
     "name": "Arcanite Reaper",
     "cost": 5,
@@ -9273,6 +9315,45 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 417,
+    "name": "Azure Drake",
+    "cost": 5,
+    "pic": "148/172/280",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [],
+      "race": 3,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "draw-card",
+                "params": []
+              }
+            ]
+          }
+        ],
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "add-spell-damage",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
@@ -9413,6 +9494,41 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 416,
+    "name": "Captain Greenskin",
+    "cost": 5,
+    "pic": "149/517/267",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 4,
+      "flags": [],
+      "race": 6,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-weapon-attack",
+                "params": [
+                  1
+                ]
+              },
+              {
+                "name": "add-weapon-durability",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
@@ -9579,6 +9695,24 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 418,
+    "name": "Fen Creeper",
+    "cost": 5,
+    "pic": "147/363/476",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 6,
+      "flags": [
+        "taunt"
+      ],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -9792,6 +9926,47 @@
     }
   },
   {
+    "id": 421,
+    "name": "Stampeding Kodo",
+    "cost": 5,
+    "pic": "149/566/389",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 5,
+      "flags": [],
+      "race": 1,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "kill",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies",
+                "attack-less(3)"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 343,
     "name": "Starfall",
     "cost": 5,
@@ -9855,6 +10030,24 @@
         ]
       },
       "race": 0
+    }
+  },
+  {
+    "id": 419,
+    "name": "Stranglethorn Tiger",
+    "cost": 5,
+    "pic": "147/848/338",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 5,
+      "flags": [
+        "stealth"
+      ],
+      "race": 1,
+      "events": {}
     }
   },
   {
