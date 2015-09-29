@@ -4038,7 +4038,9 @@
     "pic": "147/811/525",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 1,
       "maxHp": 1,
@@ -4906,7 +4908,9 @@
     "pic": "147/948/456",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 0,
       "maxHp": 4,
@@ -5260,7 +5264,9 @@
     "pic": "148/433/19",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 0,
       "maxHp": 4,
@@ -6382,7 +6388,9 @@
     "pic": "148/565/3",
     "clas": 3,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 2,
       "maxHp": 2,
@@ -7089,7 +7097,9 @@
     "pic": "147/814/373",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 5,
       "maxHp": 5,
@@ -7973,7 +7983,8 @@
     "clas": 0,
     "type": 1,
     "flags": [
-      "unimplemented"
+      "unimplemented",
+      "unique"
     ],
     "minion": {
       "attack": 3,
@@ -9831,7 +9842,9 @@
     "pic": "149/517/267",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 5,
       "maxHp": 4,
@@ -10140,7 +10153,9 @@
     "pic": "148/437/602",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 5,
       "maxHp": 4,
@@ -10907,7 +10922,9 @@
     "pic": "147/960/498",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 4,
       "maxHp": 5,
@@ -11097,7 +11114,9 @@
     "pic": "149/560/39",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 4,
       "maxHp": 4,
@@ -11176,7 +11195,9 @@
     "pic": "148/568/203",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 7,
       "maxHp": 5,
@@ -11377,7 +11398,9 @@
     "pic": "147/823/33",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 5,
       "maxHp": 5,
@@ -11460,7 +11483,9 @@
     "pic": "148/488/179",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 9,
       "maxHp": 7,
@@ -11636,7 +11661,9 @@
     "pic": "148/139/539",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 7,
       "maxHp": 5,
@@ -11772,7 +11799,9 @@
     "pic": "148/271/228",
     "clas": 9,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 7,
       "maxHp": 7,
@@ -11965,7 +11994,9 @@
     "pic": "149/557/18",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 7,
       "maxHp": 7,
@@ -12071,7 +12102,9 @@
     "pic": "148/449/432",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 8,
       "maxHp": 8,
@@ -12101,7 +12134,9 @@
     "pic": "148/187/503",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 8,
       "maxHp": 8,
@@ -12216,7 +12251,9 @@
         "heroes"
       ]
     },
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 8,
       "maxHp": 8,
@@ -12249,7 +12286,9 @@
       "Demigod's Favor",
       "Shan'do's Lesson"
     ],
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 5,
       "maxHp": 6,
@@ -12279,7 +12318,9 @@
     "pic": "148/452/241",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 4,
       "maxHp": 12,
@@ -12344,7 +12385,9 @@
     "pic": "149/535/474",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 12,
       "maxHp": 12,
