@@ -7,12 +7,9 @@ H.Druid = class Druid extends H.Hero {
 
         this.clas = H.CLASSES['druid'];
 
-        this._heroSkillCost = 2;
-    }
-
-    useHeroSkill() {
-        this.armor += 1;
-
-        this.attack = 1;
+        this.setHeroSkill({
+            activation: 'add-attack-armor',
+            params: [1]
+        });
     }
 };

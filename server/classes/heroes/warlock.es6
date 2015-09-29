@@ -7,6 +7,9 @@ H.Warlock = class Warlock extends H.Hero {
 
         this.clas = H.CLASSES['warlock'];
 
-        this.setHeroSkill('draw-card-deal-self-damage', [2]);
+        this.setHeroSkill({
+            activation: 'draw-card-deal-self-damage',
+            params: [2]
+        });
     }
 };

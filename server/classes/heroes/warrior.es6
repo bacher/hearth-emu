@@ -7,6 +7,9 @@ H.Warrior = class Warrior extends H.Hero {
 
         this.clas = H.CLASSES['warrior'];
 
-        this.setHeroSkill('add-armor', [2]);
+        this.setHeroSkill({
+            activation: 'add-armor',
+            params: [2]
+        });
     }
 };

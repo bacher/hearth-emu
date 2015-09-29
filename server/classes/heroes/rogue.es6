@@ -7,6 +7,9 @@ H.Rogue = class Rogue extends H.Hero {
 
         this.clas = H.CLASSES['rogue'];
 
-        this.setHeroSkill('equip-weapon', ['Dagger']);
+        this.setHeroSkill({
+            activation: 'equip-weapon',
+            params: ['Dagger']
+        });
     }
 };

@@ -7,21 +7,12 @@ H.Paladin = class Paladin extends H.Hero {
 
         this.clas = H.CLASSES['paladin'];
 
-        this.setHeroSkill('summon', ['Silver Hand Recruit']);
-    }
-
-    _useSkill() {
-        H.ACTIVATIONS.getByName('summon')();
-        this.armor += 1;
-
-        this.attack = 1;
-
-        this.player.battle.once('end-turn', () => {
-            this.attack = 0;
+        this.setHeroSkill({
+            activation: 'summon',
+            params: ['Silver Hand Recruit'],
+            additionCheck: () => {
+                return H.Conditions.check('can-add-creature', this);
+            }
         });
-    }
-
-    _canUseSkill() {
-        return H.Conditions.check('can-add-creature', this);
     }
 };

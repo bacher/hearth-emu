@@ -320,6 +320,12 @@ const A = {
             o.player.hand.addCard(card);
         });
     },
+    'add-attack-armor'(o) {
+        const hero = o.player.hero;
+
+        hero.attack++;
+        hero.armor++;
+    },
     'add-armor': function(o) {
         o.player.hero.armor += this.params[0];
     },
