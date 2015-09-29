@@ -140,6 +140,13 @@ const A = {
             params: [o.player.hero.armor]
         }, o);
     },
+    'deal-damage-by-event'(o) {
+        const damage = o.eventMessage.dmg;
+
+        o.targets.forEach(target => {
+            target.dealDamage(damage);
+        });
+    },
     'deal-weapon-damage-and-destroy-it'(o) {
         const weapon = o.player.hero.weapon;
 

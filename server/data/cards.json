@@ -1696,6 +1696,7 @@
     "pic": "147/981/284",
     "clas": 3,
     "type": 2,
+    "comment": "Снимет стелс даже если его наложил не он",
     "flags": [],
     "spell": {
       "acts": [
@@ -2012,12 +2013,31 @@
     "pic": "147/999/206",
     "clas": 4,
     "type": 4,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "trap": {
       "events": {
-        "custom": []
+        "custom": [
+          {
+            "event": {
+              "name": "take-damage",
+              "params": [
+                "my-hero"
+              ]
+            },
+            "acts": [
+              {
+                "name": "deal-damage-by-event",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies",
+                "heroes"
+              ]
+            }
+          }
+        ]
       }
     }
   },

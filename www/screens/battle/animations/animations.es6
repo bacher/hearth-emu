@@ -31,6 +31,8 @@ H.Animations = class Animations {
                 case 'fireball':
                 case 'arrow':
                     return this._startProjectiveAnimation(animation);
+                default:
+                    console.warn('Animation [' + animation.name + '] not implemented!', animation);
             }
 
             return Promise.resolve();

@@ -18,6 +18,7 @@ H.GameObject = class GameObject extends EventEmitter {
     }
 
     enterInGame(player) {
+        this.battle = player.battle;
         this.player = player;
 
         delete this.flags['dead'];
@@ -144,7 +145,7 @@ H.GameObject = class GameObject extends EventEmitter {
 
     _onCustomEvent(command, eventMessage, globalTargets) {
         command.act({
-            battle: this.player.battle,
+            battle: this.battle,
             player: this.player,
             handCard: null,
             minion: this,
@@ -155,6 +156,11 @@ H.GameObject = class GameObject extends EventEmitter {
 
         if (this.card.type === H.CARD_TYPES['trap']) {
             this.battle.emit('play-secret', this.player);
+
+            this.battle.addBattleAction({
+                name: 'play-secret',
+                pic: this.card.pic
+            });
 
             this.detach();
         }
