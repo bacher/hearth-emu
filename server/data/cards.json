@@ -2743,15 +2743,38 @@
     "pic": "148/382/420",
     "clas": 0,
     "type": 1,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "minion": {
       "attack": 1,
       "maxHp": 2,
       "flags": [],
       "race": 5,
-      "events": {}
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "summon",
+              "params": [
+                0,
+                "race-murloc"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {

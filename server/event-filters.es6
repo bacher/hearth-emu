@@ -37,16 +37,21 @@ const E = {
             }
 
             const filter = params[1];
+            var race;
 
             if (filter === 'attack3') {
                 attackLessThen = 4;
+            } else if (/^race-/.test(filter)) {
+                race = H.RACES[filter.substr(5)];
             }
 
             return function(eventMessage) {
                 const minion = eventMessage.minion;
 
-                if ((!allowPlayer || allowPlayer === minion.player) &&
-                    (!attackLessThen || minion.attack < attackLessThen)) {
+                if (minion !== o.minion &&
+                    (!allowPlayer || allowPlayer === minion.player) &&
+                    (!attackLessThen || minion.attack < attackLessThen) &&
+                    (!race || minion.race === race)) {
 
                     const targets = new H.Targets(o.player);
                     targets.addMinion(minion);
