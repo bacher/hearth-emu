@@ -219,6 +219,18 @@ H.Hero = class Hero {
     _onTurnEnd() {
 
     }
+
+    _onCustomEvent(command, eventMessage, globalTargets) {
+        command.act({
+            battle: this.player.battle,
+            player: this.player,
+            handCard: null,
+            params: null,
+            globalTargets,
+            eventMessage
+        });
+    }
 };
 
 H.mixGameDataAccessors(H.Hero);
+H.mixCustomEvents(H.Hero);

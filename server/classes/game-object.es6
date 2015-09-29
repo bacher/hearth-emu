@@ -53,33 +53,6 @@ H.GameObject = class GameObject extends EventEmitter {
         }
     }
 
-    addCustomEvent(command) {
-        const event = command.event;
-
-        const eventListener = H.EventFilters.getCallback(event, {
-            player: this.player,
-            minion: this
-        }, (eventMessage, globalTargets) => {
-            command.act({
-                battle: this.player.battle,
-                player: this.player,
-                handCard: null,
-                minion: this,
-                params: null,
-                globalTargets,
-                eventMessage
-            });
-
-            if (this.card.type === H.CARD_TYPES['trap']) {
-                this.battle.emit('play-secret', this.player);
-
-                this.detach();
-            }
-        });
-
-        this._onBattle(eventListener.eventName, eventListener.callback);
-    }
-
     getFlags() {
         const flags = _.clone(this.flags);
 
@@ -117,17 +90,6 @@ H.GameObject = class GameObject extends EventEmitter {
         }
 
         delete this.flags['stealth'];
-    }
-
-    _onBattle(eventName, method) {
-        this._listeners = this._listeners || [];
-
-        method = method.bind(this);
-        this._listeners.push({
-            eventName,
-            method
-        });
-        this.player.battle.on(eventName, method);
     }
 
     _detachListeners() {
@@ -179,4 +141,24 @@ H.GameObject = class GameObject extends EventEmitter {
     is(prop) {
         return !!this.flags[prop];
     }
+
+    _onCustomEvent(command, eventMessage, globalTargets) {
+        command.act({
+            battle: this.player.battle,
+            player: this.player,
+            handCard: null,
+            minion: this,
+            params: null,
+            globalTargets,
+            eventMessage
+        });
+
+        if (this.card.type === H.CARD_TYPES['trap']) {
+            this.battle.emit('play-secret', this.player);
+
+            this.detach();
+        }
+    }
 };
+
+H.mixCustomEvents(H.GameObject);

@@ -1696,11 +1696,56 @@
     "pic": "147/981/284",
     "clas": 3,
     "type": 2,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "spell": {
-      "acts": []
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-flags",
+              "params": [
+                "stealth"
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "friends",
+              "minions"
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "add-custom-event",
+              "params": []
+            }
+          ],
+          "customEvent": {
+            "acts": [
+              {
+                "name": "remove-buffered-flags",
+                "params": [
+                  "stealth"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "friends",
+                "minions"
+              ]
+            },
+            "event": {
+              "name": "end-turn",
+              "params": [
+                "own"
+              ]
+            }
+          }
+        }
+      ]
     }
   },
   {

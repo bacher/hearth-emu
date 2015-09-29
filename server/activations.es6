@@ -204,6 +204,15 @@ const A = {
             });
         });
     },
+    'remove-buffered-flags'(o) {
+        this.params.forEach(flag => {
+            o.targets.forEach(target => {
+                if (!target.base.flags[flag]) {
+                    delete target.flags[flag];
+                }
+            });
+        });
+    },
     'switch-owner': function(o) {
         o.targets.forEach(target => {
             target.detach();
@@ -462,13 +471,12 @@ const A = {
         }
     },
     'add-custom-event': function(o) {
-        if (o.targets.getCount()) {
+        if (o.targets && o.targets.getCount()) {
             o.targets.forEach(target => {
                 target.addCustomEvent(new H.Command(o.customEvent));
             });
         } else {
-            // FIXME Implement
-            console.warn('add custom event to nobody');
+            o.player.hero.addCustomEvent(new H.Command(o.customEvent));
         }
     },
     'draw-card-deal-self-damage': function(o) {
