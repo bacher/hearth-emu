@@ -369,7 +369,7 @@ H.PlayCard = class PlayCard {
                                 this._grabObject();
 
                             } else {
-                                H.socket.send('play-card', actionData);
+                                this._postAction('play-card', actionData);
                             }
                         },
                         onCancel: () => {
@@ -378,14 +378,19 @@ H.PlayCard = class PlayCard {
                         }
                     });
                 }
-
             }
 
         } else {
             this._release();
 
-            H.socket.send(actionName, actionData);
+            this._postAction(actionName, actionData);
         }
+    }
+
+    _postAction(actionName, actionData) {
+        this.$node.find('.available').removeClass('available');
+
+        H.socket.send(actionName, actionData);
     }
 
     _ifActiveWrap(callback) {
