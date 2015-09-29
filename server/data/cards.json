@@ -3056,11 +3056,23 @@
     "pic": "148/491/148",
     "clas": 6,
     "type": 2,
-    "flags": [
-      "unimplemented"
-    ],
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
     "spell": {
-      "acts": []
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-hero-attack",
+              "params": []
+            }
+          ]
+        }
+      ]
     }
   },
   {
@@ -3976,13 +3988,27 @@
         {
           "acts": [
             {
-              "name": "deal-weapon-damage-and-destroy-it",
+              "name": "deal-weapon-damage",
               "params": []
             }
           ],
           "targetsType": {
             "names": [
               "enemies"
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "destroy-weapon",
+              "params": []
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "heroes",
+              "friends"
             ]
           }
         }

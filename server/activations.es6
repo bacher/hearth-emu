@@ -147,14 +147,17 @@ const A = {
             target.dealDamage(damage);
         });
     },
-    'deal-weapon-damage-and-destroy-it'(o) {
+    'deal-weapon-damage'(o) {
         const weapon = o.player.hero.weapon;
 
         A['deal-damage'].call({
             params: [weapon.attack]
         }, o);
-
-        weapon.detachWeapon();
+    },
+    'deal-hero-attack'(o) {
+        A['deal-damage'].apply({
+            params: [o.player.hero.attack]
+        }, o);
     },
     'destroy-op-weapon-draw-cards'(o) {
         const opWeapon = o.player.enemy.hero.weapon;
