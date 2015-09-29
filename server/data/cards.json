@@ -642,11 +642,33 @@
     "pic": "148/17/364",
     "clas": 3,
     "type": 2,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "spell": {
-      "acts": []
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-aura",
+              "params": [
+                "this-turn",
+                "play-card"
+              ]
+            }
+          ],
+          "aura": {
+            "acts": [
+              {
+                "name": "reduce-cost",
+                "params": [
+                  3,
+                  0,
+                  2
+                ]
+              }
+            ]
+          }
+        }
+      ]
     }
   },
   {

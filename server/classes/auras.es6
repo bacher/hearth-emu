@@ -9,7 +9,7 @@ H.Auras = class Auras {
         this.battle = battle;
     }
 
-    addAura(aura, onlyThisTurn) {
+    addAura(aura, offConditions) {
         this.list.push(aura);
 
         const owner = aura.getOwner();
@@ -27,8 +27,12 @@ H.Auras = class Auras {
             owner.on('detach', removeAura);
         }
 
-        if (onlyThisTurn) {
+        if (offConditions.onlyThisTurn) {
             this.battle.once('end-turn', removeAura);
+        }
+
+        if (offConditions.onlyOneCard) {
+            this.battle.once('play-card', removeAura);
         }
     }
 
@@ -39,8 +43,6 @@ H.Auras = class Auras {
             aura.destroy();
 
             this.list.splice(auraIndex, 1);
-        } else {
-            console.warn('AURA ALREADY REMOVED');
         }
     }
 

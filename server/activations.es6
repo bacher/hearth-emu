@@ -535,17 +535,24 @@ const A = {
         o.player.hero.removeCrystal();
     },
     'add-aura': function(o) {
-        const isThisTurn = this.params[0] === 'this-turn';
+        const offConditions = {};
+        if (_.contains(this.params, 'this-turn')) {
+            offConditions.onlyThisTurn = true;
+        }
+
+        if (_.contains(this.params, 'play-card')) {
+            offConditions.onlyOneCard = true;
+        }
 
         const auraDetails = _.clone(o.aura);
 
         if (o.targets) {
             o.targets.forEach(target => {
-                H.Aura.addAura(o.player, target, auraDetails, isThisTurn);
+                H.Aura.addAura(o.player, target, auraDetails, offConditions);
             });
 
         } else {
-            H.Aura.addAura(o.player, null, auraDetails, isThisTurn);
+            H.Aura.addAura(o.player, null, auraDetails, offConditions);
         }
     }
 };

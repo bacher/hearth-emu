@@ -68,13 +68,17 @@ const AURAS = {
         effect(card) {
             const reduceBy = this.params[0];
             const minimum = this.params[1] || 0;
+            const type = this.params[2];
 
-            card.cost -= reduceBy;
+            if (!type || card.base.type === type) {
+                card.cost -= reduceBy;
 
-            if (card.cost < minimum) {
-                card.cost = minimum;
+                if (card.cost < minimum) {
+                    card.cost = minimum;
+                }
             }
-        }
+        },
+        defaultSide: 'my'
     },
     'enrage': {
         affect: 'minion',
@@ -137,7 +141,7 @@ H.Aura = class Aura {
         }
     }
 
-    static addAura(player, minion, auraAct, isThisTurn) {
+    static addAura(player, minion, auraAct, offConditions) {
         const auraInfo = _.clone(auraAct.acts[0]);
 
         auraInfo.targetsType = auraAct.targetsType;
@@ -148,7 +152,7 @@ H.Aura = class Aura {
 
         const aura = new H.Aura(player, auraInfo);
 
-        player.battle.auras.addAura(aura, isThisTurn);
+        player.battle.auras.addAura(aura, offConditions);
     }
 
     effect() {
