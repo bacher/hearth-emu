@@ -8408,7 +8408,8 @@
             {
               "name": "deal-spell-damage",
               "params": [
-                6
+                6,
+                "fireball"
               ]
             }
           ]
@@ -12212,7 +12213,8 @@
             {
               "name": "deal-spell-damage",
               "params": [
-                10
+                10,
+                "fireball"
               ]
             }
           ]

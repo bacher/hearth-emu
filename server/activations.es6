@@ -109,6 +109,16 @@ const A = {
         });
     },
     'deal-spell-damage': function(o) {
+        const animationName = this.params[1];
+
+        if (animationName) {
+            o.battle.addBattleAction({
+                name: animationName,
+                //by: o.animationBy.id,
+                to: o.targets.map(target => target.id)
+            });
+        }
+
         o.targets.forEach(target => {
             var damage = H.parseValue(this.params[0]);
 

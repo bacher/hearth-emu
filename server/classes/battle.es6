@@ -414,8 +414,7 @@ H.Battle = class Battle extends EventEmitter {
             player,
             handCard: null,
             globalTargets,
-            params: null,
-            animationBy: 'hero-skill'
+            params: null
         });
 
         this.sendGameData();

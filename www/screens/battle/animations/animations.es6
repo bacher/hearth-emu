@@ -135,7 +135,14 @@ H.Animations = class Animations {
     }
 
     _startProjectiveAnimation(animation) {
-        const $by = this._getNodeById(animation.by);
+        var $by;
+
+        if (animation.by) {
+            $by = this._getNodeById(animation.by);
+        } else {
+            $by = this.$node.find('.avatar.my');
+        }
+
         const byPos = $by.offset();
 
         animation.to.forEach(targetId => {
@@ -158,7 +165,7 @@ H.Animations = class Animations {
 
             setTimeout(() => {
                 $projectile.css(toPos);
-            }, 0);
+            }, 10);
         });
     }
 
@@ -167,7 +174,7 @@ H.Animations = class Animations {
     }
 
     _newSplash(position, className, damage) {
-        const $splash = render(null, 'splash', { damage, className});
+        const $splash = render(null, 'splash', { damage, className });
 
         $splash.css(position);
 
