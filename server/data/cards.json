@@ -4982,15 +4982,53 @@
     "pic": "147/888/67",
     "clas": 0,
     "type": 1,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "minion": {
       "attack": 1,
       "maxHp": 3,
       "flags": [],
       "race": 0,
-      "events": {}
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-aura",
+                "params": [
+                  "this-turn"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "play-card",
+              "params": [
+                "my",
+                2
+              ]
+            },
+            "aura": {
+              "acts": [
+                {
+                  "name": "add-attack",
+                  "params": [
+                    2
+                  ]
+                }
+              ],
+              "targetsType": {
+                "names": [
+                  "self"
+                ]
+              }
+            }
+          }
+        ]
+      }
     }
   },
   {
