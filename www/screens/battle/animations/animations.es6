@@ -28,7 +28,8 @@ H.Animations = class Animations {
                     return this._startFatigueAnimation(animation);
 
                 case 'fireball':
-                    return this._startFireballAnimation(animation);
+                case 'arrow':
+                    return this._startProjectiveAnimation(animation);
             }
 
             return Promise.resolve();
@@ -132,7 +133,7 @@ H.Animations = class Animations {
         });
     }
 
-    _startFireballAnimation(animation) {
+    _startProjectiveAnimation(animation) {
         const $by = this._getNodeById(animation.by);
         const byPos = $by.offset();
 
@@ -140,7 +141,7 @@ H.Animations = class Animations {
             const $to = this._getNodeById(targetId);
 
             const $projectile = render(null, 'projectile', {
-                addClass: 'fireball'
+                addClass: animation.name
             });
 
             const toPos = $to.offset();

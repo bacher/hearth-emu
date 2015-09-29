@@ -68,14 +68,23 @@
     position: absolute;
 
     transition: top 0.2s linear, left 0.2s linear;
-  }
 
-  .fireball {
-    position: absolute;
-    margin-top: -12px;
-    margin-left: 4px;
-    width: 35px;
-    height: 105px;
-    background: url("/textures/fireball.png");
+    pointer-events: none;
+
+    .fireball {
+      width: 35px;
+      height: 105px;
+      margin-top: -12px;
+      margin-left: 4px;
+      background: url("/textures/fireball.png");
+    }
+
+    .arrow {
+      width: 35px;
+      height: 118px;
+      margin-top: -12px;
+      margin-left: 4px;
+      background: url("/textures/arrow.png");
+    }
   }
 }

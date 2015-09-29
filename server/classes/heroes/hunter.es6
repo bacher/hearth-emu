@@ -7,8 +7,13 @@ H.Hunter = class Hunter extends H.Hero {
 
         this.clas = H.CLASSES['hunter'];
 
-        this.setHeroSkill('deal-damage', [2], 2, {
-            names: ['enemies', 'heroes']
+        this.setHeroSkill({
+            activation: 'deal-damage',
+            params: [2],
+            animation: 'arrow',
+            targetsType: {
+                names: ['enemies', 'heroes']
+            }
         });
     }
 };

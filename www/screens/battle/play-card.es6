@@ -12,7 +12,7 @@ H.PlayCard = class PlayCard {
 
         this._$clickObject = null;
         this._$grabCard = null;
-        this._$arrow = this.$node.find('.arrow');
+        this._$arrow = this.$node.find('.targeting-arrow');
 
         this._mouse = null;
 

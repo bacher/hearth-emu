@@ -11,7 +11,8 @@ H.HeroSkill = class HeroSkill {
         this.command = H.Command.createByAct({
             name: options.activation,
             params: options.params || [],
-            animation: options.animation
+            animation: options.animation,
+            targetsType: options.targetsType
         });
 
         this._needTarget = options.skillNeedTarget;
