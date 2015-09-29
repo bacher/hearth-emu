@@ -74,5 +74,7 @@ H.Screens['collection-decks'] = class CollectionDecksScreen extends H.Screen {
 
     drawDecks() {
         render(this.$node.find('.decks-wrapper'), 'decks', { decks: H.decks });
+
+        this.$node.find('.new-deck').toggle(H.decks.length < 9);
     }
 };
