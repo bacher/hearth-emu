@@ -92,7 +92,7 @@ H.Animations = class Animations {
             setTimeout(() => {
                 this._newSplash($to.offset(), animation.name, animation.name === 'damage' ? -animation.amount : animation.amount);
 
-                setTimeout(resolve, 2000);
+                setTimeout(resolve, 1000);
             }, 200);
         });
     }
@@ -137,37 +137,41 @@ H.Animations = class Animations {
     }
 
     _startProjectiveAnimation(animation) {
-        var $by;
+        return new Promise(resolve => {
+            var $by;
 
-        if (animation.by) {
-            $by = this._getNodeById(animation.by);
-        } else {
-            $by = this.$node.find('.avatar.my');
-        }
+            if (animation.by) {
+                $by = this._getNodeById(animation.by);
+            } else {
+                $by = this.$node.find('.avatar.my');
+            }
 
-        const byPos = $by.offset();
+            const byPos = $by.offset();
 
-        animation.to.forEach(targetId => {
-            const $to = this._getNodeById(targetId);
+            animation.to.forEach(targetId => {
+                const $to = this._getNodeById(targetId);
 
-            const $projectile = render(null, 'projectile', {
-                addClass: animation.name
+                const $projectile = render(null, 'projectile', {
+                    addClass: animation.name
+                });
+
+                const toPos = $to.offset();
+
+                H.rotateByVector($projectile, byPos.left - toPos.left, byPos.top - toPos.top);
+
+                $projectile.css(byPos);
+                $projectile.on('transitionend', () => {
+                    $projectile.remove();
+
+                    resolve();
+                });
+
+                this.$node.append($projectile);
+
+                setTimeout(() => {
+                    $projectile.css(toPos);
+                }, 10);
             });
-
-            const toPos = $to.offset();
-
-            H.rotateByVector($projectile, byPos.left - toPos.left, byPos.top - toPos.top);
-
-            $projectile.css(byPos);
-            $projectile.on('transitionend', () => {
-                $projectile.remove();
-            });
-
-            this.$node.append($projectile);
-
-            setTimeout(() => {
-                $projectile.css(toPos);
-            }, 10);
         });
     }
 
