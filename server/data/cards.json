@@ -5160,15 +5160,39 @@
     "pic": "149/532/339",
     "clas": 0,
     "type": 1,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "minion": {
       "attack": 4,
       "maxHp": 4,
       "flags": [],
       "race": 0,
-      "events": {}
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-aura",
+                "params": [
+                  "enemy-turn"
+                ]
+              }
+            ],
+            "aura": {
+              "acts": [
+                {
+                  "name": "reduce-cost",
+                  "params": [
+                    0,
+                    0,
+                    2,
+                    "set"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {

@@ -559,8 +559,15 @@ const A = {
     },
     'add-aura': function(o) {
         const offConditions = {};
+        var owner = o.player;
+
         if (_.contains(this.params, 'this-turn')) {
             offConditions.onlyThisTurn = true;
+        }
+
+        if (_.contains(this.params, 'enemy-turn')) {
+            offConditions.onlyThisTurn = true;
+            owner = o.player.enemy;
         }
 
         if (_.contains(this.params, 'play-card')) {
@@ -571,11 +578,11 @@ const A = {
 
         if (o.targets) {
             o.targets.forEach(target => {
-                H.Aura.addAura(o.player, target, auraDetails, offConditions);
+                H.Aura.addAura(owner, target, auraDetails, offConditions);
             });
 
         } else {
-            H.Aura.addAura(o.player, null, auraDetails, offConditions);
+            H.Aura.addAura(owner, null, auraDetails, offConditions);
         }
     }
 };

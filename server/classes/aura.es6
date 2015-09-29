@@ -69,12 +69,17 @@ const AURAS = {
             const reduceBy = this.params[0];
             const minimum = this.params[1] || 0;
             const type = this.params[2];
+            const operation = this.params[3];
 
             if (!type || card.base.type === type) {
-                card.cost -= reduceBy;
+                if (operation === 'set') {
+                    card.cost = reduceBy;
+                } else {
+                    card.cost -= reduceBy;
 
-                if (card.cost < minimum) {
-                    card.cost = minimum;
+                    if (card.cost < minimum) {
+                        card.cost = minimum;
+                    }
                 }
             }
         },
