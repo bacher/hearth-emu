@@ -4906,15 +4906,31 @@
     "pic": "147/948/456",
     "clas": 0,
     "type": 1,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "minion": {
       "attack": 0,
       "maxHp": 4,
       "flags": [],
       "race": 0,
-      "events": {}
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-copy-to-enemy-hand",
+                "params": []
+              }
+            ],
+            "event": {
+              "name": "play-card",
+              "params": [
+                0,
+                2
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {

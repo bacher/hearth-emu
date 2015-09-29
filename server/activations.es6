@@ -552,6 +552,11 @@ const A = {
     'destroy-crystal'(o) {
         o.player.hero.removeCrystal();
     },
+    'add-copy-to-enemy-hand'(o) {
+        const info = o.eventMessage;
+
+        info.player.enemy.hand.addCard(info.handCard.base);
+    },
     'add-aura': function(o) {
         const offConditions = {};
         if (_.contains(this.params, 'this-turn')) {
