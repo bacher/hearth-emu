@@ -207,12 +207,17 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
         this.playerId = data.my.id;
         this.heroId = data.my.heroId;
+        this.skillId = data.my.skillId;
 
         this.enemyPlayerId = data.op.id;
         this.enemyHeroId = data.op.heroId;
+        this.enemySkillId = data.op.skillId;
 
         this.$node.find('.avatar.my').attr('data-id', this.heroId);
         this.$node.find('.avatar.op').attr('data-id', this.enemyHeroId);
+
+        this.$node.find('.hero-skill.my').attr('data-id', this.skillId);
+        this.$node.find('.hero-skill.op').attr('data-id', this.enemySkillId);
 
         const myClass = H.CLASSES_L[data.my.clas];
         const opClass = H.CLASSES_L[data.op.clas];

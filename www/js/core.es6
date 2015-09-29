@@ -144,6 +144,16 @@ H.minInterval = function(func, interval) {
     }
 };
 
+H.rotateByVector = function($node, dX, dY) {
+    var angle = Math.atan(dX / dY);
+
+    if (dY < 0) {
+        angle = angle + Math.PI;
+    }
+
+    $node.css('transform', 'rotate(' + -angle + 'rad)');
+};
+
 function render($cont, tmplName, params) {
     if (!$cont) {
         $cont = $('<div>');

@@ -26,6 +26,9 @@ H.Animations = class Animations {
                     return this._startDamageAnimation(animation);
                 case 'fatigue':
                     return this._startFatigueAnimation(animation);
+
+                case 'fireball':
+                    return this._startFireballAnimation(animation);
             }
 
             return Promise.resolve();
@@ -126,6 +129,34 @@ H.Animations = class Animations {
             });
 
             setTimeout(resolve, 100);
+        });
+    }
+
+    _startFireballAnimation(animation) {
+        const $by = this._getNodeById(animation.by);
+        const byPos = $by.offset();
+
+        animation.to.forEach(targetId => {
+            const $to = this._getNodeById(targetId);
+
+            const $projectile = render(null, 'projectile', {
+                addClass: 'fireball'
+            });
+
+            const toPos = $to.offset();
+
+            H.rotateByVector($projectile, byPos.left - toPos.left, byPos.top - toPos.top);
+
+            $projectile.css(byPos);
+            $projectile.on('transitionend', () => {
+                $projectile.remove();
+            });
+
+            this.$node.append($projectile);
+
+            setTimeout(() => {
+                $projectile.css(toPos);
+            }, 0);
         });
     }
 

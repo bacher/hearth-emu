@@ -32,14 +32,16 @@ H.Battle = class Battle extends EventEmitter {
             name: this.p1.joinParams.name,
             clas: this.p1.hero.clas,
             id: this.p1.id,
-            heroId: this.p1.hero.id
+            heroId: this.p1.hero.id,
+            skillId: this.p1.hero.heroSkill.id
         };
 
         const p2Info = {
             name: this.p2.joinParams.name,
             clas: this.p2.hero.clas,
             id: this.p2.id,
-            heroId: this.p2.hero.id
+            heroId: this.p2.hero.id,
+            skillId: this.p2.hero.heroSkill.id
         };
 
         this.p1.sendMessage('battle-started', {
@@ -398,7 +400,7 @@ H.Battle = class Battle extends EventEmitter {
 
         var globalTargets = null;
 
-        if (heroSkill.skillNeedTarget) {
+        if (heroSkill.isNeedTarget()) {
             globalTargets = H.Targets.parseUserData(player, data);
         }
 

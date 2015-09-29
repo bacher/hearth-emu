@@ -1,8 +1,11 @@
 
+const _ = require('lodash');
 const H = require('../namespace');
 
 H.HeroSkill = class HeroSkill {
     constructor(hero, options) {
+        this.id = _.uniqueId('skill');
+
         this._hero = hero;
 
         this.command = H.Command.createByAct({
@@ -20,6 +23,7 @@ H.HeroSkill = class HeroSkill {
     }
 
     use(o) {
+        o.animationBy = this;
         this.command.act(o);
 
         this._used = true;

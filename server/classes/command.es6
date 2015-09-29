@@ -81,8 +81,8 @@ H.Command = class Command {
             if (act.animation) {
                 o.battle.addBattleAction({
                     name: act.animation,
-                    by: o.animationBy || (o.minion && o.minion.id) || 'hero',
-                    to: targets.map(target => target.id)
+                    by: (o.animationBy && o.animationBy.id) || (o.minion && o.minion.id),
+                    to: targets && targets.map(target => target.id)
                 });
             }
 

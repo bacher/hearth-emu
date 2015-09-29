@@ -244,15 +244,9 @@ H.PlayCard = class PlayCard {
 
             const distance = Math.sqrt(dX * dX + dY * dY);
 
-            var angle = Math.atan(dX / dY);
+            H.rotateByVector(this._$arrow, dX, dY);
 
-            if (dY < 0) {
-                angle = angle + Math.PI;
-            }
-
-            this._$arrow
-                .height(distance)
-                .css('transform', 'rotate(' + -angle + 'rad)');
+            this._$arrow.height(distance)
 
         } else {
             const x = this._mouse.x - 40;
