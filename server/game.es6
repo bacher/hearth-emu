@@ -22,6 +22,7 @@ require('./classes/game-object');
 require('./classes/minion');
 require('./classes/weapon');
 require('./classes/trap');
+require('./classes/hero-skill');
 require('./classes/hero');
 require('./classes/heroes/warrior');
 require('./classes/heroes/shaman');

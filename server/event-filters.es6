@@ -265,7 +265,7 @@ const E = {
         filterFunc(o, params, callback) {
             return function(eventMessage) {
                 callback.apply(null, arguments);
-            }
+            };
         }
     }
 };

@@ -7,6 +7,10 @@ H.Commands = class Commands {
         this.commands = commands && commands.map(command => new H.Command(command)) || [];
     }
 
+    addCommandAct(act) {
+        this.commands.push(H.Command.createByAct(act));
+    }
+
     addCommand(command) {
         this.commands.push(new H.Command(command));
     }

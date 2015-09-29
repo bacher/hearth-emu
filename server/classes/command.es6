@@ -4,16 +4,6 @@ const H = require('../namespace');
 
 H.Command = class Command {
     constructor(command) {
-        if (command.name) {
-            command.acts = [{
-                name: command.name,
-                params: command.params
-            }];
-
-            delete command.name;
-            delete command.params;
-        }
-
         this.acts = command.acts;
         this.event = command.event;
         this.targetsType = command.targetsType;
@@ -26,10 +16,20 @@ H.Command = class Command {
             this._aura = command.aura;
         }
 
-        this.addActFuncs();
+        this._addActFuncs();
     }
 
-    addActFuncs() {
+    static createByAct(act) {
+        const targetsType = act.targetsType;
+        delete act.targetsType;
+
+        return new H.Command({
+            acts: [act],
+            targetsType
+        });
+    }
+
+    _addActFuncs() {
         this.acts.forEach(act => {
             act.actFunc = H.ACTIVATIONS.getByName(act.name);
         });
@@ -76,6 +76,14 @@ H.Command = class Command {
 
             } else if (act.name === 'add-aura') {
                 params.aura = this._aura;
+            }
+
+            if (act.animation) {
+                o.battle.addBattleAction({
+                    name: act.animation,
+                    by: o.animationBy || (o.minion && o.minion.id) || 'hero',
+                    to: targets.map(target => target.id)
+                });
             }
 
             act.actFunc(params);

@@ -133,17 +133,29 @@ H.Targets = class Targets {
         }
     }
 
-    forEach(func) {
-        this.my.minions.forEach(func);
-        this.op.minions.forEach(func);
+    getAll() {
+        var all = [];
+
+        all = all.concat(this.my.minions);
+        all = all.concat(this.op.minions);
 
         if (this.my.hero) {
-            func(this.player.hero);
+            all.push(this.player.hero);
         }
 
         if (this.op.hero) {
-            func(this.player.enemy.hero);
+            all.push(this.player.enemy.hero);
         }
+
+        return all;
+    }
+
+    forEach(func) {
+        this.getAll().forEach(func);
+    }
+
+    map(func) {
+        return this.getAll().map(func);
     }
 
     intersect(that) {

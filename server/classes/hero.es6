@@ -34,8 +34,6 @@ H.Hero = class Hero {
 
         this.weapon = null;
 
-        this.skillUsed = false;
-
         this.flags = {};
 
         this.player.on('battle-enter', battle => {
@@ -98,17 +96,12 @@ H.Hero = class Hero {
         H.Minion.prototype.heal.apply(this, arguments);
     }
 
-    setHeroSkill(activation, params, cost, targets) {
-        this.heroSkill = new H.Command({
-            name: activation,
-            params: params || []
-        });
-        this.heroSkillTargets = targets;
-        this._heroSkillCost = cost || 2;
+    setHeroSkill(options) {
+        this.heroSkill = new H.HeroSkill(this, options);
     }
 
     useHeroSkill(o) {
-        this.heroSkill.act(o);
+        this.heroSkill.use(o);
     }
 
     wakeUp() {
@@ -189,21 +182,12 @@ H.Hero = class Hero {
             overload: this.overload,
             nextOverload: this.nextOverload,
             crystals: this.crystals,
-            skillUsed: this.skillUsed,
-            canUseSkill: this.canUseSkill(),
-            isHeroSkillTargeting: !!this.heroSkillTargets,
+            skillUsed: this.heroSkill.isUsed(),
+            canUseSkill: this.heroSkill.canUseSkill(),
+            isHeroSkillTargeting: this.heroSkill.isNeedTarget(),
             weapon: this.weapon ? this.weapon.getClientData() : null,
             flags: this.weapon ? _.extend({}, this.flags, this.weapon.getFlags()) : this.flags
         };
-    }
-
-    canUseSkill() {
-        return (
-            this.player.active &&
-            !this.skillUsed &&
-            this.mana >= this._heroSkillCost &&
-            (!this._canUseSkill || this._canUseSkill())
-        );
     }
 
     addOverload(count) {
@@ -229,7 +213,7 @@ H.Hero = class Hero {
         this.addCrystal();
         this.restoreMana();
 
-        this.skillUsed = false;
+        this.heroSkill.charge();
     }
 
     _onTurnEnd() {
