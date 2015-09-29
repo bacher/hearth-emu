@@ -10,13 +10,7 @@ H.Priest = class Priest extends H.Hero {
         this.setHeroSkill({
             activation: 'heal',
             params: [2],
-            targetsType: {
-                names: ['all'],
-                modificators: [{
-                    "name": 'damaged',
-                    "params": []
-                }]
-            },
+            targets: { names: ['all'] },
             skillNeedTarget: true
         });
     }

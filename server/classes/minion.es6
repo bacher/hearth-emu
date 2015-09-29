@@ -96,24 +96,34 @@ H.Minion = class Minion extends H.GameObject {
     }
 
     heal(amount) {
-        if (this.hp === this.maxHp && this.bufferHp === this.bufferMaxHp) {
-            return;
+        var healed = 0;
+
+        if (this.hp !== this.maxHp || this.bufferHp !== this.bufferMaxHp) {
+
+            const mayHealHp = this.maxHp - this.hp;
+
+            if (mayHealHp >= amount) {
+                healed = amount;
+                this.hp += amount;
+
+            } else {
+                healed = mayHealHp;
+                this.hp += mayHealHp;
+
+                const mayHealBufferHp = this.bufferMaxHp - this.bufferHp;
+
+                const bufferHeal = Math.min(mayHealBufferHp, amount - mayHealHp);
+
+                healed += bufferHeal;
+                this.bufferHp += bufferHeal;
+            }
         }
 
-        const mayHealHp = this.maxHp - this.hp;
-
-        if (mayHealHp >= amount) {
-            this.hp += amount;
-
-        } else {
-            this.hp += mayHealHp;
-
-            const mayHealBufferHp = this.bufferMaxHp - this.bufferHp;
-
-            this.bufferHp += Math.min(mayHealBufferHp, amount - mayHealHp);
-        }
-
-        this.player.battle.emit('heal', this);
+        this.player.battle.addBattleAction({
+            to: this.id,
+            name: 'heal',
+            amount: healed
+        });
     }
 
     addFlag(flag) {

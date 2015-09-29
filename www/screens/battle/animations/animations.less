@@ -4,16 +4,25 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 83px;
-    height: 94px;
 
-    background: url("/textures/splash.png");
     animation: scale-in-out 1s linear forwards;
+
+    &.damage {
+      width: 83px;
+      height: 94px;
+      background: url("/textures/splash.png");
+    }
+
+    &.heal {
+      width: 92px;
+      height: 99px;
+      background: url("/textures/heal.png");
+    }
 
     .value {
       color: #FFF;
       margin-left: -3px;
-      line-height: 94px;
+      line-height: 100%;
       font-family: "Belwe Bold", Times, serif;
       font-weight: bold;
       text-align: center;
