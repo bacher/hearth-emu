@@ -41,6 +41,7 @@ const E = {
 
             if (filter === 'attack3') {
                 attackLessThen = 4;
+
             } else if (/^race-/.test(filter)) {
                 race = H.RACES[filter.substr(5)];
             }

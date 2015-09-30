@@ -22,6 +22,8 @@ const A = {
             const minion = H.Minion.createByName(minionCardName);
 
             o.player.creatures.addCreature(minion, index);
+
+            o.battle.emit('summon', _.extend({ minion: minion }, o));
         }
     },
     'summon-op'(o) {
