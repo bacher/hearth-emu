@@ -10,6 +10,10 @@ H.Screens['connection-lost'] = class ConnectionLostScreen extends H.Screen {
 
     _render() {}
 
+    _onShow() {
+        $('.settings-btn').remove();
+    }
+
     _bindEventListeners() {
         this.$node.on('click', () => {
             window.location.reload();
