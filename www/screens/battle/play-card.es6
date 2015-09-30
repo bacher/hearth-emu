@@ -388,7 +388,9 @@ H.PlayCard = class PlayCard {
     }
 
     _postAction(actionName, actionData) {
-        this.$node.find('.available').removeClass('available');
+        if (actionName === 'play-card' || actionName === 'use-hero-skill') {
+            this.$node.find('.hand .available, .hero-skill .available').removeClass('available');
+        }
 
         H.socket.send(actionName, actionData);
     }

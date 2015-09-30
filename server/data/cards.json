@@ -6,12 +6,12 @@
     "pic": "147/450/216",
     "clas": 2,
     "type": 2,
-    "flags": [],
     "targetsType": {
       "names": [
         "minions"
       ]
     },
+    "flags": [],
     "spell": {
       "acts": [
         {
@@ -20,7 +20,12 @@
               "name": "restore-full-hp",
               "params": []
             }
-          ]
+          ],
+          "targetsType": {
+            "names": [
+              "self"
+            ]
+          }
         },
         {
           "acts": [
@@ -30,7 +35,12 @@
                 "taunt"
               ]
             }
-          ]
+          ],
+          "targetsType": {
+            "names": [
+              "self"
+            ]
+          }
         }
       ]
     }
@@ -7609,6 +7619,7 @@
             "targetsType": {
               "names": [
                 "minions",
+                "friends",
                 "except-self"
               ]
             }
@@ -9201,8 +9212,8 @@
     "type": 1,
     "flags": [],
     "minion": {
-      "attack": 4,
-      "maxHp": 4,
+      "attack": 2,
+      "maxHp": 7,
       "flags": [],
       "events": {},
       "race": 1

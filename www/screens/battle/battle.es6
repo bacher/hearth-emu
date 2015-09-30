@@ -189,7 +189,9 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
         this.$node.find('.hand-helper.op .value').text(game.op.hand.length);
 
-        this.$node.find('.end-turn').toggleClass('active', game.my.active);
+        this.$node.find('.end-turn')
+            .toggleClass('active', game.my.active)
+            .toggleClass('green', game.my.greenEnd);
 
         if (this._prevActiveStatus !== game.my.active) {
             if (game.my.active) {

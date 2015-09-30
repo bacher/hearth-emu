@@ -51,6 +51,19 @@ H.Minion = class Minion extends H.GameObject {
     _modifyClientData(data) {
         data.pic = data.card.pic;
 
+        if (data.hp < data.maxHp) {
+            data.flags['damaged'] = true;
+
+        } else if (data.maxHp > data.base.maxHp) {
+            data.flags['hp-upped'] = true;
+        }
+
+        if (data.attack > data.base.attack) {
+            data.flags['attack-upped'] = true;
+        } else if (data.attack < data.base.attack) {
+            data.flags['attack-reduced'] = true;
+        }
+
         delete data.card;
         delete data.base;
         delete data.race;

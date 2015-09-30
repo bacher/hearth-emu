@@ -213,7 +213,7 @@ H.Player = class Player extends EventEmitter {
     }
 
     getGameData() {
-        return {
+        const data = {
             active: this.active,
             name: this.userName,
             hero: this.hero.getClientData(),
@@ -222,6 +222,15 @@ H.Player = class Player extends EventEmitter {
             traps: this.traps.getClientData(),
             creatures: this.creatures.getClientData()
         };
+
+        // FIXME for weapon
+        data.greenEnd = (
+            data.active &&
+            !data.hero.canUseSkill &&
+            !data.hand.some(handCard => handCard.flags['can-play']) &&
+            !data.creatures.some(minion => !minion.flags['tired']));
+
+        return data;
     }
 
     _onTurnStart(player) {

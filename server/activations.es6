@@ -207,7 +207,9 @@ const A = {
     },
     'give-deathrattle': function(o) {},
     'restore-full-hp': function(o) {
-        o.params.target.hp = o.params.target.maxHp;
+        o.targets.forEach(target => {
+            target.hp = target.maxHp;
+        });
     },
     'add-flags': function(o) {
         this.params.forEach(flag => {
