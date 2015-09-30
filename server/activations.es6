@@ -67,7 +67,7 @@ const A = {
         o.player.creatures.addCreature(newMinion);
     },
     'add-mana': function(o) {
-        o.player.hero.addMana(1);
+        o.player.hero.addMana(this.params[0] || 1);
     },
     'add-attack': function(o) {
         const amount = this.params[0];

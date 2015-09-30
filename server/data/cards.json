@@ -1839,6 +1839,9 @@
     "pic": "147/501/87",
     "clas": 3,
     "type": 2,
+    "conditions": [
+      "has-weapon"
+    ],
     "flags": [],
     "spell": {
       "acts": [
@@ -8856,16 +8859,28 @@
   },
   {
     "id": 4,
-    "type": 1,
     "name": "Gnomish Inventor",
-    "pic": "147/610/246",
     "cost": 4,
+    "pic": "147/610/246",
     "clas": 0,
+    "type": 1,
+    "flags": [],
     "minion": {
       "attack": 4,
       "maxHp": 4,
-      "flags": null,
-      "events": {}
+      "flags": [],
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "draw-card",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {

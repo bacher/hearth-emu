@@ -4,6 +4,9 @@ const H = require('./namespace');
 const C = {
     'can-add-creature'(obj) {
         return obj.player.creatures.canAddCreature();
+    },
+    'has-weapon'(obj) {
+        return !!obj.player.hero.weapon;
     }
 };
 
