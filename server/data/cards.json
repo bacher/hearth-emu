@@ -9241,7 +9241,7 @@
           {
             "acts": [
               {
-                "name": "spell-damage",
+                "name": "add-spell-damage",
                 "params": [
                   1
                 ]
