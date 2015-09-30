@@ -1500,12 +1500,21 @@
           "acts": [
             {
               "name": "add-custom-event",
-              "params": [
-                "attack",
-                "draw-card"
-              ]
+              "params": []
             }
-          ]
+          ],
+          "customEvent": {
+            "acts": [
+              {
+                "name": "draw-card",
+                "params": []
+              }
+            ],
+            "event": {
+              "name": "hit-by",
+              "params": []
+            }
+          }
         }
       ]
     }
