@@ -25,17 +25,27 @@ H.HandCard = class HandCard extends EventEmitter {
         if (this.base.costCalc) {
             switch (this.base.costCalc) {
                 case 'minus-minion-count':
-                    cost = Math.max(0, cost - this.player.creatures.getCount() + this.player.enemy.creatures.getCount());
+                    cost -= this.player.creatures.getCount() + this.player.enemy.creatures.getCount();
+                    break;
+                case 'minus-weapon-attack':
+                    const weapon = this.player.hero.weapon;
+                    if (weapon) {
+                        cost -= weapon.attack;
+                    }
                     break;
                 case 'minus-hand-card-count':
                     cost -= this.player.hand.getCount() - 1;
                     break;
                 case 'minus-hero-loss-hp':
-                    cost = Math.max(0, cost - (30 - this.player.hero.hp));
+                    cost -= 30 - this.player.hero.hp;
                     break;
                 default:
                     console.warn('Unimplemented cost calc!');
                     throw 2;
+            }
+
+            if (cost < 0) {
+                cost = 0;
             }
         }
 
