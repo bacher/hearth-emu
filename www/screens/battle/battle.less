@@ -860,11 +860,22 @@
   .boom {
     position: absolute;
     display: none;
-    top: 15px;
-    left: 248px;
-    width: 425px;
-    height: 246px;
-    background: url("/textures/boom.png");
+
+    &.my {
+      top: 322px;
+      left: 210px;
+      width: 499px;
+      height: 305px;
+      background: url("/textures/boom-my.png");
+    }
+
+    &.op {
+      top: 15px;
+      left: 248px;
+      width: 425px;
+      height: 246px;
+      background: url("/textures/boom.png");
+    }
   }
 
   .notice-cloud {
