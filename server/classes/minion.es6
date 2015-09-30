@@ -134,6 +134,10 @@ H.Minion = class Minion extends H.GameObject {
         }
     }
 
+    removeFlag(flag) {
+        delete this.flags[flag];
+    }
+
 };
 
 H.mixGameDataAccessors(H.Minion);

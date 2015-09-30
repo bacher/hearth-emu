@@ -34,6 +34,14 @@ H.Creatures = class Creatures {
         }
     }
 
+    replaceMinionByMinion(replace, by) {
+        const index = this.getCreatureIndex(replace);
+
+        this._removeCreature(replace);
+
+        this.addCreature(by, index);
+    }
+
     indexOf(creat) {
         return this.creatures.indexOf(creat);
     }

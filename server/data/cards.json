@@ -5876,15 +5876,35 @@
     "pic": "147/792/425",
     "clas": 0,
     "type": 1,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "minion": {
       "attack": 0,
       "maxHp": 3,
       "flags": [],
       "race": 4,
-      "events": {}
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "swap-with-random-hand-card-minion",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "start-turn",
+              "params": [
+                "own"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {

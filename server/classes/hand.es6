@@ -44,8 +44,14 @@ H.Hand = class Hand {
         return _.find(this.cards, { id });
     }
 
-    getRandomHandCard() {
-        return H.getRandomElement(this.cards);
+    getRandomHandCard(byType) {
+        var cards = this.cards;
+
+        if (byType) {
+            cards = cards.filter(handCard => handCard.base.type === byType);
+        }
+
+        return H.getRandomElement(cards);
     }
 
     removeHandCard(card) {

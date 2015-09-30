@@ -584,6 +584,18 @@ const A = {
         } else {
             H.Aura.addAura(owner, null, auraDetails, offConditions);
         }
+    },
+    'swap-with-random-hand-card-minion'(o) {
+        o.targets.forEach(target => {
+            const handCard = target.player.hand.getRandomHandCard(H.CARD_TYPES.minion);
+
+            if (handCard) {
+                const minion = new H.Minion(null, handCard.base);
+                minion.removeFlag('sleep');
+
+                target.player.creatures.replaceMinionByMinion(target, minion);
+            }
+        });
     }
 };
 
