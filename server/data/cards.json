@@ -8968,6 +8968,20 @@
     "pic": "147/748/225",
     "clas": 5,
     "type": 1,
+    "targetsType": {
+      "names": [
+        "minions",
+        "friends"
+      ],
+      "modificators": [
+        {
+          "name": "race",
+          "params": [
+            "beast"
+          ]
+        }
+      ]
+    },
     "flags": [],
     "minion": {
       "attack": 4,
@@ -8979,26 +8993,18 @@
           {
             "acts": [
               {
+                "name": "add-attack-hp",
+                "params": [
+                  2
+                ]
+              },
+              {
                 "name": "add-flags",
                 "params": [
                   "taunt"
                 ]
               }
-            ],
-            "targetsType": {
-              "names": [
-                "minions",
-                "friends"
-              ],
-              "modificators": [
-                {
-                  "name": "race",
-                  "params": [
-                    "beast"
-                  ]
-                }
-              ]
-            }
+            ]
           }
         ]
       }
