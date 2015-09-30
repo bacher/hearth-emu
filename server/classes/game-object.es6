@@ -139,8 +139,12 @@ H.GameObject = class GameObject extends EventEmitter {
         }
     }
 
-    is(prop) {
-        return !!this.flags[prop];
+    is(flag) {
+        return !!this.flags[flag];
+    }
+
+    removeFlag(flag) {
+        delete this.flags[flag];
     }
 
     _onCustomEvent(command, eventMessage, globalTargets) {

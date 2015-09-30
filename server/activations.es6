@@ -596,6 +596,19 @@ const A = {
                 target.player.creatures.replaceMinionByMinion(target, minion);
             }
         });
+    },
+    'remove-shields-gain-attack-hp'(o) {
+        const amount = this.params[0];
+
+        o.targets.forEach(minion => {
+            if (minion.is('shield')) {
+                minion.removeFlag('shield');
+
+                o.minion.attack += amount;
+                o.minion.hp += amount;
+                o.minion.maxHp += amount;
+            }
+        });
     }
 };
 

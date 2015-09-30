@@ -6069,15 +6069,31 @@
     "pic": "148/513/75",
     "clas": 0,
     "type": 1,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "minion": {
       "attack": 3,
       "maxHp": 3,
       "flags": [],
       "race": 0,
-      "events": {}
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "remove-shields-gain-attack-hp",
+                "params": [
+                  3
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
