@@ -10235,15 +10235,24 @@
         "minions"
       ]
     },
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "minion": {
       "attack": 3,
       "maxHp": 3,
       "flags": [],
       "race": 0,
-      "events": {}
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "replace-self-by-target",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
