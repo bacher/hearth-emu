@@ -100,6 +100,10 @@ H.Creatures = class Creatures {
         return this.creatures.filter(creature => creature.is('taunt'));
     }
 
+    getRandomMinion() {
+        return H.getRandomElement(this.creatures);
+    }
+
     _removeCreature(creat) {
         const index = this.getCreatureIndex(creat);
         this.creatures.splice(index, 1);

@@ -225,9 +225,10 @@ const A = {
     },
     'switch-owner': function(o) {
         o.targets.forEach(target => {
-            target.detach();
+            const player = target.player;
 
-            target.player.enemy.creatures.addCreature(target);
+            target.detach();
+            player.enemy.creatures.addCreature(target);
             target.addFlag('sleep');
         });
     },
@@ -609,6 +610,17 @@ const A = {
                 o.minion.maxHp += amount;
             }
         });
+    },
+    'mind-control-tech'(o) {
+        const enemyCreatures = o.minion.player.enemy.creatures;
+
+        if (enemyCreatures.getCount() >= 4) {
+            const minion = enemyCreatures.getRandomMinion();
+
+            A['switch-owner'].call(this, {
+                targets: [minion]
+            });
+        }
     }
 };
 
