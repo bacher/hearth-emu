@@ -8326,15 +8326,45 @@
     "pic": "148/503/176",
     "clas": 0,
     "type": 1,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "minion": {
       "attack": 2,
       "maxHp": 5,
       "flags": [],
       "race": 0,
-      "events": {}
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-aura",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ],
+              "modificators": [
+                {
+                  "name": "adjacent",
+                  "params": []
+                }
+              ]
+            },
+            "aura": {
+              "acts": [
+                {
+                  "name": "add-spell-damage",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
