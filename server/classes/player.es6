@@ -227,6 +227,7 @@ H.Player = class Player extends EventEmitter {
         data.greenEnd = (
             data.active &&
             !data.hero.canUseSkill &&
+            (data.hero.attack === 0 || data.hero.flags['tired']) &&
             !data.hand.some(handCard => handCard.flags['can-play']) &&
             !data.creatures.some(minion => !minion.flags['tired']));
 

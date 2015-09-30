@@ -16,7 +16,7 @@ const AURAS = {
             damageInfo.damage *= this.params[0];
         },
         defaultSide: 'my',
-        priority: 100 // FIXME not work yet
+        priority: 100
     },
     'attack-equal-hp': {
         affect: 'minion',
@@ -139,6 +139,8 @@ H.Aura = class Aura {
         this._effect = aura.effect;
         /** @type {?Function} */
         this._destroy = aura.destroy;
+
+        this._priority = aura.priority || 0;
 
         this.params = auraInfo.params;
 

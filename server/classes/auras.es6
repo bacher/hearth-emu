@@ -63,6 +63,7 @@ H.Auras = class Auras {
     applyEffect(player, objectType, obj) {
         this.list
             .filter(aura => aura.isTargetPlayer(player) && aura.isAffect(objectType) && aura.isTarget(obj.that))
+            .sort((aura1, aura2) => aura1._priority - aura2._priority)
             .forEach(aura => {
                 aura.effect(obj);
             });
