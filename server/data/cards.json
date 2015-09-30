@@ -6028,15 +6028,38 @@
     "pic": "147/789/73",
     "clas": 0,
     "type": 1,
-    "flags": [
-      "unimplemented"
-    ],
+    "comment": "Невозможно вызвать если нет существа для battlecry",
+    "targetsType": {
+      "names": [
+        "minions"
+      ],
+      "modificators": [
+        {
+          "name": "attack-more",
+          "params": [
+            6
+          ]
+        }
+      ]
+    },
+    "flags": [],
     "minion": {
       "attack": 4,
       "maxHp": 2,
       "flags": [],
       "race": 0,
-      "events": {}
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "kill",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
