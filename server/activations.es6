@@ -23,13 +23,16 @@ const A = {
 
             o.player.creatures.addCreature(minion, index);
 
-            o.battle.emit('summon', _.extend({ minion: minion }, o));
+            o.battle.emit('summon', _.extend({}, o, {
+                handCard: null,
+                minion: minion
+            }));
         }
     },
     'summon-op'(o) {
-        A['summon'].apply(this, {
+        A['summon'].call(this, {
             player: o.player.enemy
-        });
+        }, o);
     },
     'summon-random': function(o) {
         const index = _.random(this.params.length - 1);
