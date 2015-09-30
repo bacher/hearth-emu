@@ -7133,6 +7133,11 @@
     "pic": "147/601/41",
     "clas": 0,
     "type": 1,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
     "flags": [],
     "minion": {
       "attack": 2,
