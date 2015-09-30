@@ -11,7 +11,6 @@ H.Creatures = class Creatures {
         this.player = player;
         this.creatures = [];
 
-        this._onCreatureDeath = this._onCreatureDeath.bind(this);
         this._onCreatureDetach = this._onCreatureDetach.bind(this);
     }
 
@@ -29,7 +28,6 @@ H.Creatures = class Creatures {
 
             minion.enterInGame(this.player);
 
-            minion.on('death', this._onCreatureDeath);
             minion.on('detach', this._onCreatureDetach);
         }
     }
@@ -37,7 +35,7 @@ H.Creatures = class Creatures {
     replaceMinionByMinion(replace, by) {
         const index = this.getCreatureIndex(replace);
 
-        this._removeCreature(replace);
+        replace.detach();
 
         this.addCreature(by, index);
     }
@@ -108,15 +106,10 @@ H.Creatures = class Creatures {
         const index = this.getCreatureIndex(creat);
         this.creatures.splice(index, 1);
 
-        creat.removeListener('death', this._onCreatureDeath);
         creat.removeListener('detach', this._onCreatureDetach);
     }
 
     _onCreatureDetach(creat) {
-        this._removeCreature(creat);
-    }
-
-    _onCreatureDeath(creat) {
         this._removeCreature(creat);
     }
 };

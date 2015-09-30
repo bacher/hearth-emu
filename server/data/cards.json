@@ -3305,6 +3305,24 @@
     }
   },
   {
+    "id": 460,
+    "name": "Squirrel",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/4/4d/Squirrel%28469%29.png",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 1,
+      "events": {}
+    }
+  },
+  {
     "id": 13,
     "name": "Stoneclaw Totem",
     "cost": 1,
@@ -8091,8 +8109,8 @@
     "pic": "147/920/245",
     "clas": 0,
     "type": 1,
+    "comment": "Должен ли появляться сон?",
     "flags": [
-      "unimplemented",
       "unique"
     ],
     "minion": {
@@ -8100,7 +8118,18 @@
       "maxHp": 3,
       "flags": [],
       "race": 0,
-      "events": {}
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "tinkmaster-transform",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
@@ -10014,6 +10043,24 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 461,
+    "name": "Devilsaur",
+    "cost": 5,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/d/d3/Devilsaur%28354%29.png",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 5,
+      "maxHp": 5,
+      "flags": [],
+      "race": 1,
+      "events": {}
     }
   },
   {

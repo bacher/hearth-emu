@@ -498,12 +498,15 @@ const A = {
         o.targets.forEach(minion => {
             const owner = minion.player;
 
-            const index = owner.creatures.indexOf(minion);
-
-            minion.detach();
-
-            owner.creatures.addCreature(H.Minion.createByName(this.params[0]), index);
+            owner.creatures.replaceMinionByMinion(minion, H.Minion.createByName(this.params[0]))
         });
+    },
+    'tinkmaster-transform'(o) {
+        const replaceByName = Math.random() < 0.5 ? 'Squirrel' : 'Devilsaur';
+
+        A['transform'].call({
+            params: [replaceByName]
+        }, o);
     },
     'add-hand-card': function(o) {
         o.player.hand.addCard(H.CARDS.getByName(this.params[0], this.params[1]));
