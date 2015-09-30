@@ -331,7 +331,7 @@ H.PlayCard = class PlayCard {
                 const $creature = render(null, 'creature', {
                     id: 'new',
                     classes: 'battlecry-preview',
-                    minion: { pic: '147/808/410' }
+                    minion: { pic: this._$grabCard.find('.card IMG').attr('src') }
                 });
 
                 if (actionData.index != null && actionData.index !== this._$minions.length) {
