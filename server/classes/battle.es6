@@ -262,13 +262,13 @@ H.Battle = class Battle extends EventEmitter {
                 targets
             });
 
-        } else if (creatureId === 'hero-skill') {
+        } else if (/^skill/.test(creatureId)) {
             targets = H.TARGETS.getByTargetsType(player, player.hero.heroSkill.getTargetsType())
                 .removeHiddenEnemies()
                 .getGameData();
 
             player.sendMessage('targets', {
-                creatureId,  // FIXME not used
+                creatureId, // FIXME not used
                 targets
             });
 
