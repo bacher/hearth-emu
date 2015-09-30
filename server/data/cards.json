@@ -3605,6 +3605,24 @@
     }
   },
   {
+    "id": 462,
+    "name": "Wicked Knife",
+    "cost": 1,
+    "pic": "147/516/183",
+    "clas": 3,
+    "type": 3,
+    "flags": [
+      "uncollectable"
+    ],
+    "weapon": {
+      "attack": 1,
+      "durability": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 219,
     "name": "Worgen Infiltrator",
     "cost": 1,

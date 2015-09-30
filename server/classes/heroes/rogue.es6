@@ -9,7 +9,7 @@ H.Rogue = class Rogue extends H.Hero {
 
         this.setHeroSkill({
             activation: 'equip-weapon',
-            params: ['Dagger']
+            params: ['Wicked Knife']
         });
     }
 };
