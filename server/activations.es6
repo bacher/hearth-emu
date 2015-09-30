@@ -93,6 +93,10 @@ const A = {
             target.hp += amount;
         });
     },
+    'add-attack-hp'(o) {
+        A['add-attack'].call(this, o);
+        A['add-hp'].call(this, o);
+    },
     'add-hp-for-card-count'(o) {
         const count = o.player.hand.getCount();
 

@@ -18,6 +18,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
         this._playCard = new H.PlayCard(this);
         this._hand = new H.Hand(this);
+        this._creatures = new H.Creatures(this);
         this._chat = new H.Chat(this);
     }
 
@@ -86,8 +87,6 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             .toggleClass('active', game.my.active)
             .toggleClass('wait', !game.my.active);
 
-        this.$node.find('.creatures').empty();
-
         this.$node.find('.avatar.my').toggleClass('available', game.my.active && game.my.hero.attack > 0 && !game.my.hero.flags['tired']);
 
         this.$node.find('.hero-skill.my')
@@ -98,32 +97,11 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         this.$node.find('.hero-skill.op')
             .toggleClass('used', game.op.hero.skillUsed);
 
+        this._creatures.draw();
+
         ['my', 'op'].forEach(side => {
             const player = game[side];
             const hero = player.hero;
-
-            const $creatures = this.$node.find('.creatures.' + side);
-
-            player.creatures.forEach(minion => {
-                var $container = $('<div>');
-
-                var classes = '';
-                for (var prop in minion.flags) {
-                    classes += ' ';
-                    classes += prop;
-                }
-
-                render($container, 'creature', { minion, classes });
-
-                const $minion = $container.children();
-
-                if (game.my.active) {
-                    if (side === 'my' && !minion.flags['tired'] && minion.attack > 0) {
-                        $minion.addClass('available');
-                    }
-                }
-                $creatures.append($minion);
-            });
 
             const $avatar = this.$node.find('.avatar.' + side);
 

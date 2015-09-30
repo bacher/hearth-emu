@@ -60,8 +60,13 @@ H.Minion = class Minion extends H.GameObject {
 
         if (data.attack > data.base.attack) {
             data.flags['attack-upped'] = true;
+
         } else if (data.attack < data.base.attack) {
             data.flags['attack-reduced'] = true;
+        }
+
+        if (this.player.active && data.attack > 0 && !data.flags['tired']) {
+            data.flags['can-play'] = true;
         }
 
         delete data.card;

@@ -1,0 +1,207 @@
+
+.b {
+
+  .creatures {
+    position: absolute;
+    width: 650px;
+    height: 110px;
+    text-align: center;
+
+    &.op {
+      top: 60px;
+      margin-top: 15px;
+    }
+
+    &.my {
+      bottom: 87px;
+    }
+  }
+
+  .creature {
+    position: relative;
+    display: inline-block;
+    margin: 0 8px;
+    width: 76px;
+    height: 108px;
+    transition: transform ease-out 0.2s;
+
+    &.shift-right {
+      transform: translate(48px, 0);
+    }
+
+    &.shift-left {
+      transform: translate(-48px, 0);
+    }
+
+    &.sleep:after {
+      position: absolute;
+      display: inline-block;
+      width: 32px;
+      height: 39px;
+      top: -18px;
+      left: 47px;
+      content: "";
+      background: url("/textures/zzz.png");
+    }
+
+    &.purpose:before {
+      position: absolute;
+      content: "";
+      top: -9px;
+      left: -11px;
+      width: 98px;
+      height: 105px;
+      background: url("/textures/card-fire-glow-square.png");
+    }
+
+    &.battlecry-preview:before {
+      position: absolute;
+      top: -28px;
+      left: -28px;
+      width: 140px;
+      height: 159px;
+      content: "";
+      pointer-events: none;
+      background: url("/textures/card-battlecry-glow.png");
+    }
+
+    &.stealth .o1:before {
+      position: absolute;
+      left: 1px;
+      width: 75px;
+      height: 106px;
+      opacity: 0.7;
+      content: "";
+      background: url("/textures/stealth.png");
+    }
+
+    &.taunt .o1 {
+      top: -10px;
+      left: -6px;
+      width: 91px;
+      height: 122px;
+      background: url("/textures/shield.png");
+    }
+
+    &.freeze .o1:after {
+      position: absolute;
+      top: -20px;
+      left: -27px;
+      width: 137px;
+      height: 145px;
+      content: "";
+      background: url("/textures/freeze.png");
+    }
+
+    &.acid .o2:before {
+      position: absolute;
+      top: 90px;
+      left: 29px;
+      width: 20px;
+      height: 28px;
+      content: "";
+      background: url("/textures/acid.png");
+    }
+
+    &.silence .o2 {
+      top: -10px;
+      left: -6px;
+      width: 96px;
+      height: 107px;
+      background: url("/textures/silence.png");
+    }
+
+    &.windfury .o2:after {
+      position: absolute;
+      left: 1px;
+      width: 75px;
+      height: 106px;
+      content: "";
+      background: url("/textures/windfury.png");
+    }
+
+    &.shield .o3:before {
+      position: absolute;
+      top: -22px;
+      left: -17px;
+      width: 111px;
+      height: 145px;
+      content: "";
+      background: url("/textures/divide-shield.png");
+    }
+
+    .overlay {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .attack, .hp {
+      position: absolute;
+      box-sizing: border-box;
+
+      color: #FFF;
+      font-family: "Belwe Bold", Times, serif;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      text-shadow: 0 0 1px #000,0 0 2px #000;
+    }
+
+    &.damaged .hp {
+      color: #F00;
+    }
+
+    &.hp-upped .hp {
+      color: #0F0;
+    }
+
+    &.attack-reduced .attack {
+      color: #F00;
+    }
+
+    &.attack-upped .attack {
+      color: #0F0;
+    }
+
+    .attack {
+      top: 84px;
+      left: -6px;
+      width: 24px;
+      height: 28px;
+      padding-top: 5px;
+      padding-left: 4px;
+      background: url("/textures/attack.png");
+    }
+
+    .hp {
+      left: 63px;
+      top: 86px;
+      width: 16px;
+      height: 25px;
+      padding-top: 3px;
+      padding-left: 1px;
+      background: url("/textures/health-small.png");
+    }
+  }
+
+  @keyframes scale-in {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .minion-preview {
+    position: absolute;
+    pointer-events: none;
+
+    animation: scale-in 0.2s linear forwards;
+
+    IMG {
+      width: 198px;
+    }
+  }
+
+}
