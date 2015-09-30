@@ -37,7 +37,7 @@ H.Card = class Card {
 
         } else if (info.type === H.CARD_TYPES.trap) {
 
-            this.acts = new H.Command({
+            this.acts = H.Command.createByAct({
                 name: 'play-trap-card',
                 params: [],
                 targetsType: 'not-need'
@@ -70,7 +70,7 @@ H.Card = class Card {
 
             object.flags = parseFlags(object.flags);
 
-            this.acts.addCommand({
+            this.acts.addCommandAct({
                 name: activation,
                 params: [this.id],
                 targetsType: 'not-need'
@@ -79,7 +79,7 @@ H.Card = class Card {
             if (this.combo) {
                 this.combo.acts = new H.Commands();
 
-                this.combo.acts.addCommand({
+                this.combo.acts.addCommandAct({
                     name: activation,
                     params: [this.id],
                     targetsType: 'not-need'
@@ -126,23 +126,22 @@ H.Card = class Card {
         if (this.combo) {
             this._comboCopy = _.clone(this._normalCopy);
 
-            var object;
+            var eventsDestination;
 
             if (this.type === H.CARD_TYPES.minion) {
                 this._comboCopy.minion = _.clone(this._comboCopy.minion);
-                object = this._comboCopy.minion;
+                eventsDestination = this._comboCopy.minion;
+
             } else if (this.type === H.CARD_TYPES.weapon) {
                 this._comboCopy.weapon = _.clone(this._comboCopy.weapon);
-                object = this._comboCopy.weapon;
+                eventsDestination = this._comboCopy.weapon;
             }
 
-            if (object) {
-                for (var prop in this.combo) {
-                    if (prop === 'object') {
-                        object.events = this.combo.object.events;
-                    } else {
-                        this._comboCopy[prop] = this.combo[prop];
-                    }
+            for (var prop in this.combo) {
+                if (prop === 'object' && eventsDestination) {
+                    eventsDestination.events = this.combo.object.events;
+                } else {
+                    this._comboCopy[prop] = this.combo[prop];
                 }
             }
         }

@@ -514,7 +514,7 @@ const A = {
         o.minion.player.creatures.replaceMinionByMinion(o.minion, new H.Minion(null, target.card));
     },
     'add-hand-card': function(o) {
-        o.player.hand.addCard(H.CARDS.getByName(this.params[0], this.params[1]));
+        o.player.hand.addCard(H.CARDS.getByName(this.params[0], this.params[1] || null));
     },
     'add-op-hand-card': function(o) {
         A['add-hand-card'].apply(this, {

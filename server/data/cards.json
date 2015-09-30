@@ -6841,7 +6841,7 @@
                 {
                   "name": "add-hand-card",
                   "params": [
-                    "headcrack"
+                    "Headcrack"
                   ]
                 }
               ],
@@ -6856,9 +6856,7 @@
         ]
       }
     },
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "spell": {
       "acts": [
         {
