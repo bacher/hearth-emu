@@ -28,7 +28,7 @@ H.Player = class Player extends EventEmitter {
         this.creatures = new H.Creatures(this);
         this.traps = new H.Traps(this);
 
-        this._playedCardCount = 0;
+        this._thisTurnPlayedCards = [];
         this._outOfCardCount = 0;
 
         ws
@@ -165,11 +165,15 @@ H.Player = class Player extends EventEmitter {
     activate() {
         this.active = true;
 
-        this._playedCardCount = 0;
+        this._thisTurnPlayedCards.length = 0;
+    }
+
+    getPlayedCards() {
+        return this._thisTurnPlayedCards;
     }
 
     getPlayedCardCount() {
-        return this._playedCardCount;
+        return this._thisTurnPlayedCards.length;
     }
 
     deactivate() {
@@ -243,7 +247,7 @@ H.Player = class Player extends EventEmitter {
 
     _onPlayCard(o) {
         if (o.player === this) {
-            this._playedCardCount++;
+            this._thisTurnPlayedCards.push(o.card);
         }
     }
 

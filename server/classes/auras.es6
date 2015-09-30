@@ -9,7 +9,7 @@ H.Auras = class Auras {
         this.battle = battle;
     }
 
-    addAura(aura, offConditions) {
+    addAura(aura, offConditions = {}) {
         this.list.push(aura);
 
         const owner = aura.getOwner();

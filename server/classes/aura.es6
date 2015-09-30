@@ -85,6 +85,20 @@ const AURAS = {
         },
         defaultSide: 'my'
     },
+    'reduce-first-minion-cost': {
+        affect: 'hand-card',
+        effect(handCard) {
+            if (handCard.base.type === H.CARD_TYPES.minion) {
+                const playedCards = handCard.that.player.getPlayedCards();
+                const minionCards = playedCards.filter(card => card.type === H.CARD_TYPES.minion);
+
+                if (minionCards.length === 0) {
+                    handCard.cost = Math.max(0, handCard.cost - this.params[0]);
+                }
+            }
+        },
+        defaultSide: 'my'
+    },
     'enrage': {
         affect: 'minion',
         effect(minion) {

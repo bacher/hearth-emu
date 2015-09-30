@@ -323,6 +323,7 @@ H.Battle = class Battle extends EventEmitter {
         const eventMessage = {
             player,
             handCard,
+            card,
             globalTargets,
             prevent: false
         };
