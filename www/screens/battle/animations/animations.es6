@@ -89,8 +89,9 @@ H.Animations = class Animations {
     _startSplashAnimation(animation) {
         return new Promise(resolve => {
             const $to = this._getNodeById(animation.to);
+
             setTimeout(() => {
-                this._newSplash($to.offset(), animation.name, animation.name === 'damage' ? -animation.amount : animation.amount);
+                this._newSplash($to, animation.name, animation.name === 'damage' ? -animation.amount : animation.amount);
 
                 setTimeout(resolve, 1000);
             }, 200);
@@ -179,12 +180,10 @@ H.Animations = class Animations {
         return player === this._battle.playerId ? 'my' : 'op';
     }
 
-    _newSplash(position, className, damage) {
+    _newSplash($node, className, damage) {
         const $splash = render(null, 'splash', { damage, className });
 
-        $splash.css(position);
-
-        $splash.appendTo(this.$node);
+        $splash.appendTo($node);
 
         $splash.on('animationend', () => {
             $splash.remove();

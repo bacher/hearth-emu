@@ -4,32 +4,27 @@
     position: absolute;
     top: 0;
     left: 0;
+    display: table;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
 
     animation: scale-in-out 1s linear forwards;
 
     &.damage {
-      width: 83px;
-      height: 94px;
-      background: url("/textures/splash.png");
-
-      .value {
-        line-height: 94px;
-      }
+      background-image: url("/textures/splash.png");
     }
 
     &.heal {
-      width: 92px;
-      height: 99px;
-      background: url("/textures/heal.png");
-
-      .value {
-        line-height: 99px;
-      }
+      background-image: url("/textures/heal.png");
     }
 
     .value {
+      display: table-cell;
+      vertical-align: middle;
+
       color: #FFF;
-      margin-left: -3px;
       font-family: "Belwe Bold", Times, serif;
       font-weight: bold;
       text-align: center;
