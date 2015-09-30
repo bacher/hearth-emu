@@ -171,7 +171,7 @@ H.Animations = class Animations {
 
                 setTimeout(() => {
                     $projectile.css(toPos);
-                }, 10);
+                }, 15);
             });
         });
     }

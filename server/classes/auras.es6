@@ -15,17 +15,21 @@ H.Auras = class Auras {
         const owner = aura.getOwner();
         const isOwnerEmitter = owner && !!owner.on;
 
-        const removeAura = player => {
+        const removeAura = () => {
+            if (isOwnerEmitter) {
+                owner.removeListener('detach', removeAura);
+            }
+
+            if (offConditions.onlyThisTurn) {
+                this.battle.removeListener('end-turn', onEndTurn);
+            }
+
+            this.removeAura(aura);
+        };
+
+        const onEndTurn = player => {
             if (player === aura.player) {
-                if (isOwnerEmitter) {
-                    owner.removeListener('detach', removeAura);
-                }
-
-                if (offConditions.onlyThisTurn) {
-                    this.battle.removeListener('end-turn', removeAura);
-                }
-
-                this.removeAura(aura);
+                removeAura();
             }
         };
 
@@ -34,7 +38,7 @@ H.Auras = class Auras {
         }
 
         if (offConditions.onlyThisTurn) {
-            this.battle.on('end-turn', removeAura);
+            this.battle.on('end-turn', onEndTurn);
         }
 
         if (offConditions.onlyOneCard) {

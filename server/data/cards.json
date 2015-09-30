@@ -2181,8 +2181,7 @@
             {
               "name": "add-flags",
               "params": [
-                "freeze",
-                "tired"
+                "freeze"
               ]
             }
           ]
@@ -4051,7 +4050,7 @@
     "type": 1,
     "flags": [],
     "minion": {
-      "attack": 2,
+      "attack": 3,
       "maxHp": 2,
       "flags": [],
       "events": {},
@@ -5798,6 +5797,11 @@
     "pic": "147/447/146",
     "clas": 2,
     "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
     "flags": [],
     "spell": {
       "acts": [
@@ -10521,18 +10525,36 @@
   },
   {
     "id": 18,
-    "type": 1,
     "name": "Nightblade",
-    "pic": "148/519/184",
     "cost": 5,
+    "pic": "148/519/184",
     "clas": 0,
+    "type": 1,
+    "flags": [],
     "minion": {
       "attack": 4,
       "maxHp": 4,
-      "flags": [
-        "bc:deal-dmg-to-hero"
-      ],
-      "events": {}
+      "flags": [],
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  3
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies",
+                "heroes"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
