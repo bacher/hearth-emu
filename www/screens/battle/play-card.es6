@@ -334,11 +334,7 @@ H.PlayCard = class PlayCard {
                     minion: { pic: this._$grabCard.find('.card IMG').attr('src') }
                 });
 
-                if (actionData.index != null && actionData.index !== this._$minions.length) {
-                    $creature.insertBefore(this.$node.find('.my .creature').eq(actionData.index));
-                } else {
-                    $creature.appendTo('.my.creatures');
-                }
+                H.insertAtIndex(this.$node.find('.creatures.my'), $creature, actionData.index);
 
                 this._savedAction.$tmpObject = $creature;
 

@@ -97,7 +97,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         this.$node.find('.hero-skill.op')
             .toggleClass('used', game.op.hero.skillUsed);
 
-        this._creatures.draw();
+        this._creatures.update(game);
 
         ['my', 'op'].forEach(side => {
             const player = game[side];

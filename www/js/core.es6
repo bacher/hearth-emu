@@ -154,6 +154,27 @@ H.rotateByVector = function($node, dX, dY) {
     $node.css('transform', 'rotate(' + -angle + 'rad)');
 };
 
+H.flattenFlags = function(flags) {
+    var classes = '';
+
+    for (var prop in flags) {
+        classes += ' ';
+        classes += prop;
+    }
+
+    return classes;
+};
+
+H.insertAtIndex = function($container, $obj, index) {
+    const $children = $container.children();
+
+    if (index != null && index < $children.length) {
+        $obj.insertBefore($children.eq(index));
+    } else {
+        $container.append($obj);
+    }
+};
+
 function render($cont, tmplName, params) {
     if (!$cont) {
         $cont = $('<div>');

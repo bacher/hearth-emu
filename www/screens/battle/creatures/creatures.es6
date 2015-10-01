@@ -4,7 +4,11 @@ H.Creatures = class Creatures {
         this._battle = battle;
         this.$node = battle.$node;
 
-        this._$creatures = this.$node.find('.creatures');
+        this._gameData = null;
+        this._prevData = null;
+
+        this._$creaturesMy = this.$node.find('.creatures.my');
+        this._$creaturesOp = this.$node.find('.creatures.op');
 
         this._bindEventListeners();
     }
@@ -14,30 +18,61 @@ H.Creatures = class Creatures {
         this.$node.on('mouseout', '.creature', this._onMouseOut.bind(this));
     }
 
-    draw() {
-        this._$creatures.empty();
+    update(gameData) {
+        this._gameData = gameData;
 
-        const game = this._battle.battleData;
+        this._updateSide(this._$creaturesMy, 'my');
+        this._updateSide(this._$creaturesOp, 'op');
 
-        ['my', 'op'].forEach(side => {
-            const player = game[side];
+        this._prevData = gameData;
+    }
 
-            const $creatures = this._$creatures.filter('.' + side);
+    _updateSide($creatures, side) {
+        const creatures = this._gameData[side].creatures;
+        const prevCreatures = this._prevData && this._prevData[side].creatures;
 
-            player.creatures.forEach(minion => {
-                var classes = '';
-                for (var prop in minion.flags) {
-                    classes += ' ';
-                    classes += prop;
+        const alreadyUpdated = [];
+
+        if (prevCreatures) {
+            prevCreatures.forEach(minion => {
+                const updatedMinion = _.find(creatures, { id: minion.id });
+
+                if (updatedMinion) {
+                    const $minion = this._getNodeById(updatedMinion.id);
+
+                    $minion[0].className = 'creature ' + this._getClasses(side, updatedMinion);
+
+                    $minion.find('.attack').text(updatedMinion.attack);
+                    $minion.find('.hp').text(updatedMinion.hp);
+
+                    alreadyUpdated.push(updatedMinion.id);
+
+                } else {
+                    // FIXME Animation?
+                    this._getNodeById(updatedMinion.id).remove();
                 }
-
-                if (side === 'my' && minion.flags['can-play']) {
-                    classes += ' available';
-                }
-
-                $creatures.append(render(null, 'creature', { minion, classes }));
             });
+        }
+
+        creatures.forEach((minion, i) => {
+            if (!_.contains(alreadyUpdated, minion.id)) {
+                const classes = this._getClasses(side, minion);
+
+                const $newMinion = render(null, 'creature', { minion, classes });
+
+                H.insertAtIndex($creatures, $newMinion, i);
+            }
         });
+    }
+
+    _getClasses(side, minion) {
+        var classes = H.flattenFlags(minion.flags);
+
+        if (side === 'my' && minion.flags['can-play']) {
+            classes += ' available';
+        }
+
+        return classes;
     }
 
     _onMouseEnter(e) {
@@ -64,5 +99,9 @@ H.Creatures = class Creatures {
             this._$preview.remove();
             this._$preview = null;
         }
+    }
+
+    _getNodeById(id) {
+        return this.$node.find(`[data-id="${id}"]`);
     }
 };
