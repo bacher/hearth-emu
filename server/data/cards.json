@@ -4382,6 +4382,25 @@
     }
   },
   {
+    "id": 563,
+    "name": "Annoy-o-Tron",
+    "cost": 2,
+    "pic": "149/30/12181",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 2,
+      "flags": [
+        "taunt",
+        "shield"
+      ],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
     "id": 160,
     "name": "Arcane Explosion",
     "cost": 2,
@@ -5081,6 +5100,40 @@
     }
   },
   {
+    "id": 564,
+    "name": "Explosive Sheep",
+    "cost": 2,
+    "pic": "149/0/12180",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 223,
     "name": "Faerie Dragon",
     "cost": 2,
@@ -5222,6 +5275,24 @@
       ],
       "events": {},
       "race": 0
+    }
+  },
+  {
+    "id": 562,
+    "name": "Gilblin Stalker",
+    "cost": 2,
+    "pic": "149/18/12249",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [
+        "stealth"
+      ],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -5788,6 +5859,44 @@
     }
   },
   {
+    "id": 561,
+    "name": "Micro Machine",
+    "cost": 2,
+    "pic": "149/88/12189",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 2,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "start-turn",
+              "params": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 381,
     "name": "Millhouse Manastorm",
     "cost": 2,
@@ -6082,6 +6191,22 @@
     }
   },
   {
+    "id": 560,
+    "name": "Puddlestomper",
+    "cost": 2,
+    "pic": "148/963/12274",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [],
+      "race": 5,
+      "events": {}
+    }
+  },
+  {
     "id": 262,
     "name": "Rampage",
     "cost": 2,
@@ -6321,6 +6446,47 @@
       ],
       "race": 0,
       "events": {}
+    }
+  },
+  {
+    "id": 565,
+    "name": "Stonesplinter Trogg",
+    "cost": 2,
+    "pic": "148/972/12266",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "play-card",
+              "params": [
+                "op",
+                2
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
