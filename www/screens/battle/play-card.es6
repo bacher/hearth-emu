@@ -412,6 +412,10 @@ H.PlayCard = class PlayCard {
         this.$node.toggleClass('arrow-mode', enable);
         this.$node.toggleClass('normal-mode', !enable);
 
+        if (enable) {
+            this.$node.trigger('arrow-mode');
+        }
+
         this._$arrow.toggle(enable);
 
         this._arrowMode = enable;

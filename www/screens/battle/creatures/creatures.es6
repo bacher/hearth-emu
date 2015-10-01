@@ -15,7 +15,9 @@ H.Creatures = class Creatures {
 
     _bindEventListeners() {
         this.$node.on('mouseenter', '.creature', this._onMouseEnter.bind(this));
-        this.$node.on('mouseout', '.creature', this._onMouseOut.bind(this));
+        this.$node.on('mouseout', '.creature', this._hidePreview.bind(this));
+
+        this.$node.on('arrow-mode', this._hidePreview.bind(this));
     }
 
     update(gameData) {
@@ -79,20 +81,22 @@ H.Creatures = class Creatures {
         const $minion = $(e.currentTarget);
 
         this._showDelay = setTimeout(() => {
-            const position = $minion.offset();
+            if (this.$node.hasClass('normal-mode')) {
+                const position = $minion.offset();
 
-            position.top -= 90;
-            position.left += 80;
+                position.top -= 90;
+                position.left += 80;
 
-            this._$preview = render(null, 'minion-preview', { pic: $minion.find('IMG').attr('src') });
+                this._$preview = render(null, 'minion-preview', { pic: $minion.find('IMG').attr('src') });
 
-            this._$preview.css(position);
+                this._$preview.css(position);
 
-            this.$node.append(this._$preview);
-        }, 300);
+                this.$node.append(this._$preview);
+            }
+        }, 400);
     }
 
-    _onMouseOut() {
+    _hidePreview() {
         clearTimeout(this._showDelay);
 
         if (this._$preview) {
