@@ -509,7 +509,7 @@ const A = {
         o.targets.forEach(minion => {
             const owner = minion.player;
 
-            owner.creatures.replaceMinionByMinion(minion, H.Minion.createByName(this.params[0]))
+            owner.creatures.replaceMinionByMinion(minion, H.Minion.createByName(this.params[0]));
         });
     },
     'tinkmaster-transform'(o) {

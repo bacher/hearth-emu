@@ -46,13 +46,10 @@ H.Animations = class Animations {
 
             $by.removeClass('available');
 
-            const byPosition = $by.offset();
             const toPosition = $to.offset();
-            const deltaX = toPosition.left - byPosition.left;
-            const deltaY = toPosition.top - byPosition.top;
 
             $by.css({
-                'transform': `translate(${deltaX}px,${deltaY}px)`,
+                'transform': `translate(${toPosition.left}px,${toPosition.top}px)`,
                 'z-index': 1
             });
 
