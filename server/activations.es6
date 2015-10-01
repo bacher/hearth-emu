@@ -640,6 +640,23 @@ const A = {
                 targets: [minion]
             });
         }
+    },
+    'add-spare-part'(o) {
+        const spareParts = [
+            'Armor Plating',
+            'Emergency Coolant',
+            'Finicky Cloakfield',
+            'Reversing Switch',
+            'Rusty Horn',
+            'Time Rewinder',
+            'Whirling Blades'
+        ];
+
+        const spareName = H.getRandomElement(spareParts);
+
+        A['add-hand-card'].call({
+            params: [spareName]
+        }, o);
     }
 };
 

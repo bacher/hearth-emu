@@ -976,6 +976,24 @@
     }
   },
   {
+    "id": 550,
+    "name": "Target Dummy",
+    "cost": 0,
+    "pic": "149/57/12288",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 0,
+      "maxHp": 2,
+      "flags": [
+        "taunt"
+      ],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
     "id": 100,
     "name": "The Coin",
     "cost": 0,
@@ -1357,6 +1375,36 @@
     }
   },
   {
+    "id": 552,
+    "name": "Armor Plating",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/a/ab/Armor_Plating%2812366%29.png",
+    "clas": 0,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-hp",
+              "params": [
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 397,
     "name": "Bananas",
     "cost": 1,
@@ -1647,6 +1695,63 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 559,
+    "name": "Clockwork Gnome",
+    "cost": 1,
+    "pic": "149/21/12200",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 1,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "add-spare-part",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 551,
+    "name": "Cogmaster",
+    "cost": 1,
+    "pic": "148/779/12179",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "add-attack-while-have-race",
+                "params": [
+                  2,
+                  "mech"
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
@@ -2033,6 +2138,36 @@
     }
   },
   {
+    "id": 553,
+    "name": "Emergency Coolant",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/5/53/Emergency_Coolant%2812372%29.png",
+    "clas": 0,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-flags",
+              "params": [
+                "freeze"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 124,
     "name": "Execute",
     "cost": 1,
@@ -2098,6 +2233,66 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 554,
+    "name": "Finicky Cloakfield",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/0/04/Finicky_Cloakfield%2812370%29.png",
+    "clas": 0,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions",
+        "friends"
+      ]
+    },
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-flags",
+              "params": [
+                "stealth"
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "add-custom-event",
+              "params": []
+            }
+          ],
+          "customEvent": {
+            "acts": [
+              {
+                "name": "remove-buffered-flags",
+                "params": [
+                  "stealth"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "start-turn",
+              "params": [
+                "own"
+              ]
+            }
+          }
+        }
+      ]
     }
   },
   {
@@ -3080,6 +3275,34 @@
     }
   },
   {
+    "id": 555,
+    "name": "Reversing Switch",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/b/b5/Reversing_Switch%2812373%29.png",
+    "clas": 0,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "swap-attack-hp",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 191,
     "name": "Rockbiter Weapon",
     "cost": 1,
@@ -3100,6 +3323,31 @@
               "name": "add-attack",
               "params": [
                 3
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 556,
+    "name": "Rusty Horn",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/c/ca/Rusty_Horn%2812369%29.png",
+    "clas": 0,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-flags",
+              "params": [
+                "taunt"
               ]
             }
           ]
@@ -3516,6 +3764,35 @@
     }
   },
   {
+    "id": 557,
+    "name": "Time Rewinder",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/4/44/Time_Rewinder%2812368%29.png",
+    "clas": 0,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "friends",
+        "minions"
+      ]
+    },
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "return-to-hand",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 181,
     "name": "Tracking",
     "cost": 1,
@@ -3742,6 +4019,36 @@
       "flags": [],
       "race": 3,
       "events": {}
+    }
+  },
+  {
+    "id": 558,
+    "name": "Whirling Blades",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/8/83/Whirling_Blades%2812375%29.png",
+    "clas": 0,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-attack",
+              "params": [
+                1
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {

@@ -31,6 +31,14 @@ const AURAS = {
             minion.attack += this.params[0];
         }
     },
+    'add-attack-while-have-race': {
+        affect: 'minion',
+        effect(minion) {
+            if (minion.player.creatures.getAllByRace(H.RACES[this.params[1]]).length) {
+                minion.attack += this.params[0];
+            }
+        }
+    },
     'add-hp': {
         affect: 'minion',
         effect(minion) {
