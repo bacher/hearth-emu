@@ -209,7 +209,7 @@ const E = {
 
             var playerSide = null;
 
-            if (side === 'own') {
+            if (side === 'my') {
                 playerSide = o.player;
             } else if (side === 'op') {
                 playerSide = o.player.enemy;
@@ -229,7 +229,7 @@ const E = {
 
             var playerSide = null;
 
-            if (side === 'own') {
+            if (side === 'my') {
                 playerSide = o.player;
             } else if (side === 'op') {
                 playerSide = o.player.enemy;
@@ -250,7 +250,7 @@ const E = {
             var playerSide = null;
             var targetMinion = null;
 
-            if (side === 'own') {
+            if (side === 'my') {
                 playerSide = o.player;
             } else if (side === 'op') {
                 playerSide = o.player.enemy;

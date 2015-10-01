@@ -1204,13 +1204,20 @@
               {
                 "name": "add-aura",
                 "params": [
-                  "add-attack",
-                  2,
-                  "this-turn",
-                  "target"
+                  "this-turn"
                 ]
               }
-            ]
+            ],
+            "aura": {
+              "acts": [
+                {
+                  "name": "add-attack",
+                  "params": [
+                    2
+                  ]
+                }
+              ]
+            }
           }
         ]
       }
@@ -1613,7 +1620,7 @@
             "event": {
               "name": "end-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -1865,7 +1872,7 @@
             "event": {
               "name": "end-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -2287,7 +2294,7 @@
             "event": {
               "name": "start-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -3228,7 +3235,7 @@
             "event": {
               "name": "death",
               "params": [
-                "own"
+                "my"
               ]
             },
             "acts": [
@@ -3665,7 +3672,7 @@
             "event": {
               "name": "start-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -4206,7 +4213,7 @@
             "event": {
               "name": "end-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -4986,7 +4993,7 @@
             "event": {
               "name": "start-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -5549,7 +5556,7 @@
             "event": {
               "name": "start-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -5850,7 +5857,7 @@
             "event": {
               "name": "end-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -6025,7 +6032,7 @@
             "event": {
               "name": "start-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -6783,7 +6790,7 @@
             "event": {
               "name": "start-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -7273,7 +7280,7 @@
             "event": {
               "name": "start-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -7761,7 +7768,7 @@
               "event": {
                 "name": "start-turn",
                 "params": [
-                  "own"
+                  "my"
                 ]
               }
             }
@@ -7974,7 +7981,7 @@
             "event": {
               "name": "end-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -8728,7 +8735,7 @@
             "event": {
               "name": "start-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -9654,7 +9661,7 @@
             "event": {
               "name": "death",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -11015,13 +11022,26 @@
             {
               "name": "add-aura",
               "params": [
-                "add-attack",
-                3,
-                "this-turn",
-                "own"
+                "this-turn"
               ]
             }
-          ]
+          ],
+          "targetsType": {
+            "names": [
+              "minions",
+              "friends"
+            ]
+          },
+          "aura": {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  3
+                ]
+              }
+            ]
+          }
         }
       ]
     }
@@ -12489,7 +12509,7 @@
             "event": {
               "name": "end-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -13061,7 +13081,7 @@
             "event": {
               "name": "end-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
@@ -13562,7 +13582,7 @@
             "event": {
               "name": "end-turn",
               "params": [
-                "own"
+                "my"
               ]
             }
           }
