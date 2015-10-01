@@ -159,7 +159,7 @@ H.Battle = class Battle extends EventEmitter {
                     cardPic: data.pic
                 });
 
-                player.sendMessage('burn-card', {
+                player.enemy.sendMessage('burn-card', {
                     side: 'op',
                     cardPic: data.pic
                 });

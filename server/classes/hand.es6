@@ -13,7 +13,7 @@ H.Hand = class Hand {
     }
 
     addCard(card) {
-        if (this.cards.length <= 10) {
+        if (this.cards.length < MAX_HAND_CARD_COUNT) {
             const handCard = new H.HandCard(this.player, card);
 
             this.cards.push(handCard);
