@@ -1859,6 +1859,43 @@
     }
   },
   {
+    "id": 501,
+    "name": "Deathcharger",
+    "cost": 1,
+    "pic": "148/641/7762",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [
+        "charge"
+      ],
+      "race": 0,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  3
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "heroes",
+                "friends"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 147,
     "name": "Defender",
     "cost": 1,
@@ -3245,6 +3282,26 @@
     }
   },
   {
+    "id": 506,
+    "name": "Slime",
+    "cost": 1,
+    "pic": "148/666/7764",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 2,
+      "flags": [
+        "taunt"
+      ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 285,
     "name": "Soulfire",
     "cost": 1,
@@ -3302,6 +3359,67 @@
                 "params": []
               }
             ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 508,
+    "name": "Spectral Spider",
+    "cost": 1,
+    "pic": "148/629/7760",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 504,
+    "name": "Spectral Trainee",
+    "cost": 1,
+    "pic": "149/388/7871",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 0,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "heroes",
+                "friends"
+              ]
+            },
+            "event": {
+              "name": "start-turn",
+              "params": [
+                "own"
+              ]
+            }
           }
         ]
       }
@@ -3465,6 +3583,53 @@
               "name": "end-turn",
               "params": []
             }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 505,
+    "name": "Undertaker",
+    "cost": 1,
+    "pic": "198/225/7737",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 503,
+    "name": "Unrelenting Trainee",
+    "cost": 1,
+    "pic": "149/384/7870",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "summon-op",
+                "params": [
+                  "Spectral Trainee"
+                ]
+              }
+            ]
           }
         ]
       }
@@ -3735,6 +3900,41 @@
               "name": "end-turn",
               "params": [
                 "own"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 502,
+    "name": "Zombie Chow",
+    "cost": 1,
+    "pic": "198/224/683",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 23,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "heal",
+                "params": [
+                  5
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies",
+                "heroes"
               ]
             }
           }
@@ -4469,6 +4669,24 @@
     }
   },
   {
+    "id": 513,
+    "name": "Echoing Ooze",
+    "cost": 2,
+    "pic": "148/632/7754",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 153,
     "name": "Equality",
     "cost": 2,
@@ -4717,6 +4935,36 @@
       ],
       "race": 0,
       "events": {}
+    }
+  },
+  {
+    "id": 507,
+    "name": "Haunted Creeper",
+    "cost": 2,
+    "pic": "148/626/7756",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 2,
+      "flags": [],
+      "race": 1,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "Spectral Spider",
+                  2
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
@@ -5037,6 +5285,24 @@
     }
   },
   {
+    "id": 509,
+    "name": "Mad Scientist",
+    "cost": 2,
+    "pic": "148/635/7748",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 378,
     "name": "Mana Addict",
     "cost": 2,
@@ -5346,6 +5612,53 @@
                 "own"
               ]
             }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 500,
+    "name": "Nerub'ar Weblord",
+    "cost": 2,
+    "pic": "148/684/7755",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 4,
+      "flags": [],
+      "race": 1,
+      "events": {}
+    }
+  },
+  {
+    "id": 510,
+    "name": "Nerubian Egg",
+    "cost": 2,
+    "pic": "148/645/7738",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 0,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "Nerubian"
+                ]
+              }
+            ]
           }
         ]
       }
@@ -5752,6 +6065,42 @@
                   "name": "adjacent",
                   "params": []
                 }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 512,
+    "name": "Unstable Ghoul",
+    "cost": 2,
+    "pic": "148/708/7757",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 3,
+      "flags": [
+        "taunt"
+      ],
+      "race": 0,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions"
               ]
             }
           }
@@ -6330,6 +6679,33 @@
     }
   },
   {
+    "id": 521,
+    "name": "Dancing Swords",
+    "cost": 3,
+    "pic": "148/723/7736",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "opp-draw-card",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 183,
     "name": "Deadly Shot",
     "cost": 3,
@@ -6362,6 +6738,26 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 523,
+    "name": "Deathlord",
+    "cost": 3,
+    "pic": "148/654/7753",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 8,
+      "flags": [
+        "taunt"
+      ],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -7478,6 +7874,22 @@
     }
   },
   {
+    "id": 511,
+    "name": "Nerubian",
+    "cost": 3,
+    "pic": "148/648/7739",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 307,
     "name": "Perdition's Blade",
     "cost": 3,
@@ -7810,6 +8222,48 @@
     }
   },
   {
+    "id": 514,
+    "name": "Shade of Naxxramas",
+    "cost": 3,
+    "pic": "148/638/7730",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [
+        "stealth"
+      ],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack-hp",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "start-turn",
+              "params": [
+                "own"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 282,
     "name": "Shadow Bolt",
     "cost": 3,
@@ -8024,6 +8478,42 @@
                   ]
                 }
               ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 522,
+    "name": "Stoneskin Gargoyle",
+    "cost": 3,
+    "pic": "148/717/7750",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "restore-full-hp",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "start-turn",
+              "params": []
             }
           }
         ]
@@ -8475,6 +8965,24 @@
     "minion": {
       "attack": 4,
       "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 515,
+    "name": "Baron Rivendare",
+    "cost": 4,
+    "pic": "148/729/7740",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 7,
       "flags": [],
       "race": 0,
       "events": {}
@@ -9696,6 +10204,39 @@
     }
   },
   {
+    "id": 516,
+    "name": "Wailing Soul",
+    "cost": 4,
+    "pic": "148/681/7758",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "silence",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "except-self",
+                "minions"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 46,
     "name": "Water Elemental",
     "cost": 4,
@@ -10579,6 +11120,49 @@
     }
   },
   {
+    "id": 517,
+    "name": "Loatheb",
+    "cost": 5,
+    "pic": "148/726/7746",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unique"
+    ],
+    "minion": {
+      "attack": 5,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-aura",
+                "params": [
+                  "enemy-turn"
+                ]
+              }
+            ],
+            "aura": {
+              "acts": [
+                {
+                  "name": "reduce-cost",
+                  "params": [
+                    -5,
+                    0,
+                    2
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 18,
     "name": "Nightblade",
     "cost": 5,
@@ -10656,6 +11240,24 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 518,
+    "name": "Spectral Knight",
+    "cost": 5,
+    "pic": "148/651/7751",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 6,
+      "flags": [
+        "spell-stealth"
+      ],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -11522,6 +12124,26 @@
     }
   },
   {
+    "id": 519,
+    "name": "Maexxna",
+    "cost": 6,
+    "pic": "148/657/7747",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unique"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 8,
+      "flags": [
+        "acid"
+      ],
+      "race": 1,
+      "events": {}
+    }
+  },
+  {
     "id": 431,
     "name": "Priestess of Elune",
     "cost": 6,
@@ -12327,6 +12949,24 @@
       ],
       "events": {},
       "race": 0
+    }
+  },
+  {
+    "id": 520,
+    "name": "Kel'Thuzad",
+    "cost": 8,
+    "pic": "148/669/7742",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 6,
+      "maxHp": 8,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {
