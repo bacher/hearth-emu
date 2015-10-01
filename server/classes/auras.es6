@@ -18,6 +18,7 @@ H.Auras = class Auras {
         const removeAura = () => {
             if (isOwnerEmitter) {
                 owner.removeListener('detach', removeAura);
+                owner.removeListener('silence', removeAura);
             }
 
             if (offConditions.onlyThisTurn) {
@@ -35,6 +36,7 @@ H.Auras = class Auras {
 
         if (isOwnerEmitter) {
             owner.on('detach', removeAura);
+            owner.on('silence', removeAura);
         }
 
         if (offConditions.onlyThisTurn) {

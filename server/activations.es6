@@ -2,8 +2,6 @@
 const _ = require('lodash');
 const H = require('./namespace');
 
-const SILENCE_IGNORE_FLAGS = ['tired', 'freeze', 'sleep'];
-
 const A = {
     'summon': function(o) {
         const minionCardName = this.params[0];
@@ -190,22 +188,7 @@ const A = {
         o.player.hero.addOverload(this.params[0]);
     },
     'silence': function(o) {
-        o.targets.forEach(target => {
-            var base = target.base;
-
-            for (var flag in target.flags) {
-                if (!base.flags[flag] && !_.contains(SILENCE_IGNORE_FLAGS, flag)) {
-                    delete target.flags[flag];
-                }
-            }
-
-            target.maxHp = base.maxHp;
-            if (target.hp > target.maxHp) {
-                target.hp = target.maxHp;
-            }
-
-            target.addFlag('silence');
-        });
+        o.targets.forEach(target => target.silence());
     },
     'kill': function(o) {
         o.targets.forEach(obj => {

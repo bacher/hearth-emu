@@ -24,16 +24,16 @@ H.GameObject = class GameObject extends EventEmitter {
         delete this.flags['dead'];
         delete this.flags['detached'];
 
-        this.events = this.base.events;
+        this.events = _.clone(this.base.events);
 
-        if (events['aura']) {
-            events['aura'].forEach(aura => {
+        if (this.events['aura']) {
+            this.events['aura'].forEach(aura => {
                 H.Aura.addAura(player, this, aura);
             });
         }
 
-        if (events['custom']) {
-            events['custom'].forEach(command => this.addCustomEvent(command));
+        if (this.events['custom']) {
+            this.events['custom'].forEach(command => this.addCustomEvent(command));
         }
     }
 
@@ -103,11 +103,13 @@ H.GameObject = class GameObject extends EventEmitter {
         delete this.flags['freeze'];
         delete this.flags['sleep'];
 
-        this.events['end-turn'].act({
-            battle: this.player.battle,
-            player: this.player,
-            minion: this
-        });
+        if (this.events['end-turn']) {
+            this.events['end-turn'].act({
+                battle: this.player.battle,
+                player: this.player,
+                minion: this
+            });
+        }
     }
 
     detach() {
@@ -158,9 +160,7 @@ H.GameObject = class GameObject extends EventEmitter {
         command.act({
             battle: this.battle,
             player: this.player,
-            handCard: null,
             minion: this,
-            params: null,
             globalTargets,
             eventMessage
         });

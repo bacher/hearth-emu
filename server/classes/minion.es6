@@ -2,6 +2,7 @@
 const _ = require('lodash');
 const H = require('../namespace');
 
+const SILENCE_IGNORE_FLAGS = ['tired', 'freeze', 'sleep'];
 
 H.Minion = class Minion extends H.GameObject {
     constructor(handCard, card) {
@@ -150,6 +151,29 @@ H.Minion = class Minion extends H.GameObject {
         if (flag === 'charge') {
             delete this.flags['sleep'];
         }
+    }
+
+    silence() {
+        var base = this.base;
+
+        for (var flag in this.flags) {
+            if (!base.flags[flag] && !_.contains(SILENCE_IGNORE_FLAGS, flag)) {
+                delete this.flags[flag];
+            }
+        }
+
+        this.maxHp = base.maxHp;
+        if (this.hp > this.maxHp) {
+            this.hp = this.maxHp;
+        }
+
+        this.addFlag('silence');
+
+        this.events = {};
+
+        this._detachListeners();
+
+        this.emit('silence');
     }
 
 };
