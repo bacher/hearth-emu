@@ -101,7 +101,7 @@ H.PlayCard = class PlayCard {
                             this._toggleCardActivation(true);
 
                             if (this._isMinionCard) {
-                                this._shiftMinions();
+                                this.battle._creatures.makeEmptySpaceUnderMouse(this._mouse);
                             }
                         }
                     } else {
@@ -157,7 +157,8 @@ H.PlayCard = class PlayCard {
         if (this._isBattlecryPreview || this._isChooseAction || this._isChooseDialogCanceled) {
             if (!success) {
                 this._savedAction.$clickObject.show();
-                this._savedAction.$tmpObject.remove();
+
+                this.battle._creatures.clearBattlecryPreview();
             }
 
         } else if (this._isCard) {
@@ -169,7 +170,7 @@ H.PlayCard = class PlayCard {
             this._$clickObject.removeClass('find-target');
         }
 
-        this._toggleCardActivation(false);
+        this._toggleCardActivation(false, success);
         this._toggleAimTargeting(false);
 
         this._clearPurposes();
@@ -283,17 +284,7 @@ H.PlayCard = class PlayCard {
             actionData.id = this._$clickObject.data('id');
 
             if (this._isMinionCard) {
-                const $creatures = this.$node.find('.my .creature');
-
-                if ($creatures.length) {
-                    const $right = $creatures.filter('.shift-right:eq(0)');
-
-                    if ($right.length) {
-                        actionData.index = $right.index();
-                    } else {
-                        actionData.index = $creatures.length;
-                    }
-                }
+                actionData.index = this.battle._creatures.getEmptySpaceIndex();
             }
         } else if (this._isMinion || this._isHero) {
             actionName = 'hit';
@@ -334,7 +325,7 @@ H.PlayCard = class PlayCard {
                     minion: { pic: this._$grabCard.find('.card IMG').attr('src') }
                 });
 
-                H.insertAtIndex(this.$node.find('.creatures.my'), $creature, actionData.index);
+                this.battle._creatures.replaceEmptySpaceByPreview($creature);
 
                 this._savedAction.$tmpObject = $creature;
 
@@ -445,45 +436,14 @@ H.PlayCard = class PlayCard {
         }
     }
 
-    _toggleCardActivation(enable) {
+    _toggleCardActivation(enable, isSuccess) {
         if (this._isCard) {
-
             this._$grabCard.toggleClass('blue-glow', enable);
 
-            if (enable) {
-                if (this._isMinionCard) {
-                    if (!this._minionsPositions) {
-                        this._$minions = this.$node.find('.my .creature');
-                        this._minionsPositions = this._$minions.map((i, node) => {
-                            const $minion = $(node);
-
-                            return $minion.offset().left + $minion.outerWidth() / 2;
-                        });
-                    }
-                }
-            } else {
-                if (this._isMinionCard && this._$minions) {
-                    this._$minions.removeClass('shift-left shift-right');
-
-                    this._$minions = null;
-                    this._minionsPositions = null;
-                }
+            if (!enable && this._isMinionCard && !isSuccess) {
+                this.battle._creatures.clearEmptySpace();
             }
         }
-    }
-
-    _shiftMinions() {
-        const x = this._mouse.x;
-
-        this._$minions.each((i, node) => {
-            const $minion = $(node);
-
-            const minionX = this._minionsPositions[i];
-
-            $minion
-                .toggleClass('shift-right', x <= minionX)
-                .toggleClass('shift-left', x > minionX);
-        });
     }
 
     _setArrowBase() {
