@@ -240,7 +240,7 @@ H.Player = class Player extends EventEmitter {
 
             this.drawCard();
 
-            this.creatures.wakeUpAll();
+            this.creatures.onStartTurn();
         }
     }
 

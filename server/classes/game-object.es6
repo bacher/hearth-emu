@@ -24,33 +24,16 @@ H.GameObject = class GameObject extends EventEmitter {
         delete this.flags['dead'];
         delete this.flags['detached'];
 
-        for (var eventTypeName in this.base.events) {
-            const eventActs = this.base.events[eventTypeName];
+        this.events = this.base.events;
 
-            if (eventTypeName === 'aura') {
-                eventActs.forEach(aura => {
-                    H.Aura.addAura(player, this, aura);
-                });
-            }
+        if (events['aura']) {
+            events['aura'].forEach(aura => {
+                H.Aura.addAura(player, this, aura);
+            });
+        }
 
-            // FIXME что с этим делать?
-            if (eventTypeName === 'end-turn') {
-                this._onBattle('end-turn', eventPlayer => {
-                    if (player === eventPlayer) {
-                        eventActs.act({
-                            battle: player.battle,
-                            player,
-                            handCard: null,
-                            params: null,
-                            globalTargets: null
-                        });
-                    }
-                });
-            }
-
-            if (eventTypeName === 'custom') {
-                eventActs.forEach(command => this.addCustomEvent(command));
-            }
+        if (events['custom']) {
+            events['custom'].forEach(command => this.addCustomEvent(command));
         }
     }
 
@@ -102,15 +85,29 @@ H.GameObject = class GameObject extends EventEmitter {
         }
     }
 
-    wakeUp() {
+    onStartTurn() {
         delete this.flags['sleep'];
         delete this.flags['hit'];
         delete this.flags['second-hit'];
+
+        if (this.events['start-turn']) {
+            this.events['start-turn'].act({
+                battle: this.player.battle,
+                player: this.player,
+                minion: this
+            });
+        }
     }
 
     onEndTurn() {
         delete this.flags['freeze'];
         delete this.flags['sleep'];
+
+        this.events['end-turn'].act({
+            battle: this.player.battle,
+            player: this.player,
+            minion: this
+        });
     }
 
     detach() {
@@ -129,13 +126,13 @@ H.GameObject = class GameObject extends EventEmitter {
         if (!this.flags['dead']) {
             this.player.battle.emit('death', this);
 
+            this._playDeathrattles();
+
             this.detach();
 
             this.flags['dead'] = true;
 
             this.emit('death', this);
-
-            //TODO: Deathrattle
         }
     }
 
@@ -145,6 +142,16 @@ H.GameObject = class GameObject extends EventEmitter {
 
     removeFlag(flag) {
         delete this.flags[flag];
+    }
+
+    _playDeathrattles() {
+        if (this.events['deathrattle']) {
+            this.events['deathrattle'].act({
+                battle: this.player.battle,
+                player: this.player,
+                minion: this
+            });
+        }
     }
 
     _onCustomEvent(command, eventMessage, globalTargets) {

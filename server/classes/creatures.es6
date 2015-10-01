@@ -56,8 +56,8 @@ H.Creatures = class Creatures {
         return this.getData();
     }
 
-    wakeUpAll() {
-        this.creatures.forEach(creature => creature.wakeUp());
+    onStartTurn() {
+        this.creatures.forEach(creature => creature.onStartTurn());
     }
 
     onEndTurn() {
