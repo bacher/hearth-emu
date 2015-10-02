@@ -4031,6 +4031,35 @@
     }
   },
   {
+    "id": 633,
+    "name": "Warbot",
+    "cost": 1,
+    "pic": "148/921/12260",
+    "clas": 1,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 3,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "enrage": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 422,
     "name": "Whelp",
     "cost": 1,
@@ -7254,6 +7283,20 @@
     }
   },
   {
+    "id": 632,
+    "name": "Bouncing Blade",
+    "cost": 3,
+    "pic": "148/918/12203",
+    "clas": 1,
+    "type": 2,
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": []
+    }
+  },
+  {
     "id": 253,
     "name": "Charge",
     "cost": 3,
@@ -8778,6 +8821,24 @@
     "minion": {
       "attack": 4,
       "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 631,
+    "name": "Ogre Warmaul",
+    "cost": 3,
+    "pic": "148/930/12211",
+    "clas": 1,
+    "type": 3,
+    "flags": [
+      "unimplemented"
+    ],
+    "weapon": {
+      "attack": 4,
+      "durability": 2,
       "flags": [],
       "race": 0,
       "events": {}
@@ -11137,6 +11198,49 @@
     }
   },
   {
+    "id": 630,
+    "name": "Screwjank Clunker",
+    "cost": 4,
+    "pic": "148/933/12220",
+    "clas": 1,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "minions",
+        "friends"
+      ],
+      "modificators": [
+        {
+          "name": "race",
+          "params": [
+            "mech"
+          ]
+        }
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 5,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-attach-hp",
+                "params": [
+                  2
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 7,
     "name": "Sen'jin Shieldmasta",
     "cost": 4,
@@ -12964,6 +13068,24 @@
     }
   },
   {
+    "id": 629,
+    "name": "Siege Engine",
+    "cost": 5,
+    "pic": "149/33/12275",
+    "clas": 1,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 5,
+      "maxHp": 4,
+      "flags": [],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
     "id": 428,
     "name": "Silver Hand Knight",
     "cost": 5,
@@ -13877,6 +13999,25 @@
     }
   },
   {
+    "id": 627,
+    "name": "Iron Juggernaut",
+    "cost": 6,
+    "pic": "148/936/12295",
+    "clas": 1,
+    "type": 1,
+    "flags": [
+      "unique",
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 6,
+      "maxHp": 5,
+      "flags": [],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
     "id": 34,
     "name": "Lord of the Arena",
     "cost": 6,
@@ -14000,6 +14141,35 @@
         "charge"
       ],
       "events": {}
+    }
+  },
+  {
+    "id": 628,
+    "name": "Shieldmaiden",
+    "cost": 6,
+    "pic": "148/927/12215",
+    "clas": 1,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-armor",
+                "params": [
+                  5
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
@@ -14457,6 +14627,33 @@
       "flags": [],
       "race": 1,
       "events": {}
+    }
+  },
+  {
+    "id": 626,
+    "name": "Crush",
+    "cost": 7,
+    "pic": "148/924/12303",
+    "clas": 1,
+    "type": 2,
+    "costCalc": "if-have-damaged-than-minus-4",
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "kill",
+              "params": []
+            }
+          ]
+        }
+      ]
     }
   },
   {

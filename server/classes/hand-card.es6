@@ -42,6 +42,14 @@ H.HandCard = class HandCard extends EventEmitter {
                 case 'minus-hero-loss-hp':
                     cost -= 30 - this.player.hero.hp;
                     break;
+                case 'if-have-damaged-than-minus-4':
+                    if (this.player.creatures.getAll().some(minion => {
+                        const minionDetails = minion.getData;
+                        return minionDetails.hp !== minionDetails.maxHp;
+                    })) {
+                        cost -= 4;
+                    }
+                    break;
                 default:
                     console.warn('Unimplemented cost calc!');
                     throw 2;
