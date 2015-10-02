@@ -1675,6 +1675,50 @@
     }
   },
   {
+    "id": 601,
+    "name": "Boom Bot",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/6/60/Boom_Bot%2812361%29.png",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  "1-4"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 321,
     "name": "Claw",
     "cost": 1,
@@ -9853,6 +9897,47 @@
     }
   },
   {
+    "id": 604,
+    "name": "Burly Rockjaw Trogg",
+    "cost": 4,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/a/a4/Burly_Rockjaw_Trogg%2812233%29.png",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "play-card",
+              "params": [
+                "op",
+                2
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 1,
     "type": 1,
     "name": "Chillwind Yeti",
@@ -14052,6 +14137,38 @@
     }
   },
   {
+    "id": 602,
+    "name": "Dr. Boom",
+    "cost": 7,
+    "pic": "149/109/12182",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unique"
+    ],
+    "minion": {
+      "attack": 7,
+      "maxHp": 7,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "Boom Bot",
+                  2
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 155,
     "name": "Flamestrike",
     "cost": 7,
@@ -14249,6 +14366,45 @@
                 "except-self",
                 "minions",
                 "friends"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 603,
+    "name": "Troggzor the Earthinator",
+    "cost": 7,
+    "pic": "149/139/12272",
+    "clas": 0,
+    "type": 1,
+    "comment": "Должен ли Трогг успевать получить бафф +2?",
+    "flags": [
+      "unique"
+    ],
+    "minion": {
+      "attack": 6,
+      "maxHp": 6,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "Burly Rockjaw Trogg"
+                ]
+              }
+            ],
+            "event": {
+              "name": "play-card",
+              "params": [
+                "op",
+                2
               ]
             }
           }
