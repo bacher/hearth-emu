@@ -9898,47 +9898,6 @@
     }
   },
   {
-    "id": 604,
-    "name": "Burly Rockjaw Trogg",
-    "cost": 4,
-    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/a/a4/Burly_Rockjaw_Trogg%2812233%29.png",
-    "clas": 0,
-    "type": 1,
-    "flags": [],
-    "minion": {
-      "attack": 3,
-      "maxHp": 5,
-      "flags": [],
-      "race": 0,
-      "events": {
-        "custom": [
-          {
-            "acts": [
-              {
-                "name": "add-attack",
-                "params": [
-                  2
-                ]
-              }
-            ],
-            "targetsType": {
-              "names": [
-                "self"
-              ]
-            },
-            "event": {
-              "name": "play-card",
-              "params": [
-                "op",
-                2
-              ]
-            }
-          }
-        ]
-      }
-    }
-  },
-  {
     "id": 1,
     "type": 1,
     "name": "Chillwind Yeti",
