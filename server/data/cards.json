@@ -7994,6 +7994,24 @@
     }
   },
   {
+    "id": 573,
+    "name": "Hobgoblin",
+    "cost": 3,
+    "pic": "149/91/12250",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 175,
     "name": "Huffer",
     "cost": 3,
@@ -8079,6 +8097,24 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 574,
+    "name": "Illuminator",
+    "cost": 3,
+    "pic": "149/42/12214",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -8336,6 +8372,26 @@
     }
   },
   {
+    "id": 575,
+    "name": "Lil' Exorcist",
+    "cost": 3,
+    "pic": "149/69/12239",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [
+        "taunt"
+      ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 19,
     "type": 1,
     "name": "Magma Rager",
@@ -8500,6 +8556,24 @@
     "clas": 0,
     "type": 1,
     "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 576,
+    "name": "Ogre Brute",
+    "cost": 3,
+    "pic": "148/966/12281",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
     "minion": {
       "attack": 4,
       "maxHp": 4,
@@ -9101,6 +9175,22 @@
     }
   },
   {
+    "id": 577,
+    "name": "Spider Tank",
+    "cost": 3,
+    "pic": "148/897/12184",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 4,
+      "flags": [],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
     "id": 522,
     "name": "Stoneskin Gargoyle",
     "cost": 3,
@@ -9251,6 +9341,24 @@
       "flags": [
         "windfury"
       ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 578,
+    "name": "Tinkertown Technician",
+    "cost": 3,
+    "pic": "149/84/12202",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
       "race": 0,
       "events": {}
     }
