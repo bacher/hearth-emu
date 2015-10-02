@@ -2667,7 +2667,22 @@
     "pic": "149/495/660",
     "clas": 0,
     "type": 1,
-    "flags": [],
+    "targetsType": {
+      "names": [
+        "minions"
+      ],
+      "modificators": [
+        {
+          "name": "race",
+          "params": [
+            "murloc"
+          ]
+        }
+      ]
+    },
+    "flags": [
+      "unimplemented"
+    ],
     "minion": {
       "attack": 1,
       "maxHp": 2,
@@ -2681,20 +2696,7 @@
                 "name": "kill",
                 "params": []
               }
-            ],
-            "targetsType": {
-              "names": [
-                "minions"
-              ],
-              "modificators": [
-                {
-                  "name": "race",
-                  "params": [
-                    "murloc"
-                  ]
-                }
-              ]
-            }
+            ]
           },
           {
             "acts": [
@@ -2909,9 +2911,7 @@
             },
             "event": {
               "name": "heal",
-              "params": [
-                "self"
-              ]
+              "params": []
             }
           }
         ]

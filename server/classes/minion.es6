@@ -117,7 +117,7 @@ H.Minion = class Minion extends H.GameObject {
     heal(amount) {
         var healed = 0;
 
-        if (this.hp !== this.maxHp || this.bufferHp !== this.bufferMaxHp) {
+        if (amount && (this.hp !== this.maxHp || this.bufferHp !== this.bufferMaxHp)) {
 
             const mayHealHp = this.maxHp - this.hp;
 
@@ -136,6 +136,8 @@ H.Minion = class Minion extends H.GameObject {
                 healed += bufferHeal;
                 this.bufferHp += bufferHeal;
             }
+
+            this.battle.emit('heal', { to: this });
         }
 
         this.player.battle.addBattleAction({
