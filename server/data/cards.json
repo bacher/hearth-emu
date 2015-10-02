@@ -890,6 +890,24 @@
     }
   },
   {
+    "id": 463,
+    "name": "Snake",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/1/11/Snake%28512%29.png",
+    "clas": 5,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 1,
+      "events": {}
+    }
+  },
+  {
     "id": 341,
     "name": "Starfall1",
     "cost": 0,
@@ -1515,6 +1533,20 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 464,
+    "name": "Bestial Wrath",
+    "cost": 1,
+    "pic": "148/421/304",
+    "clas": 5,
+    "type": 2,
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": []
     }
   },
   {
@@ -2630,6 +2662,24 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 465,
+    "name": "Hound",
+    "cost": 1,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/6/61/Hound%28290%29.png",
+    "clas": 5,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [
+        "charge"
+      ],
+      "race": 1,
+      "events": {}
     }
   },
   {
@@ -5261,6 +5311,42 @@
     }
   },
   {
+    "id": 466,
+    "name": "Explosive Trap",
+    "cost": 2,
+    "pic": "148/556/344",
+    "clas": 5,
+    "type": 4,
+    "flags": [],
+    "trap": {
+      "events": {
+        "custom": [
+          {
+            "event": {
+              "name": "take-damage",
+              "params": [
+                "my-hero"
+              ]
+            },
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 223,
     "name": "Faerie Dragon",
     "cost": 2,
@@ -5400,6 +5486,66 @@
             }
           }
         ]
+      }
+    }
+  },
+  {
+    "id": 467,
+    "name": "Flare",
+    "cost": 2,
+    "pic": "148/418/630",
+    "clas": 5,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "remove-flags",
+              "params": [
+                "stealth"
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "minions"
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "destroy-enemy-traps",
+              "params": []
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "draw-card",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 468,
+    "name": "Freezing Trap",
+    "cost": 2,
+    "pic": "148/559/99",
+    "clas": 5,
+    "type": 4,
+    "flags": [
+      "unimplemented"
+    ],
+    "trap": {
+      "events": {
+        "custom": []
       }
     }
   },
@@ -5615,6 +5761,24 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 469,
+    "name": "Hyena",
+    "cost": 2,
+    "pic": "148/397/689",
+    "clas": 5,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 1,
+      "events": {}
     }
   },
   {
@@ -6564,6 +6728,48 @@
     }
   },
   {
+    "id": 470,
+    "name": "Scavening Hyena",
+    "cost": 2,
+    "pic": "148/388/279",
+    "clas": 5,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 1,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  2
+                ]
+              },
+              {
+                "name": "add-hp",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "event": {
+              "name": "death",
+              "params": [
+                "my",
+                "beast"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 114,
     "name": "Shadow Word: Pain",
     "cost": 2,
@@ -6748,6 +6954,55 @@
             ]
           }
         ]
+      }
+    }
+  },
+  {
+    "id": 477,
+    "name": 470,
+    "cost": 2,
+    "pic": "148/424/210",
+    "clas": 5,
+    "type": 4,
+    "comment": "Работает только на hit?",
+    "flags": [],
+    "trap": {
+      "events": {
+        "custom": [
+          {
+            "event": {
+              "name": "hit-to",
+              "params": [
+                "my-minions"
+              ]
+            },
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "Snake",
+                  3
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 471,
+    "name": "Snipe",
+    "cost": 2,
+    "pic": "148/553/553",
+    "clas": 5,
+    "type": 4,
+    "flags": [
+      "unimplemented"
+    ],
+    "trap": {
+      "events": {
+        "custom": []
       }
     }
   },
@@ -7698,6 +7953,41 @@
     }
   },
   {
+    "id": 479,
+    "name": "Deadly Shot",
+    "cost": 3,
+    "pic": "148/578/239",
+    "clas": 5,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "kill",
+              "params": []
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies",
+              "minions"
+            ],
+            "modificators": [
+              {
+                "name": "random",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 523,
     "name": "Deathlord",
     "cost": 3,
@@ -7824,6 +8114,24 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 472,
+    "name": "Eaglehorn Bow",
+    "cost": 3,
+    "pic": "148/400/363",
+    "clas": 5,
+    "type": 3,
+    "flags": [
+      "unimplemented"
+    ],
+    "weapon": {
+      "attack": 3,
+      "durability": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -9963,6 +10271,30 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 473,
+    "name": "Unleash the Hounds",
+    "cost": 3,
+    "pic": "148/406/317",
+    "clas": 5,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "summon",
+              "params": [
+                "Hound",
+                3
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {
@@ -12585,6 +12917,60 @@
     }
   },
   {
+    "id": 474,
+    "name": "Explosive Shot",
+    "cost": 5,
+    "pic": "148/403/114",
+    "clas": 5,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                5
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "target"
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                2
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "target"
+            ],
+            "modificators": [
+              {
+                "name": "adjacent",
+                "params": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 425,
     "name": "Faceless Manipulator",
     "cost": 5,
@@ -14400,6 +14786,36 @@
     }
   },
   {
+    "id": 478,
+    "name": "Savannah Highmane",
+    "cost": 6,
+    "pic": "148/394/8",
+    "clas": 5,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 6,
+      "maxHp": 6,
+      "flags": [],
+      "race": 1,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "Hyenas",
+                  2
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 628,
     "name": "Shieldmaiden",
     "cost": 6,
@@ -15030,6 +15446,24 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 475,
+    "name": "Gladiator's Longbow",
+    "cost": 7,
+    "pic": "147/769/278",
+    "clas": 5,
+    "type": 3,
+    "flags": [
+      "unimplemented"
+    ],
+    "weapon": {
+      "attack": 5,
+      "durability": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {
@@ -15717,6 +16151,24 @@
       "maxHp": 6,
       "flags": [],
       "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 476,
+    "name": "King Krush",
+    "cost": 9,
+    "pic": "148/415/194",
+    "clas": 5,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 8,
+      "maxHp": 8,
+      "flags": [
+        "charge"
+      ],
+      "race": 1,
       "events": {}
     }
   },

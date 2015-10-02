@@ -210,6 +210,13 @@ const A = {
             });
         });
     },
+    'remove-flags'(o) {
+        this.params.forEach(flag => {
+            o.targets.forEach(target => {
+                target.removeFlag(flag);
+            });
+        });
+    },
     'remove-buffered-flags'(o) {
         this.params.forEach(flag => {
             o.targets.forEach(target => {
@@ -672,6 +679,9 @@ const A = {
         if (handCard.type === H.CARD_TYPES.minion && handCard.base.minion.race === H.RACES.beast) {
             handCard.cost = Math.max(0, handCard.cost - 4);
         }
+    },
+    'destroy-enemy-traps'(o) {
+        o.player.enemy.traps.getAll().forEach(tarp => trap.detach());
     }
 };
 
