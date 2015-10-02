@@ -636,9 +636,13 @@ const A = {
 
         const spareName = H.getRandomElement(spareParts);
 
+        const player = this.params[0] === 'op' ? o.player.enemy : o.player;
+
         A['add-hand-card'].call({
             params: [spareName]
-        }, o);
+        }, {
+            player
+        });
     }
 };
 

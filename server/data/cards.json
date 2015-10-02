@@ -9658,6 +9658,25 @@
     }
   },
   {
+    "id": 579,
+    "name": "Arcane Nullifier X-21",
+    "cost": 4,
+    "pic": "149/48/12246",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 5,
+      "flags": [
+        "taunt",
+        "spell-stealth"
+      ],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
     "id": 249,
     "name": "Auchenai Soulpriest",
     "cost": 4,
@@ -9790,6 +9809,47 @@
       "maxHp": 4,
       "flags": null,
       "events": {}
+    }
+  },
+  {
+    "id": 580,
+    "name": "Burly Rockjaw Trogg",
+    "cost": 4,
+    "pic": "148/975/12233",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "play-card",
+              "params": [
+                "op",
+                2
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -10060,6 +10120,24 @@
     }
   },
   {
+    "id": 581,
+    "name": "Enhance-o Mechano",
+    "cost": 4,
+    "pic": "149/100/12176",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 156,
     "name": "Fireball",
     "cost": 4,
@@ -10242,6 +10320,24 @@
     }
   },
   {
+    "id": 582,
+    "name": "Jeeves",
+    "cost": 4,
+    "pic": "149/60/12216",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 4,
+      "flags": [],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
     "id": 332,
     "name": "Keeper of the Grove",
     "cost": 4,
@@ -10256,6 +10352,24 @@
     "minion": {
       "attack": 2,
       "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 583,
+    "name": "Kezan Mystic",
+    "cost": 4,
+    "pic": "148/994/12252",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 4,
+      "maxHp": 3,
       "flags": [],
       "race": 0,
       "events": {}
@@ -10304,6 +10418,22 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 584,
+    "name": "Lost Tallstrider",
+    "cost": 4,
+    "pic": "148/984/12284",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 4,
+      "flags": [],
+      "race": 1,
+      "events": {}
     }
   },
   {
@@ -10377,6 +10507,43 @@
     }
   },
   {
+    "id": 585,
+    "name": "Mechanical Yeti",
+    "cost": 4,
+    "pic": "149/6/12253",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "add-spare-part",
+                "params": []
+              }
+            ]
+          },
+          {
+            "acts": [
+              {
+                "name": "add-spare-part",
+                "params": [
+                  "op"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 245,
     "name": "Mindgames",
     "cost": 4,
@@ -10395,6 +10562,37 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 586,
+    "name": "Mini-Mage",
+    "cost": 4,
+    "pic": "149/106/12262",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 1,
+      "flags": [
+        "stealth"
+      ],
+      "race": 0,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "add-spell-damage",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
@@ -10521,6 +10719,24 @@
         ]
       },
       "race": 0
+    }
+  },
+  {
+    "id": 587,
+    "name": "Piloted Shredder",
+    "cost": 4,
+    "pic": "149/66/12191",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 4,
+      "maxHp": 3,
+      "flags": [],
+      "race": 4,
+      "events": {}
     }
   },
   {
