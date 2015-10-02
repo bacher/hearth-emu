@@ -5,7 +5,8 @@ const EventEmitter = require('events').EventEmitter;
 const H = require('../namespace');
 
 const INACTIVE_MESSAGES = [
-    'replace-cards'
+    'replace-cards',
+    'concede'
 ];
 
 H.Player = class Player extends EventEmitter {
