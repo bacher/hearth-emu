@@ -13332,6 +13332,25 @@
     }
   },
   {
+    "id": 597,
+    "name": "Gazlowe",
+    "cost": 6,
+    "pic": "149/136/12287",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented",
+      "unique"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 6,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 445,
     "name": "Hogger",
     "cost": 6,
@@ -13484,6 +13503,43 @@
         "acid"
       ],
       "race": 1,
+      "events": {}
+    }
+  },
+  {
+    "id": 598,
+    "name": "Mogor the Ogre",
+    "cost": 6,
+    "pic": "149/121/12282",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unique",
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 7,
+      "maxHp": 6,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 599,
+    "name": "Piloted Sky Golem",
+    "cost": 6,
+    "pic": "149/94/12175",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 6,
+      "maxHp": 5,
+      "flags": [],
+      "race": 4,
       "events": {}
     }
   },
@@ -13773,6 +13829,45 @@
       "flags": [],
       "race": 0,
       "events": {}
+    }
+  },
+  {
+    "id": 600,
+    "name": "Toshley",
+    "cost": 6,
+    "pic": "149/130/12225",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unique"
+    ],
+    "minion": {
+      "attack": 5,
+      "maxHp": 7,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-spare-part",
+                "params": []
+              }
+            ]
+          }
+        ],
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "add-spare-part",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
