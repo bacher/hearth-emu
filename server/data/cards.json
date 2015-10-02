@@ -1798,7 +1798,12 @@
                   "mech"
                 ]
               }
-            ]
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            }
           }
         ]
       }
