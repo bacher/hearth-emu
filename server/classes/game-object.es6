@@ -32,6 +32,12 @@ H.GameObject = class GameObject extends EventEmitter {
             });
         }
 
+        if (this.events['enrage']) {
+            this.events['enrage'].forEach(aura => {
+                H.Aura.addEnrage(player, this, aura);
+            });
+        }
+
         if (this.events['custom']) {
             this.events['custom'].forEach(command => this.addCustomEvent(command));
         }

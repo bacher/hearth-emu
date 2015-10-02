@@ -1237,13 +1237,12 @@
       "flags": [],
       "race": 1,
       "events": {
-        "aura": [
+        "enrage": [
           {
             "acts": [
               {
-                "name": "enrage",
+                "name": "add-attack",
                 "params": [
-                  "add-attack",
                   5
                 ]
               }
@@ -4321,22 +4320,16 @@
       "flags": [],
       "race": 0,
       "events": {
-        "aura": [
+        "enrage": [
           {
             "acts": [
               {
-                "name": "enrage",
+                "name": "add-attack",
                 "params": [
-                  "add-attack",
                   3
                 ]
               }
-            ],
-            "targetsType": {
-              "names": [
-                "self"
-              ]
-            }
+            ]
           }
         ]
       }
@@ -8484,13 +8477,12 @@
       "flags": [],
       "race": 0,
       "events": {
-        "aura": [
+        "enrage": [
           {
             "acts": [
               {
-                "name": "enrage",
+                "name": "add-flags",
                 "params": [
-                  "add-flags",
                   "windfury"
                 ]
               }
@@ -8499,9 +8491,8 @@
           {
             "acts": [
               {
-                "name": "enrage",
+                "name": "add-attack",
                 "params": [
-                  "add-attack",
                   1
                 ]
               }
@@ -9063,13 +9054,12 @@
       ],
       "race": 0,
       "events": {
-        "aura": [
+        "enrage": [
           {
             "acts": [
               {
-                "name": "enrage",
+                "name": "add-attack",
                 "params": [
-                  "add-attack",
                   3
                 ]
               }

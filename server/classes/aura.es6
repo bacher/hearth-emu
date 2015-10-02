@@ -184,6 +184,24 @@ H.Aura = class Aura {
         player.battle.auras.addAura(aura, offConditions);
     }
 
+    static addEnrage(player, minion, auraAct) {
+        const auraFirstAct = auraAct.acts[0];
+
+        const enrageAura = {
+            acts: [
+                {
+                    name: 'enrage',
+                    params: [auraFirstAct.name].concat(auraFirstAct.params)
+                }
+            ],
+            targetsType: {
+                names: ['self']
+            }
+        };
+
+        H.Aura.addAura(player, minion, enrageAura);
+    }
+
     effect() {
         this._effect.apply(this, arguments);
     }
