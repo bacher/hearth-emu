@@ -7669,6 +7669,24 @@
     }
   },
   {
+    "id": 569,
+    "name": "Flying Machine",
+    "cost": 3,
+    "pic": "149/27/12247",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 4,
+      "flags": [
+        "windfury"
+      ],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
     "id": 159,
     "name": "Frost Nova",
     "cost": 3,
@@ -7730,6 +7748,78 @@
               "name": "take-damage",
               "params": [
                 "minions"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 570,
+    "name": "Gnomeregan Infantry",
+    "cost": 3,
+    "pic": "149/72/12286",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 4,
+      "flags": [
+        "charge",
+        "taunt"
+      ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 571,
+    "name": "Gnomish Experimenter",
+    "cost": 3,
+    "pic": "149/51/12199",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 572,
+    "name": "Goblin Sapper",
+    "cost": 3,
+    "pic": "149/63/12213",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "add-attack-while-op-cards-count",
+                "params": [
+                  4,
+                  6
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
               ]
             }
           }
