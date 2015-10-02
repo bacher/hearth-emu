@@ -36,6 +36,9 @@ H.HandCard = class HandCard extends EventEmitter {
                 case 'minus-hand-card-count':
                     cost -= this.player.hand.getCount() - 1;
                     break;
+                case 'minus-hand-card-op-count':
+                    cost -= this.player.enemy.hand.getCount();
+                    break;
                 case 'minus-hero-loss-hp':
                     cost -= 30 - this.player.hero.hp;
                     break;

@@ -14452,6 +14452,43 @@
     }
   },
   {
+    "id": 608,
+    "name": "Foe Reaper 4000",
+    "cost": 8,
+    "pic": "149/124/12217",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unique",
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 6,
+      "maxHp": 9,
+      "flags": [],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
+    "id": 605,
+    "name": "Force-Tank MAX",
+    "cost": 8,
+    "pic": "149/9/12248",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 7,
+      "maxHp": 7,
+      "flags": [
+        "shield"
+      ],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
     "id": 136,
     "name": "Grommash Hellscream",
     "cost": 8,
@@ -14693,6 +14730,25 @@
     }
   },
   {
+    "id": 609,
+    "name": "Sneed's Old Shredder",
+    "cost": 8,
+    "pic": "149/127/12187",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unique",
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 5,
+      "maxHp": 7,
+      "flags": [],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
     "id": 143,
     "name": "Tirion Fordring",
     "cost": 8,
@@ -14856,6 +14912,41 @@
     }
   },
   {
+    "id": 607,
+    "name": "Mekgineer Thermaplugg",
+    "cost": 9,
+    "pic": "149/133/12196",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 9,
+      "maxHp": 7,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
+                  "Leper Gnome"
+                ]
+              }
+            ],
+            "event": {
+              "name": "death",
+              "params": [
+                "op"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 451,
     "name": "Nozdormu",
     "cost": 9,
@@ -15006,6 +15097,23 @@
       "maxHp": 8,
       "flags": [],
       "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 606,
+    "name": "Clockwork Giant",
+    "cost": 12,
+    "pic": "149/148/12201",
+    "clas": 0,
+    "type": 1,
+    "costCalc": "minus-hand-card-op-count",
+    "flags": [],
+    "minion": {
+      "attack": 8,
+      "maxHp": 8,
+      "flags": [],
+      "race": 4,
       "events": {}
     }
   },
