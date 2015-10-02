@@ -247,7 +247,7 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
                     $card.addClass('loading');
                 }
             });
-        }, 0);
+        }, 10);
     }
 
     _updateTabs() {
