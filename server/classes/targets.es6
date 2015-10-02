@@ -76,7 +76,9 @@ H.Targets = class Targets {
 
     removeHiddenEnemies() {
         this.op.minions = this.op.minions.filter(minion => {
-            return !minion.is('stealth');
+            const minionFlags = minion.getData().flags;
+
+            return !minionFlags['stealth'] && !minionFlags['spell-stealth'];
         });
 
         return this;

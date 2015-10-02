@@ -408,6 +408,11 @@ const A = {
             handCard.cost = Math.max(0, handCard.cost - this.params[0]);
         });
     },
+    'copy-to-hand'(o) {
+        o.player.creatures.getAll().forEach(minion => {
+            o.player.hand.addCard(minion.card);
+        });
+    },
     'equip-weapon': function(o) {
         const card = H.CARDS.getByName(this.params[0], H.CARD_TYPES['weapon']);
 
@@ -647,6 +652,15 @@ const A = {
     'discard-deck-card'(o) {
         for (var i = 0; i < this.params[0] || 1; ++i) {
             o.player.deck.popCard();
+        }
+    },
+    'goblin-blastmage'(o) {
+        if (o.player.creatures.getAllByRace(H.RACES.mech).length) {
+            const targets = [o.player.enemy.hero].concat(o.player.enemy.creatures.getAll());
+
+            _.times(4, () => {
+                H.getRandomElement(targets).dealDamage(1);
+            });
         }
     }
 };

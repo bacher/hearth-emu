@@ -364,9 +364,10 @@ H.Battle = class Battle extends EventEmitter {
             this.emit('hit', eventMessage);
 
             if (!eventMessage.prevent) {
-                const counterAttack = eventMessage.to.getData().attack;
+                const by = eventMessage.by.getData();
+                const to = eventMessage.to.getData();
 
-                eventMessage.to.dealDamage(eventMessage.by.getData().attack);
+                eventMessage.to.dealDamage(by.attack);
 
                 this.addBattleAction({
                     name: 'hit',
@@ -378,11 +379,19 @@ H.Battle = class Battle extends EventEmitter {
                     eventMessage.to.kill();
                 }
 
-                if (counterAttack) {
-                    eventMessage.by.dealDamage(counterAttack);
+                if (by.flags['freezer']) {
+                    eventMessage.to.addFlag('freeze');
+                }
+
+                if (to.attack) {
+                    eventMessage.by.dealDamage(to.attack);
 
                     if (eventMessage.to.flags['acid'] && eventMessage.by.objType !== 'hero') {
                         eventMessage.by.kill();
+                    }
+
+                    if (to.flags['freezer']) {
+                        eventMessage.by.addFlag('freeze');
                     }
                 }
             }

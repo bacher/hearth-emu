@@ -5235,6 +5235,43 @@
     }
   },
   {
+    "id": 623,
+    "name": "Flamecannon",
+    "cost": 2,
+    "pic": "198/226/12192",
+    "clas": 8,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                4
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies",
+              "minions"
+            ],
+            "modificators": [
+              {
+                "name": "random",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 194,
     "name": "Flametongue Totem",
     "cost": 2,
@@ -6580,6 +6617,24 @@
     }
   },
   {
+    "id": 625,
+    "name": "Snowchugger",
+    "cost": 2,
+    "pic": "148/744/12230",
+    "clas": 8,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [
+        "freezer"
+      ],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
     "id": 16,
     "name": "Spirit Wolf",
     "cost": 2,
@@ -6730,6 +6785,20 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 624,
+    "name": "Unstable Portal",
+    "cost": 2,
+    "pic": "148/747/12178",
+    "clas": 8,
+    "type": 2,
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": []
     }
   },
   {
@@ -9277,6 +9346,35 @@
     }
   },
   {
+    "id": 622,
+    "name": "Soot Spewer",
+    "cost": 3,
+    "pic": "149/154/12306",
+    "clas": 8,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "add-spell-damage",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 402,
     "name": "Southsea Captain",
     "cost": 3,
@@ -10302,6 +10400,33 @@
     }
   },
   {
+    "id": 619,
+    "name": "Echo of Medivh",
+    "cost": 4,
+    "pic": "148/753/12300",
+    "clas": 8,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "copy-to-hand",
+              "params": []
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "minions",
+              "friends"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 581,
     "name": "Enhance-o Mechano",
     "cost": 4,
@@ -10366,6 +10491,33 @@
             "acts": [
               {
                 "name": "draw-card",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 620,
+    "name": "Goblin Blastmage",
+    "cost": 4,
+    "pic": "148/750/12195",
+    "clas": 8,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "goblin-blastmage",
                 "params": []
               }
             ]
@@ -11414,33 +11566,51 @@
     "minion": {
       "attack": 3,
       "maxHp": 6,
+      "flags": [
+        "freezer"
+      ],
+      "events": {},
+      "race": 0
+    }
+  },
+  {
+    "id": 621,
+    "name": "Wee Spellstopper",
+    "cost": 4,
+    "pic": "149/151/12261",
+    "clas": 8,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 5,
       "flags": [],
+      "race": 0,
       "events": {
-        "custom": [
+        "aura": [
           {
             "acts": [
               {
                 "name": "add-flags",
                 "params": [
-                  "freeze"
+                  "spell-stealth"
                 ]
               }
             ],
             "targetsType": {
               "names": [
-                "target"
-              ]
-            },
-            "event": {
-              "name": "hit-by",
-              "params": [
                 "self"
+              ],
+              "modificators": [
+                {
+                  "name": "adjacent",
+                  "params": []
+                }
               ]
             }
           }
         ]
-      },
-      "race": 0
+      }
     }
   },
   {
@@ -14319,6 +14489,25 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 618,
+    "name": "Flame Leviathan",
+    "cost": 7,
+    "pic": "148/759/12290",
+    "clas": 8,
+    "type": 1,
+    "flags": [
+      "unimplemented",
+      "unique"
+    ],
+    "minion": {
+      "attack": 7,
+      "maxHp": 7,
+      "flags": [],
+      "race": 4,
+      "events": {}
     }
   },
   {
