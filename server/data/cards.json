@@ -3052,7 +3052,7 @@
         {
           "acts": [
             {
-              "name": "opp-draw-card",
+              "name": "draw-card-op",
               "params": [
                 2
               ]
@@ -7005,7 +7005,7 @@
                 ]
               },
               {
-                "name": "opp-draw-card",
+                "name": "draw-card-op",
                 "params": [
                   2
                 ]
@@ -7135,7 +7135,7 @@
           {
             "acts": [
               {
-                "name": "opp-draw-card",
+                "name": "draw-card-op",
                 "params": []
               }
             ]
@@ -8330,21 +8330,17 @@
         "events": {
           "battlecry": [
             {
-              "event": null,
-              "command": "deal-damage(2)",
-              "targetsType": null
+              "acts": [
+                {
+                  "name": "deal-damage",
+                  "params": [
+                    2
+                  ]
+                }
+              ]
             }
-          ],
-          "deathrattle": [],
-          "end-turn": [],
-          "start-turn": [],
-          "aura": [],
-          "enrage": [],
-          "custom": []
+          ]
         }
-      },
-      "spell": {
-        "acts": []
       },
       "targetsType": {
         "names": [
@@ -8549,6 +8545,9 @@
             }
           ]
         }
+      },
+      "spell": {
+        "acts": []
       },
       "targetsType": {
         "names": [
@@ -11507,6 +11506,9 @@
             }
           ]
         }
+      },
+      "spell": {
+        "acts": []
       },
       "targetsType": {
         "names": [

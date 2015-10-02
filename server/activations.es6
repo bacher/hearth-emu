@@ -295,7 +295,7 @@ const A = {
             A['draw-card'].apply(this, o);
         }
     },
-    'opp-draw-card'(o) {
+    'draw-card-op'(o) {
         A['draw-card'].apply(this, { player: o.player.enemy });
     },
     'draw-card-at-each-target'(o) {
