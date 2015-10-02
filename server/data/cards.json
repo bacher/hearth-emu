@@ -4787,6 +4787,40 @@
     }
   },
   {
+    "id": 615,
+    "name": "Crackle",
+    "cost": 2,
+    "pic": "148/873/12241",
+    "clas": 2,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-spell-damage",
+              "params": [
+                "3-6"
+              ]
+            },
+            {
+              "name": "overload",
+              "params": [
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 374,
     "name": "Crazed Alchemist",
     "cost": 2,
@@ -6696,6 +6730,59 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 616,
+    "name": "Vitality Totem",
+    "cost": 2,
+    "pic": "148/876/12259",
+    "clas": 2,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 0,
+      "maxHp": 3,
+      "flags": [],
+      "race": 7,
+      "events": {
+        "end-turn": [
+          {
+            "acts": [
+              {
+                "name": "heal",
+                "params": [
+                  4
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "heroes",
+                "friends"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 617,
+    "name": "Whirling Zap-o-matic",
+    "cost": 2,
+    "pic": "148/870/12231",
+    "clas": 2,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [
+        "windfury"
+      ],
+      "race": 4,
+      "events": {}
     }
   },
   {
@@ -8687,6 +8774,24 @@
     }
   },
   {
+    "id": 614,
+    "name": "Powermace",
+    "cost": 3,
+    "pic": "148/867/12269",
+    "clas": 2,
+    "type": 3,
+    "flags": [
+      "unimplemented"
+    ],
+    "weapon": {
+      "attack": 3,
+      "durability": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 401,
     "name": "Questing Adventurer",
     "cost": 3,
@@ -9593,6 +9698,20 @@
     }
   },
   {
+    "id": 611,
+    "name": "Ancestor's Call",
+    "cost": 4,
+    "pic": "148/832/12218",
+    "clas": 2,
+    "type": 2,
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": []
+    }
+  },
+  {
     "id": 406,
     "name": "Ancient Brewmaster",
     "cost": 4,
@@ -10161,6 +10280,24 @@
       "maxHp": 3,
       "flags": [],
       "race": 6,
+      "events": {}
+    }
+  },
+  {
+    "id": 612,
+    "name": "Dunemaul Shaman",
+    "cost": 4,
+    "pic": "148/969/12234",
+    "clas": 2,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 5,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
       "events": {}
     }
   },
@@ -10925,6 +11062,52 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 613,
+    "name": "Siltfin Spiritwalker",
+    "cost": 4,
+    "pic": "148/879/12277",
+    "clas": 2,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 5,
+      "flags": [],
+      "race": 5,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "overload",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        ],
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "draw-card",
+                "params": []
+              }
+            ],
+            "event": {
+              "name": "death",
+              "params": [
+                "my",
+                "murloc"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -14216,6 +14399,25 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 610,
+    "name": "Neptulon",
+    "cost": 7,
+    "pic": "148/891/12292",
+    "clas": 2,
+    "type": 1,
+    "flags": [
+      "unimplemented",
+      "unique"
+    ],
+    "minion": {
+      "attack": 7,
+      "maxHp": 7,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {
