@@ -66,6 +66,9 @@ H.Player = class Player extends EventEmitter {
                     case 'end-turn':
                         this.endTurn();
                         break;
+                    case 'concede':
+                        this.hero.kill();
+                        break;
                     case 'get-targets':
                     case 'play-card':
                     case 'hit':

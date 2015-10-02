@@ -271,4 +271,8 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
         H.app.activateScreen('start-game-menu');
     }
+
+    concede() {
+        H.socket.send('concede');
+    }
 };
