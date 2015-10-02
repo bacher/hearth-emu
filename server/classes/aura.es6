@@ -78,8 +78,16 @@ const AURAS = {
             const minimum = this.params[1] || 0;
             const type = this.params[2];
             const operation = this.params[3];
+            const filter = this.params[4];
+            var race;
 
-            if (!type || card.base.type === type) {
+            if (filter && /^race-/.test(filter)) {
+                race = H.RACES[filter.match(/^race-(.+)$/)[1]];
+            }
+
+            if (!type || card.base.type === type &&
+                !race || card.base.race === race) {
+
                 if (operation === 'set') {
                     card.cost = reduceBy;
                 } else {

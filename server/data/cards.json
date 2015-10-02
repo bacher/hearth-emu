@@ -5825,6 +5825,39 @@
     }
   },
   {
+    "id": 568,
+    "name": "Mechwarper",
+    "cost": 2,
+    "pic": "148/756/12188",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "reduce-cost",
+                "params": [
+                  1,
+                  0,
+                  1,
+                  0,
+                  "race-mech"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 561,
     "name": "Micro Machine",
     "cost": 2,
@@ -6213,6 +6246,24 @@
     }
   },
   {
+    "id": 566,
+    "name": "Recombobulator",
+    "cost": 2,
+    "pic": "149/103/12198",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 205,
     "name": "River Crocolisk",
     "cost": 2,
@@ -6287,6 +6338,55 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 567,
+    "name": "Ship's Cannon",
+    "cost": 2,
+    "pic": "148/997/12258",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            },
+            "event": {
+              "name": "summon",
+              "params": [
+                "my",
+                "race-pirate"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
