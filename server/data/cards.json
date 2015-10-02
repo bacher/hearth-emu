@@ -12846,10 +12846,11 @@
           {
             "acts": [
               {
-                "name": "change-minions-cost",
+                "name": "reduce-cost",
                 "params": [
-                  3,
-                  "my"
+                  -3,
+                  0,
+                  1
                 ]
               }
             ]

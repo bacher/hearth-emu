@@ -374,14 +374,14 @@ H.Battle = class Battle extends EventEmitter {
                     to: target.id
                 });
 
-                if (eventMessage.by.flags['acid']) {
+                if (eventMessage.by.flags['acid'] && eventMessage.to.objType !== 'hero') {
                     eventMessage.to.kill();
                 }
 
                 if (counterAttack) {
                     eventMessage.by.dealDamage(counterAttack);
 
-                    if (eventMessage.to.flags['acid']) {
+                    if (eventMessage.to.flags['acid'] && eventMessage.by.objType !== 'hero') {
                         eventMessage.by.kill();
                     }
                 }
