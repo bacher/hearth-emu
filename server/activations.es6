@@ -28,9 +28,9 @@ const A = {
         }
     },
     'summon-op'(o) {
-        A['summon'].call(this, {
-            player: o.player.enemy
-        }, o);
+        o.player = o.player.enemy;
+
+        A['summon'].call(this, o);
     },
     'summon-random': function(o) {
         const index = _.random(this.params.length - 1);
