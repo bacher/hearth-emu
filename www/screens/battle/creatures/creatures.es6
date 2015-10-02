@@ -41,6 +41,8 @@ H.Creatures = class Creatures {
     }
 
     _updateSide($creatures, side) {
+        this._hidePreview();
+
         const creatures = this._gameData[side].creatures;
         const prevCreatures = this._prevData && this._prevData[side].creatures;
 
