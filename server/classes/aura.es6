@@ -93,8 +93,8 @@ const AURAS = {
                 race = H.RACES[filter.match(/^race-(.+)$/)[1]];
             }
 
-            if (!type || card.base.type === type &&
-                !race || card.base.race === race) {
+            if ((!type || card.base.type === type) &&
+                (!race || card.base.race === race)) {
 
                 if (operation === 'set') {
                     card.cost = reduceBy;
