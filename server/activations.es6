@@ -195,7 +195,6 @@ const A = {
             obj.kill();
         });
     },
-    'give-deathrattle': function(o) {},
     'restore-full-hp': function(o) {
         o.targets.forEach(target => {
             target.hp = target.maxHp;

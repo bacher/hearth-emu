@@ -1768,16 +1768,6 @@
     "clas": 3,
     "type": 2,
     "combo": {
-      "object": {
-        "events": {
-          "battlecry": [],
-          "deathrattle": [],
-          "end-turn": [],
-          "start-turn": [],
-          "aura": [],
-          "custom": []
-        }
-      },
       "spell": {
         "acts": [
           {
@@ -4342,25 +4332,16 @@
     "pic": "147/444/526",
     "clas": 2,
     "type": 2,
-    "flags": [],
     "targetsType": {
       "names": [
         "minions"
       ]
     },
+    "flags": [
+      "unimplemented"
+    ],
     "spell": {
-      "acts": [
-        {
-          "acts": [
-            {
-              "name": "give-deathrattle",
-              "params": [
-                "resummon"
-              ]
-            }
-          ]
-        }
-      ]
+      "acts": []
     }
   },
   {
@@ -4845,11 +4826,6 @@
             }
           ]
         }
-      },
-      "spell": {
-        "acts": [
-          {}
-        ]
       }
     },
     "flags": [],
@@ -5048,16 +5024,6 @@
     "clas": 3,
     "type": 2,
     "combo": {
-      "object": {
-        "events": {
-          "battlecry": [],
-          "deathrattle": [],
-          "end-turn": [],
-          "start-turn": [],
-          "aura": [],
-          "custom": []
-        }
-      },
       "spell": {
         "acts": [
           {
@@ -7714,16 +7680,6 @@
     "clas": 3,
     "type": 2,
     "combo": {
-      "object": {
-        "events": {
-          "battlecry": [],
-          "deathrattle": [],
-          "end-turn": [],
-          "start-turn": [],
-          "aura": [],
-          "custom": []
-        }
-      },
       "spell": {
         "acts": [
           {
@@ -8374,16 +8330,17 @@
         "events": {
           "battlecry": [
             {
-              "acts": [
-                {
-                  "name": "deal-damage",
-                  "params": [
-                    2
-                  ]
-                }
-              ]
+              "event": null,
+              "command": "deal-damage(2)",
+              "targetsType": null
             }
-          ]
+          ],
+          "deathrattle": [],
+          "end-turn": [],
+          "start-turn": [],
+          "aura": [],
+          "enrage": [],
+          "custom": []
         }
       },
       "spell": {
@@ -8400,7 +8357,9 @@
         "all"
       ]
     },
-    "flags": [],
+    "flags": [
+      "unimplemented"
+    ],
     "weapon": {
       "attack": 2,
       "durability": 2,
@@ -8590,9 +8549,6 @@
             }
           ]
         }
-      },
-      "spell": {
-        "acts": []
       },
       "targetsType": {
         "names": [
@@ -11551,9 +11507,6 @@
             }
           ]
         }
-      },
-      "spell": {
-        "acts": []
       },
       "targetsType": {
         "names": [
