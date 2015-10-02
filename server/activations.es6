@@ -108,6 +108,9 @@ const A = {
         o.minion.hp += value;
         o.minion.maxHp += value;
     },
+    'add-attack-per-target'(o) {
+        o.minion.attack += o.targets.getCount();
+    },
     'deal-damage': function(o) {
         o.targets.forEach(target => {
             const damage = H.parseValue(this.params[0]);
@@ -661,6 +664,13 @@ const A = {
             _.times(4, () => {
                 H.getRandomElement(targets).dealDamage(1);
             });
+        }
+    },
+    'call-pet'(o) {
+        const handCard = o.player.drawCard();
+
+        if (handCard.type === H.CARD_TYPES.minion && handCard.base.minion.race === H.RACES.beast) {
+            handCard.cost = Math.max(0, handCard.cost - 4);
         }
     }
 };

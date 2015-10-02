@@ -3804,7 +3804,35 @@
       "attack": 1,
       "maxHp": 1,
       "flags": [],
-      "events": {},
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "except-self",
+                "minions",
+                "friends"
+              ],
+              "modificators": [
+                {
+                  "name": "race",
+                  "params": [
+                    "beast"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
       "race": 1
     }
   },
@@ -4766,6 +4794,27 @@
     }
   },
   {
+    "id": 639,
+    "name": "Call Pet",
+    "cost": 2,
+    "pic": "148/791/12224",
+    "clas": 5,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "call-pet",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 122,
     "name": "Cleave",
     "cost": 2,
@@ -5230,6 +5279,20 @@
     }
   },
   {
+    "id": 640,
+    "name": "Feign Death",
+    "cost": 2,
+    "pic": "148/819/12238",
+    "clas": 5,
+    "type": 2,
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": []
+    }
+  },
+  {
     "id": 257,
     "name": "Fiery War Axe",
     "cost": 2,
@@ -5408,6 +5471,49 @@
       ],
       "race": 0,
       "events": {}
+    }
+  },
+  {
+    "id": 638,
+    "name": "Glaivezooka",
+    "cost": 2,
+    "pic": "148/894/12267",
+    "clas": 5,
+    "type": 3,
+    "flags": [],
+    "weapon": {
+      "attack": 2,
+      "durability": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "friends",
+                "minions"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -6684,6 +6790,24 @@
     }
   },
   {
+    "id": 641,
+    "name": "Steamwheedle Sniper",
+    "cost": 2,
+    "pic": "149/36/12242",
+    "clas": 5,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 565,
     "name": "Stonesplinter Trogg",
     "cost": 2,
@@ -7327,6 +7451,50 @@
               ]
             }
           ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 635,
+    "name": "Cobra Shot",
+    "cost": 3,
+    "pic": "148/991/12304",
+    "clas": 5,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                3
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "heroes",
+              "enemies"
+            ]
+          }
         }
       ]
     }
@@ -8695,6 +8863,50 @@
     "flags": [],
     "spell": {
       "acts": []
+    }
+  },
+  {
+    "id": 637,
+    "name": "Metaltooth Leaper",
+    "cost": 3,
+    "pic": "148/912/12254",
+    "clas": 5,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "except-self",
+                "minions",
+                "friends"
+              ],
+              "modificators": [
+                {
+                  "name": "race",
+                  "params": [
+                    "mech"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -11229,7 +11441,7 @@
           {
             "acts": [
               {
-                "name": "add-attach-hp",
+                "name": "add-attack-hp",
                 "params": [
                   2
                 ]
@@ -12746,6 +12958,50 @@
       "flags": [],
       "race": 0,
       "events": {}
+    }
+  },
+  {
+    "id": 636,
+    "name": "King of Beasts",
+    "cost": 5,
+    "pic": "148/906/12285",
+    "clas": 5,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 6,
+      "flags": [
+        "taunt"
+      ],
+      "race": 1,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-attack-per-target",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "except-self",
+                "friends",
+                "minions"
+              ],
+              "modificators": [
+                {
+                  "name": "race",
+                  "params": [
+                    "beast"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -14734,6 +14990,46 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 634,
+    "name": "Gahz'rilla",
+    "cost": 7,
+    "pic": "148/915/12232",
+    "clas": 5,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 6,
+      "maxHp": 9,
+      "flags": [],
+      "race": 1,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "x2",
+                "params": [
+                  "attack"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "take-damage",
+              "params": [
+                "self"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
