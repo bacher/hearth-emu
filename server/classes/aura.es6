@@ -94,7 +94,7 @@ const AURAS = {
             }
 
             if ((!type || card.base.type === type) &&
-                (!race || card.base.race === race)) {
+                (!race || card.base.minion.race === race)) {
 
                 if (operation === 'set') {
                     card.cost = reduceBy;
