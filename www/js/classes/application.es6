@@ -7,8 +7,8 @@ H.Application = class Application {
         this._sceens = [];
     }
 
-    activateScreen(name) {
-        const newActiveScreen = new H.Screens[name]();
+    activateScreen(name, params) {
+        const newActiveScreen = new H.Screens[name](params);
 
         this._sceens.push(newActiveScreen);
 

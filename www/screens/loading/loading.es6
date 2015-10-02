@@ -81,7 +81,9 @@ H.Screens['loading'] = class LoadingScreen extends H.Screen {
         } else if (hash === '#start-game' || hash === '#battle') {
             H.app.activateScreen('start-game-menu');
         } else {
-            H.app.activateScreen('main-menu');
+            H.app.activateScreen('main-menu', {
+                longLoad: true
+            });
         }
     }
 };

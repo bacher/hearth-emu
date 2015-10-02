@@ -1,10 +1,12 @@
 
 H.Screens['main-menu'] = class MainMenuScreen extends H.Screen {
-    constructor() {
+    constructor(params = {}) {
         super({
             gClass: 'm',
             name: 'main-menu'
         });
+
+        this._longLoad = params.longLoad;
     }
 
     _render() {
@@ -17,7 +19,7 @@ H.Screens['main-menu'] = class MainMenuScreen extends H.Screen {
                 .one('transitionend', () => {
                     this.$node.addClass('loaded');
                 });
-        }, 1500);
+        }, this._longLoad ? 1500 : 500);
     }
 
     _bindEventListeners() {
