@@ -94,4 +94,8 @@ H.Socket = class Socket {
         }
     }
 
+    close() {
+        this._socket.close();
+    }
+
 };
