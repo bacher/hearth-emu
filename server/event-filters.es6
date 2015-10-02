@@ -246,6 +246,7 @@ const E = {
         eventName: 'death',
         filterFunc(o, params, callback) {
             const side = params[0];
+            const raceFilter = H.RACES[params[1]];
 
             var playerSide = null;
             var targetMinion = null;
@@ -260,7 +261,8 @@ const E = {
 
             return function(minion) {
                 if (!playerSide || playerSide === minion.player &&
-                    !targetMinion || targetMinion === minion) {
+                    !targetMinion || targetMinion === minion &&
+                    !raceFilter || minion.race === raceFilter) {
                     callback.apply(null, arguments);
                 }
             };

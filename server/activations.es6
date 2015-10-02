@@ -643,6 +643,11 @@ const A = {
         }, {
             player
         });
+    },
+    'discard-deck-card'(o) {
+        for (var i = 0; i < this.params[0] || 1; ++i) {
+            o.player.deck.popCard();
+        }
     }
 };
 

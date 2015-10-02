@@ -11293,6 +11293,41 @@
     }
   },
   {
+    "id": 588,
+    "name": "Antique Healbot",
+    "cost": 5,
+    "pic": "148/978/12227",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "heal",
+                "params": [
+                  8
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "friends",
+                "heroes"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 256,
     "name": "Arcanite Reaper",
     "cost": 5,
@@ -11467,6 +11502,24 @@
     }
   },
   {
+    "id": 589,
+    "name": "Blingtron 3000",
+    "cost": 5,
+    "pic": "149/142/12183",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 3,
+      "maxHp": 4,
+      "flags": [],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
     "id": 187,
     "name": "Bloodlust",
     "cost": 5,
@@ -11503,6 +11556,41 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 590,
+    "name": "Bomb Lobber",
+    "cost": 5,
+    "pic": "149/75/12193",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  4
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions",
+                "enemies"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -11815,6 +11903,42 @@
     }
   },
   {
+    "id": 591,
+    "name": "Fel Reaver",
+    "cost": 5,
+    "pic": "148/788/12264",
+    "clas": 0,
+    "type": 1,
+    "comment": "Наносит ли урон если нет карт в колоде?",
+    "flags": [],
+    "minion": {
+      "attack": 8,
+      "maxHp": 8,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "discard-deck-card",
+                "params": [
+                  3
+                ]
+              }
+            ],
+            "event": {
+              "name": "play-card",
+              "params": [
+                "op"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 418,
     "name": "Fen Creeper",
     "cost": 5,
@@ -11929,6 +12053,46 @@
     }
   },
   {
+    "id": 592,
+    "name": "Hemet Nesingwary",
+    "cost": 5,
+    "pic": "149/145/12268",
+    "clas": 0,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "minions"
+      ],
+      "modificators": [
+        {
+          "name": "race",
+          "params": [
+            "beast"
+          ]
+        }
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 6,
+      "maxHp": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "kill",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 112,
     "name": "Holy Nova",
     "cost": 5,
@@ -11997,6 +12161,42 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 593,
+    "name": "Junkbot",
+    "cost": 5,
+    "pic": "149/97/12251",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 1,
+      "maxHp": 5,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-attack-hp",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "event": {
+              "name": "death",
+              "params": [
+                "my",
+                "mech"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -12115,6 +12315,182 @@
     }
   },
   {
+    "id": 594,
+    "name": "Madder Bomber",
+    "cost": 5,
+    "pic": "149/45/12177",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "except-self"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "except-self"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "except-self"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "except-self"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "except-self"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "except-self"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 595,
+    "name": "Mimiron's Head",
+    "cost": 5,
+    "pic": "149/115/12190",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unimplemented",
+      "unique"
+    ],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
     "id": 18,
     "name": "Nightblade",
     "cost": 5,
@@ -12162,6 +12538,22 @@
     "flags": [],
     "spell": {
       "acts": []
+    }
+  },
+  {
+    "id": 596,
+    "name": "Salty Dog",
+    "cost": 5,
+    "pic": "148/981/12263",
+    "clas": 0,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 7,
+      "maxHp": 4,
+      "flags": [],
+      "race": 6,
+      "events": {}
     }
   },
   {
