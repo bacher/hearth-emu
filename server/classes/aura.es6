@@ -42,7 +42,7 @@ const AURAS = {
     'add-attack-while-op-cards-count': {
         affect: 'minion',
         effect(minion) {
-            if (minion.player.enemy.hand.getCount() >= this.params[1]) {
+            if (minion.that.player.enemy.hand.getCount() >= this.params[1]) {
                 minion.attack += this.params[0];
             }
         }
