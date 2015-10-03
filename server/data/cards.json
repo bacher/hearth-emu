@@ -13492,6 +13492,51 @@
     }
   },
   {
+    "id": 670,
+    "name": "Druid of the Fang",
+    "cost": 5,
+    "pic": "149/12/12243",
+    "clas": 6,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "druid-of-the-fang",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 671,
+    "name": "Druid of the Fang_",
+    "cost": 5,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/c/c8/Druid_of_the_Fang%2812353%29.png",
+    "clas": 6,
+    "type": 1,
+    "flags": [
+      "uncollectable"
+    ],
+    "minion": {
+      "attack": 7,
+      "maxHp": 7,
+      "flags": [],
+      "race": 1,
+      "events": {}
+    }
+  },
+  {
     "id": 139,
     "name": "Earth Elemental",
     "cost": 5,
@@ -15445,6 +15490,39 @@
     }
   },
   {
+    "id": 669,
+    "name": "Mech-Bear-Cat",
+    "cost": 6,
+    "pic": "148/861/12226",
+    "clas": 6,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 7,
+      "maxHp": 6,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-spare-part",
+                "params": []
+              }
+            ],
+            "event": {
+              "name": "take-damage",
+              "params": [
+                "self"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 598,
     "name": "Mogor the Ogre",
     "cost": 6,
@@ -15530,6 +15608,38 @@
         "charge"
       ],
       "events": {}
+    }
+  },
+  {
+    "id": 668,
+    "name": "Recycle",
+    "cost": 6,
+    "pic": "148/845/12279",
+    "clas": 6,
+    "type": 2,
+    "comment": "Вызывает ли deathrattle?",
+    "targetsType": {
+      "names": [
+        "enemies",
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "shuffle-into-deck",
+              "params": []
+            },
+            {
+              "name": "detach",
+              "params": []
+            }
+          ]
+        }
+      ]
     }
   },
   {

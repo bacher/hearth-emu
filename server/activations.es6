@@ -214,6 +214,11 @@ const A = {
             obj.kill();
         });
     },
+    'detach': function(o) {
+        o.targets.forEach(obj => {
+            obj.detach();
+        });
+    },
     'restore-full-hp': function(o) {
         o.targets.forEach(target => {
             target.hp = target.maxHp;
@@ -716,6 +721,13 @@ const A = {
     },
     'shuffle-into-deck'(o) {
         o.player.deck.shuffleCard(o.minion.card);
+    },
+    'druid-of-the-fang'(o) {
+        const creatures = o.player.creatures;
+
+        if (creatures.getAllByRace(H.RACES.beast).length) {
+            creatures.replaceMinionByMinion(o.minion, H.Minion.createByName('Druid of the Fang_'));
+        }
     }
 };
 
