@@ -15558,6 +15558,42 @@
     }
   },
   {
+    "id": 658,
+    "name": "Trade Prince Gallywix",
+    "cost": 6,
+    "pic": "148/826/12291",
+    "clas": 3,
+    "type": 1,
+    "flags": [
+      "unique"
+    ],
+    "minion": {
+      "attack": 5,
+      "maxHp": 8,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "copy-card-give-coin",
+                "params": []
+              }
+            ],
+            "event": {
+              "name": "play-card",
+              "params": [
+                "op",
+                2
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 126,
     "name": "Vanish",
     "cost": 6,

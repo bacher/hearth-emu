@@ -701,6 +701,14 @@ const A = {
     },
     'destroy-enemy-traps'(o) {
         o.player.enemy.traps.getAll().forEach(tarp => trap.detach());
+    },
+    'copy-card-give-coin'(o) {
+        const handCard = o.eventMessage.handCard;
+
+        console.warn(handCard.base.name);
+
+        o.player.hand.addCard(handCard.base);
+        o.player.enemy.hand.addCard(H.CARDS.getByName('The Coin', H.CARD_TYPES.spell));
     }
 };
 
