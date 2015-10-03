@@ -161,8 +161,8 @@ H.Player = class Player extends EventEmitter {
                 data: json
             }));
         } catch (e) {
-            console.log('ERROR', e);
-            console.log(json);
+            console.warn('Socket sending message error:', e);
+            console.warn(json);
         }
     }
 

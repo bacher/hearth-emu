@@ -314,6 +314,15 @@ H.Battle = class Battle extends EventEmitter {
             this._activateCard(player, null, additionCard, data.choosenCard, minion);
         }
 
+        const eventMessage = {
+            battle: this,
+            player,
+            handCard,
+            minion: card.type === H.CARD_TYPES.minion ? handCard.minion : null
+        };
+
+        this.emit('card-played', eventMessage);
+
         this.sendGameData();
     }
 

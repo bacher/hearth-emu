@@ -24,6 +24,35 @@ const E = {
             };
         }
     },
+    'card-played': {
+        eventName: 'card-played',
+        filterFunc: function(o, params, callback) {
+            var allowPlayer;
+            var allowType = params[1];
+
+            if (params[0] === 'my') {
+                allowPlayer = o.player;
+            } else if (params[0] === 'op') {
+                allowPlayer = o.player.enemy;
+            }
+
+            return function(eventMessage) {
+                const handCard = eventMessage.handCard;
+
+                if ((!allowPlayer || allowPlayer === handCard.player) &&
+                    (!allowType || handCard.base.type === allowType)) {
+
+                    var targets = null;
+
+                    if (eventMessage.minion) {
+                        targets = H.Targets.createFromMinions(o.player, eventMessage.minion);
+                    }
+
+                    callback(eventMessage, targets);
+                }
+            };
+        }
+    },
     'summon': {
         eventName: 'summon',
         filterFunc: function(o, params, callback) {

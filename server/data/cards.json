@@ -6971,12 +6971,28 @@
     "pic": "148/553/553",
     "clas": 5,
     "type": 4,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "trap": {
       "events": {
-        "custom": []
+        "custom": [
+          {
+            "event": {
+              "name": "card-played",
+              "params": [
+                "op",
+                1
+              ]
+            },
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  4
+                ]
+              }
+            ]
+          }
+        ]
       }
     }
   },
