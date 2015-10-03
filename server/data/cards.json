@@ -6776,6 +6776,45 @@
     }
   },
   {
+    "id": 648,
+    "name": "Seal of Light",
+    "cost": 2,
+    "pic": "148/942/12305",
+    "clas": 4,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "heal",
+              "params": [
+                4
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "heroes",
+              "friends"
+            ]
+          }
+        },
+        {
+          "acts": [
+            {
+              "name": "add-hero-attack",
+              "params": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 114,
     "name": "Shadow Word: Pain",
     "cost": 2,
@@ -6807,6 +6846,24 @@
           ]
         }
       ]
+    }
+  },
+  {
+    "id": 649,
+    "name": "Shielded Minibot",
+    "cost": 2,
+    "pic": "148/945/12257",
+    "clas": 4,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [
+        "shield"
+      ],
+      "race": 4,
+      "events": {}
     }
   },
   {
@@ -7742,6 +7799,50 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 645,
+    "name": "Coghammer",
+    "cost": 3,
+    "pic": "148/948/12228",
+    "clas": 4,
+    "type": 3,
+    "flags": [],
+    "weapon": {
+      "attack": 2,
+      "durability": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-flags",
+                "params": [
+                  "shield",
+                  "taunt"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions",
+                "friends"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -9268,6 +9369,40 @@
     }
   },
   {
+    "id": 646,
+    "name": "Muster for Battle",
+    "cost": 3,
+    "pic": "148/954/12223",
+    "clas": 4,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "summon",
+              "params": [
+                "Silver Hand Recruit",
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "equip-weapon",
+              "params": [
+                "Light's Justice"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 511,
     "name": "Nerubian",
     "cost": 3,
@@ -9641,6 +9776,24 @@
       "flags": [
         "shield"
       ],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 647,
+    "name": "Scarlet Purifier",
+    "cost": 3,
+    "pic": "149/81/12240",
+    "clas": 4,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 4,
+      "maxHp": 3,
+      "flags": [],
       "race": 0,
       "events": {}
     }
@@ -12560,6 +12713,25 @@
     }
   },
   {
+    "id": 642,
+    "name": "Bolvar Fordragon",
+    "cost": 5,
+    "pic": "148/960/12244",
+    "clas": 4,
+    "type": 1,
+    "flags": [
+      "unique",
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 7,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 590,
     "name": "Bomb Lobber",
     "cost": 5,
@@ -12682,6 +12854,47 @@
                 ]
               }
             ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 643,
+    "name": "Cobalt Guardian",
+    "cost": 5,
+    "pic": "148/957/12222",
+    "clas": 4,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 6,
+      "maxHp": 3,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-flags",
+                "params": [
+                  "shield"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "summon",
+              "params": [
+                "my",
+                "race-mech"
+              ]
+            }
           }
         ]
       }
@@ -13597,6 +13810,24 @@
     "flags": [],
     "spell": {
       "acts": []
+    }
+  },
+  {
+    "id": 644,
+    "name": "Quartermaster",
+    "cost": 5,
+    "pic": "148/951/12280",
+    "clas": 4,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 2,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {
