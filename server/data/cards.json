@@ -1491,8 +1491,8 @@
     "type": 2,
     "targetsType": {
       "names": [
-        "friends",
-        "minions"
+        "minions",
+        "friends"
       ],
       "modificators": [
         {
@@ -1510,43 +1510,49 @@
           "acts": [
             {
               "name": "add-aura",
-              "params": [
-                "add-attack",
-                2,
-                "this-turn",
-                "target"
+              "params": []
+            }
+          ],
+          "aura": {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
               ]
             }
-          ]
+          }
         },
         {
           "acts": [
             {
               "name": "add-aura",
-              "params": [
-                "add-flags",
-                "immune",
-                "this-turn",
-                "target"
+              "params": []
+            }
+          ],
+          "aura": {
+            "acts": [
+              {
+                "name": "add-flags",
+                "params": [
+                  "immune"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
               ]
             }
-          ]
+          }
         }
       ]
-    }
-  },
-  {
-    "id": 464,
-    "name": "Bestial Wrath",
-    "cost": 1,
-    "pic": "148/421/304",
-    "clas": 5,
-    "type": 2,
-    "flags": [
-      "unimplemented"
-    ],
-    "spell": {
-      "acts": []
     }
   },
   {
@@ -6959,7 +6965,7 @@
   },
   {
     "id": 477,
-    "name": 470,
+    "name": "Snake Trap",
     "cost": 2,
     "pic": "148/424/210",
     "clas": 5,

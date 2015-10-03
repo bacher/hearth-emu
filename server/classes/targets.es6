@@ -74,11 +74,12 @@ H.Targets = class Targets {
         minions.splice(minions.indexOf(minion), 1);
     }
 
+    // FIXME переименовать
     removeHiddenEnemies() {
         this.op.minions = this.op.minions.filter(minion => {
             const minionFlags = minion.getData().flags;
 
-            return !minionFlags['stealth'] && !minionFlags['spell-stealth'];
+            return !minionFlags['stealth'] && !minionFlags['spell-stealth'] && !minionFlags['immune'];
         });
 
         return this;

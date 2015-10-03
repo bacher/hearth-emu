@@ -95,7 +95,11 @@ H.Creatures = class Creatures {
     }
 
     getTauntMinions() {
-        return this.creatures.filter(creature => creature.is('taunt'));
+        return this.creatures.filter(minion => {
+            const minionDetails = minion.getData();
+
+            return minionDetails.flags['taunt'] && !minionDetails.flags['immune'];
+        });
     }
 
     getRandomMinion() {

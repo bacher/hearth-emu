@@ -79,6 +79,10 @@ H.Minion = class Minion extends H.GameObject {
     dealDamage(dmg) {
         const minionDetails = this.getData();
 
+        if (minionDetails.flags['immune']) {
+            return;
+        }
+
         const eventMessage = {
             to: this,
             dmg: dmg,
@@ -107,7 +111,6 @@ H.Minion = class Minion extends H.GameObject {
 
                 this._dealDamage(dmg);
             }
-
         }
     }
 
