@@ -18,7 +18,6 @@ H.Targets = class Targets {
     }
 
     static createFromMinions(player, ...minions) {
-        console.warn(minions);
         const targets = new Targets(player);
 
         targets.addMinions(minions);

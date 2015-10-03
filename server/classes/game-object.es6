@@ -176,6 +176,7 @@ H.GameObject = class GameObject extends EventEmitter {
 
             this.battle.addBattleAction({
                 name: 'play-secret',
+                player: this.player.id,
                 pic: this.card.pic
             });
 

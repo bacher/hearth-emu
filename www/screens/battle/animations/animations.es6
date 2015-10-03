@@ -31,6 +31,9 @@ H.Animations = class Animations {
                 case 'fireball':
                 case 'arrow':
                     return this._startProjectiveAnimation(animation);
+
+                case 'play-secret':
+                    return this._startPlaySecretAnimation(animation);
                 default:
                     console.warn('Animation [' + animation.name + '] not implemented!', animation);
             }
@@ -170,6 +173,31 @@ H.Animations = class Animations {
                     $projectile.css(toPos);
                 }, 15);
             });
+        });
+    }
+
+    _startPlaySecretAnimation(animation) {
+        return new Promise(resolve => {
+            const $splash = render(null, 'secret-splash');
+            this.$node.append($splash);
+
+            $splash.on('animationend', () => {
+                $splash.remove();
+            });
+
+            setTimeout(() => {
+                animation.side = animation.player === this._battle.playerId ? 'my' : 'op';
+
+                const $card = render(null, 'secret-card', animation);
+
+                this.$node.append($card);
+
+                $card.on('animationend', () => {
+                    $card.remove();
+
+                    resolve();
+                });
+            }, 300);
         });
     }
 

@@ -98,4 +98,81 @@
       background: url("/textures/arrow.png");
     }
   }
+
+  .secret-splash {
+    position: absolute;
+    top: 152px;
+    left: 445px;
+    width: 391px;
+    height: 311px;
+    background: url("/textures/secret-splash.png");
+
+    animation: secret-bounce 2s linear forwards;
+  }
+
+  @keyframes secret-bounce {
+    0% {
+      transform: scale(0);
+    }
+    6% {
+      transform: scale(1.2);
+    }
+    10% {
+      transform: scale(0.9);
+    }
+    14% {
+      transform: scale(1.1);
+    }
+    18% {
+      transform: scale(1);
+    }
+    92% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+
+  .secret-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    IMG {
+      width: 200px;
+    }
+
+    &.my {
+      animation: up-my-secret 3s linear forwards;
+    }
+
+    &.op {
+      animation: op-my-secret 3s linear forwards;
+    }
+  }
+
+  @keyframes up-my-secret {
+    0% {
+      transform: translate(542px, 346px) scale(0);
+    }
+    10% {
+      transform: translate(241px, 158px) scale(1);
+    }
+    100% {
+      transform: translate(241px, 158px) scale(1);
+    }
+  }
+
+  @keyframes op-my-secret {
+    0% {
+      transform: translate(542px, -72px) scale(0);
+    }
+    10% {
+      transform: translate(241px, 158px) scale(1);
+    }
+    100% {
+      transform: translate(241px, 158px) scale(1);
+    }
+  }
 }
