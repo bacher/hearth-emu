@@ -259,6 +259,68 @@
     }
   },
   {
+    "id": 678,
+    "name": "Dark Wispers_1",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/e/e5/Dark_Wispers%2812336%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "summon",
+              "params": [
+                "Wisp",
+                5
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 679,
+    "name": "Dark Wispers_2",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/8/8c/Dark_Wispers%2812335%29.png",
+    "clas": 6,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-attack-hp",
+              "params": [
+                5
+              ]
+            },
+            {
+              "name": "add-flags",
+              "params": [
+                "taunt"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 348,
     "name": "Demigod's Favor",
     "cost": 0,
@@ -15268,6 +15330,24 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 680,
+    "name": "Dark Wispers",
+    "cost": 6,
+    "pic": "148/882/12298",
+    "clas": 6,
+    "type": 2,
+    "additionActions": [
+      "Dark Wispers_1",
+      "Dark Wispers_2"
+    ],
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": []
     }
   },
   {
