@@ -101,6 +101,15 @@ const A = {
         o.minion.hp += count;
         o.minion.maxHp += count;
     },
+    'swap-hp'(o) {
+        const target = o.targets.getOneMinion();
+        const hp = o.minion.hp;
+
+        o.minion.hp = target.hp;
+        o.minion.maxHp = target.maxHp;
+
+        target.maxHp = target.hp = hp;
+    },
     'add-attack-hp-for-each-played-card'(o) {
         const value = (o.minion.player.getPlayedCardCount() - 1) * 2;
 
@@ -136,6 +145,13 @@ const A = {
             o.battle.auras.applyEffect(o.player, 'spell-damage', damageInfo);
 
             target.dealDamage(damageInfo.damage);
+        });
+    },
+    'deal-self-damage'(o) {
+        o.targets.forEach(target => {
+            const targetInfo = target.getInfo();
+
+            target.dealDamage(targetInfo.attack);
         });
     },
     'deal-damage-to-adjacent'(o) {

@@ -2866,6 +2866,20 @@
     }
   },
   {
+    "id": 656,
+    "name": "Light of the Naaru",
+    "cost": 1,
+    "pic": "148/776/12297",
+    "clas": 9,
+    "type": 2,
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": []
+    }
+  },
+  {
     "id": 202,
     "name": "Light's Justice",
     "cost": 1,
@@ -3517,6 +3531,40 @@
             "event": {
               "name": "play-secret",
               "params": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 657,
+    "name": "Shadowbomber",
+    "cost": 1,
+    "pic": "148/765/12278",
+    "clas": 9,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 1,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  3
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "heroes"
+              ]
             }
           }
         ]
@@ -6849,6 +6897,54 @@
     }
   },
   {
+    "id": 654,
+    "name": "Shadowboxer",
+    "cost": 2,
+    "pic": "148/987/12256",
+    "clas": 9,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 3,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            },
+            "event": {
+              "name": "heal",
+              "params": [
+                "self"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 649,
     "name": "Shielded Minibot",
     "cost": 2,
@@ -6950,6 +7046,55 @@
           "targetsType": "not-need"
         }
       ]
+    }
+  },
+  {
+    "id": 655,
+    "name": "Shrinkmeister",
+    "cost": 2,
+    "pic": "148/773/12197",
+    "clas": 9,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-aura",
+                "params": [
+                  "this-turn"
+                ]
+              }
+            ],
+            "aura": {
+              "acts": [
+                {
+                  "name": "reduce-attack",
+                  "params": [
+                    2
+                  ]
+                }
+              ],
+              "targetsType": {
+                "names": [
+                  "self"
+                ]
+              }
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -10436,6 +10581,58 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 653,
+    "name": "Velen's Chosen",
+    "cost": 3,
+    "pic": "148/769/12174",
+    "clas": 9,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-attack",
+              "params": [
+                2
+              ]
+            },
+            {
+              "name": "add-hp",
+              "params": [
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "add-aura",
+              "params": []
+            }
+          ],
+          "aura": {
+            "acts": [
+              {
+                "name": "add-spell-damage",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        }
+      ]
     }
   },
   {
@@ -14083,6 +14280,49 @@
     }
   },
   {
+    "id": 651,
+    "name": "Upgraded Repair Bot",
+    "cost": 5,
+    "pic": "149/24/12185",
+    "clas": 9,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "friends",
+        "minions"
+      ],
+      "modificators": [
+        {
+          "name": "race",
+          "params": [
+            "mech"
+          ]
+        }
+      ]
+    },
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 5,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-hp",
+                "params": [
+                  4
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 424,
     "name": "Venture Co. Mercenary",
     "cost": 5,
@@ -14106,6 +14346,40 @@
                   0,
                   1
                 ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 652,
+    "name": "Vol'jin",
+    "cost": 5,
+    "pic": "148/782/12296",
+    "clas": 9,
+    "type": 1,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [
+      "unique"
+    ],
+    "minion": {
+      "attack": 6,
+      "maxHp": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "swap-hp",
+                "params": []
               }
             ]
           }
@@ -14794,6 +15068,32 @@
       "flags": [],
       "race": 4,
       "events": {}
+    }
+  },
+  {
+    "id": 650,
+    "name": "Lightbomb",
+    "cost": 6,
+    "pic": "148/762/12301",
+    "clas": 9,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-self-damage",
+              "params": []
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "minions"
+            ]
+          }
+        }
+      ]
     }
   },
   {

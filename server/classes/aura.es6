@@ -31,6 +31,16 @@ const AURAS = {
             minion.attack += this.params[0];
         }
     },
+    'reduce-attack': {
+        affect: ['minion', 'hero'],
+        effect(minion) {
+            minion.attack -= this.params[0];
+
+            if (minion.attack < 0) {
+                minion.attack = 0;
+            }
+        }
+    },
     'add-attack-while-have-race': {
         affect: 'minion',
         effect(minion) {
