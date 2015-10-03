@@ -110,7 +110,7 @@ H.Hero = class Hero {
         this.attack = 0;
 
         if (this.weapon) {
-            this.weapon.wakeUp();
+            this.weapon.onStartTurn();
         }
     }
 

@@ -102,6 +102,22 @@ H.Creatures = class Creatures {
         });
     }
 
+    getAdjacent(minion) {
+        const index = this.creatures.indexOf(minion);
+
+        const minions = [];
+
+        if (index > 0) {
+            minions.push(this.creatures[index - 1]);
+        }
+
+        if (index + 1 < this.creatures.length) {
+            minions.push(this.creatures[index + 1]);
+        }
+
+        return minions;
+    }
+
     getRandomMinion() {
         return H.getRandomElement(this.creatures);
     }

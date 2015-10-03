@@ -147,6 +147,16 @@ const AURAS = {
                 }
             }
         }
+    },
+    'beasts-gain-charge': {
+        affect: 'minion',
+        effect(minion) {
+            if (this.owner !== minion.that && minion.race === H.RACES.beast && minion.flags['sleep']) {
+                delete minion.flags['tired'];
+                delete minion.flags['sleep'];
+            }
+        },
+        defaultSide: 'my'
     }
 };
 

@@ -125,14 +125,22 @@ H.Targets = class Targets {
     }
 
     getOne() {
-        if (this.my.minions.length) {
-            return this.my.minions[0];
-        } else if (this.op.minions.length) {
-            return this.op.minions[0];
+        const minion = this.getOneMinion();
+
+        if (minion) {
+            return minion
         } else if (this.my.hero) {
             return this.player.hero;
         } else if (this.op.hero) {
             return this.player.enemy.hero;
+        }
+    }
+
+    getOneMinion() {
+        if (this.my.minions.length) {
+            return this.my.minions[0];
+        } else if (this.op.minions.length) {
+            return this.op.minions[0];
         }
     }
 
@@ -195,31 +203,12 @@ H.Targets = class Targets {
         return targets;
     }
 
-    getAdjacent() {
-        var creatures;
-        var minion;
+    _getAdjacentMinions() {
+        const minion = this.getOneMinion();
 
-        if (this.my.minions.length) {
-            minion = this.my.minions[0];
-            creatures = this.player.creatures.creatures;
-        } else {
-            minion = this.op.minions[0];
-            creatures = this.player.enemy.creatures.creatures;
+        if (minion) {
+            return minion.player.creatures.getAdjacent(minion);
         }
-
-        const index = creatures.indexOf(minion);
-
-        const minions = [];
-
-        if (index > 0) {
-            minions.push(creatures[index - 1]);
-        }
-
-        if (index + 1 < creatures.length) {
-            minions.push(creatures[index + 1]);
-        }
-
-        return minions;
     }
 
     'random'(count) {
@@ -280,14 +269,14 @@ H.Targets = class Targets {
         this._filterAll(obj => obj.race === raceId);
     }
     'adjacent'() {
-        const adjacent = this.getAdjacent();
+        const adjacent = this._getAdjacentMinions();
 
         this.empty();
 
         this.addMinions(adjacent);
     }
     'add-adjacent'() {
-        this.addMinions(this.getAdjacent());
+        this.addMinions(this._getAdjacentMinions());
     }
     'invert'() {
         this._invertMinions(this.my, this.player.creatures);
