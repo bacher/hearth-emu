@@ -101,6 +101,36 @@
     }
   },
   {
+    "id": 675,
+    "name": "Attack Mode",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/4/45/Attack_Mode%2812328%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-attack",
+              "params": [
+                1
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "self"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 304,
     "name": "Backstab",
     "cost": 0,
@@ -1027,6 +1057,36 @@
               ]
             }
           ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 676,
+    "name": "Tank Mode",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/f/fc/Tank_Mode%2812330%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-hp",
+              "params": [
+                1
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "self"
+            ]
+          }
         }
       ]
     }
@@ -4627,6 +4687,26 @@
         "taunt",
         "shield"
       ],
+      "race": 4,
+      "events": {}
+    }
+  },
+  {
+    "id": 677,
+    "name": "Anodized Robo Cub",
+    "cost": 2,
+    "pic": "148/835/12219",
+    "clas": 6,
+    "type": 1,
+    "additionActions": [
+      "Attack Mode",
+      "Tank Mode"
+    ],
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
       "race": 4,
       "events": {}
     }
