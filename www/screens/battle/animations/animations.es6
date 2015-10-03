@@ -50,9 +50,19 @@ H.Animations = class Animations {
             $by.removeClass('available');
 
             const toPosition = $to.offset();
+            const pos = {};
+
+            if ($by.hasClass('avatar')) {
+                const byPosition = $by.offset();
+                pos.x = toPosition.left - byPosition.left;
+                pos.y = toPosition.top - byPosition.top;
+            } else {
+                pos.x = toPosition.left;
+                pos.y = toPosition.top;
+            }
 
             $by.css({
-                'transform': `translate(${toPosition.left}px,${toPosition.top}px)`,
+                'transform': `translate(${pos.x}px,${pos.y}px)`,
                 'z-index': 1
             });
 

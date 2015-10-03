@@ -392,7 +392,7 @@ H.Battle = class Battle extends EventEmitter {
                     eventMessage.to.addFlag('freeze');
                 }
 
-                if (to.attack) {
+                if (to.attack && eventMessage.to.objType !== 'hero') {
                     eventMessage.by.dealDamage(to.attack);
 
                     if (eventMessage.to.flags['acid'] && eventMessage.by.objType !== 'hero') {

@@ -174,6 +174,7 @@ H.Hero = class Hero {
     getBaseData() {
         return {
             that: this,
+            id: this.id,
             attack: (this.weapon ? this.weapon.attack : 0) + this.attack,
             hp: this.hp,
             armor: this.armor,
