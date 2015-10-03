@@ -17,6 +17,15 @@ H.Targets = class Targets {
         return targets;
     }
 
+    static createFromMinions(player, ...minions) {
+        console.warn(minions);
+        const targets = new Targets(player);
+
+        targets.addMinions(minions);
+
+        return targets;
+    }
+
     applyModificators(modificators) {
         if (modificators) {
             modificators.forEach(mod => {

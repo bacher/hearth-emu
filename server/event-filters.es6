@@ -91,6 +91,7 @@ const E = {
                     (!allowPlayer || allowPlayer === eventMessage.to.player) &&
                     (!allowHero || allowHero === eventMessage.to) &&
                     (!onlyMinions || eventMessage.to.objType === 'minion')) {
+
                     callback(eventMessage);
                 }
             };
@@ -125,7 +126,7 @@ const E = {
 
                     callback(eventMessage, targets);
 
-                    if (eventMessage.by.is('dead')) {
+                    if (eventMessage.by.is('detached')) {
                         eventMessage.prevent = true;
                     }
                 }

@@ -5531,12 +5531,27 @@
     "pic": "148/559/99",
     "clas": 5,
     "type": 4,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "trap": {
       "events": {
-        "custom": []
+        "custom": [
+          {
+            "event": {
+              "name": "hit-to",
+              "params": [
+                "my-hero"
+              ]
+            },
+            "acts": [
+              {
+                "name": "return-to-hand-reduce-cost",
+                "params": [
+                  -2
+                ]
+              }
+            ]
+          }
+        ]
       }
     }
   },
