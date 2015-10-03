@@ -728,6 +728,24 @@ const A = {
         if (creatures.getAllByRace(H.RACES.beast).length) {
             creatures.replaceMinionByMinion(o.minion, H.Minion.createByName('Druid of the Fang_'));
         }
+    },
+    'kill-if-alone'(o) {
+        if (o.player.creatures.getCount() === 1) {
+            o.minion.kill();
+        }
+    },
+    'demonheart'(o) {
+        const minion = o.targets.getOne();
+
+        if (minion.player === o.player && minion.race === H.RACES.demon) {
+            minion.attack += 5;
+            minion.hp += 5;
+            minion.maxHp += 5;
+        } else {
+            A['deal-spell-damage'].call({
+                params: [5]
+            }, o);
+        }
     }
 };
 

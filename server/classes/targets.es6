@@ -90,6 +90,14 @@ H.Targets = class Targets {
             return !minionFlags['stealth'] && !minionFlags['spell-stealth'] && !minionFlags['immune'];
         });
 
+        if (this.op.hero) {
+            const heroFlags = this.player.enemy.hero.getData().flags;
+
+            if (heroFlags['immune']) {
+                this.op.hero = false;
+            }
+        }
+
         return this;
     }
 
@@ -276,6 +284,12 @@ H.Targets = class Targets {
         const raceId = H.RACES[race];
         this._filterAll(obj => obj.race === raceId);
     }
+
+    'non-race'(race) {
+        const raceId = H.RACES[race];
+        this._filterAll(obj => obj.race !== raceId);
+    }
+
     'adjacent'() {
         const adjacent = this._getAdjacentMinions();
 

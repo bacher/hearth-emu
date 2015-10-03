@@ -5251,6 +5251,35 @@
     }
   },
   {
+    "id": 687,
+    "name": "Darkbomb",
+    "cost": 2,
+    "pic": "148/785/12299",
+    "clas": 7,
+    "type": 2,
+    "comment": "Spell damage?",
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-spell-damage",
+              "params": [
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 251,
     "name": "Defias Ringleader",
     "cost": 2,
@@ -6672,6 +6701,24 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 688,
+    "name": "Mistress of Pain",
+    "cost": 2,
+    "pic": "148/794/12283",
+    "clas": 7,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 4,
+      "flags": [],
+      "race": 2,
+      "events": {}
     }
   },
   {
@@ -11733,6 +11780,54 @@
     }
   },
   {
+    "id": 686,
+    "name": "Fel Cannon",
+    "cost": 4,
+    "pic": "https://media-hearth.cursecdn.com/avatars/148/800/12221.png",
+    "clas": 7,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 5,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "end-turn": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions"
+              ],
+              "modificators": [
+                {
+                  "name": "non-race",
+                  "params": [
+                    "mech"
+                  ]
+                },
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 156,
     "name": "Fireball",
     "cost": 4,
@@ -11939,6 +12034,20 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 685,
+    "name": "Imp-losion",
+    "cost": 4,
+    "pic": "148/900/12302",
+    "clas": 7,
+    "type": 2,
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": []
     }
   },
   {
@@ -13641,6 +13750,32 @@
     }
   },
   {
+    "id": 683,
+    "name": "Demonheart",
+    "cost": 5,
+    "pic": "148/797/12237",
+    "clas": 7,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "demonheart",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 461,
     "name": "Devilsaur",
     "cost": 5,
@@ -13922,6 +14057,24 @@
         "taunt"
       ],
       "race": 0,
+      "events": {}
+    }
+  },
+  {
+    "id": 684,
+    "name": "Floating Watcher",
+    "cost": 5,
+    "pic": "149/78/12271",
+    "clas": 7,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 4,
+      "maxHp": 4,
+      "flags": [],
+      "race": 2,
       "events": {}
     }
   },
@@ -14952,6 +15105,33 @@
             "acts": [
               {
                 "name": "swap-hp",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 682,
+    "name": "Anima Golem",
+    "cost": 6,
+    "pic": "149/3/12245",
+    "clas": 7,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 9,
+      "maxHp": 9,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "end-turn": [
+          {
+            "acts": [
+              {
+                "name": "kill-if-alone",
                 "params": []
               }
             ]
@@ -17344,6 +17524,89 @@
     ],
     "spell": {
       "acts": []
+    }
+  },
+  {
+    "id": 681,
+    "name": "Mal'Ganis",
+    "cost": 9,
+    "pic": "148/803/12294",
+    "clas": 7,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 9,
+      "maxHp": 7,
+      "flags": [],
+      "race": 2,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "friends",
+                "minions"
+              ],
+              "modificators": [
+                {
+                  "name": "race",
+                  "params": [
+                    "demon"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "acts": [
+              {
+                "name": "add-hp",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "friends",
+                "minions"
+              ],
+              "modificators": [
+                {
+                  "name": "race",
+                  "params": [
+                    "demon"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "acts": [
+              {
+                "name": "add-flags",
+                "params": [
+                  "immune"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "friends",
+                "heroes"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
