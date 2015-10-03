@@ -15657,7 +15657,9 @@
     "pic": "148/367/643",
     "clas": 1,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "unique"
+    ],
     "minion": {
       "attack": 4,
       "maxHp": 9,

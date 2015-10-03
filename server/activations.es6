@@ -177,7 +177,7 @@ const A = {
                 params: [opWeapon.durability]
             }, o);
 
-            opWeapon.detachWeapon();
+            opWeapon.destroy();
         }
     },
     'warrior-mortal-strike'(o) {
@@ -451,7 +451,9 @@ const A = {
     },
     'destroy-weapon': function(o) {
         o.targets.forEach(hero => {
-            hero.destroyWeapon();
+            if (hero.weapon) {
+                hero.weapon.destroy();
+            }
         });
     },
     'add-charge-if-weapon': function(o) {

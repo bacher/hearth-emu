@@ -27,7 +27,7 @@ H.Weapon = class Weapon extends H.GameObject {
         this.durability -= count;
 
         if (this.durability <= 0) {
-            this.detachWeapon();
+            this.destroy();
         }
     }
 
@@ -38,14 +38,14 @@ H.Weapon = class Weapon extends H.GameObject {
             this.attack--;
 
             if (this.attack === 0) {
-                this.detachWeapon();
+                this.destroy();
             }
         } else {
             this.reduceDurability(1);
         }
     }
 
-    detachWeapon() {
+    destroy() {
         const player = this.player;
 
         this.kill();
