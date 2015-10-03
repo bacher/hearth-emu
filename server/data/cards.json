@@ -5737,6 +5737,41 @@
     }
   },
   {
+    "id": 664,
+    "name": "Goblin Auto-Barber",
+    "cost": 2,
+    "pic": "148/809/12212",
+    "clas": 3,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 2,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-weapon-attack",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "heroes",
+                "friends"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 507,
     "name": "Haunted Creeper",
     "cost": 2,
@@ -6576,6 +6611,47 @@
                 "params": []
               }
             ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 665,
+    "name": "One-eyed Cheat",
+    "cost": 2,
+    "pic": "148/815/12255",
+    "clas": 3,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 4,
+      "maxHp": 1,
+      "flags": [],
+      "race": 6,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-flags",
+                "params": [
+                  "stealth"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            },
+            "event": {
+              "name": "summon",
+              "params": [
+                "my",
+                "race-pirate"
+              ]
+            }
           }
         ]
       }
@@ -7991,6 +8067,41 @@
     }
   },
   {
+    "id": 662,
+    "name": "Cogmaster's Wrench",
+    "cost": 3,
+    "pic": "148/812/12265",
+    "clas": 3,
+    "type": 3,
+    "flags": [],
+    "weapon": {
+      "attack": 1,
+      "durability": 3,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "aura": [
+          {
+            "acts": [
+              {
+                "name": "add-attack-while-have-race",
+                "params": [
+                  2,
+                  "mech"
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 390,
     "name": "Coldlight Oracle",
     "cost": 3,
@@ -9112,6 +9223,55 @@
             "targetsType": {
               "names": [
                 "self"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 663,
+    "name": "Iron Sensei",
+    "cost": 3,
+    "pic": "148/823/12229",
+    "clas": 3,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 2,
+      "flags": [],
+      "race": 4,
+      "events": {
+        "end-turn": [
+          {
+            "acts": [
+              {
+                "name": "add-attack-hp",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions",
+                "friends"
+              ],
+              "modificators": [
+                {
+                  "name": "race",
+                  "params": [
+                    "mech"
+                  ]
+                },
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
               ]
             }
           }
@@ -12047,6 +12207,83 @@
     }
   },
   {
+    "id": 660,
+    "name": "Sabotage",
+    "cost": 4,
+    "pic": "148/909/12236",
+    "clas": 3,
+    "type": 2,
+    "combo": {
+      "spell": {
+        "acts": [
+          {
+            "acts": [
+              {
+                "name": "kill",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies",
+                "minions"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "acts": [
+              {
+                "name": "destroy-weapon",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "enemies",
+                "heroes"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "kill",
+              "params": []
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "enemies",
+              "minions"
+            ],
+            "modificators": [
+              {
+                "name": "random",
+                "params": [
+                  1
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 630,
     "name": "Screwjank Clunker",
     "cost": 4,
@@ -12367,6 +12604,59 @@
               "enemies"
             ]
           }
+        }
+      ]
+    }
+  },
+  {
+    "id": 661,
+    "name": "Tinker's Sharpsword Oil",
+    "cost": 4,
+    "pic": "148/806/12276",
+    "clas": 3,
+    "type": 2,
+    "combo": {
+      "spell": {
+        "acts": [
+          {
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  3
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions",
+                "friends"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-weapon-attack",
+              "params": [
+                3
+              ]
+            }
+          ]
         }
       ]
     }
@@ -14007,6 +14297,26 @@
     "flags": [],
     "spell": {
       "acts": []
+    }
+  },
+  {
+    "id": 659,
+    "name": "Ogre Ninja",
+    "cost": 5,
+    "pic": "149/39/12235",
+    "clas": 3,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 6,
+      "maxHp": 6,
+      "flags": [
+        "stealth"
+      ],
+      "race": 0,
+      "events": {}
     }
   },
   {

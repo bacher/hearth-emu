@@ -478,7 +478,11 @@ const A = {
         }
     },
     'add-weapon-attack': function(o) {
-        o.player.hero.weapon.attack += this.params[0];
+        const weapon = o.player.hero.weapon;
+
+        if (weapon) {
+            weapon.attack += this.params[0];
+        }
     },
     'add-weapon-durability': function(o) {
         o.player.hero.weapon.durability += this.params[0];
