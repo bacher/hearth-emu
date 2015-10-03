@@ -2677,7 +2677,9 @@
     "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/6/61/Hound%28290%29.png",
     "clas": 5,
     "type": 1,
-    "flags": [],
+    "flags": [
+      "uncollectable"
+    ],
     "minion": {
       "attack": 1,
       "maxHp": 1,

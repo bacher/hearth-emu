@@ -675,8 +675,9 @@ const A = {
     },
     'call-pet'(o) {
         const handCard = o.player.drawCard();
+        const card = handCard.base;
 
-        if (handCard.type === H.CARD_TYPES.minion && handCard.base.minion.race === H.RACES.beast) {
+        if (card.type === H.CARD_TYPES.minion && card.minion.race === H.RACES.beast) {
             handCard.cost = Math.max(0, handCard.cost - 4);
         }
     },

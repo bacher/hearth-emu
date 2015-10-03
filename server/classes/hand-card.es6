@@ -13,6 +13,8 @@ H.HandCard = class HandCard extends EventEmitter {
 
         this.id = _.uniqueId('hand');
         this.base = card;
+
+        this.cost = card.cost;
     }
 
     getBaseData() {
@@ -20,7 +22,7 @@ H.HandCard = class HandCard extends EventEmitter {
 
         const base = this.base.getInfo(comboMode);
 
-        var cost = base.cost;
+        var cost = this.cost;
 
         if (this.base.costCalc) {
             switch (this.base.costCalc) {
