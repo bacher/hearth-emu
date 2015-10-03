@@ -124,6 +124,10 @@ const E = {
                     targets.addMinion(eventMessage.by);
 
                     callback(eventMessage, targets);
+
+                    if (eventMessage.by.is('dead')) {
+                        eventMessage.prevent = true;
+                    }
                 }
             };
         }

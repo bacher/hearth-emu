@@ -5307,13 +5307,14 @@
     "pic": "148/556/344",
     "clas": 5,
     "type": 4,
+    "comment": "Успевает ли урон срабатывание enrage?",
     "flags": [],
     "trap": {
       "events": {
         "custom": [
           {
             "event": {
-              "name": "take-damage",
+              "name": "hit-to",
               "params": [
                 "my-hero"
               ]
