@@ -315,6 +315,62 @@
     }
   },
   {
+    "id": 672,
+    "name": "Gift of Cards",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/e/ef/Gift_of_Cards%2812333%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "draw-card",
+              "params": []
+            },
+            {
+              "name": "draw-card-op",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 673,
+    "name": "Gift of Mana",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/7/7b/Gift_of_Mana%2812332%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-crystal",
+              "params": []
+            },
+            {
+              "name": "add-crystal",
+              "params": [
+                "op"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 180,
     "name": "Hunter's Mark",
     "cost": 0,
@@ -8857,6 +8913,26 @@
           }
         ]
       }
+    }
+  },
+  {
+    "id": 674,
+    "name": "Grove Tender",
+    "cost": 3,
+    "pic": "148/849/12273",
+    "clas": 6,
+    "type": 1,
+    "additionActions": [
+      "Gift of Cards",
+      "Gift of Mana"
+    ],
+    "flags": [],
+    "minion": {
+      "attack": 2,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {}
     }
   },
   {
