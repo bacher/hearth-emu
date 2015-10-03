@@ -88,4 +88,13 @@ H.Deck = class Deck {
 
         this.deckCards = allowCards;
     }
+
+    shuffleCard(card) {
+        const insertIndex = Math.floor(Math.random() * (this.deckCards.length + 1));
+
+        this.deckCards.splice(insertIndex, 0, {
+            card,
+            id: _.uniqueId('card')
+        });
+    }
 };

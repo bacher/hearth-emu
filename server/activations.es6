@@ -713,6 +713,9 @@ const A = {
 
         o.player.hand.addCard(handCard.base);
         o.player.enemy.hand.addCard(H.CARDS.getByName('The Coin', H.CARD_TYPES.spell));
+    },
+    'shuffle-into-deck'(o) {
+        o.player.deck.shuffleCard(o.minion.card);
     }
 };
 

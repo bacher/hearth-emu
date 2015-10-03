@@ -16301,6 +16301,35 @@
     }
   },
   {
+    "id": 667,
+    "name": "Malorne",
+    "cost": 7,
+    "pic": "148/864/12293",
+    "clas": 6,
+    "type": 1,
+    "flags": [
+      "unique"
+    ],
+    "minion": {
+      "attack": 9,
+      "maxHp": 7,
+      "flags": [],
+      "race": 1,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "shuffle-into-deck",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 610,
     "name": "Neptulon",
     "cost": 7,
@@ -17053,6 +17082,32 @@
       "flags": [],
       "race": 3,
       "events": {}
+    }
+  },
+  {
+    "id": 666,
+    "name": "Tree of Life",
+    "cost": 9,
+    "pic": "148/858/12270",
+    "clas": 6,
+    "type": 2,
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "restore-full-hp",
+              "params": []
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "all"
+            ]
+          }
+        }
+      ]
     }
   },
   {

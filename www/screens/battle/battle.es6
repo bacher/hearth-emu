@@ -145,7 +145,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                 deckClass = 's5'
             }
 
-            this.$node.find('.deck.' + side).removeClass('s1 s2 s3 s4 s5').addClass(deckClass);
+            this.$node.find('.deck.' + side).removeClass('hole s1 s2 s3 s4 s5').addClass(deckClass);
             this.$node.find('.deck-helper.' + side + ' .value').text(cardsLeft);
 
             render(this.$node.find('.traps.' + side), 'traps', {
