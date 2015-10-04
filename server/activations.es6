@@ -43,6 +43,17 @@ const A = {
 
         A['summon'].call({ params: [minionCardName] }, o);
     },
+    'summon-demon-from-hand'(o) {
+        const demonsHandCards = o.player.hand.getAll()
+            .filter(handCard => handCard.base.type === H.CARD_TYPES.minion && handCard.base.minion.race === H.RACES.demon);
+
+        const demonHandCard = H.getRandomElement(demonsHandCards);
+
+        if (demonHandCard) {
+            o.player.creatures.addCreature(new H.Minion(null, demonHandCard.base));
+            o.player.hand.removeHandCard(demonHandCard);
+        }
+    },
     'card-summon': function(o) {
         const minion = new H.Minion(o.handCard);
         o.handCard.minion = o.baseParams.minion = o.minion = minion;
@@ -451,7 +462,7 @@ const A = {
         });
     },
     'copy-to-hand'(o) {
-        o.player.creatures.getAll().forEach(minion => {
+        o.targets.forEach(minion => {
             o.player.hand.addCard(minion.card);
         });
     },

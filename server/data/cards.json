@@ -1589,6 +1589,57 @@
     }
   },
   {
+    "id": 524,
+    "name": "Avenge",
+    "cost": 1,
+    "pic": "148/696/7729",
+    "clas": 4,
+    "type": 4,
+    "flags": [],
+    "trap": {
+      "events": {
+        "custom": [
+          {
+            "event": {
+              "name": "death",
+              "params": [
+                "my"
+              ]
+            },
+            "acts": [
+              {
+                "name": "add-attack",
+                "params": [
+                  3
+                ]
+              },
+              {
+                "name": "add-hp",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions",
+                "friends"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 397,
     "name": "Bananas",
     "cost": 1,
@@ -4354,6 +4405,24 @@
     }
   },
   {
+    "id": 525,
+    "name": "Webspinner",
+    "cost": 1,
+    "pic": "148/660/7741",
+    "clas": 5,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 1,
+      "maxHp": 1,
+      "flags": [],
+      "race": 1,
+      "events": {}
+    }
+  },
+  {
     "id": 422,
     "name": "Whelp",
     "cost": 1,
@@ -7081,6 +7150,20 @@
     }
   },
   {
+    "id": 526,
+    "name": "Reincarnate",
+    "cost": 2,
+    "pic": "148/711/7731",
+    "clas": 2,
+    "type": 2,
+    "flags": [
+      "unimplemented"
+    ],
+    "spell": {
+      "acts": []
+    }
+  },
+  {
     "id": 205,
     "name": "River Crocolisk",
     "cost": 2,
@@ -8538,6 +8621,49 @@
     }
   },
   {
+    "id": 527,
+    "name": "Dark Cultist",
+    "cost": 3,
+    "pic": "148/705/7735",
+    "clas": 9,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 4,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "add-hp",
+                "params": [
+                  3
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions",
+                "friends"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 183,
     "name": "Deadly Shot",
     "cost": 3,
@@ -8699,6 +8825,44 @@
           }
         }
       ]
+    }
+  },
+  {
+    "id": 528,
+    "name": "Duplicate",
+    "cost": 3,
+    "pic": "148/687/7732",
+    "clas": 8,
+    "type": 4,
+    "flags": [],
+    "trap": {
+      "events": {
+        "custom": [
+          {
+            "event": {
+              "name": "death",
+              "params": [
+                "my"
+              ]
+            },
+            "acts": [
+              {
+                "name": "copy-to-hand",
+                "params": []
+              },
+              {
+                "name": "copy-to-hand",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
@@ -11264,6 +11428,46 @@
     }
   },
   {
+    "id": 529,
+    "name": "Anub'ar Ambusher",
+    "cost": 4,
+    "pic": "148/714/7728",
+    "clas": 3,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 5,
+      "maxHp": 5,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "return-to-hand",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions"
+              ],
+              "modificators": [
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 255,
     "name": "Arathi Weaponsmith",
     "cost": 4,
@@ -11650,6 +11854,40 @@
                   "self"
                 ]
               }
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 530,
+    "name": "Death's Bite",
+    "cost": 4,
+    "pic": "148/699/7734",
+    "clas": 1,
+    "type": 3,
+    "flags": [],
+    "weapon": {
+      "attack": 4,
+      "durability": 2,
+      "flags": [],
+      "race": 0,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "deal-damage",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "minions"
+              ]
             }
           }
         ]
@@ -12544,6 +12782,24 @@
     }
   },
   {
+    "id": 531,
+    "name": "Poison Seeds",
+    "cost": 4,
+    "pic": "148/690/7726",
+    "clas": 6,
+    "type": 1,
+    "flags": [
+      "unimplemented"
+    ],
+    "minion": {
+      "attack": 0,
+      "maxHp": 0,
+      "flags": [],
+      "race": 0,
+      "events": {}
+    }
+  },
+  {
     "id": 157,
     "name": "Polymorph",
     "cost": 4,
@@ -13125,6 +13381,33 @@
                 2
               ]
             }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 532,
+    "name": "Voidcaller",
+    "cost": 4,
+    "pic": "148/702/7733",
+    "clas": 7,
+    "type": 1,
+    "flags": [],
+    "minion": {
+      "attack": 3,
+      "maxHp": 4,
+      "flags": [],
+      "race": 2,
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "summon-demon-from-hand",
+                "params": []
+              }
+            ]
           }
         ]
       }
