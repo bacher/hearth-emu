@@ -109,7 +109,11 @@ H.Minion = class Minion extends H.GameObject {
                     amount: dmg
                 });
 
+                const player = this.player;
+
                 this._dealDamage(dmg);
+
+                player.battle.emit('damage-dealt', eventMessage);
             }
         }
     }
