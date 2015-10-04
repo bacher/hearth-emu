@@ -6710,15 +6710,36 @@
     "pic": "148/794/12283",
     "clas": 7,
     "type": 1,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "minion": {
       "attack": 1,
       "maxHp": 4,
       "flags": [],
       "race": 2,
-      "events": {}
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "heal-by-damage",
+                "params": []
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "heroes",
+                "friends"
+              ]
+            },
+            "event": {
+              "name": "hit-by",
+              "params": [
+                "self"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {

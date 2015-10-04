@@ -292,6 +292,13 @@ const A = {
             target.heal(this.params[0]);
         });
     },
+    'heal-by-damage'(o) {
+        const amount = o.eventMessage.by.getData().attack;
+
+        o.targets.forEach(target => {
+            target.heal(amount);
+        });
+    },
     'x2': function(o) {
         this.params.forEach(field => {
             o.targets.forEach(target => {

@@ -112,17 +112,27 @@
 
     transition: transform 0.15s linear;
 
-    &.purpose:before {
+    &.purpose:after {
       position: absolute;
+      top: -5px;
+      left: -5px;
+      width: 88px;
+      height: 97px;
       content: "";
-      top: -9px;
-      left: -11px;
-      width: 98px;
-      height: 105px;
-      background: url("/textures/card-fire-glow-square.png");
+      background: url("/textures/minion-purpose.png");
     }
 
-    &.battlecry-preview:before {
+    &.taunt.purpose:after {
+      position: absolute;
+      top: -8px;
+      left: -13px;
+      width: 105px;
+      height: 98px;
+      content: "";
+      background: url("/textures/minion-purpose_taunt.png");
+    }
+
+    &.battlecry-preview:after {
       position: absolute;
       top: -28px;
       left: -28px;
