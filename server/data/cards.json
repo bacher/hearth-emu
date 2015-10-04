@@ -387,6 +387,66 @@
     }
   },
   {
+    "id": 734,
+    "name": "Fire Hawk Form",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/0/04/Fire_Hawk_Form%2814644%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "transform",
+              "params": [
+                "Druid of the Flame_2"
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "self"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 731,
+    "name": "Firecat Form",
+    "cost": 0,
+    "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/8/85/Firecat_Form%2814643%29.png",
+    "clas": 6,
+    "type": 2,
+    "flags": [
+      "uncollectable"
+    ],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "transform",
+              "params": [
+                "Druid of the Flame_1"
+              ]
+            }
+          ],
+          "targetsType": {
+            "names": [
+              "self"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": 50,
     "name": "Frog",
     "cost": 0,
