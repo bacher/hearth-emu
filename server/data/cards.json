@@ -16659,8 +16659,19 @@
               {
                 "name": "summon",
                 "params": [
+                  "Boom Bot"
+                ]
+              }
+            ]
+          },
+          {
+            "acts": [
+              {
+                "name": "summon",
+                "params": [
                   "Boom Bot",
-                  2
+                  1,
+                  "prev"
                 ]
               }
             ]

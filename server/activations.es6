@@ -12,7 +12,11 @@ const A = {
             const minionPosition = o.player.creatures.indexOf(o.minion);
 
             if (minionPosition !== -1) {
-                index = minionPosition + 1;
+                if (this.params[2] === 'prev') {
+                    index = minionPosition;
+                } else {
+                    index = minionPosition + 1;
+                }
             }
         }
 
