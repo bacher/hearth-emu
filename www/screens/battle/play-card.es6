@@ -322,7 +322,7 @@ H.PlayCard = class PlayCard {
                 const $creature = render(null, 'creature', {
                     id: 'new',
                     classes: 'battlecry-preview',
-                    minion: { pic: this._$grabCard.find('.card IMG').attr('src') }
+                    minion: { pic: this._$grabCard.data('pic') }
                 });
 
                 this.battle._creatures.replaceEmptySpaceByPreview($creature);
