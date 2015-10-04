@@ -11088,15 +11088,25 @@
     "pic": "148/199/119",
     "clas": 7,
     "type": 1,
-    "flags": [
-      "unimplemented"
-    ],
+    "comment": "Должен сработать deathrattle?",
+    "flags": [],
     "minion": {
       "attack": 3,
       "maxHp": 3,
       "flags": [],
       "race": 2,
-      "events": {}
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "void-terror",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {

@@ -757,6 +757,17 @@ const A = {
                 params: [5]
             }, o);
         }
+    },
+    'void-terror'(o) {
+        const adjacent = o.player.creatures.getAdjacent(o.minion);
+
+        adjacent.forEach(minion => {
+            o.minion.attack += minion.attack;
+            o.minion.hp += minion.hp;
+            o.minion.maxHp += minion.hp;
+
+            minion.kill();
+        })
     }
 };
 
