@@ -39,13 +39,15 @@ H.Screens['collection-deck'] = class CollectionDeckScreen extends H.Screen {
 
                 this._removeCardPreview();
 
-                this._$previewImage = $('<img>')
-                    .addClass('card-preview')
-                    .attr('src', $cardLine.data('pic'))
-                    .css({
-                        top: Math.min(268, Math.max(20, cardPosition.top + - 123))
-                    })
-                    .appendTo(this.$node);
+                this._$previewImage = render(null, 'deck-card-preview', {
+                    pic: $cardLine.data('pic')
+                });
+
+                this._$previewImage.css({
+                    top: Math.min(268, Math.max(20, cardPosition.top - 123))
+                });
+
+                this.$node.append(this._$previewImage);
             })
             .on('mouseleave', '.card-line', () => {
                 this._removeCardPreview();
