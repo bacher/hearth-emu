@@ -368,7 +368,7 @@ H.PlayCard = class PlayCard {
             }
 
         } else {
-            this._release();
+            this._release(true);
 
             this._postAction(actionName, actionData);
         }
