@@ -8202,11 +8202,18 @@
     "pic": "148/918/12203",
     "clas": 1,
     "type": 2,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "spell": {
-      "acts": []
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "bouncing-blade",
+              "params": []
+            }
+          ]
+        }
+      ]
     }
   },
   {

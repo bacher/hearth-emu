@@ -767,7 +767,21 @@ const A = {
             o.minion.maxHp += minion.hp;
 
             minion.kill();
-        })
+        });
+    },
+    'bouncing-blade'(o) {
+        var minions = o.player.creatures.getAll().concat(o.player.enemy.creatures.getAll());
+
+        minions = minions.filter(minion => !minion.getData().flags['immune']);
+
+        if (minions.length) {
+            var target = null;
+
+            while (!target || !target.is('dead')) {
+                target = H.getRandomElement(minions);
+                target.dealDamage(1);
+            }
+        }
     }
 };
 

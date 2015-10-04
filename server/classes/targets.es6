@@ -66,6 +66,10 @@ H.Targets = class Targets {
         minions.forEach(minion => this.addMinion(minion));
     }
 
+    addFriendlyMinions() {
+        this.addMinions(this.player.creatures.getAll());
+    }
+
     addEnemyMinions() {
         this.addMinions(this.player.enemy.creatures.getAll());
     }
