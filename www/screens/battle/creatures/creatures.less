@@ -107,21 +107,10 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 76px;
-    height: 108px;
+    width: 78px;
+    height: 106px;
 
     transition: transform 0.15s linear;
-
-    &.sleep:after {
-      position: absolute;
-      display: inline-block;
-      width: 32px;
-      height: 39px;
-      top: -18px;
-      left: 47px;
-      content: "";
-      background: url("/textures/zzz.png");
-    }
 
     &.purpose:before {
       position: absolute;
@@ -219,15 +208,35 @@
       background: url("/textures/immune.png");
     }
 
-    .overlay {
+    &.sleep .last {
+      position: absolute;
+      top: -18px;
+      left: 47px;
+      width: 32px;
+      height: 39px;
+      content: "";
+      background: url("/textures/zzz.png");
+    }
+
+    > * {
       position: absolute;
       pointer-events: none;
     }
 
-    .attack, .hp {
-      position: absolute;
-      box-sizing: border-box;
+    IMG {
+      top: 4px;
+      left: 5px;
+      width: 69px;
+    }
 
+    .border {
+      left: -2px;
+      width: 80px;
+      height: 106px;
+      background: url("/textures/minion-border.png");
+    }
+
+    .attack, .hp {
       color: #FFF;
       font-family: "Belwe Bold", Times, serif;
       font-size: 18px;
@@ -253,23 +262,39 @@
     }
 
     .attack {
-      top: 84px;
-      left: -6px;
-      width: 24px;
-      height: 28px;
-      padding-top: 5px;
-      padding-left: 4px;
-      background: url("/textures/attack.png");
+      top: 69px;
+      left: 5px;
+      width: 20px;
     }
 
     .hp {
-      left: 63px;
-      top: 86px;
-      width: 16px;
-      height: 25px;
-      padding-top: 3px;
-      padding-left: 1px;
-      background: url("/textures/health-small.png");
+      left: 55px;
+      top: 70px;
+      width: 20px;
+    }
+  }
+
+  &.normal-mode .creature.available {
+    &:after {
+      position: absolute;
+      top: -13px;
+      left: -13px;
+      width: 105px;
+      height: 108px;
+      content: "";
+      background: url("/textures/minion-glow.png");
+      pointer-events: none;
+    }
+
+    &.taunt:after {
+      position: absolute;
+      top: -14px;
+      left: -15px;
+      width: 109px;
+      height: 111px;
+      content: "";
+      background: url("/textures/minion-glow_taunt.png");
+      pointer-events: none;
     }
   }
 
