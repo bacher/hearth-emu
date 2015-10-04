@@ -17,10 +17,10 @@ H.Targets = class Targets {
         return targets;
     }
 
-    static createFromMinions(player, ...minions) {
+    static createFromMinion(player, minion) {
         const targets = new Targets(player);
 
-        targets.addMinions(minions);
+        targets.addMinion(minion);
 
         return targets;
     }

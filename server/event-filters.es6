@@ -45,7 +45,7 @@ const E = {
                     var targets = null;
 
                     if (eventMessage.minion) {
-                        targets = H.Targets.createFromMinions(o.player, eventMessage.minion);
+                        targets = H.Targets.createFromMinion(o.player, eventMessage.minion);
                     }
 
                     callback(eventMessage, targets);
@@ -297,7 +297,10 @@ const E = {
                 if (!playerSide || playerSide === minion.player &&
                     !targetMinion || targetMinion === minion &&
                     !raceFilter || minion.race === raceFilter) {
-                    callback.apply(null, arguments);
+
+                    const targets = H.Targets.createFromMinion(o.player, minion);
+
+                    callback(minion, targets);
                 }
             };
         }

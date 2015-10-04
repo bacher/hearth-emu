@@ -8854,12 +8854,7 @@
                 "name": "copy-to-hand",
                 "params": []
               }
-            ],
-            "targetsType": {
-              "names": [
-                "self"
-              ]
-            }
+            ]
           }
         ]
       }
