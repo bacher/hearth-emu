@@ -10367,9 +10367,7 @@
         "all"
       ]
     },
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "weapon": {
       "attack": 2,
       "durability": 2,
