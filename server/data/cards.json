@@ -2996,6 +2996,7 @@
     "pic": "149/495/660",
     "clas": 0,
     "type": 1,
+    "comment": "Тут должен быть опциональный battlecry",
     "targetsType": {
       "names": [
         "minions"
@@ -3009,9 +3010,7 @@
         }
       ]
     },
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "minion": {
       "attack": 1,
       "maxHp": 2,
@@ -3041,7 +3040,12 @@
                   2
                 ]
               }
-            ]
+            ],
+            "targetsType": {
+              "names": [
+                "self"
+              ]
+            }
           }
         ]
       }
