@@ -43,15 +43,18 @@ const A = {
 
         A['summon'].call({ params: [minionCardName] }, o);
     },
-    'summon-demon-from-hand'(o) {
-        const demonsHandCards = o.player.hand.getAll()
-            .filter(handCard => handCard.base.type === H.CARD_TYPES.minion && handCard.base.minion.race === H.RACES.demon);
+    'summon-from-hand'(o) {
+        const player = this.params[0] === 'op' ? o.player.enemy : o.player;
+        const race = H.RACES[this.params[1]];
+
+        const demonsHandCards = player.hand.getAll()
+            .filter(handCard => handCard.base.type === H.CARD_TYPES.minion && (!race || handCard.base.minion.race === race));
 
         const demonHandCard = H.getRandomElement(demonsHandCards);
 
         if (demonHandCard) {
-            o.player.creatures.addCreature(new H.Minion(null, demonHandCard.base));
-            o.player.hand.removeHandCard(demonHandCard);
+            player.creatures.addCreature(new H.Minion(null, demonHandCard.base));
+            player.hand.removeHandCard(demonHandCard);
         }
     },
     'card-summon': function(o) {

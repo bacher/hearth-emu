@@ -11484,11 +11484,24 @@
     "pic": "148/832/12218",
     "clas": 2,
     "type": 2,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "spell": {
-      "acts": []
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "summon-from-hand",
+              "params": []
+            },
+            {
+              "name": "summon-from-hand",
+              "params": [
+                "op"
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {
@@ -13549,8 +13562,11 @@
           {
             "acts": [
               {
-                "name": "summon-demon-from-hand",
-                "params": []
+                "name": "summon-from-hand",
+                "params": [
+                  "my",
+                  "demon"
+                ]
               }
             ]
           }
