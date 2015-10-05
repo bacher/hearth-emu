@@ -1,5 +1,6 @@
 
 const cluster = require('cluster');
+var lastStart = 0;
 
 if (cluster.isMaster) {
     startFork();
@@ -14,5 +15,11 @@ if (cluster.isMaster) {
 }
 
 function startFork() {
-    cluster.fork();
+    var start = Date.now();
+
+    if (start - lastStart > 3000) {
+        cluster.fork();
+
+        lastStart = start;
+    }
 }

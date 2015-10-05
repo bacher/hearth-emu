@@ -7879,11 +7879,24 @@
     "pic": "148/747/12178",
     "clas": 8,
     "type": 2,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "spell": {
-      "acts": []
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "add-random-hand-minion",
+              "params": []
+            },
+            {
+              "name": "reduce-hand-card-cost",
+              "params": [
+                3
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {

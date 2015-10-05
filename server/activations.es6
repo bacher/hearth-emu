@@ -396,6 +396,20 @@ const A = {
             o.player.hand.addCard(card);
         });
     },
+    'add-random-hand-minion'(o) {
+        const cost = this.params[0];
+
+        const card = H.CARDS.getRandom(H.CARD_TYPES.minion, cost);
+
+        console.log(card);
+
+        o.baseParams.handCard = o.player.hand.addCard(card);
+    },
+    'reduce-hand-card-cost'(o) {
+        if (o.handCard) {
+            o.handCard.reduceCost(3);
+        }
+    },
     'add-attack-armor'(o) {
         const hero = o.player.hero;
 
@@ -792,6 +806,55 @@ const A = {
                 target = H.getRandomElement(minions);
                 target.dealDamage(1);
             }
+        }
+    },
+    'if-race-in-hand-gain-attack-hp'(o) {
+        const attack = this.params[1];
+        const hp = this.params[2] || attack;
+
+        if (o.player.creatures.getAllByRace(H.RACES[this.params[0]]).length) {
+            o.minion.attack += attack;
+            o.minion.hp += hp;
+            o.minion.maxHp += hp;
+        }
+    },
+    'if-opp-less-hp-add-attack-hp'(o) {
+        if (o.player.enemy.hero.hp <= this.params[0]) {
+            o.minion.attack += this.params[1];
+            o.minion.hp += this.params[1];
+            o.minion.maxHp += this.params[1];
+        }
+    },
+    'reduce-card-cost'(o) {
+        o.player.hand.getAll().forEach(handCard => handCard.reduceCost(this.params[0]));
+    },
+    'reduce-cost'(o) {
+
+    },
+    'revenge'(o) {
+        const damage = o.player.hero.hp >= 12 ? 3 : 1;
+
+        o.targets.forEach(target => {
+            target.dealDamage(damage);
+        });
+    },
+    'demonwrath'(o) {
+        const targets = H.Targets.getAllMinions(o.player);
+
+        targets['non-race'](H.RACES.demon);
+
+        targets.forEach(target => {
+            target.dealDamage(2);
+        });
+    },
+    'empty-hand-add-attack-hp'(o) {
+        const attack = this.params[0];
+        const hp = this.params[1] || attack;
+
+        if (o.player.hand.getCount() === 0) {
+            o.minion.attack += attack;
+            o.minion.hp += hp;
+            o.minion.maxHp += hp;
         }
     }
 };

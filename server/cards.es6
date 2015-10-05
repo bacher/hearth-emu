@@ -7,10 +7,25 @@ const cardsRaw = require('./data/cards.json');
 const cards = cardsRaw.map(card => new H.Card(card));
 
 const cardsHash = {};
+const cardsCostHash = {};
+const cardsTypeHash = {
+    [H.CARD_TYPES.minion]: [],
+    [H.CARD_TYPES.spell]: [],
+    [H.CARD_TYPES.weapon]: [],
+    [H.CARD_TYPES.trap]: []
+};
 
 for (var i = 0; i < cards.length; ++i) {
     var card = cards[i];
     cardsHash[card.id] = card;
+
+    cardsTypeHash[card.type].push(card);
+
+    if (!cardsCostHash[card.cost]) {
+        cardsCostHash[card.cost] = [];
+    }
+
+    cardsCostHash[card.cost].push(card);
 }
 
 H.CARDS = {
@@ -34,5 +49,23 @@ H.CARDS = {
                 return card;
             }
         }
+    },
+    getRandom(type, cost) {
+        var cards;
+
+        if (cost) {
+            cards = cardsCostHash[cost];
+
+            if (type) {
+                cards = cards.filter(card => card.type === type);
+            }
+
+        } else {
+            if (type) {
+                cards = cardsTypeHash[type];
+            }
+        }
+
+        return H.getRandomElement(cards);
     }
 };
