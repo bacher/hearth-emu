@@ -3725,6 +3725,11 @@
     "pic": "http://hydra-media.cursecdn.com/hearthstone.gamepedia.com/c/ca/Rusty_Horn%2812369%29.png",
     "clas": 0,
     "type": 2,
+    "targetsType": {
+      "names": [
+        "minions"
+      ]
+    },
     "flags": [
       "uncollectable"
     ],
