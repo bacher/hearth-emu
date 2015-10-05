@@ -191,6 +191,10 @@ H.Hand = class Hand {
 
         if (handCard.targetsType) {
             classes += ' need-target';
+
+            if (handCard.type === H.CARD_TYPES.minion) {
+                classes += ' need-battlecry-target';
+            }
         }
 
         classes += ' c' + (i + 1);

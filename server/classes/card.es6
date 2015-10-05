@@ -13,6 +13,7 @@ H.Card = class Card {
         this.pic = info.pic.match(/\/([^/]+?)(?:\.png)?$/)[1];
         this.flags = parseFlags(info.flags);
         this.targetsType = info.targetsType;
+        this.isTargetsTypeOptional = info.isTargetsTypeOptional;
         this.customAction = info.customAction;
         this.conditions = info.conditions || [];
 

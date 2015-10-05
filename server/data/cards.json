@@ -3010,6 +3010,7 @@
         }
       ]
     },
+    "isTargetsTypeOptional": true,
     "flags": [],
     "minion": {
       "attack": 1,
@@ -3024,7 +3025,8 @@
                 "name": "kill",
                 "params": []
               }
-            ]
+            ],
+            "optional": true
           },
           {
             "acts": [
@@ -3045,7 +3047,8 @@
               "names": [
                 "self"
               ]
-            }
+            },
+            "optional": true
           }
         ]
       }

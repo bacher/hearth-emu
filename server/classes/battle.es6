@@ -327,7 +327,20 @@ H.Battle = class Battle extends EventEmitter {
     }
 
     _activateCard(player, handCard, card, data, minion) {
-        const globalTargets = card.targetsType ? H.Targets.parseUserData(player, data) : null;
+        var globalTargets = null;
+        var skipOptionals = false;
+
+        if (card.targetsType) {
+            if (data.targetId) {
+                globalTargets = H.Targets.parseUserData(player, data)
+
+            } else if (card.isTargetsTypeOptional) {
+                skipOptionals = true;
+
+            } else {
+                throw new Error('No Targets');
+            }
+        }
 
         const eventMessage = {
             player,
@@ -352,7 +365,8 @@ H.Battle = class Battle extends EventEmitter {
                     handCardInfo: handCard && handCard.getData(),
                     minion: minion,
                     params: data,
-                    globalTargets: eventMessage.globalTargets
+                    globalTargets: eventMessage.globalTargets,
+                    skipOptionals
                 });
             }
         }

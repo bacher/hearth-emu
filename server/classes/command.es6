@@ -7,6 +7,7 @@ H.Command = class Command {
         this.acts = command.acts;
         this.event = command.event;
         this.targetsType = command.targetsType;
+        this.isOptional = command.optional;
 
         if (command.customEvent) {
             this._customEvent = command.customEvent;
@@ -41,6 +42,10 @@ H.Command = class Command {
 
     act(o) {
         var targets;
+
+        if (this.isOptional && o.skipOptionals) {
+            return;
+        }
 
         if (this.targetsType === 'not-need') {
             targets = null;

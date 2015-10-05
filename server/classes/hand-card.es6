@@ -86,12 +86,22 @@ H.HandCard = class HandCard extends EventEmitter {
             data.flags['can-play'] = true;
         }
 
-        if (data.base.targetsType) {
-            data.flags['need-battlecry-target'] = true;
+        if (this.base.type === H.CARD_TYPES.minion && data.base.targetsType) {
+            if (this.base.isTargetsTypeOptional) {
+                const targets = H.TARGETS.getByTargetsType(this.player, data.base.targetsType, this);
+
+                if (targets.getCount()) {
+                    data.targetsType = true;
+                }
+
+            } else {
+                data.targetsType = true;
+            }
+        } else {
+            data.targetsType = !!data.base.targetsType;
         }
 
         data.type = data.base.type;
-        data.targetsType = !!data.base.targetsType;
         data.pic = data.base.pic;
 
         if (data.isComboMode) {
