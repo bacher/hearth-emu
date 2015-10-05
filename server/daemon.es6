@@ -8,18 +8,19 @@ if (cluster.isMaster) {
     cluster.on('exit', function(worker, code) {
         console.warn('Slave process died, ERRORCODE: ' + code);
 
-        setTimeout(startFork, 2000);
+        if (Date.now() - lastStart < 3000) {
+            setTimeout(startFork, 10000);
+        } else {
+            setTimeout(startFork, 2000);
+        }
+
     });
 } else {
     require('./server');
 }
 
 function startFork() {
-    var start = Date.now();
+    lastStart = Date.now();
 
-    if (start - lastStart > 3000) {
-        cluster.fork();
-
-        lastStart = start;
-    }
+    cluster.fork();
 }
