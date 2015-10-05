@@ -308,8 +308,19 @@ const E = {
     'play-secret': {
         eventName: 'play-secret',
         filterFunc(o, params, callback) {
+            const side = params[0];
+            var playerSide;
+
+            if (side === 'my') {
+                playerSide = o.player;
+            } else if (side === 'op') {
+                playerSide = o.player.enemy;
+            }
+
             return function(eventMessage) {
-                callback.apply(null, arguments);
+                if (!playerSide || playerSide === eventMessage) {
+                    callback(eventMessage);
+                }
             };
         }
     }

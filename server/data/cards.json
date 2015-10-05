@@ -8993,15 +8993,32 @@
     "pic": "148/400/363",
     "clas": 5,
     "type": 3,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "weapon": {
       "attack": 3,
       "durability": 2,
       "flags": [],
       "race": 0,
-      "events": {}
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "add-weapon-durability",
+                "params": [
+                  1
+                ]
+              }
+            ],
+            "event": {
+              "name": "play-secret",
+              "params": [
+                "my"
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
