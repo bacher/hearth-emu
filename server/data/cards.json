@@ -10396,15 +10396,46 @@
     "pic": "148/867/12269",
     "clas": 2,
     "type": 3,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "weapon": {
       "attack": 3,
       "durability": 2,
       "flags": [],
       "race": 0,
-      "events": {}
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "add-attack-hp",
+                "params": [
+                  2
+                ]
+              }
+            ],
+            "targetsType": {
+              "names": [
+                "friends",
+                "minions"
+              ],
+              "modificators": [
+                {
+                  "name": "race",
+                  "params": [
+                    "mech"
+                  ]
+                },
+                {
+                  "name": "random",
+                  "params": [
+                    1
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   {
