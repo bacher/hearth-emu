@@ -397,11 +397,10 @@ const A = {
         });
     },
     'add-random-hand-minion'(o) {
-        const cost = this.params[0];
+        const cost = typeof this.params[0] === 'number' ? cost : null;
+        const race = typeof this.params[1] === 'string' ? H.RACES[this.params[1]] : null;
 
-        const card = H.CARDS.getRandom(H.CARD_TYPES.minion, cost);
-
-        console.log(card);
+        const card = H.CARDS.getRandom(H.CARD_TYPES.minion, cost, race);
 
         o.baseParams.handCard = o.player.hand.addCard(card);
     },

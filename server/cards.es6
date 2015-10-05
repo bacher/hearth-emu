@@ -50,7 +50,7 @@ H.CARDS = {
             }
         }
     },
-    getRandom(type, cost) {
+    getRandom(type = null, cost = null, race = null) {
         var cards;
 
         if (cost) {
@@ -58,11 +58,19 @@ H.CARDS = {
 
             if (type) {
                 cards = cards.filter(card => card.type === type);
+
+                if (race && type === H.CARD_TYPES.minion) {
+                    cards = cards.filter(card => card.minion.race === race);
+                }
             }
 
         } else {
             if (type) {
                 cards = cardsTypeHash[type];
+
+                if (race && type === H.CARD_TYPES.minion) {
+                    cards = cards.filter(card => card.minion.race === race);
+                }
             }
         }
 

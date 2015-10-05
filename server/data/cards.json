@@ -4471,15 +4471,27 @@
     "pic": "148/660/7741",
     "clas": 5,
     "type": 1,
-    "flags": [
-      "unimplemented"
-    ],
+    "flags": [],
     "minion": {
       "attack": 1,
       "maxHp": 1,
       "flags": [],
       "race": 1,
-      "events": {}
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "add-random-hand-minion",
+                "params": [
+                  "_",
+                  "beast"
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {
