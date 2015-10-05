@@ -485,6 +485,9 @@ const A = {
             o.player.hand.addCard(minion.card);
         });
     },
+    'copy-draw-hand'(o) {
+        o.player.hand.addCard(o.eventMessage.handCard.base);
+    },
     'equip-weapon': function(o) {
         const card = H.CARDS.getByName(this.params[0], H.CARD_TYPES['weapon']);
 

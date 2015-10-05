@@ -17660,6 +17660,41 @@
     }
   },
   {
+    "id": 713,
+    "name": "Chromaggus",
+    "cost": 8,
+    "pic": "198/44/14451",
+    "clas": 0,
+    "type": 1,
+    "flags": [
+      "unique"
+    ],
+    "minion": {
+      "attack": 6,
+      "maxHp": 8,
+      "flags": [],
+      "race": 3,
+      "events": {
+        "custom": [
+          {
+            "acts": [
+              {
+                "name": "copy-draw-hand",
+                "params": []
+              }
+            ],
+            "event": {
+              "name": "draw-card",
+              "params": [
+                "my"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
     "id": 608,
     "name": "Foe Reaper 4000",
     "cost": 8,

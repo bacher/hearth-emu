@@ -323,6 +323,25 @@ const E = {
                 }
             };
         }
+    },
+    'draw-card': {
+        eventName: 'draw-card',
+        filterFunc(o, params, callback) {
+            const side = params[0];
+            var playerSide;
+
+            if (side === 'my') {
+                playerSide = o.player;
+            } else if (side === 'op') {
+                playerSide = o.player.enemy;
+            }
+
+            return function(eventMessage) {
+                if (!playerSide || playerSide === eventMessage.player) {
+                    callback(eventMessage);
+                }
+            };
+        }
     }
 };
 

@@ -189,7 +189,15 @@ H.Player = class Player extends EventEmitter {
 
         if (card) {
             if (this.hand.canAddCard()) {
-                return this.hand.addCard(card);
+                const handCard = this.hand.addCard(card);
+
+                this.battle.emit('draw-card', {
+                    player: this,
+                    handCard
+                });
+
+                return handCard;
+
             } else {
                 this.emit('message', {
                     msg: 'burn-card',
