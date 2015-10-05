@@ -17982,15 +17982,25 @@
     "clas": 0,
     "type": 1,
     "flags": [
-      "unique",
-      "unimplemented"
+      "unique"
     ],
     "minion": {
       "attack": 5,
       "maxHp": 7,
       "flags": [],
       "race": 4,
-      "events": {}
+      "events": {
+        "deathrattle": [
+          {
+            "acts": [
+              {
+                "name": "summon-random-legendary-minion",
+                "params": []
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {

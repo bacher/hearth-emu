@@ -14,18 +14,25 @@ const cardsTypeHash = {
     [H.CARD_TYPES.weapon]: [],
     [H.CARD_TYPES.trap]: []
 };
+const legendary = [];
 
 for (var i = 0; i < cards.length; ++i) {
     var card = cards[i];
     cardsHash[card.id] = card;
 
-    cardsTypeHash[card.type].push(card);
+    if (card.flags['unimplemented']) {
+        cardsTypeHash[card.type].push(card);
 
-    if (!cardsCostHash[card.cost]) {
-        cardsCostHash[card.cost] = [];
+        if (!cardsCostHash[card.cost]) {
+            cardsCostHash[card.cost] = [];
+        }
+
+        cardsCostHash[card.cost].push(card);
+
+        if (card.flags['unique']) {
+            legendary.push(card);
+        }
     }
-
-    cardsCostHash[card.cost].push(card);
 }
 
 H.CARDS = {
@@ -72,6 +79,15 @@ H.CARDS = {
                     cards = cards.filter(card => card.minion.race === race);
                 }
             }
+        }
+
+        return H.getRandomElement(cards);
+    },
+    getRandomLegendary(type = null) {
+        var cards = legendary;
+
+        if (type) {
+            cards = cards.filter(card => card.type === type);
         }
 
         return H.getRandomElement(cards);

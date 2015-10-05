@@ -864,6 +864,11 @@ const A = {
             o.minion.hp += hp;
             o.minion.maxHp += hp;
         }
+    },
+    'summon-random-legendary-minion'(o) {
+        const card = H.CARDS.getRandomLegendary(H.CARD_TYPES.minion);
+
+        o.player.creatures.addCreature(new H.Minion(null, card));
     }
 };
 
