@@ -343,6 +343,11 @@ const A = {
             o.player.drawCard();
         }
     },
+    'empty-hand-draw-card'(o) {
+        if (o.player.hand.getCount() === 0) {
+            o.player.drawCard();
+        }
+    },
     'draw-card-chance'(o) {
         if (Math.random() < this.params[0]) {
             A['draw-card'].apply(this, o);

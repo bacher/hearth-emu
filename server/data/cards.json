@@ -7164,6 +7164,42 @@
     }
   },
   {
+    "id": 729,
+    "name": "Quick Shot",
+    "cost": 2,
+    "pic": "197/981/14459",
+    "clas": 5,
+    "type": 2,
+    "targetsType": {
+      "names": [
+        "all"
+      ]
+    },
+    "flags": [],
+    "spell": {
+      "acts": [
+        {
+          "acts": [
+            {
+              "name": "deal-damage",
+              "params": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "name": "empty-hand-draw-card",
+              "params": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": 262,
     "name": "Rampage",
     "cost": 2,
