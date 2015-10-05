@@ -17356,7 +17356,6 @@
     "clas": 2,
     "type": 1,
     "flags": [
-      "unimplemented",
       "unique"
     ],
     "minion": {
@@ -17364,7 +17363,64 @@
       "maxHp": 7,
       "flags": [],
       "race": 0,
-      "events": {}
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "add-random-hand-minion",
+                "params": [
+                  "_",
+                  "murloc"
+                ]
+              }
+            ]
+          },
+          {
+            "acts": [
+              {
+                "name": "add-random-hand-minion",
+                "params": [
+                  "_",
+                  "murloc"
+                ]
+              }
+            ]
+          },
+          {
+            "acts": [
+              {
+                "name": "add-random-hand-minion",
+                "params": [
+                  "_",
+                  "murloc"
+                ]
+              }
+            ]
+          },
+          {
+            "acts": [
+              {
+                "name": "add-random-hand-minion",
+                "params": [
+                  "_",
+                  "murloc"
+                ]
+              }
+            ]
+          },
+          {
+            "acts": [
+              {
+                "name": "overload",
+                "params": [
+                  3
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   {

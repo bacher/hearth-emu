@@ -37,9 +37,7 @@ const A = {
         A['summon'].call(this, o);
     },
     'summon-random': function(o) {
-        const index = _.random(this.params.length - 1);
-
-        const minionCardName = this.params[index];
+        const minionCardName = H.getRandomElement(this.params);
 
         A['summon'].call({ params: [minionCardName] }, o);
     },
