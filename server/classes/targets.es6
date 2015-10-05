@@ -315,6 +315,9 @@ H.Targets = class Targets {
         this._invertMinions(this.my, this.player.creatures);
         this._invertMinions(this.op, this.player.enemy.creatures);
     }
+    'with'(flag) {
+        this._filterAll(obj => obj.getData().flags[flag]);
+    }
 
     _invertMinions(side, playerCreatures) {
         side.minions = playerCreatures.getAll().filter(creature => {

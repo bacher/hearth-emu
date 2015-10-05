@@ -16856,15 +16856,42 @@
     "pic": "147/781/396",
     "clas": 0,
     "type": 1,
+    "targetsType": {
+      "names": [
+        "enemies",
+        "minions"
+      ],
+      "modificators": [
+        {
+          "name": "with",
+          "params": [
+            "taunt"
+          ]
+        }
+      ]
+    },
+    "isTargetsTypeOptional": true,
     "flags": [
-      "unimplemented"
+      "unique"
     ],
     "minion": {
       "attack": 4,
       "maxHp": 5,
       "flags": [],
       "race": 0,
-      "events": {}
+      "events": {
+        "battlecry": [
+          {
+            "acts": [
+              {
+                "name": "kill",
+                "params": []
+              }
+            ],
+            "optional": true
+          }
+        ]
+      }
     }
   },
   {
