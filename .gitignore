@@ -13,6 +13,3 @@
 /www/screens/**/*.js
 /www/screens/**/*.js.map
 /www/screens/**/*.css
-
-/Gruntfile.js
-/Gruntfile.js.map

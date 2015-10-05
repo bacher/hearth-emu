@@ -4,6 +4,7 @@
   "description": "",
   "main": "Gruntfile.js",
   "scripts": {
+    "dep-install": "npm install && cd server && npm install && cd ../www && bower install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
