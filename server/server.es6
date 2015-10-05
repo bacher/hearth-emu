@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 app.use(express.static('../www'));
 
-const server = app.listen(8080, function () {
+const server = app.listen(process.env['PORT'] || 80, function () {
     var host = server.address().address;
     var port = server.address().port;
 
