@@ -8343,7 +8343,7 @@
     "pic": "147/789/73",
     "clas": 0,
     "type": 1,
-    "comment": "Невозможно вызвать если нет существа для battlecry",
+    "comment": "",
     "targetsType": {
       "names": [
         "minions"
@@ -8357,6 +8357,7 @@
         }
       ]
     },
+    "isTargetsTypeOptional": true,
     "flags": [],
     "minion": {
       "attack": 4,
@@ -8371,7 +8372,8 @@
                 "name": "kill",
                 "params": []
               }
-            ]
+            ],
+            "optional": true
           }
         ]
       }
