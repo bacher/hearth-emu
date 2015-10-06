@@ -169,7 +169,7 @@ function processEvents(obj, events) {
         if (eventTypeName === 'battlecry') {
             obj.acts.addCommands(commands);
 
-        } else if (_.contains(['deathrattle', 'end-turn', 'start-turn'], eventTypeName)) {
+        } else if (_.contains(['deathrattle', 'end-turn', 'start-turn', 'inspire'], eventTypeName)) {
             events[eventTypeName] = new H.Commands(commands);
 
         } else if (eventTypeName === 'custom') {

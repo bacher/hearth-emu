@@ -68,8 +68,8 @@ H.mixCustomEvents = function(clas) {
         this.player.battle.on(eventName, method);
     };
 
-    clas.prototype.addCustomEvent = function(command) {
-        const event = command.event;
+    clas.prototype.addCustomEvent = function(command, event = null) {
+        event = event || command.event;
 
         const eventListener = H.EventFilters.getCallback(event, {
             player: this.player,

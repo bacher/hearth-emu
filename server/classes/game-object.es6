@@ -41,6 +41,13 @@ H.GameObject = class GameObject extends EventEmitter {
         if (this.events['custom']) {
             this.events['custom'].forEach(command => this.addCustomEvent(command));
         }
+
+        if (this.events['inspire']) {
+            this.addCustomEvent(this.events['inspire'], {
+                name: 'use-hero-skill',
+                params: ['my']
+            });
+        }
     }
 
     getFlags() {

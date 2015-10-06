@@ -102,6 +102,10 @@ H.Hero = class Hero {
 
     useHeroSkill(o) {
         this.heroSkill.use(o);
+
+        this.battle.emit('use-hero-skill', {
+            player: this.player
+        });
     }
 
     wakeUp() {
