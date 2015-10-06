@@ -3,6 +3,7 @@
 /node_modules/
 
 /server/node_modules/
+/server/_compiled/
 /server/**/*.js
 /server/**/*.js.map
 
