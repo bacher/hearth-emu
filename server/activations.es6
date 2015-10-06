@@ -881,6 +881,14 @@ const A = {
         const card = H.CARDS.getRandomLegendary(H.CARD_TYPES.minion);
 
         o.player.creatures.addCreature(new H.Minion(null, card));
+    },
+    'summon-random-minion'(o) {
+        const race = this.params[0];
+        const cost = this.params[1];
+
+        const card = H.CARDS.getRandom(H.CARD_TYPES.minion, cost, H.RACES[race]);
+
+        o.player.creatures.addCreature(new H.Minion(null, card));
     }
 };
 
