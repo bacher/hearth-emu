@@ -1,8 +1,7 @@
 
 const H = require('./namespace');
 
-
-const cardsRaw = require('./cards.json');
+const cardsRaw = require('../data/cards.json');
 
 const cards = cardsRaw.map(card => new H.Card(card));
 
