@@ -631,11 +631,16 @@ const A = {
         }));
     },
     'add-crystal'(o) {
+        const count = this.params[1] || 1;
+        var player = o.player;
+
         if (this.params[0] === 'op') {
             o.player.enemy.hero.addCrystal();
-        } else {
-            o.player.hero.addCrystal();
         }
+
+        _.times(count, () => {
+            player.hero.addCrystal();
+        });
     },
     'destroy-crystal'(o) {
         o.player.hero.removeCrystal();
