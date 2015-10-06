@@ -243,7 +243,7 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
                 const $cardFront = $card.find('.front');
 
                 if (!$cardFront.data('loaded')) {
-                    $card.append($('<IMG>').addClass('img back').attr('src', '../cards/card_back.png'));
+                    $card.append($('<IMG>').addClass('img back').attr('src', '/textures/card_back.png'));
                     $card.addClass('loading');
                 }
             });
