@@ -4,6 +4,7 @@ var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 var watch = require('gulp-watch');
 var plumber = require('gulp-plumber');
+var less = require('gulp-less');
 
 gulp.task('server-es6', function () {
     return gulp.src('server/**/*.es6')
@@ -35,5 +36,20 @@ gulp.task('client-es6-watch', function () {
         .pipe(gulp.dest('www/_js'));
 });
 
-gulp.task('default', ['server-es6', 'client-es6']);
-gulp.task('watch', ['server-es6-watch', 'client-es6-watch']);
+gulp.task('less', function() {
+    return gulp.src('www/styles/compiled.less')
+        .pipe(less())
+        .pipe(gulp.dest('www/styles'));
+});
+
+gulp.task('less-watch', function() {
+    return gulp.src('www/styles/compiled.less')
+        .pipe(watch('www/**/*.less'))
+        .pipe(plumber())
+        .pipe(less())
+        .pipe(plumber.stop())
+        .pipe(gulp.dest('www/styles'));
+});
+
+gulp.task('default', ['server-es6', 'client-es6', 'less']);
+gulp.task('watch', ['server-es6-watch', 'client-es6-watch', 'less-watch']);
