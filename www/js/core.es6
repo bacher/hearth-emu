@@ -81,11 +81,7 @@ H.loadOptions = function() {
 };
 
 H.makeCardUrl = function(part) {
-    if (/^http/.test(part)) {
-        return part;
-    } else {
-        return 'http://media-hearth.cursecdn.com/avatars/' + part + '.png';
-    }
+    return '/textures/cards/' + part + '.png';
 };
 
 H.loadDecks = function() {

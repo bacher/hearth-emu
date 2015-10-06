@@ -116,11 +116,14 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
 
             const $weapon = this.$node.find('.weapon.' + side);
-            if (player.hero.weapon) {
+            const weapon = player.hero.weapon;
+
+            if (weapon) {
                 $weapon.show();
                 $weapon.toggleClass('off', !player.active);
-                $weapon.find('.attack').text(player.hero.weapon.attack);
-                $weapon.find('.durability').text(player.hero.weapon.durability);
+                $weapon.find('.pic').attr('src', '/textures/weapons/' + weapon.pic + '.png');
+                $weapon.find('.attack').text(weapon.attack);
+                $weapon.find('.durability').text(weapon.durability);
             } else {
                 $weapon.hide();
             }

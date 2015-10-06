@@ -71,16 +71,6 @@
     left: -26px;
   }
 
-  .card, .creature {
-    IMG {
-      position: absolute;
-      pointer-events: none;
-      top: -13px;
-      left: -6px;
-      width: 90px;
-    }
-  }
-
   .creature, .avatar {
     &.find-target {
       transform: scale(1.12);
@@ -322,12 +312,18 @@
       left: -5px;
     }
 
-    &.off:before {
+    &.off .locker {
       position: absolute;
       width: 111px;
       height: 98px;
-      content: "";
       background: url("/textures/weapon-frame_lock.png");
+    }
+
+    .pic {
+      position: absolute;
+      top: 11px;
+      left: 16px;
+      width: 78px;
     }
 
     .frame {

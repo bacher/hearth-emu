@@ -106,7 +106,7 @@ H.Creatures = class Creatures {
                 position.top -= 90;
                 position.left += 80;
 
-                this._$preview = render(null, 'minion-preview', { pic: $minion.find('IMG').attr('src') });
+                this._$preview = render(null, 'minion-preview', { pic: $minion.data('preview-pic') });
 
                 this._$preview.css(position);
 
