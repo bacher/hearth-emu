@@ -831,6 +831,13 @@ const A = {
             o.minion.maxHp += hp;
         }
     },
+    'if-hold-dragon'(o) {
+        if (o.player.hand.getAllByRace(H.RACES.dragon).length) {
+            A[this.params[0]].call({
+                params: this.params.slice(1)
+            }, o);
+        }
+    },
     'if-opp-less-hp-add-attack-hp'(o) {
         if (o.player.enemy.hero.hp <= this.params[0]) {
             o.minion.attack += this.params[1];
