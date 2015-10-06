@@ -5,9 +5,7 @@
 /server/node_modules/
 /server/_compiled/
 /server/**/*.js
-/server/**/*.js.map
 
 /www/bower_components/
 /www/_js/
 /www/styles/*.css
-/www/screens/**/*.css
