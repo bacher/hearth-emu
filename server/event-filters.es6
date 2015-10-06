@@ -126,6 +126,44 @@ const E = {
             };
         }
     },
+    'damage-taken': {
+        eventName: 'damage-dealt',
+        filterFunc: function(o, params, callback) {
+            const target = params[0];
+            const isAlive = params[1] === 'alive';
+
+            var minion;
+            var allowPlayer;
+            var allowHero;
+            var onlyMinions;
+
+            if (target === 'self') {
+                minion = o.minion;
+            } else if (target === 'my') {
+                allowPlayer = o.player;
+            } else if (target === 'op') {
+                allowPlayer = o.player.enemy;
+            } else if (target === 'my-hero') {
+                allowHero = o.player.hero;
+            } else if (target === 'minions') {
+                onlyMinions = true;
+            } else if (target === 'my-minions') {
+                allowPlayer = o.player;
+                onlyMinions = true;
+            }
+
+            return function(eventMessage) {
+                if ((!minion || minion === eventMessage.to) &&
+                    (!allowPlayer || allowPlayer === eventMessage.to.player) &&
+                    (!allowHero || allowHero === eventMessage.to) &&
+                    (!onlyMinions || eventMessage.to.objType === 'minion') &&
+                    (!isAlive || !eventMessage.to.is('dead'))) {
+
+                    callback(eventMessage);
+                }
+            };
+        }
+    },
     'hit-to': {
         eventName: 'hit',
         filterFunc: function(o, params, callback) {
@@ -140,6 +178,8 @@ const E = {
                 allowPlayer = o.player;
             } else if (target === 'op') {
                 allowPlayer = o.player.enemy;
+            } else if (target === 'my-hero') {
+                minion = o.player.hero;
             } else if (target === 'my-minions') {
                 allowPlayer = o.player;
                 allowType = H.CARD_TYPES['minion'];

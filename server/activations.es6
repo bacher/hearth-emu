@@ -222,6 +222,9 @@ const A = {
     'overload': function(o) {
         o.player.hero.addOverload(this.params[0]);
     },
+    'unlock-overload'(o) {
+        o.player.hero.removeOverload();
+    },
     'silence': function(o) {
         o.targets.forEach(target => target.silence());
     },
@@ -822,6 +825,16 @@ const A = {
         }
     },
     'if-race-in-hand-gain-attack-hp'(o) {
+        const attack = this.params[1];
+        const hp = this.params[2] || attack;
+
+        if (o.player.hand.getAllByRace(H.RACES[this.params[0]]).length) {
+            o.minion.attack += attack;
+            o.minion.hp += hp;
+            o.minion.maxHp += hp;
+        }
+    },
+    'if-race-gain-attack-hp'(o) {
         const attack = this.params[1];
         const hp = this.params[2] || attack;
 

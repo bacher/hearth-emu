@@ -30,6 +30,10 @@ H.Hand = class Hand {
         return this.cards;
     }
 
+    getAllByRace(race) {
+        return this.cards.filter(card => card.base.type === H.CARD_TYPES.minion && card.base.minion.race === race);
+    }
+
     getCount() {
         return this.cards.length;
     }

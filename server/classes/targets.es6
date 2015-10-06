@@ -25,6 +25,15 @@ H.Targets = class Targets {
         return targets;
     }
 
+    static getAllMinions(player) {
+        const targets = new H.Targets(player);
+
+        targets.addFriendlyMinions();
+        targets.addEnemyMinions();
+
+        return targets;
+    }
+
     applyModificators(modificators) {
         if (modificators) {
             modificators.forEach(mod => {

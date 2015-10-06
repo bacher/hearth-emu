@@ -125,6 +125,14 @@ H.HandCard = class HandCard extends EventEmitter {
 
         delete data.base;
     }
+
+    reduceCost(amount) {
+        this.cost -= amount;
+
+        if (this.cost < 0) {
+            this.cost = 0;
+        }
+    }
 };
 
 H.mixGameDataAccessors(H.HandCard);

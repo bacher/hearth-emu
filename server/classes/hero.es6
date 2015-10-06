@@ -195,6 +195,10 @@ H.Hero = class Hero {
         this.nextOverload += count;
     }
 
+    removeOverload() {
+        this.nextOverload = 0;
+    }
+
     equipWeapon(weapon) {
         this.weapon = weapon;
 

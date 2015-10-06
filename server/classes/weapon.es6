@@ -18,6 +18,7 @@ H.Weapon = class Weapon extends H.GameObject {
 
     getClientData() {
         return {
+            pic: this.card.pic,
             attack: this.attack,
             durability: this.durability
         };
