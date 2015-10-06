@@ -17,7 +17,7 @@ H.Screens['loading'] = class LoadingScreen extends H.Screen {
         H.loadDecks();
 
         $.ajax({
-            url: 'textures.json'
+            url: '/textures/textures.json'
         }).then(this._onTexturesLoad.bind(this));
     }
 
