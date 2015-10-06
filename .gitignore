@@ -7,9 +7,6 @@
 /server/**/*.js.map
 
 /www/bower_components/
-/www/js/**/*.js
-/www/js/**/*.js.map
+/www/_js/
 /www/styles/*.css
-/www/screens/**/*.js
-/www/screens/**/*.js.map
 /www/screens/**/*.css
