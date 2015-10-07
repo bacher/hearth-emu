@@ -593,6 +593,15 @@ const A = {
             owner.creatures.replaceMinionByMinion(minion, H.Minion.createByName(this.params[0]));
         });
     },
+    'transform-into-random-same-cost'(o) {
+        o.targets.forEach(minion => {
+            const cost = minion.card.cost;
+
+            const card = H.CARDS.getRandom(H.CARD_TYPES.minion, cost);
+
+            minion.player.creatures.replaceMinionByMinion(minion, new H.Minion(null, card));
+        });
+    },
     'tinkmaster-transform'(o) {
         const replaceByName = Math.random() < 0.5 ? 'Squirrel' : 'Devilsaur';
 
