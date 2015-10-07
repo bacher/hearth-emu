@@ -72,6 +72,16 @@ const A = {
             o.player.creatures.addCreature(minion);
         }
     },
+    'put-random-deck-secret'(o) {
+        const trapCard = o.player.deck.getRandomCards(1, H.CARD_TYPES.trap)[0];
+
+        if (trapCard) {
+            const trap = new H.Minion(null, trapCard);
+
+            o.player.deck.removeCard(trap);
+            o.player.hero.traps.addTrap(trap);
+        }
+    },
     'redemption'(o) {
         const minion = o.eventMessage;
 

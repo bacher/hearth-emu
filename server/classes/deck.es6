@@ -64,6 +64,10 @@ H.Deck = class Deck {
         }
     }
 
+    removeCard(card) {
+        this.deckCards = this.deckCards.filter(deckCard => deckCard !== card);
+    }
+
     removeCards(cards) {
         this.deckCards = this.deckCards.filter(deckCard => !_.contains(cards, deckCard));
     }
