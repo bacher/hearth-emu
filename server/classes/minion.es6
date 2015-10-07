@@ -45,6 +45,8 @@ H.Minion = class Minion extends H.GameObject {
     }
 
     _modifyData(data) {
+        data.flags = this._processFlags(data.flags);
+
         data.hp += this.bufferHp;
         data.maxHp += this.bufferMaxHp;
     }

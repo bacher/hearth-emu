@@ -109,6 +109,7 @@ H.Hero = class Hero {
     }
 
     wakeUp() {
+        // FIXME UNUSED?
         delete this.flags['tired'];
 
         this.attack = 0;

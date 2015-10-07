@@ -89,6 +89,14 @@ const AURAS = {
             });
         }
     },
+    'remove-flags': {
+        affect: 'minion',
+        effect(target) {
+            this.params.forEach(flag => {
+                delete target.flags[flag];
+            });
+        }
+    },
     'reduce-cost': {
         affect: 'hand-card',
         effect(card) {
