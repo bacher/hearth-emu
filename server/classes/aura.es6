@@ -175,6 +175,13 @@ const AURAS = {
             }
         },
         defaultSide: 'my'
+    },
+    'can-use-hero-skill-twice': {
+        affect: 'hero-skill',
+        effect(skill) {
+            skill.maxUseCount = 2;
+        },
+        defaultSide: 'my'
     }
 };
 

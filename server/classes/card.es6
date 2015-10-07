@@ -158,7 +158,10 @@ H.Card = class Card {
                 obj.acts.addCommands(commands);
 
             } else if (_.contains(['deathrattle', 'end-turn', 'start-turn', 'inspire'], eventTypeName)) {
-                object.flags[eventTypeName] = true;
+
+                if (_.contains(['deathrattle', 'inspire'], eventTypeName)) {
+                    object.flags[eventTypeName] = true;
+                }
 
                 events[eventTypeName] = new H.Commands(commands);
 
