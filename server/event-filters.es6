@@ -7,6 +7,7 @@ const E = {
         filterFunc: function(o, params, callback) {
             var allowPlayer;
             var allowType = params[1];
+            var allowCost = params[2];
 
             if (params[0] === 'my') {
                 allowPlayer = o.player;
@@ -18,7 +19,8 @@ const E = {
                 const handCard = eventMessage.handCard;
 
                 if ((!allowPlayer || allowPlayer === handCard.player) &&
-                    (!allowType || handCard.base.type === allowType)) {
+                    (!allowType || handCard.base.type === allowType) &&
+                    (!allowCost || handCard.base.cost === allowCost)) {
                     callback(eventMessage);
                 }
             };

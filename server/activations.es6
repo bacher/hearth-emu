@@ -629,6 +629,11 @@ const A = {
 
         o.player.hand.addCard(spellCard);
     },
+    'add-random-class-card'(o) {
+        const clas = H.CLASSES[this.params[0]];
+
+        o.player.hand.addCard(H.CARDS.getRandom(null, null, null, clas));
+    },
     'play-trap-card': function(o) {
         o.player.traps.addTrap(new H.Trap(o.handCard));
     },
