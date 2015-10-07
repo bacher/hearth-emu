@@ -13,9 +13,10 @@ H.Card = class Card {
         this.pic = info.pic.match(/\/([^/]+?)(?:\.png)?$/)[1];
         this.flags = parseFlags(info.flags);
         this.targetsType = info.targetsType;
+        this.optionalCondition = info.optionalCondition;
         this.isTargetsTypeOptional = info.isTargetsTypeOptional;
         this.customAction = info.customAction;
-        this.conditions = info.conditions || [];
+        this.playConditions = info.playConditions || [];
 
         if (info.additionActions) {
             process.nextTick(() => {
@@ -62,7 +63,7 @@ H.Card = class Card {
                 activation = 'card-summon';
                 this.minion = object = info.minion;
 
-                this.conditions = ['can-add-creature'].concat(this.conditions);
+                this.playConditions = ['can-add-creature'].concat(this.playConditions);
 
             } else {
                 activation = 'equip-weapon-card';

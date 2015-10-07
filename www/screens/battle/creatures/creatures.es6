@@ -79,11 +79,7 @@ H.Creatures = class Creatures {
             }
         });
 
-        if (prevCreatures) {
-            $creatures.removeClass('count' + prevCreatures.length);
-        }
-
-        $creatures.addClass('count' + creatures.length);
+        $creatures[0].className = $creatures[0].className.replace(/\bcount\d\b/g, '') + ' count' + creatures.length;
     }
 
     _getClasses(side, minion) {

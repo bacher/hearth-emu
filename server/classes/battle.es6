@@ -330,16 +330,12 @@ H.Battle = class Battle extends EventEmitter {
         var globalTargets = null;
         var skipOptionals = false;
 
-        if (card.targetsType) {
-            if (data.targetId) {
-                globalTargets = H.Targets.parseUserData(player, data)
+        if (card.optionalCondition && !handCard.checkOptionalAct(card)) {
+            skipOptionals = true;
+        }
 
-            } else if (card.isTargetsTypeOptional) {
-                skipOptionals = true;
-
-            } else {
-                throw new Error('No Targets');
-            }
+        if (data.targetId && (!skipOptionals || !card.isTargetsTypeOptional)) {
+            globalTargets = H.Targets.parseUserData(player, data)
         }
 
         const eventMessage = {

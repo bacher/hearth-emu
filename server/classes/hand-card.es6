@@ -81,16 +81,14 @@ H.HandCard = class HandCard extends EventEmitter {
         }
 
         if (this.player.active && this.player.hero.mana >= data.cost &&
-            !this.base.conditions.some(condition => !H.Conditions.check(condition, this))
+            !this.base.playConditions.some(condition => !H.Conditions.check(condition, this))
         ) {
             data.flags['can-play'] = true;
         }
 
         if (this.base.type === H.CARD_TYPES.minion && data.base.targetsType) {
             if (this.base.isTargetsTypeOptional) {
-                const targets = H.TARGETS.getByTargetsType(this.player, data.base.targetsType, this);
-
-                if (targets.getCount()) {
+                if (this.checkOptionalAct(data.base)) {
                     data.targetsType = true;
                 }
 
@@ -131,6 +129,26 @@ H.HandCard = class HandCard extends EventEmitter {
 
         if (this.cost < 0) {
             this.cost = 0;
+        }
+    }
+
+    checkOptionalAct(base) {
+        const conditionName = base.optionalCondition.name;
+
+        switch (conditionName) {
+            case 'target-exists':
+                const targets = H.TARGETS.getByTargetsType(this.player, base.targetsType, this);
+
+                return targets.getCount();
+
+            case 'hold':
+                const race = H.RACES[base.optionalCondition.params[0]];
+
+                return this.player.hand.getAllByRace(race).length;
+
+            default:
+                console.warn('Unknown act condition');
+                throw 1;
         }
     }
 };
