@@ -918,6 +918,15 @@ const A = {
         const card = H.CARDS.getRandom(H.CARD_TYPES.minion, cost, H.RACES[race]);
 
         o.player.creatures.addCreature(new H.Minion(null, card));
+    },
+    'animate'(o) {
+        o.targets.forEach(target => {
+            o.player.battle.addBattleAction({
+                name: this.params[0],
+                by: o.player.hero.id,
+                to: target.id
+            });
+        });
     }
 };
 

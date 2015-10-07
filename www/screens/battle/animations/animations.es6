@@ -32,8 +32,12 @@ H.Animations = class Animations {
                 case 'arrow':
                     return this._startProjectiveAnimation(animation);
 
+                case 'lightning-bolt':
+                    return this._startLightningBoltAnimation(animation);
+
                 case 'play-secret':
                     return this._startPlaySecretAnimation(animation);
+
                 default:
                     console.warn('Animation [' + animation.name + '] not implemented!', animation);
             }
@@ -209,6 +213,38 @@ H.Animations = class Animations {
                 });
             }, 300);
         });
+    }
+
+    _startLightningBoltAnimation(animation) {
+        return new Promise(resolve => {
+            const $by = this._getNodeById(animation.by);
+            const $to = this._getNodeById(animation.to);
+
+            const byPos = $by.offset();
+            const toPos = $to.offset();
+
+            const $bolt = render(null, 'chanel', { clas: 'lightning-bolt' });
+
+            $bolt.css(this._getCenter($by));
+
+            H.rotateByVector($bolt, byPos.left - toPos.left, byPos.top - toPos.top);
+
+            setTimeout(() => {
+                $bolt.remove();
+                resolve();
+            }, 700);
+
+            this.$node.append($bolt);
+        });
+    }
+
+    _getCenter($obj) {
+        const pos = $obj.offset();
+
+        pos.left += $obj.width() / 2;
+        pos.top += $obj.height() / 2;
+
+        return pos;
     }
 
     _parseSide(player) {
