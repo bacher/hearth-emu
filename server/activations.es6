@@ -357,9 +357,11 @@ const A = {
             o.player.drawCard();
         }
     },
-    'empty-hand-draw-card'(o) {
-        if (o.player.hand.getCount() === 0) {
-            o.player.drawCard();
+    'if-empty-hand'(o) {
+        if (o.player.hand.isEmpty()) {
+            A[this.params[0]].call({
+                params: this.params.slice(1)
+            }, o);
         }
     },
     'draw-card-chance'(o) {
@@ -903,16 +905,6 @@ const A = {
         targets.forEach(target => {
             target.dealDamage(2);
         });
-    },
-    'empty-hand-add-attack-hp'(o) {
-        const attack = this.params[0];
-        const hp = this.params[1] || attack;
-
-        if (o.player.hand.getCount() === 0) {
-            o.minion.attack += attack;
-            o.minion.hp += hp;
-            o.minion.maxHp += hp;
-        }
     },
     'summon-random-legendary-minion'(o) {
         const card = H.CARDS.getRandomLegendary(H.CARD_TYPES.minion);

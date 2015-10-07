@@ -73,4 +73,8 @@ H.Hand = class Hand {
     empty() {
         this.cards.length = 0;
     }
+
+    isEmpty() {
+        return this.cards.length === 0;
+    }
 };
