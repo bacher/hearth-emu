@@ -524,10 +524,18 @@ const A = {
         }
     },
     'reduce-weapon-durability'(o) {
-        o.player.hero.weapon.reduceDurability(this.params[0]);
+        const weapon = o.player.hero.weapon;
+
+        if (weapon) {
+            weapon.reduceDurability(this.params[0]);
+        }
     },
     'reduce-op-weapon-durability'(o) {
-        o.player.enemy.hero.weapon.reduceDurability(this.params[0]);
+        const weapon = o.player.enemy.hero.weapon;
+
+        if (weapon) {
+            weapon.reduceDurability(this.params[0]);
+        }
     },
     'destroy-weapon': function(o) {
         o.targets.forEach(hero => {
@@ -549,7 +557,11 @@ const A = {
         }
     },
     'add-weapon-durability': function(o) {
-        o.player.hero.weapon.durability += this.params[0];
+        const weapon = o.player.hero.weapon;
+
+        if (weapon) {
+            weapon.durability += this.params[0];
+        }
     },
     'frostwolf-warlord': function(o) {
         const minion = o.minion;
