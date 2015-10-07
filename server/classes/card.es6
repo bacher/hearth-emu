@@ -87,10 +87,10 @@ H.Card = class Card {
                 });
             }
 
-            processEvents(this, object.events);
+            this._processEvents(this, object);
 
             if (this.combo) {
-                processEvents(this.combo, this.combo.object.events);
+                this._processEvents(this.combo, this.combo.object);
             }
         }
 
@@ -148,6 +148,28 @@ H.Card = class Card {
         }
     }
 
+    _processEvents(obj, object) {
+        const events = object.events;
+
+        for (var eventTypeName in events) {
+            const commands = events[eventTypeName];
+
+            if (eventTypeName === 'battlecry') {
+                obj.acts.addCommands(commands);
+
+            } else if (_.contains(['deathrattle', 'end-turn', 'start-turn', 'inspire'], eventTypeName)) {
+                object.flags[eventTypeName] = true;
+
+                events[eventTypeName] = new H.Commands(commands);
+
+            } else if (eventTypeName === 'custom') {
+                events[eventTypeName] = commands.map(command => {
+                    return new H.Command(command);
+                });
+            }
+        }
+    }
+
 };
 
 function parseFlags(flags) {
@@ -160,22 +182,4 @@ function parseFlags(flags) {
     }
 
     return flagsHash;
-}
-
-function processEvents(obj, events) {
-    for (var eventTypeName in events) {
-        const commands = events[eventTypeName];
-
-        if (eventTypeName === 'battlecry') {
-            obj.acts.addCommands(commands);
-
-        } else if (_.contains(['deathrattle', 'end-turn', 'start-turn', 'inspire'], eventTypeName)) {
-            events[eventTypeName] = new H.Commands(commands);
-
-        } else if (eventTypeName === 'custom') {
-            events[eventTypeName] = commands.map(command => {
-                return new H.Command(command);
-            });
-        }
-    }
 }

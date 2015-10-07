@@ -75,13 +75,16 @@ const E = {
                 race = H.RACES[filter.substr(5)];
             }
 
+            const flags = params[2];
+
             return function(eventMessage) {
                 const minion = eventMessage.minion;
 
                 if (minion !== o.minion &&
                     (!allowPlayer || allowPlayer === minion.player) &&
                     (!attackLessThen || minion.attack < attackLessThen) &&
-                    (!race || minion.race === race)) {
+                    (!race || minion.race === race) &&
+                    (!flags || minion.is(flags))) {
 
                     const targets = new H.Targets(o.player);
                     targets.addMinion(minion);
