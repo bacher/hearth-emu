@@ -696,6 +696,18 @@ const A = {
 
         info.player.enemy.hand.addCard(info.handCard.base);
     },
+    'put-card-from-deck'(o) {
+        const cardType = H.CARD_TYPES[this.params[0]];
+        const race = H.RACES[this.params[1]];
+
+        const card = o.player.deck.getRandomCards(1, cardType, race)[0];
+
+        if (card) {
+            o.player.hand.addCard(card);
+
+            o.player.deck.removeCard(card);
+        }
+    },
     'add-aura': function(o) {
         const offConditions = {};
         var owner = o.player;
@@ -808,8 +820,6 @@ const A = {
     },
     'copy-card-give-coin'(o) {
         const handCard = o.eventMessage.handCard;
-
-        console.warn(handCard.base.name);
 
         o.player.hand.addCard(handCard.base);
         o.player.enemy.hand.addCard(H.CARDS.getByName('The Coin', H.CARD_TYPES.spell));
