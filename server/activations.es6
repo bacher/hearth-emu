@@ -622,6 +622,11 @@ const A = {
             player: o.player.enemy
         });
     },
+    'add-random-spell'(o) {
+        const spellCard = H.CARDS.getRandom(H.CARD_TYPES.spell);
+
+        o.player.hand.addCard(spellCard);
+    },
     'play-trap-card': function(o) {
         o.player.traps.addTrap(new H.Trap(o.handCard));
     },
