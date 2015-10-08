@@ -2,12 +2,9 @@
 each card in cards
    .card-wrapper
       .card(data-id= card.id,
-         class= (card.flags['unique'] ? 'unique' : ''))
+         class= (card.flags['unique'] ? 'unique' : '')+(card.flags['unimplemented'] ? ' unimplemented-card' : ''))
 
          if (card.loaded)
             IMG.img.front(src=H.makeCardUrl(card.pic))
 
          .glow
-
-         if (card.flags['unimplemented'])
-            .unimplemented Not implemented yet

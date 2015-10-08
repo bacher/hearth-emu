@@ -39,9 +39,7 @@ H.Screens['collection-deck'] = class CollectionDeckScreen extends H.Screen {
 
                 this._removeCardPreview();
 
-                this._$previewImage = render(null, 'deck-card-preview', {
-                    pic: $cardLine.data('pic')
-                });
+                this._$previewImage = render(null, 'deck-card-preview', H.cardsHash[$cardLine.data('id')]);
 
                 this._$previewImage.css({
                     top: Math.min(268, Math.max(20, cardPosition.top - 123))

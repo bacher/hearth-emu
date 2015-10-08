@@ -1,5 +1,6 @@
 
 each cardInfo in cards
-   .card-line(class=(cardInfo.x2?'x2':'')+(cardInfo.card.flags['unimplemented']?' unimplemented':''),data-id=cardInfo.card.id,data-pic=cardInfo.card.pic)
+   .card-line(class=(cardInfo.x2?'x2':'')+(cardInfo.card.flags['unimplemented']?' unimplemented':''),
+      data-id=cardInfo.card.id)
       SPAN.cost= cardInfo.card.cost
       SPAN.name= cardInfo.card.name
