@@ -53,7 +53,9 @@ const H = {
         'Gul\'dan',
         'Jaina Proudmoore',
         'Anduin Wrynn'
-    ]
+    ],
+
+    _eventListeners: {}
 };
 
 H.Mixins = {};
@@ -168,6 +170,34 @@ H.insertAtIndex = function($container, $obj, index) {
         $obj.insertBefore($children.eq(index));
     } else {
         $container.append($obj);
+    }
+};
+
+H.on = function(eventName, callback) {
+    if (!H._eventListeners[eventName]) {
+        H._eventListeners[eventName] = [];
+    }
+
+    H._eventListeners[eventName].push(callback);
+};
+
+H.off = function(eventName, callback) {
+    const callbacks = H._eventListeners[eventName];
+
+    const callbackIndex = callbacks.indexOf(callback);
+
+    if (callbackIndex !== -1) {
+        H._eventListeners[eventName].splice(callbackIndex, 1);
+    }
+};
+
+H.emit = function(eventName, data) {
+    const callbacks = H._eventListeners[eventName];
+
+    if (callbacks) {
+        callbacks.forEach(callback => {
+            callback(data);
+        });
     }
 };
 

@@ -1,17 +1,26 @@
 
 H.Screens['menu'] = class MenuScreen extends H.Screen {
-    constructor() {
+    constructor(params = {}) {
         super({
             gClass: 'm',
             name: 'menu',
             hash: false
         });
+
+        this.position = params.position;
     }
 
     _render() {
         render(this.$node, 'menu', {
             items: this.getItems()
         });
+
+        if (this.position) {
+            this.$node.find('.menu').css({
+                top: this.position.y,
+                left: this.position.x
+            });
+        }
     }
 
     _bindEventListeners() {

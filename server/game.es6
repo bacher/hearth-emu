@@ -2,6 +2,7 @@
 const WebSocketServer = new require('ws');
 
 const H = require('./namespace');
+const importTools = require('./import-tools/import');
 
 require('./constants');
 require('./utils');
@@ -58,6 +59,23 @@ module.exports = class Game {
                 ok: true,
                 cards: H.CARDS.clientList
             });
+        });
+
+        this.app.get('/import.json', (req, res) => {
+            importTools.extract(req.query.url)
+                .then(deck => {
+                    res.json({
+                        ok: true,
+                        deck: deck
+                    });
+                })
+                .catch(e => {
+                    console.warn('Import error:', e);
+
+                    res.json({
+                        ok: false
+                    });
+                });
         });
     }
 

@@ -2,7 +2,7 @@
 H.Screens['main-menu'] = class MainMenuScreen extends H.Screen {
     constructor(params = {}) {
         super({
-            gClass: 'm',
+            gClass: 'mm',
             name: 'main-menu'
         });
 

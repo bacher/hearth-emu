@@ -41,13 +41,17 @@ H.CARDS = {
     getById: function(id) {
         return this.hash[id];
     },
-    getByName: function(name, type) {
+    getByName: function(name, type, onlyCollectable) {
         const lowerCaseName = name.toLowerCase();
 
         for (var i = 0; i < cards.length; ++i) {
             const card = cards[i];
 
             if (type && card.type !== type) {
+                continue;
+            }
+
+            if (onlyCollectable && card.flags['uncollectable']) {
                 continue;
             }
 

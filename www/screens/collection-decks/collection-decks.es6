@@ -16,31 +16,7 @@ H.Screens['collection-decks'] = class CollectionDecksScreen extends H.Screen {
     _bindEventListeners() {
         this.$node
             .on('click', '.new-deck', () => {
-                const chooseHero = H.app.activateOverlay('choose-hero-deck', {
-                    onlyBasic: true,
-                    onChoose: selectInfo => {
-                        const clas = selectInfo.heroClass;
-                        const className = H.CLASSES_L[clas];
-
-                        const deckInfo = {
-                            label: 'Custom ' + _.capitalize(className),
-                            clas: clas,
-                            cardIds: [],
-                            id: _.random(10000)
-                        };
-
-                        H.decks.push(deckInfo);
-
-                        H.saveDecks();
-
-                        H.app.getActiveScreen().deckCreated(deckInfo.id);
-
-                        chooseHero.close();
-                    },
-                    onBack: () => {
-                        chooseHero.close();
-                    }
-                });
+                H.app.activateOverlay('new-deck-menu');
             })
             .on('click', '.deck', e => {
                 const $deck = $(e.currentTarget);
@@ -63,6 +39,10 @@ H.Screens['collection-decks'] = class CollectionDecksScreen extends H.Screen {
             .on('click', '.confirm .cancel', () => {
                 this.$node.find('.confirm').hide();
             });
+
+        this.onGlobal('decks-updated', () => {
+            this.drawDecks();
+        });
     }
 
     _removeDeck(removeId) {

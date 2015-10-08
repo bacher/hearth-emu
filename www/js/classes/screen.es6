@@ -74,6 +74,12 @@ H.Screen = class Screen {
             this._destroy();
         }
 
+        if (this._globalBound) {
+            this._globalBound.forEach(listenerInfo => {
+                H.off(listenerInfo.eventName, listenerInfo.callback);
+            });
+        }
+
         this.$node.off();
         this.$node.remove();
     }
@@ -90,5 +96,12 @@ H.Screen = class Screen {
 
     enableMenu() {
         this._disableMenu = false;
+    }
+
+    onGlobal(eventName, callback) {
+        this._globalBound = this._globalBound || [];
+        this._globalBound.push({ eventName, callback });
+
+        H.on(eventName, callback);
     }
 };
