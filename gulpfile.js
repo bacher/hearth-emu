@@ -42,14 +42,5 @@ gulp.task('less', function() {
         .pipe(gulp.dest('www/styles'));
 });
 
-gulp.task('less-watch', function() {
-    return gulp.src('www/styles/compiled.less')
-        .pipe(watch('www/**/*.less'))
-        .pipe(plumber())
-        .pipe(less())
-        .pipe(plumber.stop())
-        .pipe(gulp.dest('www/styles'));
-});
-
 gulp.task('default', ['server-es6', 'client-es6', 'less']);
-gulp.task('watch', ['server-es6-watch', 'client-es6-watch', 'less-watch']);
+gulp.task('watch', ['server-es6-watch', 'client-es6-watch', 'less']);

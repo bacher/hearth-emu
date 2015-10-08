@@ -1,0 +1,9 @@
+
+.menu
+   each item in items
+      if item === 'splitter'
+         .splitter
+      else
+         .btn-place
+           .btn(data-id=item.id)
+             SPAN= item.label

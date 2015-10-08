@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
-#/usr/local/bin/clientjade \
-**/*.jade > js/_templates.js
+#/usr/local/bin/clientjade **/*.jade > js/_templates.js
 
 /usr/local/bin/clientjade \
     ./screens/battle-end/battle-end.jade \
@@ -33,7 +32,7 @@
     ./screens/collection-decks/decks.jade \
     ./screens/collection/collection-cards.jade \
     ./screens/collection/collection.jade \
-    ./screens/game-menu/game-menu.jade \
+    ./screens/menu/menu.jade \
     ./screens/loading/loading.jade \
     ./screens/main-menu/main-menu.jade \
     ./screens/options/options.jade \

@@ -1,56 +1,46 @@
 
-H.Screens['game-menu'] = class GameMenuScreen extends H.Screen {
-    constructor() {
-        super({
-            gClass: 'gm',
-            name: 'game-menu',
-            hash: false
-        });
+const Menu = H.Screens['menu'];
+
+H.Screens['game-menu'] = class GameMenuScreen extends Menu {
+    getItems() {
+        var items = [
+            { id: 'options', label: 'Options' },
+            { id: 'quit', label: 'Quit' },
+            'splitter',
+            { id: 'resume', label: 'Resume' }
+        ];
+
+        if (H.app.getActiveScreen().name === 'battle') {
+            items = [
+                { id: 'concede', label: 'Concede' },
+                'splitter'
+            ].concat(items);
+        }
+
+        return items;
     }
 
-    _render() {
-        render(this.$node, 'game-menu', {
-            inBattle: H.app.getActiveScreen().name === 'battle'
-        });
-    }
-
-    _show() {
-        this.$node.show();
-
+    _onShow() {
         $('.settings-btn').addClass('active');
     }
 
-    _bindEventListeners() {
-        this.$node
-            .on('click', e => {
-                if (!e.isDefaultPrevented()) {
-                    this.close();
-                }
-            })
-            .on('click', '.game-menu', e => {
-                e.preventDefault();
-            })
-            .on('click', '.concede', () => {
-                this.close();
-                H.app.getActiveScreen().concede();
-            })
-            .on('click', '.options', () => {
-                this.close();
-                H.app.activateOverlay('options');
-            })
-            .on('click', '.quit', () => {
-                window.location = '/';
-            })
-            .on('click', '.resume', () => {
-                this.close();
-            });
+    _onHide() {
+        $('.settings-btn').removeClass('active');
     }
 
-    close() {
-        this.closed = true;
+    onSelect(id) {
+        switch (id) {
+            case 'concede':
+                H.app.getActiveScreen().concede();
+                break;
 
-        $('.settings-btn').removeClass('active');
+            case 'options':
+                H.app.activateOverlay('options');
+                break;
 
-        this.hideThenDestroy();
+            case 'quit':
+                window.location = '/';
+                break;
+        }
     }
 };
