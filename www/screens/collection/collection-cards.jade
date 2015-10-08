@@ -2,7 +2,7 @@
 each card in cards
    .card-wrapper
       .card(data-id= card.id,
-         class= (card.flags['unique'] ? 'unique' : '') + (card.flags['unimplemented'] ? ' not-impl': ''))
+         class= (card.flags['unique'] ? 'unique' : ''))
 
          if (card.loaded)
             IMG.img.front(src=H.makeCardUrl(card.pic))

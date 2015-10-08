@@ -39,7 +39,7 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
 
                 this.drawCards();
             })
-            .on('click', '.card:not(.lock):not(.not-impl)', e => {
+            .on('click', '.card:not(.lock)', e => {
                 if (!this._deckScreen || !this._deckScreen.canAddCard()) {
                     return;
                 }

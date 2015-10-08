@@ -80,6 +80,8 @@ H.Screens['collection-deck'] = class CollectionDeckScreen extends H.Screen {
 
         const ids = this._deck.cardIds;
 
+        var hasUnimplementedCard = false;
+
         for (var i = 0; i < ids.length; ++i) {
             const id = ids[i];
 
@@ -95,6 +97,10 @@ H.Screens['collection-deck'] = class CollectionDeckScreen extends H.Screen {
                 card,
                 x2: multiplyer === 2
             });
+
+            if (card.flags['unimplemented']) {
+                hasUnimplementedCard = true;
+            }
         }
 
         cards.forEach(card => {
@@ -107,7 +113,9 @@ H.Screens['collection-deck'] = class CollectionDeckScreen extends H.Screen {
 
         this.$node.find('.card-count .number').text(ids.length + '/30');
 
-        this.$node.find('.hero-right-panel').toggleClass('full', ids.length === 30);
+        this.$node.find('.hero-right-panel')
+            .toggleClass('full', ids.length === 30)
+            .toggleClass('unavailable', hasUnimplementedCard);
     }
 
     _removeCardPreview() {
