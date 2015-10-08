@@ -1,34 +1,42 @@
 
-
-const fs = require('fs');
 const request = require('request');
 
 const H = require('../namespace');
 const hearthpwn = require('./hearthpwn');
-
-//console.log(hearthpwn.parse(fs.readFileSync('hearthpwn.html', 'utf-8')));
+const hearthstonetopdecks = require('./hearthstonetopdecks');
 
 exports.extract = function(url) {
     return new Promise((resolve, reject) => {
-        // http://www.hearthpwn.com/decks/307-miracle-rogue
-        const match = url.match(/^(?:https?:\/\/)(?:www\.)hearthpwn\.com\/decks\/([a-z0-9-]+)$/);
+        var parser = null;
 
-        if (match) {
+        // http://www.hearthpwn.com/decks/307-miracle-rogue
+        if (/^(?:https?:\/\/)(?:www\.)hearthpwn\.com\/decks\/[a-z0-9-]+$/.test(url)) {
+            parser = hearthpwn;
+
+        // https://www.hearthstonetopdecks.com/decks/kolentos-season-19-control-priest/
+        } else if (/^(?:https?:\/\/)(?:www\.)hearthstonetopdecks\.com\/decks\/[^/]+\/$/.test(url)) {
+            parser = hearthstonetopdecks;
+        }
+
+        if (parser) {
             request({
                 url,
-                timeout: 30000
+                timeout: 10000
             }, (error, res, body) => {
                 if (error) {
                     reject(error);
 
                 } else {
                     try {
-                        resolve(makeClientDeck(hearthpwn.parse(body)));
+                        resolve(makeClientDeck(parser.parse(body)));
                     } catch (e) {
                         reject(e);
                     }
                 }
             });
+
+        } else {
+            reject();
         }
     });
 };
