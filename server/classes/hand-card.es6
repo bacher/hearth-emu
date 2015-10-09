@@ -150,6 +150,12 @@ H.HandCard = class HandCard extends EventEmitter {
 
                 return this.player.hand.getAllByRace(race).length;
 
+            case 'reveal-minions':
+                const myMinion = this.player.deck.getRandomCard(H.CARD_TYPES.minion);
+                const opMinion = this.player.enemy.deck.getRandomCard(H.CARD_TYPES.minion);
+
+                return myMinion && (!opMinion || myMinion.cost > opMinion.cost);
+
             default:
                 console.warn('Unknown act condition');
                 throw 1;

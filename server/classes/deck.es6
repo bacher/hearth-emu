@@ -32,6 +32,12 @@ H.Deck = class Deck {
         };
     }
 
+    getRandomCard(type, race) {
+        const minions = this.getRandomCards(1, type, race);
+
+        return minions.length && minions[0] || null;
+    }
+
     getRandomCards(count, type, race) {
         var deckCards = this.deckCards;
 
