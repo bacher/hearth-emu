@@ -1,0 +1,50 @@
+
+.b {
+  .chat {
+    position: absolute;
+    top: 555px;
+    left: 10px;
+
+    z-index: 1000;
+  }
+
+  .messages {
+    position: absolute;
+    bottom: 0;
+    width: 400px;
+    max-height: 342px;
+
+    color: #FFF;
+    text-shadow: 0 0 1px #000;
+    overflow: hidden;
+
+    pointer-events: none;
+  }
+
+  .message {
+    .player {
+      font-weight: bold;
+
+      &:after {
+        content: ": ";
+      }
+    }
+  }
+
+  .prompt {
+    position: absolute;
+    top: 1px;
+    width: 400px;
+
+    color: #D6D6D6;
+  }
+
+  .message-input {
+    position: absolute;
+    top: 1px;
+
+    INPUT {
+      width: 400px;
+    }
+  }
+}

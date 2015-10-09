@@ -15,6 +15,8 @@
     ./screens/battle/battle.jade \
     ./screens/battle/emotions/big-ballon.jade \
     ./screens/battle/emotions/emotions.jade \
+    ./screens/battle/chat/chat.jade \
+    ./screens/battle/chat/message.jade \
     ./screens/battle/creatures/creature.jade \
     ./screens/battle/creatures/minion-preview.jade \
     ./screens/battle/hand/card.jade \

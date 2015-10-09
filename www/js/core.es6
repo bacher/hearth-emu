@@ -55,6 +55,11 @@ const H = {
         'Anduin Wrynn'
     ],
 
+    KEYS: {
+        'escape': 27,
+        'enter': 13
+    },
+
     _eventListeners: {}
 };
 

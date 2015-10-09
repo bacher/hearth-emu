@@ -20,6 +20,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         this._hand = new H.Hand(this);
         this._creatures = new H.Creatures(this);
         this._emotions = new H.Emotions(this);
+        this._chat = new H.Chat(this);
     }
 
     _bindEventListeners() {
@@ -224,7 +225,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
     }
 
     _onOpChatEmotion(message) {
-        this._chat.showMessage('op', message.text);
+        this._emotions.showMessage('op', message.text);
     }
 
     _showYourTurnSplash() {

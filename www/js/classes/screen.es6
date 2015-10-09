@@ -28,6 +28,7 @@ H.Screen = class Screen {
     _render() {}
 
     _bindEventListeners() {}
+    _unbindEventListeners() {}
 
     getNode() {
         return this.$node;
@@ -70,6 +71,8 @@ H.Screen = class Screen {
     }
 
     destroy() {
+        this._unbindEventListeners();
+
         if (this._destroy) {
             this._destroy();
         }

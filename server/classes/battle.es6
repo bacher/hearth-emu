@@ -202,6 +202,13 @@ H.Battle = class Battle extends EventEmitter {
                 });
                 break;
             }
+            case 'chat-message': {
+                this.sendMessage('chat-message', {
+                    player: player.userName,
+                    message: data
+                });
+                break;
+            }
             default:
                 console.warn('Unhandled Player Message:', msg);
         }

@@ -1,9 +1,4 @@
 
-H.KEYS = {
-    escape: 27
-};
-
-
 H.PlayCard = class PlayCard {
     constructor(battle) {
         this.battle = battle;

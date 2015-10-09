@@ -6,7 +6,8 @@ const H = require('../namespace');
 
 const INACTIVE_MESSAGES = [
     'replace-cards',
-    'concede'
+    'concede',
+    'chat-message'
 ];
 
 H.Player = class Player extends EventEmitter {
@@ -75,6 +76,7 @@ H.Player = class Player extends EventEmitter {
                     case 'hit':
                     case 'use-hero-skill':
                     case 'chat-emotion':
+                    case 'chat-message':
                         this.emit('client-message', { msg, data });
                         break;
                     default:
