@@ -139,7 +139,7 @@ H.Animations = class Animations {
 
     _startHeroSkillAnimation(animation) {
         return new Promise(resolve => {
-            const $card = render(null, 'hero-skill-card');
+            const $card = render(null, 'hero-skill-card', { clas: H.CLASSES_L[animation.clas] });
 
             $card.appendTo(this.$node);
 

@@ -435,7 +435,8 @@ H.Battle = class Battle extends EventEmitter {
 
         this.addBattleAction({
             name: 'use-hero-skill',
-            player: player.id
+            player: player.id,
+            clas: player.hero.clas
         });
 
         hero.useHeroSkill({
