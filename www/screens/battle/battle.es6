@@ -19,7 +19,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         this._playCard = new H.PlayCard(this);
         this._hand = new H.Hand(this);
         this._creatures = new H.Creatures(this);
-        this._chat = new H.Chat(this);
+        this._emotions = new H.Emotions(this);
     }
 
     _bindEventListeners() {

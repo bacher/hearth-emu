@@ -13,8 +13,8 @@
     ./screens/battle/animations/splash.jade \
     ./screens/battle/animations/chanel.jade \
     ./screens/battle/battle.jade \
-    ./screens/battle/chat/big-ballon.jade \
-    ./screens/battle/chat/chat.jade \
+    ./screens/battle/emotions/big-ballon.jade \
+    ./screens/battle/emotions/emotions.jade \
     ./screens/battle/creatures/creature.jade \
     ./screens/battle/creatures/minion-preview.jade \
     ./screens/battle/hand/card.jade \

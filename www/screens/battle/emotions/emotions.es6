@@ -8,7 +8,7 @@ H.CHAT_MESSAGES = {
     'threaten': 'The elements will destroy you!'
 };
 
-H.Chat = class Chat {
+H.Emotions = class Emotions {
     constructor(battle) {
         this._battle = battle;
         this.$node = battle.$node;
@@ -65,7 +65,7 @@ H.Chat = class Chat {
     _render() {
         this._showed = true;
 
-        this._$ballons = render(null, 'chat');
+        this._$ballons = render(null, 'emotions');
 
         this.$node.append(this._$ballons);
     }
