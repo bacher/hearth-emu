@@ -23,7 +23,7 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
 
         this._$cards = this.$node.find('.cards');
 
-        this._checkCardsCache();
+        H.cardsPromise.then(this._cardsLoaded.bind(this));
 
         setTimeout(() => {
             this._decksScreen = H.app.activateOverlay('collection-decks');
@@ -95,39 +95,6 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
                 this._filterCards();
                 this.drawCards();
             });
-    }
-
-    _checkCardsCache() {
-        if (H.cards) {
-            this._cardsLoaded();
-        } else {
-            $.ajax({
-                url: '/cards.json'
-            }).then(data => {
-                H.cards = {
-                    all: data.cards,
-                    [H.CLASSES.neutral]: [],
-                    [H.CLASSES.warrior]: [],
-                    [H.CLASSES.shaman]: [],
-                    [H.CLASSES.rogue]: [],
-                    [H.CLASSES.paladin]: [],
-                    [H.CLASSES.hunter]: [],
-                    [H.CLASSES.druid]: [],
-                    [H.CLASSES.warlock]: [],
-                    [H.CLASSES.mage]: [],
-                    [H.CLASSES.priest]: []
-                };
-
-                H.cardsHash = {};
-
-                data.cards.forEach(card => {
-                    H.cards[card.clas].push(card);
-                    H.cardsHash[card.id] = card;
-                });
-
-                this._cardsLoaded();
-            });
-        }
     }
 
     _cardsLoaded() {

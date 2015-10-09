@@ -19,6 +19,38 @@ H.Screens['loading'] = class LoadingScreen extends H.Screen {
         $.ajax({
             url: '/textures/textures.json'
         }).then(this._onTexturesLoad.bind(this));
+
+        H.cardsPromise = new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/cards.json'
+            }).then(data => {
+                H.cards = {
+                    all: data.cards,
+                    [H.CLASSES.neutral]: [],
+                    [H.CLASSES.warrior]: [],
+                    [H.CLASSES.shaman]: [],
+                    [H.CLASSES.rogue]: [],
+                    [H.CLASSES.paladin]: [],
+                    [H.CLASSES.hunter]: [],
+                    [H.CLASSES.druid]: [],
+                    [H.CLASSES.warlock]: [],
+                    [H.CLASSES.mage]: [],
+                    [H.CLASSES.priest]: []
+                };
+
+                H.cardsHash = {};
+
+                data.cards.forEach(card => {
+                    H.cards[card.clas].push(card);
+                    H.cardsHash[card.id] = card;
+                });
+
+                resolve();
+
+            }).fail(e => {
+                reject(e);
+            });
+        });
     }
 
     _show() {
