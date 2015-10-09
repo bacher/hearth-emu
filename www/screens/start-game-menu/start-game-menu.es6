@@ -9,6 +9,15 @@ H.Screens['start-game-menu'] = class StartGameMenuScreen extends H.Screen {
 
     _onShow() {
         const chooseDeck = H.app.activateOverlay('choose-hero-deck', {
+            decks: H.decks.map(deck => {
+                return _.extend({}, deck, { unavailable: (
+                    deck.cardIds.length !== 30 ||
+                    deck.cardIds.some(cardId => {
+                        return H.cardsHash[cardId].flags['unimplemented']
+                    })
+                )});
+            }),
+
             okButtonType: 'play',
 
             onChoose: selection => {

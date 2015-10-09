@@ -7,6 +7,8 @@ H.Screens['choose-hero-deck'] = class ChooseHeroDeckScreen extends H.Screen {
             hash: false
         });
 
+        this._decks = params.decks;
+
         this._isOnlyBasic = params.onlyBasic || false;
         this._initialMode = this._isOnlyBasic ? 'basic' : (params.mode || 'custom');
         this._okButtonClass = params.okButtonType || 'choose';
@@ -22,7 +24,7 @@ H.Screens['choose-hero-deck'] = class ChooseHeroDeckScreen extends H.Screen {
     _render() {
         render(this.$node, 'choose-hero-deck', {
             onlyBasic: this._isOnlyBasic,
-            decks: H.decks
+            decks: this._decks || H.decks
         });
 
         this._$type = this.$node.find('.select-decks-type');
