@@ -67,13 +67,18 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
 
                 this.drawCards();
             })
+            .on('keyup', '.search', () => {
+                this._filterCards();
+
+                this.drawCards();
+            })
             .on('focusout', '.search', () => {
                 this._filterCards();
 
                 this.drawCards();
             })
             .on('keydown', '.search', e => {
-                if (e.which === 13) {
+                if (e.which === H.KEYS['enter']) {
                     $(e.currentTarget).blur();
                 }
             })
