@@ -195,7 +195,7 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
                 const picUrl = H.makeCardUrl(card.pic);
                 const $card = this._$cards.find('.card').eq(i);
                 const $img = $(img).addClass('img front').hide();
-                $card.append($img);
+                $card.prepend($img);
                 loadCards.push($card);
 
                 img.onload = () => {
