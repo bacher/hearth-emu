@@ -327,6 +327,9 @@ H.Targets = class Targets {
     'with'(flag) {
         this._filterAll(obj => obj.getData().flags[flag]);
     }
+    'legendary'() {
+        this._filterAll(obj => obj.card.flags['unique']);
+    }
 
     _invertMinions(side, playerCreatures) {
         side.minions = playerCreatures.getAll().filter(creature => {
