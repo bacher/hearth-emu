@@ -404,7 +404,7 @@ const A = {
         const max = this.params[0] || 1;
 
         for (var i = 0; i < max; ++i) {
-            o.player.removeRandomHandCard();
+            o.player.hand.removeRandomHandCard();
         }
     },
     'copy-random-enemy-card': function(o) {
@@ -953,6 +953,11 @@ const A = {
                 by: o.player.hero.id,
                 to: target.id
             });
+        });
+    },
+    'deal-damage-from-event'(o) {
+        o.targets.forEach(target => {
+            target.dealDamage(o.eventMessage.dmg);
         });
     }
 };
