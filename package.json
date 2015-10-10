@@ -6,6 +6,7 @@
   "scripts": {
     "install": "npm install && cd server && npm install && cd ../www && bower install",
     "build": "gulp && cd www && ./compile-jade.sh",
+    "start": "cd server && sudo nohup node _compiled/daemon.js &",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
