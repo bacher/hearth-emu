@@ -330,6 +330,11 @@ H.Targets = class Targets {
     'legendary'() {
         this._filterAll(obj => obj.card.flags['unique']);
     }
+    'except'(minionName) {
+        minionName = minionName.toLowerCase();
+
+        this._filterAll(obj => obj.card.name.toLowerCase() !== minionName);
+    }
 
     _invertMinions(side, playerCreatures) {
         side.minions = playerCreatures.getAll().filter(creature => {

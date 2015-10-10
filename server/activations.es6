@@ -800,6 +800,25 @@ const A = {
             player
         });
     },
+    'add-dream-card'(o) {
+        const spareParts = [
+            'Dream',
+            'Emerald Drake',
+            'Laughing Sister',
+            'Nightmare',
+            'Ysera Awakens'
+        ];
+
+        const dreamName = H.getRandomElement(spareParts);
+
+        const player = this.params[0] === 'op' ? o.player.enemy : o.player;
+
+        A['add-hand-card'].call({
+            params: [dreamName]
+        }, {
+            player
+        });
+    },
     'discard-deck-card'(o) {
         for (var i = 0; i < this.params[0] || 1; ++i) {
             o.player.deck.popCard();
