@@ -182,6 +182,28 @@ const AURAS = {
             skill.maxUseCount = 2;
         },
         defaultSide: 'my'
+    },
+    'steamwheedle-sniper': {
+        affect: 'hero-skill',
+        effect(skill) {
+            if (skill.that.name === 'hunter-base') {
+                // FIXME UGLY
+                const heroSkill = new H.HeroSkill(skill.that._hero, {
+                    name: 'hunter-base',
+                    activation: 'deal-damage',
+                    params: [2],
+                    animation: 'arrow',
+                    targets: { names: ['all'] },
+                    skillNeedTarget: true
+                });
+
+                skill.targets = { names: ['all'] };
+                skill.needTarget = true;
+
+                skill.command = heroSkill.command;
+            }
+        },
+        defaultSide: 'my'
     }
 };
 

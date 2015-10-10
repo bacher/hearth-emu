@@ -7,6 +7,8 @@ H.HeroSkill = class HeroSkill {
         this.player = hero.player;
         this._hero = hero;
 
+        this.name = options.name || 'unknown';
+
         this.objType = 'hero-skill';
 
         this.id = _.uniqueId('skill');
@@ -28,7 +30,8 @@ H.HeroSkill = class HeroSkill {
 
     use(o) {
         o.animationBy = this;
-        this.command.act(o);
+        console.log(this.getData());
+        this.getData().command.act(o);
 
         this._usedCount++;
     }
@@ -55,17 +58,20 @@ H.HeroSkill = class HeroSkill {
     }
 
     isNeedTarget() {
-        return !!this._needTarget;
+        return !!this.getData().needTarget;
     }
 
     getTargetsType() {
-        return this._targets;
+        return this.getData().targets;
     }
 
     getBaseData() {
         return {
             that: this,
-            maxUseCount: 1
+            command: this.command,
+            maxUseCount: 1,
+            needTarget: this._needTarget,
+            targets: this._needTarget && this._targets
         };
     }
 };
