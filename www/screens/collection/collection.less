@@ -185,6 +185,37 @@
       }
     }
 
+    .uses {
+      position: absolute;
+      top: 1px;
+      right: 3px;
+
+      color: #FFF;
+      font-family: "Belwe Bold", Times, serif;
+      text-shadow: 0 0 1px #000;
+      z-index: 3;
+
+      &:after {
+        content: "%";
+      }
+
+      &:hover:before {
+        position: absolute;
+        width: 81px;
+        top: 17px;
+        left: -29px;
+        padding: 3px 5px;
+        border-radius: 5px;
+        background: #000;
+        color: #FFF;
+        font-size: 10px;
+        text-align: center;
+        content: 'The percentage of use in decks by "hearthpwn.com" statistics.';
+        pointer-events: none;
+      }
+    }
+
+    // FIXME What the glow?
     &.flip:hover .glow {
       position: absolute;
       top: -11px;

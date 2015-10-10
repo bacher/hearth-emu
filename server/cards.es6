@@ -2,6 +2,7 @@
 const H = require('./namespace');
 
 const cardsRaw = require('../data/cards.json');
+const cardsUsesHash = require('../data/uses.json');
 
 const cards = cardsRaw.map(card => new H.Card(card));
 
@@ -37,7 +38,12 @@ for (var i = 0; i < cards.length; ++i) {
 H.CARDS = {
     list: cards,
     hash: cardsHash,
-    clientList: cards.map(card => card.getInfo(false, true)),
+    clientList: cards.map(card => {
+        const info = card.getInfo(false, true);
+        info.usesPercent = cardsUsesHash[info.name] || '';
+
+        return info;
+    }),
     getById: function(id) {
         return this.hash[id];
     },

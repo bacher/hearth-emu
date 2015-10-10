@@ -7,4 +7,7 @@ each card in cards
          if (card.loaded)
             IMG.img.front(src=H.makeCardUrl(card.pic))
 
+         if (card.usesPercent)
+            .uses= card.usesPercent
+
          .glow
