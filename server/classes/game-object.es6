@@ -20,6 +20,7 @@ H.GameObject = class GameObject extends EventEmitter {
     enterInGame(player) {
         this.battle = player.battle;
         this.player = player;
+        this._lastPlayer = player;
 
         delete this.flags['dead'];
         delete this.flags['detached'];

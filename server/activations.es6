@@ -72,6 +72,13 @@ const A = {
             o.player.creatures.addCreature(minion);
         }
     },
+    'summon-died'(o) {
+        o.player.battle._thisTurnDead.forEach(minion => {
+            if (minion._lastPlayer === o.player) {
+                o.player.creatures.addCreature(new H.Minion(null, minion.card));
+            }
+        });
+    },
     'put-random-deck-secret'(o) {
         const trapCard = o.player.deck.getRandomCards(1, H.CARD_TYPES.trap)[0];
 

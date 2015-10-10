@@ -19,12 +19,20 @@ H.Battle = class Battle extends EventEmitter {
 
         this._bindListeners();
 
+        this._thisTurnDead = [];
+
         player1.enterBattle(this);
         player2.enterBattle(this);
 
         setTimeout(() => {
             this._start();
         }, 1000);
+
+        this.on('death', obj => {
+            if (obj.objType === 'minion') {
+                this._thisTurnDead.push(obj);
+            }
+        });
     }
 
     _start() {
@@ -234,6 +242,8 @@ H.Battle = class Battle extends EventEmitter {
         const players = this.getPlayers();
 
         this.emit('end-turn', players[0]);
+
+        this._thisTurnDead.length = 0;
 
         this.emit('start-turn', players[1]);
     }
