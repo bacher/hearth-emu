@@ -26,9 +26,13 @@
       font-weight: bold;
 
       &:after {
+        font-weight: normal;
         content: ": ";
       }
     }
+
+    animation: fade 5s linear forwards;
+    animation-delay: 120s;
   }
 
   .prompt {
@@ -37,14 +41,53 @@
     width: 400px;
 
     color: #D6D6D6;
+
+    animation: chat-fade-in 25s linear forwards;
   }
 
   .message-input {
     position: absolute;
-    top: 1px;
+    top: 2px;
+    left: -7px;
 
     INPUT {
       width: 400px;
+
+      padding: 2px 8px;
+      border-radius: 6px;
+      color: #FFF;
+      border: none;
+      font-family: serif;
+      font-size: 18px;
+      outline: none;
+      background: rgba(0,0,0,0.4);
+    }
+  }
+
+  @keyframes chat-fade-in {
+    0% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 0;
+    }
+    45% {
+      opacity: 1;
+    }
+    95% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fade {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
     }
   }
 }

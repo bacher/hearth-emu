@@ -12,14 +12,6 @@ H.Chat = class Chat {
         this._render();
 
         this._bindEventListeners();
-
-        setTimeout(() => {
-            this._showPrompt();
-        }, 5000);
-
-        setTimeout(() => {
-            this._removePrompt();
-        }, 15000);
     }
 
     _render() {
@@ -63,7 +55,7 @@ H.Chat = class Chat {
     _showInput() {
         this._inputShowed = true;
 
-        this._removePrompt();
+        this.$node.find('.prompt').remove();
 
         this.$node.find('.message-input').show();
         this._$input.focus();
@@ -92,16 +84,14 @@ H.Chat = class Chat {
     }
 
     _onChatMessage(data) {
+        const $message = render(null, 'message', data);
+
+        setTimeout(() => {
+            $message.addClass('hide');
+        }, 12000);
+
         this._$messages
-            .append(render(null, 'message', data))
+            .append($message)
             .scrollTop(999);
-    }
-
-    _showPrompt() {
-        this.$node.find('.prompt').show();
-    }
-
-    _removePrompt() {
-        this.$node.find('.prompt').remove();
     }
 };
