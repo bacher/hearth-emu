@@ -1040,8 +1040,12 @@ const A = {
             target.dealDamage(o.eventMessage.dmg);
         });
     },
-    'beneath-the-grounds'(o) {
-
+    'if-have-secret'(o) {
+        if (o.player.hero.traps.getCount()) {
+            A[this.params[0]].call({
+                params: this.params.slice(1)
+            }, o);
+        }
     }
 };
 

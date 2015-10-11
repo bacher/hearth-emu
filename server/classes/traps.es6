@@ -20,6 +20,10 @@ H.Traps = class Traps {
         trap.on('detach', this._onTrapDetach);
     }
 
+    getCount() {
+        return this.traps.length;
+    }
+
     getClientData() {
         return this.traps.map(trap => trap.getClientData());
     }
