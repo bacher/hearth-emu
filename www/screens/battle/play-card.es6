@@ -323,43 +323,43 @@ H.PlayCard = class PlayCard {
                 this.battle._creatures.replaceEmptySpaceByPreview($creature);
 
                 this._savedAction.$tmpObject = $creature;
+            }
 
-                const minionNeedBattleCry = this._isMinionNeedBattleCryTarget;
+            const minionNeedBattleCry = this._isMinionNeedBattleCryTarget;
 
-                this._release(true);
+            this._release(true);
 
-                if (minionNeedBattleCry) {
-                    this._initGrab({ $on: $creature });
-                    this._grabObject();
+            if (minionNeedBattleCry) {
+                this._initGrab({ $on: this._savedAction.$tmpObject });
+                this._grabObject();
 
-                } else {
-                    const cardHandId = this._savedAction.$clickObject.data('id');
-                    const cardInfo = _.find(this.battle.battleData.my.hand, { id: cardHandId });
+            } else {
+                const cardHandId = this._savedAction.$clickObject.data('id');
+                const cardInfo = _.find(this.battle.battleData.my.hand, { id: cardHandId });
 
-                    H.app.activateOverlay('choose-card', {
-                        cards: cardInfo.additionActions,
-                        onSelect: index => {
-                            const selectedCard = cardInfo.additionActions[index];
+                H.app.activateOverlay('choose-card', {
+                    cards: cardInfo.additionActions,
+                    onSelect: index => {
+                        const selectedCard = cardInfo.additionActions[index];
 
-                            actionData.choosenCard = {
-                                id: selectedCard.id
-                            };
+                        actionData.choosenCard = {
+                            id: selectedCard.id
+                        };
 
-                            if (selectedCard.isNeedTarget) {
-                                this._choosenCardAction = true;
-                                this._initGrab();
-                                this._grabObject();
+                        if (selectedCard.isNeedTarget) {
+                            this._choosenCardAction = true;
+                            this._initGrab();
+                            this._grabObject();
 
-                            } else {
-                                this._postAction('play-card', actionData);
-                            }
-                        },
-                        onCancel: () => {
-                            this._isChooseDialogCanceled = true;
-                            this._release();
+                        } else {
+                            this._postAction('play-card', actionData);
                         }
-                    });
-                }
+                    },
+                    onCancel: () => {
+                        this._isChooseDialogCanceled = true;
+                        this._release();
+                    }
+                });
             }
 
         } else {
