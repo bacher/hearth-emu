@@ -111,6 +111,10 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
 
         this._updateTabs();
 
+        _.times(10, i => {
+            this._startCaching(this._cards[i].slice(0, 8));
+        });
+
         this.drawCards();
     }
 
@@ -169,6 +173,7 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
             const cardsPool = this._currentCards[clas];
 
             const cards = cardsPool.slice(this.page * 8, this.page * 8 + 8);
+            const prepareCards = cardsPool.slice((this.page + 1) * 8, (this.page + 1) * 8 + 8);
 
             this.$node.find('.scroll-zone.left').toggle(this.page !== 0);
             this.$node.find('.scroll-zone.right').toggle(this.page * 8 + 8 < cardsPool.length);
@@ -182,6 +187,8 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
             this._initCardsLoadAnimation(cards);
 
             this.checkCardLimits();
+
+            this._startCaching(prepareCards);
         }
     }
 
@@ -312,6 +319,18 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
 
             this.$node.find('.class-bg').addClass($tab.data('clas'));
         }
+    }
+
+    _startCaching(cards) {
+        cards.forEach(card => {
+            const img = new Image();
+
+            img.onload = () => {
+                card.loaded = true;
+            };
+
+            img.src = H.makeCardUrl(card.pic);
+        });
     }
 
 };
