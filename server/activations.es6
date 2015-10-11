@@ -218,6 +218,15 @@ const A = {
             params: [o.player.hero.attack]
         }, o);
     },
+    'deal-hero-skill-damage'(o) {
+        const damageInfo = { damage: this.params[0] };
+
+        o.battle.auras.applyEffect(o.player, 'hero-skill-damage', damageInfo);
+
+        o.targets.forEach(target => {
+            target.dealDamage(damageInfo.damage);
+        });
+    },
     'destroy-op-weapon-draw-cards'(o) {
         const opWeapon = o.player.enemy.hero.weapon;
 

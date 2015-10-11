@@ -204,6 +204,13 @@ const AURAS = {
             }
         },
         defaultSide: 'my'
+    },
+    'increase-hero-skill-damage': {
+        affect: 'hero-skill-damage',
+        effect(damageInfo) {
+            damageInfo.damage += this.params[0];
+        },
+        defaultSide: 'my'
     }
 };
 

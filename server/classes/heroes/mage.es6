@@ -8,7 +8,8 @@ H.Mage = class Mage extends H.Hero {
         this.clas = H.CLASSES['mage'];
 
         this.setHeroSkill({
-            activation: 'deal-damage',
+            name: 'Fireball',
+            activation: 'deal-hero-skill-damage',
             params: [1],
             animation: 'fireball',
             targets: { names: ['all'] },
