@@ -96,15 +96,19 @@
     }
   }
 
-  &.loaded .my-collection {
+  .my-collection {
     position: absolute;
     top: -1px;
     left: 177px;
     width: 239px;
     height: 92px;
+    opacity: 0;
+    background: url("/textures/my-collection_hover.png");
+    transition: opacity 0.3s;
+  }
 
-    &:hover {
-      background: url("/textures/my-collection_hover.png");
-    }
+  &.loaded .my-collection:hover {
+    opacity: 1;
+    transition-duration: 0.1s;
   }
 }
