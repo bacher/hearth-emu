@@ -390,49 +390,7 @@ H.Battle = class Battle extends EventEmitter {
 
         const targets = H.Targets.parseUserData(player, data);
 
-        targets.forEach(target => {
-            const eventMessage = {
-                by: by,
-                to: target,
-                prevent: false
-            };
-
-            this.emit('hit', eventMessage);
-
-            if (!eventMessage.prevent) {
-                const by = eventMessage.by.getData();
-                const to = eventMessage.to.getData();
-
-                eventMessage.to.dealDamage(by.attack);
-
-                this.addBattleAction({
-                    name: 'hit',
-                    by: by.id,
-                    to: target.id
-                });
-
-                if (eventMessage.by.flags['acid'] && eventMessage.to.objType !== 'hero') {
-                    eventMessage.to.kill();
-                }
-
-                if (by.flags['freezer']) {
-                    eventMessage.to.addFlag('freeze');
-                }
-
-                if (to.attack && eventMessage.to.objType !== 'hero') {
-                    eventMessage.by.dealDamage(to.attack);
-
-                    if (eventMessage.to.flags['acid'] && eventMessage.by.objType !== 'hero') {
-                        eventMessage.by.kill();
-                    }
-
-                    if (to.flags['freezer']) {
-                        eventMessage.by.addFlag('freeze');
-                    }
-                }
-            }
-        });
-        by.setHitFlags();
+        by.hit(targets.getOne());
 
         this.sendGameData();
     }

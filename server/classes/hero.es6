@@ -123,10 +123,8 @@ H.Hero = class Hero {
         if (this.weapon) {
             this.weapon.setHitFlags();
 
-            if (!this.weapon) {
-                this.flags['tired'] = true;
-            }
         } else {
+            // FIXME UNUSED?
             this.flags['tired'] = true;
         }
     }
@@ -242,3 +240,4 @@ H.Hero = class Hero {
 
 H.mixGameDataAccessors(H.Hero);
 H.mixCustomEvents(H.Hero);
+H.mixHitting(H.Hero);

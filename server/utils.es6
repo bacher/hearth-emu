@@ -80,6 +80,60 @@ H.mixCustomEvents = function(clas) {
     };
 };
 
+H.mixHitting = function(clas) {
+    clas.prototype.hit = function(target) {
+        const battle = this.player.battle;
+
+        const eventMessage = {
+            by: this,
+            to: target,
+            prevent: false
+        };
+
+        battle.emit('hit', eventMessage);
+
+        if (!eventMessage.prevent) {
+            const by = eventMessage.by.getData();
+            const to = eventMessage.to.getData();
+
+            const isDamageDealt = eventMessage.to.dealDamage(by.attack);
+
+            battle.addBattleAction({
+                name: 'hit',
+                by: by.id,
+                to: target.id
+            });
+
+            if (isDamageDealt) {
+                if (by.flags['freezer']) {
+                    eventMessage.to.addFlag('freeze');
+                }
+
+                // FIXME Пробивает ли яд через щит?
+                if (by.flags['acid'] && eventMessage.to.objType !== 'hero') {
+                    eventMessage.to.kill();
+                }
+            }
+
+            if (to.attack && eventMessage.to.objType !== 'hero') {
+                const isCounterDamageDealt = eventMessage.by.dealDamage(to.attack);
+
+                if (isCounterDamageDealt) {
+                    if (to.flags['freezer']) {
+                        eventMessage.by.addFlag('freeze');
+                    }
+
+                    if (to.flags['acid'] && eventMessage.by.objType !== 'hero') {
+                        eventMessage.by.kill();
+                    }
+                }
+            }
+        }
+
+        this.setHitFlags();
+    };
+};
+
 H.parseParams = function(paramNames, values) {
     const params = {};
 

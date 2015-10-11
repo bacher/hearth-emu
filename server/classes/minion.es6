@@ -116,6 +116,8 @@ H.Minion = class Minion extends H.GameObject {
                 this._dealDamage(dmg);
 
                 player.battle.emit('damage-dealt', eventMessage);
+
+                return true;
             }
         }
     }
@@ -202,3 +204,4 @@ H.Minion = class Minion extends H.GameObject {
 };
 
 H.mixGameDataAccessors(H.Minion);
+H.mixHitting(H.Minion);
