@@ -330,6 +330,11 @@ H.Targets = class Targets {
     'legendary'() {
         this._filterAll(obj => obj.card.flags['unique']);
     }
+    'name'(minionName) {
+        minionName = minionName.toLowerCase();
+
+        this._filterAll(obj => obj.card.name.toLowerCase() === minionName);
+    }
     'except'(minionName) {
         minionName = minionName.toLowerCase();
 
