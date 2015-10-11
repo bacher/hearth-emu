@@ -56,6 +56,10 @@ H.HandCard = class HandCard extends EventEmitter {
                     cost -= this.player.creatures.getAllByRace(H.RACES.pirate).length;
                     break;
 
+                case 'minus-deaths-count':
+                    cost -= this.player.battle._thisTurnDead.length;
+                    break;
+
                 default:
                     console.warn('Unimplemented cost calc!');
                     throw 2;
