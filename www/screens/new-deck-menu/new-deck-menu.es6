@@ -55,7 +55,7 @@ H.Screens['new-deck-menu'] = class NewDeckMenuScreen extends Menu {
                 break;
 
             case 'import':
-                const url = prompt('Enter deck resource URL');
+                const url = prompt('Game support import from:\nwww.hearthpwn.com\nwww.hearthstonetopdecks.com\n\nEnter deck resource URL:');
 
                 if (url) {
                     $.get('/import.json?url=' + encodeURI(url)).then(data => {
