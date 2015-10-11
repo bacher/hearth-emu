@@ -36,6 +36,11 @@ const A = {
 
         A['summon'].call(this, o);
     },
+    'summon-copy'(o) {
+        o.targets.forEach(target => {
+            o.player.creatures.addCreature(new H.Minion(null, target.card));
+        });
+    },
     'summon-random': function(o) {
         const minionCardName = H.getRandomElement(this.params);
 
