@@ -183,6 +183,13 @@ const AURAS = {
         },
         defaultSide: 'my'
     },
+    'infinity-hero-skill': {
+        affect: 'hero-skill',
+        effect(skill) {
+            skill.maxUseCount = 9999;
+        },
+        defaultSide: 'my'
+    },
     'steamwheedle-sniper': {
         affect: 'hero-skill',
         effect(skill) {
