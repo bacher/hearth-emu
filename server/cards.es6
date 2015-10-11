@@ -20,7 +20,7 @@ for (var i = 0; i < cards.length; ++i) {
     var card = cards[i];
     cardsHash[card.id] = card;
 
-    if (card.flags['unimplemented']) {
+    if (!card.flags['unimplemented'] && !card.flags['unhand']) {
         cardsTypeHash[card.type].push(card);
 
         if (!cardsCostHash[card.cost]) {

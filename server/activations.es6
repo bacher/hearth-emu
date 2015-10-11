@@ -425,12 +425,18 @@ const A = {
         });
     },
     'add-random-hand-minion'(o) {
+        var player = o.player;
+
+        if (this.params[0] === 'op') {
+            player = player.enemy;
+        }
+
         const cost = typeof this.params[0] === 'number' ? cost : null;
         const race = typeof this.params[1] === 'string' ? H.RACES[this.params[1]] : null;
 
         const card = H.CARDS.getRandom(H.CARD_TYPES.minion, cost, race);
 
-        o.baseParams.handCard = o.player.hand.addCard(card);
+        o.baseParams.handCard = player.hand.addCard(card);
     },
     'reduce-hand-card-cost'(o) {
         if (o.handCard) {
