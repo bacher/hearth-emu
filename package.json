@@ -24,6 +24,7 @@
     "grunt-spritesmith": "^5.1.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.2.1",
+    "gulp-batch": "^1.0.5",
     "gulp-concat": "^2.6.0",
     "gulp-less": "^3.0.3",
     "gulp-plumber": "^1.0.1",

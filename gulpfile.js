@@ -3,6 +3,7 @@ var gulp = require('gulp');
 var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 var watch = require('gulp-watch');
+var batch = require('gulp-batch');
 var plumber = require('gulp-plumber');
 var less = require('gulp-less');
 
@@ -42,5 +43,12 @@ gulp.task('less', function() {
         .pipe(gulp.dest('www/styles'));
 });
 
+gulp.task('less-watch', function() {
+    return watch('www/**/*.less', batch(function(events, done) {
+        gulp.start('less', done)
+    }));
+});
+
+
 gulp.task('default', ['server-es6', 'client-es6', 'less']);
-gulp.task('watch', ['server-es6-watch', 'client-es6-watch', 'less']);
+gulp.task('watch', ['server-es6-watch', 'client-es6-watch', 'less-watch']);
