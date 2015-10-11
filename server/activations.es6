@@ -1052,6 +1052,13 @@ const A = {
                 params: this.params.slice(1)
             }, o);
         }
+    },
+    'summon-random-minion-cost-from-event'(o) {
+        const cost = o.eventMessage.card.cost;
+
+        const card = H.CARDS.getRandom(H.CARD_TYPES.minion, cost);
+
+        o.player.creatures.addCreature(new H.Minion(null, card));
     }
 };
 
