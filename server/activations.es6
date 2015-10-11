@@ -171,12 +171,21 @@ const A = {
             });
         }
 
+        const damageInfo = { damage: H.parseValue(this.params[0]) };
+
+        o.battle.auras.applyEffect(o.player, 'spell-damage', damageInfo);
+
         o.targets.forEach(target => {
-            var damage = H.parseValue(this.params[0]);
+            target.dealDamage(damageInfo.damage);
+        });
+    },
+    'deal-double-spell-damage'(o) {
+        const damageInfo = { damage: H.parseValue(this.params[0]) };
 
-            const damageInfo = { damage };
-            o.battle.auras.applyEffect(o.player, 'spell-damage', damageInfo);
+        o.battle.auras.applyEffect(o.player, 'spell-damage', damageInfo);
+        o.battle.auras.applyEffect(o.player, 'spell-damage', damageInfo);
 
+        o.targets.forEach(target => {
             target.dealDamage(damageInfo.damage);
         });
     },
