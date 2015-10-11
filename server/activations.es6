@@ -1053,6 +1053,13 @@ const A = {
             }, o);
         }
     },
+    'if-dead'(o) {
+        if (o.targets.getOne().is('dead')) {
+            A[this.params[0]].call({
+                params: this.params.slice(1)
+            }, o);
+        }
+    },
     'summon-random-minion-cost-from-event'(o) {
         const cost = o.eventMessage.card.cost;
 

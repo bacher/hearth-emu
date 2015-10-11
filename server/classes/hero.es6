@@ -234,6 +234,10 @@ H.Hero = class Hero {
             eventMessage
         });
     }
+
+    is(flag) {
+        return !!this.flags[flag];
+    }
 };
 
 H.mixGameDataAccessors(H.Hero);
