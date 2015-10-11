@@ -702,9 +702,15 @@ const A = {
         });
     },
     'add-random-spell'(o) {
+        var player = o.player;
+
+        if (this.params[0] === 'op') {
+            player = player.enemy;
+        }
+
         const spellCard = H.CARDS.getRandom(H.CARD_TYPES.spell);
 
-        o.player.hand.addCard(spellCard);
+        player.hand.addCard(spellCard);
     },
     'add-random-class-card'(o) {
         const clas = H.CLASSES[this.params[0]];
