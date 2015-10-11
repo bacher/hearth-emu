@@ -620,6 +620,35 @@ const A = {
             owner.creatures.replaceMinionByMinion(minion, H.Minion.createByName(this.params[0]));
         });
     },
+    // FIXME change names
+    'shuffle-into-deck'(o) {
+        o.player.deck.shuffleCard(o.minion.card);
+    },
+    'shuffle-target-into-deck'(o) {
+        const count = this.params[0] || 1;
+
+        const card = o.targets.getOne().card;
+
+        _.times(count, () => {
+            o.player.deck.shuffleCard(card);
+        });
+    },
+    'shuffle-card-into-deck'(o) {
+        var player = o.player;
+
+        if (this.params[0] === 'op') {
+            player = player.enemy;
+        }
+
+        const cardName = this.params[1];
+        const count = this.params[2] || 1;
+
+        const card = H.CARDS.getByName(cardName);
+
+        _.times(count, () => {
+            player.deck.shuffleCard(card);
+        });
+    },
     'transform-into-random-same-cost'(o) {
         o.targets.forEach(minion => {
             const cost = minion.card.cost;
@@ -856,9 +885,6 @@ const A = {
         o.player.hand.addCard(handCard.base);
         o.player.enemy.hand.addCard(H.CARDS.getByName('The Coin', H.CARD_TYPES.spell));
     },
-    'shuffle-into-deck'(o) {
-        o.player.deck.shuffleCard(o.minion.card);
-    },
     'druid-of-the-fang'(o) {
         const creatures = o.player.creatures;
 
@@ -919,14 +945,13 @@ const A = {
             o.minion.maxHp += hp;
         }
     },
-    'if-race-gain-attack-hp'(o) {
-        const attack = this.params[1];
-        const hp = this.params[2] || attack;
+    'if-have-race'(o) {
+        const race = H.RACES[this.params[0]];
 
-        if (o.player.creatures.getAllByRace(H.RACES[this.params[0]]).length) {
-            o.minion.attack += attack;
-            o.minion.hp += hp;
-            o.minion.maxHp += hp;
+        if (o.player.creatures.getAllByRace(race).length) {
+            A[this.params[1]].call({
+                params: this.params.slice(2)
+            }, o);
         }
     },
     'if-hold-dragon'(o) {
@@ -991,6 +1016,9 @@ const A = {
         o.targets.forEach(target => {
             target.dealDamage(o.eventMessage.dmg);
         });
+    },
+    'beneath-the-grounds'(o) {
+
     }
 };
 
