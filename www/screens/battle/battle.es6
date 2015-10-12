@@ -113,7 +113,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             const $avatar = this.$node.find('.avatar.' + side);
 
             $avatar[0].className = 'avatar ' + side + ' ' +
-                $avatar.data('clas') + ' ' +
+                hero.name + ' ' +
                 H.flattenFlags(hero.flags) +
                 (hero.flags['can-play'] ? ' available' : '');
 
@@ -217,13 +217,9 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         const myClass = H.CLASSES_L[data.my.clas];
         const opClass = H.CLASSES_L[data.op.clas];
 
-        this.$node.find('.avatar.my')
-            .addClass(myClass)
-            .data('clas', myClass);
+        this.$node.find('.avatar.my').addClass(myClass);
 
-        this.$node.find('.avatar.op')
-            .addClass(opClass)
-            .data('clas', opClass);
+        this.$node.find('.avatar.op').addClass(opClass);
 
         this.$node.find('.hero-skill.my').addClass(myClass);
         this.$node.find('.hero-skill.op').addClass(opClass);

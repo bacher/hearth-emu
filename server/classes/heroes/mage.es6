@@ -3,7 +3,7 @@ const H = require('../../namespace');
 
 H.Mage = class Mage extends H.Hero {
     constructor(player) {
-        super(player);
+        super(player, 'mage');
 
         this.setHeroSkill({
             name: 'fireblast',

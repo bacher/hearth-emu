@@ -3,7 +3,7 @@ const H = require('../../namespace');
 
 H.Jaraxxus = class Jaraxxus extends H.Hero {
     constructor(player) {
-        super(player);
+        super(player, 'jaraxxus');
 
         this.maxHp = this.hp = 15;
 

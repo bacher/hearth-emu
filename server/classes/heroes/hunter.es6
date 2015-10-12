@@ -3,7 +3,7 @@ const H = require('../../namespace');
 
 H.Hunter = class Hunter extends H.Hero {
     constructor(player) {
-        super(player);
+        super(player, 'hunter');
 
         this.setHeroSkill({
             name: 'steady-shot',

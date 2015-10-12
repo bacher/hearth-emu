@@ -3,7 +3,7 @@ const H = require('../../namespace');
 
 H.Shaman = class Shaman extends H.Hero {
     constructor(player) {
-        super(player);
+        super(player, 'shaman');
 
         this.totems = [
             H.CARDS.getByName('Searing Totem'),

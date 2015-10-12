@@ -3,11 +3,13 @@ const _ = require('lodash');
 const H = require('../namespace');
 
 H.Hero = class Hero {
-    constructor(player) {
+    constructor(player, name) {
         this.player = player;
 
         this.id = _.uniqueId('hero');
         this.objType = 'hero';
+
+        this.name = name;
 
         this.attack = 0;
         this.hp = 30;
@@ -133,6 +135,8 @@ H.Hero = class Hero {
     }
 
     _modifyClientData(data) {
+        data.name = this.name;
+
         if (this.player.active && data.attack > 0 && !data.flags['tired']) {
             data.flags['can-play'] = true;
         }
