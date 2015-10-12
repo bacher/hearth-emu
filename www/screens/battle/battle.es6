@@ -115,7 +115,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             $avatar[0].className = 'avatar ' + side + ' ' +
                 hero.name + ' ' +
                 H.flattenFlags(hero.flags) +
-                (hero.flags['can-play'] ? ' available' : '');
+                (side === 'my' && hero.flags['can-play'] ? ' available' : '');
 
             $avatar.find('.health').show();
             $avatar.find('.health .value').text(hero.hp);

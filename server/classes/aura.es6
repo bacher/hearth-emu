@@ -57,6 +57,12 @@ const AURAS = {
             }
         }
     },
+    'add-weapon-attack': {
+        affect: 'weapon',
+        effect(weapon) {
+            weapon.attack += this.params[0];
+        }
+    },
     'add-hp': {
         affect: 'minion',
         effect(minion) {

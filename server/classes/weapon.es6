@@ -4,11 +4,11 @@ const H = require('../namespace');
 
 
 H.Weapon = class Weapon extends H.GameObject {
-
     constructor(card) {
-        super();
+        super(null, card);
 
-        this.card = card;
+        this.objType = 'weapon';
+
         this.base = card.weapon;
 
         this.attack = this.base.attack;
@@ -20,7 +20,7 @@ H.Weapon = class Weapon extends H.GameObject {
         return new H.Weapon(H.CARDS.getByName(name, H.CARD_TYPES.weapon));
     }
 
-    getClientData() {
+    getData() {
         return {
             pic: this.card.pic,
             attack: this.attack,
@@ -58,3 +58,5 @@ H.Weapon = class Weapon extends H.GameObject {
         player.hero.weapon = null;
     }
 };
+
+H.mixGameDataAccessors(H.Weapon);

@@ -124,7 +124,7 @@ H.Hero = class Hero {
         return {
             that: this,
             id: this.id,
-            attack: (this.weapon ? this.weapon.attack : 0) + this.attack,
+            attack: (this.weapon ? this.weapon.getData().attack : 0) + this.attack,
             hp: this.hp,
             armor: this.armor,
             spellDamage: this.spellDamage,
