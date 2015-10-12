@@ -26,9 +26,15 @@ H.Player = class Player extends EventEmitter {
         this.active = false;
         this.deck = null;
         this.hero = null;
+        this.clas = null;
         this.hand = new H.Hand(this);
         this.creatures = new H.Creatures(this);
         this.traps = new H.Traps(this);
+
+        // Тут нужен синхронный промис
+        this.battleEnterPromise = new Promise(resolve => {
+            this._battleEnterFillPromise = resolve;
+        });
 
         this._thisTurnPlayedCards = [];
         this._outOfCardCount = 0;
@@ -103,8 +109,9 @@ H.Player = class Player extends EventEmitter {
                 deck = H.BASIC_DECKS[deck];
             }
 
+            this.clas = deck.clas;
             this.deck = new H.Deck(deck.cardIds);
-            this.hero = H.Hero.create(this, deck.clas);
+            this.hero = H.Hero.create(H.CLASSES_L[deck.clas], this);
 
             const brackedName = '[' + this.userName + ']';
             this.log = console.log.bind(console, brackedName);
@@ -152,6 +159,8 @@ H.Player = class Player extends EventEmitter {
         this.battle.on('play-card', this._onPlayCard.bind(this));
 
         this.emit('battle-enter', battle);
+
+        this._battleEnterFillPromise(battle);
     }
 
     sendMessage(msg, json) {
@@ -240,7 +249,7 @@ H.Player = class Player extends EventEmitter {
         // FIXME for weapon
         data.greenEnd = (
             data.active &&
-            !data.hero.canUseSkill &&
+            !data.hero.heroSkill.canUseSkill &&
             (data.hero.attack === 0 || data.hero.flags['tired']) &&
             !data.hand.some(handCard => handCard.flags['can-play']) &&
             !data.creatures.some(minion => !minion.flags['tired']));

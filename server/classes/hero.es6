@@ -2,18 +2,6 @@
 const _ = require('lodash');
 const H = require('../namespace');
 
-const Constructors = {
-    [H.CLASSES.warrior]: 'Warrior',
-    [H.CLASSES.shaman]: 'Shaman',
-    [H.CLASSES.rogue]: 'Rogue',
-    [H.CLASSES.paladin]: 'Paladin',
-    [H.CLASSES.hunter]: 'Hunter',
-    [H.CLASSES.druid]: 'Druid',
-    [H.CLASSES.warlock]: 'Warlock',
-    [H.CLASSES.mage]: 'Mage',
-    [H.CLASSES.priest]: 'Priest'
-};
-
 H.Hero = class Hero {
     constructor(player) {
         this.player = player;
@@ -36,7 +24,7 @@ H.Hero = class Hero {
 
         this.flags = {};
 
-        this.player.on('battle-enter', battle => {
+        this.player.battleEnterPromise.then(battle => {
             this.battle = battle;
 
             battle.on('start-turn', player => {
@@ -53,8 +41,8 @@ H.Hero = class Hero {
         });
     }
 
-    static create(player, clas) {
-        return new H[Constructors[clas]](player);
+    static create(heroName, player) {
+        return new H[_.capitalize(heroName)](player);
     }
 
     dealDamage(dmg) {
@@ -188,9 +176,7 @@ H.Hero = class Hero {
             overload: this.overload,
             nextOverload: this.nextOverload,
             crystals: this.crystals,
-            skillUsed: this.heroSkill.isUsed(),
-            canUseSkill: this.heroSkill.canUseSkill(),
-            isHeroSkillTargeting: this.heroSkill.isNeedTarget(),
+            heroSkill: this.heroSkill.getClientData(),
             weapon: this.weapon ? this.weapon.getClientData() : null,
             flags: this.weapon ? _.extend({}, this.flags, this.weapon.getFlags()) : this.flags
         };

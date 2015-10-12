@@ -16,6 +16,10 @@ H.Weapon = class Weapon extends H.GameObject {
         this.flags = _.clone(this.base.flags);
     }
 
+    static createByName(name) {
+        return new H.Weapon(H.CARDS.getByName(name, H.CARD_TYPES.weapon));
+    }
+
     getClientData() {
         return {
             pic: this.card.pic,

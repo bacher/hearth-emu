@@ -5,8 +5,6 @@ H.Shaman = class Shaman extends H.Hero {
     constructor(player) {
         super(player);
 
-        this.clas = H.CLASSES['shaman'];
-
         this.totems = [
             H.CARDS.getByName('Searing Totem'),
             H.CARDS.getByName('Stoneclaw Totem'),

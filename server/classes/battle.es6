@@ -38,7 +38,7 @@ H.Battle = class Battle extends EventEmitter {
     _start() {
         const p1Info = {
             name: this.p1.joinParams.name,
-            clas: this.p1.hero.clas,
+            clas: this.p1.clas,
             id: this.p1.id,
             heroId: this.p1.hero.id,
             skillId: this.p1.hero.heroSkill.id
@@ -46,7 +46,7 @@ H.Battle = class Battle extends EventEmitter {
 
         const p2Info = {
             name: this.p2.joinParams.name,
-            clas: this.p2.hero.clas,
+            clas: this.p2.clas,
             id: this.p2.id,
             heroId: this.p2.hero.id,
             skillId: this.p2.hero.heroSkill.id
@@ -400,7 +400,6 @@ H.Battle = class Battle extends EventEmitter {
         const heroSkill = hero.heroSkill;
 
         player.hero.mana -= 2;
-        player.hero.skillUsed = true;
 
         var globalTargets = null;
 
@@ -411,7 +410,7 @@ H.Battle = class Battle extends EventEmitter {
         this.addBattleAction({
             name: 'use-hero-skill',
             player: player.id,
-            clas: player.hero.clas
+            clas: player.clas
         });
 
         hero.useHeroSkill({

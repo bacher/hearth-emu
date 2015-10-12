@@ -5,8 +5,6 @@ H.Paladin = class Paladin extends H.Hero {
     constructor(player) {
         super(player);
 
-        this.clas = H.CLASSES['paladin'];
-
         this.setHeroSkill({
             activation: 'summon',
             params: ['Silver Hand Recruit'],

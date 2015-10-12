@@ -28,6 +28,10 @@ H.HeroSkill = class HeroSkill {
         this._usedCount = 0;
     }
 
+    getName() {
+        return this.name;
+    }
+
     use(o) {
         o.animationBy = this;
         console.log(this.getData());
@@ -73,6 +77,11 @@ H.HeroSkill = class HeroSkill {
             needTarget: this._needTarget,
             targets: this._needTarget && this._targets
         };
+    }
+
+    _modifyClientData(data) {
+        data.skillUsed = this.isUsed();
+        data.canUseSkill = this.canUseSkill();
     }
 };
 
