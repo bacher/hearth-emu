@@ -87,10 +87,6 @@ H.Hero = class Hero {
 
     useHeroSkill(o) {
         this.heroSkill.use(o);
-
-        this.battle.emit('use-hero-skill', {
-            player: this.player
-        });
     }
 
     wakeUp() {
@@ -156,22 +152,10 @@ H.Hero = class Hero {
 
     }
 
-    _onCustomEvent(command, eventMessage, globalTargets) {
-        command.act({
-            battle: this.player.battle,
-            player: this.player,
-            handCard: null,
-            params: null,
-            globalTargets,
-            eventMessage
-        });
-    }
-
     is(flag) {
         return !!this.flags[flag];
     }
 };
 
 H.mixGameDataAccessors(H.Hero);
-H.mixCustomEvents(H.Hero);
 H.mixHitting(H.Hero);

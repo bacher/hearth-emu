@@ -298,4 +298,17 @@ H.Player = class Player extends EventEmitter {
         this.ws.close();
     }
 
+    _onCustomEvent(command, eventMessage, globalTargets) {
+        command.act({
+            battle: this.battle,
+            player: this,
+            handCard: null,
+            params: null,
+            globalTargets,
+            eventMessage
+        });
+    }
+
 };
+
+H.mixCustomEvents(H.Player);

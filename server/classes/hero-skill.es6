@@ -38,6 +38,10 @@ H.HeroSkill = class HeroSkill {
         this.getData().command.act(o);
 
         this._usedCount++;
+
+        this.battle.emit('use-hero-skill', {
+            player: this.player
+        });
     }
 
     charge() {

@@ -629,7 +629,7 @@ const A = {
                 target.addCustomEvent(new H.Command(o.customEvent));
             });
         } else {
-            o.player.hero.addCustomEvent(new H.Command(o.customEvent));
+            o.player.addCustomEvent(new H.Command(o.customEvent));
         }
     },
     'draw-card-deal-self-damage': function(o) {
