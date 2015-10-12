@@ -1071,7 +1071,7 @@ const A = {
         const minion = o.minion;
 
         if (minion.card.name === 'Lord Jaraxxus') {
-            o.player.hero = H.create('Jaraxxus');
+            o.player.hero = H.Hero.create('Jaraxxus', o.player);
 
             o.player.hero.equipWeapon(H.Weapon.createByName('Blood Fury'));
         }

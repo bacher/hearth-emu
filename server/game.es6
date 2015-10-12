@@ -35,6 +35,7 @@ require('./classes/heroes/druid');
 require('./classes/heroes/warlock');
 require('./classes/heroes/mage');
 require('./classes/heroes/priest');
+require('./classes/heroes/jaraxxus');
 require('./classes/player');
 
 require('./activations');
