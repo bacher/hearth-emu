@@ -1098,6 +1098,97 @@ const A = {
         o.targets.forEach(target => {
             target._playDeathrattles();
         });
+    },
+    'improve-hero-power'(o) {
+        const clas = o.player.clas;
+        const hero = o.player.hero;
+        const powerName = hero.heroSkill.getName();
+
+        if (clas === H.CLASSES.druid) {
+            if (powerName === 'shapeshift') {
+                hero.setHeroSkill({
+                    name: 'dire-shapeshift',
+                    activation: 'add-attack-armor',
+                    params: [2]
+                });
+            }
+
+        } else if (clas === H.CLASSES.hunter) {
+            if (powerName === 'steady-shot') {
+                hero.setHeroSkill({
+                    name: 'ballista-shot',
+                    activation: 'deal-hero-skill-damage',
+                    params: [3],
+                    animation: 'arrow',
+                    targetsType: {
+                        names: ['enemies', 'heroes']
+                    }
+                });
+            }
+        } else if (clas === H.CLASSES.mage) {
+            if (powerName === 'fireblast') {
+                hero.setHeroSkill({
+                    name: 'fireblast-rank-2',
+                    activation: 'deal-hero-skill-damage',
+                    params: [2],
+                    animation: 'fireball',
+                    targets: { names: ['all'] },
+                    skillNeedTarget: true
+                });
+            }
+        } else if (clas === H.CLASSES.paladin) {
+            if (powerName === 'reinforce') {
+                hero.setHeroSkill({
+                    name: 'the-silver-hand',
+                    activation: 'summon',
+                    params: ['Silver Hand Recruit', 2],
+                    additionCheck: function() {
+                        return H.Conditions.check('can-add-creature', this);
+                    }
+                });
+            }
+
+        } else if (clas === H.CLASSES.priest) {
+            if (powerName === 'lesser-heal') {
+                hero.setHeroSkill({
+                    name: 'heal',
+                    activation: 'heal',
+                    params: [4],
+                    targets: { names: ['all'] },
+                    skillNeedTarget: true
+                });
+            }
+
+        } else if (clas === H.CLASSES.rogue) {
+            if (powerName === 'dagger-mastery') {
+                hero.setHeroSkill({
+                    name: 'poisoned-daggers',
+                    activation: 'equip-weapon',
+                    params: ['Poisoned Dagger']
+                });
+            }
+
+        } else if (clas === H.CLASSES.shaman) {
+            if (powerName === 'totemic-call') {
+                // FIXME
+            }
+
+        } else if (clas === H.CLASSES.warlock) {
+            if (powerName === 'life-tap') {
+                hero.setHeroSkill({
+                    name: 'soul-tap',
+                    activation: 'draw-card'
+                });
+            }
+        } else if (clas === H.CLASSES.warrior) {
+            if (powerName === 'armor-up') {
+                hero.setHeroSkill({
+                    name: 'tank-up',
+                    activation: 'add-armor',
+                    params: [4]
+                });
+            }
+        }
     }
 };
 

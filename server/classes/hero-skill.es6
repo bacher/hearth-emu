@@ -39,6 +39,10 @@ H.HeroSkill = class HeroSkill {
         });
     }
 
+    getName() {
+        return this.name;
+    }
+
     charge() {
         this._usedCount = 0;
     }
