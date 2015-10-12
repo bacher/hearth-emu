@@ -1066,6 +1066,17 @@ const A = {
         const card = H.CARDS.getRandom(H.CARD_TYPES.minion, cost);
 
         o.player.creatures.addCreature(new H.Minion(null, card));
+    },
+    'replace-hero'(o) {
+        const minion = o.minion;
+
+        if (minion.card.name === 'Lord Jaraxxus') {
+            o.player.hero = H.create('Jaraxxus');
+
+            o.player.hero.equipWeapon(H.Weapon.createByName('Blood Fury'));
+        }
+
+        minion.detach();
     }
 };
 
