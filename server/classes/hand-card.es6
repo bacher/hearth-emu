@@ -14,7 +14,7 @@ H.HandCard = class HandCard extends EventEmitter {
         this.id = _.uniqueId('hand');
         this.base = card;
 
-        this.cost = 1;//card.cost;
+        this.cost = card.cost;
     }
 
     getBaseData() {

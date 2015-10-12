@@ -95,7 +95,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
 
         $myHeroSkill.toggleClass('available', myHeroSkill.canUseSkill)
             .toggleClass('off', myHeroSkill.skillUsed)
-            .toggleClass('need-target', myHeroSkill.needTarget);
+            .toggleClass('need-target', !!myHeroSkill.needTarget);
 
         const $opHeroSkill = this.$node.find('.hero-skill.op');
         const opHeroSkill = game.op.hero.heroSkill;

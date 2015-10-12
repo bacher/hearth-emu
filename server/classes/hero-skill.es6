@@ -28,18 +28,13 @@ H.HeroSkill = class HeroSkill {
         this._usedCount = 0;
     }
 
-    getName() {
-        return this.name;
-    }
-
     use(o) {
         o.animationBy = this;
-        console.log(this.getData());
         this.getData().command.act(o);
 
         this._usedCount++;
 
-        this.battle.emit('use-hero-skill', {
+        this.player.battle.emit('use-hero-skill', {
             player: this.player
         });
     }
