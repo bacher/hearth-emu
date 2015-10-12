@@ -1093,6 +1093,11 @@ const A = {
 
             target.addFlag('deathrattle');
         });
+    },
+    'trigger-deathrattle'(o) {
+        o.targets.forEach(target => {
+            target._playDeathrattles();
+        });
     }
 };
 
