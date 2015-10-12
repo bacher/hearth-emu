@@ -2,7 +2,9 @@
 const H = require('../namespace');
 
 H.Energy = class Energy {
-    constructor() {
+    constructor(player) {
+        this.player = player;
+
         this.objType = 'energy';
 
         this.mana = 0;
@@ -11,11 +13,8 @@ H.Energy = class Energy {
         this.nextOverload = 0;
     }
 
-    getManaStatus() {
-        return {
-            mana: this.mana,
-            crystals: this.crystals
-        };
+    getMana() {
+        return this.mana;
     }
 
     addMana(count) {
@@ -63,6 +62,14 @@ H.Energy = class Energy {
             nextOverload: this.nextOverload,
             crystals: this.crystals
         };
+    }
+
+    onTurnStart() {
+        this.overload = this.nextOverload;
+        this.nextOverload = 0;
+
+        this.addCrystal();
+        this.restoreMana();
     }
 
 };

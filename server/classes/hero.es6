@@ -19,7 +19,7 @@ H.Hero = class Hero {
 
         this.flags = {};
 
-        this.player.battleEnterPromise.then(battle => {
+        this.player.onBattleEnter(battle => {
             this.battle = battle;
 
             battle.on('start-turn', player => {
@@ -149,12 +149,6 @@ H.Hero = class Hero {
     }
 
     _onTurnStart() {
-        this.overload = this.nextOverload;
-        this.nextOverload = 0;
-
-        this.addCrystal();
-        this.restoreMana();
-
         this.heroSkill.charge();
     }
 

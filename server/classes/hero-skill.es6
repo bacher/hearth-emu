@@ -46,9 +46,9 @@ H.HeroSkill = class HeroSkill {
 
     canUseSkill() {
         return (
-            this._hero.player.active &&
+            this.player.active &&
             !this.isUsed() &&
-            this._hero.mana >= this.getCost() &&
+            this.player.energy.getMana() >= this.getCost() &&
             (!this._additionCheck || this._additionCheck())
         );
     }

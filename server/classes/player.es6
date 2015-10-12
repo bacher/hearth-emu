@@ -27,18 +27,15 @@ H.Player = class Player extends EventEmitter {
         this.deck = null;
         this.hero = null;
         this.clas = null;
-        this.energy = new H.Energy();
+        this.energy = new H.Energy(this);
         this.hand = new H.Hand(this);
         this.creatures = new H.Creatures(this);
         this.traps = new H.Traps(this);
 
-        // Тут нужен синхронный промис
-        this.battleEnterPromise = new Promise(resolve => {
-            this._battleEnterFillPromise = resolve;
-        });
-
         this._thisTurnPlayedCards = [];
         this._outOfCardCount = 0;
+
+        this._battleEnterListeners = [];
 
         ws
             .on('message', json => {
@@ -161,7 +158,16 @@ H.Player = class Player extends EventEmitter {
 
         this.emit('battle-enter', battle);
 
-        this._battleEnterFillPromise(battle);
+        this._battleEnterListeners.forEach(callback => callback(battle));
+        this._battleEnterListeners = null;
+    }
+
+    onBattleEnter(callback) {
+        if (this.battle) {
+            callback(this.battle);
+        } else {
+            this._battleEnterListeners.push(callback);
+        }
     }
 
     sendMessage(msg, json) {
@@ -262,6 +268,8 @@ H.Player = class Player extends EventEmitter {
     _onTurnStart(player) {
         if (this === player) {
             this.activate();
+
+            this.energy.onTurnStart();
 
             this.drawCard();
 

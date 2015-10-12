@@ -24,6 +24,10 @@ H.makeArray = function(value) {
 H.mixGameDataAccessors = function(clas) {
     if (!clas.prototype.getData) {
         clas.prototype.getData = function() {
+            if (!this.player) {
+                console.warn(this);
+            }
+
             var data = this.player.battle.auras.applyEffects(this.player, this);
 
             if (this._modifyData) {

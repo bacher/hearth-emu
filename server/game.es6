@@ -25,6 +25,7 @@ require('./classes/weapon');
 require('./classes/trap');
 require('./classes/hero-skill');
 require('./classes/hero');
+require('./classes/energy');
 require('./classes/heroes/warrior');
 require('./classes/heroes/shaman');
 require('./classes/heroes/rogue');

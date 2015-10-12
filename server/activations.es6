@@ -103,7 +103,7 @@ const A = {
         o.player.creatures.addCreature(newMinion);
     },
     'add-mana': function(o) {
-        o.player.hero.addMana(this.params[0] || 1);
+        o.player.energy.addMana(this.params[0] || 1);
     },
     'add-attack': function(o) {
         const amount = this.params[0];
@@ -260,10 +260,10 @@ const A = {
         }, o);
     },
     'overload': function(o) {
-        o.player.hero.addOverload(this.params[0]);
+        o.player.energy.addOverload(this.params[0]);
     },
     'unlock-overload'(o) {
-        o.player.hero.removeOverload();
+        o.player.energy.removeOverload();
     },
     'silence': function(o) {
         o.targets.forEach(target => target.silence());
@@ -752,15 +752,15 @@ const A = {
         var player = o.player;
 
         if (this.params[0] === 'op') {
-            o.player.enemy.hero.addCrystal();
+            o.player.enemy.energy.addCrystal();
         }
 
         _.times(count, () => {
-            player.hero.addCrystal();
+            player.energy.addCrystal();
         });
     },
     'destroy-crystal'(o) {
-        o.player.hero.removeCrystal();
+        o.player.energy.removeCrystal();
     },
     'add-copy-to-enemy-hand'(o) {
         const info = o.eventMessage;

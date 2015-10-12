@@ -88,7 +88,7 @@ H.HandCard = class HandCard extends EventEmitter {
             data.flags['expensive'] = true;
         }
 
-        if (this.player.active && this.player.hero.mana >= data.cost &&
+        if (this.player.active && this.player.energy.getMana() >= data.cost &&
             !this.base.playConditions.some(condition => !H.Conditions.check(condition, this))
         ) {
             data.flags['can-play'] = true;

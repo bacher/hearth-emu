@@ -87,8 +87,8 @@ H.Battle = class Battle extends EventEmitter {
     }
 
     _start2() {
-        this.p1.hero.addCrystal();
-        this.p1.hero.restoreMana();
+        this.p1.energy.addCrystal();
+        this.p1.energy.restoreMana();
         this.p1.activate();
         this.p1.drawCard();
         this.p1.drawCard();
@@ -305,7 +305,7 @@ H.Battle = class Battle extends EventEmitter {
         const card = handCardInfo.base;
 
         player.hand.removeHandCard(handCard);
-        player.hero.removeMana(handCardInfo.cost);
+        player.energy.removeMana(handCardInfo.cost);
 
         this._activateCard(player, handCard, card, data);
 
@@ -399,7 +399,7 @@ H.Battle = class Battle extends EventEmitter {
         const hero = player.hero;
         const heroSkill = hero.heroSkill;
 
-        player.hero.mana -= 2;
+        player.energy.removeMana(2);
 
         var globalTargets = null;
 
