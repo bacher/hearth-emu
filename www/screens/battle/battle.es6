@@ -108,6 +108,7 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
         ['my', 'op'].forEach(side => {
             const player = game[side];
             const hero = player.hero;
+            const energy = player.energy;
 
             const $avatar = this.$node.find('.avatar.' + side);
 
@@ -139,8 +140,8 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
                 $weapon.hide();
             }
 
-            this.$node.find('.stats.' + side + ' .mana .active').text(hero.mana);
-            this.$node.find('.stats.' + side + ' .mana .all').text(hero.crystals);
+            this.$node.find('.stats.' + side + ' .mana .active').text(energy.mana);
+            this.$node.find('.stats.' + side + ' .mana .all').text(energy.crystals);
 
             const cardsLeft = player.deck.count;
             var deckClass;
@@ -169,15 +170,15 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             this._hand.onGameData(game);
         });
 
-        const hero = game.my.hero;
+        const energy = game.my.energy;
 
         this.$node.find('.stats .crystals')
             .removeClass()
             .addClass('crystals')
-            .addClass('cn' + hero.mana)
-            .addClass('co' + (hero.crystals - hero.mana - hero.overload))
-            .addClass('cl' + hero.overload)
-            .addClass('no' + hero.nextOverload);
+            .addClass('cn' + energy.mana)
+            .addClass('co' + (energy.crystals - energy.mana - energy.overload))
+            .addClass('cl' + energy.overload)
+            .addClass('no' + energy.nextOverload);
 
         this.$node.find('.hand-helper.op .value').text(game.op.hand.length);
 

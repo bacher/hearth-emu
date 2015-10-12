@@ -27,6 +27,7 @@ H.Player = class Player extends EventEmitter {
         this.deck = null;
         this.hero = null;
         this.clas = null;
+        this.energy = new H.Energy();
         this.hand = new H.Hand(this);
         this.creatures = new H.Creatures(this);
         this.traps = new H.Traps(this);
@@ -240,6 +241,7 @@ H.Player = class Player extends EventEmitter {
             active: this.active,
             name: this.userName,
             hero: this.hero.getClientData(),
+            energy: this.energy.getClientData(),
             hand: this.hand.getClientData(),
             deck: this.deck.getClientData(),
             traps: this.traps.getClientData(),

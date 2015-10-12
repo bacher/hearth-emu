@@ -15,11 +15,6 @@ H.Hero = class Hero {
         this.armor = 0;
         this.spellDamage = 0;
 
-        this.mana = 0;
-        this.crystals = 0;
-        this.overload = 0;
-        this.nextOverload = 0;
-
         this.weapon = null;
 
         this.flags = {};
@@ -123,45 +118,8 @@ H.Hero = class Hero {
         this.player.emit('message', { msg: 'defeat' });
     }
 
-    getManaStatus() {
-        return {
-            mana: this.mana,
-            crystals: this.crystals
-        };
-    }
-
-    addMana(count) {
-        this.mana += count;
-
-        if (this.mana > 10) {
-            this.mana = 10;
-        }
-    }
-
-    addCrystal() {
-        if (this.crystals < 10) {
-            this.crystals++;
-        }
-    }
-
-    removeCrystal(count = 1) {
-        this.crystals = Math.max(0, this.crystals - count);
-    }
-
     addFlag(flag) {
         this.flags[flag] = true;
-    }
-
-    restoreMana() {
-        this.mana = this.crystals - this.overload;
-    }
-
-    removeMana(count) {
-        if (count > this.mana) {
-            this.mana = 0;
-        } else {
-            this.mana -= count;
-        }
     }
 
     getBaseData() {
@@ -172,10 +130,6 @@ H.Hero = class Hero {
             hp: this.hp,
             armor: this.armor,
             spellDamage: this.spellDamage,
-            mana: this.mana,
-            overload: this.overload,
-            nextOverload: this.nextOverload,
-            crystals: this.crystals,
             heroSkill: this.heroSkill.getClientData(),
             weapon: this.weapon ? this.weapon.getClientData() : null,
             flags: this.weapon ? _.extend({}, this.flags, this.weapon.getFlags()) : this.flags
@@ -186,14 +140,6 @@ H.Hero = class Hero {
         if (this.player.active && data.attack > 0 && !data.flags['tired']) {
             data.flags['can-play'] = true;
         }
-    }
-
-    addOverload(count) {
-        this.nextOverload += count;
-    }
-
-    removeOverload() {
-        this.nextOverload = 0;
     }
 
     equipWeapon(weapon) {
