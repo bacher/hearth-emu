@@ -2,7 +2,7 @@
 const _ = require('lodash');
 const H = require('../namespace');
 
-const SILENCE_IGNORE_FLAGS = ['tired', 'freeze', 'sleep'];
+const SILENCE_IGNORE_FLAGS = ['freeze', 'sleep'];
 
 H.Minion = class Minion extends H.GameObject {
     constructor(handCard, card) {
@@ -187,10 +187,13 @@ H.Minion = class Minion extends H.GameObject {
             }
         }
 
+        this.attack = base.attack;
+
         this.maxHp = base.maxHp;
         if (this.hp > this.maxHp) {
             this.hp = this.maxHp;
         }
+
 
         this.addFlag('silence');
 
