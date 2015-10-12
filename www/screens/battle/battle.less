@@ -151,6 +151,16 @@
 
     transition: transform 0.2s linear;
 
+    &.freeze .o1:before {
+      position: absolute;
+      top: -26px;
+      left: -34px;
+      width: 165px;
+      height: 182px;
+      content: "";
+      background: url("/textures/hero-freeze.png");
+    }
+
     &:hover:after {
       position: absolute;
       content: "";
@@ -217,6 +227,11 @@
     }
     &.priest {
       background: url("/textures/hero_priest.png");
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
     }
   }
 

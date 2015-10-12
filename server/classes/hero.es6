@@ -88,6 +88,8 @@ H.Hero = class Hero {
 
                     this.kill();
                 }
+
+                return true;
             }
         }
     }
@@ -192,6 +194,12 @@ H.Hero = class Hero {
             weapon: this.weapon ? this.weapon.getClientData() : null,
             flags: this.weapon ? _.extend({}, this.flags, this.weapon.getFlags()) : this.flags
         };
+    }
+
+    _modifyClientData(data) {
+        if (this.player.active && data.attack > 0 && !data.flags['tired']) {
+            data.flags['can-play'] = true;
+        }
     }
 
     addOverload(count) {
