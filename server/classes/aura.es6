@@ -193,10 +193,10 @@ const AURAS = {
     'steamwheedle-sniper': {
         affect: 'hero-skill',
         effect(skill) {
-            if (skill.that.name === 'hunter-base') {
+            if (skill.that.name === 'steady-shot') {
                 // FIXME UGLY
                 const heroSkill = new H.HeroSkill(skill.that._hero, {
-                    name: 'hunter-base',
+                    name: 'steady-shot',
                     activation: 'deal-damage',
                     params: [2],
                     animation: 'arrow',

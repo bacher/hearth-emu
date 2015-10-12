@@ -6,6 +6,7 @@ H.Rogue = class Rogue extends H.Hero {
         super(player);
 
         this.setHeroSkill({
+            name: 'dagger-mastery',
             activation: 'equip-weapon',
             params: ['Wicked Knife']
         });

@@ -6,6 +6,7 @@ H.Priest = class Priest extends H.Hero {
         super(player);
 
         this.setHeroSkill({
+            name: 'lesser-heal',
             activation: 'heal',
             params: [2],
             targets: { names: ['all'] },

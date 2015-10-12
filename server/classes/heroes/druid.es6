@@ -6,6 +6,7 @@ H.Druid = class Druid extends H.Hero {
         super(player);
 
         this.setHeroSkill({
+            name: 'shapeshift',
             activation: 'add-attack-armor',
             params: [1]
         });

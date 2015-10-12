@@ -13,6 +13,7 @@ H.Shaman = class Shaman extends H.Hero {
         ];
 
         this.setHeroSkill({
+            name: 'totemic-call',
             activation: 'call-totem',
             additionCheck: () => {
                 return (

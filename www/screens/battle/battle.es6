@@ -88,13 +88,20 @@ H.Screens['battle'] = class BattleScreen extends H.Screen {
             .toggleClass('active', game.my.active)
             .toggleClass('wait', !game.my.active);
 
-        this.$node.find('.hero-skill.my')
-            .toggleClass('available', game.my.hero.heroSkill.canUseSkill)
-            .toggleClass('off', game.my.hero.heroSkill.skillUsed)
-            .toggleClass('need-target', game.my.hero.heroSkill.needTarget);
+        const $myHeroSkill = this.$node.find('.hero-skill.my');
+        const myHeroSkill = game.my.hero.heroSkill;
 
-        this.$node.find('.hero-skill.op')
-            .toggleClass('used', game.op.hero.heroSkill.skillUsed);
+        $myHeroSkill[0].className = 'hero-skill my ' + myHeroSkill.name;
+
+        $myHeroSkill.toggleClass('available', myHeroSkill.canUseSkill)
+            .toggleClass('off', myHeroSkill.skillUsed)
+            .toggleClass('need-target', myHeroSkill.needTarget);
+
+        const $opHeroSkill = this.$node.find('.hero-skill.op');
+        const opHeroSkill = game.op.hero.heroSkill;
+
+        $opHeroSkill[0].className = 'hero-skill op ' + opHeroSkill.name;
+        $opHeroSkill.toggleClass('used', game.op.hero.heroSkill.skillUsed);
 
         this._creatures.update(game);
 

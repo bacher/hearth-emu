@@ -6,6 +6,7 @@ H.Warrior = class Warrior extends H.Hero {
         super(player);
 
         this.setHeroSkill({
+            name: 'armor-up',
             activation: 'add-armor',
             params: [2]
         });

@@ -80,6 +80,11 @@ H.HeroSkill = class HeroSkill {
     }
 
     _modifyClientData(data) {
+        delete data.command;
+        delete data.maxUseCount;
+        delete data.targets;
+
+        data.name = this.name;
         data.skillUsed = this.isUsed();
         data.canUseSkill = this.canUseSkill();
     }

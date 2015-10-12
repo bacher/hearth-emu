@@ -6,6 +6,7 @@ H.Paladin = class Paladin extends H.Hero {
         super(player);
 
         this.setHeroSkill({
+            name: 'reinforce',
             activation: 'summon',
             params: ['Silver Hand Recruit'],
             additionCheck: () => {

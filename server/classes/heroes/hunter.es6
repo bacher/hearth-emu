@@ -6,7 +6,7 @@ H.Hunter = class Hunter extends H.Hero {
         super(player);
 
         this.setHeroSkill({
-            name: 'hunter-base',
+            name: 'steady-shot',
             activation: 'deal-hero-skill-damage',
             params: [2],
             animation: 'arrow',
