@@ -1077,6 +1077,22 @@ const A = {
         }
 
         minion.detach();
+    },
+    'add-deathrattle'(o) {
+        o.targets.forEach(target => {
+            if (!target.events['deathrattle']) {
+                target.events['deathrattle'] = [];
+            }
+
+            target.events['deathrattle'].push(new H.Command({
+                acts: [{ name: this.params[0], params: [] }],
+                targetsType: {
+                    names: ['self']
+                }
+            }));
+
+            target.addFlag('deathrattle');
+        });
     }
 };
 

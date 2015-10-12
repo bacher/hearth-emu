@@ -158,15 +158,11 @@ H.Card = class Card {
             if (eventTypeName === 'battlecry') {
                 obj.acts.addCommands(commands);
 
-            } else if (_.contains(['deathrattle', 'end-turn', 'start-turn', 'inspire'], eventTypeName)) {
-
+            } else if (_.contains(['deathrattle', 'end-turn', 'start-turn', 'inspire', 'custom'], eventTypeName)) {
                 if (_.contains(['deathrattle', 'inspire'], eventTypeName)) {
                     object.flags[eventTypeName] = true;
                 }
 
-                events[eventTypeName] = new H.Commands(commands);
-
-            } else if (eventTypeName === 'custom') {
                 events[eventTypeName] = commands.map(command => {
                     return new H.Command(command);
                 });

@@ -27,6 +27,10 @@ H.GameObject = class GameObject extends EventEmitter {
 
         this.events = _.clone(this.base.events);
 
+        for (var eventName in this.events) {
+            this.events[eventName] = _.clone(this.events[eventName]);
+        }
+
         if (this.events['aura']) {
             this.events['aura'].forEach(aura => {
                 H.Aura.addAura(player, this, aura);
@@ -44,9 +48,11 @@ H.GameObject = class GameObject extends EventEmitter {
         }
 
         if (this.events['inspire']) {
-            this.addCustomEvent(this.events['inspire'], {
-                name: 'use-hero-skill',
-                params: ['my']
+            this.events['inspire'].forEach(inspire => {
+                this.addCustomEvent(inspire, {
+                    name: 'use-hero-skill',
+                    params: ['my']
+                });
             });
         }
     }
@@ -162,10 +168,12 @@ H.GameObject = class GameObject extends EventEmitter {
 
     _playDeathrattles() {
         if (this.events['deathrattle']) {
-            this.events['deathrattle'].act({
-                battle: this.player.battle,
-                player: this.player,
-                minion: this
+            this.events['deathrattle'].forEach(deathrattle => {
+                deathrattle.act({
+                    battle: this.player.battle,
+                    player: this.player,
+                    minion: this
+                });
             });
         }
     }
