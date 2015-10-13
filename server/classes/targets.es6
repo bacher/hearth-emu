@@ -320,6 +320,10 @@ H.Targets = class Targets {
         this.my.hero = !this.my.hero;
         this.op.hero = !this.op.hero;
     }
+    'enemies'() {
+        this.my.hero = false;
+        this.my.minions.length = 0;
+    }
     'invert-minions'() {
         this._invertMinions(this.my, this.player.creatures);
         this._invertMinions(this.op, this.player.enemy.creatures);

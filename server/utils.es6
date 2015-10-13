@@ -106,6 +106,23 @@ H.mixHitting = function(clas) {
         const myData = this.getData();
 
         if (myData.attack) {
+            if (isCounterAttack) {
+                battle.emit('counter-hit', {
+                    by: this,
+                    to: target
+                });
+
+            } else {
+                battle.emit('hit', {
+                    by: this,
+                    to: target
+                });
+
+                this.setHitFlags();
+
+                target.hit(this, true);
+            }
+
             const isDamageDealt = target.dealDamage(myData.attack);
 
             if (!isCounterAttack) {
@@ -125,23 +142,6 @@ H.mixHitting = function(clas) {
                 if (myData.flags['acid'] && target.objType !== 'hero') {
                     target.kill();
                 }
-            }
-
-            if (isCounterAttack) {
-                battle.emit('counter-hit', {
-                    by: this,
-                    to: target
-                });
-
-            } else {
-                battle.emit('hit', {
-                    by: this,
-                    to: target
-                });
-
-                this.setHitFlags();
-
-                target.hit(this, true);
             }
         }
     };

@@ -389,8 +389,18 @@ H.Battle = class Battle extends EventEmitter {
         const by = this.getObjectById(data.by);
 
         const targets = H.Targets.parseUserData(player, data);
+        const target = targets.getOne();
 
-        by.tryHit(targets.getOne());
+        if (by.getData().flags['ogre-attack'] && Math.random() < 0.5) {
+            targets.invert();
+            targets.enemies();
+            targets.random(1);
+
+            by.tryHit(targets.getOne() || target);
+
+        } else {
+            by.tryHit(target);
+        }
 
         this.sendGameData();
     }
