@@ -4,6 +4,7 @@ const request = require('request');
 const H = require('../namespace');
 const hearthpwn = require('./hearthpwn');
 const hearthstonetopdecks = require('./hearthstonetopdecks');
+const icyveins = require('./icyveins');
 
 exports.extract = function(url) {
     return new Promise((resolve, reject) => {
@@ -16,6 +17,10 @@ exports.extract = function(url) {
         // https://www.hearthstonetopdecks.com/decks/kolentos-season-19-control-priest/
         } else if (/^(?:https?:\/\/)(?:www\.)hearthstonetopdecks\.com\/decks\/[^/]+\/$/.test(url)) {
             parser = hearthstonetopdecks;
+
+        // http://www.icy-veins.com/hearthstone/legendary-mage-echo-giants-freeze-tgt-deck
+        } else if (/^(?:https?:\/\/)(?:www\.)icy-veins\.com\/hearthstone\/[^/]+$/.test(url)) {
+            parser = icyveins;
         }
 
         if (parser) {
@@ -30,6 +35,7 @@ exports.extract = function(url) {
                     try {
                         resolve(makeClientDeck(parser.parse(body)));
                     } catch (e) {
+                        console.warn('Fail on deck url:', url);
                         reject(e);
                     }
                 }
