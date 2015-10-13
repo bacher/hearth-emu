@@ -16,6 +16,8 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
         this._deckScreen = null;
 
         this.page = 0;
+
+        this._startFiltering = _.debounce(this._startFiltering.bind(this), 200);
     }
 
     _render() {
@@ -67,16 +69,7 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
 
                 this.drawCards();
             })
-            .on('keyup', '.search', () => {
-                this._filterCards();
-
-                this.drawCards();
-            })
-            .on('focusout', '.search', () => {
-                this._filterCards();
-
-                this.drawCards();
-            })
+            .on('keyup change search', '.search', this._startFiltering)
             .on('keydown', '.search', e => {
                 if (e.which === H.KEYS['enter']) {
                     $(e.currentTarget).blur();
@@ -100,6 +93,13 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
                 this._filterCards();
                 this.drawCards();
             });
+    }
+
+    _startFiltering() {
+        console.log('F');
+        this._filterCards();
+
+        this.drawCards();
     }
 
     _cardsLoaded() {
