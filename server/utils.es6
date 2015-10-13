@@ -85,7 +85,7 @@ H.mixCustomEvents = function(clas) {
 };
 
 H.mixHitting = function(clas) {
-    clas.prototype.hit = function(target) {
+    clas.prototype.tryHit = function(target) {
         const battle = this.player.battle;
 
         const eventMessage = {
@@ -94,47 +94,56 @@ H.mixHitting = function(clas) {
             prevent: false
         };
 
-        battle.emit('hit', eventMessage);
+        battle.emit('try-hit', eventMessage);
 
         if (!eventMessage.prevent) {
-            const by = eventMessage.by.getData();
-            const to = eventMessage.to.getData();
+            this.hit(target);
+        }
+    };
 
-            const isDamageDealt = eventMessage.to.dealDamage(by.attack);
+    clas.prototype.hit = function(target, isCounterAttack) {
+        const battle = this.player.battle;
+        const myData = this.getData();
 
-            battle.addBattleAction({
-                name: 'hit',
-                by: by.id,
-                to: target.id
-            });
+        if (myData.attack) {
+            const isDamageDealt = target.dealDamage(myData.attack);
+
+            if (!isCounterAttack) {
+                battle.addBattleAction({
+                    name: 'hit',
+                    by: this.id,
+                    to: target.id
+                });
+            }
 
             if (isDamageDealt) {
-                if (by.flags['freezer']) {
-                    eventMessage.to.addFlag('freeze');
+                if (myData.flags['freezer']) {
+                    target.addFlag('freeze');
                 }
 
                 // FIXME Пробивает ли яд через щит?
-                if (by.flags['acid'] && eventMessage.to.objType !== 'hero') {
-                    eventMessage.to.kill();
+                if (myData.flags['acid'] && target.objType !== 'hero') {
+                    target.kill();
                 }
             }
 
-            if (to.attack && eventMessage.to.objType !== 'hero') {
-                const isCounterDamageDealt = eventMessage.by.dealDamage(to.attack);
+            if (isCounterAttack) {
+                battle.emit('counter-hit', {
+                    by: this,
+                    to: target
+                });
 
-                if (isCounterDamageDealt) {
-                    if (to.flags['freezer']) {
-                        eventMessage.by.addFlag('freeze');
-                    }
+            } else {
+                battle.emit('hit', {
+                    by: this,
+                    to: target
+                });
 
-                    if (to.flags['acid'] && eventMessage.by.objType !== 'hero') {
-                        eventMessage.by.kill();
-                    }
-                }
+                this.setHitFlags();
+
+                target.hit(this, true);
             }
         }
-
-        this.setHitFlags();
     };
 };
 

@@ -199,6 +199,40 @@ const E = {
                     targets.addMinion(eventMessage.by);
 
                     callback(eventMessage, targets);
+                }
+            };
+        }
+    },
+    'try-hit-to': {
+        eventName: 'try-hit',
+        filterFunc(o, params, callback) {
+            const target = params[0];
+            var minion;
+            var allowPlayer;
+            var allowType;
+
+            if (target === 'self') {
+                minion = o.minion;
+            } else if (target === 'my') {
+                allowPlayer = o.player;
+            } else if (target === 'op') {
+                allowPlayer = o.player.enemy;
+            } else if (target === 'my-hero') {
+                minion = o.player.hero;
+            } else if (target === 'my-minions') {
+                allowPlayer = o.player;
+                allowType = H.CARD_TYPES['minion'];
+            }
+
+            return function(eventMessage) {
+                if ((!minion || minion === eventMessage.to) &&
+                    (!allowPlayer || allowPlayer === eventMessage.to.player) &&
+                    (!allowType || (eventMessage.to.card && eventMessage.to.card.type === allowType))) {
+
+                    const targets = new H.Targets(eventMessage.to.player);
+                    targets.addMinion(eventMessage.by);
+
+                    callback(eventMessage, targets);
 
                     if (eventMessage.by.is('detached')) {
                         eventMessage.prevent = true;

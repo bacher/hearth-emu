@@ -390,7 +390,7 @@ H.Battle = class Battle extends EventEmitter {
 
         const targets = H.Targets.parseUserData(player, data);
 
-        by.hit(targets.getOne());
+        by.tryHit(targets.getOne());
 
         this.sendGameData();
     }
