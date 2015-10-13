@@ -17,7 +17,7 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
 
         this.page = 0;
 
-        this._startFiltering = _.debounce(this._startFiltering.bind(this), 200);
+        this._startFilteringDebounced = _.debounce(this._startFiltering.bind(this), 100);
     }
 
     _render() {
@@ -69,7 +69,8 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
 
                 this.drawCards();
             })
-            .on('keyup change search', '.search', this._startFiltering)
+            .on('keyup', '.search', this._startFilteringDebounced)
+            .on('change search', '.search', this._startFiltering.bind(this))
             .on('keydown', '.search', e => {
                 if (e.which === H.KEYS['enter']) {
                     $(e.currentTarget).blur();
@@ -96,7 +97,6 @@ H.Screens['collection'] = class CollectionScreen extends H.Screen {
     }
 
     _startFiltering() {
-        console.log('F');
         this._filterCards();
 
         this.drawCards();
