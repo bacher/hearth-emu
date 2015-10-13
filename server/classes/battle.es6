@@ -399,7 +399,7 @@ H.Battle = class Battle extends EventEmitter {
         const hero = player.hero;
         const heroSkill = hero.heroSkill;
 
-        player.energy.removeMana(2);
+        player.energy.removeMana(heroSkill.getData().cost);
 
         var globalTargets = null;
 

@@ -1100,8 +1100,9 @@ const A = {
         });
     },
     'improve-hero-power'(o) {
-        const clas = o.player.clas;
-        const hero = o.player.hero;
+        const player = o.player;
+        const clas = player.clas;
+        const hero = player.hero;
         const powerName = hero.heroSkill.getName();
 
         if (clas === H.CLASSES.druid) {
@@ -1158,7 +1159,6 @@ const A = {
                     skillNeedTarget: true
                 });
             }
-
         } else if (clas === H.CLASSES.rogue) {
             if (powerName === 'dagger-mastery') {
                 hero.setHeroSkill({
@@ -1167,12 +1167,16 @@ const A = {
                     params: ['Poisoned Dagger']
                 });
             }
-
         } else if (clas === H.CLASSES.shaman) {
             if (powerName === 'totemic-call') {
-                // FIXME
+                hero.setHeroSkill({
+                    name: 'totemic-slam',
+                    customAction: 'totemic-slam',
+                    additionCheck: () => {
+                        return H.Conditions.check('can-add-creature', player)
+                    }
+                });
             }
-
         } else if (clas === H.CLASSES.warlock) {
             if (powerName === 'life-tap') {
                 hero.setHeroSkill({

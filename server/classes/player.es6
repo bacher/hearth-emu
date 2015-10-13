@@ -16,6 +16,8 @@ H.Player = class Player extends EventEmitter {
 
         this.id = _.uniqueId('player');
 
+        this.objType = 'player';
+
         this.battle = null;
         this.ws = ws;
         this.status = 'waiting';
@@ -306,6 +308,22 @@ H.Player = class Player extends EventEmitter {
             params: null,
             globalTargets,
             eventMessage
+        });
+    }
+
+    initCardSelectMode(cards, callback) {
+        this.addOnceMessageListener('card-selection', data => {
+            callback(cards[data.index]);
+
+            this.battle.sendGameData();
+        });
+
+        this.sendMessage('select-card', {
+            cards: cards.map(card => {
+                return {
+                    pic: card.pic
+                };
+            })
         });
     }
 

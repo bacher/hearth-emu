@@ -13,12 +13,17 @@ H.HeroSkill = class HeroSkill {
 
         this.id = _.uniqueId('skill');
 
-        this.command = H.Command.createByAct({
-            name: options.activation,
-            params: options.params || [],
-            animation: options.animation,
-            targetsType: options.targetsType
-        });
+        if (options.customAction) {
+            this._customAction = options.customAction;
+
+        } else {
+            this.command = H.Command.createByAct({
+                name: options.activation,
+                params: options.params || [],
+                animation: options.animation,
+                targetsType: options.targetsType
+            });
+        }
 
         this._needTarget = options.skillNeedTarget;
         this._targets = options.targets;
@@ -30,7 +35,14 @@ H.HeroSkill = class HeroSkill {
 
     use(o) {
         o.animationBy = this;
-        this.getData().command.act(o);
+
+        if (this._customAction) {
+            H.CustomActions.getByName(this._customAction)({
+                player: this.player
+            });
+        } else {
+            this.getData().command.act(o);
+        }
 
         this._usedCount++;
 
@@ -78,7 +90,8 @@ H.HeroSkill = class HeroSkill {
             command: this.command,
             maxUseCount: 1,
             needTarget: this._needTarget,
-            targets: this._needTarget && this._targets
+            targets: this._needTarget && this._targets,
+            cost: this._cost
         };
     }
 
@@ -86,6 +99,7 @@ H.HeroSkill = class HeroSkill {
         delete data.command;
         delete data.maxUseCount;
         delete data.targets;
+        delete data.cost;
 
         data.name = this.name;
         data.skillUsed = this.isUsed();

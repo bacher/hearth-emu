@@ -1,6 +1,6 @@
 
 .card-selection
-   .cards-container
+   .cards-container(class='count_' + cards.length)
       each card, i in cards
          .card-select-wrapper(data-index=i)
             IMG.card-select-preview(src=H.makeCardUrl(card.pic))
