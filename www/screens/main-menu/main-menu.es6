@@ -43,18 +43,6 @@ H.Screens['main-menu'] = class MainMenuScreen extends H.Screen {
         clearInterval(this._statisticUpdateInterval);
     }
 
-    _hide() {
-        return new Promise(resolve => {
-            this.$node.find('.disk').removeClass('ready');
-
-            setTimeout(() => {
-                this.$node.hide();
-
-                resolve();
-            }, 500);
-        });
-    }
-
     _updateStatistic() {
         $.ajax('/online.json').then(data => {
             this.$node.find('.statistic .value').text(data.online);
