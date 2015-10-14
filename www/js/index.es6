@@ -22,7 +22,6 @@ $('BODY')
     .append($('<DIV>').addClass('settings-btn').on('click', () => {
         H.toggleMenu();
     }))
-    .append($('<DIV>').addClass('beta').text('BETA'))
     .append($('<DIV>').addClass('feedback').text('Feedback').click(e => {
         const text = prompt('Tell me about your pain:');
 
