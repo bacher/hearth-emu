@@ -20,6 +20,13 @@ H.Screens['main-menu'] = class MainMenuScreen extends H.Screen {
                     this.$node.addClass('loaded');
                 });
         }, this._longLoad ? 1500 : 500);
+
+
+        this._updateStatistic();
+
+        this._statisticUpdateInterval = setInterval(() => {
+            this._updateStatistic();
+        }, 5000);
     }
 
     _bindEventListeners() {
@@ -32,6 +39,10 @@ H.Screens['main-menu'] = class MainMenuScreen extends H.Screen {
             });
     }
 
+    _unbindEventListeners() {
+        clearInterval(this._statisticUpdateInterval);
+    }
+
     _hide() {
         return new Promise(resolve => {
             this.$node.find('.disk').removeClass('ready');
@@ -41,6 +52,12 @@ H.Screens['main-menu'] = class MainMenuScreen extends H.Screen {
 
                 resolve();
             }, 500);
+        });
+    }
+
+    _updateStatistic() {
+        $.ajax('/online.json').then(data => {
+            this.$node.find('.statistic .value').text(data.online);
         });
     }
 };

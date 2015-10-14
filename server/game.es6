@@ -79,6 +79,33 @@ module.exports = class Game {
                     });
                 });
         });
+
+        const online = {};
+        var onlineCount = 0;
+
+        setInterval(() => {
+            onlineCount = 0;
+            const last = Date.now() - 60000;
+
+            for (var id in online) {
+                if (online[id] < last) {
+                    delete online[id];
+                } else {
+                    onlineCount++;
+                }
+            }
+        }, 5000);
+
+        this.app.post('/iamalive.json', (req, res) => {
+            online[req.query.id] = Date.now();
+            res.end();
+        });
+
+        this.app.get('/online.json', (req, res) => {
+            res.json({
+                online: Math.max(onlineCount, 1)
+            });
+        });
     }
 
     listenWebSockets() {

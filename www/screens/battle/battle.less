@@ -451,65 +451,6 @@
   .inferno        .skill-helper { background: url("/textures/hero-powers/helper_inferno.png"); }
 
 
-  .table {
-    position: absolute;
-    width: 178px;
-    height: 0;
-    background: url("/textures/table_body.png");
-    text-align: left;
-    cursor: default;
-    pointer-events: none;
-    white-space: normal;
-    z-index: 10;
-    display: none;
-
-    &:before {
-      position: absolute;
-      bottom: 100%;
-      width: 185px;
-      height: 56px;
-      content: "";
-      background: url("/textures/table_top-bottom.png") 0 100%;
-    }
-
-    &:after {
-      position: absolute;
-      top: 100%;
-      width: 185px;
-      height: 56px;
-      content: "";
-      background: url("/textures/table_top-bottom.png");
-    }
-
-    .header, .text {
-      position: absolute;
-      z-index: 1;
-    }
-
-    .header {
-      top: -36px;
-      left: 36px;
-      font-size: 16px;
-      font-family: "Belwe Bold", Times, serif;
-      font-weight: bold;
-      color: #FFF;
-      text-shadow: 0 0 1px #000, 0 0 1px #000, 0 0 2px #000;
-    }
-
-    .text {
-      top: -10px;
-      left: 36px;
-      width: 128px;
-      font-size: 12px;
-      color: #FDFDFD;
-
-      .value {
-        margin: 0 3px;
-      }
-    }
-
-  }
-
   .deck-helper {
     &.op {
       top: 63px;

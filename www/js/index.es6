@@ -1,4 +1,6 @@
 
+H.sessionId = _.random(0, 10000000);
+
 H.loadOptions();
 
 H.app = new H.Application();
@@ -25,3 +27,13 @@ if (H.options['fullscreen']) {
         document.body.webkitRequestFullscreen();
     });
 }
+
+function iAmAlive() {
+    $.ajax({
+        url: '/iamalive.json?id=' + H.sessionId,
+        method: 'POST'
+    });
+}
+
+iAmAlive();
+setInterval(iAmAlive, 30000);
