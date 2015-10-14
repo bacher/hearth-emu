@@ -92,8 +92,7 @@ H.Hero = class Hero {
     }
 
     wakeUp() {
-        // FIXME UNUSED?
-        delete this.flags['tired'];
+        delete this.flags['hit'];
 
         this.attack = 0;
 
@@ -107,8 +106,7 @@ H.Hero = class Hero {
             this.weapon.setHitFlags();
 
         } else {
-            // FIXME UNUSED?
-            this.flags['tired'] = true;
+            this.flags['hit'] = true;
         }
     }
 
@@ -130,14 +128,14 @@ H.Hero = class Hero {
             spellDamage: this.spellDamage,
             heroSkill: this.heroSkill.getClientData(),
             weapon: this.weapon ? this.weapon.getClientData() : null,
-            flags: this.weapon ? _.extend({}, this.flags, this.weapon.getFlags()) : this.flags
+            flags: _.extend({}, this.flags, this.weapon ? this.weapon.flags : null)
         };
     }
 
     _modifyClientData(data) {
         data.name = this.name;
 
-        if (this.player.active && data.attack > 0 && !data.flags['tired']) {
+        if (this.player.active && data.attack > 0 && !data.flags['hit']) {
             data.flags['can-play'] = true;
         }
     }
