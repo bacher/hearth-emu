@@ -1,4 +1,5 @@
 
+const fs = new require('fs');
 const WebSocketServer = new require('ws');
 
 const H = require('./namespace');
@@ -105,6 +106,12 @@ module.exports = class Game {
             res.json({
                 online: Math.max(onlineCount, 1)
             });
+        });
+
+        this.app.post('/feedback.json', (req, res) => {
+            fs.appendFile('feedback.txt', '[NEW_MESSAGE ' + new Date().toJSON() + ']\n' + req.body.text + '\n\n');
+
+            res.send();
         });
     }
 

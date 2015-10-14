@@ -18,9 +18,26 @@ $(document).on('keyup', e => {
     }
 });
 
-$('BODY').append($('<DIV>').addClass('settings-btn').on('click', () => {
-    H.toggleMenu();
-}));
+$('BODY')
+    .append($('<DIV>').addClass('settings-btn').on('click', () => {
+        H.toggleMenu();
+    }))
+    .append($('<DIV>').addClass('beta').text('BETA'))
+    .append($('<DIV>').addClass('feedback').text('Feedback').click(e => {
+        const text = prompt('Tell me about your pain:');
+
+        if (text) {
+            $.ajax({
+                url: '/feedback.json',
+                method: 'POST',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify({
+                    text: text
+                })
+            });
+        }
+    }));
 
 if (H.options['fullscreen']) {
     $(document).on('mousedown', () => {
