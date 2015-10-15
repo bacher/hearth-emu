@@ -34,7 +34,7 @@ H.Screens['feedback'] = class extends Dialog {
                     alert('ERROR, sorry');
                 }
                 this.close();
-            }).error(error => {
+            }).fail(error => {
                 alert('ERROR, sorry');
             });
 

@@ -64,11 +64,11 @@ module.exports = class Game {
             });
         });
 
-        this.app.get('/import.json', (req, res) => {
+        this.app.post('/import.json', (req, res) => {
             importTools.extract(req.query.url)
                 .then(deck => {
                     res.json({
-                        ok: true,
+                        status: 'ok',
                         deck: deck
                     });
                 })
@@ -76,7 +76,7 @@ module.exports = class Game {
                     console.warn('Import error:', e);
 
                     res.json({
-                        ok: false
+                        status: 'error'
                     });
                 });
         });

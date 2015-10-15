@@ -55,25 +55,7 @@ H.Screens['new-deck-menu'] = class NewDeckMenuScreen extends Menu {
                 break;
 
             case 'import':
-                const url = prompt('Game support import from:\nwww.hearthpwn.com\nwww.hearthstonetopdecks.com\nwww.icy-veins.com\n\nEnter deck resource URL:');
-
-                if (url) {
-                    $.get('/import.json?url=' + encodeURI(url)).then(data => {
-                        if (data.ok) {
-                            const deck = data.deck;
-
-                            deck.id = _.random(1000);
-
-                            H.decks.push(deck);
-                            H.saveDecks();
-
-                            H.emit('decks-updated');
-
-                        } else {
-                            alert('Sorry. We could not parse deck...\nError logged and will be fixed.');
-                        }
-                    });
-                }
+                H.app.activateOverlay('import-deck');
                 break;
         }
     }

@@ -1,0 +1,26 @@
+
+.import-deck
+   .base
+      .line
+         |Game support import decks from resources:
+         .links
+            A.link(href="http://www.hearthpwn.com/",target="_blank")
+               IMG.link-pic(src="/textures/import-sources/hearthpwn.png")
+               |hearthpwn.com
+            A.link(href="http://www.hearthstonetopdecks.com/",target="_blank")
+               IMG.link-pic(src="/textures/import-sources/hearthstonetopdecks.png")
+               |hearthstonetopdecks.com
+            A.link(href="http://www.icy-veins.com/",target="_blank")
+               IMG.link-pic(src="/textures/import-sources/icyveins.png")
+               |icy-veins.com
+
+      .line
+         .label Enter deck URL:
+         INPUT.input.url
+
+      .line.tip
+         DIV For example:
+         A(href="http://www.hearthpwn.com/decks/307-miracle-rogue",target="_blank")
+            |http://www.hearthpwn.com/decks/307-miracle-rogue
+
+   .spinner

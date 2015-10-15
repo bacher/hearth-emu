@@ -28,13 +28,13 @@ H.Screens['dialog'] = class DialogScreen extends H.Screen {
     _renderBody() {}
 
     _onShow() {
-        this.$node.find('.email').focus();
+        this.$node.find('INPUT:first').focus();
     }
 
     _bindEventListeners() {
         this.$node
-            .on('click', '.ok', this._onOk.bind(this))
-            .on('click', '.cancel', this._onCancel.bind(this));
+            .on('click', '.ok.active', this._onOk.bind(this))
+            .on('click', '.cancel.active', this._onCancel.bind(this));
     }
 
     /** @virtual */
@@ -46,5 +46,9 @@ H.Screens['dialog'] = class DialogScreen extends H.Screen {
 
     close() {
         this.hideThenDestroy();
+    }
+
+    disableButtons() {
+        this.$node.find('.button').removeClass('active');
     }
 };

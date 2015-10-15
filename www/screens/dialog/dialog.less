@@ -31,6 +31,10 @@
     text-shadow: 0 0 3px #000;
   }
 
+  INPUT.highlight {
+    box-shadow: 0 0 8px 1px #F00;
+  }
+
   .body {
     position: absolute;
     top: 68px;
@@ -76,7 +80,7 @@
     text-align: center;
     line-height: 42px;
 
-    &:hover {
+    &.active:hover {
       animation: jerk 0.1s linear forwards;
     }
 

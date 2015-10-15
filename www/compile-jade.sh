@@ -41,4 +41,5 @@
     ./screens/waiting-opponent/waiting-opponent.jade \
     ./screens/dialog/dialog.jade \
     ./screens/feedback/feedback.jade \
+    ./screens/import-deck/import-deck.jade \
     > _js/_templates.js

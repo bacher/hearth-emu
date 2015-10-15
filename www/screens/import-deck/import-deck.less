@@ -1,0 +1,52 @@
+
+.di {
+  .import-deck {
+    font-size: 16px;
+
+    .links {
+      margin-top: 4px;
+      margin-left: 12px;
+    }
+
+    .link {
+      display: block;
+      line-height: 21px;
+    }
+
+    .url {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .link-pic {
+      width: 18px;
+      margin-right: 3px;
+      vertical-align: middle;
+    }
+
+    .tip {
+      color: #444;
+    }
+
+    .spinner {
+      position: absolute;
+      display: none;
+      top: 31px;
+      left: 124px;
+      width: 165px;
+      height: 165px;
+
+      background: url("/textures/rune-1.png");
+      animation: roll 3s linear infinite;
+    }
+  }
+
+  @keyframes roll {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
