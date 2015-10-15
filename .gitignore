@@ -5,6 +5,7 @@
 /server/node_modules/
 /server/_compiled/
 /server/**/*.js
+/server/feedback.txt
 
 /www/bower_components/
 /www/_js/

@@ -1,0 +1,95 @@
+
+.di {
+  pointer-events: all;
+  z-index: 100;
+
+  background: rgba(0,0,0,.2);
+
+  .dialog {
+    position: absolute;
+    top: 140px;
+    left: 381px;
+    width: 517px;
+    height: 376px;
+    background: url("/textures/dialog.png");
+
+    transform-origin: 50% 10%;
+
+    animation: grow-up 0.5s linear forwards;
+  }
+
+  .title {
+    position: absolute;
+    top: 11px;
+    width: 517px;
+
+    color: #FFF;
+    font-family: "Belwe Bold", Times, serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 0 3px #000;
+  }
+
+  .body {
+    position: absolute;
+    top: 68px;
+    left: 50px;
+    width: 417px;
+    height: 233px;
+
+    color: #000;
+    font-family: "Belwe Bold", Times, serif;
+    font-size: 14px;
+
+    .line {
+      padding: 11px 0;
+    }
+
+    .label {
+      padding-bottom: 1px;
+    }
+
+    .input {
+      outline: none;
+
+      color: #FFF;
+      font-family: "Belwe Bold", Times, serif;
+      font-size: 14px;
+
+      background: #353535;
+      border: 1px solid #666;
+    }
+  }
+
+  .button {
+    position: absolute;
+    top: 322px;
+    width: 149px;
+    height: 42px;
+    box-sizing: border-box;
+
+    color: #000;
+    font-family: "Belwe Bold", Times, serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 42px;
+
+    &:hover {
+      animation: jerk 0.1s linear forwards;
+    }
+
+    &.ok {
+      left: 97px;
+      padding-left: 16px;
+      background: url("/textures/dialog_ok.png");
+    }
+
+    &.cancel {
+      left: 263px;
+      padding-left: 31px;
+      background: url("/textures/dialog_cancel.png");
+    }
+  }
+}

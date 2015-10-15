@@ -39,4 +39,6 @@
     ./screens/main-menu/main-menu.jade \
     ./screens/options/options.jade \
     ./screens/waiting-opponent/waiting-opponent.jade \
+    ./screens/dialog/dialog.jade \
+    ./screens/feedback/feedback.jade \
     > _js/_templates.js

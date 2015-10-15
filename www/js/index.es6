@@ -22,20 +22,8 @@ $('BODY')
     .append($('<DIV>').addClass('settings-btn').on('click', () => {
         H.toggleMenu();
     }))
-    .append($('<DIV>').addClass('feedback').text('Feedback').click(e => {
-        const text = prompt('Tell me about your pain:');
-
-        if (text) {
-            $.ajax({
-                url: '/feedback.json',
-                method: 'POST',
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify({
-                    text: text
-                })
-            });
-        }
+    .append($('<DIV>').addClass('feedback-btn').text('Feedback').click(() => {
+        H.app.activateOverlay('feedback');
     }));
 
 if (H.options['fullscreen']) {

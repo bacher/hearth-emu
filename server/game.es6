@@ -109,9 +109,19 @@ module.exports = class Game {
         });
 
         this.app.post('/feedback.json', (req, res) => {
-            fs.appendFile('feedback.txt', '[NEW_MESSAGE ' + new Date().toJSON() + ']\n' + req.body.text + '\n\n');
+            var message = '[NEW_MESSAGE ' + new Date().toJSON() + ']\n';
 
-            res.send();
+            if (req.body.email) {
+                message += req.body.email + '\n';
+            }
+
+            message += req.body.text + '\n\n';
+
+            fs.appendFile('feedback.txt', message);
+
+            res.json({
+                status: 'ok'
+            });
         });
     }
 
