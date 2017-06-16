@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 #/usr/local/bin/clientjade **/*.jade > js/_templates.js
 
-/usr/local/bin/clientjade \
+../node_modules/.bin/clientjade \
     ./screens/battle-end/battle-end.jade \
     ./screens/battle-welcome/battle-welcome.jade \
     ./screens/battle-welcome/repick-cards.jade \
