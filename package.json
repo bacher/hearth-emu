@@ -24,7 +24,7 @@
     "clientjade": "^0.1.1",
     "grunt": "^0.4.5",
     "grunt-spritesmith": "^5.1.0",
-    "gulp": "^3.9.0",
+    "gulp": "^4.0.0",
     "gulp-babel": "^5.2.1",
     "gulp-batch": "^1.0.5",
     "gulp-concat": "^2.6.0",
