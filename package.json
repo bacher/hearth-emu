@@ -6,7 +6,7 @@
   "scripts": {
     "up": "npm install && cd server && npm install && cd ../www && bower install",
     "build": "gulp && cd www && ./compile-jade.sh",
-    "start": "cd server && sudo nohup node _compiled/daemon.js &",
+    "start": "cd server && node _compiled/daemon.js",
     "deploy": "npm run-script up && npm run-script build && npm run-script start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,7 +14,10 @@
     "type": "git",
     "url": "git+https://github.com/Bacher/hearth-emu.git"
   },
-  "author": "Bacher <bacherko@gmail.com>",
+  "author": {
+    "name": "Ilya 'Bacher' Lebedev",
+    "email": "bacherko@gmail.com"
+  },
   "license": "GPL-2.0",
   "bugs": {
     "url": "https://github.com/Bacher/hearth-emu/issues"

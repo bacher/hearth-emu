@@ -1,12 +1,15 @@
 /.idea/
 
-/node_modules/
+node_modules
+bower_components
 
 /server/node_modules/
 /server/_compiled/
 /server/**/*.js
 /server/feedback.txt
 
-/www/bower_components/
 /www/_js/
 /www/styles/*.css
+
+package-lock.json
+yarn.lock
